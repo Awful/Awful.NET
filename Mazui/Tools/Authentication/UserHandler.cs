@@ -22,12 +22,13 @@ namespace Mazui.Tools.Authentication
             var user = UserAuthDatabase.GetDefaultUser();
             if (user == null) return new UserState { IsLoggedIn = false, WebManager = new WebManager() };
             var webManager = await CreateAuthWebManager(user);
-            return new UserState { IsLoggedIn = false, WebManager = webManager };
+            return new UserState { IsLoggedIn = true, WebManager = webManager, User = user };
         }
     }
 
     public class UserState
     {
+        public UserAuth User { get; set; }
         public WebManager WebManager { get; set; }
 
         public bool IsLoggedIn { get; set; }

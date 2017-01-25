@@ -140,6 +140,9 @@
     <Compile Include="Views\Busy.xaml.cs">
       <DependentUpon>Busy.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -167,6 +170,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Forums\forum.txt" />
+    <Content Include="Assets\Images\Dontrel-Awful2.png" />
+    <Content Include="Assets\Images\Icon2.png" />
+    <Content Include="Assets\Images\unfunny.png" />
     <Content Include="Assets\Mazui.png" />
     <Content Include="Assets\sa-clip.mp4" />
     <Content Include="Assets\SplashScreen.png" />
@@ -826,6 +832,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Busy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

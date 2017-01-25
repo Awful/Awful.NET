@@ -18,6 +18,15 @@ namespace Mazui.Database.Functions
             }
         }
 
+        public static async Task<int> RemoveUser(UserAuth user)
+        {
+            using (var db = new UserAuthContext())
+            {
+                db.Users.Remove(user);
+                return await db.SaveChangesAsync();
+            }
+        }
+
         public static async Task<int> AddOrUpdateUser(UserAuth userAuth)
         {
             using (var db = new UserAuthContext())

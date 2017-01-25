@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ForumThreadListBaseViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LoginPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MazuiViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SettingsPageViewModel.cs" />

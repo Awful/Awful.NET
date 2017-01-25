@@ -35,6 +35,13 @@
             </Controls:HamburgerButtonInfo>
         </Controls:HamburgerMenu.PrimaryButtons>
         <Controls:HamburgerMenu.SecondaryButtons>
+            <!-- login button -->
+            <Controls:HamburgerButtonInfo x:Name="LoginButton" PageType="views:LoginPage">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48" Symbol="Contact" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Account" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
             
             <!-- settings button -->
             <Controls:HamburgerButtonInfo PageType="views:SettingsPage">

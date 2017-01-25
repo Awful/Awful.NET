@@ -1,4 +1,5 @@
 ﻿using Mazui.Core.Managers;
+using Mazui.Core.Models.Users;
 using Mazui.Tools.Authentication;
 using System;
 using System.Collections.Generic;
@@ -32,11 +33,23 @@ namespace Mazui.ViewModels
             }
         }
 
+        private UserAuth _user = default(UserAuth);
+
+        public UserAuth User
+        {
+            get { return _user; }
+            set
+            {
+                Set(ref _user, value);
+            }
+        }
+
         public WebManager WebManager { get; set; }
 
         public async Task LoginUser()
         {
             var auth = await UserHandler.GetDefaultAuthWebManager();
+            User = auth.User;
             IsLoggedIn = auth.IsLoggedIn;
             WebManager = auth.WebManager;
         }
