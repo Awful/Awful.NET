@@ -66,6 +66,11 @@ namespace Mazui.ViewModels
             }
         }
 
+        public void NavigateToThreadList(Forum forum)
+        {
+            NavigationService.Navigate(typeof(Views.ThreadListPage), JsonConvert.SerializeObject(forum));
+        }
+
         private async Task GetMainPageForumsAsync(bool forceRefresh = false)
         {
             var forumCategoryEntities = ForumsDatabase.GetMainForumCategories();

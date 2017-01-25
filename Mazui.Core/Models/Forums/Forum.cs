@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -23,6 +24,8 @@ namespace Mazui.Core.Models.Forums
         public int ForumId { get; set; }
 
         public int CategoryId { get; set; }
+
+        [JsonIgnore]
 
         public Category Category { get; set; }
 

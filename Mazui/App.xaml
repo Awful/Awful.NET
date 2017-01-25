@@ -11,10 +11,20 @@
                 <ResourceDictionary Source="Styles\Custom.xaml" />
                 <ResourceDictionary Source="Styles\Forums.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <converters:HasSeenThreadConverter x:Key="HasSeenThreadConverter" />
             <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <converters:BooleanToVisibilityInverter x:Key="BooleanToVisibilityInverter" />
+            <converters:RatingVisibilityConverter x:Key="RatingVisibilityConverter" />
+            <converters:RepliesSinceLastOpenedColorConverter x:Key="RepliesSinceLastOpenedColorConverter" />
+            <converters:ThreadHeaderColorConverter x:Key="ThreadHeaderColorConverter" />
             <converters:SubforumHeaderColorConverter x:Key="SubforumHeaderColorConverter" />
+            <converters:ThreadNullCheckConverter x:Key="ThreadNullCheckConverter"/>
             <converters:AddOrRemoveFavoriteTextConverter x:Key="AddOrRemoveFavoriteTextConverter" />
+            <converters:ForumImageConverter  x:Key="ForumImageConverter" />
+            <converters:PageNumberConverter x:Key="PageNumberConverter" />
+            <converters:BooleanInverter x:Key="BooleanInverter" />
+            <converters:BackButtonEnableConverter x:Key="BackButtonEnableConverter" />
+            <converters:BookmarkTextConverter x:Key="BookmarkTextConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </common:BootStrapper>

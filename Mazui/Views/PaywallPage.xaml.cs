@@ -21,9 +21,9 @@ namespace Mazui.Views
         public PaywallPage()
         {
             this.InitializeComponent();
-            Template10.Common.BootStrapper.Current.NavigationService.ClearHistory();
-            var length = Template10.Common.BootStrapper.Current.NavigationService.Frame.BackStack.Count;
-            Template10.Common.BootStrapper.Current.NavigationService.Frame.BackStack.RemoveAt(length - 1);
+            // Template10.Common.BootStrapper.Current.NavigationService.ClearHistory();
+            //var length = Template10.Common.BootStrapper.Current.NavigationService.Frame.BackStack.Count;
+            // Template10.Common.BootStrapper.Current.NavigationService.Frame.BackStack.RemoveAt(length - 1);
         }
 
         private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)

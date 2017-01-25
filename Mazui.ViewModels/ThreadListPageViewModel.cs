@@ -70,10 +70,10 @@ namespace Mazui.ViewModels
             }
         }
 
-        private void ForumPageScrollingCollection_CheckIsPaywallEvent(object sender, PageScrollingCollection.IsPaywallArgs e)
+        private async void ForumPageScrollingCollection_CheckIsPaywallEvent(object sender, PageScrollingCollection.IsPaywallArgs e)
         {
             if (!e.IsPaywall) return;
-            NavigationService.Navigate(typeof(PaywallPage));
+            await NavigationService.NavigateAsync(typeof(PaywallPage));
         }
         #endregion
     }
