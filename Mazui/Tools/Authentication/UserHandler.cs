@@ -17,11 +17,19 @@ namespace Mazui.Tools.Authentication
             return new WebManager(cookies);
         }
 
-        public static async Task<WebManager> GetDefaultAuthWebManager()
+        public static async Task<UserState> GetDefaultAuthWebManager()
         {
             var user = UserAuthDatabase.GetDefaultUser();
-            if (user == null) return new WebManager();
-            return await CreateAuthWebManager(user);
+            if (user == null) return new UserState { IsLoggedIn = false, WebManager = new WebManager() };
+            var webManager = await CreateAuthWebManager(user);
+            return new UserState { IsLoggedIn = false, WebManager = webManager };
         }
+    }
+
+    public class UserState
+    {
+        public WebManager WebManager { get; set; }
+
+        public bool IsLoggedIn { get; set; }
     }
 }

@@ -12,17 +12,6 @@ namespace Mazui.ViewModels
         #region Properties
         private UserAuth _user = default(UserAuth);
 
-        private bool _isLoggedIn = default(bool);
-
-        public bool IsLoggedIn
-        {
-            get { return _isLoggedIn; }
-            set
-            {
-                Set(ref _isLoggedIn, value);
-            }
-        }
-
         public UserAuth User
         {
             get { return _user; }
@@ -34,17 +23,6 @@ namespace Mazui.ViewModels
         #endregion
 
         #region Methods
-
-        public bool HasLogin()
-        {
-            User = UserAuthDatabase.GetDefaultUser();
-            return User != null;
-        }
-
-        public void LoginUser()
-        {
-            IsLoggedIn = HasLogin();
-        }
 
         #endregion
     }
