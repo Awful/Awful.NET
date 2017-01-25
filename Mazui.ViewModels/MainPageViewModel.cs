@@ -39,6 +39,11 @@ namespace Mazui.ViewModels
         {
             try
             {
+                if (WebManager == null)
+                {
+                    await LoginUser();
+                }
+
                 if (!ForumGroupList.Any())
                 {
                     IsLoading = true;
@@ -66,6 +71,13 @@ namespace Mazui.ViewModels
             }
         }
 
+        public async Task RefreshForums()
+        {
+            IsLoading = true;
+            await GetMainPageForumsAsync(true);
+            IsLoading = false;
+        }
+
         public void NavigateToThreadList(Forum forum)
         {
             NavigationService.Navigate(typeof(Views.ThreadListPage), JsonConvert.SerializeObject(forum));
@@ -75,8 +87,8 @@ namespace Mazui.ViewModels
         {
             var forumCategoryEntities = ForumsDatabase.GetMainForumCategories();
             if (forumCategoryEntities.Any() && !forceRefresh) { AddForumCategoryToPage(forumCategoryEntities); return; }
-            if (!_isLoggedIn) { forumCategoryEntities = await LoadDefaultForums(); }
-            if (_isLoggedIn && forceRefresh) forumCategoryEntities = await LoadForumsFromSite();
+            if (!IsLoggedIn) { forumCategoryEntities = await LoadDefaultForums(); }
+            if (IsLoggedIn && forceRefresh) forumCategoryEntities = await LoadForumsFromSite();
             ForumGroupList.Clear();
             foreach (var forumCategoryEntity in forumCategoryEntities) ForumGroupList.Add(forumCategoryEntity);
             RaisePropertyChanged("ForumGroupList");
@@ -85,8 +97,7 @@ namespace Mazui.ViewModels
 
         private async Task<List<Category>> LoadForumsFromSite()
         {
-            if (_webManager == null) _webManager = await UserHandler.CreateAuthWebManager(_user);
-            if (_forumManager == null) _forumManager = new ForumManager(_webManager);
+            if (_forumManager == null) _forumManager = new ForumManager(WebManager);
 
             var forumResult = await _forumManager.GetForumCategoriesAsync();
             var resultCheck = await ResultChecker.CheckSuccess(forumResult);

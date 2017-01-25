@@ -145,5 +145,8 @@
                 </SemanticZoom.ZoomedInView>
             </SemanticZoom>
         </Grid>
+        <CommandBar x:Name="ForumCommandBar" Grid.Row="3">
+            <AppBarButton Icon="Refresh" Label="Refresh Forum List" Click="{x:Bind ViewModel.RefreshForums}"/>
+        </CommandBar>
     </Grid>
 </Page>

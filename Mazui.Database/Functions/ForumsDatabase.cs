@@ -47,7 +47,7 @@ namespace Mazui.Database.Functions
                 var forums = db.Forums.ToList();
                 db.Categories.RemoveRange(categories);
                 db.Forums.RemoveRange(forums);
-
+                await db.SaveChangesAsync();
                 var count = 1;
                 foreach (var item in newCategories)
                 {

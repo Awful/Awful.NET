@@ -27,10 +27,12 @@ namespace Mazui.ViewModels
         #region Methods
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
         {
+            IsLoading = true;
             if (WebManager == null)
             {
                 await LoginUser();
             }
+            IsLoading = false;
         }
 
         public async Task LogoutUser()
