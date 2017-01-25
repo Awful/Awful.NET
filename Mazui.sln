@@ -5,7 +5,21 @@ VisualStudioVersion = 15.0.26020.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mazui", "Mazui\Mazui.csproj", "{8490068A-DD2F-499E-84BD-E54A0A5B9AD4}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mazui.Core", "Mazui.Core\Mazui.Core.shproj", "{ED5E0EC4-6109-4332-9004-1D0ED0AF9EED}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mazui.Database", "Mazui.Database\Mazui.Database.shproj", "{83249B0C-9768-4FBC-98A2-67ED9F3D12DC}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mazui.UWP.ViewModels", "Mazui.ViewModels\Mazui.UWP.ViewModels.shproj", "{2B534404-C418-4012-AF4F-0197565A4D5A}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Mazui.ViewModels\Mazui.ViewModels.projitems*{2b534404-c418-4012-af4f-0197565a4d5a}*SharedItemsImports = 13
+		Mazui.Database\Mazui.Database.projitems*{83249b0c-9768-4fbc-98a2-67ed9f3d12dc}*SharedItemsImports = 13
+		Mazui.Core\Mazui.Core.projitems*{8490068a-dd2f-499e-84bd-e54a0a5b9ad4}*SharedItemsImports = 4
+		Mazui.Database\Mazui.Database.projitems*{8490068a-dd2f-499e-84bd-e54a0a5b9ad4}*SharedItemsImports = 4
+		Mazui.ViewModels\Mazui.ViewModels.projitems*{8490068a-dd2f-499e-84bd-e54a0a5b9ad4}*SharedItemsImports = 4
+		Mazui.Core\Mazui.Core.projitems*{ed5e0ec4-6109-4332-9004-1d0ed0af9eed}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
 		Debug|x64 = Debug|x64

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>ed5e0ec4-6109-4332-9004-1d0ed0af9eed</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Mazui.Core</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\AuthenticationManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\ForumManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\ThreadManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\UserManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\WebManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Forums\Category.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Forums\Forum.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Threads\Thread.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Users\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Users\UserAuth.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Web\AuthResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Web\Error.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Web\Result.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tools\EndPoints.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tools\ErrorHandler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tools\Extensions.cs" />
+  </ItemGroup>
+</Project>
