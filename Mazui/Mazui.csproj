@@ -134,6 +134,7 @@
     <Compile Include="Tools\Converters\SubforumHeaderColorConverter.cs" />
     <Compile Include="Tools\Converters\ThreadHeaderColorConverter.cs" />
     <Compile Include="Tools\Converters\ThreadNullCheckConverter.cs" />
+    <Compile Include="Tools\Helpers.cs" />
     <Compile Include="Tools\PageScrollingCollection.cs" />
     <Compile Include="Tools\ResultChecker.cs" />
     <Compile Include="Views\BasePage.cs" />

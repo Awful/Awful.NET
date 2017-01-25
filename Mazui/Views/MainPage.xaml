@@ -36,7 +36,7 @@
             ItemsPath="ForumList" />
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource MainPageBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -88,13 +88,13 @@
                 IsItemClickEnabled="True">
                         <listControls:AdaptiveGridView.ItemTemplate>
                             <DataTemplate x:DataType="forums:Forum">
-                                <Grid x:Name="ForumTemplateGrid" HorizontalAlignment="Stretch">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="5"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Rectangle Fill="{x:Bind IsSubforum, Converter={StaticResource SubforumHeaderColorConverter}}" Grid.Column="0"/>
-                                    <TextBlock Style="{ThemeResource ForumBox}" Foreground="{ThemeResource ForumFontColor}" Grid.Column="1" Text="{x:Bind Name}" FontFamily="{ThemeResource DefaultFont}" TextWrapping="Wrap" TextAlignment="Left" Margin="15,5,15,0" />
+                                <Grid Background="{ThemeResource ForumBackground}" x:Name="ForumTemplateGrid" HorizontalAlignment="Stretch">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Rectangle Fill="{x:Bind IsSubforum, Converter={StaticResource SubforumHeaderColorConverter}}" Grid.Row="0"/>
+                                    <TextBlock Style="{ThemeResource ForumBox}" Foreground="{ThemeResource ForumFontColor}" Grid.Row="1" Text="{x:Bind Name}" FontFamily="{ThemeResource DefaultFont}" TextWrapping="Wrap" TextAlignment="Left" Margin="15,5,15,0" />
                                     <FlyoutBase.AttachedFlyout>
                                         <MenuFlyout>
                                             <MenuFlyoutItem Text="{Binding Converter={StaticResource AddOrRemoveFavoriteTextConverter}}" Click="AddOrRemoveFavorite"  CommandParameter="{Binding}"/>

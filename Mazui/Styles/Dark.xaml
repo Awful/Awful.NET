@@ -6,7 +6,8 @@
     <Color x:Key="AwfulStatusBar">#232323</Color>
     <Color x:Key="AwfulWebBackground">#000000</Color>
     <FontFamily x:Key="DefaultFont">Segoe UI</FontFamily>
-    <SolidColorBrush x:Key="MainPageBackground" Color="#1E1E1E"/>
+    <SolidColorBrush x:Key="MainPageBackground" Color="Black"/>
+    <SolidColorBrush x:Key="SidebarBackground" Color="#252526"/>
     <SolidColorBrush x:Key="ForumBackground" Color="#252526"/>
     <SolidColorBrush x:Key="ForumFontColor" Color="White"/>
     <SolidColorBrush x:Key="TitleFontColor" Color="#ffffff"/>

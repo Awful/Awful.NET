@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Mazui.Services;
+using System;
+using System.Linq;
+using Template10.Common;
 using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -21,7 +24,11 @@ namespace Mazui.Tools.Converters
             {
                 return new SolidColorBrush(Colors.Transparent);
             }
-            return (bool)value ? Application.Current.Resources["HasSeenThreadColor"] as SolidColorBrush : Application.Current.Resources["ThreadColor"] as SolidColorBrush;
+            if(SettingsService.Instance.AppTheme == ApplicationTheme.Dark)
+            {
+                return (bool)value ? Helpers.GetSolidColorBrush("#FF5C7AB7") : Helpers.GetSolidColorBrush("#FF232323");
+            }
+            return (bool)value ? Helpers.GetSolidColorBrush("#FFC6D8FB") : Helpers.GetSolidColorBrush("#FFd4e1ee");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
