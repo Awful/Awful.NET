@@ -17,7 +17,7 @@ namespace Mazui.Tools.Converters
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (_helper.Read<bool>("TransparentThreadListBackground", true))
+            if (_helper.Read<bool>("TransparentThreadListBackground", false))
             {
                 return new SolidColorBrush(Colors.Transparent);
             }
