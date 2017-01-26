@@ -1,4 +1,6 @@
-﻿using Mazui.ViewModels;
+﻿using Mazui.Core.Models.Threads;
+using Mazui.ViewModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;

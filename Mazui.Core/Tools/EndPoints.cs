@@ -6,6 +6,10 @@ namespace Mazui.Core.Tools
 {
     public class EndPoints
     {
+        public const string SavedForum = "SavedForum";
+
+        public const string SavedThread = "SavedThread";
+
         public const string GotoNewPost = "&goto=newpost";
 
         public const string PerPage = "&perpage=40";

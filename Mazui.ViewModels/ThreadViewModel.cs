@@ -16,6 +16,7 @@ using Mazui.WebTemplate.Legacy;
 using Mazui.Services;
 using HtmlAgilityPack;
 using System.IO;
+using Mazui.Core.Tools;
 
 namespace Mazui.ViewModels
 {
@@ -56,45 +57,16 @@ namespace Mazui.ViewModels
             _postManager = new PostManager(WebManager);
         }
 
+        public async Task LoadFromState(IDictionary<string, object> suspensionState)
+        {
+            if (suspensionState.ContainsKey(EndPoints.SavedThread))
+            {
+                Selected = JsonConvert.DeserializeObject<Thread>(suspensionState[EndPoints.SavedThread]?.ToString());
+                await LoadThread(false);
+            }
+        }
+
         #region Methods
-        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
-        {
-            if (WebManager == null)
-            {
-                await LoginUser();
-            }
-
-            _postManager = new PostManager(WebManager);
-
-            if (suspensionState.ContainsKey(nameof(Thread)))
-            {
-                Selected = JsonConvert.DeserializeObject<Thread>(suspensionState[nameof(Thread)]?.ToString());
-            }
-            else
-            {
-                var thread = JsonConvert.DeserializeObject<Thread>((string)parameter);
-                if (thread == null) return;
-                Selected = thread;
-            }
-
-            await LoadThread(false);
-        }
-
-        public override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
-        {
-            if (suspending)
-            {
-                if (Selected != null)
-                {
-                    var newThread = Selected.Clone();
-                    newThread.Html = null;
-                    newThread.Posts = null;
-                    state[nameof(Selected)] = JsonConvert.SerializeObject(newThread);
-                }
-                state[nameof(Thread)] = JsonConvert.SerializeObject(Selected);
-            }
-            return Task.CompletedTask;
-        }
 
         public async Task LoadThread(bool goToPageOverride = false)
         {

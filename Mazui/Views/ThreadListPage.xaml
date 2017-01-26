@@ -10,6 +10,10 @@
     xmlns:listControls="using:Mazui.Controls.ListControls"
     xmlns:threads="using:Mazui.Core.Models.Threads"
     xmlns:UwpControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:behaviors="using:Template10.Behaviors"
+    xmlns:converters="using:Mazui.Tools.Converters"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -81,6 +85,21 @@
                             <TextBlock x:Phase="2" Grid.Column="2" VerticalAlignment="Center" Margin="15" Visibility="{x:Bind HasSeen, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{ThemeResource ForumReplyThreadBox}" FontFamily="{ThemeResource DefaultFont}" x:Name="ReplyCount"
                                                    Text="{Binding RepliesSinceLastOpened, Mode=OneWay}" />
                         </Grid>
+                        <FlyoutBase.AttachedFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="Go to Last Page" Click="GoToLastPage"  CommandParameter="{Binding}"/>
+                                <MenuFlyoutItem Click="AddRemoveBookmark" CommandParameter="{Binding}" Text="{Binding IsBookmark, Converter={StaticResource BookmarkTextConverter}}"/>
+                                <MenuFlyoutItem Click="Unread" CommandParameter="{Binding}" Text="Unread"/>
+                            </MenuFlyout>
+                        </FlyoutBase.AttachedFlyout>
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Holding">
+                                <converters:OpenMenuFlyoutAction />
+                            </core:EventTriggerBehavior>
+                            <core:EventTriggerBehavior EventName="RightTapped">
+                                <converters:OpenMenuFlyoutAction />
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
                     </Grid>
                 </DataTemplate>
             </listControls:AdaptiveGridView.ItemTemplate>

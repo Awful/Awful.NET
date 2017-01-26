@@ -1,10 +1,12 @@
 ﻿using Mazui.Core.Models.Threads;
 using Mazui.ViewModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Template10.Services.WindowService;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -24,8 +26,10 @@ namespace Mazui.Views
     /// </summary>
     public sealed partial class ThreadListPage : Page
     {
+        public static ThreadListPage Instance { get; set; }
         public ThreadListPage()
         {
+            Instance = this;
             this.InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Enabled;
         }
@@ -38,5 +42,44 @@ namespace Mazui.Views
             var thread = e.ClickedItem as Thread;
             await ViewModel.NavigateToThread(thread);
         }
+
+        private async void OpenInNewWindow(object sender, RoutedEventArgs e)
+        {
+            var imageSource = sender as MenuFlyoutItem;
+            var thread = imageSource?.CommandParameter as Thread;
+            if (thread == null)
+                return;
+            ViewModel.Selected = thread;
+            await WindowService.Instance.ShowAsync<ThreadPage>(JsonConvert.SerializeObject(thread));
+        }
+
+        private async void GoToLastPage(object sender, RoutedEventArgs e)
+        {
+            var imageSource = sender as MenuFlyoutItem;
+            var thread = imageSource?.CommandParameter as Thread;
+            if (thread == null)
+                return;
+            ViewModel.Selected = thread;
+            await ViewModel.NavigateToThread(thread);
+        }
+
+        private void AddRemoveBookmark(object sender, RoutedEventArgs e)
+        {
+            var imageSource = sender as MenuFlyoutItem;
+            var thread = imageSource?.CommandParameter as Thread;
+            if (thread == null)
+                return;
+            // ViewModel.AddRemoveBookmark(thread);
+        }
+
+        private void Unread(object sender, RoutedEventArgs e)
+        {
+            var imageSource = sender as MenuFlyoutItem;
+            var thread = imageSource?.CommandParameter as Thread;
+            if (thread == null)
+                return;
+            // ViewModel.UnreadThread(thread);
+        }
+
     }
 }
