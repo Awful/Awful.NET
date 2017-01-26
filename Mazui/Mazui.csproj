@@ -97,6 +97,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ListControls\AdaptiveGridView.cs" />
+    <Compile Include="Controls\ThreadView.xaml.cs">
+      <DependentUpon>ThreadView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\20170119041039_UserDatabase.cs" />
     <Compile Include="Migrations\20170119041039_UserDatabase.designer.cs">
       <DependentUpon>20170119041039_UserDatabase.cs</DependentUpon>
@@ -126,7 +129,9 @@
     <Compile Include="Tools\Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Tools\Converters\BooleanToVisibilityInverter.cs" />
     <Compile Include="Tools\Converters\ForumImageConverter.cs" />
+    <Compile Include="Tools\Converters\ForwardButtonEnableConverter.cs" />
     <Compile Include="Tools\Converters\HasSeenThreadConverter.cs" />
+    <Compile Include="Tools\Converters\NotifyThreadTextConverter.cs" />
     <Compile Include="Tools\Converters\OpenMenuFlyoutAction.cs" />
     <Compile Include="Tools\Converters\PageNumberConverter.cs" />
     <Compile Include="Tools\Converters\RatingVisibilityConverter.cs" />
@@ -137,6 +142,7 @@
     <Compile Include="Tools\Helpers.cs" />
     <Compile Include="Tools\PageScrollingCollection.cs" />
     <Compile Include="Tools\ResultChecker.cs" />
+    <Compile Include="Tools\Threads\WebViewHelper.cs" />
     <Compile Include="Views\BasePage.cs" />
     <Compile Include="Views\Busy.xaml.cs">
       <DependentUpon>Busy.xaml</DependentUpon>
@@ -161,6 +167,9 @@
     </Compile>
     <Compile Include="Views\ThreadListPage.xaml.cs">
       <DependentUpon>ThreadListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ThreadPage.xaml.cs">
+      <DependentUpon>ThreadPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -808,6 +817,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\ThreadView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Custom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -861,6 +874,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ThreadListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ThreadPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -20,6 +20,7 @@ namespace Mazui.Tools.Converters
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
+            // Can't use Application Resources here, it doesn't refresh them after a theme switch without restarting...
             if (_helper.Read<bool>("TransparentThreadListBackground", false))
             {
                 return new SolidColorBrush(Colors.Transparent);

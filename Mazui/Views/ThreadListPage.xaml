@@ -39,6 +39,7 @@
                 MaxItemHeight="70"
                 MinItemWidth="300"
             IsItemClickEnabled="True"
+            ItemClick="AdaptiveGridView_ItemClick"
             ItemsSource="{Binding ForumPageScrollingCollection, UpdateSourceTrigger=PropertyChanged}">
             <listControls:AdaptiveGridView.ItemTemplate>
                 <DataTemplate x:DataType="threads:Thread">

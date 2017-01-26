@@ -1,4 +1,5 @@
-﻿using Mazui.ViewModels;
+﻿using Mazui.Core.Models.Threads;
+using Mazui.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,9 +27,16 @@ namespace Mazui.Views
         public ThreadListPage()
         {
             this.InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
         // strongly-typed view models enable x:bind
         public ThreadListPageViewModel ViewModel => this.DataContext as ThreadListPageViewModel;
+
+        private async void AdaptiveGridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var thread = e.ClickedItem as Thread;
+            await ViewModel.NavigateToThread(thread);
+        }
     }
 }

@@ -1,0 +1,96 @@
+﻿<UserControl
+    x:Class="Mazui.Controls.ThreadView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Mazui.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:viewModels="using:Mazui.ViewModels"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:threads="using:Mazui.Tools.Threads"
+    xmlns:uwp="using:FontAwesome.UWP"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.DataContext>
+        <viewModels:ThreadViewModel />
+    </UserControl.DataContext>
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <controls:PageHeader x:Name="ThreadPageHeader" BackButtonVisibility="Collapsed" VisualStateNormalMinWidth="720" HorizontalAlignment="Stretch" Background="{ThemeResource SystemAccentColor}" Foreground="White" Text="{Binding Selected.Name}">
+            </controls:PageHeader>
+            <Grid Grid.Row="2" Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" Canvas.ZIndex="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Grid.Background>
+                    <SolidColorBrush Opacity=".9" Color="{StaticResource AwfulWebBackground}"></SolidColorBrush>
+                </Grid.Background>
+                <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" Height="48" Width="48" VerticalAlignment="Center" HorizontalAlignment="Center"></ProgressRing>
+            </Grid>
+            <WebView DefaultBackgroundColor="{ThemeResource AwfulWebBackground}" Grid.Row="2" Canvas.ZIndex="0" IsRightTapEnabled="True"  threads:WebViewHelper.Html="{Binding Selected.Html}"  x:Name="ThreadFullView">
+            </WebView>
+            <CommandBar x:Name="ForumCommandBar" Grid.Row="3">
+                <AppBarButton Label="First Page" IsEnabled="{Binding Selected.CurrentPage, Converter={StaticResource BackButtonEnableConverter}}" Click="{x:Bind ViewModel.FirstThreadPage}">
+                    <AppBarButton.Icon>
+                        <uwp:FontAwesome Icon="FastBackward" HorizontalAlignment="Center" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton Label="Previous Page" IsEnabled="{Binding Selected.CurrentPage, Converter={StaticResource BackButtonEnableConverter}}" Click="{x:Bind ViewModel.PreviousPage}">
+                    <AppBarButton.Icon>
+                        <uwp:FontAwesome Icon="Backward" HorizontalAlignment="Center" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton Label="Refresh" IsEnabled="{Binding IsLoading, Converter={StaticResource BooleanInverter}}"  Click="{x:Bind ViewModel.ReloadThread}" Icon="Refresh"/>
+                <AppBarButton Label="Next Page" IsEnabled="{Binding Selected, Converter={StaticResource ForwardButtonEnableConverter}}"  Click="{x:Bind ViewModel.NextPage}">
+                    <AppBarButton.Icon>
+                        <uwp:FontAwesome Icon="Forward" HorizontalAlignment="Center" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton Label="Last Page" IsEnabled="{Binding Selected, Converter={StaticResource ForwardButtonEnableConverter}}"  Click="{x:Bind ViewModel.LastThreadPage}">
+                    <AppBarButton.Icon>
+                        <uwp:FontAwesome Icon="FastForward" HorizontalAlignment="Center" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton IsEnabled="{Binding IsLoggedIn}" Click="{x:Bind ViewModel.ReplyToThread}" Label="Reply">
+                    </AppBarButton>
+                    <AppBarButton IsEnabled="{Binding IsLoggedIn}" Click="{x:Bind ViewModel.AddRemoveBookmark}"  Label="{Binding Selected.IsBookmark, Converter={StaticResource BookmarkTextConverter}, Mode=OneWay}">
+                    </AppBarButton>
+                    <AppBarButton Visibility="{Binding Selected.IsBookmark, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" IsEnabled="{Binding IsLoggedIn}" Click="{x:Bind ViewModel.AddRemoveNotificationTable}" Label="{Binding Selected.IsNotified, Converter={StaticResource NotifyThreadTextConverter}, Mode=OneWay}">
+                    </AppBarButton>
+                    <AppBarButton Click="ScrollToBottom" Label="Scroll To Bottom"/>
+                    <AppBarButton x:Name="PageNumberButton2" Label="{Binding Selected, Converter={StaticResource PageNumberConverter}, Mode=TwoWay}">
+                        <Button.Flyout>
+                            <Flyout>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="150"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Viewbox Grid.Column="1" Margin="5" Height="40">
+                                            <TextBlock Grid.Column="1" x:Name="PageTextBox" Text="{Binding Selected, Converter={StaticResource PageNumberConverter}}"/>
+                                        </Viewbox>
+                                    </Grid>
+                                    <TextBox Grid.Row="1" Width="150"  InputScope="Number" Margin="5" TextChanged="PageNumberTextBox_OnTextChanged" x:Name="PageNumberTextBox"/>
+                                    <Button HorizontalAlignment="Center"  Grid.Row="2" Margin="5" x:Name="PageNumberButton" Click="{x:Bind ViewModel.ChangeThreadPage}" Content="Change Page"/>
+                                </Grid>
+                            </Flyout>
+                        </Button.Flyout>
+                    </AppBarButton>
+                </CommandBar.SecondaryCommands>
+            </CommandBar>
+        </Grid>
+    </Grid>
+</UserControl>

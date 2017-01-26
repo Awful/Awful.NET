@@ -1,4 +1,5 @@
 ﻿using Mazui.Core.Models.Forums;
+using Mazui.Core.Models.Threads;
 using Mazui.Tools;
 using Mazui.Views;
 using Newtonsoft.Json;
@@ -51,6 +52,11 @@ namespace Mazui.ViewModels
 
             ForumPageScrollingCollection = new PageScrollingCollection(Forum, 1, WebManager);
             ForumPageScrollingCollection.CheckIsPaywallEvent += ForumPageScrollingCollection_CheckIsPaywallEvent;
+        }
+
+        public async Task NavigateToThread(Thread thread)
+        {
+            await NavigationService.NavigateAsync(typeof(Views.ThreadPage), JsonConvert.SerializeObject(thread));
         }
 
         private void SuspendRecover(object parameter, IDictionary<string, object> suspensionState)

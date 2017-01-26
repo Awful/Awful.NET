@@ -16,5 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)SettingsPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ShellViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ThreadListPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ThreadPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ThreadViewModel.cs" />
   </ItemGroup>
 </Project>

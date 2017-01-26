@@ -1,4 +1,5 @@
 ﻿using Mazui.Core.Models.Forums;
+using Mazui.Core.Models.Posts;
 using PropertyChanged;
 using System;
 using System.Collections.Generic;
@@ -74,6 +75,8 @@ namespace Mazui.Core.Models.Threads
         public string Html { get; set; }
 
         public bool IsPrivateMessage { get; set; }
+
+        public List<Post> Posts { get; set; }
 
         public Thread Clone()
         {
