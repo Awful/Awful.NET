@@ -1,0 +1,19 @@
+body {
+	background: #99f url("http://fi.somethingawful.com/byob/cat.gif") top left no-repeat
+}
+
+body, tr, th, .postbody, p, li, blockquote, h4, .author,.breadcrumbs, .btn , a{
+	color: white !important;
+	font-family: "comic sans ms", Times, serif;
+}
+
+
+.seen1
+{
+background-color: rgba(0, 153, 255, .5);
+}
+
+.seen2
+{
+background-color: rgba(0, 102, 255, .5);
+}

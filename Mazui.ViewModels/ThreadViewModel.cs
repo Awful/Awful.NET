@@ -11,6 +11,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using Template10.Services.NavigationService;
+using System.Linq;
+using Mazui.WebTemplate.Legacy;
+using Mazui.Services;
+using HtmlAgilityPack;
+using System.IO;
 
 namespace Mazui.ViewModels
 {
@@ -93,9 +98,12 @@ namespace Mazui.ViewModels
 
         public async Task LoadThread(bool goToPageOverride = false)
         {
+            IsLoading = true;
             var result = await _postManager.GetThreadPostsAsync(Selected.Location, Selected.CurrentPage, Selected.HasBeenViewed, goToPageOverride);
             if (await CheckResult(result) == false) return;
-            await SetupPosts(result);
+            var threadPosts = await SetupPosts(result);
+            await SetupHtml(threadPosts);
+            IsLoading = false;
         }
 
         public async Task NextPage()
@@ -175,7 +183,65 @@ namespace Mazui.ViewModels
 
         }
 
-        private async Task SetupPosts(Result result)
+        private async Task SetupHtml(ThreadPosts postresult)
+        {
+            if (!Selected.Posts.Any()) return;
+            var threadTemplateModel = new ThreadTemplateModel()
+            {
+                ForumThread = Selected,
+                IsDarkThemeSet = SettingsService.Instance.AppTheme == Windows.UI.Xaml.ApplicationTheme.Dark,
+                IsLoggedIn = IsLoggedIn,
+                Posts = Selected.Posts,
+                EmbeddedGifv = SettingsService.Instance.ShowEmbeddedGifv,
+                EmbeddedTweets = SettingsService.Instance.ShowEmbeddedTweets,
+                EmbeddedVideo = SettingsService.Instance.ShowEmbeddedVideo
+            };
+            var threadTemplate = new ThreadTemplate() { Model = threadTemplateModel };
+            var html = threadTemplate.GenerateString();
+            if (!SettingsService.Instance.AutoplayGif)
+            {
+                var doc2 = new HtmlDocument();
+                doc2.LoadHtml(html);
+                HtmlNode bodyNode = doc2.DocumentNode.Descendants("body").FirstOrDefault();
+                var images = bodyNode.Descendants("img").Where(node => node.GetAttributeValue("class", string.Empty) != "av");
+                foreach (var image in images)
+                {
+                    var src = image.Attributes["src"].Value;
+                    if (Path.GetExtension(src) != ".gif")
+                        continue;
+                    if (src.Contains("somethingawful.com"))
+                        continue;
+                    if (src.Contains("emoticons"))
+                        continue;
+                    if (src.Contains("smilies"))
+                        continue;
+                    image.Attributes.Add("data-gifffer", image.Attributes["src"].Value);
+                    image.Attributes.Remove("src");
+                }
+                html = doc2.DocumentNode.OuterHtml;
+            }
+            Selected.Html = html;
+            var count = postresult.Posts.Count(node => !node.HasSeen);
+            if (Selected.RepliesSinceLastOpened > 0)
+            {
+                if ((Selected.RepliesSinceLastOpened - count < 0) || count == 0)
+                {
+                    Selected.RepliesSinceLastOpened = 0;
+                }
+                else
+                {
+                    Selected.RepliesSinceLastOpened -= count;
+                }
+            }
+            Selected.Name = postresult.ForumThread.Name;
+            if (Selected.IsBookmark)
+            {
+                // await _db.RefreshBookmark(Selected);
+            }
+            RaisePropertyChanged("Selected");
+        }
+
+        private async Task<ThreadPosts> SetupPosts(Result result)
         {
             var errorMessage = "";
             try
@@ -191,14 +257,14 @@ namespace Mazui.ViewModels
                 {
                     IsLoggedIn = false;
                 }
-                var posts = postresult.Posts;
-                return;
+                return postresult;
             }
             catch (Exception ex)
             {
                 errorMessage = ex.Message;
             }
             await ResultChecker.SendMessageDialogAsync($"Error parsing thread: {errorMessage}", false);
+            return null;
         }
 
         private async Task<bool> CheckResult(Result result)

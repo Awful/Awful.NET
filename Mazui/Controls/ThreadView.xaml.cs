@@ -1,4 +1,5 @@
 ﻿using Mazui.Core.Models.Threads;
+using Mazui.Tools.Web;
 using Mazui.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -28,8 +29,8 @@ namespace Mazui.Controls
         public ThreadView()
         {
             this.InitializeComponent();
-            // ThreadFullView.NavigationCompleted += WebViewCommands.WebView_OnNavigationCompleted;
-            // ThreadFullView.ScriptNotify += WebViewCommands.WebViewNotifyCommand.WebView_ScriptNotify;
+            ThreadFullView.NavigationCompleted += WebViewCommands.WebView_OnNavigationCompleted;
+            ThreadFullView.ScriptNotify += WebViewCommands.WebViewNotifyCommand.WebView_ScriptNotify;
         }
 
         private void FlyoutOnOpened(object sender, object o)

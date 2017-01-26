@@ -1,0 +1,83 @@
+#content {
+	background-color: black;
+	color: black;
+}
+
+.ptr-refresh #ptr .genericon {
+    color: white;
+}
+
+.thread-header {
+    border-bottom: 1px transparent solid;
+    padding-bottom: 10px;
+}
+
+.userquoted {
+    background: rgba(255, 254, 186, 0.29) none repeat-x !important;
+}
+
+a, a:hover, a:visited{
+    color: #C6D9FB;
+	text-decoration: underline;
+}
+
+.altcolor2,tr.altcolor2 td,td.altcolor2 {
+    background-color: black;
+}
+
+.altcolor1,tr.altcolor1 td,td.altcolor1 {
+    background-color: black;
+}
+
+#thread dl.userinfo dt.author {
+	padding-bottom: 4px;
+	font-weight: bolder;
+	color: white !important;
+	font-size: 14px !important;
+	text-shadow: 0 0 0 #EEEEEE;
+}
+
+#mods,div.pages,#copyright,#forum th,#forum td.lastpost,#forum span.pages,#thread div.postbar,td.postdate,td.postlinks,#thread dl.userinfo dd,#thread tr.postbar td,div.threadrate,div.subscribe {
+    color: white;
+}
+
+body, tr, th, .postbody, p, li, blockquote, h4, .author,.breadcrumbs, .btn {
+	color: white !important;
+}
+
+.registered, .postdate, .bbc-center {
+	color: white !important;
+}
+
+.seen1
+{
+background-color: #114211!important;
+background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAARSURBVBhXYwACQSdBMGZgAAAFhgDJcI5nugAAAABJRU5ErkJggg==')!important;
+background-repeat: repeat!important;
+}
+
+.seen2
+{
+background-color: #114211!important;
+background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAARSURBVBhXYwACQSdBMGZgAAAFhgDJcI5nugAAAABJRU5ErkJggg==')!important;
+background-repeat: repeat!important;
+}
+
+.postCount1 {
+    background-color: black;
+}
+
+.postCount2 {
+    background-color: black;
+}
+
+.btn
+{
+background-color: rgba(0, 0, 0, 1);
+    border: 1px solid white;
+}
+
+blockquote
+{
+border-left: 5px solid rgba(87, 255, 87, 0.6);
+}

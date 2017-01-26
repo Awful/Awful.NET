@@ -12,7 +12,8 @@ namespace Mazui.Tools.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var currentThread = (Thread)value;
+            var currentThread = value as Thread;
+            if (currentThread == null) return false;
             return currentThread.TotalPages != currentThread.CurrentPage;
         }
 

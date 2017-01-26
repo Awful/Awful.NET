@@ -1,0 +1,168 @@
+﻿@model ThreadTemplateModel
+<!DOCTYPE html>
+<html>
+@{
+int seenCount = 1;
+var theme = "";
+var allPosts = Model.Posts.Any(node => !node.HasSeen) && Model.Posts.Any(node => node.HasSeen);;
+var otherPosts = Model.Posts.Any(node => !node.HasSeen);
+switch (Model.ForumThread.ForumId)
+            {
+                case 29:
+                    theme = "<link href=\"ms-appx-web:///Assets/Website/CSS/29.css\" type=\"text/css\" media=\"all\" rel=\"stylesheet\">";
+                    break;
+                case 26:
+                    theme = "<link href=\"ms-appx-web:///Assets/Website/CSS/26.css\" type=\"text/css\" media=\"all\" rel=\"stylesheet\">";
+                    break;
+                case 267:
+                    theme = "<link href=\"ms-appx-web:///Assets/Website/CSS/267.css\" type=\"text/css\" media=\"all\" rel=\"stylesheet\">";
+                    break;
+                case 268:
+                    theme = "<link href=\"ms-appx-web:///Assets/Website/CSS/268.css\" type=\"text/css\" media=\"all\" rel=\"stylesheet\">";
+                    break;
+            }
+}
+<head>
+    <meta name="twitter:dnt" content="on">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href="ms-appx-web:///Assets/Website/CSS/winstrap.css" media="all" rel="stylesheet" type="text/css">
+    <link href="ms-appx-web:///Assets/Website/CSS/forum-thread.css" media="all" rel="stylesheet" type="text/css">
+    <link href="ms-appx-web:///Assets/Website/CSS/bbcode.css" media="all" rel="stylesheet" type="text/css">
+    @if (Model.IsDarkThemeSet) {
+    	<meta name="twitter:widgets:theme" content="dark">
+    	<link href="ms-appx-web:///Assets/Website/CSS/dark.css" media="all" rel="stylesheet" type="text/css">
+    }
+   	@{
+   	WriteLiteral(theme);
+   	}
+    <!--<script type="text/javascript" async="" src="JS/jquery.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-2.2.3.js"   integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="   crossorigin="anonymous"></script>
+    <script type="text/javascript" async="" src="ms-appx-web:///Assets/gifffer.js"></script>
+    <script type="text/javascript" async="" src="ms-appx-web:///Assets/bootstrap.min.js"></script>
+    <script type="text/javascript" async="" src="ms-appx-web:///Assets/widgets.js"></script>
+    <script type="text/javascript" async="" src="ms-appx-web:///Assets/threadTemplate.js"></script>
+    <script type="text/javascript" async="" src="ms-appx-web:///Assets/url.min.js"></script>
+    <title>Forum Thread</title>
+</head>
+
+<body data-thread-id="@Model.ForumThread.ThreadId" data-thread-name="@Model.ForumThread.Name" data-show-embedded-tweets="@Model.EmbeddedTweets" data-show-embedded-gifv="@Model.EmbeddedGifv" data-show-embedded-video="@Model.EmbeddedVideo" style="overflow-x: hidden;">
+	<div style="display:none;" id="loggedinusername">@Model.ForumThread.LoggedInUserName</div>
+    <div id="content">
+        <div id="thread">
+            <div class="container-fluid">
+            	<div class="row clearfix">
+            		@if(allPosts) {
+            		<div id="showPosts">
+                        <div style="width: 100%; margin: 0;" class="btn-group">
+                            <button style="margin-left: 0; margin-right: 0; margin-top:1px; margin-bottom: 5px;" class="btn btn-block center-block" id="" type="submit" onclick="window.ForumCommand('showPosts', 'true')">Show Previous Posts</button>
+                        </div>
+                    </div>
+            		}
+            		@foreach (var post in Model.Posts) {
+
+            		if (seenCount > 2) {
+                    	seenCount = 1;
+            		}
+            		string hasSeen = otherPosts && post.HasSeen ? "hiddenpost " : "";
+                    hasSeen += post.HasSeen ? string.Concat("seen", seenCount) : string.Concat("postCount", seenCount);
+                	seenCount++;
+
+            		<div style="overflow: auto;" class="@hasSeen">
+            		<div class="col-md-4 thread-header">
+                            <div id="threadView">
+                            <img data-user-id="@post.User.Id" src="@post.User.AvatarLink"
+                                alt="" class="av" border="0">
+                                <div class="userinfo">
+                                    <p style="padding: 0;" class="text"><span class="@post.User.Roles">@post.User.Username</span></p>
+                                    <p class="text article-title"><span class="registered">@post.PostDate</span></p>
+                                    <div style="font-size: 14px;" class="avatar-user-info">
+                                        @{
+											WriteLiteral(post.User.AvatarHtml);
+										 }
+                                	</div>
+                                </div>
+                            </div>
+                    </div>
+                    <div style="padding: 15px;" class="col-md-8">
+                    	<div class="article-content">
+                    		<div id="@post.PostId" class="postbody">
+                    		@{
+								WriteLiteral(post.PostHtml);
+							}
+                    		</div>
+                    		@if (Model.IsLoggedIn) {
+                    		<footer>
+                                    <tr class="postbar">
+                                        <td class="postlinks">
+                                            <ul class="profilelinks">
+                                                <li>
+                                                    <button class="btn" id="" type="submit" onclick="window.QuotePost('@post.PostId')">Quote</button>
+                                                </li>
+                                                <li>
+                                                    <button style="margin-left: 7px;" class="btn" id="" type="submit" onclick="window.MarkAsLastRead('@post.PostIndex')">Last Read</button>
+                                                </li>
+                                                @if (post.User.IsCurrentUserPost) {
+                                                <li>
+                                                    <button style="margin-left: 7px;" class="btn
+                                                    " id="" type="submit" onclick="window.EditPost('@post.PostId')">Edit</button>
+                                                </li>
+                                                }
+                                            </ul>
+                                        </td>
+                                    </tr>
+                            </footer>
+                    		}
+                    	</div>
+                    </div>
+            		</div>
+           	 		}
+            	</div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        window.onload = function () {
+			
+            Gifffer();
+
+            $(".postbody a").click(function () {
+                var bool = window.OpenLink(this.href);
+                return bool;
+            });
+
+            $(".standard a").click(function () {
+                var bool = window.OpenLink(this.href);
+                return bool;
+            });
+
+            $(".av").on("click", function () {
+                ForumCommand('userProfile', $(this).attr('data-user-id'));
+            });
+
+            $("img").on("dblclick", function () {
+                ForumCommand('downloadImage', this.src);
+            });
+
+            var b = RegExp("^" + $("#loggedinusername").text().replace(/([.*+?^${}()|\[\]\/\\])/g,"\\$1") + "\\s+posted:$");
+            $(".bbc-block h4").filter(function () {
+                return b.test($(this).text());
+            }).map(function() {
+                return $(this).closest(".bbc-block")[0];
+            }).addClass("userquoted");
+            ForumCommand('scrollToDivStart', $("#scrolltopoststring").text());
+        };
+
+        var reloadPage = function () {
+            return new Promise(function (resolve, reject) {
+                if (true) {
+                    ForumCommand('reloadPage', null);
+                    resolve();
+                } else {
+                    reject();
+                }
+            });
+        };
+    </script>
+</body>
+</html>

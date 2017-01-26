@@ -1,0 +1,23 @@
+body {
+    background-color: #FF3399;
+	color: white;
+}
+
+body, tr, th, .postbody, p, li, blockquote, h4, .author,.breadcrumbs, .btn , a{
+	color: white !important;
+}
+
+.seen1
+{
+background-color: rgba(255, 0, 102, .9)
+}
+
+.seen2
+{
+background-color: rgba(255, 51, 204, .9)
+}
+
+blockquote
+{
+border-left: 5px solid rgba(87, 255, 87, 0.6);
+}

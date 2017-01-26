@@ -1,0 +1,91 @@
+﻿@model PreviewPostTemplateModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="twitter:dnt" content="on">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href="ms-appx-web:///Assets/Website/CSS/winstrap.css" media="all" rel="stylesheet" type="text/css">
+    <link href="ms-appx-web:///Assets/Website/CSS/forum-thread.css" media="all" rel="stylesheet" type="text/css">
+    <link href="ms-appx-web:///Assets/Website/CSS/bbcode.css" media="all" rel="stylesheet" type="text/css">
+    @if (Model.IsDarkThemeSet) {
+    	<meta name="twitter:widgets:theme" content="dark">
+    	<link href="ms-appx-web:///Assets/Website/CSS/dark.css" media="all" rel="stylesheet" type="text/css">
+    }
+    <!--<script type="text/javascript" async="" src="JS/jquery.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-2.2.3.js"   integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="   crossorigin="anonymous"></script>
+    <script type="text/javascript" async="" src="ms-appx-web:///Assets/gifffer.js"></script>
+    <script type="text/javascript" async="" src="ms-appx-web:///Assets/bootstrap.min.js"></script>
+    <script type="text/javascript" async="" src="ms-appx-web:///Assets/widgets.js"></script>
+    <script type="text/javascript" async="" src="ms-appx-web:///Assets/threadTemplate.js"></script>
+    <script type="text/javascript" async="" src="ms-appx-web:///Assets/url.min.js"></script>
+    <script type="text/javascript" async="" src="ms-appx-web:///Assets/directionalnavigation-1.0.0.0.js"></script>
+    <title>Forum Thread</title>
+</head>
+
+<body data-show-embedded-tweets="true" data-show-embedded-gifv="true" data-show-embedded-video="true" style="overflow-x: hidden;">
+    <div id="content">
+        <div id="thread">
+            <div class="container-fluid">
+            	<div class="row clearfix">
+            		<div style="overflow: auto;" class="postCount1">
+                    <div style="padding: 15px;" class="col-md-">
+                    	<div class="article-content">
+                    		<div class="postbody">
+                    		@{
+								WriteLiteral(@Model.Post.PostHtml);
+							}
+                    		</div>
+                    	</div>
+                    </div>
+            		</div>
+            	</div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+            window.onload = function () {
+                Gifffer();
+
+                $(".postbody a").click(function () {
+                    var bool = window.OpenLink(this.href);
+                    return bool;
+                });
+
+                $(".standard a").click(function () {
+                    var bool = window.OpenLink(this.href);
+                    return bool;
+                });
+
+                $(".av").on("click", function () {
+                    ForumCommand('userProfile', $(this).attr('data-user-id'));
+                });
+
+                $("img").on("dblclick", function () {
+                    ForumCommand('downloadImage', this.src);
+                });
+
+                var b = RegExp("^" + $("#loggedinusername").text().replace(/([.*+?^${}()|\[\]\/\\])/g,"\\$1") + "\\s+posted:$");
+                $(".bbc-block h4").filter(function () {
+                    return b.test($(this).text());
+                }).map(function() {
+                    return $(this).closest(".bbc-block")[0];
+                }).addClass("userquoted");
+                ForumCommand('scrollToDivStart', $("#scrolltopoststring").text());
+            };
+
+            var reloadPage = function () {
+                return new Promise(function (resolve, reject) {
+                    if (true) {
+                        ForumCommand('reloadPage', null);
+                        resolve();
+                    } else {
+                        reject();
+                    }
+                });
+            };
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,48 @@
+.bbcf-xx-small { font-size: 11px; }
+
+.bbcf-x-small { font-size: 11px; }
+
+.bbcf-small { font-size: 11px; }
+
+.bbcf-medium { }
+
+.bbcf-large { font-size: 14px; }
+
+.bbcf-x-large { font-size: 16px; }
+
+.bbcf-xx-large { font-size: 18px; }
+
+tt.bbc { font-family: monospace, "Courier New"; }
+
+.bbc-center { text-align: center; }
+
+.bbc-spoiler, .bbc-spoiler li { background: #000; }
+
+.bbc-spoiler a:link, .bbc-spoiler a:visited, .bbc-spoiler a:active, .bbc-spoiler a:link { color: #000; }
+
+.bbc-spoiler:hover a:link, .bbc-spoiler:hover a:visited, .bbc-spoiler:hover a:active, .bbc-spoiler:hover a:link { color: #80c0ff; }
+
+ul.bbc-list, ol.bbc-list { }
+
+.bbc-spoiler, .bbc-spoiler li {
+    background-color: #222;
+    border-radius: 0;
+    color: #222;
+    /** padding-top: 3px; **/
+    padding: 1px 0 2px 0;
+}
+
+.bbc-spoiler img { visibility: hidden; }
+
+.bbc-spoiler.reveal img, .bbc-spoiler.stay img { visibility: visible; }
+
+.bbc-spoiler.reveal li, .bbc-spoiler.reveal, .bbc-spoiler.stay {
+    background-color: #FAFAFA;
+    box-shadow: none;
+    cursor: pointer;
+    /** padding-top: 3px; **/
+}
+
+.bbc-spoiler:hover a:link, .bbc-spoiler:hover a:visited, .bbc-spoiler:hover a:active, .bbc-spoiler:hover a:link { color: #B05042; }
+
+.bbc-spoiler a:link, .bbc-spoiler a:visited, .bbc-spoiler a:active, .bbc-spoiler a:link { color: #222; }

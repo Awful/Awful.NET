@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <link href="CSS/bootstrap-winjs.css" media="all" rel="stylesheet" type="text/css">
+        <link href="CSS/bootstrap-table.css" media="all" rel="stylesheet" type="text/css">
+		<link href="../forum-thread.css" media="all" rel="stylesheet" type="text/css">
+        <script type="text/javascript" async="" src="../jquery.js"></script>
+        <script type="text/javascript" async="" src="../forumThread.js"></script>
+        <script type="text/javascript" async="" src="../threadTemplate.js"></script>
+        <script type="text/javascript" async="" src="../url.min.js"></script>
+        <script type="text/javascript" async="" src="../taphold.js"></script>
+		<script type="text/javascript" async="" src="../bootstrap-table.js"></script>
+        <script type="text/javascript" async="">
+            
+            window.onload = function () {
+                $(".postbody a").click(function () {
+                    var bool = window.OpenLink(this.href);
+                    return bool;
+                });
+
+                $(".standard a").click(function () {
+                    var bool = window.OpenLink(this.href);
+                    return bool;
+                });
+
+                $(".av").on("click", function () {
+                    ForumCommand('userProfile', $(this).attr('data-user-id'));
+                });
+
+                $("img").on("dblclick", function () {
+                    ForumCommand('downloadImage', this.src);
+                });
+
+                $('.bbc-block').each(function () {
+                    $(this).click(function () {
+                        if ($('blockquote', this).is(":visible")) {
+                            $('blockquote', this).fadeOut();
+                        }
+                        else {
+                            $('blockquote', this).fadeIn();
+                        }
+                    });
+                });
+
+                ForumCommand('setFont', null);
+            };
+        </script>
+        <title>Forum Thread</title>
+    </head>
+<body id="thread">
+    <div class="container-fluid">
+        <div class="row clearfix">
+		<table data-toggle="table">
+			<tbody><tr><th>Type</th><th nowrap="">Date</th><th>Horrible Jerk</th><th>Punishment Reason</th><th nowrap="">Requested By</th><th nowrap="">Approved By</th></tr>
+				<tr><td align="left"><b><a href="/showthread.php?goto=post&amp;postid=324979806" target="new">BAN</a></b></td><td nowrap="">03/26/07 08:05pm</td><td nowrap=""><b><a href="/member.php?s=&amp;action=getinfo&amp;userid=37260" target="_blank">Unkempt</a></b></td><td>Furry.</td><td nowrap=""><a href="/member.php?s=&amp;action=getinfo&amp;userid=27691" target="_blank" nowrap="">Lowtax</a></td><td nowrap=""><a href="/member.php?s=&amp;action=getinfo&amp;userid=27691" target="_blank" nowrap="">Lowtax</a></td></tr>				<tr><td align="left"><b><a href="/showthread.php?goto=post&amp;postid=298560676" target="new">PROBATION</a></b></td><td nowrap="">04/17/05 06:59pm</td><td nowrap=""><b><a href="/member.php?s=&amp;action=getinfo&amp;userid=37260" target="_blank">Unkempt</a></b></td><td>We don't care if someone is on your ignore list, thank you.  User loses posting privileges for 3 days.</td><td nowrap=""><a href="/member.php?s=&amp;action=getinfo&amp;userid=22720" target="_blank" nowrap="">Debbie Metallica</a></td><td nowrap=""><a href="/member.php?s=&amp;action=getinfo&amp;userid=22720" target="_blank" nowrap="">Debbie Metallica</a></td></tr>
+		</tbody></table>
+		</div>
+    </div>
+</body>
+</html>

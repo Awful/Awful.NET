@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, user-scalable=no"/>
+        <link href="ms-appx-web:///Assets/Website/CSS/bbcode.css" media="all" rel="stylesheet" type="text/css">
+        <link href="ms-appx-web:///Assets/Website/CSS/ui-light-new.css" media="all" rel="stylesheet" type="text/css">
+        <link href="ms-appx-web:///Assets/Website/CSS/forum-thread.css" media="all" rel="stylesheet" type="text/css">
+        <script type="text/javascript" async="" src="ms-appx-web:///Assets/jquery.js"></script>
+        <script type="text/javascript" async="" src="ms-appx-web:///Assets/forumThread.js"></script>
+        <script type="text/javascript" async="" src="ms-appx-web:///Assets/threadTemplate.js"></script>
+        <script type="text/javascript" async="" src="ms-appx-web:///Assets/url.min.js"></script>
+        <script type="text/javascript" async="">
+            
+            window.onload = function () {
+                $(".postbody a").click(function () {
+                    var bool = window.OpenLink(this.href);
+                    return bool;
+                });
+
+                $(".standard a").click(function () {
+                    var bool = window.OpenLink(this.href);
+                    return bool;
+                });
+
+                ForumCommand('setFont', null);
+            };
+        </script>
+        <title>Forum Thread</title>
+    </head>
+<body class="SAclopedia" id="SAclopedia">
+</body>
+</html>

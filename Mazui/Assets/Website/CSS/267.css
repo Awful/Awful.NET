@@ -1,0 +1,19 @@
+body {
+	background: url(http://fi.somethingawful.com/images/ddrd-bgYoshi.jpg) #cedbf0;
+}
+
+.seen1
+{
+background-color: rgba(212, 225, 238, .5);
+}
+
+.seen2
+{
+background-color: rgba(188, 212, 237, .5);
+}
+
+.container-fluid
+{
+background: url(http://fi.somethingawful.com/images/ddrd-bgYoshiBottom.png) repeat-x bottom;
+padding-bottom: 120px;
+}

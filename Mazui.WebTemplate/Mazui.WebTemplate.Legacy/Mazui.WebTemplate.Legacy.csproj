@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{B159244C-199D-49B4-93F8-FAC12DE5D52A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Mazui.WebTemplate.Legacy</RootNamespace>
+    <AssemblyName>AwfulWebTemplate</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThreadTemplate.cs">
+      <DependentUpon>ThreadTemplate.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ThreadTemplateModel.cs" />
+    <Compile Include="PrivateMessageTemplateModel.cs" />
+    <Compile Include="PrivateMessageTemplate.cs">
+      <DependentUpon>PrivateMessageTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="PreviewPostTemplate.cs">
+      <DependentUpon>PreviewPostTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="PreviewPostTemplateModel.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="ThreadTemplate.cshtml">
+      <Generator>RazorTemplatePreprocessor</Generator>
+      <LastGenOutput>ThreadTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="PrivateMessageTemplate.cshtml">
+      <Generator>RazorTemplatePreprocessor</Generator>
+      <LastGenOutput>PrivateMessageTemplate.cs</LastGenOutput>
+    </None>
+    <None Include="PreviewPostTemplate.cshtml">
+      <Generator>RazorTemplatePreprocessor</Generator>
+      <LastGenOutput>PreviewPostTemplate.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AwfulRedux.UI\AwfulRedux.UI.csproj">
+      <Project>{361195A9-C85A-4EA1-BF49-4A861B7BC7CA}</Project>
+      <Name>AwfulRedux.UI</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

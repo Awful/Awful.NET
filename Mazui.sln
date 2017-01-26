@@ -11,13 +11,17 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mazui.Database", "Mazui.Dat
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mazui.UWP.ViewModels", "Mazui.ViewModels\Mazui.UWP.ViewModels.shproj", "{2B534404-C418-4012-AF4F-0197565A4D5A}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mazui.WebTemplate.Legacy", "Mazui.WebTemplate.Legacy\Mazui.WebTemplate.Legacy.shproj", "{316402D3-1164-400D-8226-554C6509957C}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Mazui.ViewModels\Mazui.ViewModels.projitems*{2b534404-c418-4012-af4f-0197565a4d5a}*SharedItemsImports = 13
+		Mazui.WebTemplate.Legacy\Mazui.WebTemplate.Legacy.projitems*{316402d3-1164-400d-8226-554c6509957c}*SharedItemsImports = 13
 		Mazui.Database\Mazui.Database.projitems*{83249b0c-9768-4fbc-98a2-67ed9f3d12dc}*SharedItemsImports = 13
 		Mazui.Core\Mazui.Core.projitems*{8490068a-dd2f-499e-84bd-e54a0a5b9ad4}*SharedItemsImports = 4
 		Mazui.Database\Mazui.Database.projitems*{8490068a-dd2f-499e-84bd-e54a0a5b9ad4}*SharedItemsImports = 4
 		Mazui.ViewModels\Mazui.ViewModels.projitems*{8490068a-dd2f-499e-84bd-e54a0a5b9ad4}*SharedItemsImports = 4
+		Mazui.WebTemplate.Legacy\Mazui.WebTemplate.Legacy.projitems*{8490068a-dd2f-499e-84bd-e54a0a5b9ad4}*SharedItemsImports = 4
 		Mazui.Core\Mazui.Core.projitems*{ed5e0ec4-6109-4332-9004-1d0ed0af9eed}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

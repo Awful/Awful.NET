@@ -90,6 +90,27 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="Assets\ThreadTags\README.md" />
+    <None Include="Assets\Website\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Assets\bootstrap.min.js" />
+    <Content Include="Assets\directionalnavigation-1.0.0.0.js" />
+    <Content Include="Assets\gifffer.js" />
+    <Content Include="Assets\hammer.2.0.4.js" />
+    <Content Include="Assets\jquery.js" />
+    <Content Include="Assets\jquery.min.js" />
+    <Content Include="Assets\taphold.js" />
+    <Content Include="Assets\ThreadRatings\1stars.png" />
+    <Content Include="Assets\ThreadRatings\2stars.png" />
+    <Content Include="Assets\ThreadRatings\3stars.png" />
+    <Content Include="Assets\ThreadRatings\4stars.png" />
+    <Content Include="Assets\ThreadRatings\5stars.png" />
+    <Content Include="Assets\threadTemplate.js" />
+    <Content Include="Assets\url.min.js" />
+    <Content Include="Assets\Website\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="Assets\Website\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Assets\Website\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Assets\Website\genericons\Genericons.eot" />
+    <Content Include="Assets\Website\genericons\Genericons.ttf" />
+    <None Include="Assets\Website\genericons\Genericons.woff" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +164,7 @@
     <Compile Include="Tools\PageScrollingCollection.cs" />
     <Compile Include="Tools\ResultChecker.cs" />
     <Compile Include="Tools\Threads\WebViewHelper.cs" />
+    <Compile Include="Tools\Web\WebViewCommands.cs" />
     <Compile Include="Views\BasePage.cs" />
     <Compile Include="Views\Busy.xaml.cs">
       <DependentUpon>Busy.xaml</DependentUpon>
@@ -802,6 +824,27 @@
     <Content Include="Assets\ThreadTags\yp-gnugpl.png" />
     <Content Include="Assets\ThreadTags\yp-snowcrash971.png" />
     <Content Include="Assets\ThreadTags\yp-tubes296.png" />
+    <Content Include="Assets\Website\CSS\26.css" />
+    <Content Include="Assets\Website\CSS\267.css" />
+    <Content Include="Assets\Website\CSS\268.css" />
+    <Content Include="Assets\Website\CSS\29.css" />
+    <Content Include="Assets\Website\CSS\base.css" />
+    <Content Include="Assets\Website\CSS\bbcode.css" />
+    <Content Include="Assets\Website\CSS\dark.css" />
+    <Content Include="Assets\Website\CSS\forum-thread.css" />
+    <Content Include="Assets\Website\CSS\Swipe.css" />
+    <Content Include="Assets\Website\CSS\WindowsPhone-Default.css" />
+    <Content Include="Assets\Website\CSS\winstrap.css" />
+    <Content Include="Assets\Website\CSS\winstrap.min.css" />
+    <Content Include="Assets\Website\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Assets\Website\genericons\genericons.css" />
+    <Content Include="Assets\Website\genericons\Genericons.svg" />
+    <Content Include="Assets\Website\rap-sheet-test.html" />
+    <Content Include="Assets\Website\saclopedia.html" />
+    <Content Include="Assets\Website\test-thread.html" />
+    <Content Include="Assets\Website\thread.html" />
+    <Content Include="Assets\widgets.js" />
+    <Content Include="Assets\wptr.1.1.js" />
     <Content Include="FodyWeavers.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -885,6 +928,7 @@
   <Import Project="..\Mazui.Core\Mazui.Core.projitems" Label="Shared" />
   <Import Project="..\Mazui.Database\Mazui.Database.projitems" Label="Shared" />
   <Import Project="..\Mazui.ViewModels\Mazui.ViewModels.projitems" Label="Shared" />
+  <Import Project="..\Mazui.WebTemplate.Legacy\Mazui.WebTemplate.Legacy.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
