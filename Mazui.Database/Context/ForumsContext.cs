@@ -1,4 +1,5 @@
 ﻿using Mazui.Core.Models.Forums;
+using Mazui.Core.Models.Threads;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ namespace Mazui.Database.Context
     {
         public DbSet<Forum> Forums { get; set; }
         public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Thread> BookmarkedThreads { get; set; }
 
         private string DatabasePath { get; set; }
 

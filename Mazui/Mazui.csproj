@@ -137,6 +137,14 @@
     <Compile Include="Migrations\Forums\20170119225144_Order.designer.cs">
       <DependentUpon>20170119225144_Order.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Forums\20170130000303_Bookmarks.cs" />
+    <Compile Include="Migrations\Forums\20170130000303_Bookmarks.designer.cs">
+      <DependentUpon>20170130000303_Bookmarks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Forums\20170130003053_BookmarksOrder.cs" />
+    <Compile Include="Migrations\Forums\20170130003053_BookmarksOrder.designer.cs">
+      <DependentUpon>20170130003053_BookmarksOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Forums\ForumsContextModelSnapshot.cs" />
     <Compile Include="Migrations\UserAuthContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -169,6 +177,9 @@
     <Compile Include="Tools\Threads\WebViewHelper.cs" />
     <Compile Include="Tools\Web\WebViewCommands.cs" />
     <Compile Include="Views\BasePage.cs" />
+    <Compile Include="Views\BookmarkPage.xaml.cs">
+      <DependentUpon>BookmarkPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Busy.xaml.cs">
       <DependentUpon>Busy.xaml</DependentUpon>
     </Compile>
@@ -890,6 +901,10 @@
     <Page Include="Styles\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BookmarkPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Busy.xaml">
       <SubType>Designer</SubType>

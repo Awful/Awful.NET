@@ -9,6 +9,7 @@
     <Import_RootNamespace>Mazui.ViewModels</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)BookmarkViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ForumThreadListBaseViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LoginPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPageViewModel.cs" />

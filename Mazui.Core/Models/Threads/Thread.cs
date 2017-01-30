@@ -76,6 +76,8 @@ namespace Mazui.Core.Models.Threads
 
         public bool IsPrivateMessage { get; set; }
 
+        public int OrderNumber { get; set; }
+
         public List<Post> Posts { get; set; }
 
         public Thread Clone()

@@ -1,0 +1,108 @@
+﻿<Page
+    x:Class="Mazui.Views.BookmarkPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Mazui.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:Mazui.ViewModels"
+    xmlns:listControls="using:Mazui.Controls.ListControls"
+    xmlns:Template10Controls="using:Template10.Controls"
+    xmlns:threads="using:Mazui.Core.Models.Threads"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:behaviors="using:Template10.Behaviors"
+    xmlns:converters="using:Mazui.Tools.Converters"
+    xmlns:UwpControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d">
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <SuppressNavigationTransitionInfo/>
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+    <Page.DataContext>
+        <viewModels:BookmarkViewModel />
+    </Page.DataContext>
+    <Grid Background="{ThemeResource MainPageBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Template10Controls:PageHeader  Background="{ThemeResource SystemAccentColor}" Foreground="White" BackButtonVisibility="Collapsed" VisualStateNormalMinWidth="720" HorizontalAlignment="Stretch" Text="Bookmarks" Frame="{x:Bind Frame}">
+        </Template10Controls:PageHeader>
+        <ProgressBar IsIndeterminate="True" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="2"/>
+        <listControls:AdaptiveGridView Grid.Row="3"
+                MinItemHeight="70"
+                MaxItemHeight="70"
+                MinItemWidth="300"
+            IsItemClickEnabled="True"
+            ItemClick="AdaptiveGridView_ItemClick"
+            ItemsSource="{Binding BookmarkedThreads, UpdateSourceTrigger=PropertyChanged}">
+            <listControls:AdaptiveGridView.ItemTemplate>
+                <DataTemplate x:DataType="threads:Thread">
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{x:Bind HasSeen, Converter={StaticResource HasSeenThreadConverter}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="4"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0"
+                                  Background="{x:Bind IsSticky, Converter={StaticResource ThreadHeaderColorConverter}}" />
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <UwpControls:ImageEx 
+                                            Height="45" Width="45" VerticalAlignment="Top" Margin="5" PlaceholderStretch="UniformToFill" Source="{Binding ImageIconLocation, Converter={StaticResource ForumImageConverter}}" PlaceholderSource="/Assets/ThreadTags/missing.png"/>
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock x:Phase="1" Margin="2" Style="{ThemeResource ForumTitleThreadBox}" FontFamily="{ThemeResource DefaultFont}" Foreground="{ThemeResource ForumFontColor}"  Text="{x:Bind Name}" TextWrapping="Wrap" />
+                                <Grid Margin="2" Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Grid.Column="1" Margin="0,0,2,0" FontSize="12" FontFamily="Segoe MDL2 Assets" Glyph="&#xE7C3;"/>
+                                    <TextBlock Grid.Column="2" Margin="0,0,5,0" FontSize="12" Text="{x:Bind TotalPages, Mode=OneWay}" />
+                                    <TextBlock Grid.Column="3" Margin="0,0,2,0" FontSize="12" Text="Killed By: " />
+                                    <TextBlock Grid.Column="4" Margin="0,0,5,0" FontSize="12" Text="{x:Bind KilledBy, Mode=OneWay}" />
+                                </Grid>
+                            </Grid>
+                            <TextBlock x:Phase="2" Grid.Column="2" VerticalAlignment="Center" Margin="15" Visibility="{x:Bind HasSeen, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{ThemeResource ForumReplyThreadBox}" FontFamily="{ThemeResource DefaultFont}" x:Name="ReplyCount"
+                                                   Text="{Binding RepliesSinceLastOpened, Mode=OneWay}" />
+                        </Grid>
+                        <FlyoutBase.AttachedFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="Go to Last Page" Click="GoToLastPage"  CommandParameter="{Binding}"/>
+                                <MenuFlyoutItem Click="AddRemoveBookmark" CommandParameter="{Binding}" Text="{Binding IsBookmark, Converter={StaticResource BookmarkTextConverter}}"/>
+                                <MenuFlyoutItem Click="Unread" CommandParameter="{Binding}" Text="Unread"/>
+                            </MenuFlyout>
+                        </FlyoutBase.AttachedFlyout>
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Holding">
+                                <converters:OpenMenuFlyoutAction />
+                            </core:EventTriggerBehavior>
+                            <core:EventTriggerBehavior EventName="RightTapped">
+                                <converters:OpenMenuFlyoutAction />
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                    </Grid>
+                </DataTemplate>
+            </listControls:AdaptiveGridView.ItemTemplate>
+        </listControls:AdaptiveGridView>
+    </Grid>
+</Page>

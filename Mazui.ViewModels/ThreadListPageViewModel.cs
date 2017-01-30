@@ -79,12 +79,6 @@ namespace Mazui.ViewModels
             return Task.CompletedTask;
         }
 
-        public async Task NavigateToThread(Thread thread)
-        {
-            Selected = thread;
-            await NavigationService.NavigateAsync(typeof(Views.ThreadPage), JsonConvert.SerializeObject(thread));
-        }
-
         private void SuspendRecover(object parameter, IDictionary<string, object> suspensionState)
         {
             if (suspensionState.ContainsKey(EndPoints.SavedForum))

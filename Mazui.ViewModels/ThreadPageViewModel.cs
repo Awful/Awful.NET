@@ -37,11 +37,24 @@ namespace Mazui.ViewModels
 
         public override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
         {
-            if (ThreadListPage.Instance != null && ThreadListPage.Instance.ViewModel.Selected.ThreadId == ThreadView.ViewModel.Selected.ThreadId)
+            if (ThreadListPage.Instance != null)
             {
-                ThreadListPage.Instance.ViewModel.Selected.RepliesSinceLastOpened = ThreadView.ViewModel.Selected.RepliesSinceLastOpened;
-                ThreadListPage.Instance.ViewModel.Selected.HasBeenViewed = true;
-                ThreadListPage.Instance.ViewModel.Selected.HasSeen = true;
+                if (ThreadListPage.Instance.ViewModel.Selected.ThreadId == ThreadView.ViewModel.Selected.ThreadId)
+                {
+                    ThreadListPage.Instance.ViewModel.Selected.RepliesSinceLastOpened = ThreadView.ViewModel.Selected.RepliesSinceLastOpened;
+                    ThreadListPage.Instance.ViewModel.Selected.HasBeenViewed = true;
+                    ThreadListPage.Instance.ViewModel.Selected.HasSeen = true;
+                }
+            }
+
+            if (BookmarkPage.Instance != null)
+            {
+                if (BookmarkPage.Instance.ViewModel.Selected.ThreadId == ThreadView.ViewModel.Selected.ThreadId)
+                {
+                    BookmarkPage.Instance.ViewModel.Selected.RepliesSinceLastOpened = ThreadView.ViewModel.Selected.RepliesSinceLastOpened;
+                    BookmarkPage.Instance.ViewModel.Selected.HasBeenViewed = true;
+                    BookmarkPage.Instance.ViewModel.Selected.HasSeen = true;
+                }
             }
 
             if (suspending)

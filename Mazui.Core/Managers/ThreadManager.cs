@@ -1,13 +1,17 @@
 ﻿using HtmlAgilityPack;
+using Mazui.Core.Models.Forums;
+using Mazui.Core.Models.Posts;
 using Mazui.Core.Models.Threads;
 using Mazui.Core.Models.Web;
 using Mazui.Core.Tools;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +24,171 @@ namespace Mazui.Core.Managers
         public ThreadManager(WebManager webManager)
         {
             _webManager = webManager;
+        }
+
+        public async Task<bool> MarkThreadUnreadAsync(long threadId)
+        {
+            var dic = new Dictionary<string, string>
+            {
+                ["json"] = "1",
+                ["action"] = "resetseen",
+                ["threadid"] = threadId.ToString()
+            };
+            var header = new FormUrlEncodedContent(dic);
+            await _webManager.PostData(EndPoints.ResetBase, header);
+            return true;
+        }
+
+        public async Task<Result> GetBookmarksAsync(int page)
+        {
+            var forumThreadList = new List<Thread>();
+            var forum = new Forum()
+            {
+                Name = "Bookmarks",
+                IsSubforum = false,
+                Location = EndPoints.UserCp
+            };
+            String url = EndPoints.BookmarksUrl;
+            if (page >= 0)
+            {
+                url = EndPoints.BookmarksUrl + string.Format(EndPoints.PageNumber, page);
+            }
+
+            var result = (await _webManager.GetData(url));
+            var doc = new HtmlDocument();
+            doc.LoadHtml(result.ResultHtml);
+
+            HtmlNode forumNode =
+                doc.DocumentNode.Descendants()
+                    .FirstOrDefault(node => node.GetAttributeValue("class", string.Empty).Contains("threadlist"));
+
+
+            foreach (
+                HtmlNode threadNode in
+                    forumNode.Descendants("tr")
+                        .Where(node => node.GetAttributeValue("class", string.Empty).StartsWith("thread")))
+            {
+                var threadEntity = new Thread { ForumId = 0, IsBookmark = true };
+                ParseThreadHtml(threadEntity, threadNode);
+                forumThreadList.Add(threadEntity);
+            }
+            result.ResultJson = JsonConvert.SerializeObject(forumThreadList);
+            return result;
+        }
+
+        public async Task<Result> AddBookmarkAsync(long threadId)
+        {
+            var dic = new Dictionary<string, string>
+            {
+                ["json"] = "1",
+                ["action"] = "add",
+                ["threadid"] = threadId.ToString()
+            };
+            var header = new FormUrlEncodedContent(dic);
+            return await _webManager.PostData(EndPoints.Bookmark, header);
+        }
+
+        public async Task<Result> RemoveBookmarkAsync(long threadId)
+        {
+            var dic = new Dictionary<string, string>
+            {
+                ["json"] = "1",
+                ["action"] = "remove",
+                ["threadid"] = threadId.ToString()
+            };
+            var header = new FormUrlEncodedContent(dic);
+            return await _webManager.PostData(EndPoints.Bookmark, header);
+        }
+
+        public async Task<NewThread> GetThreadCookiesAsync(int forumId)
+        {
+            try
+            {
+                string url = string.Format(EndPoints.NewThread, forumId);
+                var result = await _webManager.GetData(url);
+                HtmlDocument doc = new HtmlDocument();
+                doc.LoadHtml(result.ResultHtml);
+                HtmlNode[] formNodes = doc.DocumentNode.Descendants("input").ToArray();
+
+                HtmlNode formKeyNode =
+                    formNodes.FirstOrDefault(node => node.GetAttributeValue("name", "").Equals("formkey"));
+
+                HtmlNode formCookieNode =
+                    formNodes.FirstOrDefault(node => node.GetAttributeValue("name", "").Equals("form_cookie"));
+
+                var newForumEntity = new NewThread();
+                try
+                {
+                    string formKey = formKeyNode.GetAttributeValue("value", "");
+                    string formCookie = formCookieNode.GetAttributeValue("value", "");
+                    newForumEntity.FormKey = formKey;
+                    newForumEntity.FormCookie = formCookie;
+                    return newForumEntity;
+                }
+                catch (Exception exception)
+                {
+                    throw new InvalidOperationException($"Could not parse new thread form data. {exception}");
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public async Task<Result> CreateNewThreadAsync(NewThread newThreadEntity)
+        {
+            var form = new MultipartFormDataContent
+            {
+                {new StringContent("postthread"), "action"},
+                {new StringContent(newThreadEntity.ForumId.ToString(CultureInfo.InvariantCulture)), "forumid"},
+                {new StringContent(newThreadEntity.FormKey), "formkey"},
+                {new StringContent(newThreadEntity.FormCookie), "form_cookie"},
+                {new StringContent(newThreadEntity.PostIcon.Id.ToString(CultureInfo.InvariantCulture)), "iconid"},
+                {new StringContent(Extensions.HtmlEncode(newThreadEntity.Subject)), "subject"},
+                {new StringContent(Extensions.HtmlEncode(newThreadEntity.Content)), "message"},
+                {new StringContent(newThreadEntity.ParseUrl.ToString()), "parseurl"},
+                {new StringContent("Submit Reply"), "submit"}
+            };
+            return await _webManager.PostFormData(EndPoints.NewThreadBase, form);
+        }
+
+        public async Task<Result> CreateNewThreadPreview(NewThread newThreadEntity)
+        {
+            var form = new MultipartFormDataContent
+            {
+                {new StringContent("postthread"), "action"},
+                {new StringContent(newThreadEntity.ForumId.ToString(CultureInfo.InvariantCulture)), "forumid"},
+                {new StringContent(newThreadEntity.FormKey), "formkey"},
+                {new StringContent(newThreadEntity.FormCookie), "form_cookie"},
+                {new StringContent(newThreadEntity.PostIcon.Id.ToString(CultureInfo.InvariantCulture)), "iconid"},
+                {new StringContent(Extensions.HtmlEncode(newThreadEntity.Subject)), "subject"},
+                {new StringContent(Extensions.HtmlEncode(newThreadEntity.Content)), "message"},
+                {new StringContent(newThreadEntity.ParseUrl.ToString()), "parseurl"},
+                {new StringContent("Submit Post"), "submit"},
+                {new StringContent("Preview Post"), "preview"}
+            };
+
+            // We post to SA the same way we would for a normal reply, but instead of getting a redirect back to the
+            // thread, we'll get redirected to back to the reply screen with the preview message on it.
+            // From here we can parse that preview and return it to the user.
+            try
+            {
+                var result = await _webManager.PostFormData(EndPoints.NewThreadBase, form);
+                var doc = new HtmlDocument();
+                doc.LoadHtml(result.ResultHtml);
+                HtmlNode[] replyNodes = doc.DocumentNode.Descendants("div").ToArray();
+
+                HtmlNode previewNode =
+                    replyNodes.FirstOrDefault(node => node.GetAttributeValue("class", "").Equals("inner postbody"));
+                var post = new Post { PostHtml = previewNode.OuterHtml };
+                result.ResultJson = JsonConvert.SerializeObject(post);
+                return result;
+            }
+            catch (Exception exception)
+            {
+                throw new Exception("Failed to get preview HTML", exception);
+            }
         }
 
         public async Task<Result> GetForumThreadsAsync(string forumLocation, int forumId, int page, bool parseToJson = true)

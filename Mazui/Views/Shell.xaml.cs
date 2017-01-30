@@ -31,6 +31,7 @@ namespace Mazui.Views
             Instance = this;
             InitializeComponent();
             _settings = Services.SettingsService.Instance;
+            ViewModel.CheckLogin();
         }
 
         public Shell(INavigationService navigationService) : this()

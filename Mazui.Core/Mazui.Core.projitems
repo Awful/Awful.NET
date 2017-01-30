@@ -18,7 +18,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Forums\Category.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Forums\Forum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Posts\Post.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Posts\PostIcon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Posts\ThreadPosts.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Threads\NewThread.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Threads\Thread.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Users\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Users\UserAuth.cs" />

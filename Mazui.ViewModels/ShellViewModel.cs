@@ -24,6 +24,19 @@ namespace Mazui.ViewModels
 
         #region Methods
 
+        public void CheckLogin()
+        {
+            try
+            {
+                User = UserAuthDatabase.GetDefaultUser();
+                if (User != null) IsLoggedIn = true;
+            }
+            catch (Exception)
+            {
+                return;
+            }
+        }
+
         #endregion
     }
 }

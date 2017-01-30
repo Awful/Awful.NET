@@ -33,6 +33,14 @@
                                Text="Home" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
+
+            <Controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" PageType="views:BookmarkPage">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48" Symbol="ShowResults" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Bookmarks" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+            
         </Controls:HamburgerMenu.PrimaryButtons>
         <Controls:HamburgerMenu.SecondaryButtons>
             <!-- login button -->

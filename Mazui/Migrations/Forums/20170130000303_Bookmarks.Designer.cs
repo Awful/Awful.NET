@@ -8,9 +8,10 @@ using Mazui.Database.Context;
 namespace Mazui.Migrations.Forums
 {
     [DbContext(typeof(ForumsContext))]
-    partial class ForumsContextModelSnapshot : ModelSnapshot
+    [Migration("20170130000303_Bookmarks")]
+    partial class Bookmarks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");
@@ -143,8 +144,6 @@ namespace Mazui.Migrations.Forums
                     b.Property<string>("LoggedInUserName");
 
                     b.Property<string>("Name");
-
-                    b.Property<int>("OrderNumber");
 
                     b.Property<int>("Rating");
 
