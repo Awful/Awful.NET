@@ -1,4 +1,5 @@
-﻿using Mazui.Core.Models.Forums;
+﻿using AmazingPullToRefresh.Controls;
+using Mazui.Core.Models.Forums;
 using Mazui.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -48,6 +49,11 @@ namespace Mazui.Views
             {
                 await ViewModel.AddOrRemoveFavorite(forum);
             }
+        }
+
+        private async void PullToRefreshExtender_RefreshRequested(object sender, RefreshRequestedEventArgs e)
+        {
+            await ViewModel.RefreshForums();
         }
     }
 }

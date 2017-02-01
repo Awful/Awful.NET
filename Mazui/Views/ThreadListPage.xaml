@@ -14,6 +14,7 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:behaviors="using:Template10.Behaviors"
     xmlns:converters="using:Mazui.Tools.Converters"
+    xmlns:uwp="using:AmazingPullToRefresh.Controls"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -43,6 +44,7 @@
                 MaxItemHeight="70"
                 MinItemWidth="300"
             IsItemClickEnabled="True"
+            Margin="10"
             ItemClick="AdaptiveGridView_ItemClick"
             ItemsSource="{Binding ForumPageScrollingCollection, UpdateSourceTrigger=PropertyChanged}">
             <listControls:AdaptiveGridView.ItemTemplate>
@@ -103,6 +105,13 @@
                     </Grid>
                 </DataTemplate>
             </listControls:AdaptiveGridView.ItemTemplate>
+            <uwp:PullToRefreshAdorner.Extender>
+                <uwp:PullToRefreshExtender RefreshRequested="PullToRefreshExtender_RefreshRequested" />
+            </uwp:PullToRefreshAdorner.Extender>
         </listControls:AdaptiveGridView>
+        <CommandBar x:Name="ForumCommandBar"  Grid.Row="4">
+            <AppBarButton Label="Create Thread" Click="{x:Bind ViewModel.CreateThread}" Icon="Add"/>
+            <AppBarButton Label="Refresh" Click="{x:Bind ViewModel.Init}" Icon="Refresh"/>
+        </CommandBar>
     </Grid>
 </Page>

@@ -65,6 +65,12 @@ namespace Mazui.ViewModels
             if (Forum != null && (mode == NavigationMode.Forward | mode == NavigationMode.Back)) return;
 
 
+            Init();
+        }
+
+        public void Init()
+        {
+            if (ForumPageScrollingCollection != null) ForumPageScrollingCollection.CheckIsPaywallEvent -= ForumPageScrollingCollection_CheckIsPaywallEvent;
             ForumPageScrollingCollection = new PageScrollingCollection(Forum, 1, WebManager);
             ForumPageScrollingCollection.CheckIsPaywallEvent += ForumPageScrollingCollection_CheckIsPaywallEvent;
         }
@@ -109,6 +115,11 @@ namespace Mazui.ViewModels
         {
             if (!e.IsPaywall) return;
             await NavigationService.NavigateAsync(typeof(PaywallPage));
+        }
+
+        public void CreateThread()
+        {
+
         }
         #endregion
     }

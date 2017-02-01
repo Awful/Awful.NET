@@ -14,6 +14,7 @@
     xmlns:behaviors="using:Template10.Behaviors"
     xmlns:converters="using:Mazui.Tools.Converters"
     xmlns:UwpControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:uwp="using:AmazingPullToRefresh.Controls"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -103,6 +104,12 @@
                     </Grid>
                 </DataTemplate>
             </listControls:AdaptiveGridView.ItemTemplate>
+                            <uwp:PullToRefreshAdorner.Extender>
+                    <uwp:PullToRefreshExtender RefreshRequested="PullToRefreshExtender_RefreshRequested" />
+                </uwp:PullToRefreshAdorner.Extender>
         </listControls:AdaptiveGridView>
+        <CommandBar x:Name="ForumCommandBar" Grid.Row="4">
+            <AppBarButton Label="Refresh" Click="{x:Bind ViewModel.Refresh}" Icon="Refresh"/>
+        </CommandBar>
     </Grid>
 </Page>

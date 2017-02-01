@@ -1,4 +1,5 @@
-﻿using Mazui.Core.Models.Threads;
+﻿using AmazingPullToRefresh.Controls;
+using Mazui.Core.Models.Threads;
 using Mazui.ViewModels;
 using Newtonsoft.Json;
 using System;
@@ -31,7 +32,7 @@ namespace Mazui.Views
         {
             Instance = this;
             this.InitializeComponent();
-            NavigationCacheMode = NavigationCacheMode.Enabled;
+            NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         // strongly-typed view models enable x:bind
@@ -69,7 +70,7 @@ namespace Mazui.Views
             var thread = imageSource?.CommandParameter as Thread;
             if (thread == null)
                 return;
-            // ViewModel.AddRemoveBookmark(thread);
+            ViewModel.AddRemoveBookmark(thread);
         }
 
         private void Unread(object sender, RoutedEventArgs e)
@@ -78,8 +79,12 @@ namespace Mazui.Views
             var thread = imageSource?.CommandParameter as Thread;
             if (thread == null)
                 return;
-            // ViewModel.UnreadThread(thread);
+            ViewModel.UnreadThread(thread);
         }
 
+        private void PullToRefreshExtender_RefreshRequested(object sender, RefreshRequestedEventArgs e)
+        {
+            ViewModel.Init();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Mazui.Core.Models.Threads;
+﻿using AmazingPullToRefresh.Controls;
+using Mazui.Core.Models.Threads;
 using Mazui.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -62,6 +63,11 @@ namespace Mazui.Views
             if (thread == null)
                 return;
             ViewModel.UnreadThread(thread);
+        }
+
+        private async void PullToRefreshExtender_RefreshRequested(object sender, RefreshRequestedEventArgs e)
+        {
+            await ViewModel.Refresh();
         }
     }
 }
