@@ -20,21 +20,40 @@ namespace Mazui.Views
 {
     public sealed partial class BookmarkPage : Page
     {
-        public static BookmarkPage Instance { get; set; }
         // strongly-typed view models enable x:bind
         public BookmarkViewModel ViewModel => this.DataContext as BookmarkViewModel;
 
         public BookmarkPage()
         {
-            Instance = this;
             this.InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Enabled;
+            ViewModel.ThreadView = ThreadPageView;
+            ViewModel.MasterDetailViewControl = previewControl;
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            base.OnNavigatingFrom(e);
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                ResetPageCache();
+            }
+        }
+
+        private void ResetPageCache()
+        {
+            var cacheSize = ((Frame)Parent).CacheSize;
+            ((Frame)Parent).CacheSize = 0;
+            ((Frame)Parent).CacheSize = cacheSize;
         }
 
         private async void AdaptiveGridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var thread = e.ClickedItem as Thread;
-            await ViewModel.NavigateToThread(thread);
+            if (thread == null)
+                return;
+            await ThreadPageView.LoadThread(thread);
+            ViewModel.IsThreadSelectedAndLoaded = true;
         }
 
         private async void GoToLastPage(object sender, RoutedEventArgs e)
@@ -44,7 +63,8 @@ namespace Mazui.Views
             if (thread == null)
                 return;
             ViewModel.Selected = thread;
-            await ViewModel.NavigateToThread(thread);
+            await ThreadPageView.LoadThread(thread, false, true);
+            ViewModel.IsThreadSelectedAndLoaded = true;
         }
 
         private void AddRemoveBookmark(object sender, RoutedEventArgs e)

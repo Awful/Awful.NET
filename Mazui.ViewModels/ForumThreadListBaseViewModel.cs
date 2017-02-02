@@ -9,11 +9,16 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
+using Mazui.Controls;
 
 namespace Mazui.ViewModels
 {
     public class ForumThreadListBaseViewModel : MazuiViewModel
     {
+        public ThreadView ThreadView { get; set; }
+
+        public MasterDetailViewControl MasterDetailViewControl { get; set; }
+
         private Thread _selected = default(Thread);
 
         public Thread Selected
@@ -22,6 +27,17 @@ namespace Mazui.ViewModels
             set
             {
                 Set(ref _selected, value);
+            }
+        }
+
+        private bool _isThreadSelectedAndLoaded;
+
+        public bool IsThreadSelectedAndLoaded
+        {
+            get { return _isThreadSelectedAndLoaded; }
+            set
+            {
+                Set(ref _isThreadSelectedAndLoaded, value);
             }
         }
 

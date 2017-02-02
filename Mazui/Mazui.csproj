@@ -118,6 +118,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ListControls\AdaptiveGridView.cs" />
+    <Compile Include="Controls\MasterDetailViewControl.xaml.cs">
+      <DependentUpon>MasterDetailViewControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ThreadView.xaml.cs">
       <DependentUpon>ThreadView.xaml</DependentUpon>
     </Compile>
@@ -849,7 +852,6 @@
     <Content Include="Assets\Website\CSS\Swipe.css" />
     <Content Include="Assets\Website\CSS\WindowsPhone-Default.css" />
     <Content Include="Assets\Website\CSS\winstrap.css" />
-    <Content Include="Assets\Website\CSS\winstrap.min.css" />
     <Content Include="Assets\Website\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Assets\Website\genericons\genericons.css" />
     <Content Include="Assets\Website\genericons\Genericons.svg" />
@@ -874,6 +876,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\MasterDetailViewControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\ThreadView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

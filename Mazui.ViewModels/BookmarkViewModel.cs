@@ -46,8 +46,19 @@ namespace Mazui.ViewModels
             {
                 await LoginUser();
             }
-
+            Template10.Common.BootStrapper.Current.NavigationService.FrameFacade.BackRequested += MasterDetailViewControl.NavigationManager_BackRequested;
             _threadManager = new ThreadManager(WebManager);
+
+            if (suspensionState.ContainsKey(nameof(Selected)))
+            {
+                if (Selected == null)
+                {
+                    Selected = JsonConvert.DeserializeObject<Thread>(suspensionState[nameof(Selected)]?.ToString());
+                    await ThreadView.LoadThread(Selected, true);
+                    IsThreadSelectedAndLoaded = true;
+                    suspensionState.Clear();
+                }
+            }
 
             if (BookmarkedThreads != null && BookmarkedThreads.Any())
             {
@@ -55,6 +66,23 @@ namespace Mazui.ViewModels
             }
 
             await LoadInitialList();
+        }
+
+        public override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
+        {
+            Template10.Common.BootStrapper.Current.NavigationService.FrameFacade.BackRequested -= MasterDetailViewControl.NavigationManager_BackRequested;
+            if (suspending)
+            {
+                if (Selected != null)
+                {
+                    var newThread = Selected.Clone();
+                    newThread.Html = null;
+                    newThread.Posts = null;
+                    state[nameof(Selected)] = JsonConvert.SerializeObject(newThread);
+                }
+
+            }
+            return Task.CompletedTask;
         }
 
         public async Task LoadInitialList()

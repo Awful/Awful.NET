@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Mazui"
     xmlns:common="using:Template10.Common"
-    xmlns:converters="using:Mazui.Tools.Converters">
+    xmlns:converters="using:Mazui.Tools.Converters"
+    xmlns:converters1="using:Template10.Converters">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -27,6 +28,16 @@
             <converters:ForwardButtonEnableConverter x:Key="ForwardButtonEnableConverter" />
             <converters:BookmarkTextConverter x:Key="BookmarkTextConverter" />
             <converters:NotifyThreadTextConverter x:Key="NotifyThreadTextConverter"/>
-        </ResourceDictionary>
+      <converters1:ValueWhenConverter 
+    Value="Collapsed" 
+    Otherwise="Visible"
+    When="{x:Null}"
+    x:Key="NullVisibilityConverter" />
+      <converters1:ValueWhenConverter 
+    Value="Visible" 
+    Otherwise="Collapsed"
+    When="{x:Null}"
+    x:Key="NullVisibilityInverter" />
+    </ResourceDictionary>
     </Application.Resources>
 </common:BootStrapper>

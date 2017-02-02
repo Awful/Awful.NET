@@ -15,6 +15,7 @@
     xmlns:converters="using:Mazui.Tools.Converters"
     xmlns:UwpControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:uwp="using:AmazingPullToRefresh.Controls"
+    xmlns:controls="using:Mazui.Controls"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -29,17 +30,20 @@
         <viewModels:BookmarkViewModel />
     </Page.DataContext>
     <Grid Background="{ThemeResource MainPageBackground}">
-        <Grid.RowDefinitions>
+    <controls:MasterDetailViewControl VerticalAlignment="Stretch" x:Name="previewControl" PreviewItem="{Binding Selected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+      <controls:MasterDetailViewControl.MasterViewPaneContent>
+        <Grid>
+          <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Template10Controls:PageHeader  Background="{ThemeResource SystemAccentColor}" Foreground="White" BackButtonVisibility="Collapsed" VisualStateNormalMinWidth="720" HorizontalAlignment="Stretch" Text="Bookmarks" Frame="{x:Bind Frame}">
-        </Template10Controls:PageHeader>
-        <ProgressBar IsIndeterminate="True" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="2"/>
-        <listControls:AdaptiveGridView Grid.Row="3"
+          </Grid.RowDefinitions>
+          <Template10Controls:PageHeader  Background="{ThemeResource SystemAccentColor}" Foreground="White" BackButtonVisibility="Collapsed" VisualStateNormalMinWidth="720" HorizontalAlignment="Stretch" Text="Bookmarks" Frame="{x:Bind Frame}">
+          </Template10Controls:PageHeader>
+          <ProgressBar IsIndeterminate="True" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="2"/>
+          <listControls:AdaptiveGridView Grid.Row="3"
                 MinItemHeight="70"
                 MaxItemHeight="70"
                 MinItemWidth="300"
@@ -47,69 +51,93 @@
             ItemClick="AdaptiveGridView_ItemClick"
             ItemsSource="{Binding BookmarkedThreads, UpdateSourceTrigger=PropertyChanged}">
             <listControls:AdaptiveGridView.ItemTemplate>
-                <DataTemplate x:DataType="threads:Thread">
-                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{x:Bind HasSeen, Converter={StaticResource HasSeenThreadConverter}}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="4"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0"
+              <DataTemplate x:DataType="threads:Thread">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{x:Bind HasSeen, Converter={StaticResource HasSeenThreadConverter}}">
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="4"/>
+                    <RowDefinition Height="*"/>
+                  </Grid.RowDefinitions>
+                  <Grid Grid.Row="0"
                                   Background="{x:Bind IsSticky, Converter={StaticResource ThreadHeaderColorConverter}}" />
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <UwpControls:ImageEx 
+                  <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto"/>
+                      <ColumnDefinition Width="*"/>
+                      <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <UwpControls:ImageEx 
                                             Height="45" Width="45" VerticalAlignment="Top" Margin="5" PlaceholderStretch="UniformToFill" Source="{Binding ImageIconLocation, Converter={StaticResource ForumImageConverter}}" PlaceholderSource="/Assets/ThreadTags/missing.png"/>
-                            <Grid Grid.Column="1">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="40"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <TextBlock x:Phase="1" Margin="2" Style="{ThemeResource ForumTitleThreadBox}" FontFamily="{ThemeResource DefaultFont}" Foreground="{ThemeResource ForumFontColor}"  Text="{x:Bind Name}" TextWrapping="Wrap" />
-                                <Grid Margin="2" Grid.Row="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <FontIcon Grid.Column="1" Margin="0,0,2,0" FontSize="12" FontFamily="Segoe MDL2 Assets" Glyph="&#xE7C3;"/>
-                                    <TextBlock Grid.Column="2" Margin="0,0,5,0" FontSize="12" Text="{x:Bind TotalPages, Mode=OneWay}" />
-                                    <TextBlock Grid.Column="3" Margin="0,0,2,0" FontSize="12" Text="Killed By: " />
-                                    <TextBlock Grid.Column="4" Margin="0,0,5,0" FontSize="12" Text="{x:Bind KilledBy, Mode=OneWay}" />
-                                </Grid>
-                            </Grid>
-                            <TextBlock x:Phase="2" Grid.Column="2" VerticalAlignment="Center" Margin="15" Visibility="{x:Bind HasSeen, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{ThemeResource ForumReplyThreadBox}" FontFamily="{ThemeResource DefaultFont}" x:Name="ReplyCount"
-                                                   Text="{Binding RepliesSinceLastOpened, Mode=OneWay}" />
-                        </Grid>
-                        <FlyoutBase.AttachedFlyout>
-                            <MenuFlyout>
-                                <MenuFlyoutItem Text="Go to Last Page" Click="GoToLastPage"  CommandParameter="{Binding}"/>
-                                <MenuFlyoutItem Click="AddRemoveBookmark" CommandParameter="{Binding}" Text="{Binding IsBookmark, Converter={StaticResource BookmarkTextConverter}}"/>
-                                <MenuFlyoutItem Click="Unread" CommandParameter="{Binding}" Text="Unread"/>
-                            </MenuFlyout>
-                        </FlyoutBase.AttachedFlyout>
-                        <interactivity:Interaction.Behaviors>
-                            <core:EventTriggerBehavior EventName="Holding">
-                                <converters:OpenMenuFlyoutAction />
-                            </core:EventTriggerBehavior>
-                            <core:EventTriggerBehavior EventName="RightTapped">
-                                <converters:OpenMenuFlyoutAction />
-                            </core:EventTriggerBehavior>
-                        </interactivity:Interaction.Behaviors>
+                    <Grid Grid.Column="1">
+                      <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="Auto"/>
+                      </Grid.RowDefinitions>
+                      <TextBlock x:Phase="1" Margin="2" Style="{ThemeResource ForumTitleThreadBox}" FontFamily="{ThemeResource DefaultFont}" Foreground="{ThemeResource ForumFontColor}"  Text="{x:Bind Name}" TextWrapping="Wrap" />
+                      <Grid Margin="2" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <FontIcon Grid.Column="1" Margin="0,0,2,0" FontSize="12" FontFamily="Segoe MDL2 Assets" Glyph="&#xE7C3;"/>
+                        <TextBlock Grid.Column="2" Margin="0,0,5,0" FontSize="12" Text="{x:Bind TotalPages, Mode=OneWay}" />
+                        <TextBlock Grid.Column="3" Margin="0,0,2,0" FontSize="12" Text="Killed By: " />
+                        <TextBlock Grid.Column="4" Margin="0,0,5,0" FontSize="12" Text="{x:Bind KilledBy, Mode=OneWay}" />
+                      </Grid>
                     </Grid>
-                </DataTemplate>
+                    <TextBlock x:Phase="2" Grid.Column="2" VerticalAlignment="Center" Margin="15" Visibility="{x:Bind HasSeen, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{ThemeResource ForumReplyThreadBox}" FontFamily="{ThemeResource DefaultFont}" x:Name="ReplyCount"
+                                                   Text="{Binding RepliesSinceLastOpened, Mode=OneWay}" />
+                  </Grid>
+                  <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout>
+                      <MenuFlyoutItem Text="Go to Last Page" Click="GoToLastPage"  CommandParameter="{Binding}"/>
+                      <MenuFlyoutItem Click="AddRemoveBookmark" CommandParameter="{Binding}" Text="{Binding IsBookmark, Converter={StaticResource BookmarkTextConverter}}"/>
+                      <MenuFlyoutItem Click="Unread" CommandParameter="{Binding}" Text="Unread"/>
+                    </MenuFlyout>
+                  </FlyoutBase.AttachedFlyout>
+                  <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Holding">
+                      <converters:OpenMenuFlyoutAction />
+                    </core:EventTriggerBehavior>
+                    <core:EventTriggerBehavior EventName="RightTapped">
+                      <converters:OpenMenuFlyoutAction />
+                    </core:EventTriggerBehavior>
+                  </interactivity:Interaction.Behaviors>
+                </Grid>
+              </DataTemplate>
             </listControls:AdaptiveGridView.ItemTemplate>
-                            <uwp:PullToRefreshAdorner.Extender>
-                    <uwp:PullToRefreshExtender RefreshRequested="PullToRefreshExtender_RefreshRequested" />
-                </uwp:PullToRefreshAdorner.Extender>
-        </listControls:AdaptiveGridView>
-        <CommandBar x:Name="ForumCommandBar" Grid.Row="4">
+            <uwp:PullToRefreshAdorner.Extender>
+              <uwp:PullToRefreshExtender RefreshRequested="PullToRefreshExtender_RefreshRequested" />
+            </uwp:PullToRefreshAdorner.Extender>
+          </listControls:AdaptiveGridView>
+          <CommandBar x:Name="ForumCommandBar" Grid.Row="4">
             <AppBarButton Label="Refresh" Click="{x:Bind ViewModel.Refresh}" Icon="Refresh"/>
-        </CommandBar>
+          </CommandBar>
+        </Grid>
+      </controls:MasterDetailViewControl.MasterViewPaneContent>
+      <controls:MasterDetailViewControl.DetailViewPaneContent>
+        <Grid>
+          <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="{Binding IsThreadSelectedAndLoaded,
+                    Converter={StaticResource BooleanToVisibilityInverter}}">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Template10Controls:PageHeader BackButtonVisibility="Collapsed"  VisualStateNormalMinWidth="720"  HorizontalAlignment="Stretch" Text="" Frame="{x:Bind Frame}">
+            </Template10Controls:PageHeader>
+            <FontIcon Grid.Row="1" Margin="0,25,0,25" HorizontalAlignment="Center" FontSize="70" FontFamily="Segoe MDL2 Assets" Glyph="&#xE0C4;" />
+            <Image Grid.Row="2" Margin="5" Source="/Assets/Images/Icon2.png"/>
+            <TextBlock Grid.Row="3" TextAlignment="Center" Padding="15" TextWrapping="Wrap" Style="{StaticResource TitleTextBlockStyle}" Text="Select a thread"/>
+          </Grid>
+          <controls:ThreadView Visibility="{Binding Selected, Converter={StaticResource NullVisibilityConverter}, Mode=OneWay}" x:Name="ThreadPageView">
+
+          </controls:ThreadView>
+        </Grid>
+      </controls:MasterDetailViewControl.DetailViewPaneContent>
+    </controls:MasterDetailViewControl>
     </Grid>
 </Page>

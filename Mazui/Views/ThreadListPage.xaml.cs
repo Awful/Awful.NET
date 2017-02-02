@@ -27,12 +27,28 @@ namespace Mazui.Views
     /// </summary>
     public sealed partial class ThreadListPage : Page
     {
-        public static ThreadListPage Instance { get; set; }
         public ThreadListPage()
         {
-            Instance = this;
             this.InitializeComponent();
-            NavigationCacheMode = NavigationCacheMode.Required;
+            NavigationCacheMode = NavigationCacheMode.Enabled;
+            ViewModel.ThreadView = ThreadPageView;
+            ViewModel.MasterDetailViewControl = previewControl;
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            base.OnNavigatingFrom(e);
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                ResetPageCache();
+            }
+        }
+
+        private void ResetPageCache()
+        {
+            var cacheSize = ((Frame)Parent).CacheSize;
+            ((Frame)Parent).CacheSize = 0;
+            ((Frame)Parent).CacheSize = cacheSize;
         }
 
         // strongly-typed view models enable x:bind
@@ -61,7 +77,8 @@ namespace Mazui.Views
             if (thread == null)
                 return;
             ViewModel.Selected = thread;
-            await ViewModel.NavigateToThread(thread);
+            await ThreadPageView.LoadThread(thread, false, true);
+            ViewModel.IsThreadSelectedAndLoaded = true;
         }
 
         private void AddRemoveBookmark(object sender, RoutedEventArgs e)

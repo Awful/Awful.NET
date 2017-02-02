@@ -57,7 +57,7 @@ namespace Mazui.ViewModels
             {
                 await LoginUser();
             }
-
+            Template10.Common.BootStrapper.Current.NavigationService.FrameFacade.BackRequested += MasterDetailViewControl.NavigationManager_BackRequested;
             SuspendRecover(parameter, suspensionState);
 
             // If we're recovering from suspension, but the view model has not been cleared.
@@ -77,8 +77,16 @@ namespace Mazui.ViewModels
 
         public override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
         {
+            Template10.Common.BootStrapper.Current.NavigationService.FrameFacade.BackRequested -= MasterDetailViewControl.NavigationManager_BackRequested;
             if (suspending)
             {
+                if (Selected != null)
+                {
+                    var newThread = Selected.Clone();
+                    newThread.Html = null;
+                    newThread.Posts = null;
+                    state[nameof(Selected)] = JsonConvert.SerializeObject(newThread);
+                }
                 state[EndPoints.SavedForum] = JsonConvert.SerializeObject(Forum);
             }
 
