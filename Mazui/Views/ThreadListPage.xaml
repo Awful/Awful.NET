@@ -47,6 +47,7 @@
           <ListView Grid.Row="3" Padding="0"
             IsItemClickEnabled="True"
             ItemClick="AdaptiveGridView_ItemClick"
+            ItemContainerStyle="{ThemeResource ThreadItemStyle}"
             ItemsSource="{Binding ForumPageScrollingCollection, UpdateSourceTrigger=PropertyChanged}">
             <ListView.ItemTemplate>
               <DataTemplate x:DataType="threads:Thread">
@@ -106,11 +107,6 @@
                 </Grid>
               </DataTemplate>
             </ListView.ItemTemplate>
-            <ListView.ItemContainerStyle>
-              <Style TargetType="ListViewItem">
-                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-              </Style>
-            </ListView.ItemContainerStyle>
             <uwp:PullToRefreshAdorner.Extender>
               <uwp:PullToRefreshExtender RefreshRequested="PullToRefreshExtender_RefreshRequested" />
             </uwp:PullToRefreshAdorner.Extender>

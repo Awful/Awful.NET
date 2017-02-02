@@ -43,14 +43,12 @@
           <Template10Controls:PageHeader  Background="{ThemeResource SystemAccentColor}" Foreground="White" BackButtonVisibility="Collapsed" VisualStateNormalMinWidth="720" HorizontalAlignment="Stretch" Text="Bookmarks" Frame="{x:Bind Frame}">
           </Template10Controls:PageHeader>
           <ProgressBar IsIndeterminate="True" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="2"/>
-          <listControls:AdaptiveGridView Grid.Row="3"
-                MinItemHeight="70"
-                MaxItemHeight="70"
-                MinItemWidth="300"
+          <ListView
             IsItemClickEnabled="True"
             ItemClick="AdaptiveGridView_ItemClick"
+            ItemContainerStyle="{ThemeResource ThreadItemStyle}"
             ItemsSource="{Binding BookmarkedThreads, UpdateSourceTrigger=PropertyChanged}">
-            <listControls:AdaptiveGridView.ItemTemplate>
+            <ListView.ItemTemplate>
               <DataTemplate x:DataType="threads:Thread">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{x:Bind HasSeen, Converter={StaticResource HasSeenThreadConverter}}">
                   <Grid.RowDefinitions>
@@ -107,11 +105,11 @@
                   </interactivity:Interaction.Behaviors>
                 </Grid>
               </DataTemplate>
-            </listControls:AdaptiveGridView.ItemTemplate>
+            </ListView.ItemTemplate>
             <uwp:PullToRefreshAdorner.Extender>
               <uwp:PullToRefreshExtender RefreshRequested="PullToRefreshExtender_RefreshRequested" />
             </uwp:PullToRefreshAdorner.Extender>
-          </listControls:AdaptiveGridView>
+          </ListView>
           <CommandBar x:Name="ForumCommandBar" Grid.Row="4">
             <AppBarButton Label="Refresh" Click="{x:Bind ViewModel.Refresh}" Icon="Refresh"/>
           </CommandBar>
