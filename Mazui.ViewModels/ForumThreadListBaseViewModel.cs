@@ -68,42 +68,5 @@ namespace Mazui.ViewModels
                        };
             await msgDlg2.ShowAsync();
         }
-
-        public async void AddRemoveBookmark(Thread thread)
-        {
-            string error = "";
-            try
-            {
-                var threadManager = new ThreadManager(WebManager);
-                string bookmarkstring;
-                if (thread.IsBookmark)
-                {
-                    await threadManager.RemoveBookmarkAsync(thread.ThreadId);
-                    thread.IsBookmark = !thread.IsBookmark;
-                    await ForumsDatabase.RefreshBookmark(thread);
-                    bookmarkstring = string.Format("'{0}' has been removed from your bookmarks.", thread.Name);
-                }
-                else
-                {
-                    bookmarkstring = string.Format("'{0}' has been added to your bookmarks.",
-                        thread.Name);
-                    thread.IsBookmark = !thread.IsBookmark;
-                    await threadManager.AddBookmarkAsync(thread.ThreadId);
-                    await ForumsDatabase.AddBookmark(thread);
-                }
-                var msgDlg2 =
-                       new MessageDialog(bookmarkstring)
-                       {
-                           DefaultCommandIndex = 1
-                       };
-                await msgDlg2.ShowAsync();
-            }
-            catch (Exception ex)
-            {
-                error = ex.Message;
-            }
-
-            if (!string.IsNullOrEmpty(error)) await ResultChecker.SendMessageDialogAsync($"Failed to get Bookmarks: {error}", false);
-        }
     }
 }

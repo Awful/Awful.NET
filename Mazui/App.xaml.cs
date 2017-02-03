@@ -61,7 +61,13 @@ namespace Mazui
 
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
+            SetupBackgroundServices();
             await NavigationService.NavigateAsync(typeof(Views.MainPage));
+        }
+
+        private void SetupBackgroundServices()
+        {
+            _settingsService.ChangeBookmarkLiveTileBackgroundStatus(_settingsService.BookmarkBackground);
         }
 
         protected override void OnBackgroundActivated(BackgroundActivatedEventArgs args)

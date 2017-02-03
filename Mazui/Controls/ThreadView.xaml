@@ -59,7 +59,7 @@
                 <CommandBar.SecondaryCommands>
                     <AppBarButton IsEnabled="{Binding IsLoggedIn}" Click="{x:Bind ViewModel.ReplyToThread}" Label="Reply">
                     </AppBarButton>
-                    <AppBarButton IsEnabled="{Binding IsLoggedIn}" Click="{x:Bind ViewModel.AddRemoveBookmark}"  Label="{Binding Selected.IsBookmark, Converter={StaticResource BookmarkTextConverter}, Mode=OneWay}">
+                    <AppBarButton IsEnabled="{Binding IsLoggedIn}" Click="{x:Bind ViewModel.AddRemoveBookmarkView}"  Label="{Binding Selected.IsBookmark, Converter={StaticResource BookmarkTextConverter}, Mode=OneWay}">
                     </AppBarButton>
                     <AppBarButton Visibility="{Binding Selected.IsBookmark, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" IsEnabled="{Binding IsLoggedIn}" Click="{x:Bind ViewModel.AddRemoveNotificationTable}" Label="{Binding Selected.IsNotified, Converter={StaticResource NotifyThreadTextConverter}, Mode=OneWay}">
                     </AppBarButton>

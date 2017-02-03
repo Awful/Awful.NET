@@ -2,6 +2,7 @@
 using Mazui.Core.Models.Threads;
 using Mazui.Core.Models.Users;
 using Mazui.Database.Functions;
+using Mazui.Notifications;
 using Mazui.Services;
 using Mazui.Tools.Authentication;
 using Newtonsoft.Json;
@@ -21,8 +22,6 @@ namespace Mazui.Tools.BackgroundTasks
         BackgroundTaskCancellationReason _cancelReason = BackgroundTaskCancellationReason.Abort;
         volatile bool _cancelRequested = false;
         BackgroundTaskDeferral _deferral = null;
-        ThreadPoolTimer _periodicTimer = null;
-        uint _progress = 0;
         IBackgroundTaskInstance _taskInstance = null;
         WebManager _webManager;
         ThreadManager _threadManager;
@@ -45,24 +44,30 @@ namespace Mazui.Tools.BackgroundTasks
                 switch (taskInstance.Task.Name)
                 {
                     case "BookmarkNotifyBackgroundActivity":
-                        await BookmarkNotifyBackgroundActivity(bookmarks);
+                        BookmarkNotifyBackgroundActivity(bookmarks);
                         break;
                     case "BookmarkBackgroundActivity":
-                        await BookmarkBackgroundActivity(bookmarks);
+                        BookmarkBackgroundActivity(bookmarks);
                         break;
                 }
             }
             _deferral.Complete();
         }
 
-        public async Task BookmarkNotifyBackgroundActivity(List<Thread> bookmarks)
+        public void BookmarkNotifyBackgroundActivity(List<Thread> bookmarks)
         {
-            
+            foreach (var thread in bookmarks.Where(thread => thread.RepliesSinceLastOpened > 0 && thread.IsNotified))
+            {
+                NotifyStatusTile.CreateToastNotification(thread);
+            }
         }
 
-        public async Task BookmarkBackgroundActivity(List<Thread> bookmarks)
+        public void BookmarkBackgroundActivity(List<Thread> bookmarks)
         {
-
+            foreach (var thread in bookmarks.Where(thread => thread.RepliesSinceLastOpened > 0))
+            {
+                NotifyStatusTile.CreateBookmarkLiveTile(thread);
+            }
         }
 
         private  async Task<List<Thread>> GetNewBookmarks()
@@ -94,7 +99,7 @@ namespace Mazui.Tools.BackgroundTasks
                 Debug.Write(ex.Message);
                 // Failed to get bookmarks, return empty.
             }
-            return newbookmarkthreads;
+            return await ForumsDatabase.GetBookmarkedThreadsFromDb();
         }
 
         private void OnCanceled(IBackgroundTaskInstance sender, BackgroundTaskCancellationReason reason)

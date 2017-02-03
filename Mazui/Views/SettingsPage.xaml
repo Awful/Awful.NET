@@ -41,7 +41,7 @@
                                       IsOn="{Binding UseDarkThemeButton, Mode=TwoWay}"
                                       OffContent="Light Theme" OnContent="Dark Theme" />
                         <TextBlock Margin="0,0,0,20" x:Name="ThemeSwitchText" RelativePanel.Below="UseDarkThemeToggleSwitch" TextWrapping="Wrap">If you change the theme, you must restart the app to fully see the changes.</TextBlock>
-                        <ToggleSwitch x:Name="UseBookmarkBackground" RelativePanel.Below="UseDarkThemeToggleSwitch" Header="Enable Bookmark Live Tiles"
+                        <ToggleSwitch x:Name="UseBookmarkBackground" RelativePanel.Below="ThemeSwitchText" Header="Enable Bookmark Live Tiles"
                                       IsOn="{Binding UseBackgroundTask, Mode=TwoWay}"
                                       OffContent="Off" OnContent="On" />
                         <TextBlock Margin="0,0,0,20" x:Name="BookmarkBackgroundSwitchText" RelativePanel.Below="UseBookmarkBackground" TextWrapping="Wrap">Enables updated bookmarks to appear on your Awful live tile.</TextBlock>

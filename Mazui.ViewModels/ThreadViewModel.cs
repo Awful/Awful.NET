@@ -156,14 +156,14 @@ namespace Mazui.ViewModels
                 }));
         }
 
-        public async void AddRemoveBookmark()
+        public async Task AddRemoveBookmarkView()
         {
-
+            await this.AddRemoveBookmark(Selected);
         }
 
-        public async void AddRemoveNotificationTable()
+        public async Task AddRemoveNotificationTable()
         {
-
+            await this.AddRemoveNotification(Selected);
         }
 
         private async Task SetupHtml(ThreadPosts postresult)

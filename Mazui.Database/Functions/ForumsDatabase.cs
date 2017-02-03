@@ -86,12 +86,18 @@ namespace Mazui.Database.Functions
 
         public static async Task<int> RefreshBookmarkedThreads(List<Thread> updatedBookmarkList)
         {
+            var notifyThreadIds = new List<int>();
             using (var db = new ForumsContext())
             {
-                var notifyThreads = await db.BookmarkedThreads.Where(node => node.IsNotified).ToListAsync();
-                var notifyThreadIds = notifyThreads.Select(thread => thread.ThreadId).ToList();
+                var allBooksmarks = await db.BookmarkedThreads.ToListAsync();
+                var notifyThreads = allBooksmarks.Where(node => node.IsNotified);
+                notifyThreadIds = notifyThreads.Select(thread => thread.ThreadId).ToList();
+                db.BookmarkedThreads.RemoveRange(allBooksmarks);
+                await db.SaveChangesAsync();
+            }
 
-                await RemoveBookmarkThreads();
+            using (var db = new ForumsContext())
+            {
                 var count = 0;
                 foreach (Thread t in updatedBookmarkList)
                 {
@@ -101,29 +107,27 @@ namespace Mazui.Database.Functions
                     {
                         t.IsNotified = true;
                     }
+                    t.IsBookmark = true;
                     t.OrderNumber = count;
                     count++;
                 }
 
-                await db.BookmarkedThreads.AddRangeAsync(updatedBookmarkList);
+                foreach(var thread in updatedBookmarkList)
+                {
+                    db.BookmarkedThreads.Add(thread);
+                }
                 return await db.SaveChangesAsync();
             }
         }
 
-        public static async Task RefreshBookmark(Thread updatedBookmark)
+        public static async Task AddRemoveNotification(int id, bool notification)
         {
             using (var bds = new ForumsContext())
             {
-                bds.BookmarkedThreads.Update(updatedBookmark);
-                await bds.SaveChangesAsync();
-            }
-        }
-
-        public static async Task AddBookmark(Thread updatedBookmark)
-        {
-            using (var bds = new ForumsContext())
-            {
-                bds.BookmarkedThreads.Update(updatedBookmark);
+                var thread = bds.BookmarkedThreads.FirstOrDefault(node => node.ThreadId == id);
+                if (thread == null) return;
+                thread.IsNotified = notification;
+                bds.BookmarkedThreads.Update(thread);
                 await bds.SaveChangesAsync();
             }
         }

@@ -67,13 +67,22 @@ namespace Mazui.Views
             ViewModel.IsThreadSelectedAndLoaded = true;
         }
 
-        private void AddRemoveBookmark(object sender, RoutedEventArgs e)
+        private async void AddRemoveBookmark(object sender, RoutedEventArgs e)
         {
             var imageSource = sender as MenuFlyoutItem;
             var thread = imageSource?.CommandParameter as Thread;
             if (thread == null)
                 return;
-            ViewModel.AddRemoveBookmark(thread);
+            await ViewModel.AddRemoveBookmark(thread);
+        }
+
+        private async void AddRemoveNotify(object sender, RoutedEventArgs e)
+        {
+            var imageSource = sender as MenuFlyoutItem;
+            var thread = imageSource?.CommandParameter as Thread;
+            if (thread == null)
+                return;
+            await ViewModel.AddRemoveNotification(thread);
         }
 
         private void Unread(object sender, RoutedEventArgs e)
