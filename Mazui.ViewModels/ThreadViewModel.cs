@@ -54,7 +54,7 @@ namespace Mazui.ViewModels
                 await LoginUser();
             }
 
-            _postManager = new PostManager(WebManager);
+            if (_postManager == null) _postManager = new PostManager(WebManager);
         }
 
         public async Task LoadFromState(IDictionary<string, object> suspensionState)

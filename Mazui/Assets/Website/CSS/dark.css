@@ -6,6 +6,10 @@ body {
 	color: black;
 }
 
+.avatar-user-info * {
+    color: #fff !important;
+}
+
 .thread-header {
     border-bottom: 1px transparent solid;
     padding-bottom: 10px;

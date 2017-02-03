@@ -40,6 +40,7 @@ namespace Mazui.Controls
 
         public async Task LoadThread(Thread thread, bool fromSuspend = false, bool lastPage = false)
         {
+            await ViewModel.Init();
             if (lastPage)
             {
                 thread.CurrentPage = thread.TotalPages;

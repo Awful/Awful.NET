@@ -43,7 +43,7 @@
           <Template10Controls:PageHeader  Background="{ThemeResource SystemAccentColor}" Foreground="White" BackButtonVisibility="Collapsed" VisualStateNormalMinWidth="720" HorizontalAlignment="Stretch" Text="Bookmarks" Frame="{x:Bind Frame}">
           </Template10Controls:PageHeader>
           <ProgressBar IsIndeterminate="True" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="2"/>
-          <ListView
+           <ListView Grid.Row="3" Padding="0"
             IsItemClickEnabled="True"
             ItemClick="AdaptiveGridView_ItemClick"
             ItemContainerStyle="{ThemeResource ThreadItemStyle}"
@@ -125,7 +125,7 @@
               <RowDefinition Height="*"/>
               <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Template10Controls:PageHeader BackButtonVisibility="Collapsed"  VisualStateNormalMinWidth="720"  HorizontalAlignment="Stretch" Text="" Frame="{x:Bind Frame}">
+                        <Template10Controls:PageHeader Background="{ThemeResource SystemAccentColor}" Foreground="White" BackButtonVisibility="Collapsed"  VisualStateNormalMinWidth="720"  HorizontalAlignment="Stretch" Text="" Frame="{x:Bind Frame}">
             </Template10Controls:PageHeader>
             <FontIcon Grid.Row="1" Margin="0,25,0,25" HorizontalAlignment="Center" FontSize="70" FontFamily="Segoe MDL2 Assets" Glyph="&#xE0C4;" />
             <Image Grid.Row="2" Margin="5" Source="/Assets/Images/Icon2.png"/>
