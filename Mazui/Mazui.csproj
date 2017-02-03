@@ -172,6 +172,7 @@
     <Compile Include="Services\WindowService\WindowService.cs" />
     <Compile Include="Tools\Authentication\CookieManager.cs" />
     <Compile Include="Tools\Authentication\UserHandler.cs" />
+    <Compile Include="Tools\BackgroundTasks\BackgroundActivity.cs" />
     <Compile Include="Tools\Converters\AddOrRemoveFavoriteTextConverter.cs" />
     <Compile Include="Tools\Converters\BackButtonEnableConverter.cs" />
     <Compile Include="Tools\Converters\BookmarkTextConverter.cs" />

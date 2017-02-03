@@ -1,5 +1,6 @@
 ﻿using Mazui.Database.Context;
 using Mazui.Services;
+using Mazui.Tools.BackgroundTasks;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -61,6 +62,11 @@ namespace Mazui
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
             await NavigationService.NavigateAsync(typeof(Views.MainPage));
+        }
+
+        protected override void OnBackgroundActivated(BackgroundActivatedEventArgs args)
+        {
+            BackgroundActivity.Start(args.TaskInstance);
         }
     }
 }

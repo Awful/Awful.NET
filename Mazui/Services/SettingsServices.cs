@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Uwp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Template10.Utils;
+using Windows.ApplicationModel.Background;
 using Windows.UI.Xaml;
 
 namespace Mazui.Services
@@ -67,7 +69,7 @@ namespace Mazui.Services
             set
             {
                 _helper.Write(nameof(BackgroundEnable), value);
-                //ChangeBackgroundStatus(value);
+                ChangeBookmarkLiveTileBackgroundStatus(value);
             }
         }
 
@@ -86,6 +88,7 @@ namespace Mazui.Services
             set
             {
                 _helper.Write(nameof(BookmarkBackground), value);
+                ChangeBookmarkLiveTileBackgroundStatus(value);
             }
         }
 
@@ -95,6 +98,7 @@ namespace Mazui.Services
             set
             {
                 _helper.Write(nameof(BookmarkNotifications), value);
+                ChangeBookmarkNotifyBackgroundStatus(value);
             }
         }
 
@@ -122,6 +126,30 @@ namespace Mazui.Services
             set
             {
                 _helper.Write(nameof(LastRefresh), value);
+            }
+        }
+
+        public void ChangeBookmarkLiveTileBackgroundStatus(bool value)
+        {
+            if (value)
+            {
+                BackgroundTaskRegistration registered = BackgroundTaskHelper.Register("BookmarkBackgroundActivity", new TimeTrigger(15, true));
+            }
+            else
+            {
+                BackgroundTaskHelper.Unregister("BookmarkBackgroundActivity");
+            }
+        }
+
+        public void ChangeBookmarkNotifyBackgroundStatus(bool value)
+        {
+            if (value)
+            {
+                BackgroundTaskRegistration registered = BackgroundTaskHelper.Register("BookmarkNotifyBackgroundActivity", new TimeTrigger(15, true));
+            }
+            else
+            {
+                BackgroundTaskHelper.Unregister("BookmarkNotifyBackgroundActivity");
             }
         }
 
