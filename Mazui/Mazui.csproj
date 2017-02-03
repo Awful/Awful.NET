@@ -178,6 +178,7 @@
     <Compile Include="Tools\Manager\ImgurManager.cs" />
     <Compile Include="Tools\Manager\UploadManager.cs" />
     <Compile Include="Tools\PageScrollingCollection.cs" />
+    <Compile Include="Tools\PrivateMessageScrollingCollection.cs" />
     <Compile Include="Tools\ResultChecker.cs" />
     <Compile Include="Tools\Threads\WebViewHelper.cs" />
     <Compile Include="Tools\Web\AddImage.cs" />
@@ -194,6 +195,9 @@
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewPrivateMessagePage.xaml.cs">
+      <DependentUpon>NewPrivateMessagePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PaywallPage.xaml.cs">
       <DependentUpon>PaywallPage.xaml</DependentUpon>
@@ -923,6 +927,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewPrivateMessagePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

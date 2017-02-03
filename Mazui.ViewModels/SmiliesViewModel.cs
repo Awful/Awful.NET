@@ -40,17 +40,6 @@ namespace Mazui.ViewModels
             }
         }
 
-        private bool _isLoading;
-
-        public bool IsLoading
-        {
-            get { return _isLoading; }
-            set
-            {
-                Set(ref _isLoading, value);
-            }
-        }
-
         private SmileManager _smileManager;
         public ObservableCollection<SmileCategory> FullSmileCategoryEntities { get; set; }
 

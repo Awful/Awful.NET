@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)NewPostBaseViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NewPrivateMessageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PostIconViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PrivateMessagesListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SettingsPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ShellViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SmiliesViewModel.cs" />
