@@ -18,6 +18,7 @@ namespace Mazui.Database.Functions
             {
                 return db.Categories
                     .Include(o => o.ForumList)
+                    .OrderBy(node => node.Order)
                     .ToList();
             }
         }
