@@ -850,7 +850,6 @@
     <Content Include="Assets\Website\CSS\dark.css" />
     <Content Include="Assets\Website\CSS\forum-thread.css" />
     <Content Include="Assets\Website\CSS\Swipe.css" />
-    <Content Include="Assets\Website\CSS\WindowsPhone-Default.css" />
     <Content Include="Assets\Website\CSS\winstrap.css" />
     <Content Include="Assets\Website\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Assets\Website\genericons\genericons.css" />

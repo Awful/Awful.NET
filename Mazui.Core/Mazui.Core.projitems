@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Managers\AuthenticationManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Managers\ForumManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Managers\PostManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\SmileManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Managers\ThreadManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Managers\UserManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Managers\WebManager.cs" />
@@ -20,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Posts\Post.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Posts\PostIcon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Posts\ThreadPosts.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Smilies\SmileCategory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Threads\NewThread.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Threads\Thread.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Users\User.cs" />
