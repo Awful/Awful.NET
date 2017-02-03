@@ -133,7 +133,7 @@ namespace Mazui.Services
         {
             if (value)
             {
-                BackgroundTaskRegistration registered = BackgroundTaskHelper.Register("BookmarkBackgroundActivity", new TimeTrigger(15, true));
+                BackgroundTaskRegistration registered = BackgroundTaskHelper.Register("BookmarkBackgroundActivity", new TimeTrigger(15, true), false, true, new SystemCondition(SystemConditionType.InternetAvailable));
             }
             else
             {
@@ -145,7 +145,7 @@ namespace Mazui.Services
         {
             if (value)
             {
-                BackgroundTaskRegistration registered = BackgroundTaskHelper.Register("BookmarkNotifyBackgroundActivity", new TimeTrigger(15, true));
+                BackgroundTaskRegistration registered = BackgroundTaskHelper.Register("BookmarkNotifyBackgroundActivity", new TimeTrigger(15, true), false, true, new SystemCondition(SystemConditionType.InternetAvailable));
             }
             else
             {
