@@ -21,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)PreviewViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PreviousPostsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PrivateMessagesListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PrivateMessageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ReplyThreadViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SettingsPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ShellViewModel.cs" />

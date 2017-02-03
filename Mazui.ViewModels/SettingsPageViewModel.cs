@@ -88,6 +88,12 @@ namespace Mazui.ViewModels
             set { _settings.ImgurUsername = value; base.RaisePropertyChanged(); }
         }
 
+        public bool UseDarkThemeButton
+        {
+            get { return _settings.AppTheme.Equals(ApplicationTheme.Dark); }
+            set { _settings.AppTheme = value ? ApplicationTheme.Dark : ApplicationTheme.Light; base.RaisePropertyChanged(); }
+        }
+
         public void LogoutOfImgur()
         {
             try

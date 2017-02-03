@@ -40,7 +40,14 @@
                     <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Bookmarks" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
-            
+
+            <Controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" PageType="views:PrivateMessageListPage">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48" Symbol="Mail" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Private Messages" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
         </Controls:HamburgerMenu.PrimaryButtons>
         <Controls:HamburgerMenu.SecondaryButtons>
             <!-- login button -->

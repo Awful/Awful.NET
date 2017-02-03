@@ -4,6 +4,7 @@ using Mazui.Views;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
@@ -84,7 +85,10 @@ namespace Mazui.ViewModels
             {
                 return;
             }
-            Refresh();
+            if (PrivateMessageScrollingCollection == null || !PrivateMessageScrollingCollection.Any())
+            {
+                Refresh();
+            }
         }
 
         public override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)

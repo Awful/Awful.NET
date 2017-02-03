@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mazui.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,15 @@ namespace Mazui.Views
         public NewPrivateMessagePage()
         {
             this.InitializeComponent();
+            SmiliesView.ViewModel.ReplyBox = ReplyText;
+            ViewModel.Subject = Subject;
+            ViewModel.PostIconViewModel = PostIconView.ViewModel;
+            ViewModel.SmiliesViewModel = SmiliesView.ViewModel;
+            ViewModel.ReplyBox = ReplyText;
+            ViewModel.Recipient = Recipient;
         }
+
+        // strongly-typed view models enable x:bind
+        public NewPrivateMessageViewModel ViewModel => this.DataContext as NewPrivateMessageViewModel;
     }
 }
