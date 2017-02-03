@@ -1,4 +1,4 @@
-﻿using Mazui.Core.Models.Posts;
+﻿using Mazui.Core.Models.PostIcons;
 using System;
 using System.Collections.Generic;
 using System.Text;

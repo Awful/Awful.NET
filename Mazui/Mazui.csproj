@@ -175,9 +175,12 @@
     <Compile Include="Tools\Converters\ThreadHeaderColorConverter.cs" />
     <Compile Include="Tools\Converters\ThreadNullCheckConverter.cs" />
     <Compile Include="Tools\Helpers.cs" />
+    <Compile Include="Tools\Manager\ImgurManager.cs" />
+    <Compile Include="Tools\Manager\UploadManager.cs" />
     <Compile Include="Tools\PageScrollingCollection.cs" />
     <Compile Include="Tools\ResultChecker.cs" />
     <Compile Include="Tools\Threads\WebViewHelper.cs" />
+    <Compile Include="Tools\Web\AddImage.cs" />
     <Compile Include="Tools\Web\WebViewCommands.cs" />
     <Compile Include="Views\BasePage.cs" />
     <Compile Include="Views\BookmarkPage.xaml.cs">
