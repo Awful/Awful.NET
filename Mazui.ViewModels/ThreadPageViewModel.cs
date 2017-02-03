@@ -20,6 +20,13 @@ namespace Mazui.ViewModels
     {
         public ThreadView ThreadView { get; set; }
 
+        public async Task Init(Thread thread)
+        {
+            await ThreadView.ViewModel.Init();
+            ThreadView.ViewModel.Selected = thread;
+            await ThreadView.ViewModel.LoadThread();
+        }
+
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             await ThreadView.ViewModel.Init();

@@ -168,9 +168,6 @@
     <Compile Include="Notifications\NotifyStatusTile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\SettingsServices.cs" />
-    <Compile Include="Services\WindowService\IWindowService.cs" />
-    <Compile Include="Services\WindowService\WindowHelper.cs" />
-    <Compile Include="Services\WindowService\WindowService.cs" />
     <Compile Include="Tools\Authentication\CookieManager.cs" />
     <Compile Include="Tools\Authentication\UserHandler.cs" />
     <Compile Include="Tools\BackgroundTasks\BackgroundActivity.cs" />
@@ -199,6 +196,7 @@
     <Compile Include="Tools\PrivateMessageScrollingCollection.cs" />
     <Compile Include="Tools\ResultChecker.cs" />
     <Compile Include="Tools\Threads\WebViewHelper.cs" />
+    <Compile Include="Tools\ViewSystem\ViewLifetimeControl.cs" />
     <Compile Include="Tools\Web\AddImage.cs" />
     <Compile Include="Tools\Web\WebViewCommands.cs" />
     <Compile Include="Views\BasePage.cs" />

@@ -28,5 +28,14 @@ namespace Mazui.Views
             NavigationCacheMode = NavigationCacheMode.Enabled;
             ViewModel.ThreadView = this.ThreadPageView;
         }
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            //var thread = JsonConvert.DeserializeObject<Thread>(e.Parameter as string);
+            //if (thread != null)
+            //{
+            //    await ViewModel.Init(thread);
+            //}
+        }
     }
 }

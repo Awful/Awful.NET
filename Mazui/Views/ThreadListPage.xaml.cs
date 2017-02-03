@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Template10.Services.WindowService;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -60,16 +59,6 @@ namespace Mazui.Views
             await ViewModel.NavigateToThread(thread);
         }
 
-        private async void OpenInNewWindow(object sender, RoutedEventArgs e)
-        {
-            var imageSource = sender as MenuFlyoutItem;
-            var thread = imageSource?.CommandParameter as Thread;
-            if (thread == null)
-                return;
-            ViewModel.Selected = thread;
-            await WindowService.Instance.ShowAsync<ThreadPage>(JsonConvert.SerializeObject(thread));
-        }
-
         private async void GoToLastPage(object sender, RoutedEventArgs e)
         {
             var imageSource = sender as MenuFlyoutItem;
@@ -81,22 +70,22 @@ namespace Mazui.Views
             ViewModel.IsThreadSelectedAndLoaded = true;
         }
 
-        private void AddRemoveBookmark(object sender, RoutedEventArgs e)
+        private async void AddRemoveBookmark(object sender, RoutedEventArgs e)
         {
             var imageSource = sender as MenuFlyoutItem;
             var thread = imageSource?.CommandParameter as Thread;
             if (thread == null)
                 return;
-            ViewModel.AddRemoveBookmark(thread);
+            await ViewModel.AddRemoveBookmark(thread);
         }
 
-        private void Unread(object sender, RoutedEventArgs e)
+        private async void Unread(object sender, RoutedEventArgs e)
         {
             var imageSource = sender as MenuFlyoutItem;
             var thread = imageSource?.CommandParameter as Thread;
             if (thread == null)
                 return;
-            ViewModel.UnreadThread(thread);
+            await ViewModel.UnreadThread(thread);
         }
 
         private void PullToRefreshExtender_RefreshRequested(object sender, RefreshRequestedEventArgs e)

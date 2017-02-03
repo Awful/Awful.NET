@@ -4,12 +4,14 @@ using Mazui.Tools.BackgroundTasks;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Template10.Common;
 using Template10.Controls;
+using Mazui.Tools.ViewSystem;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -28,6 +30,8 @@ namespace Mazui
     sealed partial class App : BootStrapper
     {
         SettingsService _settingsService = SettingsService.Instance;
+
+        public ObservableCollection<ViewLifetimeControl> SecondaryViews = new ObservableCollection<ViewLifetimeControl>();
 
         public App()
         {

@@ -67,6 +67,15 @@ namespace Mazui.Views
             ViewModel.IsThreadSelectedAndLoaded = true;
         }
 
+        private async void OpenInNewWindow(object sender, RoutedEventArgs e)
+        {
+            var imageSource = sender as MenuFlyoutItem;
+            var thread = imageSource?.CommandParameter as Thread;
+            if (thread == null)
+                return;
+            await ViewModel.OpenInNewWindow(thread);
+        }
+
         private async void AddRemoveBookmark(object sender, RoutedEventArgs e)
         {
             var imageSource = sender as MenuFlyoutItem;

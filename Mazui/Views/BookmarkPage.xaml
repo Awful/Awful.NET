@@ -93,6 +93,7 @@
                       <MenuFlyoutItem Text="Go to Last Page" Click="GoToLastPage"  CommandParameter="{Binding}"/>
                       <MenuFlyoutItem Click="AddRemoveBookmark" CommandParameter="{Binding}" Text="{Binding IsBookmark, Converter={StaticResource BookmarkTextConverter}}"/>
                       <MenuFlyoutItem Click="AddRemoveNotify" CommandParameter="{Binding}" Text="{Binding IsNotified, Converter={StaticResource NotifyThreadTextConverter}}"/>
+                      <MenuFlyoutItem Click="OpenInNewWindow" CommandParameter="{Binding}" Text="Open In New Window"/>
                       <MenuFlyoutItem Click="Unread" CommandParameter="{Binding}" Text="Unread"/>
                     </MenuFlyout>
                   </FlyoutBase.AttachedFlyout>

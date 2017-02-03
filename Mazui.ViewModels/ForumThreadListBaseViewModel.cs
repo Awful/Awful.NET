@@ -10,6 +10,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Mazui.Controls;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
+using Mazui.Tools.ViewSystem;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
+using Windows.UI.ViewManagement;
+using Template10.Common;
+using Mazui.Views;
 
 namespace Mazui.ViewModels
 {
@@ -41,20 +49,25 @@ namespace Mazui.ViewModels
             }
         }
 
+        public async Task OpenInNewWindow(Thread thread)
+        {
+            var control = await NavigationService.OpenAsync(typeof(ThreadPage), JsonConvert.SerializeObject(thread));
+        }
+
         public async Task NavigateToThread(Thread thread)
         {
             Selected = thread;
             await NavigationService.NavigateAsync(typeof(Views.ThreadPage), JsonConvert.SerializeObject(thread));
         }
 
-        public async void GoToLastPage(Thread thread)
+        public async Task GoToLastPage(Thread thread)
         {
             thread.CurrentPage = thread.TotalPages;
             thread.RepliesSinceLastOpened = 0;
             Selected = thread;
         }
 
-        public async void UnreadThread(Thread thread)
+        public async Task UnreadThread(Thread thread)
         {
             var threadManager = new ThreadManager(WebManager);
             await threadManager.MarkThreadUnreadAsync(thread.ThreadId);
