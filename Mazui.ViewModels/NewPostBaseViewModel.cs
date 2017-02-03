@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Mazui.Tools.Web;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 
 namespace Mazui.ViewModels
@@ -8,6 +10,17 @@ namespace Mazui.ViewModels
     public class NewPostBaseViewModel : MazuiViewModel
     {
         private TextBox _replyBox = default(TextBox);
+
+        private string _title = default(string);
+
+        public string Title
+        {
+            get { return _title; }
+            set
+            {
+                Set(ref _title, value);
+            }
+        }
 
         public TextBox ReplyBox
         {
@@ -27,6 +40,14 @@ namespace Mazui.ViewModels
             {
                 Set(ref _subject, value);
             }
+        }
+
+
+        public async Task AddImageViaImgur()
+        {
+            IsLoading = true;
+            await AddImage.AddImageViaImgur(ReplyBox);
+            IsLoading = false;
         }
     }
 }

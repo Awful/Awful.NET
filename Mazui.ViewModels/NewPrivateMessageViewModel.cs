@@ -19,17 +19,6 @@ namespace Mazui.ViewModels
 
         public PostIconViewModel PostIconViewModel { get; set; }
 
-        private string _title = default(string);
-
-        public string Title
-        {
-            get { return _title; }
-            set
-            {
-                Set(ref _title, value);
-            }
-        }
-
         public async void OpenSmiliesView()
         {
             await SmiliesViewModel.LoadSmilies();
@@ -163,13 +152,6 @@ namespace Mazui.ViewModels
                 string replyText = string.IsNullOrEmpty(ReplyBox.Text) ? string.Empty : ReplyBox.Text;
                 if (replyText != null) ReplyBox.Text = replyText.Insert(ReplyBox.SelectionStart, text);
             }
-        }
-
-        public async Task AddImageViaImgur()
-        {
-            IsLoading = true;
-            await AddImage.AddImageViaImgur(ReplyBox);
-            IsLoading = false;
         }
     }
 }
