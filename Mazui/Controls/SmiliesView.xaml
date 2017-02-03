@@ -27,6 +27,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <SearchBox x:Name="FilterBox" Margin="15" PlaceholderText="Filter..." SuggestionsRequested="{x:Bind ViewModel.SmiliesFilterOnSuggestedQuery}" QuerySubmitted="{x:Bind ViewModel.SmiliesFilterOnSubmittedQuery}" QueryChanged="{x:Bind ViewModel.SmiliesFilterOnChangedQuery}"   HorizontalAlignment="Stretch" Grid.Row="0"/>
         <Grid Canvas.ZIndex="1" Grid.Row="1" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" >
             <ProgressBar VerticalAlignment="Center" IsIndeterminate="True" Height="50"/>
             <Rectangle Fill="Transparent" Opacity=".5"/>
