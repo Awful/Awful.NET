@@ -13,7 +13,7 @@ namespace Mazui.Core.Models.Smilies
             SmileList = new List<Smile>();
         }
 
-        public virtual ICollection<Smile> SmileList { get; set; }
+        public List<Smile> SmileList { get; set; }
 
         public string Name { get; set; }
     }

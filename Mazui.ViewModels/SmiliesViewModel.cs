@@ -56,9 +56,8 @@ namespace Mazui.ViewModels
             {
                 IsLoading = true;
                 var result = await _smileManager.GetSmileList();
-                var list = JsonConvert.DeserializeObject<List<SmileCategory>>(result.ResultJson);
-                FullSmileCategoryEntities = list.ToObservableCollection();
-                foreach (var item in list)
+                FullSmileCategoryEntities = result.ToObservableCollection();
+                foreach (var item in result)
                 {
                     SmileCategoryList.Add(item);
                 }

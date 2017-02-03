@@ -142,7 +142,18 @@ namespace Mazui.ViewModels
 
         public void ReplyToThread()
         {
-
+            Template10.Common.BootStrapper.Current.NavigationService.Navigate(typeof(ReplyPage),
+                JsonConvert.SerializeObject(new ThreadReply()
+                {
+                    Thread = new Thread()
+                    {
+                        ForumId = Selected.ForumId,
+                        ThreadId = Selected.ThreadId,
+                        Name = Selected.Name,
+                        CurrentPage = Selected.CurrentPage,
+                        TotalPages = Selected.TotalPages
+                    }
+                }));
         }
 
         public async void AddRemoveBookmark()

@@ -25,20 +25,20 @@
         <viewModels:ReplyThreadViewModel />
     </Page.DataContext>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource MainPageBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <controls:PageHeader BackButtonVisibility="Collapsed" VisualStateNormalMinWidth="720" HorizontalAlignment="Stretch" Content="{Binding Title, Mode=OneWay}" Frame="{x:Bind Frame}">
+        <controls:PageHeader Background="{ThemeResource SystemAccentColor}" Foreground="White" BackButtonVisibility="Collapsed" VisualStateNormalMinWidth="720" HorizontalAlignment="Stretch" Content="{Binding Title, Mode=OneWay}" Frame="{x:Bind Frame}">
             <interactivity:Interaction.Behaviors>
                 <behaviors:EllipsisBehavior Visibility="Collapsed" />
             </interactivity:Interaction.Behaviors>
         </controls:PageHeader>
         <CommandBar Grid.Row="1">
-            <AppBarButton x:Name="SmiliesButton" Click="{x:Bind ViewModel.OpenSmiliesView}" flyout:FlyoutHelper.IsOpen="{x:Bind ViewModel.SmiliesViewModel.IsOpen, Mode=OneWay}"
+            <AppBarButton x:Name="SmiliesButton" Click="{x:Bind ViewModel.OpenSmiliesView}" AllowFocusOnInteraction="True" flyout:FlyoutHelper.IsOpen="{x:Bind ViewModel.SmiliesViewModel.IsOpen, Mode=OneWay}"
                 flyout:FlyoutHelper.Parent="{Binding ElementName=SmiliesFlyout}" Label="Smilies"  Icon="Emoji">
                 <Button.Flyout>
                     <Flyout x:Name="SmiliesFlyout" Placement="Full" FlyoutPresenterStyle="{StaticResource SmilieFlyoutPresenterStyle}">
