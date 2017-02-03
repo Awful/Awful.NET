@@ -41,11 +41,59 @@
                                       IsOn="{Binding UseDarkThemeButton, Mode=TwoWay}"
                                       OffContent="Light Theme" OnContent="Dark Theme" />
                         <TextBlock Margin="0,0,0,20" x:Name="ThemeSwitchText" RelativePanel.Below="UseDarkThemeToggleSwitch" TextWrapping="Wrap">If you change the theme, you must restart the app to fully see the changes.</TextBlock>
+                        <ToggleSwitch x:Name="UseBackgroundTask" RelativePanel.Below="ThemeSwitchText"  Header="Enable Background Tasks"
+                                      IsOn="{Binding UseBackgroundTask, Mode=TwoWay}"
+                                      OffContent="Off" OnContent="On" />
+                        <TextBlock Margin="0,0,0,20" x:Name="BackgroundSwitchText" RelativePanel.Below="UseBackgroundTask" TextWrapping="Wrap">Enables background Tasks to be used.</TextBlock>
+                        <ToggleSwitch x:Name="UseBookmarkBackground" RelativePanel.Below="BackgroundSwitchText" Header="Enable Bookmark Live Tiles"
+                                      IsOn="{Binding UseBackgroundBookmarkLiveTile, Mode=TwoWay}"
+                                      OffContent="Off" OnContent="On" />
+                        <TextBlock Margin="0,0,0,20" x:Name="BookmarkBackgroundSwitchText" RelativePanel.Below="UseBookmarkBackground" TextWrapping="Wrap">Enables updated bookmarks to appear on your Awful live tile.</TextBlock>
+                        <ToggleSwitch x:Name="UseBookmarkNotification" RelativePanel.Below="BookmarkBackgroundSwitchText" Header="Enable Bookmark Notifications"
+                                      IsOn="{Binding UseBookmarkBackgroundNotify, Mode=TwoWay}"
+                                      OffContent="Off" OnContent="On" />
+                        <TextBlock Margin="0,0,0,20" x:Name="BookmarkNotificationSwitchText" RelativePanel.Below="UseBookmarkNotification" TextWrapping="Wrap">Enables selected bookmarks to appear as toast notifications in your action center when they are updated.</TextBlock>
                     </RelativePanel>
                 </ScrollViewer>
             </PivotItem>
             <PivotItem Header="Thread" DataContext="{Binding SettingsPartViewModel}">
                 <ScrollViewer Margin="0,12,-12,0" HorizontalContentAlignment="Left" VerticalScrollBarVisibility="Auto">
+                    <RelativePanel HorizontalAlignment="Left">
+                        <ToggleSwitch x:Name="UseShowEmbeddedTwitterSwitch" Header="Show Full Embedded Tweets in Threads"
+                                      IsOn="{Binding UseShowEmbeddedTweetsButton, Mode=TwoWay}"
+                                      OffContent="Off" OnContent="On" />
+                        <TextBlock  Margin="0,0,0,20" x:Name="ShowEmbeddedTweetsText" RelativePanel.Below="UseShowEmbeddedTwitterSwitch" TextWrapping="Wrap">
+                            If enabled, Twitter URLs that are wrapped in [url] tags will appear as fully embedded tweets.
+                        </TextBlock>
+                        <ToggleSwitch  x:Name="UseShowEmbeddedGifvSwitch" RelativePanel.Below="ShowEmbeddedTweetsText" Header="Show Embedded GIFVs"
+                                      IsOn="{Binding UseShowEmbeddedGifvButton, Mode=TwoWay}"
+                                      OffContent="Off" OnContent="On" />
+                        <TextBlock  Margin="0,0,0,20" x:Name="ShowEmbeddedGifvText" RelativePanel.Below="UseShowEmbeddedGifvSwitch" TextWrapping="Wrap">
+                            Render all [url] wrapped imgur GIFVs.
+                        </TextBlock>
+                        <ToggleSwitch x:Name="UseShowEmbeddedVideoSwitch"  RelativePanel.Below="ShowEmbeddedGifvText" Header="Show Embedded MP4 Videos"
+                                      IsOn="{Binding UseShowEmbeddedVideoButton, Mode=TwoWay}"
+                                      OffContent="Off" OnContent="On" />
+                        <TextBlock  Margin="0,0,0,20" x:Name="ShowEmbeddedVideoText" RelativePanel.Below="UseShowEmbeddedVideoSwitch" TextWrapping="Wrap">Render all [url] wrapped MP4 videos.</TextBlock>
+                        <ToggleSwitch x:Name="OpenNewThreadsInWindowsSwitch"  RelativePanel.Below="ShowEmbeddedVideoText" Header="[ALPHA] Open Linked Threads in New Windows"
+                                      IsOn="{Binding UseOpenNewThreadInWindowButton, Mode=TwoWay}"
+                                      OffContent="Off" OnContent="On" />
+                        <TextBlock  Margin="0,0,0,20" x:Name="OpenNewThreadsInWindowsText" RelativePanel.Below="OpenNewThreadsInWindowsSwitch" TextWrapping="Wrap">If on, all SA thread links will pop open a new window.</TextBlock>
+                        <ToggleSwitch x:Name="AlwaysAutoplayGifTextSwitcb"  RelativePanel.Below="OpenNewThreadsInWindowsText" Header="Always Autoplay Gifs"
+                                      IsOn="{Binding AlwaysAutoplayGif, Mode=TwoWay}"
+                                      OffContent="Off" OnContent="On" />
+                        <TextBlock  Margin="0,0,0,20" x:Name="AlwaysAutoplayGifTextText" RelativePanel.Below="AlwaysAutoplayGifTextSwitcb" TextWrapping="Wrap">If on, all GIFs in threads will autoplay. May cause memory issues.</TextBlock>
+                        <TextBlock  Margin="0,0,0,20" x:Name="ImgurLogin" RelativePanel.Below="AlwaysAutoplayGifTextText" TextWrapping="Wrap">Imgur Login</TextBlock>
+                        <Grid x:Name="ImgurSigninGrid" HorizontalAlignment="Stretch" RelativePanel.Below="ImgurLogin">
+                            <StackPanel>
+                                <Button Visibility="{Binding ImgurSignedIn, Converter={StaticResource BooleanToVisibilityConverter}}" Click="{x:Bind ViewModel.SettingsPartViewModel.LogoutOfImgur}">Logout</Button>
+                                <Button Visibility="{Binding ImgurSignedIn, Converter={StaticResource BooleanToVisibilityInverter}}" Click="{x:Bind ViewModel.SettingsPartViewModel.LoginToImgur}" Margin="0,5,0,0">Login</Button>
+                            </StackPanel>
+                        </Grid>
+                        <ToggleSwitch  x:Name="UseTransparentThreadListBackground" RelativePanel.Below="ImgurSigninGrid" Header="Set Thread List Background Transparent"
+                                      IsOn="{Binding UseTransparentThreadListBackground, Mode=TwoWay}"
+                                      OffContent="Off" OnContent="On" />
+                    </RelativePanel>
                 </ScrollViewer>
             </PivotItem>
             <PivotItem Header="About">

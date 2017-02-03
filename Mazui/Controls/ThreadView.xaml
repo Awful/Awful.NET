@@ -28,7 +28,7 @@
             </controls:PageHeader>
             <Grid Grid.Row="2" Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" Canvas.ZIndex="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <Grid.Background>
-                    <SolidColorBrush Opacity=".9" Color="{StaticResource AwfulWebBackground}"></SolidColorBrush>
+                    <SolidColorBrush Opacity=".9" Color="{ThemeResource AwfulWebBackground}"></SolidColorBrush>
                 </Grid.Background>
                 <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" Height="48" Width="48" VerticalAlignment="Center" HorizontalAlignment="Center"></ProgressRing>
             </Grid>

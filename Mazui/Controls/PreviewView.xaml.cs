@@ -14,15 +14,17 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Mazui.Views
+// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
+
+namespace Mazui.Controls
 {
-    public sealed partial class SettingsPage : Page
+    public sealed partial class PreviewView : UserControl
     {
-        public SettingsPage()
+        public PreviewView()
         {
             this.InitializeComponent();
         }
 
-        public SettingsPageViewModel ViewModel => this.DataContext as SettingsPageViewModel;
+        public PreviewViewModel ViewModel => this.DataContext as PreviewViewModel;
     }
 }

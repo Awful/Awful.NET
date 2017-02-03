@@ -14,15 +14,16 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Mazui.Views
+namespace Mazui.Controls
 {
-    public sealed partial class SettingsPage : Page
+    public sealed partial class SmiliesView : UserControl
     {
-        public SettingsPage()
+        public SmiliesView()
         {
             this.InitializeComponent();
         }
 
-        public SettingsPageViewModel ViewModel => this.DataContext as SettingsPageViewModel;
+        // strongly-typed view models enable x:bind
+        public SmiliesViewModel ViewModel => this.DataContext as SmiliesViewModel;
     }
 }
