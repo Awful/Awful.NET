@@ -19,7 +19,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)NewThreadViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PostIconViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PreviewViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PreviousPostsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PrivateMessagesListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ReplyThreadViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SettingsPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ShellViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SmiliesViewModel.cs" />
