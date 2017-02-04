@@ -56,8 +56,11 @@ namespace Mazui.Views
         private async void AdaptiveGridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var thread = e.ClickedItem as Thread;
+            if (thread == null)
+                return;
             ViewModel.Selected = thread;
-            await ViewModel.NavigateToThread(thread);
+            await ThreadPageView.LoadThread(thread);
+            ViewModel.IsThreadSelectedAndLoaded = true;
         }
 
         private async void GoToLastPage(object sender, RoutedEventArgs e)
