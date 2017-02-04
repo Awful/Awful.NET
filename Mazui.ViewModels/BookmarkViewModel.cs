@@ -70,7 +70,6 @@ namespace Mazui.ViewModels
 
         public override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
         {
-            Template10.Common.BootStrapper.Current.NavigationService.FrameFacade.BackRequested -= MasterDetailViewControl.NavigationManager_BackRequested;
             if (suspending)
             {
                 if (Selected != null)
@@ -81,6 +80,10 @@ namespace Mazui.ViewModels
                     state[nameof(Selected)] = JsonConvert.SerializeObject(newThread);
                 }
 
+            }
+            else
+            {
+                Template10.Common.BootStrapper.Current.NavigationService.FrameFacade.BackRequested -= MasterDetailViewControl.NavigationManager_BackRequested;
             }
             return Task.CompletedTask;
         }

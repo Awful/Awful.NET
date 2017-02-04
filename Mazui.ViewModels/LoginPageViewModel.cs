@@ -93,6 +93,8 @@ namespace Mazui.ViewModels
 
             IsLoading = false;
             IsLoggedIn = true;
+            Views.Shell.Instance.ViewModel.IsLoggedIn = true;
+
             NavigationService.Navigate(typeof(Views.MainPage));
         }
 

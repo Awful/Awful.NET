@@ -29,6 +29,7 @@ namespace Mazui.Views
         {
             this.InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Enabled;
+            ViewModel.MasterDetailViewControl = previewControl;
         }
 
         private void ResetPageCache()
@@ -63,6 +64,7 @@ namespace Mazui.Views
             var thread = e.ClickedItem as PrivateMessage;
             if (thread == null)
                 return;
+            ViewModel.Selected = thread;
             await PrivateMessageView.LoadPrivateMessage(thread);
             ViewModel.IsThreadSelectedAndLoaded = true;
         }

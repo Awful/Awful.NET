@@ -1,4 +1,5 @@
-﻿using Mazui.Core.Models.Messages;
+﻿using Mazui.Controls;
+using Mazui.Core.Models.Messages;
 using Mazui.Tools;
 using Mazui.Views;
 using Newtonsoft.Json;
@@ -22,6 +23,8 @@ namespace Mazui.ViewModels
                 Set(ref _privateMessageScrollingCollection, value);
             }
         }
+
+        public MasterDetailViewControl MasterDetailViewControl { get; set; }
 
         private PrivateMessage _selected = default(PrivateMessage);
 

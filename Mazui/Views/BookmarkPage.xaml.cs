@@ -52,6 +52,7 @@ namespace Mazui.Views
             var thread = e.ClickedItem as Thread;
             if (thread == null)
                 return;
+            ViewModel.Selected = thread;
             await ThreadPageView.LoadThread(thread);
             ViewModel.IsThreadSelectedAndLoaded = true;
         }

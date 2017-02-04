@@ -102,6 +102,7 @@ namespace Mazui.ViewModels
 
         public async Task CreateThread()
         {
+            if (PostIconViewModel.PostIcon == null) return;
             IsLoading = true;
             if (string.IsNullOrEmpty(ReplyBox.Text) || string.IsNullOrEmpty(Subject.Text) || _newThread == null) return;
             _newThread.Content = ReplyBox.Text;

@@ -56,6 +56,7 @@ namespace Mazui.Views
         private async void AdaptiveGridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var thread = e.ClickedItem as Thread;
+            ViewModel.Selected = thread;
             await ViewModel.NavigateToThread(thread);
         }
 
