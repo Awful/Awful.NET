@@ -20,8 +20,8 @@
     <Controls:HamburgerMenu x:Name="MyHamburgerMenu" 
                             SecondaryButtonOrientation="Vertical"
                             AccentColor="{ThemeResource SystemAccentColor}"
-                            VisualStateNormalMinWidth="720"
-                            VisualStateWideMinWidth="1200">
+                            VisualStateNarrowMinWidth="320"
+                            VisualStateNormalMinWidth="720">
         <Controls:HamburgerMenu.PrimaryButtons>
             <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:MainPage">
                 <StackPanel Orientation="Horizontal">

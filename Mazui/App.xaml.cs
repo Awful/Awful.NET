@@ -23,6 +23,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.ViewManagement;
 
 namespace Mazui
 {
@@ -49,6 +50,7 @@ namespace Mazui
             #endregion
 
             RequestedTheme = _settingsService.AppTheme;
+            
             // CacheMaxDuration = _settingsService.CacheMaxDuration;
             // ShowShellBackButton = _settingsService.UseShellBackButton;
         }
@@ -65,6 +67,7 @@ namespace Mazui
 
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(330, 200));
             SetupBackgroundServices();
             await NavigationService.NavigateAsync(typeof(Views.MainPage));
         }
