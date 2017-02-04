@@ -11,11 +11,14 @@ using Template10.Mvvm;
 using Template10.Utils;
 using Mazui.Core.Models.Smilies;
 using Mazui.Core.Managers;
+using Mazui.Controls;
 
 namespace Mazui.ViewModels
 {
     public class SmiliesViewModel : MazuiViewModel
     {
+        public SmiliesView SmiliesView { get; set; }
+
         private ObservableCollection<SmileCategory> _smileCategoryList = new ObservableCollection<SmileCategory>();
 
         public ObservableCollection<SmileCategory> SmileCategoryList
@@ -63,6 +66,8 @@ namespace Mazui.ViewModels
                 }
                 IsLoading = false;
             }
+
+            SmiliesView.Init();
         }
 
         public void SelectIcon(object sender, ItemClickEventArgs e)

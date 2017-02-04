@@ -21,6 +21,14 @@ namespace Mazui.Controls
         public SmiliesView()
         {
             this.InitializeComponent();
+            ViewModel.SmiliesView = this;
+        }
+
+        public void Init()
+        {
+            ForumViewSource.Source = ViewModel.SmileCategoryList;
+            var collectionGroups = ForumViewSource.View.CollectionGroups;
+            ((ListViewBase)this.semanticZoom.ZoomedOutView).ItemsSource = collectionGroups;
         }
 
         // strongly-typed view models enable x:bind

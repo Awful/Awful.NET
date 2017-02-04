@@ -32,7 +32,20 @@
             <ProgressBar VerticalAlignment="Center" IsIndeterminate="True" Height="50"/>
             <Rectangle Fill="Transparent" Opacity=".5"/>
         </Grid>
-        <GridView
+        <SemanticZoom Grid.Row="1" x:Name="semanticZoom">
+            <SemanticZoom.ZoomedOutView>
+                <ListView x:Name="ForumListView" Margin="5">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Group.Name }" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </SemanticZoom.ZoomedOutView>
+            <SemanticZoom.ZoomedInView>
+                <GridView
                 x:Name="ItemGridView"
                 Margin="15"
                 Grid.Row="1"
@@ -43,36 +56,38 @@
                 ItemClick="{x:Bind ViewModel.SelectIcon}"
                 IsItemClickEnabled="True"
                 HorizontalAlignment="Stretch">
-            <GridView.ItemTemplate>
-                <DataTemplate x:DataType="smilies:Smile">
-                    <Grid HorizontalAlignment="Left" Width="100" Height="100">
-                        <StackPanel VerticalAlignment="Bottom">
-                            <Border Height="50" Background="{ThemeResource AwfulHeader}">
-                                <Image Source="{Binding ImageUrl}" Stretch="None"
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="smilies:Smile">
+                            <Grid HorizontalAlignment="Left" Width="100" Height="100">
+                                <StackPanel VerticalAlignment="Bottom">
+                                    <Border Height="50" Background="{ThemeResource AwfulHeader}">
+                                        <Image Source="{Binding ImageUrl}" Stretch="None"
                                            AutomationProperties.Name="{Binding Title}" />
-                            </Border>
-                            <TextBlock TextAlignment="Center" Text="{Binding Title}"
+                                    </Border>
+                                    <TextBlock TextAlignment="Center" Text="{Binding Title}"
                                            Height="30" Margin="15,0,15,0" />
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </GridView.ItemTemplate>
-            <GridView.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.HeaderTemplate>
-                        <DataTemplate x:DataType="smilies:SmileCategory">
-                            <Grid Margin="5,0,0,5" Width="225">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <TextBlock Text="{Binding Name}" Style="{StaticResource SubheaderTextBlockStyle}" VerticalAlignment="Center"/>
-                                <Rectangle Grid.Row="1" Fill="GreenYellow" Height="1" Margin="0,7,0,0"/>
+                                </StackPanel>
                             </Grid>
                         </DataTemplate>
-                    </GroupStyle.HeaderTemplate>
-                </GroupStyle>
-            </GridView.GroupStyle>
-        </GridView>
+                    </GridView.ItemTemplate>
+                    <GridView.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate x:DataType="smilies:SmileCategory">
+                                    <Grid Margin="5,0,0,5" Width="225">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="{Binding Name}" Style="{StaticResource SubheaderTextBlockStyle}" VerticalAlignment="Center"/>
+                                        <Rectangle Grid.Row="1" Fill="GreenYellow" Height="1" Margin="0,7,0,0"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
+                        </GroupStyle>
+                    </GridView.GroupStyle>
+                </GridView>
+            </SemanticZoom.ZoomedInView>
+        </SemanticZoom>
     </Grid>
 </UserControl>
