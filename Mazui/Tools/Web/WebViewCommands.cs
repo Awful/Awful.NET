@@ -20,6 +20,8 @@ using Mazui.Core.Models.Threads;
 using Mazui.Services;
 using Mazui.Views;
 using System.Windows.Input;
+using Mazui.Tools.Authentication;
+using Mazui.Notifications;
 
 namespace Mazui.Tools.Web
 {
@@ -35,12 +37,20 @@ namespace Mazui.Tools.Web
         {
             private static string _url;
 
+            private static WebManager _webManager;
+
             public static async void WebView_ScriptNotify(object sender, NotifyEventArgs e)
             {
                 var webview = sender as WebView;
                 if (webview == null)
                 {
                     return;
+                }
+
+                if (_webManager == null)
+                {
+                    var auth = await UserHandler.GetDefaultAuthWebManager();
+                    _webManager = auth.WebManager;
                 }
 
                 try
@@ -88,7 +98,7 @@ namespace Mazui.Tools.Web
                         case "openPost":
                             try
                             {
-                                var postManager = new PostManager(Views.Shell.Instance.ViewModel.WebManager);
+                                var postManager = new PostManager(_webManager);
                                 var postId = ParsePostId(command.Id);
                                 var result = await postManager.GetPostAsync(postId);
                                 var post = JsonConvert.DeserializeObject<Post>(result.ResultJson);
@@ -109,30 +119,30 @@ namespace Mazui.Tools.Web
                             break;
                         case "quote":
                             var quoteObject = JsonConvert.DeserializeObject<PostQuote>(command.Id);
-                //            Template10.Common.BootStrapper.Current.NavigationService.Navigate(typeof(ReplyPage),
-                //JsonConvert.SerializeObject(new ThreadReply()
-                //{
-                //    Thread = new AwfulRedux.UI.Models.Threads.Thread()
-                //    {
-                //        ThreadId = Convert.ToInt32(quoteObject.thread_id),
-                //        Name = quoteObject.thread_name
-                //    },
-                //    QuoteId = Convert.ToInt32(quoteObject.post_id)
-                //}));
+                            Template10.Common.BootStrapper.Current.NavigationService.Navigate(typeof(ReplyPage),
+                JsonConvert.SerializeObject(new ThreadReply()
+                {
+                    Thread = new Thread()
+                    {
+                        ThreadId = Convert.ToInt32(quoteObject.thread_id),
+                        Name = quoteObject.thread_name
+                    },
+                    QuoteId = Convert.ToInt32(quoteObject.post_id)
+                }));
                             break;
                         case "edit":
                             var editObject = JsonConvert.DeserializeObject<PostQuote>(command.Id);
-                //            Template10.Common.BootStrapper.Current.NavigationService.Navigate(typeof(ReplyPage),
-                //JsonConvert.SerializeObject(new ThreadReply()
-                //{
-                //    Thread = new AwfulRedux.UI.Models.Threads.Thread()
-                //    {
-                //        ThreadId = Convert.ToInt32(editObject.thread_id),
-                //        Name = editObject.thread_name
-                //    },
-                //    QuoteId = Convert.ToInt32(editObject.post_id),
-                //    IsEdit = true
-                //}));
+                            Template10.Common.BootStrapper.Current.NavigationService.Navigate(typeof(ReplyPage),
+                JsonConvert.SerializeObject(new ThreadReply()
+                            {
+                                Thread = new Thread()
+                                {
+                                    ThreadId = Convert.ToInt32(editObject.thread_id),
+                                    Name = editObject.thread_name
+                                },
+                                QuoteId = Convert.ToInt32(editObject.post_id),
+                                IsEdit = true
+                            }));
                             break;
                         case "scrollToPost":
                             try
@@ -153,11 +163,11 @@ namespace Mazui.Tools.Web
                             try
                             {
                                 var lastreadObject = JsonConvert.DeserializeObject<PostQuote>(command.Id);
-                                var threadManager = new ThreadManager(Views.Shell.Instance.ViewModel.WebManager);
+                                var threadManager = new ThreadManager(_webManager);
                                 await threadManager.MarkPostAsLastReadAs(Convert.ToInt32(lastreadObject.thread_id), Convert.ToInt32(lastreadObject.post_id));
                                 int nextPost = Convert.ToInt32(lastreadObject.post_id) + 1;
                                 await webview.InvokeScriptAsync("ScrollToDiv", new[] { string.Concat("#postId", nextPost.ToString()) });
-                                // NotifyStatusTile.CreateToastNotification("Last Read", "Post marked as last read.");
+                                NotifyStatusTile.CreateToastNotification("Last Read", "Post marked as last read.");
                             }
                             catch (Exception ex)
                             {
@@ -188,8 +198,7 @@ namespace Mazui.Tools.Web
                                 var json = JsonConvert.SerializeObject(newThreadEntity);
                                 if (SettingsService.Instance.OpenThreadsInNewWindow)
                                 {
-                                    //WindowHelper helper = new WindowHelper();
-                                    //await helper.ShowAsync<ThreadPage>(json);
+                                    await Template10.Common.BootStrapper.Current.NavigationService.OpenAsync(typeof(ThreadPage), json);
                                 }
                                 else
                                 {
