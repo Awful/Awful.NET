@@ -12,6 +12,7 @@ using Template10.Utils;
 using Mazui.Core.Models.Smilies;
 using Mazui.Core.Managers;
 using Mazui.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Mazui.ViewModels
 {
@@ -76,6 +77,13 @@ namespace Mazui.ViewModels
             if (smile == null) return;
             ReplyBox.Text = ReplyBox.Text.Insert(ReplyBox.Text.Length, smile.Title);
             IsOpen = false;
+
+            // If we're in a flyout, close after it's done.
+            var fb = SmiliesView.Parent as FlyoutPresenter;
+            if (fb == null) return;
+            var test = fb.Parent as Popup;
+            if (test == null) return;
+            test.IsOpen = false;
         }
 
         public void SmiliesFilterOnSuggestedQuery(SearchBox sender, SearchBoxSuggestionsRequestedEventArgs args)

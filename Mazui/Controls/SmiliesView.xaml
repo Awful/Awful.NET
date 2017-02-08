@@ -8,6 +8,7 @@
     xmlns:viewModels="using:Mazui.ViewModels"
     xmlns:smilies="using:Mazui.Core.Models.Smilies"
     mc:Ignorable="d"
+    xmlns:listControls="using:Mazui.Controls.ListControls"
     d:DesignHeight="300"
     d:DesignWidth="400">
 
@@ -45,7 +46,7 @@
                 </ListView>
             </SemanticZoom.ZoomedOutView>
             <SemanticZoom.ZoomedInView>
-                <GridView
+                <listControls:AdaptiveGridView 
                 x:Name="ItemGridView"
                 Margin="15"
                 Grid.Row="1"
@@ -53,13 +54,16 @@
                 ItemsSource="{Binding Source={StaticResource ForumViewSource}, Mode=TwoWay}"
                 SelectionMode="None"
                 IsSwipeEnabled="false"
+                MinItemWidth="100"
+                MinItemHeight="80"
+                MaxItemHeight="80"
                 ItemClick="{x:Bind ViewModel.SelectIcon}"
                 IsItemClickEnabled="True"
                 HorizontalAlignment="Stretch">
-                    <GridView.ItemTemplate>
+                    <listControls:AdaptiveGridView.ItemTemplate>
                         <DataTemplate x:DataType="smilies:Smile">
-                            <Grid HorizontalAlignment="Left" Width="100" Height="100">
-                                <StackPanel VerticalAlignment="Bottom">
+                            <Grid HorizontalAlignment="Stretch" Width="100" Height="100">
+                                <StackPanel VerticalAlignment="Stretch">
                                     <Border Height="50" Background="{ThemeResource AwfulHeader}">
                                         <Image Source="{Binding ImageUrl}" Stretch="None"
                                            AutomationProperties.Name="{Binding Title}" />
@@ -69,8 +73,8 @@
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
-                    </GridView.ItemTemplate>
-                    <GridView.GroupStyle>
+                    </listControls:AdaptiveGridView.ItemTemplate>
+                    <listControls:AdaptiveGridView.GroupStyle>
                         <GroupStyle>
                             <GroupStyle.HeaderTemplate>
                                 <DataTemplate x:DataType="smilies:SmileCategory">
@@ -85,8 +89,8 @@
                                 </DataTemplate>
                             </GroupStyle.HeaderTemplate>
                         </GroupStyle>
-                    </GridView.GroupStyle>
-                </GridView>
+                    </listControls:AdaptiveGridView.GroupStyle>
+                </listControls:AdaptiveGridView>
             </SemanticZoom.ZoomedInView>
         </SemanticZoom>
     </Grid>
