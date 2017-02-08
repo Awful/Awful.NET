@@ -14,6 +14,7 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:converters="using:Mazui.Tools.Converters"
     xmlns:uwp="using:AmazingPullToRefresh.Controls"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -86,6 +87,7 @@
                 ItemClick="MainForumListFull_OnItemClick"
                 SelectionMode="None"
                 IsSwipeEnabled="True"
+                animations:ReorderGridAnimation.Duration="300"
                 IsItemClickEnabled="True">
                         <listControls:AdaptiveGridView.ItemTemplate>
                             <DataTemplate x:DataType="forums:Forum">
