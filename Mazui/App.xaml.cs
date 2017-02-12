@@ -38,6 +38,12 @@ namespace Mazui
         {
             InitializeComponent();
             SplashFactory = (e) => new Views.Splash(e);
+            #region Xbox
+            if (IsTenFoot)
+            {
+                this.RequiresPointerMode = Windows.UI.Xaml.ApplicationRequiresPointerMode.WhenRequested;
+            }
+            #endregion
             #region Database
             using (var db = new UserAuthContext())
             {
@@ -81,5 +87,28 @@ namespace Mazui
         {
             BackgroundActivity.Start(args.TaskInstance);
         }
+
+        #region Xbox
+        public static bool IsTenFootPC { get; private set; } = false;
+
+        public static bool IsTenFoot
+        {
+            get
+            {
+                return Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Xbox" || IsTenFootPC;
+            }
+            set
+            {
+                if (value != IsTenFootPC)
+                {
+                    IsTenFootPC = value;
+                    TenFootModeChanged?.Invoke(null, null);
+                }
+            }
+        }
+
+        public static event EventHandler TenFootModeChanged;
+
+        #endregion
     }
 }
