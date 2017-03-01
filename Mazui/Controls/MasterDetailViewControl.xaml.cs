@@ -33,15 +33,12 @@ namespace Mazui.Controls
         public MasterDetailViewControl()
         {
             this.InitializeComponent();
-            this.Loaded += MasterDetailViewControl_Loaded;
         }
 
-        private void MasterDetailViewControl_Loaded(object sender, RoutedEventArgs e)
+        public void Loaded()
         {
-            this.Unloaded += MasterDetailViewControl_Unloaded;
             ApplicationView.GetForCurrentView().VisibleBoundsChanged += OnVisibleBoundsChanged;
             this.DataContextChanged += MasterDetailViewControl_DataContextChanged;
-
             Window.Current.SizeChanged += Current_SizeChanged;
             EvaluateLayout();
         }
@@ -63,10 +60,8 @@ namespace Mazui.Controls
             EvaluateLayout();
         }
 
-        private void MasterDetailViewControl_Unloaded(object sender, RoutedEventArgs e)
+        public void Unloaded()
         {
-            this.Loaded -= MasterDetailViewControl_Loaded;
-            this.Unloaded -= MasterDetailViewControl_Unloaded;
             ApplicationView.GetForCurrentView().VisibleBoundsChanged -= OnVisibleBoundsChanged;
             this.DataContextChanged -= MasterDetailViewControl_DataContextChanged;
             Window.Current.SizeChanged -= Current_SizeChanged;
@@ -105,19 +100,11 @@ namespace Mazui.Controls
             }
         }
 
-        private void EvaluateLayout()
+        public void EvaluateLayout()
         {
             double width = Window.Current.Bounds.Width;
             double height;
-            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationViewBoundsMode") &&
-                AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Xbox")
-            {
-                height = ApplicationView.GetForCurrentView().VisibleBounds.Height + 55;
-            }
-            else
-            {
-                height = ApplicationView.GetForCurrentView().VisibleBounds.Height;
-            }
+            height = ApplicationView.GetForCurrentView().VisibleBounds.Height;
 
             bool isOrientationChange = width == lastWindowHeight && height == lastWindowWidth;
 

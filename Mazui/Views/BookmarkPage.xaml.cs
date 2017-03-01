@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.ApplicationModel;
 
 namespace Mazui.Views
 {
@@ -29,6 +30,19 @@ namespace Mazui.Views
             NavigationCacheMode = NavigationCacheMode.Enabled;
             ViewModel.ThreadView = ThreadPageView;
             ViewModel.MasterDetailViewControl = previewControl;
+            Application.Current.Resuming += new EventHandler<Object>(App_Resuming);
+            Application.Current.Suspending += new SuspendingEventHandler(App_Suspending);
+            previewControl.Loaded();
+        }
+
+        private void App_Suspending(object sender, SuspendingEventArgs e)
+        {
+            previewControl.Unloaded();
+        }
+
+        private void App_Resuming(object sender, object e)
+        {
+            previewControl.Loaded();
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -36,6 +50,7 @@ namespace Mazui.Views
             base.OnNavigatingFrom(e);
             if (e.NavigationMode == NavigationMode.Back)
             {
+                Application.Current.Resuming -= new EventHandler<Object>(App_Resuming);
                 ResetPageCache();
             }
         }

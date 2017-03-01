@@ -24,6 +24,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.ViewManagement;
+using Windows.Foundation.Metadata;
+using Windows.UI;
 
 namespace Mazui
 {
@@ -71,10 +73,35 @@ namespace Mazui
             };
         }
 
+        public void SetTitleBarColor()
+        {
+            //windows title bar      
+            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.BackgroundColor = (Color)Application.Current.Resources["SystemAccentColor"];
+            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ForegroundColor = Colors.White;
+            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = (Color)Application.Current.Resources["SystemAccentColor"];
+            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ButtonForegroundColor = Colors.White;
+
+            //StatusBar for Mobile
+
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            {
+                Windows.UI.ViewManagement.StatusBar.GetForCurrentView().BackgroundColor = (Color)Application.Current.Resources["SystemAccentColor"];
+                Windows.UI.ViewManagement.StatusBar.GetForCurrentView().BackgroundOpacity = 1;
+                Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Colors.White;
+            }
+        }
+
+        public override void OnResuming(object s, object e, AppExecutionState previousExecutionState)
+        {
+            base.OnResuming(s, e, previousExecutionState);
+            SetTitleBarColor();
+        }
+
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(330, 200));
             SetupBackgroundServices();
+            SetTitleBarColor();
             await NavigationService.NavigateAsync(typeof(Views.MainPage));
         }
 

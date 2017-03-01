@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -30,6 +31,19 @@ namespace Mazui.Views
             this.InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Enabled;
             ViewModel.MasterDetailViewControl = previewControl;
+            Application.Current.Resuming += new EventHandler<Object>(App_Resuming);
+            Application.Current.Suspending += new SuspendingEventHandler(App_Suspending);
+            previewControl.Loaded();
+        }
+
+        private void App_Suspending(object sender, SuspendingEventArgs e)
+        {
+            previewControl.Unloaded();
+        }
+
+        private void App_Resuming(object sender, object e)
+        {
+            previewControl.Loaded();
         }
 
         private void ResetPageCache()
@@ -51,6 +65,7 @@ namespace Mazui.Views
             Template10.Common.BootStrapper.Current.NavigationService.FrameFacade.BackRequested -= previewControl.NavigationManager_BackRequested;
             if (e.NavigationMode == NavigationMode.Back)
             {
+                Application.Current.Resuming -= new EventHandler<Object>(App_Resuming);
                 ResetPageCache();
             }
         }
