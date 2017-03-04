@@ -1,0 +1,13 @@
+﻿{
+  "supports": {},
+  "dependencies": {
+    "Fody": "1.29.4",
+    "HtmlAgilityPack": "1.4.9.5",
+    "Newtonsoft.Json": "9.0.1",
+    "PropertyChanged.Fody": "1.52.1",
+    "QueryString.NET": "1.0.0"
+  },
+  "frameworks": {
+    ".NETPortable,Version=v4.5,Profile=Profile7": {}
+  }
+}

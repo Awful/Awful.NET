@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F308A749-3AB4-48BA-8C5E-D36E72C9601D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Mazui.Core</RootNamespace>
+    <AssemblyName>Mazui.Core</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Managers\AuthenticationManager.cs" />
+    <Compile Include="Managers\ForumManager.cs" />
+    <Compile Include="Managers\PostIconManager.cs" />
+    <Compile Include="Managers\PostManager.cs" />
+    <Compile Include="Managers\PrivateMessageManager.cs" />
+    <Compile Include="Managers\ReplyManager.cs" />
+    <Compile Include="Managers\SmileManager.cs" />
+    <Compile Include="Managers\ThreadManager.cs" />
+    <Compile Include="Managers\UserManager.cs" />
+    <Compile Include="Managers\WebManager.cs" />
+    <Compile Include="Models\Forums\Category.cs" />
+    <Compile Include="Models\Forums\Forum.cs" />
+    <Compile Include="Models\Messages\NewPrivateMessage.cs" />
+    <Compile Include="Models\Messages\PrivateMessage.cs" />
+    <Compile Include="Models\PostIcons\PostIcon.cs" />
+    <Compile Include="Models\PostIcons\PostIconCategory.cs" />
+    <Compile Include="Models\Posts\Post.cs" />
+    <Compile Include="Models\Posts\PostIcon.cs" />
+    <Compile Include="Models\Posts\ThreadPosts.cs" />
+    <Compile Include="Models\Replies\ForumReply.cs" />
+    <Compile Include="Models\Smilies\SmileCategory.cs" />
+    <Compile Include="Models\Threads\NewThread.cs" />
+    <Compile Include="Models\Threads\Thread.cs" />
+    <Compile Include="Models\Threads\ThreadReply.cs" />
+    <Compile Include="Models\Users\User.cs" />
+    <Compile Include="Models\Users\UserAuth.cs" />
+    <Compile Include="Models\Web\AuthResult.cs" />
+    <Compile Include="Models\Web\Error.cs" />
+    <Compile Include="Models\Web\Result.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\EndPoints.cs" />
+    <Compile Include="Tools\ErrorHandler.cs" />
+    <Compile Include="Tools\Extensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="project.json" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="..\..\packages\Fody.1.29.4\build\portable-net+sl+win+wpa+wp\Fody.targets" Condition="Exists('..\..\packages\Fody.1.29.4\build\portable-net+sl+win+wpa+wp\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Fody.1.29.4\build\portable-net+sl+win+wpa+wp\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Fody.1.29.4\build\portable-net+sl+win+wpa+wp\Fody.targets'))" />
+  </Target>
+</Project>

@@ -1065,8 +1065,16 @@
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
-  <Import Project="..\Mazui.Core\Mazui.Core.projitems" Label="Shared" />
-  <Import Project="..\Mazui.Database\Mazui.Database.projitems" Label="Shared" />
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Mazui.Core\Mazui.Core.csproj">
+      <Project>{f308a749-3ab4-48ba-8c5e-d36e72c9601d}</Project>
+      <Name>Mazui.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Mazui.Database\Mazui.Database.csproj">
+      <Project>{5f0507a3-3378-4195-8477-b051ea5dda8e}</Project>
+      <Name>Mazui.Database</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\Mazui.ViewModels\Mazui.ViewModels.projitems" Label="Shared" />
   <Import Project="..\Mazui.WebTemplate.Legacy\Mazui.WebTemplate.Legacy.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
