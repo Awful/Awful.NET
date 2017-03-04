@@ -1,4 +1,5 @@
-﻿using Microsoft.Toolkit.Uwp;
+﻿using Mazui.Tools.BackgroundTasks;
+using Microsoft.Toolkit.Uwp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,7 +70,7 @@ namespace Mazui.Services
             set
             {
                 _helper.Write(nameof(BackgroundEnable), value);
-                ChangeBookmarkLiveTileBackgroundStatus(value);
+				ChangeBackgroundStatus(value);
             }
         }
 
@@ -88,7 +89,6 @@ namespace Mazui.Services
             set
             {
                 _helper.Write(nameof(BookmarkBackground), value);
-                ChangeBookmarkLiveTileBackgroundStatus(value);
             }
         }
 
@@ -98,7 +98,6 @@ namespace Mazui.Services
             set
             {
                 _helper.Write(nameof(BookmarkNotifications), value);
-                ChangeBookmarkNotifyBackgroundStatus(value);
             }
         }
 
@@ -129,29 +128,21 @@ namespace Mazui.Services
             }
         }
 
-        public void ChangeBookmarkLiveTileBackgroundStatus(bool value)
-        {
-            if (value)
-            {
-                BackgroundTaskRegistration registered = BackgroundTaskHelper.Register("BookmarkBackgroundActivity", new TimeTrigger(15, true), false, true, new SystemCondition(SystemConditionType.InternetAvailable));
-            }
-            else
-            {
-                BackgroundTaskHelper.Unregister("BookmarkBackgroundActivity");
-            }
-        }
-
-        public void ChangeBookmarkNotifyBackgroundStatus(bool value)
-        {
-            if (value)
-            {
-                BackgroundTaskRegistration registered = BackgroundTaskHelper.Register("BookmarkNotifyBackgroundActivity", new TimeTrigger(15, true), false, true, new SystemCondition(SystemConditionType.InternetAvailable));
-            }
-            else
-            {
-                BackgroundTaskHelper.Unregister("BookmarkNotifyBackgroundActivity");
-            }
-        }
+		public async void ChangeBackgroundStatus(bool value)
+		{
+			if (value)
+			{
+				var task = await
+						BackgroundTaskUtils.RegisterBackgroundTask(BackgroundTaskUtils.BackgroundTaskEntryPoint,
+							BackgroundTaskUtils.BackgroundTaskName,
+							new TimeTrigger(15, false),
+							null);
+			}
+			else
+			{
+				BackgroundTaskUtils.UnregisterBackgroundTasks(BackgroundTaskUtils.BackgroundTaskName);
+			}
+		}
 
         public delegate void ChangedAppTheme();
 

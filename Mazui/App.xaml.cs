@@ -26,6 +26,8 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.ViewManagement;
 using Windows.Foundation.Metadata;
 using Windows.UI;
+using Windows.UI.Notifications;
+using Windows.ApplicationModel.Background;
 
 namespace Mazui
 {
@@ -58,9 +60,6 @@ namespace Mazui
             #endregion
 
             RequestedTheme = _settingsService.AppTheme;
-            
-            // CacheMaxDuration = _settingsService.CacheMaxDuration;
-            // ShowShellBackButton = _settingsService.UseShellBackButton;
         }
 
         public override UIElement CreateRootElement(IActivatedEventArgs e)
@@ -105,18 +104,36 @@ namespace Mazui
             await NavigationService.NavigateAsync(typeof(Views.MainPage));
         }
 
-        private void SetupBackgroundServices()
+        private async void SetupBackgroundServices()
         {
-            _settingsService.ChangeBookmarkLiveTileBackgroundStatus(_settingsService.BookmarkBackground);
-        }
+			IsIoT = ApiInformation.IsTypePresent("Windows.Devices.Gpio.GpioController");
 
-        protected override void OnBackgroundActivated(BackgroundActivatedEventArgs args)
-        {
-            BackgroundActivity.Start(args.TaskInstance);
-        }
+			if (IsIoT) return;
 
-        #region Xbox
-        public static bool IsTenFootPC { get; private set; } = false;
+			TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueue(true);
+			BackgroundTaskUtils.UnregisterBackgroundTasks(BackgroundTaskUtils.ToastBackgroundTaskName);
+			var task2 = await
+				BackgroundTaskUtils.RegisterBackgroundTask(BackgroundTaskUtils.ToastBackgroundTaskEntryPoint,
+					BackgroundTaskUtils.ToastBackgroundTaskName, new ToastNotificationActionTrigger(),
+					null);
+
+			if (SettingsService.Instance.BackgroundEnable)
+			{
+				BackgroundTaskUtils.UnregisterBackgroundTasks(BackgroundTaskUtils.BackgroundTaskName);
+				var task = await
+					BackgroundTaskUtils.RegisterBackgroundTask(BackgroundTaskUtils.BackgroundTaskEntryPoint,
+						BackgroundTaskUtils.BackgroundTaskName,
+						new TimeTrigger(15, false),
+						null);
+			}
+		}
+
+		#region iot
+		public static bool IsIoT { get; private set; } = false;
+		#endregion
+
+		#region Xbox
+		public static bool IsTenFootPC { get; private set; } = false;
 
         public static bool IsTenFoot
         {

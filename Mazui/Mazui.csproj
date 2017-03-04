@@ -185,38 +185,10 @@
     <Compile Include="Controls\ThreadView.xaml.cs">
       <DependentUpon>ThreadView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20170119041039_UserDatabase.cs" />
-    <Compile Include="Migrations\20170119041039_UserDatabase.designer.cs">
-      <DependentUpon>20170119041039_UserDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20170119144611_DefaultUser.cs" />
-    <Compile Include="Migrations\20170119144611_DefaultUser.designer.cs">
-      <DependentUpon>20170119144611_DefaultUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Forums\20170119180655_Forums.cs" />
-    <Compile Include="Migrations\Forums\20170119180655_Forums.designer.cs">
-      <DependentUpon>20170119180655_Forums.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Forums\20170119225144_Order.cs" />
-    <Compile Include="Migrations\Forums\20170119225144_Order.designer.cs">
-      <DependentUpon>20170119225144_Order.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Forums\20170130000303_Bookmarks.cs" />
-    <Compile Include="Migrations\Forums\20170130000303_Bookmarks.designer.cs">
-      <DependentUpon>20170130000303_Bookmarks.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Forums\20170130003053_BookmarksOrder.cs" />
-    <Compile Include="Migrations\Forums\20170130003053_BookmarksOrder.designer.cs">
-      <DependentUpon>20170130003053_BookmarksOrder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Forums\ForumsContextModelSnapshot.cs" />
-    <Compile Include="Migrations\UserAuthContextModelSnapshot.cs" />
-    <Compile Include="Notifications\NotifyStatusTile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\SettingsServices.cs" />
-    <Compile Include="Tools\Authentication\CookieManager.cs" />
-    <Compile Include="Tools\Authentication\UserHandler.cs" />
     <Compile Include="Tools\BackgroundTasks\BackgroundActivity.cs" />
+    <Compile Include="Tools\BackgroundTasks\BackgroundTaskUtils.cs" />
     <Compile Include="Tools\Converters\AddOrRemoveFavoriteTextConverter.cs" />
     <Compile Include="Tools\Converters\BackButtonEnableConverter.cs" />
     <Compile Include="Tools\Converters\BookmarkTextConverter.cs" />
@@ -1073,6 +1045,14 @@
     <ProjectReference Include="..\Core\Mazui.Database\Mazui.Database.csproj">
       <Project>{5f0507a3-3378-4195-8477-b051ea5dda8e}</Project>
       <Name>Mazui.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Windows\Mazui.BackgroundNotify\Mazui.BackgroundNotify.csproj">
+      <Project>{d70329c5-4983-4b31-b64e-f1f8299194d9}</Project>
+      <Name>Mazui.BackgroundNotify</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Windows\Mazui.Windows.Core\Mazui.Windows.Core.csproj">
+      <Project>{1e407387-75d5-4bd4-beca-19a93f7c4a0f}</Project>
+      <Name>Mazui.Windows.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\Mazui.ViewModels\Mazui.ViewModels.projitems" Label="Shared" />

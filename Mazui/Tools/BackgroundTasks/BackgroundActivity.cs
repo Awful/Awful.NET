@@ -120,8 +120,8 @@ namespace Mazui.Tools.BackgroundTasks
 
         public static void Start(IBackgroundTaskInstance taskInstance)
         {
-            var activity = new BackgroundActivity();
-            activity.Run(taskInstance);
+            // var activity = new BackgroundActivity();
+            // activity.Run(taskInstance);
         }
     }
 }

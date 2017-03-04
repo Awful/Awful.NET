@@ -45,6 +45,32 @@
     <Compile Include="Context\UserAuthContext.cs" />
     <Compile Include="Functions\ForumsDatabase.cs" />
     <Compile Include="Functions\UserAuthDatabase.cs" />
+    <Compile Include="Migrations\20170119041039_UserDatabase.cs" />
+    <Compile Include="Migrations\20170119041039_UserDatabase.Designer.cs">
+      <DependentUpon>20170119041039_UserDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20170119144611_DefaultUser.cs" />
+    <Compile Include="Migrations\20170119144611_DefaultUser.Designer.cs">
+      <DependentUpon>20170119144611_DefaultUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Forums\20170119180655_Forums.cs" />
+    <Compile Include="Migrations\Forums\20170119180655_Forums.Designer.cs">
+      <DependentUpon>20170119180655_Forums.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Forums\20170119225144_Order.cs" />
+    <Compile Include="Migrations\Forums\20170119225144_Order.Designer.cs">
+      <DependentUpon>20170119225144_Order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Forums\20170130000303_Bookmarks.cs" />
+    <Compile Include="Migrations\Forums\20170130000303_Bookmarks.Designer.cs">
+      <DependentUpon>20170130000303_Bookmarks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Forums\20170130003053_BookmarksOrder.cs" />
+    <Compile Include="Migrations\Forums\20170130003053_BookmarksOrder.Designer.cs">
+      <DependentUpon>20170130003053_BookmarksOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Forums\ForumsContextModelSnapshot.cs" />
+    <Compile Include="Migrations\UserAuthContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
