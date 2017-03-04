@@ -28,6 +28,8 @@ using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.UI.Notifications;
 using Windows.ApplicationModel.Background;
+using Newtonsoft.Json;
+using Mazui.Notifications;
 
 namespace Mazui
 {
@@ -101,10 +103,67 @@ namespace Mazui
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(330, 200));
             SetupBackgroundServices();
             SetTitleBarColor();
-            await NavigationService.NavigateAsync(typeof(Views.MainPage));
+			await SetupStartupLocation(startKind, args);
         }
 
-        private async void SetupBackgroundServices()
+		private async Task SetupStartupLocation(StartKind startKind, IActivatedEventArgs args)
+		{
+			try
+			{
+				if (startKind == StartKind.Activate)
+				{
+					if (args.Kind == ActivationKind.ToastNotification)
+						StartupFromToast(args);
+					if (args.Kind == ActivationKind.VoiceCommand)
+						StartupFromVoice(args);
+					if (args.Kind == ActivationKind.Protocol)
+						StartupFromProtocol(args);
+				}
+				else
+				{
+					await NavigationService.NavigateAsync(typeof(Views.MainPage));
+				}
+			}
+			catch (Exception)
+			{
+				// If all else fails, go to the main page.
+				await NavigationService.NavigateAsync(typeof(Views.MainPage));
+			}
+		}
+
+		private async void StartupFromToast(IActivatedEventArgs args)
+		{
+			var toastArgs = args as ToastNotificationActivatedEventArgs;
+			if (toastArgs == null)
+				return;
+			var arguments = JsonConvert.DeserializeObject<ToastNotificationArgs>(toastArgs.Argument);
+			await NavigationService.NavigateAsync(typeof(Views.BookmarkPage), arguments);
+		}
+
+		private async void StartupFromVoice(IActivatedEventArgs args)
+		{
+
+		}
+
+		private async void StartupFromProtocol(IActivatedEventArgs args)
+		{
+			var protoArgs = args as ProtocolActivatedEventArgs;
+			var arguments = JsonConvert.DeserializeObject<ToastNotificationArgs>(protoArgs.Uri.OriginalString.Replace("awful:", ""));
+			if (arguments != null && arguments.ThreadId > 0 && arguments.IsThreadBookmark)
+			{
+				await NavigationService.NavigateAsync(typeof(Views.BookmarkPage), arguments);
+			}
+			else if (arguments != null && arguments.ThreadId > 0 && !arguments.IsThreadBookmark)
+			{
+				await NavigationService.NavigateAsync(typeof(Views.ThreadPage), arguments);
+			}
+			else
+			{
+				await NavigationService.NavigateAsync(typeof(Views.MainPage));
+			}
+		}
+
+		private async void SetupBackgroundServices()
         {
 			IsIoT = ApiInformation.IsTypePresent("Windows.Devices.Gpio.GpioController");
 

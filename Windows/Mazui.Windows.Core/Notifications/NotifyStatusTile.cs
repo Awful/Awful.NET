@@ -81,10 +81,16 @@ namespace Mazui.Notifications
         public static void CreateToastNotification(Thread forumThread)
         {
             string replyText = forumThread.RepliesSinceLastOpened > 1 ? " has {0} replies." : " has {0} reply.";
-            string test = "{" + string.Format("type:'toast', 'threadId':{0}, 'pageNumber':{1}, 'isThreadBookmark':{2}", forumThread.ThreadId, forumThread.CurrentPage, forumThread.IsBookmark.ToString().ToLower()) + "}";
+			var notification = new ToastNotificationArgs()
+			{
+				Type = ToastType.Toast,
+				ThreadId = forumThread.ThreadId,
+				PageNumber = forumThread.CurrentPage,
+				IsThreadBookmark = forumThread.IsBookmark
+			};
             ToastContent content = new ToastContent()
             {
-                Launch = test,
+                Launch = JsonConvert.SerializeObject(notification),
                 Visual = new ToastVisual()
                 {
                     BindingGeneric = new ToastBindingGeneric()
@@ -116,11 +122,11 @@ namespace Mazui.Notifications
                 {
                     Buttons =
                     {
-                        new ToastButton("Open Thread", test)
+                        new ToastButton("Open Thread", JsonConvert.SerializeObject(notification))
                         {
                             ActivationType = ToastActivationType.Foreground
                         },
-                        new ToastButton("Sleep", "sleep")
+                        new ToastButton("Sleep", JsonConvert.SerializeObject(new ToastNotificationArgs() { Type = ToastType.Sleep }))
                         {
                             ActivationType = ToastActivationType.Background
                         }
@@ -157,9 +163,12 @@ namespace Mazui.Notifications
             }
             imageElement[0].Attributes[1].NodeValue = imageName;
             IXmlNode toastNode = notificationXml.SelectSingleNode("/toast");
-            string test = "{" + string.Format("type:'toast'") + "}";
-            var xmlElement = (XmlElement)toastNode;
-            xmlElement?.SetAttribute("launch", test);
+			var notification = new ToastNotificationArgs()
+			{
+				Type = ToastType.Ignore
+			};
+			var xmlElement = (XmlElement)toastNode;
+            xmlElement?.SetAttribute("launch", JsonConvert.SerializeObject(notification));
             var toastNotification = new ToastNotification(notificationXml)
             {
                 ExpirationTime = DateTimeOffset.UtcNow.AddSeconds(30)

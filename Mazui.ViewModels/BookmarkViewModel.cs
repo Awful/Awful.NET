@@ -1,6 +1,7 @@
 ﻿using Mazui.Core.Managers;
 using Mazui.Core.Models.Threads;
 using Mazui.Database.Functions;
+using Mazui.Notifications;
 using Mazui.Services;
 using Mazui.Tools;
 using Newtonsoft.Json;
@@ -60,12 +61,14 @@ namespace Mazui.ViewModels
                 }
             }
 
-            if (BookmarkedThreads != null && BookmarkedThreads.Any())
+			await LoadToast(parameter);
+
+			if (BookmarkedThreads != null && BookmarkedThreads.Any())
             {
                 return;
             }
 
-            await LoadInitialList();
+			await LoadInitialList();
         }
 
         public override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
@@ -87,6 +90,21 @@ namespace Mazui.ViewModels
             }
             return Task.CompletedTask;
         }
+
+		public async Task LoadToast(object parameter)
+		{
+			var toastArgs = parameter as ToastNotificationArgs;
+			if (toastArgs != null)
+			{
+				var thread = BookmarkedThreads.FirstOrDefault(node => node.ThreadId == toastArgs.ThreadId);
+				if (thread != null)
+				{
+					thread.CurrentPage = toastArgs.PageNumber;
+					Selected = thread;
+					await ThreadView.LoadThread(thread);
+				}
+			}
+		}
 
         public async Task LoadInitialList()
         {

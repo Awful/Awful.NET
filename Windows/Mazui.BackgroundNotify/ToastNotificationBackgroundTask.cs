@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Mazui.Notifications;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +21,15 @@ namespace Mazui.BackgroundNotify
 
 			var details = taskInstance.TriggerDetails as ToastNotificationActionTriggerDetail;
 			var arguments = details?.Argument;
-			if (arguments == "sleep")
+			if (arguments != null)
 			{
-				_helper.Write("BookmarkNotifications", false);
+				var args = JsonConvert.DeserializeObject<ToastNotificationArgs>(arguments);
+				if (args.Type == ToastType.Sleep)
+				{
+					_helper.Write("BookmarkNotifications", false);
+				}
 			}
+			
 			deferral.Complete();
 		}
 	}
