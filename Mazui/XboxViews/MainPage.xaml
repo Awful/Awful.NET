@@ -154,9 +154,6 @@
                                 </GroupStyle.HeaderTemplate>
                             </GroupStyle>
                         </listControls:AdaptiveGridView.GroupStyle>
-                        <uwp:PullToRefreshAdorner.Extender>
-                            <uwp:PullToRefreshExtender RefreshRequested="PullToRefreshExtender_RefreshRequested" />
-                        </uwp:PullToRefreshAdorner.Extender>
                     </listControls:AdaptiveGridView>
                 </SemanticZoom.ZoomedInView>
             </SemanticZoom>
