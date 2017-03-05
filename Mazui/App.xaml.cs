@@ -105,6 +105,11 @@ namespace Mazui
                 Windows.UI.ViewManagement.StatusBar.GetForCurrentView().BackgroundOpacity = 1;
                 Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Colors.White;
             }
+
+			if (IsTenFoot)
+			{
+				Application.Current.Resources["SystemControlHighlightAccentBrush"] = Colors.Black;
+			}
         }
 
         public override void OnResuming(object s, object e, AppExecutionState previousExecutionState)
@@ -279,7 +284,7 @@ namespace Mazui
 		#endregion
 
 		#region Xbox
-		public static bool IsTenFootPC { get; private set; } = false;
+		public static bool IsTenFootPC { get; private set; } = true;
 
         public static bool IsTenFoot
         {
