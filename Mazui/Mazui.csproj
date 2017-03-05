@@ -180,11 +180,17 @@
     <Compile Include="Controls\PrivateMessageView.xaml.cs">
       <DependentUpon>PrivateMessageView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SmiliesXboxView.xaml.cs">
+      <DependentUpon>SmiliesXboxView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SmiliesView.xaml.cs">
       <DependentUpon>SmiliesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ThreadView.xaml.cs">
       <DependentUpon>ThreadView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\XboxPrivateMessageView.xaml.cs">
+      <DependentUpon>XboxPrivateMessageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\XboxThreadView.xaml.cs">
       <DependentUpon>XboxThreadView.xaml</DependentUpon>
@@ -273,11 +279,26 @@
     <Compile Include="XboxViews\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XboxViews\NewPrivateMessagePage.xaml.cs">
+      <DependentUpon>NewPrivateMessagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="XboxViews\NewThreadPage.xaml.cs">
+      <DependentUpon>NewThreadPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XboxViews\PrivateMessageListPage.xaml.cs">
       <DependentUpon>PrivateMessageListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XboxViews\ReplyPage.xaml.cs">
+      <DependentUpon>ReplyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="XboxViews\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XboxViews\ThreadListPage.xaml.cs">
       <DependentUpon>ThreadListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="XboxViews\ThreadPage.xaml.cs">
+      <DependentUpon>ThreadPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -962,11 +983,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\SmiliesXboxView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\SmiliesView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ThreadView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\XboxPrivateMessageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1066,11 +1095,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="XboxViews\NewPrivateMessagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="XboxViews\NewThreadPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="XboxViews\PrivateMessageListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="XboxViews\ReplyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="XboxViews\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="XboxViews\ThreadListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="XboxViews\ThreadPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

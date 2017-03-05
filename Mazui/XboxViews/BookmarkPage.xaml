@@ -29,12 +29,17 @@
 
         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="25" Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="10"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="10"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+            <Template10Controls:PageHeader  Background="Black" Foreground="White" BackButtonVisibility="Collapsed" VisualStateNormalMinWidth="720" HorizontalAlignment="Stretch" Text="Bookmarks" Frame="{x:Bind Frame}">
+                <interactivity:Interaction.Behaviors>
+                    <behaviors:EllipsisBehavior Visibility="Collapsed" />
+                </interactivity:Interaction.Behaviors>
+            </Template10Controls:PageHeader>
             <CommandBar Background="Black" tools:CommandBarExtensions.HideMoreButton="True" x:Name="ForumCommandBar" Grid.Row="1">
                 <AppBarButton Label="Refresh" Click="{x:Bind ViewModel.Refresh}" Icon="Refresh"/>
             </CommandBar>
@@ -103,9 +108,6 @@
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-                <uwp:PullToRefreshAdorner.Extender>
-                    <uwp:PullToRefreshExtender RefreshRequested="PullToRefreshExtender_RefreshRequested" />
-                </uwp:PullToRefreshAdorner.Extender>
             </ListView>
         </Grid>
 

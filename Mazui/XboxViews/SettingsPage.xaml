@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Mazui.Views.SettingsPage"
+    x:Class="Mazui.XboxViews.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Mazui.Views"
@@ -7,30 +7,21 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ViewModels="using:Mazui.ViewModels"
     xmlns:Controls="using:Template10.Controls"
-    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+        xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:Template10.Behaviors"
     mc:Ignorable="d">
-    <Page.Transitions>
-        <TransitionCollection>
-            <NavigationThemeTransition>
-                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                    <SuppressNavigationTransitionInfo/>
-                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-            </NavigationThemeTransition>
-        </TransitionCollection>
-    </Page.Transitions>
     <Page.DataContext>
         <ViewModels:SettingsPageViewModel />
     </Page.DataContext>
 
-    <Grid Background="{ThemeResource MainPageBackground}">
+    <Grid Margin="50" Background="{ThemeResource MainPageBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
         <!--  header  -->
-        <Controls:PageHeader BackButtonVisibility="Collapsed" Background="{ThemeResource SystemAccentColor}" Foreground="White" Content="Settings" Frame="{x:Bind Frame}">
+        <Controls:PageHeader BackButtonVisibility="Collapsed" Background="Black" Foreground="White" Content="Settings" Frame="{x:Bind Frame}">
             <interactivity:Interaction.Behaviors>
                 <behaviors:EllipsisBehavior Visibility="Collapsed" />
             </interactivity:Interaction.Behaviors>
@@ -39,28 +30,6 @@
         <!--  #region content  -->
 
         <Pivot x:Name="MyPivot" Grid.Row="1">
-            <PivotItem Header="App" DataContext="{Binding SettingsPartViewModel}">
-                <ScrollViewer Margin="0,12,-12,0" HorizontalContentAlignment="Left" VerticalScrollBarVisibility="Auto">
-                    <RelativePanel HorizontalAlignment="Left">
-                        <ToggleSwitch x:Name="UseDarkThemeToggleSwitch"  Header="Use Light Theme"
-                                      IsOn="{Binding UseDarkThemeButton, Mode=TwoWay}"
-                                      OffContent="Light Theme" OnContent="Dark Theme" />
-                        <TextBlock Margin="0,0,0,20" x:Name="ThemeSwitchText" RelativePanel.Below="UseDarkThemeToggleSwitch" TextWrapping="Wrap">If you change the theme, you must restart the app to fully see the changes.</TextBlock>
-                        <ToggleSwitch x:Name="UseBackgroundTask" RelativePanel.Below="ThemeSwitchText"  Header="Enable Background Tasks"
-                                      IsOn="{Binding UseBackgroundTask, Mode=TwoWay}"
-                                      OffContent="Off" OnContent="On" />
-                        <TextBlock Margin="0,0,0,20" x:Name="BackgroundSwitchText" RelativePanel.Below="UseBackgroundTask" TextWrapping="Wrap">Enables background Tasks to be used.</TextBlock>
-                        <ToggleSwitch x:Name="UseBookmarkBackground" RelativePanel.Below="BackgroundSwitchText" Header="Enable Bookmark Live Tiles"
-                                      IsOn="{Binding UseBackgroundBookmarkLiveTile, Mode=TwoWay}"
-                                      OffContent="Off" OnContent="On" />
-                        <TextBlock Margin="0,0,0,20" x:Name="BookmarkBackgroundSwitchText" RelativePanel.Below="UseBookmarkBackground" TextWrapping="Wrap">Enables updated bookmarks to appear on your Awful live tile.</TextBlock>
-                        <ToggleSwitch x:Name="UseBookmarkNotification" RelativePanel.Below="BookmarkBackgroundSwitchText" Header="Enable Bookmark Notifications"
-                                      IsOn="{Binding UseBookmarkBackgroundNotify, Mode=TwoWay}"
-                                      OffContent="Off" OnContent="On" />
-                        <TextBlock Margin="0,0,0,20" x:Name="BookmarkNotificationSwitchText" RelativePanel.Below="UseBookmarkNotification" TextWrapping="Wrap">Enables selected bookmarks to appear as toast notifications in your action center when they are updated.</TextBlock>
-                    </RelativePanel>
-                </ScrollViewer>
-            </PivotItem>
             <PivotItem Header="Thread" DataContext="{Binding SettingsPartViewModel}">
                 <ScrollViewer Margin="0,12,-12,0" HorizontalContentAlignment="Left" VerticalScrollBarVisibility="Auto">
                     <RelativePanel HorizontalAlignment="Left">

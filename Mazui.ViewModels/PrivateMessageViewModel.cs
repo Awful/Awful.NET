@@ -73,8 +73,16 @@ namespace Mazui.ViewModels
 
         public void Reply()
         {
-            Template10.Common.BootStrapper.Current.NavigationService.Navigate(typeof(NewPrivateMessagePage),
-                JsonConvert.SerializeObject(Selected));
+            if (App.IsTenFoot)
+			{
+				Template10.Common.BootStrapper.Current.NavigationService.Navigate(typeof(XboxViews.NewPrivateMessagePage),
+				JsonConvert.SerializeObject(Selected));
+			}
+			else
+			{
+				Template10.Common.BootStrapper.Current.NavigationService.Navigate(typeof(NewPrivateMessagePage),
+				JsonConvert.SerializeObject(Selected));
+			}
         }
     }
 }

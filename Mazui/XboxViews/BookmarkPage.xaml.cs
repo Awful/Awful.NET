@@ -26,6 +26,8 @@ namespace Mazui.XboxViews
 		public BookmarkPage()
 		{
 			this.InitializeComponent();
+			NavigationCacheMode = NavigationCacheMode.Enabled;
+			ViewModel.XboxThreadView = ThreadPageView;
 		}
 
 		private async void AdaptiveGridView_ItemClick(object sender, ItemClickEventArgs e)

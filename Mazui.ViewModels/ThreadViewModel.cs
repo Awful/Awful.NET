@@ -141,18 +141,24 @@ namespace Mazui.ViewModels
 
         public void ReplyToThread()
         {
-            Template10.Common.BootStrapper.Current.NavigationService.Navigate(typeof(ReplyPage),
-                JsonConvert.SerializeObject(new ThreadReply()
-                {
-                    Thread = new Thread()
-                    {
-                        ForumId = Selected.ForumId,
-                        ThreadId = Selected.ThreadId,
-                        Name = Selected.Name,
-                        CurrentPage = Selected.CurrentPage,
-                        TotalPages = Selected.TotalPages
-                    }
-                }));
+			var reply = JsonConvert.SerializeObject(new ThreadReply()
+			{
+				Thread = new Thread()
+				{
+					ForumId = Selected.ForumId,
+					ThreadId = Selected.ThreadId,
+					Name = Selected.Name,
+					CurrentPage = Selected.CurrentPage,
+					TotalPages = Selected.TotalPages
+				}
+			});
+			if (App.IsTenFoot)
+			{
+				Template10.Common.BootStrapper.Current.NavigationService.Navigate(typeof(XboxViews.ReplyPage), reply);
+			} else
+			{
+				Template10.Common.BootStrapper.Current.NavigationService.Navigate(typeof(ReplyPage), reply);
+			}
         }
 
         public async Task AddRemoveBookmarkView()

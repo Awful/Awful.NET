@@ -32,7 +32,7 @@ namespace Mazui.XboxViews
 		private void MainForumListFull_OnItemClick(object sender, ItemClickEventArgs e)
 		{
 			var forum = e.ClickedItem as Forum;
-			//ViewModel.NavigateToThreadList(forum);
+			ViewModel.NavigateToXboxThreadList(forum);
 		}
 
 		protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -83,11 +83,11 @@ namespace Mazui.XboxViews
 					}
 					else
 					{
-
+						ViewModel.NavigateToPMList();
 					}
 					break;
 				case "Settings":
-
+						ViewModel.NavigateToXboxSettings();
 					break;
 				default:
 					return;

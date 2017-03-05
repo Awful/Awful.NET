@@ -57,8 +57,11 @@ namespace Mazui.ViewModels
             {
                 await LoginUser();
             }
-            Template10.Common.BootStrapper.Current.NavigationService.FrameFacade.BackRequested += MasterDetailViewControl.NavigationManager_BackRequested;
-            SuspendRecover(parameter, suspensionState);
+			if (!App.IsTenFoot)
+			{
+				Template10.Common.BootStrapper.Current.NavigationService.FrameFacade.BackRequested += MasterDetailViewControl.NavigationManager_BackRequested;
+			}
+			SuspendRecover(parameter, suspensionState);
 
             // If we're recovering from suspension, but the view model has not been cleared.
             // Keep the state we currently have. Everything is already populated.
@@ -90,8 +93,9 @@ namespace Mazui.ViewModels
             }
             else
             {
-                Template10.Common.BootStrapper.Current.NavigationService.FrameFacade.BackRequested -= MasterDetailViewControl.NavigationManager_BackRequested;
-            }
+				if (!App.IsTenFoot)
+					Template10.Common.BootStrapper.Current.NavigationService.FrameFacade.BackRequested -= MasterDetailViewControl.NavigationManager_BackRequested;
+			}
 
             return Task.CompletedTask;
         }
@@ -130,7 +134,17 @@ namespace Mazui.ViewModels
 
         public void CreateThread()
         {
-            if(this.IsLoggedIn) NavigationService.Navigate(typeof(NewThreadPage), JsonConvert.SerializeObject(Forum));
+			if (this.IsLoggedIn)
+			{
+				if (App.IsTenFoot)
+				{
+					NavigationService.Navigate(typeof(XboxViews.NewThreadPage), JsonConvert.SerializeObject(Forum));
+				}
+				else
+				{
+					NavigationService.Navigate(typeof(NewThreadPage), JsonConvert.SerializeObject(Forum));
+				}
+			}
         }
         #endregion
     }

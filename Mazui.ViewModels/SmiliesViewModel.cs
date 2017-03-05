@@ -20,7 +20,9 @@ namespace Mazui.ViewModels
     {
         public SmiliesView SmiliesView { get; set; }
 
-        private ObservableCollection<SmileCategory> _smileCategoryList = new ObservableCollection<SmileCategory>();
+		public SmiliesXboxView SmiliesXboxView { get; set; }
+
+		private ObservableCollection<SmileCategory> _smileCategoryList = new ObservableCollection<SmileCategory>();
 
         public ObservableCollection<SmileCategory> SmileCategoryList
         {
@@ -68,8 +70,9 @@ namespace Mazui.ViewModels
                 IsLoading = false;
             }
 
-            SmiliesView.Init();
-        }
+            if (SmiliesView != null) SmiliesView.Init();
+			if (SmiliesXboxView != null) SmiliesXboxView.Init();
+		}
 
         public void SelectIcon(object sender, ItemClickEventArgs e)
         {
@@ -79,11 +82,23 @@ namespace Mazui.ViewModels
             IsOpen = false;
 
             // If we're in a flyout, close after it's done.
-            var fb = SmiliesView.Parent as FlyoutPresenter;
-            if (fb == null) return;
-            var test = fb.Parent as Popup;
-            if (test == null) return;
-            test.IsOpen = false;
+            if (SmiliesView != null)
+			{
+				var fb = SmiliesView.Parent as FlyoutPresenter;
+				if (fb == null) return;
+				var test = fb.Parent as Popup;
+				if (test == null) return;
+				test.IsOpen = false;
+			}
+
+			if (SmiliesXboxView != null)
+			{
+				var fb = SmiliesXboxView.Parent as FlyoutPresenter;
+				if (fb == null) return;
+				var test = fb.Parent as Popup;
+				if (test == null) return;
+				test.IsOpen = false;
+			}
         }
 
         public void SmiliesFilterOnSuggestedQuery(SearchBox sender, SearchBoxSuggestionsRequestedEventArgs args)

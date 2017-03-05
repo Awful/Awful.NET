@@ -8,6 +8,9 @@
     mc:Ignorable="d"
     xmlns:viewModels="using:Mazui.ViewModels"
     xmlns:controls="using:Template10.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:behaviors="using:Template10.Behaviors"
     xmlns:threads="using:Mazui.Tools.Threads"
     xmlns:uwp="using:FontAwesome.UWP"
     xmlns:tools="using:Mazui.Tools"
@@ -26,8 +29,11 @@
             </Grid.RowDefinitions>
 
             <controls:PageHeader x:Name="ThreadPageHeader" BackButtonVisibility="Collapsed" VisualStateNormalMinWidth="720" HorizontalAlignment="Stretch" Background="Black" Foreground="White" Text="{Binding Selected.Name}">
+                <interactivity:Interaction.Behaviors>
+                    <behaviors:EllipsisBehavior Visibility="Collapsed" />
+                </interactivity:Interaction.Behaviors>
             </controls:PageHeader>
-            <CommandBar x:Name="ForumCommandBar" tools:CommandBarExtensions.HideMoreButton="True"  Background="Black" Grid.Row="1">
+            <CommandBar x:Name="ForumCommandBar" Background="Black" Grid.Row="3">
                 <AppBarButton Label="First Page" IsEnabled="{Binding Selected.CurrentPage, Converter={StaticResource BackButtonEnableConverter}}" Click="{x:Bind ViewModel.FirstThreadPage}">
                     <AppBarButton.Icon>
                         <uwp:FontAwesome Icon="FastBackward" HorizontalAlignment="Center" />

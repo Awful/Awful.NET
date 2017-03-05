@@ -34,13 +34,16 @@ namespace Mazui.Core.Managers
             {
                 {new StringContent("dosend"), "action"},
                 {new StringContent(newPrivateMessageEntity.Receiver), "touser"},
-                {new StringContent(newPrivateMessageEntity.Icon.Id.ToString(CultureInfo.InvariantCulture)), "iconid"},
                 {new StringContent(Extensions.HtmlEncode(newPrivateMessageEntity.Title)), "title"},
                 {new StringContent(Extensions.HtmlEncode(newPrivateMessageEntity.Body)), "message"},
                 {new StringContent("yes"), "parseurl"},
                 {new StringContent("yes"), "parseurl"},
                 {new StringContent("Send Message"), "submit"}
             };
+				if (newPrivateMessageEntity.Icon != null)
+				{
+					form.Add(new StringContent(newPrivateMessageEntity.Icon.Id.ToString(CultureInfo.InvariantCulture)), "iconid");
+				}
             }
             catch (Exception ex)
             {

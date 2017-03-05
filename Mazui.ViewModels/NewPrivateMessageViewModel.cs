@@ -80,7 +80,6 @@ namespace Mazui.ViewModels
         {
             IsLoading = true;
             if (string.IsNullOrEmpty(ReplyBox.Text) || _newPrivateMessage == null) return;
-            if (PostIconViewModel.PostIcon == null) return;
             IsLoading = true;
             Result result = new Result();
             try

@@ -24,8 +24,9 @@ namespace Mazui.ViewModels
     public class ForumThreadListBaseViewModel : MazuiViewModel
     {
         public ThreadView ThreadView { get; set; }
+		public XboxThreadView XboxThreadView { get; set; }
 
-        public MasterDetailViewControl MasterDetailViewControl { get; set; }
+		public MasterDetailViewControl MasterDetailViewControl { get; set; }
 
         private Thread _selected = default(Thread);
 

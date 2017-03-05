@@ -105,7 +105,14 @@ namespace Mazui.ViewModels
 
         public void CreateNewPm()
         {
-            Template10.Common.BootStrapper.Current.NavigationService.Navigate(typeof(NewPrivateMessagePage), JsonConvert.SerializeObject(new NewPrivateMessage()));
+            if (App.IsTenFoot)
+			{
+				Template10.Common.BootStrapper.Current.NavigationService.Navigate(typeof(XboxViews.NewPrivateMessagePage), JsonConvert.SerializeObject(new NewPrivateMessage()));
+			}
+			else
+			{
+				Template10.Common.BootStrapper.Current.NavigationService.Navigate(typeof(NewPrivateMessagePage), JsonConvert.SerializeObject(new NewPrivateMessage()));
+			}
         }
     }
 }

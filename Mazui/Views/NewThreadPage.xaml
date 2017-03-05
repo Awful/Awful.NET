@@ -31,7 +31,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <controls:PageHeader BackButtonVisibility="Collapsed" VisualStateNormalMinWidth="720" HorizontalAlignment="Stretch" Content="{Binding Title, Mode=OneWay}" Frame="{x:Bind Frame}">
+        <controls:PageHeader Background="{ThemeResource SystemAccentColor}" BackButtonVisibility="Collapsed" VisualStateNormalMinWidth="720" HorizontalAlignment="Stretch" Content="{Binding Title, Mode=OneWay}" Frame="{x:Bind Frame}">
         </controls:PageHeader>
         <CommandBar Grid.Row="1">
             <AppBarButton x:Name="PostIconButton" Click="{x:Bind ViewModel.OpenPostIconView}" flyout:FlyoutHelper.IsOpen="{x:Bind ViewModel.PostIconViewModel.IsOpen, Mode=OneWay}"
