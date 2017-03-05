@@ -284,7 +284,7 @@ namespace Mazui
 		#endregion
 
 		#region Xbox
-		public static bool IsTenFootPC { get; private set; } = true;
+		public static bool IsTenFootPC { get; private set; } = false;
 
         public static bool IsTenFoot
         {
