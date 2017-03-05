@@ -162,7 +162,7 @@ namespace Mazui.VoiceCommands
 			var newPms = privateMessages.Where(
 				node =>
 					!string.IsNullOrEmpty(node.Status) &&
-					node.Status == "http://fi.somethingawful.com/images/newpm.gif");
+					node.Status.Contains("newpm.gif"));
 			if (!newPms.Any())
 			{
 				var userMessage = new VoiceCommandUserMessage();
