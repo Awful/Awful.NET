@@ -89,6 +89,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="MazuiCommands.xml" />
     <None Include="Assets\ThreadTags\README.md" />
     <None Include="Assets\Website\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Assets\awful_logo_144dp.png" />
@@ -1053,6 +1054,10 @@
     <ProjectReference Include="..\Windows\Mazui.Windows.Core\Mazui.Windows.Core.csproj">
       <Project>{1e407387-75d5-4bd4-beca-19a93f7c4a0f}</Project>
       <Name>Mazui.Windows.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Windows\MazuiVoiceService\MazuiVoiceService.csproj">
+      <Project>{5ace15f7-8c81-4294-b637-7f5d774d5ea2}</Project>
+      <Name>MazuiVoiceService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\Mazui.ViewModels\Mazui.ViewModels.projitems" Label="Shared" />

@@ -30,6 +30,8 @@ using Windows.UI.Notifications;
 using Windows.ApplicationModel.Background;
 using Newtonsoft.Json;
 using Mazui.Notifications;
+using Windows.Storage;
+using Windows.Media.SpeechRecognition;
 
 namespace Mazui
 {
@@ -98,7 +100,12 @@ namespace Mazui
             SetTitleBarColor();
         }
 
-        public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
+		public override async Task OnInitializeAsync(IActivatedEventArgs args)
+		{
+			await InstallVoiceCommands();
+		}
+
+		public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(330, 200));
             SetupBackgroundServices();
@@ -131,6 +138,22 @@ namespace Mazui
 			}
 		}
 
+		private async Task InstallVoiceCommands()
+		{
+			try
+			{
+				// Install the main VCD. Since there's no simple way to test that the VCD has been imported, or that it's your most recent
+				// version, it's not unreasonable to do this upon app load.
+				StorageFile vcdStorageFile = await Package.Current.InstalledLocation.GetFileAsync(@"MazuiCommands.xml");
+
+				await Windows.ApplicationModel.VoiceCommands.VoiceCommandDefinitionManager.InstallCommandDefinitionsFromStorageFileAsync(vcdStorageFile);
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine("Installing Voice Commands Failed: " + ex.ToString());
+			}
+		}
+
 		private async void StartupFromToast(IActivatedEventArgs args)
 		{
 			var toastArgs = args as ToastNotificationActivatedEventArgs;
@@ -140,9 +163,49 @@ namespace Mazui
 			await NavigationService.NavigateAsync(typeof(Views.BookmarkPage), arguments);
 		}
 
-		private async void StartupFromVoice(IActivatedEventArgs args)
+		private async Task StartupFromVoice(IActivatedEventArgs args)
 		{
+			var commandArgs = args as VoiceCommandActivatedEventArgs;
+			await HandleVoiceRequest(commandArgs);
+		}
 
+		private string SemanticInterpretation(string interpretationKey, SpeechRecognitionResult speechRecognitionResult)
+		{
+			return speechRecognitionResult.SemanticInterpretation.Properties[interpretationKey].FirstOrDefault();
+		}
+
+		private async Task HandleVoiceRequest(VoiceCommandActivatedEventArgs commandArgs)
+		{
+			SpeechRecognitionResult speechRecognitionResult = commandArgs.Result;
+
+			// Get the name of the voice command and the text spoken. See AdventureWorksCommands.xml for
+			// the <Command> tags this can be filled with.
+			string voiceCommandName = speechRecognitionResult.RulePath[0];
+			string textSpoken = speechRecognitionResult.Text;
+
+			// The commandMode is either "voice" or "text", and it indictes how the voice command
+			// was entered by the user.
+			// Apps should respect "text" mode by providing feedback in silent form.
+			string commandMode = this.SemanticInterpretation("commandMode", speechRecognitionResult);
+
+
+
+			switch (voiceCommandName)
+			{
+				case "openBookmarks":
+					await NavigationService.NavigateAsync(typeof(Views.BookmarkPage));
+					break;
+				case "openPrivateMessages":
+					await NavigationService.NavigateAsync(typeof(Views.PrivateMessageListPage));
+					break;
+				case "lowtaxIsAJerk":
+					// TODO: Maybe fix this? Not like anyone would care.
+					await NavigationService.NavigateAsync(typeof(Views.BookmarkPage));
+					break;
+				default:
+					await NavigationService.NavigateAsync(typeof(Views.MainPage));
+					break;
+			}
 		}
 
 		private async void StartupFromProtocol(IActivatedEventArgs args)

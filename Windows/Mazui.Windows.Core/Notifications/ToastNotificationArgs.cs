@@ -23,6 +23,8 @@ namespace Mazui.Notifications
 		public bool OpenBookmarks { get; set; }
 
 		public bool OpenForum { get; set; }
+
+		public bool IsLoggedIn { get; set; } = true;
 	}
 
 	public enum ToastType
