@@ -84,8 +84,12 @@ namespace Mazui.ViewModels
 		{
 			NavigationService.Navigate(typeof(XboxViews.LoginPage));
 		}
+		public void NavigateToXboxBookmarks()
+		{
+			NavigationService.Navigate(typeof(XboxViews.BookmarkPage));
+		}
 
-        private async Task GetMainPageForumsAsync(bool forceRefresh = false)
+		private async Task GetMainPageForumsAsync(bool forceRefresh = false)
         {
             var forumCategoryEntities = ForumsDatabase.GetMainForumCategories();
             if (forumCategoryEntities.Any() && !forceRefresh) { AddForumCategoryToPage(forumCategoryEntities); return; }

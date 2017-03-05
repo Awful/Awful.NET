@@ -261,11 +261,20 @@
     <Compile Include="Views\ThreadPage.xaml.cs">
       <DependentUpon>ThreadPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XboxViews\BookmarkPage.xaml.cs">
+      <DependentUpon>BookmarkPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XboxViews\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="XboxViews\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="XboxViews\PrivateMessageListPage.xaml.cs">
+      <DependentUpon>PrivateMessageListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="XboxViews\ThreadListPage.xaml.cs">
+      <DependentUpon>ThreadListPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -1038,11 +1047,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="XboxViews\BookmarkPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="XboxViews\LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="XboxViews\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="XboxViews\PrivateMessageListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="XboxViews\ThreadListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

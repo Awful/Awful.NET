@@ -47,7 +47,10 @@ namespace Mazui.ViewModels
             {
                 await LoginUser();
             }
-            Template10.Common.BootStrapper.Current.NavigationService.FrameFacade.BackRequested += MasterDetailViewControl.NavigationManager_BackRequested;
+            if (!App.IsTenFoot)
+			{
+				Template10.Common.BootStrapper.Current.NavigationService.FrameFacade.BackRequested += MasterDetailViewControl.NavigationManager_BackRequested;
+			}
             _threadManager = new ThreadManager(WebManager);
 
             if (suspensionState.ContainsKey(nameof(Selected)))
@@ -86,7 +89,8 @@ namespace Mazui.ViewModels
             }
             else
             {
-                Template10.Common.BootStrapper.Current.NavigationService.FrameFacade.BackRequested -= MasterDetailViewControl.NavigationManager_BackRequested;
+				if (!App.IsTenFoot)
+					Template10.Common.BootStrapper.Current.NavigationService.FrameFacade.BackRequested -= MasterDetailViewControl.NavigationManager_BackRequested;
             }
             return Task.CompletedTask;
         }

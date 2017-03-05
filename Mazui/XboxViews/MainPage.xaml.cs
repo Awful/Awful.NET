@@ -71,12 +71,19 @@ namespace Mazui.XboxViews
 					if (!ViewModel.IsLoggedIn)
 					{
 						ViewModel.NavigateToXboxLogin();
+					} else
+					{
+						ViewModel.NavigateToXboxBookmarks();
 					}
 					break;
 				case "Private Messages":
 					if (!ViewModel.IsLoggedIn)
 					{
 						ViewModel.NavigateToXboxLogin();
+					}
+					else
+					{
+
 					}
 					break;
 				case "Settings":

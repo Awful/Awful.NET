@@ -38,12 +38,6 @@
             <Grid Grid.Row="2">
                 <StackPanel Margin="0,25,0,0" Width="300">
                     <TextBox x:Name="Username" IsSpellCheckEnabled="False" Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Username" Margin="0,0,0,15">
-                        <interactivity:Interaction.Behaviors>
-                            <!--  focus on textbox when page loads  -->
-                            <core:EventTriggerBehavior>
-                                <behaviors:FocusAction />
-                            </core:EventTriggerBehavior>
-                        </interactivity:Interaction.Behaviors>
                     </TextBox>
                     <PasswordBox PasswordRevealMode="Peek" x:Name="Password" Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Password" Margin="0,0,0,15">
                     </PasswordBox>
