@@ -29,13 +29,10 @@ namespace Mazui.ViewModels
         private Category _favoritesEntity;
         private WebManager _webManager;
         private ForumManager _forumManager;
+		#endregion
+		#region Methods
 
-        private UserAuth _user = Views.Shell.Instance.ViewModel.User;
-        private bool _isLoggedIn = Views.Shell.Instance.ViewModel.IsLoggedIn;
-        #endregion
-        #region Methods
-
-        public async Task Init()
+		public async Task Init()
         {
             try
             {

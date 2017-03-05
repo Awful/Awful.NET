@@ -63,17 +63,30 @@ namespace Mazui
             }
             #endregion
 
-            RequestedTheme = _settingsService.AppTheme;
+            RequestedTheme = IsTenFoot ? ApplicationTheme.Dark : _settingsService.AppTheme;
         }
 
-        public override UIElement CreateRootElement(IActivatedEventArgs e)
+		public override UIElement CreateRootElement(IActivatedEventArgs e)
         {
-            var service = NavigationServiceFactory(BackButton.Attach, ExistingContent.Include);
-            return new ModalDialog()
-            {
-                ModalContent = new Views.Busy(),
-                Content = new Views.Shell(service)
-            };
+            if (!IsTenFoot)
+			{
+				var service = NavigationServiceFactory(BackButton.Attach, ExistingContent.Include);
+				return new ModalDialog()
+				{
+					ModalContent = new Views.Busy(),
+					Content = new Views.Shell(service)
+				};
+			}
+			else
+			{
+				var navigationFrame = new Frame();
+				var navigationService = NavigationServiceFactory(BackButton.Attach, ExistingContent.Include, navigationFrame);
+				return new ModalDialog
+				{
+					DisableBackButtonWhenModal = true,
+					Content = navigationFrame
+				};
+			}
         }
 
         public void SetTitleBarColor()
@@ -108,13 +121,24 @@ namespace Mazui
 		public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(330, 200));
-            SetupBackgroundServices();
+			if (IsTenFoot)
+			{
+				// Turn off overscan. We'll be handling it.
+				var AppView = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView();
+				AppView.SetDesiredBoundsMode(Windows.UI.ViewManagement.ApplicationViewBoundsMode.UseCoreWindow);
+			}
+			SetupBackgroundServices();
             SetTitleBarColor();
 			await SetupStartupLocation(startKind, args);
         }
 
 		private async Task SetupStartupLocation(StartKind startKind, IActivatedEventArgs args)
 		{
+			if (IsTenFoot)
+			{
+				await NavigationService.NavigateAsync(typeof(XboxViews.MainPage));
+				return;
+			}
 			try
 			{
 				if (startKind == StartKind.Activate)
@@ -122,7 +146,7 @@ namespace Mazui
 					if (args.Kind == ActivationKind.ToastNotification)
 						StartupFromToast(args);
 					if (args.Kind == ActivationKind.VoiceCommand)
-						StartupFromVoice(args);
+						await StartupFromVoice(args);
 					if (args.Kind == ActivationKind.Protocol)
 						StartupFromProtocol(args);
 				}
