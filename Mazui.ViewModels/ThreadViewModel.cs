@@ -14,7 +14,6 @@ using Template10.Services.NavigationService;
 using System.Linq;
 using Mazui.WebTemplate.Legacy;
 using Mazui.Services;
-using HtmlAgilityPack;
 using System.IO;
 using Mazui.Core.Tools;
 
@@ -183,26 +182,8 @@ namespace Mazui.ViewModels
             var html = threadTemplate.GenerateString();
             if (!SettingsService.Instance.AutoplayGif)
             {
-                var doc2 = new HtmlDocument();
-                doc2.LoadHtml(html);
-                HtmlNode bodyNode = doc2.DocumentNode.Descendants("body").FirstOrDefault();
-                var images = bodyNode.Descendants("img").Where(node => node.GetAttributeValue("class", string.Empty) != "av");
-                foreach (var image in images)
-                {
-                    var src = image.Attributes["src"].Value;
-                    if (Path.GetExtension(src) != ".gif")
-                        continue;
-                    if (src.Contains("somethingawful.com"))
-                        continue;
-                    if (src.Contains("emoticons"))
-                        continue;
-                    if (src.Contains("smilies"))
-                        continue;
-                    image.Attributes.Add("data-gifffer", image.Attributes["src"].Value);
-                    image.Attributes.Remove("src");
-                }
-                html = doc2.DocumentNode.OuterHtml;
-            }
+				html = Mazui.Core.Tools.Extensions.RemoveAutoplayGif(html);
+			}
             Selected.Html = html;
             var count = postresult.Posts.Count(node => !node.HasSeen);
             if (Selected.RepliesSinceLastOpened > 0)

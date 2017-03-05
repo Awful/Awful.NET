@@ -2,7 +2,6 @@
   "dependencies": {
     "AmazingPullToRefresh": "0.9.0",
     "FontAwesome.UWP": "4.7.0.9",
-    "HtmlAgilityPack": "1.4.9.5",
     "Imgur.API": "4.0.1",
     "Microsoft.EntityFrameworkCore.Sqlite": "1.1.0",
     "Microsoft.EntityFrameworkCore.Tools": "1.1.0-preview4-final",
