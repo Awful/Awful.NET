@@ -33,9 +33,9 @@ namespace Mazui.XboxViews
 			var thread = e.ClickedItem as Thread;
 			if (thread == null)
 				return;
-			//ViewModel.Selected = thread;
-			//await ThreadPageView.LoadThread(thread);
-			//ViewModel.IsThreadSelectedAndLoaded = true;
+			ViewModel.Selected = thread;
+			await ThreadPageView.LoadThread(thread);
+			ViewModel.IsThreadSelectedAndLoaded = true;
 		}
 
 		private async void GoToLastPage(object sender, RoutedEventArgs e)
@@ -44,9 +44,9 @@ namespace Mazui.XboxViews
 			var thread = imageSource?.CommandParameter as Thread;
 			if (thread == null)
 				return;
-			//ViewModel.Selected = thread;
-			//await ThreadPageView.LoadThread(thread, false, true);
-			//ViewModel.IsThreadSelectedAndLoaded = true;
+			ViewModel.Selected = thread;
+			await ThreadPageView.LoadThread(thread, false, true);
+			ViewModel.IsThreadSelectedAndLoaded = true;
 		}
 		private async void AddRemoveBookmark(object sender, RoutedEventArgs e)
 		{

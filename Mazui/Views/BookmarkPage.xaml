@@ -41,6 +41,9 @@
             <RowDefinition Height="Auto"/>
           </Grid.RowDefinitions>
           <Template10Controls:PageHeader  Background="{ThemeResource SystemAccentColor}" Foreground="White" BackButtonVisibility="Collapsed" VisualStateNormalMinWidth="720" HorizontalAlignment="Stretch" Text="Bookmarks" Frame="{x:Bind Frame}">
+            <interactivity:Interaction.Behaviors>
+                <behaviors:EllipsisBehavior Visibility="Collapsed" />
+            </interactivity:Interaction.Behaviors>
           </Template10Controls:PageHeader>
           <ProgressBar IsIndeterminate="True" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="2"/>
            <ListView Grid.Row="3" Padding="0"

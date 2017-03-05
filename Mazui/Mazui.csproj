@@ -186,6 +186,9 @@
     <Compile Include="Controls\ThreadView.xaml.cs">
       <DependentUpon>ThreadView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\XboxThreadView.xaml.cs">
+      <DependentUpon>XboxThreadView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\SettingsServices.cs" />
     <Compile Include="Tools\BackgroundTasks\BackgroundActivity.cs" />
@@ -964,6 +967,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ThreadView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\XboxThreadView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

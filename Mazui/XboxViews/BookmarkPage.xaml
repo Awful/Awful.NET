@@ -108,5 +108,25 @@
                 </uwp:PullToRefreshAdorner.Extender>
             </ListView>
         </Grid>
+
+        <Grid Margin="25" Grid.Column="1">
+            <Grid>
+                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="{Binding IsThreadSelectedAndLoaded,
+                    Converter={StaticResource BooleanToVisibilityInverter}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <FontIcon Grid.Row="1" Margin="0,25,0,25" HorizontalAlignment="Center" FontSize="70" FontFamily="Segoe MDL2 Assets" Glyph="&#xE0C4;" />
+                    <Image Grid.Row="2" Margin="5" Source="/Assets/Images/Icon2.png"/>
+                    <TextBlock Grid.Row="3" TextAlignment="Center" Padding="15" TextWrapping="Wrap" Style="{StaticResource TitleTextBlockStyle}" Text="Select a thread"/>
+                </Grid>
+                <controls:XboxThreadView Visibility="{Binding Selected, Converter={StaticResource NullVisibilityConverter}, Mode=OneWay}" x:Name="ThreadPageView">
+
+                </controls:XboxThreadView>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
