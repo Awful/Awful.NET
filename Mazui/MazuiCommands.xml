@@ -49,6 +49,10 @@
     <Command Name="didMyThreadsUpdate">
       <Example> Check my bookmarked threads for updates</Example>
       <ListenFor RequireAppName="BeforeOrAfterPhrase"> check [my] threads </ListenFor>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> check [my] {builtin:AppName} bookmarks </ListenFor>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> check [my] {builtin:AppName} bookmarks for updates </ListenFor>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> check [my] bookmarks </ListenFor>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> check [my] bookmarks for updates </ListenFor>
       <ListenFor RequireAppName="BeforeOrAfterPhrase"> check [my] threads for updates </ListenFor>
       <ListenFor RequireAppName="BeforeOrAfterPhrase"> check [my] bookmarked threads for updates</ListenFor>
       <ListenFor RequireAppName="ExplicitlySpecified"> check [my] {builtin:AppName} threads </ListenFor>
