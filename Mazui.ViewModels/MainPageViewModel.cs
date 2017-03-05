@@ -80,6 +80,11 @@ namespace Mazui.ViewModels
             NavigationService.Navigate(typeof(Views.ThreadListPage), JsonConvert.SerializeObject(forum));
         }
 
+		public void NavigateToXboxLogin()
+		{
+			NavigationService.Navigate(typeof(XboxViews.LoginPage));
+		}
+
         private async Task GetMainPageForumsAsync(bool forceRefresh = false)
         {
             var forumCategoryEntities = ForumsDatabase.GetMainForumCategories();

@@ -93,9 +93,16 @@ namespace Mazui.ViewModels
 
             IsLoading = false;
             IsLoggedIn = true;
-            Views.Shell.Instance.ViewModel.IsLoggedIn = true;
 
-            NavigationService.Navigate(typeof(Views.MainPage));
+            if (App.IsTenFoot)
+			{
+				NavigationService.Navigate(typeof(XboxViews.MainPage));
+			}
+			else
+			{
+				Views.Shell.Instance.ViewModel.IsLoggedIn = true;
+				NavigationService.Navigate(typeof(Views.MainPage));
+			}
         }
 
         private async Task RemoveUserCookies()

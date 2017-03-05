@@ -57,5 +57,34 @@ namespace Mazui.XboxViews
 		{
 			await ViewModel.RefreshForums();
 		}
+
+		private void MenuList_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			var menuItem = e.ClickedItem as string;
+			if (string.IsNullOrEmpty(menuItem)) return;
+			switch(menuItem)
+			{
+				case "Account":
+					ViewModel.NavigateToXboxLogin();
+					break;
+				case "Bookmarks":
+					if (!ViewModel.IsLoggedIn)
+					{
+						ViewModel.NavigateToXboxLogin();
+					}
+					break;
+				case "Private Messages":
+					if (!ViewModel.IsLoggedIn)
+					{
+						ViewModel.NavigateToXboxLogin();
+					}
+					break;
+				case "Settings":
+
+					break;
+				default:
+					return;
+			}
+		}
 	}
 }
