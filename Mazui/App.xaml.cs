@@ -290,7 +290,7 @@ namespace Mazui
         {
             get
             {
-                return Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Xbox" || IsTenFootPC;
+                return Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Xbox" || Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Holographic" || IsTenFootPC;
             }
             set
             {
