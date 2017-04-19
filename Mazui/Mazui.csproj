@@ -199,6 +199,7 @@
     <Compile Include="Services\SettingsServices.cs" />
     <Compile Include="Tools\BackgroundTasks\BackgroundActivity.cs" />
     <Compile Include="Tools\BackgroundTasks\BackgroundTaskUtils.cs" />
+    <Compile Include="Tools\Common\FileAccessCommands.cs" />
     <Compile Include="Tools\Converters\AddOrRemoveFavoriteTextConverter.cs" />
     <Compile Include="Tools\Converters\BackButtonEnableConverter.cs" />
     <Compile Include="Tools\Converters\BookmarkTextConverter.cs" />

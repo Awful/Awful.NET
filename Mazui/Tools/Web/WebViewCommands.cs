@@ -22,6 +22,7 @@ using Mazui.Views;
 using System.Windows.Input;
 using Mazui.Tools.Authentication;
 using Mazui.Notifications;
+using Mazui.Tools.Common;
 
 namespace Mazui.Tools.Web
 {
@@ -306,7 +307,7 @@ namespace Mazui.Tools.Web
 					var fileName = Path.GetFileName(new Uri(url).AbsolutePath);
 					var client = new HttpClient();
 					var stream = await client.GetStreamAsync(url);
-					// await FileAccessCommands.SaveStreamToCameraRoll(stream, fileName);
+					await FileAccessCommands.SaveStreamToCameraRoll(stream, fileName);
 				}
 				catch (Exception ex)
 				{
