@@ -15,6 +15,7 @@
     xmlns:converters="using:Mazui.Tools.Converters"
     xmlns:uwp="using:AmazingPullToRefresh.Controls"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:brushes="using:Mazui.Brushes"
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -38,7 +39,10 @@
             ItemsPath="ForumList" />
     </Page.Resources>
 
-    <Grid Background="{ThemeResource MainPageBackground}">
+    <Grid>
+        <Grid.Background>
+            <brushes:HostBlurBrush BlurColor="{ThemeResource PageBackground}" BlurAmount="20"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -47,8 +51,11 @@
         </Grid.RowDefinitions>
 
         <!--  header  -->
-        <controls:PageHeader VisualStateNormalMinWidth="720"  BackButtonVisibility="Collapsed" Background="{ThemeResource SystemAccentColor}" Foreground="White" Frame="{x:Bind Frame, Mode=OneWay}"
+        <controls:PageHeader VisualStateNormalMinWidth="720"  BackButtonVisibility="Collapsed" Foreground="White" Frame="{x:Bind Frame, Mode=OneWay}"
                              Content="Forums List">
+            <controls:PageHeader.Background>
+                <brushes:HostBlurBrush BlurColor="{ThemeResource SystemAccentColor}" BlurAmount="10"/>
+            </controls:PageHeader.Background>
         </controls:PageHeader>
 
         <!--  #region content  -->
@@ -152,6 +159,9 @@
             </SemanticZoom>
         </Grid>
         <CommandBar x:Name="ForumCommandBar" Grid.Row="3">
+            <CommandBar.Background>
+                <brushes:HostBlurBrush BlurColor="{ThemeResource NavAreaBackgroundColor}" BlurAmount="20"/>
+            </CommandBar.Background>
             <AppBarButton Icon="Refresh" Label="Refresh Forum List" Click="{x:Bind ViewModel.RefreshForums}"/>
         </CommandBar>
     </Grid>
