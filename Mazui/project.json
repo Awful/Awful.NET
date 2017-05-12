@@ -15,7 +15,10 @@
     "Polly": "5.0.6",
     "PropertyChanged.Fody": "1.52.1",
     "QueryString.NET": "1.0.0",
-    "Template10": "1.1.12"
+    "Template10": "1.1.12",
+    "WindowsStateTriggers": "1.1.0",
+    "WinUX.UWP": "2.4.17005.1",
+    "WinUX.UWP.Xaml": "2.4.17005.1"
   },
   "frameworks": {
     "uap10.0": {}

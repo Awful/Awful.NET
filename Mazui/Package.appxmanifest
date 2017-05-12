@@ -22,12 +22,10 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
       <Extensions>
-        <uap:Extension Category="windows.appService" EntryPoint="Mazui.VoiceCommands.MazuiVoiceCommandService">
-          <uap:AppService Name="MazuiVoiceCommandService" />
-        </uap:Extension>
-        <Extension Category="windows.backgroundTasks" EntryPoint="Mazui.BackgroundNotify.BackgroundNotifyStatus">
+        <Extension Category="windows.backgroundTasks" EntryPoint="Mazui.BackgroundNotify.ToastNotificationBackgroundTask">
           <BackgroundTasks>
-            <Task Type="timer" />
+            <Task Type="systemEvent" />
+            <Task Type="deviceConnectionChange" />
           </BackgroundTasks>
         </Extension>
         <uap:Extension Category="windows.protocol">
@@ -35,12 +33,14 @@
             <uap:DisplayName>Awful Forums Reader</uap:DisplayName>
           </uap:Protocol>
         </uap:Extension>
-        <Extension Category="windows.backgroundTasks" EntryPoint="Mazui.BackgroundNotify.ToastNotificationBackgroundTask">
+        <Extension Category="windows.backgroundTasks" EntryPoint="Mazui.BackgroundNotify.BackgroundNotifyStatus">
           <BackgroundTasks>
-            <Task Type="systemEvent" />
-            <Task Type="deviceConnectionChange" />
+            <Task Type="timer" />
           </BackgroundTasks>
         </Extension>
+        <uap:Extension Category="windows.appService" EntryPoint="Mazui.VoiceCommands.MazuiVoiceCommandService">
+          <uap:AppService Name="MazuiVoiceCommandService" />
+        </uap:Extension>
       </Extensions>
     </Application>
   </Applications>

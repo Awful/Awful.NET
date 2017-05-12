@@ -32,6 +32,7 @@ using Newtonsoft.Json;
 using Mazui.Notifications;
 using Windows.Storage;
 using Windows.Media.SpeechRecognition;
+using Windows.UI.Core;
 
 namespace Mazui
 {
@@ -73,7 +74,8 @@ namespace Mazui
 				var service = NavigationServiceFactory(BackButton.Attach, ExistingContent.Include);
 				return new ModalDialog()
 				{
-					ModalContent = new Views.Busy(),
+				    DisableBackButtonWhenModal = true,
+                    ModalContent = new Views.Busy(),
 					Content = new Views.Shell(service)
 				};
 			}
@@ -92,10 +94,10 @@ namespace Mazui
         public void SetTitleBarColor()
         {
             //windows title bar      
-            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.BackgroundColor = Colors.Transparent;
-            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ForegroundColor = Colors.Transparent;
-            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = Colors.Transparent;
-            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ButtonForegroundColor = Colors.Transparent;
+            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.BackgroundColor = (Color)Application.Current.Resources["SystemAccentColor"];
+            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ForegroundColor = Colors.White;
+            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = (Color)Application.Current.Resources["SystemAccentColor"];
+            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ButtonForegroundColor = Colors.White;
 
             //StatusBar for Mobile
 

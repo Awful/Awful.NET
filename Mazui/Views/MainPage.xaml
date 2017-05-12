@@ -39,10 +39,7 @@
             ItemsPath="ForumList" />
     </Page.Resources>
 
-    <Grid>
-        <Grid.Background>
-            <brushes:HostBlurBrush BlurColor="{ThemeResource PageBackground}" BlurAmount="20"/>
-        </Grid.Background>
+    <Grid Background="{ThemeResource PageBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -51,11 +48,8 @@
         </Grid.RowDefinitions>
 
         <!--  header  -->
-        <controls:PageHeader VisualStateNormalMinWidth="720"  BackButtonVisibility="Collapsed" Foreground="White" Frame="{x:Bind Frame, Mode=OneWay}"
+        <controls:PageHeader VisualStateNormalMinWidth="720"  BackButtonVisibility="Collapsed" Background="{ThemeResource SystemAccentColor}" Foreground="White" Frame="{x:Bind Frame, Mode=OneWay}"
                              Content="Forums List">
-            <controls:PageHeader.Background>
-                <brushes:HostBlurBrush BlurColor="{ThemeResource SystemAccentColor}" BlurAmount="10"/>
-            </controls:PageHeader.Background>
         </controls:PageHeader>
 
         <!--  #region content  -->

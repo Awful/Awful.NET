@@ -32,7 +32,7 @@ namespace Mazui.Views
         {
             Instance = this;
             InitializeComponent();
-            InitilizeTitleBar();
+            // InitilizeTitleBar();
             _settings = Services.SettingsService.Instance;
             ViewModel.CheckLogin();
         }
@@ -48,26 +48,6 @@ namespace Mazui.Views
             HamburgerMenu.RefreshStyles(_settings.AppTheme, true);
             //HamburgerMenu.IsFullScreen = _settings.IsFullScreen;
             //HamburgerMenu.HamburgerButtonVisibility = _settings.ShowHamburgerButton ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        private void InitilizeTitleBar()
-        {
-            var titleBar = CoreApplication.GetCurrentView().TitleBar;
-            titleBar.ExtendViewIntoTitleBar = true;
-
-            titleBar.LayoutMetricsChanged += (s, e) =>
-            {
-                TitleBarGrid.Height = s.Height;
-                TitleBarContentGrid.Margin = new Thickness(s.SystemOverlayLeftInset + 12, 0, s.SystemOverlayRightInset - 12, 0);
-            };
-
-            var view = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView();
-            TitleBarTextBlock.Text = Package.Current.DisplayName;
-
-            view.TitleBar.BackgroundColor = Colors.Transparent;
-            view.TitleBar.InactiveBackgroundColor = Colors.Transparent;
-            view.TitleBar.ButtonBackgroundColor = Colors.Transparent;
-            view.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
         }
     }
 }

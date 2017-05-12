@@ -18,93 +18,76 @@
         <viewModels:ShellViewModel />
     </Page.DataContext>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <Controls:HamburgerMenu x:Name="MyHamburgerMenu" 
+                            Grid.Row="1"
+                            SecondaryButtonOrientation="Vertical"
+                            NavButtonForeground="{ThemeResource NavButtonForegroundColor}"
+                            NavButtonCheckedForeground="{ThemeResource NavButtonCheckedForegroundColor}"
+                            NavButtonHoverForeground="{ThemeResource NavButtonHoverForegroundColor}"
+                            NavButtonPressedForeground="{ThemeResource NavButtonHoverForegroundColor}"
+                            HamburgerForeground="{ThemeResource HamburgerForegroundColor}"
+                            VisualStateNarrowMinWidth="320"
+                            VisualStateNormalMinWidth="720"
+                            VisualStateWideMinWidth="1020">
+        <Controls:HamburgerMenu.HamburgerBackground>
+            <SolidColorBrush Color="{ThemeResource SystemAccentColor}"></SolidColorBrush>
+        </Controls:HamburgerMenu.HamburgerBackground>
+        <Controls:HamburgerMenu.NavAreaBackground>
+            <brushes:HostBlurBrush BlurColor="{ThemeResource NavAreaBackgroundColor}" BlurAmount="20"/>
+        </Controls:HamburgerMenu.NavAreaBackground>
+        <Controls:HamburgerMenu.NavButtonCheckedBackground>
+            <SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity=".50"></SolidColorBrush>
+        </Controls:HamburgerMenu.NavButtonCheckedBackground>
+        <Controls:HamburgerMenu.NavButtonPressedBackground>
+            <SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity=".60"></SolidColorBrush>
+        </Controls:HamburgerMenu.NavButtonPressedBackground>
+        <Controls:HamburgerMenu.NavButtonHoverBackground>
+            <SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity=".20"></SolidColorBrush>
+        </Controls:HamburgerMenu.NavButtonHoverBackground>
+        <Controls:HamburgerMenu.PrimaryButtons>
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:MainPage">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48"
+                                Height="48"
+                                Symbol="Home" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Home" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
 
-        <Grid x:Name="TitleBarGrid">
-            <Grid.Background>
-                <brushes:HostBlurBrush BlurColor="{ThemeResource SystemAccentColor}" BlurAmount="100"/>
-            </Grid.Background>
+            <Controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" PageType="views:BookmarkPage">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48" Symbol="ShowResults" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Bookmarks" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
 
-            <Grid x:Name="TitleBarContentGrid">
-                <TextBlock x:Name="TitleBarTextBlock" FontSize="12" VerticalAlignment="Center"/>
-            </Grid>
-        </Grid>
+            <Controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" PageType="views:PrivateMessageListPage">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48" Symbol="Mail" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Private Messages" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
 
-        <Controls:HamburgerMenu x:Name="MyHamburgerMenu" 
-                                Grid.Row="1"
-                                SecondaryButtonOrientation="Vertical"
-                                NavButtonForeground="{ThemeResource NavButtonForegroundColor}"
-                                NavButtonCheckedForeground="{ThemeResource NavButtonCheckedForegroundColor}"
-                                NavButtonHoverForeground="{ThemeResource NavButtonHoverForegroundColor}"
-                                NavButtonPressedForeground="{ThemeResource NavButtonHoverForegroundColor}"
-                                HamburgerForeground="{ThemeResource HamburgerForegroundColor}"
-                                VisualStateNarrowMinWidth="320"
-                                VisualStateNormalMinWidth="720"
-                                VisualStateWideMinWidth="1020">
-            <Controls:HamburgerMenu.HamburgerBackground>
-                <brushes:HostBlurBrush BlurColor="{ThemeResource SystemAccentColor}" BlurAmount="10"/>
-            </Controls:HamburgerMenu.HamburgerBackground>
-            <Controls:HamburgerMenu.NavAreaBackground>
-                <brushes:HostBlurBrush BlurColor="{ThemeResource NavAreaBackgroundColor}" BlurAmount="20"/>
-            </Controls:HamburgerMenu.NavAreaBackground>
-            <Controls:HamburgerMenu.NavButtonCheckedBackground>
-                <SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity=".50"></SolidColorBrush>
-            </Controls:HamburgerMenu.NavButtonCheckedBackground>
-            <Controls:HamburgerMenu.NavButtonPressedBackground>
-                <SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity=".60"></SolidColorBrush>
-            </Controls:HamburgerMenu.NavButtonPressedBackground>
-            <Controls:HamburgerMenu.NavButtonHoverBackground>
-                <SolidColorBrush Color="{ThemeResource SystemAccentColor}" Opacity=".20"></SolidColorBrush>
-            </Controls:HamburgerMenu.NavButtonHoverBackground>
-            <Controls:HamburgerMenu.PrimaryButtons>
-                <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:MainPage">
-                    <StackPanel Orientation="Horizontal">
-                        <SymbolIcon Width="48"
-                                    Height="48"
-                                    Symbol="Home" />
-                        <TextBlock Margin="12,0,0,0"
-                                   VerticalAlignment="Center"
-                                   Text="Home" />
-                    </StackPanel>
-                </Controls:HamburgerButtonInfo>
+        </Controls:HamburgerMenu.PrimaryButtons>
+        <Controls:HamburgerMenu.SecondaryButtons>
+            <!-- login button -->
+            <Controls:HamburgerButtonInfo x:Name="LoginButton" PageType="views:LoginPage">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48" Symbol="Contact" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Account" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
 
-                <Controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" PageType="views:BookmarkPage">
-                    <StackPanel Orientation="Horizontal">
-                        <SymbolIcon Width="48" Height="48" Symbol="ShowResults" />
-                        <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Bookmarks" />
-                    </StackPanel>
-                </Controls:HamburgerButtonInfo>
+            <!-- settings button -->
+            <Controls:HamburgerButtonInfo PageType="views:SettingsPage">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48" Symbol="Setting" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Settings" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
 
-                <Controls:HamburgerButtonInfo IsEnabled="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay}" PageType="views:PrivateMessageListPage">
-                    <StackPanel Orientation="Horizontal">
-                        <SymbolIcon Width="48" Height="48" Symbol="Mail" />
-                        <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Private Messages" />
-                    </StackPanel>
-                </Controls:HamburgerButtonInfo>
-
-            </Controls:HamburgerMenu.PrimaryButtons>
-            <Controls:HamburgerMenu.SecondaryButtons>
-                <!-- login button -->
-                <Controls:HamburgerButtonInfo x:Name="LoginButton" PageType="views:LoginPage">
-                    <StackPanel Orientation="Horizontal">
-                        <SymbolIcon Width="48" Height="48" Symbol="Contact" />
-                        <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Account" />
-                    </StackPanel>
-                </Controls:HamburgerButtonInfo>
-
-                <!-- settings button -->
-                <Controls:HamburgerButtonInfo PageType="views:SettingsPage">
-                    <StackPanel Orientation="Horizontal">
-                        <SymbolIcon Width="48" Height="48" Symbol="Setting" />
-                        <TextBlock Margin="12,0,0,0" VerticalAlignment="Center" Text="Settings" />
-                    </StackPanel>
-                </Controls:HamburgerButtonInfo>
-
-            </Controls:HamburgerMenu.SecondaryButtons>
-        </Controls:HamburgerMenu>
-    </Grid>
+        </Controls:HamburgerMenu.SecondaryButtons>
+    </Controls:HamburgerMenu>
 </Page>
