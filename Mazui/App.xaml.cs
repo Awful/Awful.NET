@@ -33,6 +33,8 @@ using Mazui.Notifications;
 using Windows.Storage;
 using Windows.Media.SpeechRecognition;
 using Windows.UI.Core;
+using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Analytics;
 
 namespace Mazui
 {
@@ -65,6 +67,8 @@ namespace Mazui
             #endregion
 
             RequestedTheme = IsTenFoot ? ApplicationTheme.Dark : _settingsService.AppTheme;
+
+            MobileCenter.Start("3d56682d-2a46-4cdc-91d4-3b605577d728", typeof(Analytics));
         }
 
 		public override UIElement CreateRootElement(IActivatedEventArgs e)
