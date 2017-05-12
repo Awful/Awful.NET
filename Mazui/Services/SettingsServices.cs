@@ -159,9 +159,6 @@ namespace Mazui.Services
             set
             {
                 _helper.Write(nameof(AppTheme), value.ToString());
-                (Window.Current.Content as FrameworkElement).RequestedTheme = value.ToElementTheme();
-                Views.Shell.HamburgerMenu.RefreshStyles(value, true);
-                if (ChangedAppThemeHandler != null) ChangedAppThemeHandler.Invoke();
             }
         }
 
