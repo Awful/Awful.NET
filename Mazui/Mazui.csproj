@@ -16,7 +16,11 @@
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>Mazui_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Mazui_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>EBB89D1153E374591931CB7922D59D80083C63B5</PackageCertificateThumbprint>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -158,6 +162,8 @@
     <None Include="Assets\Website\genericons\Genericons.eot" />
     <Content Include="Assets\Website\genericons\Genericons.ttf" />
     <None Include="Assets\Website\genericons\Genericons.woff" />
+    <None Include="Mazui_StoreKey.pfx" />
+    <None Include="Mazui_TemporaryKey.pfx" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -307,7 +313,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="Mazui_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Forums\forum.txt" />
@@ -956,7 +961,10 @@
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Assets\widgets.js" />
     <Content Include="Assets\wptr.1.1.js" />
-    <Content Include="FodyWeavers.xml" />
+    <Content Include="FodyWeavers.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
   </ItemGroup>
@@ -1152,6 +1160,12 @@
     <SDKReference Include="WindowsMobile, Version=10.0.15063.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Imgur.API, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\Imgur.API.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="..\Mazui.ViewModels\Mazui.ViewModels.projitems" Label="Shared" />
   <Import Project="..\Mazui.WebTemplate.Legacy\Mazui.WebTemplate.Legacy.projitems" Label="Shared" />
