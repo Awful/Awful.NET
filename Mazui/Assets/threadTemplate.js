@@ -14,6 +14,11 @@ var ScrollToBottom = function() {
     $('html, body').animate({ scrollTop: $(document).height() }, 0);
 };
 
+var ScrollToTop = function() {
+    $('html, body').animate({ scrollTop: 0 }, 0);
+};
+
+
 var ScrollToDiv = function (pti) {
     var test = $(pti);
     if (test != null) {

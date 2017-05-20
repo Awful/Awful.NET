@@ -60,7 +60,14 @@ namespace Mazui.Controls
 
         private async void ScrollToBottom(object sender, RoutedEventArgs e)
         {
-            await ThreadFullView.InvokeScriptAsync("ScrollToBottom", null);
+            try
+            {
+                await ThreadFullView.InvokeScriptAsync("ScrollToBottom", null);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
 
         private void PageNumberTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
@@ -70,6 +77,18 @@ namespace Mazui.Controls
             if (isNumeric)
             {
                 ViewModel.PageSelection = PageNumberTextBox.Text;
+            }
+        }
+
+        private async void ThreadPageHeader_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            try
+            {
+                await ThreadFullView.InvokeScriptAsync("ScrollToTop", null);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
             }
         }
     }

@@ -24,7 +24,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <controls:PageHeader x:Name="ThreadPageHeader" BackButtonVisibility="Collapsed" VisualStateNormalMinWidth="720" HorizontalAlignment="Stretch" Background="{ThemeResource SystemAccentColor}" Foreground="White" Text="{Binding Selected.Name}">
+            <controls:PageHeader x:Name="ThreadPageHeader" Tapped="ThreadPageHeader_OnTapped" BackButtonVisibility="Collapsed" VisualStateNormalMinWidth="720" HorizontalAlignment="Stretch" Background="{ThemeResource SystemAccentColor}" Foreground="White" Text="{Binding Selected.Name}">
             </controls:PageHeader>
             <Grid Grid.Row="2" Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" Canvas.ZIndex="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <Grid.Background>
