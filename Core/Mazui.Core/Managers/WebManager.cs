@@ -1,4 +1,5 @@
 ﻿using Mazui.Core.Models.Web;
+using Mazui.Core.Tools;
 using System;
 using System.IO;
 using System.Net;
@@ -38,6 +39,7 @@ namespace Mazui.Core.Managers
             }
             using (var client = new HttpClient(handler))
             {
+                client.DefaultRequestHeaders.Add("User-Agent", EndPoints.UserAgent);
                 client.DefaultRequestHeaders.IfModifiedSince = DateTimeOffset.UtcNow;
                 var result = await client.GetAsync(new Uri(uri));
                 var stream = await result.Content.ReadAsStreamAsync();
@@ -68,6 +70,7 @@ namespace Mazui.Core.Managers
             }
             using (var client = new HttpClient(handler))
             {
+                client.DefaultRequestHeaders.Add("User-Agent", EndPoints.UserAgent);
                 client.DefaultRequestHeaders.IfModifiedSince = DateTimeOffset.UtcNow;
                 var result = await client.PostAsync(new Uri(uri), data);
                 var stream = await result.Content.ReadAsStreamAsync();
@@ -77,25 +80,6 @@ namespace Mazui.Core.Managers
                     return new Result(result.IsSuccessStatusCode, html);
                 }
             }
-        }
-
-        public async Task<CookieContainer> PostDataLogin(string url, string data)
-        {
-            var uri = new Uri(url);
-            var request = (HttpWebRequest)WebRequest.Create(url);
-            request.Accept = Accept;
-            request.CookieContainer = new CookieContainer();
-            request.Method = "POST";
-            request.ContentType = PostContentType;
-            request.UseDefaultCredentials = false;
-
-            using (var writer = new StreamWriter(await request.GetRequestStreamAsync()))
-            {
-                writer.Write(data);
-            }
-
-            WebResponse response = await request.GetResponseAsync();
-            return request.CookieContainer;
         }
 
         public async Task<Result> PostFormData(string uri, MultipartFormDataContent form)
@@ -112,6 +96,7 @@ namespace Mazui.Core.Managers
             }
             using (var client = new HttpClient(handler))
             {
+                client.DefaultRequestHeaders.Add("User-Agent", EndPoints.UserAgent);
                 var result = await client.PostAsync(new Uri(uri), form);
                 var stream = await result.Content.ReadAsStreamAsync();
                 using (var reader = new StreamReader(stream, Encoding.GetEncoding("ISO-8859-1")))
