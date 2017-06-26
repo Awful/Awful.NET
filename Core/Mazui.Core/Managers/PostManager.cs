@@ -128,7 +128,7 @@ namespace Mazui.Core.Managers
                 foreach (
                    HtmlNode postNode in
                        threadNode.Descendants("table")
-                           .Where(node => node.GetAttributeValue("class", string.Empty).Contains("post") && !string.IsNullOrEmpty(node.GetAttributeValue("data-idx", string.Empty))))
+                           .Where(node => node.GetAttributeValue("class", string.Empty).Contains("post")))
                 {
                     var post = new Post();
                     ParsePost(post, postNode);

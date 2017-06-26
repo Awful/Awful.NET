@@ -68,7 +68,7 @@ namespace Mazui
 
             RequestedTheme = IsTenFoot ? ApplicationTheme.Dark : _settingsService.AppTheme;
 
-            MobileCenter.Start("3d56682d-2a46-4cdc-91d4-3b605577d728", typeof(Analytics));
+            MobileCenter.Start("7c08dba0-8597-4ea2-8ea8-ee9163c998bc", typeof(Analytics));
         }
 
 		public override UIElement CreateRootElement(IActivatedEventArgs e)

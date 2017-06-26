@@ -17,7 +17,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>Mazui_StoreKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>EBB89D1153E374591931CB7922D59D80083C63B5</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>D45C63F3A7E5E8F87E5CAAA78DFE3840784460F9</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
