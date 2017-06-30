@@ -18,7 +18,7 @@ namespace Mazui.Database.Context
 
         public ForumsContext()
         {
-            DatabasePath = "Forums.sqlite";
+            DatabasePath = "ForumsRedux.sqlite";
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
