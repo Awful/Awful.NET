@@ -3,14 +3,16 @@ using Mazui.Core.Models.Posts;
 using PropertyChanged;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Mazui.Core.Models.Threads
 {
-    [ImplementPropertyChanged]
-    public class Thread
+    public class Thread : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public string Name { get; set; }
 
         public string Location { get; set; }
