@@ -130,7 +130,7 @@ namespace Mazui.ViewModels
             {
                 error = ex.Message;
             }
-            if (!string.IsNullOrEmpty(error)) await ResultChecker.SendMessageDialogAsync($"Failed to get Bookmarks: {error}", false);
+            if (!string.IsNullOrEmpty(error)) await ResultChecker.SendMessageDialogAsync($"Failed to get Bookmarks (Load Inital List): {error}", false);
             IsLoading = false;
         }
 
@@ -180,7 +180,7 @@ namespace Mazui.ViewModels
             {
                 error = ex.Message;
             }
-            if (!string.IsNullOrEmpty(error)) await ResultChecker.SendMessageDialogAsync($"Failed to get Bookmarks: {error}", false);
+            if (!string.IsNullOrEmpty(error)) await ResultChecker.SendMessageDialogAsync($"Failed to get Bookmarks (Refresh): {error}", false);
             IsLoading = false;
         }
         #endregion
