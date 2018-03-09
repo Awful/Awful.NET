@@ -35,7 +35,7 @@ namespace Awful.Views
         private void MainForumListFull_OnItemClick(object sender, ItemClickEventArgs e)
         {
             var forum = e.ClickedItem as Forum;
-            //ViewModel.NavigateToThreadList(forum);
+            ViewModel.NavigateToThreadList(forum);
         }
     }
 }

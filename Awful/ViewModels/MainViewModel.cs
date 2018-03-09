@@ -7,6 +7,7 @@ using Awful.Database.Functions;
 using Awful.Helpers;
 using Awful.Managers;
 using Awful.Models.Forums;
+using Awful.Services;
 using Awful.Tools;
 using Newtonsoft.Json;
 using Windows.Storage;
@@ -59,6 +60,11 @@ namespace Awful.ViewModels
             {
                 await ResultChecker.SendMessageDialogAsync($"Failed to setup forum list: {e.Message}", false);
             }
+        }
+
+        public void NavigateToThreadList(Forum forum)
+        {
+            NavigationService.Navigate(typeof(Views.ThreadListPage), JsonConvert.SerializeObject(forum));
         }
 
         private void AddForumCategoryToPage(List<Category> forumCategoryEntities)

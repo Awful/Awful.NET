@@ -1,0 +1,3 @@
+[submodule "Awful/Assets/ThreadTags"]
+	path = Awful/Assets/ThreadTags
+	url = git@github.com:Awful/thread-tags.git

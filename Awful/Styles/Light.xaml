@@ -12,6 +12,7 @@
     <SolidColorBrush x:Key="HamburgerForegroundColor">White</SolidColorBrush>
     <Color x:Key="NavAreaBackgroundColor">White</Color>
     <Color x:Key="PageBackground">#F2F2F2</Color>
+    <SolidColorBrush x:Key="ThreadListBorder" Color="#CCCCCC"/>
     <SolidColorBrush x:Key="MainPageBackground" Color="#E5E5E5"/>
     <SolidColorBrush x:Key="SidebarBackground" Color="#F2F2F2"/>
     <SolidColorBrush x:Key="ForumBackground" Color="#D8D8D8"/>
