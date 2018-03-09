@@ -1,0 +1,38 @@
+﻿<Application
+    x:Class="Awful.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:Awful.Tools.Converters"
+    >
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/_Colors.xaml"/>
+                <ResourceDictionary Source="/Styles/_FontSizes.xaml"/>
+                <ResourceDictionary Source="/Styles/_Thickness.xaml"/>
+
+                <ResourceDictionary Source="/Styles/TextBlock.xaml"/>
+                <ResourceDictionary Source="/Styles/Page.xaml"/>
+                <ResourceDictionary Source="/Styles/Custom.xaml" />
+                <ResourceDictionary Source="/Styles/Forums.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:HasSeenThreadConverter x:Key="HasSeenThreadConverter" />
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converters:BooleanToVisibilityInverter x:Key="BooleanToVisibilityInverter" />
+            <converters:RatingVisibilityConverter x:Key="RatingVisibilityConverter" />
+            <converters:RepliesSinceLastOpenedColorConverter x:Key="RepliesSinceLastOpenedColorConverter" />
+            <converters:ThreadHeaderColorConverter x:Key="ThreadHeaderColorConverter" />
+            <converters:SubforumHeaderColorConverter x:Key="SubforumHeaderColorConverter" />
+            <converters:ThreadNullCheckConverter x:Key="ThreadNullCheckConverter"/>
+            <converters:AddOrRemoveFavoriteTextConverter x:Key="AddOrRemoveFavoriteTextConverter" />
+            <converters:ForumImageConverter  x:Key="ForumImageConverter" />
+            <converters:PageNumberConverter x:Key="PageNumberConverter" />
+            <converters:BooleanInverter x:Key="BooleanInverter" />
+            <converters:BackButtonEnableConverter x:Key="BackButtonEnableConverter" />
+            <converters:ForwardButtonEnableConverter x:Key="ForwardButtonEnableConverter" />
+            <converters:BookmarkTextConverter x:Key="BookmarkTextConverter" />
+            <converters:NotifyThreadTextConverter x:Key="NotifyThreadTextConverter"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
