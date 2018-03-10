@@ -27,6 +27,7 @@ namespace Awful.Views
             this.InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Enabled;
             ViewModel.MasterDetailViewControl = previewControl;
+            ViewModel.ThreadView = ThreadPageView;
             Application.Current.Resuming += new EventHandler<Object>(App_Resuming);
             Application.Current.Suspending += new SuspendingEventHandler(App_Suspending);
             previewControl.Loaded();
@@ -42,11 +43,12 @@ namespace Awful.Views
             previewControl.Loaded();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             if (e.Parameter == null) return; 
             ViewModel.Load(e.Parameter as string);
+            await ThreadPageView.LoadBaseView();
         }
 
         private async void AdaptiveGridView_ItemClick(object sender, ItemClickEventArgs e)

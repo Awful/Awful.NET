@@ -12,7 +12,7 @@ namespace Awful.ViewModels
 {
     public class ForumThreadListBaseViewModel : AwfulViewModel
     {
-        //public ThreadView ThreadView { get; set; }
+        public ThreadView ThreadView { get; set; }
 
         public MasterDetailViewControl MasterDetailViewControl { get; set; }
 

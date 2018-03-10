@@ -124,6 +124,9 @@
     <Compile Include="Controls\MasterDetailViewControl.xaml.cs">
       <DependentUpon>MasterDetailViewControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ThreadView.xaml.cs">
+      <DependentUpon>ThreadView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
     <Compile Include="Helpers\Json.cs" />
     <Compile Include="Helpers\Observable.cs" />
@@ -154,6 +157,7 @@
     <Compile Include="Tools\Converters\SubforumHeaderColorConverter.cs" />
     <Compile Include="Tools\Converters\ThreadHeaderColorConverter.cs" />
     <Compile Include="Tools\Converters\ThreadNullCheckConverter.cs" />
+    <Compile Include="Tools\ForumCommand.cs" />
     <Compile Include="Tools\PageScrollingCollection.cs" />
     <Compile Include="Tools\ResultChecker.cs" />
     <Compile Include="ViewModels\AwfulViewModel.cs" />
@@ -163,8 +167,12 @@
     <Compile Include="ViewModels\ShellNavigationItem.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\ThreadListPageViewModel.cs" />
+    <Compile Include="ViewModels\ThreadViewModel.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PaywallPage.xaml.cs">
+      <DependentUpon>PaywallPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -186,6 +194,10 @@
     <Page Include="Controls\MasterDetailViewControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ThreadView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\Custom.xaml">
       <SubType>Designer</SubType>
@@ -231,6 +243,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\PaywallPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -262,6 +278,11 @@
     <Content Include="Assets\BadgeLogo.scale-150.png" />
     <Content Include="Assets\BadgeLogo.scale-200.png" />
     <Content Include="Assets\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\Forums\jquery.js" />
+    <Content Include="Assets\Forums\main.js" />
+    <Content Include="Assets\Forums\vendor.css" />
+    <Content Include="Assets\Forums\vendor.js" />
+    <Content Include="Assets\Forums\WebPage.html" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />

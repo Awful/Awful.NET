@@ -92,6 +92,13 @@
                     </CommandBar>-->
                 </Grid>
             </controls:MasterDetailViewControl.MasterViewPaneContent>
+            <controls:MasterDetailViewControl.DetailViewPaneContent>
+                <Grid>
+                    <controls:ThreadView x:Name="ThreadPageView">
+
+                    </controls:ThreadView>
+                </Grid>
+            </controls:MasterDetailViewControl.DetailViewPaneContent>
         </controls:MasterDetailViewControl>
     </Grid>
 </Page>
