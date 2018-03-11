@@ -1,5 +1,7 @@
-﻿using Awful.Tools;
+﻿using Awful.Models.Threads;
+using Awful.Tools;
 using Awful.ViewModels;
+using Awful.Web;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -31,17 +33,20 @@ namespace Awful.Controls
         public ThreadView()
         {
             this.InitializeComponent();
+            ViewModel.Web = Web;
+            ViewModel.Init();
         }
 
         public async Task LoadBaseView()
         {
-            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Forums/WebPage.html"));
-            Web.NavigateToString(await FileIO.ReadTextAsync(file));
+           // var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Forums/WebPage.html"));
+          //  Web.NavigateToString(await FileIO.ReadTextAsync(file));
         }
     
         private void OnNavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
-
+            ViewModel.WebCommands = new WebCommands();
+            sender.AddWebAllowedObject("webCommands", ViewModel.WebCommands);
         }
 
         private async void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
@@ -60,6 +65,26 @@ namespace Awful.Controls
             {
 
             }
+        }
+
+        public async Task LoadThread(Thread thread, bool fromSuspend = false, bool lastPage = false)
+        {
+            ViewModel.Init();
+            if (lastPage)
+            {
+                thread.CurrentPage = thread.TotalPages;
+                thread.RepliesSinceLastOpened = 0;
+            }
+            else if (thread.CurrentPage == 0)
+            {
+                thread.CurrentPage = 1;
+            }
+            if (fromSuspend && ViewModel.Selected != null)
+            {
+                return;
+            }
+            ViewModel.Selected = thread;
+            await ViewModel.LoadThread();
         }
     }
 }

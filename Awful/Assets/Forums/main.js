@@ -6862,11 +6862,18 @@ let Home = class Home extends React.Component {
         super(props);
         this.parser = new HtmlToReactParser.Parser();
         let internalWindow = window;
-        this.isDebug = internalWindow.external.notify == null;
+        this.isDebug = internalWindow.ToCSharp == null;
         if (!this.isDebug) {
-            this.nativeForumCommand = internalWindow.external.notify;
-            this.nativeForumCommand({ Type: "reactLoaded" });
+            this.nativeForumCommand = internalWindow.ToCSharp;
         }
+    }
+    componentDidMount() {
+        window.ForumTemplate();
+        window.timg.scan("body");
+    }
+    componentDidUpdate() {
+        window.ForumTemplate();
+        window.timg.scan("body");
     }
     renderUser(user) {
         let roles = user.Roles == 'author' ? '' : 'user-info-roles ' + user.Roles;
@@ -6882,6 +6889,8 @@ let Home = class Home extends React.Component {
         return React.createElement("div", { className: "post-body" }, test);
     }
     renderPostFooter(post) {
+        if (!this.props.appState.forumThreadPosts.ForumThread.IsLoggedIn)
+            return React.createElement("div", null);
         let editButton = post.User.IsCurrentUserPost ? React.createElement(Button_1.DefaultButton, { text: 'Edit', style: { marginRight: "5px" } }) : React.createElement("div", null);
         return React.createElement("div", { className: "post-footer" },
             editButton,
@@ -6897,7 +6906,6 @@ let Home = class Home extends React.Component {
     render() {
         let debug = this.isDebug ? React.createElement("div", null, "DEBUG") : React.createElement("div", null);
         return (React.createElement("div", { className: "thread-posts" },
-            React.createElement("div", null, "TEST"),
             debug,
             this.props.appState.forumThreadPosts != null ? this.props.appState.forumThreadPosts.Posts.map(u => this.renderPost(u)) : React.createElement("div", null)));
     }
@@ -11189,14 +11197,27 @@ class AppState {
     constructor() {
         this.forumThreadPosts = new ForumThreadPosts();
     }
+    forumCommand(command) {
+        switch (command.Type) {
+            case "addTestPosts":
+                this.addTestPosts();
+                break;
+            case "addPosts":
+                this.addPosts(command.Command);
+                break;
+            case "reset":
+                this.forumThreadPosts = new ForumThreadPosts();
+                break;
+        }
+    }
     addPosts(forumThreadPosts) {
         this.forumThreadPosts.ForumThread = forumThreadPosts.ForumThread;
-        this.forumThreadPosts.ForumThread;
+        this.forumThreadPosts.Posts = this.forumThreadPosts.Posts.concat(forumThreadPosts.Posts);
     }
     addTestPosts() {
         var testPost = new testpost_1.TestPost();
         this.forumThreadPosts.ForumThread = testPost.testPostOne.ForumThread;
-        this.forumThreadPosts.Posts = this.forumThreadPosts.Posts.concat(testPost.testPostOne.Posts);
+        this.forumThreadPosts.Posts = this.forumThreadPosts.Posts.concat(testPost.testPostTwo.Posts);
     }
 }
 __decorate([

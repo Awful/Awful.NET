@@ -45,6 +45,8 @@ namespace Awful.Models.Threads
 
         public bool IsLocked { get; set; }
 
+        public bool IsLoggedIn { get; set; }
+
         public bool IsAnnouncement { get; set; }
 
         public bool HasBeenViewed { get; set; }

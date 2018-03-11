@@ -16,6 +16,16 @@
 </head>
 <body>
     <div id="react-app"></div>
+    <script>
+        var FromCSharp = function (command) {
+            window.app.props.appState.forumCommand(JSON.parse(command));
+            window.ForumTemplate();
+        }
+
+        var ToCSharp = function (command) {
+            window.external.notify(JSON.stringify(command));
+        }
+    </script>
     <script type="text/javascript" async="" src="ms-appx-web:///Assets/Forums/vendor.js"></script>
     <script type="text/javascript" async="" src="ms-appx-web:///Assets/Forums/main.js"></script>
 </body>

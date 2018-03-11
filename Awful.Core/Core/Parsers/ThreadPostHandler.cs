@@ -57,10 +57,11 @@ namespace Awful.Parsers
             foreach (
                HtmlNode postNode in
                    threadNode.Descendants("table")
-                       .Where(node => node.GetAttributeValue("class", string.Empty).Contains("post")))
+                       .Where(node => node.GetAttributeValue("class", string.Empty).Contains("post") && node.GetAttributeValue("data-idx", string.Empty) != ""))
             {
                 var post = new Post();
                 PostHandler.ParsePost(post, postNode);
+                if (post.PostId == 0) continue;
                 var postBodyNode =
                     postNode.Descendants("td")
                         .FirstOrDefault(node => node.GetAttributeValue("class", string.Empty).Equals("postbody"));
@@ -98,6 +99,7 @@ namespace Awful.Parsers
             {
                 var usernameNode = doc.DocumentNode.Descendants("div").FirstOrDefault(node => node.GetAttributeValue("id", string.Empty).Equals("loggedinusername"));
                 forumThread.LoggedInUserName = usernameNode != null ? usernameNode.InnerText : string.Empty;
+                if (forumThread.LoggedInUserName == "Unregistered Faggot") forumThread.IsLoggedIn = false;
                 string[] test = responseUri.Split('#');
                 if (test.Length > 1 && test[1].Contains("pti"))
                 {

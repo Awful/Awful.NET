@@ -7,8 +7,8 @@ namespace Awful.Models.Posts
 {
     public class ThreadPosts
     {
-        public Thread ForumThread { get; set; }
+        public Thread ForumThread { get; set; } = new Thread();
 
-        public List<Post> Posts { get; set; }
+        public List<Post> Posts { get; set; } = new List<Post>();
     }
 }

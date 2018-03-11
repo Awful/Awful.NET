@@ -158,6 +158,7 @@
     <Compile Include="Tools\Converters\ThreadHeaderColorConverter.cs" />
     <Compile Include="Tools\Converters\ThreadNullCheckConverter.cs" />
     <Compile Include="Tools\ForumCommand.cs" />
+    <Compile Include="Tools\ForumCommandCreator.cs" />
     <Compile Include="Tools\PageScrollingCollection.cs" />
     <Compile Include="Tools\ResultChecker.cs" />
     <Compile Include="ViewModels\AwfulViewModel.cs" />
@@ -280,9 +281,11 @@
     <Content Include="Assets\BadgeLogo.scale-400.png" />
     <Content Include="Assets\Forums\jquery.js" />
     <Content Include="Assets\Forums\main.js" />
+    <Content Include="Assets\Forums\threadTemplate.js" />
     <Content Include="Assets\Forums\vendor.css" />
     <Content Include="Assets\Forums\vendor.js" />
     <Content Include="Assets\Forums\WebPage.html" />
+    <Content Include="Assets\Forums\widgets.js" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />
@@ -989,6 +992,10 @@
     <ProjectReference Include="..\Awful.Core\Awful.Core.csproj">
       <Project>{610f9232-2edc-49ca-9c50-f775349f3777}</Project>
       <Name>Awful.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Awful.Web\Awful.Web.csproj">
+      <Project>{217c3b5c-f72f-478b-a8eb-bebf4d5d5e27}</Project>
+      <Name>Awful.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

@@ -14,6 +14,7 @@ using System.Linq;
 using Awful.Services;
 using System.IO;
 using Windows.UI.Xaml.Controls;
+using Awful.Web;
 
 namespace Awful.ViewModels
 {
@@ -21,16 +22,7 @@ namespace Awful.ViewModels
     {
         #region Properties
 
-        private bool _hasReactLoaded = default(bool);
-
-        public bool HasReactLoaded
-        {
-            get { return _hasReactLoaded; }
-            set
-            {
-                Set(ref _hasReactLoaded, value);
-            }
-        }
+        public WebView Web { get; set; }
 
         private Thread _selected = default(Thread);
 
@@ -66,16 +58,65 @@ namespace Awful.ViewModels
             if (_postManager == null) _postManager = new PostManager(WebManager);
         }
 
-        public async Task HandleForumCommand(ForumCommand forumCommand)
+        public async Task LoadThread(bool goToPageOverride = false)
         {
-            switch(forumCommand.Type)
+            IsLoading = true;
+            await Web.InvokeScriptAsync("FromCSharp", ForumCommandCreator.CreateForumCommand("reset", null));
+            var result = await _postManager.GetThreadPostsAsync(Selected.Location, Selected.CurrentPage, Selected.HasBeenViewed, goToPageOverride);
+            if (await CheckResult(result) == false) return;
+            await Web.InvokeScriptAsync("FromCSharp", ForumCommandCreator.CreateForumCommand("addPosts", JsonConvert.DeserializeObject<ThreadPosts>(result.ResultJson)));
+            IsLoading = false;
+        }
+
+        public WebCommands WebCommands { get; set; }
+
+        private async Task<bool> CheckResult(Result result)
+        {
+            var resultCheck = await ResultChecker.CheckPaywallOrSuccess(result);
+            if (!resultCheck)
             {
-                case "reactLoaded":
-                    HasReactLoaded = true;
-                    break;
-                default:
-                    break;
+                if (result.Type == typeof(Error).ToString())
+                {
+                    var error = JsonConvert.DeserializeObject<Error>(result.ResultJson);
+                    if (error.IsPaywall)
+                    {
+                        NavigationService.Navigate(typeof(PaywallPage));
+                    }
+                    return false;
+                }
             }
+
+            return true;
+        }
+
+        private async Task<ThreadPosts> SetupPosts(Result result)
+        {
+            var errorMessage = "";
+            try
+            {
+                var postresult = JsonConvert.DeserializeObject<ThreadPosts>(result.ResultJson);
+                Selected.LoggedInUserName = postresult.ForumThread.LoggedInUserName;
+                Selected.CurrentPage = postresult.ForumThread.CurrentPage;
+                Selected.TotalPages = postresult.ForumThread.TotalPages;
+                Selected.Posts = postresult.Posts;
+                // If the user is the "Test" user, say they are not logged in (even though they are)
+                if (Selected.LoggedInUserName == "Testy Susan")
+                {
+                    IsLoggedIn = false;
+                }
+                return postresult;
+            }
+            catch (Exception ex)
+            {
+                errorMessage = ex.Message;
+            }
+            await ResultChecker.SendMessageDialogAsync($"Error parsing thread: {errorMessage}", false);
+            return null;
+        }
+
+        internal async Task HandleForumCommand(ForumCommand test)
+        {
+            //throw new NotImplementedException();
         }
     }
 }

@@ -57,7 +57,7 @@ namespace Awful.Views
             if (thread == null)
                 return;
             ViewModel.Selected = thread;
-            //await ThreadPageView.LoadThread(thread);
+            await ThreadPageView.LoadThread(thread);
             ViewModel.IsThreadSelectedAndLoaded = true;
         }
 
