@@ -158,15 +158,19 @@ namespace Awful.ViewModels
         public void PopulateNavItems()
         {
             TestLoginUser();
-            _primaryItems.Clear();
-            _secondaryItems.Clear();
+            var primaryItems = new ObservableCollection<ShellNavigationItem>();
+            var secondaryItems = new ObservableCollection<ShellNavigationItem>();
 
-            _primaryItems.Add(ShellNavigationItem.FromType<MainPage>("Shell_Main".GetLocalized(), Symbol.Home));
+            primaryItems.Add(ShellNavigationItem.FromType<MainPage>("Home", Symbol.Home));
             if (IsLoggedIn)
             {
-
+                primaryItems.Add(ShellNavigationItem.FromType<BookmarkPage>("Bookmarks", Symbol.ShowResults));
+                primaryItems.Add(ShellNavigationItem.FromType<PrivateMessageListPage>("Private Messages", Symbol.Mail));
             }
-            _secondaryItems.Add(ShellNavigationItem.FromType<SettingsPage>("Shell_Settings".GetLocalized(), Symbol.Setting));
+            secondaryItems.Add(ShellNavigationItem.FromType<LoginPage>("Profile", Symbol.Contact));
+            secondaryItems.Add(ShellNavigationItem.FromType<SettingsPage>("Settings", Symbol.Setting));
+            PrimaryItems = primaryItems;
+            SecondaryItems = secondaryItems;
         }
 
         private void ItemSelected(HamburgerMenuItemInvokedEventArgs args)

@@ -19,11 +19,21 @@ namespace Awful.Parsers
 {
     public class ThreadHandler
     {
+        public static void CheckPaywall(HtmlDocument doc)
+        {
+            if (
+                   doc.DocumentNode.InnerText.Contains(
+                       "Sorry, you must be a registered forums member to view this page."))
+            {
+                throw new Exception("paywall");
+            }
+        }
+
         public static void ParseForumThreads(List<Thread> forumThreadList, string html, int forumId)
         {
             var doc = new HtmlDocument();
             doc.LoadHtml(html);
-
+            CheckPaywall(doc);
             var forumNode =
                 doc.DocumentNode.Descendants()
                     .FirstOrDefault(node => node.GetAttributeValue("class", string.Empty).Contains("threadlist"));

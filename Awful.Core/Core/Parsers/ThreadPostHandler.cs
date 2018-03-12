@@ -45,7 +45,7 @@ namespace Awful.Parsers
                    doc.DocumentNode.InnerText.Contains(
                        "Sorry, you must be a registered forums member to view this page."))
             {
-                throw new Exception("We've hit the paywall!");
+                throw new Exception("paywall");
             }
         }
         public static void GetThreadPosts(List<Post> forumThreadPosts, HtmlDocument doc)
@@ -99,7 +99,7 @@ namespace Awful.Parsers
             {
                 var usernameNode = doc.DocumentNode.Descendants("div").FirstOrDefault(node => node.GetAttributeValue("id", string.Empty).Equals("loggedinusername"));
                 forumThread.LoggedInUserName = usernameNode != null ? usernameNode.InnerText : string.Empty;
-                if (forumThread.LoggedInUserName == "Unregistered Faggot") forumThread.IsLoggedIn = false;
+                forumThread.IsLoggedIn = forumThread.LoggedInUserName != "Unregistered Faggot";
                 string[] test = responseUri.Split('#');
                 if (test.Length > 1 && test[1].Contains("pti"))
                 {

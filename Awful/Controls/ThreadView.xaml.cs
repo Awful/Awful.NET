@@ -85,6 +85,7 @@ namespace Awful.Controls
             }
             ViewModel.Selected = thread;
             await ViewModel.ReloadThread();
+            ViewModel.IsPageLoaded = true;
         }
 
         private async void ScrollToBottom(object sender, RoutedEventArgs e)

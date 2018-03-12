@@ -104,9 +104,9 @@
         DisplayMode="{x:Bind ViewModel.DisplayMode, Mode=OneWay}"
         IsPaneOpen="{x:Bind ViewModel.IsPaneOpen, Mode=TwoWay}"
         ItemTemplate="{StaticResource NavigationMenuItemDataTemplate}"
-        ItemsSource="{x:Bind ViewModel.PrimaryItems}"
+        ItemsSource="{x:Bind ViewModel.PrimaryItems, Mode=TwoWay}"
         OptionsItemTemplate="{StaticResource NavigationMenuItemDataTemplate}"
-        OptionsItemsSource="{x:Bind ViewModel.SecondaryItems}"
+        OptionsItemsSource="{x:Bind ViewModel.SecondaryItems, Mode=TwoWay}"
         PaneBackground="{ThemeResource SystemControlBackgroundAltHighBrush}"
         PaneForeground="{ThemeResource SystemControlForegroundBaseHighBrush}"
         >

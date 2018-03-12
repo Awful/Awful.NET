@@ -15,6 +15,7 @@ namespace Awful.Views
             InitializeComponent();
             DataContext = ViewModel;
             ViewModel.Initialize(shellFrame);
+            App.ShellViewModel = ViewModel;
         }
     }
 }

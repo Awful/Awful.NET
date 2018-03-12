@@ -7,7 +7,20 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Grid Background="{ThemeResource MainPageBackground}">
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock FontWeight="Bold" TextAlignment="Center" Style="{ThemeResource HeaderTextBlockStyle}" Text="BUY A FORUMS ACCOUNT"/>
+            <MediaElement Grid.Row="1" Margin="5" Source="/Assets/sa-clip.mp4" AutoPlay="True"/>
+            <TextBlock Margin="5" TextAlignment="Center" Grid.Row="2" TextWrapping="Wrap">Sorry, you must be a registered forums member to view this page.
+            If you have an account, just log in on the left navigation pane. Otherwise, go to Something Awful to create an account.
+            </TextBlock>
+            <Button Margin="5" Grid.Row="3" HorizontalAlignment="Center" Content="Create Account" Click="ButtonBase_OnClick"></Button>
+        </Grid>
     </Grid>
 </Page>

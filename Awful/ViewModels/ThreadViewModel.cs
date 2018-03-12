@@ -22,6 +22,17 @@ namespace Awful.ViewModels
     {
         #region Properties
 
+        private bool _isPageLoaded = default(bool);
+
+        public bool IsPageLoaded
+        {
+            get { return _isPageLoaded; }
+            set
+            {
+                Set(ref _isPageLoaded, value);
+            }
+        }
+
         public WebView Web { get; set; }
 
         private Thread _selected = default(Thread);
@@ -50,12 +61,8 @@ namespace Awful.ViewModels
 
         public void Init()
         {
-            if (WebManager == null)
-            {
-                LoginUser();
-            }
-
-            if (_postManager == null) _postManager = new PostManager(WebManager);
+            LoginUser();
+            _postManager = new PostManager(WebManager);
         }
 
         public async Task AddRemoveBookmarkView()
@@ -199,7 +206,23 @@ namespace Awful.ViewModels
                 if (Selected.LoggedInUserName == "Testy Susan")
                 {
                     IsLoggedIn = false;
+                    Selected.IsLoggedIn = false;
                 }
+
+                var count = postresult.Posts.Count(node => !node.HasSeen);
+                if (Selected.RepliesSinceLastOpened > 0)
+                {
+                    if ((Selected.RepliesSinceLastOpened - count < 0) || count == 0)
+                    {
+                        Selected.RepliesSinceLastOpened = 0;
+                    }
+                    else
+                    {
+                        Selected.RepliesSinceLastOpened -= count;
+                    }
+                }
+                Selected.Name = postresult.ForumThread.Name;
+
                 return;
             }
             catch (Exception ex)
@@ -219,6 +242,9 @@ namespace Awful.ViewModels
                     Selected.ScrollToPost = 0;
                     Selected.ScrollToPostString = string.Empty;
                     await LoadThread();
+                    break;
+                case "loaded":
+                    IsPageLoaded = true;
                     break;
                 default:
                     break;

@@ -1,5 +1,6 @@
 ﻿using Awful.Models.Forums;
 using Awful.Models.Threads;
+using Awful.Services;
 using Awful.Tools;
 using Awful.Views;
 using Newtonsoft.Json;
@@ -45,10 +46,7 @@ namespace Awful.ViewModels
 
             Forum = JsonConvert.DeserializeObject<Forum>(forumJson);
 
-            if (WebManager == null)
-            {
-                LoginUser();
-            }
+            LoginUser();
 
             if (ForumPageScrollingCollection != null) ForumPageScrollingCollection.CheckIsPaywallEvent -= ForumPageScrollingCollection_CheckIsPaywallEvent;
             ForumPageScrollingCollection = new PageScrollingCollection(Forum, 1, WebManager);
@@ -58,7 +56,7 @@ namespace Awful.ViewModels
         private async void ForumPageScrollingCollection_CheckIsPaywallEvent(object sender, PageScrollingCollection.IsPaywallArgs e)
         {
             if (!e.IsPaywall) return;
-            //await NavigationService.NavigateAsync(typeof(PaywallPage));
+            NavigationService.Navigate(typeof(PaywallPage));
         }
 
         #endregion

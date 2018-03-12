@@ -43,10 +43,7 @@ namespace Awful.ViewModels
         {
             try
             {
-                if (WebManager == null)
-                {
-                    LoginUser();
-                }
+                LoginUser();
 
                 if (!ForumGroupList.Any())
                 {
@@ -105,7 +102,7 @@ namespace Awful.ViewModels
             if (IsLoggedIn && forceRefresh) forumCategoryEntities = await LoadForumsFromSite();
             ForumGroupList.Clear();
             foreach (var forumCategoryEntity in forumCategoryEntities) ForumGroupList.Add(forumCategoryEntity);
-            //RaisePropertyChanged("ForumGroupList");
+            OnPropertyChanged("ForumGroupList");
             await ForumsDatabase.SaveForumList(ForumGroupList.ToList());
         }
 

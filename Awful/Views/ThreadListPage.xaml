@@ -77,9 +77,9 @@
                                                 <TextBlock Grid.Column="3" Margin="0,0,2,0" FontSize="12" Text="Killed By: " />
                                                 <TextBlock Grid.Column="4" Margin="0,0,5,0" FontSize="12" Text="{x:Bind KilledBy, Mode=OneWay}" />
                                             </Grid>
-                                            <TextBlock x:Phase="2" Grid.Column="2" VerticalAlignment="Center" Margin="15" Visibility="{x:Bind HasSeen, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{ThemeResource ForumReplyThreadBox}" FontFamily="{ThemeResource DefaultFont}" x:Name="ReplyCount"
-                                                   Text="{Binding RepliesSinceLastOpened, Mode=OneWay}" />
                                         </Grid>
+                                        <TextBlock x:Phase="2" Grid.Column="2" VerticalAlignment="Center" Margin="15" Visibility="{x:Bind HasSeen, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{ThemeResource ForumReplyThreadBox}" FontFamily="{ThemeResource DefaultFont}" x:Name="ReplyCount"
+                                                   Text="{Binding RepliesSinceLastOpened, Mode=OneWay}" />
                                     </Grid>
                                     <FlyoutBase.AttachedFlyout>
                                         <MenuFlyout>

@@ -61,6 +61,11 @@ namespace Awful.Services
             where T : Page
             => Navigate(typeof(T), parameter, infoOverride);
 
+        public static void Clear()
+        {
+            Frame.BackStack.Clear();
+        }
+
         private static void RegisterFrameEvents()
         {
             if (_frame != null)

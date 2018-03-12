@@ -1,6 +1,7 @@
 ﻿using System;
 using Awful.Database.Context;
 using Awful.Services;
+using Awful.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -15,6 +16,8 @@ namespace Awful
         {
             get { return _activationService.Value; }
         }
+
+        public static ShellViewModel ShellViewModel { get; set; }
 
         public App()
         {

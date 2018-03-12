@@ -67,6 +67,10 @@ namespace Awful.Tools
         {
             result.IsSuccess = false;
             result.Type = typeof(Error).ToString();
+            if (!isPaywall)
+            {
+                isPaywall = reason.Equals("paywall");
+            }
             var error = new Error()
             {
                 Type = type,
