@@ -84,7 +84,41 @@ namespace Awful.Controls
                 return;
             }
             ViewModel.Selected = thread;
-            await ViewModel.LoadThread();
+            await ViewModel.ReloadThread();
+        }
+
+        private async void ScrollToBottom(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+               // await Web.InvokeScriptAsync("ScrollToBottom", null);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
+        }
+
+        private void PageNumberTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            int n;
+            bool isNumeric = int.TryParse(PageNumberTextBox.Text, out n);
+            if (isNumeric)
+            {
+                ViewModel.PageSelection = PageNumberTextBox.Text;
+            }
+        }
+
+        private async void ThreadPageHeader_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            try
+            {
+                //await Web.InvokeScriptAsync("ScrollToTop", null);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
     }
 }

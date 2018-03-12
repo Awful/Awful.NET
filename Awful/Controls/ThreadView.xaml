@@ -7,17 +7,83 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:Awful.ViewModels"
     mc:Ignorable="d"
+    xmlns:uwp="using:FontAwesome.UWP"
     d:DesignHeight="300"
     d:DesignWidth="400">
     <UserControl.DataContext>
         <viewModels:ThreadViewModel />
     </UserControl.DataContext>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
-        <WebView Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="2" Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" Canvas.ZIndex="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.Background>
+                <SolidColorBrush Opacity=".9" Color="{ThemeResource AwfulWebBackground}"></SolidColorBrush>
+            </Grid.Background>
+            <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" Height="48" Width="48" VerticalAlignment="Center" HorizontalAlignment="Center"></ProgressRing>
+        </Grid>
+        <WebView Grid.Row="2"  DefaultBackgroundColor="{ThemeResource AwfulWebBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                   NavigationStarting="OnNavigationStarting" NavigationCompleted="Web_NavigationCompleted" ScriptNotify="Web_ScriptNotify" Source="ms-appx-web:///Assets/Forums/WebPage.html" x:Name="Web" />
+        <CommandBar x:Name="ForumCommandBar" Grid.Row="3">
+            <AppBarButton Label="First Page" IsEnabled="{Binding Selected.CurrentPage, Converter={StaticResource BackButtonEnableConverter}}" Click="{x:Bind ViewModel.FirstThreadPage}">
+                <AppBarButton.Icon>
+                    <uwp:FontAwesome Icon="FastBackward" HorizontalAlignment="Center" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton Label="Previous Page" IsEnabled="{Binding Selected.CurrentPage, Converter={StaticResource BackButtonEnableConverter}}" Click="{x:Bind ViewModel.PreviousPage}">
+                <AppBarButton.Icon>
+                    <uwp:FontAwesome Icon="Backward" HorizontalAlignment="Center" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton Label="Refresh" IsEnabled="{Binding IsLoading, Converter={StaticResource BooleanInverter}}"  Click="{x:Bind ViewModel.RefreshThread}" Icon="Refresh"/>
+            <AppBarButton Label="Next Page" IsEnabled="{Binding Selected, Converter={StaticResource ForwardButtonEnableConverter}}"  Click="{x:Bind ViewModel.NextPage}">
+                <AppBarButton.Icon>
+                    <uwp:FontAwesome Icon="Forward" HorizontalAlignment="Center" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton Label="Last Page" IsEnabled="{Binding Selected, Converter={StaticResource ForwardButtonEnableConverter}}"  Click="{x:Bind ViewModel.LastThreadPage}">
+                <AppBarButton.Icon>
+                    <uwp:FontAwesome Icon="FastForward" HorizontalAlignment="Center" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton IsEnabled="{Binding IsLoggedIn}" Click="{x:Bind ViewModel.ReplyToThread}" Label="Reply">
+                </AppBarButton>
+                <AppBarButton IsEnabled="{Binding IsLoggedIn}" Click="{x:Bind ViewModel.AddRemoveBookmarkView}"  Label="{Binding Selected.IsBookmark, Converter={StaticResource BookmarkTextConverter}, Mode=OneWay}">
+                </AppBarButton>
+                <AppBarButton Visibility="{Binding Selected.IsBookmark, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" IsEnabled="{Binding IsLoggedIn}" Click="{x:Bind ViewModel.AddRemoveNotificationTable}" Label="{Binding Selected.IsNotified, Converter={StaticResource NotifyThreadTextConverter}, Mode=OneWay}">
+                </AppBarButton>
+                <AppBarButton Click="ScrollToBottom" Label="Scroll To Bottom"/>
+                <AppBarButton x:Name="PageNumberButton2" AllowFocusOnInteraction="True" Label="{Binding Selected, Converter={StaticResource PageNumberConverter}, Mode=TwoWay}">
+                    <Button.Flyout>
+                        <Flyout>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Viewbox Grid.Column="1" Margin="5" Height="40">
+                                        <TextBlock Grid.Column="1" x:Name="PageTextBox" Text="{Binding Selected, Converter={StaticResource PageNumberConverter}}"/>
+                                    </Viewbox>
+                                </Grid>
+                                <TextBox Grid.Row="1" Width="150"  InputScope="Number" Margin="5" TextChanged="PageNumberTextBox_OnTextChanged" x:Name="PageNumberTextBox"/>
+                                <Button HorizontalAlignment="Center"  Grid.Row="2" Margin="5" x:Name="PageNumberButton" Click="{x:Bind ViewModel.ChangeThreadPage}" Content="Change Page"/>
+                            </Grid>
+                        </Flyout>
+                    </Button.Flyout>
+                </AppBarButton>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
     </Grid>
 </UserControl>

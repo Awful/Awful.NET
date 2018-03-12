@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Awful.ViewModels
 {
-    public class ShellViewModel : Observable
+    public class ShellViewModel : AwfulViewModel
     {
         private const string PanoramicStateName = "PanoramicState";
         private const string WideStateName = "WideState";
@@ -155,12 +155,17 @@ namespace Awful.ViewModels
             InitializeState(Window.Current.Bounds.Width);
         }
 
-        private void PopulateNavItems()
+        public void PopulateNavItems()
         {
+            TestLoginUser();
             _primaryItems.Clear();
             _secondaryItems.Clear();
 
             _primaryItems.Add(ShellNavigationItem.FromType<MainPage>("Shell_Main".GetLocalized(), Symbol.Home));
+            if (IsLoggedIn)
+            {
+
+            }
             _secondaryItems.Add(ShellNavigationItem.FromType<SettingsPage>("Shell_Settings".GetLocalized(), Symbol.Setting));
         }
 

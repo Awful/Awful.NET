@@ -9,10 +9,9 @@ using System.Text;
 
 namespace Awful.Models.Threads
 {
-    public class Thread : INotifyPropertyChanged
+    [AddINotifyPropertyChangedInterfaceAttribute]
+    public class Thread
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public string Name { get; set; }
 
         public string Location { get; set; }

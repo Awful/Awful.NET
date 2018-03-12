@@ -4,7 +4,7 @@
     xmlns:local="using:Awful.Styles">
     <SolidColorBrush x:Key="AwfulHeader" Color="#FF1E72C9"/>
     <Color x:Key="AwfulStatusBar">#FF1E72C9</Color>
-    <Color x:Key="AwfulWebBackground">#FFFFFF</Color>
+    <Color x:Key="AwfulWebBackground">#F4F3F3</Color>
     <FontFamily x:Key="DefaultFont">Segoe UI</FontFamily>
     <SolidColorBrush x:Key="NavButtonForegroundColor">Black</SolidColorBrush>
     <SolidColorBrush x:Key="NavButtonCheckedForegroundColor">Black</SolidColorBrush>

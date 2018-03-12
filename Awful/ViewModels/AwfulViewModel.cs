@@ -104,6 +104,13 @@ namespace Awful.ViewModels
             if (!string.IsNullOrEmpty(error)) await ResultChecker.SendMessageDialogAsync($"Failed to get Bookmarks: {error}", false);
         }
 
+        public void TestLoginUser()
+        {
+            var auth = UserAuthHandler.GetDefaultAuthWebManager();
+            User = auth.User;
+            IsLoggedIn = auth.IsLoggedIn;
+        }
+
         public void LoginUser()
         {
             var auth = UserAuthHandler.GetDefaultAuthWebManager();

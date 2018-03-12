@@ -81,6 +81,21 @@
                                                    Text="{Binding RepliesSinceLastOpened, Mode=OneWay}" />
                                         </Grid>
                                     </Grid>
+                                    <FlyoutBase.AttachedFlyout>
+                                        <MenuFlyout>
+                                            <MenuFlyoutItem Text="Go to Last Page" Click="GoToLastPage"  CommandParameter="{Binding}"/>
+                                            <MenuFlyoutItem Click="AddRemoveBookmark" CommandParameter="{Binding}" Text="{Binding IsBookmark, Converter={StaticResource BookmarkTextConverter}}"/>
+                                            <MenuFlyoutItem Click="Unread" CommandParameter="{Binding}" Text="Unread"/>
+                                        </MenuFlyout>
+                                    </FlyoutBase.AttachedFlyout>
+                                    <interactivity:Interaction.Behaviors>
+                                        <Core:EventTriggerBehavior EventName="Holding">
+                                            <converters:OpenMenuFlyoutAction />
+                                        </Core:EventTriggerBehavior>
+                                        <Core:EventTriggerBehavior EventName="RightTapped">
+                                            <converters:OpenMenuFlyoutAction />
+                                        </Core:EventTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
                                 </Grid>
                                 
                             </DataTemplate>

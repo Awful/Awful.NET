@@ -68,17 +68,8 @@ namespace Awful.Views
             if (thread == null)
                 return;
             ViewModel.Selected = thread;
-            //await ThreadPageView.LoadThread(thread, false, true);
+            await ThreadPageView.LoadThread(thread, false, true);
             ViewModel.IsThreadSelectedAndLoaded = true;
-        }
-
-        private async void OpenInNewWindow(object sender, RoutedEventArgs e)
-        {
-            var imageSource = sender as MenuFlyoutItem;
-            var thread = imageSource?.CommandParameter as Thread;
-            if (thread == null)
-                return;
-            //await ViewModel.OpenInNewWindow(thread);
         }
 
         private async void AddRemoveBookmark(object sender, RoutedEventArgs e)
