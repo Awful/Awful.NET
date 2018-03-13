@@ -13,28 +13,19 @@
     mc:Ignorable="d">
     <Page.Resources>
         <DataTemplate x:Key="NavigationMenuItemDataTemplate" x:DataType="vm:ShellNavigationItem">
-            <Grid Width="320" Height="40">
+            <Grid Width="300" Height="40">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition Width="32" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Grid fcu:Visibility="Collapsed" cu:Visibility="Visible">
-                    <Rectangle
-                        Width="6"
-                        Height="24"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Fill="{ThemeResource SystemControlForegroundAccentBrush}"
-                        Visibility="{x:Bind SelectedVis, Mode=OneWay}" />
-                </Grid>
                 <Viewbox
                     Child="{x:Bind Icon}"
                     ToolTipService.ToolTip="{x:Bind Label}"
-                    Margin="16,12"
+                    Margin="0,0,16,0"
                     VerticalAlignment="Center" />
                 <TextBlock
                     Grid.Column="1"
-                    Margin="0,9,0,11"
+                    Margin="0,9,0,6"
                     VerticalAlignment="Center"
                     Foreground="{x:Bind SelectedForeground, Mode=OneWay}"
                     Text="{x:Bind Label}"
@@ -97,50 +88,48 @@
         </DataTemplate>
     </Page.Resources>
 
-    <controls:HamburgerMenu
+    <Grid  x:Name="NavRootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <NavigationView
         x:Name="NavigationMenu"
-        UseNavigationViewWhenPossible="True"
         SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}"
-        DisplayMode="{x:Bind ViewModel.DisplayMode, Mode=OneWay}"
         IsPaneOpen="{x:Bind ViewModel.IsPaneOpen, Mode=TwoWay}"
-        ItemTemplate="{StaticResource NavigationMenuItemDataTemplate}"
-        ItemsSource="{x:Bind ViewModel.PrimaryItems, Mode=TwoWay}"
-        OptionsItemTemplate="{StaticResource NavigationMenuItemDataTemplate}"
-        OptionsItemsSource="{x:Bind ViewModel.SecondaryItems, Mode=TwoWay}"
-        PaneBackground="{ThemeResource SystemControlBackgroundAltHighBrush}"
-        PaneForeground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+        MenuItemTemplate="{StaticResource NavigationMenuItemDataTemplate}"
+        MenuItemsSource="{x:Bind ViewModel.PrimaryItems, Mode=TwoWay}"
+        Header="{x:Bind ViewModel.Header, Mode=OneWay}"
+        IsSettingsVisible="True"
         >
-        <i:Interaction.Behaviors>
-            <ic:EventTriggerBehavior EventName="ItemInvoked">
-                <ic:InvokeCommandAction Command="{x:Bind ViewModel.ItemSelectedCommand}" />
-            </ic:EventTriggerBehavior>
-        </i:Interaction.Behaviors>
-        <Grid Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
-            <Frame x:Name="shellFrame"/>
-        </Grid>
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="WindowStates">
-                <i:Interaction.Behaviors>
-                    <ic:EventTriggerBehavior EventName="CurrentStateChanged">
-                        <ic:InvokeCommandAction Command="{x:Bind ViewModel.StateChangedCommand}"/>
-                    </ic:EventTriggerBehavior>
-                </i:Interaction.Behaviors>
-                <VisualState x:Name="PanoramicState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1024"/>
-                    </VisualState.StateTriggers>
-                </VisualState>
-                <VisualState x:Name="WideState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="640"/>
-                    </VisualState.StateTriggers>
-                </VisualState>
-                <VisualState x:Name="NarrowState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0"/>
-                    </VisualState.StateTriggers>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-    </controls:HamburgerMenu>
+            <i:Interaction.Behaviors>
+                <ic:EventTriggerBehavior EventName="ItemInvoked">
+                    <ic:InvokeCommandAction Command="{x:Bind ViewModel.ItemSelectedCommand}" />
+                </ic:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+            <Grid Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
+                <Frame x:Name="shellFrame"/>
+            </Grid>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="WindowStates">
+                    <i:Interaction.Behaviors>
+                        <ic:EventTriggerBehavior EventName="CurrentStateChanged">
+                            <ic:InvokeCommandAction Command="{x:Bind ViewModel.StateChangedCommand}"/>
+                        </ic:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
+                    <VisualState x:Name="PanoramicState">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="1024"/>
+                        </VisualState.StateTriggers>
+                    </VisualState>
+                    <VisualState x:Name="WideState">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="640"/>
+                        </VisualState.StateTriggers>
+                    </VisualState>
+                    <VisualState x:Name="NarrowState">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="0"/>
+                        </VisualState.StateTriggers>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </NavigationView>
+    </Grid>
 </Page>

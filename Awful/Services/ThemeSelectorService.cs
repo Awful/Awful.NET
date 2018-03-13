@@ -5,6 +5,10 @@ using Windows.Storage;
 using Windows.UI.Xaml;
 
 using Awful.Helpers;
+using Windows.Foundation.Metadata;
+using Microsoft.Toolkit.Uwp.UI.Extensions;
+using Windows.UI;
+using Windows.ApplicationModel.Core;
 
 namespace Awful.Services
 {
@@ -33,6 +37,8 @@ namespace Awful.Services
             {
                 frameworkElement.RequestedTheme = Theme;
             }
+
+           SetupTitlebar();
         }
 
         private static async Task<ElementTheme> LoadThemeFromSettingsAsync()
@@ -51,6 +57,37 @@ namespace Awful.Services
         private static async Task SaveThemeInSettingsAsync(ElementTheme theme)
         {
             await ApplicationData.Current.LocalSettings.SaveAsync(SettingsKey, theme.ToString());
+        }
+
+        private static void SetupTitlebar()
+        {
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
+            {
+                var titleBar = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar;
+                if (titleBar != null)
+                {
+                    titleBar.ButtonBackgroundColor = Colors.Transparent;
+                    if (Theme == ElementTheme.Dark)
+                    {
+                        titleBar.ButtonForegroundColor = Colors.White;
+                        titleBar.ForegroundColor = Colors.White;
+                    }
+                    else
+                    {
+                        titleBar.ButtonForegroundColor = Colors.Black;
+                        titleBar.ForegroundColor = Colors.Black;
+                    }
+
+                    titleBar.BackgroundColor = Colors.Black;
+
+                    titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+                    titleBar.ButtonInactiveForegroundColor = Colors.LightGray;
+
+                    CoreApplicationViewTitleBar coreTitleBar = TitleBarHelper.Instance.TitleBar;
+
+                    coreTitleBar.ExtendViewIntoTitleBar = true;
+                }
+            }
         }
     }
 }

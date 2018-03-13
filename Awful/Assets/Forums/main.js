@@ -6902,12 +6902,20 @@ let Home = class Home extends React.Component {
         }
     }
     componentDidMount() {
-        window.ForumTemplate();
-        window.timg.scan("body");
+        try {
+            window.ForumTemplate();
+            window.timg.scan("body");
+        }
+        catch (e) {
+        }
     }
     componentDidUpdate() {
-        window.ForumTemplate();
-        window.timg.scan("body");
+        try {
+            window.ForumTemplate();
+            window.timg.scan("body");
+        }
+        catch (e) {
+        }
     }
     loadMoreItems() {
         let { CurrentPage, TotalPages, } = this.props.appState.forumThreadPosts.ForumThread;

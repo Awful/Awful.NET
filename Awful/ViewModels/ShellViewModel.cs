@@ -23,6 +23,14 @@ namespace Awful.ViewModels
         private const double WideStateMinWindowWidth = 640;
         private const double PanoramicStateMinWindowWidth = 1024;
 
+        private string _header;
+
+        public string Header
+        {
+            get { return _header; }
+            set { Set(ref _header, value); }
+        }
+
         private bool _isPaneOpen;
 
         public bool IsPaneOpen
@@ -57,14 +65,6 @@ namespace Awful.ViewModels
             set { Set(ref _primaryItems, value); }
         }
 
-        private ObservableCollection<ShellNavigationItem> _secondaryItems = new ObservableCollection<ShellNavigationItem>();
-
-        public ObservableCollection<ShellNavigationItem> SecondaryItems
-        {
-            get { return _secondaryItems; }
-            set { Set(ref _secondaryItems, value); }
-        }
-
         private ICommand _openPaneCommand;
 
         public ICommand OpenPaneCommand
@@ -88,7 +88,7 @@ namespace Awful.ViewModels
             {
                 if (_itemSelected == null)
                 {
-                    _itemSelected = new RelayCommand<HamburgerMenuItemInvokedEventArgs>(ItemSelected);
+                    _itemSelected = new RelayCommand<NavigationViewItemInvokedEventArgs>(ItemSelected);
                 }
 
                 return _itemSelected;
@@ -159,37 +159,36 @@ namespace Awful.ViewModels
         {
             TestLoginUser();
             var primaryItems = new ObservableCollection<ShellNavigationItem>();
-            var secondaryItems = new ObservableCollection<ShellNavigationItem>();
-
             primaryItems.Add(ShellNavigationItem.FromType<MainPage>("Home", Symbol.Home));
             if (IsLoggedIn)
             {
                 primaryItems.Add(ShellNavigationItem.FromType<BookmarkPage>("Bookmarks", Symbol.ShowResults));
                 primaryItems.Add(ShellNavigationItem.FromType<PrivateMessageListPage>("Private Messages", Symbol.Mail));
             }
-            secondaryItems.Add(ShellNavigationItem.FromType<LoginPage>("Profile", Symbol.Contact));
-            secondaryItems.Add(ShellNavigationItem.FromType<SettingsPage>("Settings", Symbol.Setting));
+            primaryItems.Add(ShellNavigationItem.FromType<LoginPage>("Profile", Symbol.Contact));
             PrimaryItems = primaryItems;
-            SecondaryItems = secondaryItems;
         }
 
-        private void ItemSelected(HamburgerMenuItemInvokedEventArgs args)
+        private void ItemSelected(NavigationViewItemInvokedEventArgs args)
         {
             if (DisplayMode == SplitViewDisplayMode.CompactOverlay || DisplayMode == SplitViewDisplayMode.Overlay)
             {
                 IsPaneOpen = false;
             }
 
-            Navigate(args.InvokedItem);
+            if (args.IsSettingsInvoked)
+            {
+                NavigationService.Navigate(typeof(SettingsPage));
+            }
+           else
+            {
+                Navigate(args.InvokedItem);
+            }
         }
 
         private void Frame_Navigated(object sender, NavigationEventArgs e)
         {
             var navigationItem = PrimaryItems?.FirstOrDefault(i => i.PageType == e?.SourcePageType);
-            if (navigationItem == null)
-            {
-                navigationItem = SecondaryItems?.FirstOrDefault(i => i.PageType == e?.SourcePageType);
-            }
 
             if (navigationItem != null)
             {

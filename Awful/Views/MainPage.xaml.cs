@@ -19,6 +19,7 @@ namespace Awful.Views
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            App.ShellViewModel.Header = "Awful Forums Reader";
             await ViewModel.LoadAsync();
         }
 
