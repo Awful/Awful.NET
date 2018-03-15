@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.ComponentModel;
+using Awful.Services;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -67,17 +68,30 @@ namespace Awful.Controls
             Window.Current.SizeChanged -= Current_SizeChanged;
         }
 
-        public void NavigationManager_BackRequested(object sender, HandledEventArgs e)
+        public void NavigationManager_BackRequested(object sender, BackRequestedEventArgs e)
         {
             if (isInOnePaneMode)
             {
                 if (PreviewItem != null)
                 {
                     ShowMasterView();
-
-                    e.Handled = true;
+                }
+                else
+                {
+                    if (NavigationService.CanGoBack)
+                    {
+                        NavigationService.GoBack();
+                    }
                 }
             }
+            else
+            {
+                if (NavigationService.CanGoBack)
+                {
+                    NavigationService.GoBack();
+                }
+            }
+            e.Handled = true;
         }
 
         public void ShowMasterView()

@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -43,6 +43,15 @@ namespace Awful.Services
         public static void GoBack() => Frame.GoBack();
 
         public static void GoForward() => Frame.GoForward();
+
+        public static void BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            if (CanGoBack)
+            {
+                GoBack();
+                e.Handled = true;
+            }
+        }
 
         public static bool Navigate(Type pageType, object parameter = null, NavigationTransitionInfo infoOverride = null)
         {

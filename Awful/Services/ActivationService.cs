@@ -49,7 +49,7 @@ namespace Awful.Services
                     NavigationService.Navigated += Frame_Navigated;
                     if (SystemNavigationManager.GetForCurrentView() != null)
                     {
-                        SystemNavigationManager.GetForCurrentView().BackRequested += ActivationService_BackRequested;
+                        SystemNavigationManager.GetForCurrentView().BackRequested += NavigationService.BackRequested;
                     }
                 }
             }
@@ -114,15 +114,6 @@ namespace Awful.Services
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = NavigationService.CanGoBack ?
                 AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
-        }
-
-        private void ActivationService_BackRequested(object sender, BackRequestedEventArgs e)
-        {
-            if (NavigationService.CanGoBack)
-            {
-                NavigationService.GoBack();
-                e.Handled = true;
-            }
         }
 
         internal async Task ActivateFromShareTargetAsync(ShareTargetActivatedEventArgs activationArgs)

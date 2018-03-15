@@ -1,4 +1,5 @@
 ﻿using Awful.Models.Threads;
+using Awful.Services;
 using Awful.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -49,6 +51,15 @@ namespace Awful.Views
             if (e.Parameter == null) return; 
             ViewModel.Load(e.Parameter as string);
             await ThreadPageView.LoadBaseView();
+            SystemNavigationManager.GetForCurrentView().BackRequested -= NavigationService.BackRequested;
+            SystemNavigationManager.GetForCurrentView().BackRequested += previewControl.NavigationManager_BackRequested;
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            SystemNavigationManager.GetForCurrentView().BackRequested -= previewControl.NavigationManager_BackRequested;
+            SystemNavigationManager.GetForCurrentView().BackRequested += NavigationService.BackRequested;
         }
 
         private async void AdaptiveGridView_ItemClick(object sender, ItemClickEventArgs e)
