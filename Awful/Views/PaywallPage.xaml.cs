@@ -21,6 +21,7 @@ namespace Awful.Views
         public PaywallPage()
         {
             this.InitializeComponent();
+            App.ShellViewModel.Header = "";
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

@@ -25,6 +25,7 @@ namespace Awful.Views
         public BookmarkPage()
         {
             this.InitializeComponent();
+            App.ShellViewModel.Header = "Bookmarks";
         }
     }
 }

@@ -25,6 +25,7 @@ namespace Awful.Views
         {
             this.InitializeComponent();
             ViewModel.Load();
+            App.ShellViewModel.Header = "Profile";
         }
     }
 }

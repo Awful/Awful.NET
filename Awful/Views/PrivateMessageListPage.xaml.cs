@@ -25,6 +25,7 @@ namespace Awful.Views
         public PrivateMessageListPage()
         {
             this.InitializeComponent();
+            App.ShellViewModel.Header = "Private Messages";
         }
     }
 }

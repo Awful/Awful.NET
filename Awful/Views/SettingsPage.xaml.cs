@@ -15,6 +15,7 @@ namespace Awful.Views
         public SettingsPage()
         {
             InitializeComponent();
+            App.ShellViewModel.Header = "Settings";
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

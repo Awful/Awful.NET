@@ -45,6 +45,7 @@ namespace Awful.ViewModels
         {
 
             Forum = JsonConvert.DeserializeObject<Forum>(forumJson);
+            App.ShellViewModel.Header = Forum.Name;
 
             LoginUser();
 
