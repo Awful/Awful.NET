@@ -58,17 +58,29 @@ namespace Awful.ViewModels
             Forum = JsonConvert.DeserializeObject<Forum>(forumJson);
             App.ShellViewModel.Header = Forum.Name;
 
+            Init();
+        }
+
+        public void Init()
+        {
             LoginUser();
 
             if (ForumPageScrollingCollection != null) ForumPageScrollingCollection.CheckIsPaywallEvent -= ForumPageScrollingCollection_CheckIsPaywallEvent;
             ForumPageScrollingCollection = new PageScrollingCollection(Forum, 1, WebManager);
             ForumPageScrollingCollection.CheckIsPaywallEvent += ForumPageScrollingCollection_CheckIsPaywallEvent;
         }
-
         private async void ForumPageScrollingCollection_CheckIsPaywallEvent(object sender, PageScrollingCollection.IsPaywallArgs e)
         {
             if (!e.IsPaywall) return;
             NavigationService.Navigate(typeof(PaywallPage));
+        }
+
+        public void CreateThread()
+        {
+            if (this.IsLoggedIn)
+            {
+                // NavigationService.Navigate(typeof(NewThreadPage), JsonConvert.SerializeObject(Forum));
+            }
         }
 
         #endregion

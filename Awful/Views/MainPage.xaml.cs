@@ -21,6 +21,9 @@ namespace Awful.Views
             base.OnNavigatedTo(e);
             App.ShellViewModel.Header = "Awful Forums Reader";
             await ViewModel.LoadAsync();
+            ForumViewSource.Source = ViewModel.ForumGroupList;
+            var collectionGroups = ForumViewSource.View.CollectionGroups;
+            ((ListViewBase)this.semanticZoom.ZoomedOutView).ItemsSource = collectionGroups;
         }
 
         private async void AddOrRemoveFavorite(object sender, RoutedEventArgs e)

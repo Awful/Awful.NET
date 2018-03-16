@@ -57,7 +57,7 @@
                                             Margin="5"
                                             PlaceholderStretch="UniformToFill"
                                             Source="{Binding ImageIconLocation, Converter={StaticResource ForumImageConverter}}"
-                                            PlaceholderSource="/Assets/ThreadTags/missing.png"/>
+                                            PlaceholderSource="/Assets/missing.png"/>
                                         <Grid Grid.Column="1">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="40"/>
@@ -101,10 +101,10 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <!--<CommandBar x:Name="ForumCommandBar"  Grid.Row="4">
+                    <CommandBar Height="97" x:Name="ForumCommandBar"  Grid.Row="4">
                         <AppBarButton Label="Create Thread" Click="{x:Bind ViewModel.CreateThread}" Icon="Add"/>
                         <AppBarButton Label="Refresh" Click="{x:Bind ViewModel.Init}" Icon="Refresh"/>
-                    </CommandBar>-->
+                    </CommandBar>
                 </Grid>
             </controls:MasterDetailViewControl.MasterViewPaneContent>
             <controls:MasterDetailViewControl.DetailViewPaneContent>
