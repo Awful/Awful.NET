@@ -60,6 +60,8 @@ namespace Awful.ViewModels
             }
         }
 
+        public bool IsEnabled { get; set; } = true;
+
         private bool _isSelected;
 
         public bool IsSelected
@@ -90,7 +92,7 @@ namespace Awful.ViewModels
             set { Set(ref _selectedForeground, value); }
         }
 
-        public ShellNavigationItem(string label, Symbol symbol, Type pageType)
+        public ShellNavigationItem(string label, Symbol symbol, bool isEnabled, Type pageType)
             : this(label, pageType)
         {
             Symbol = symbol;
@@ -108,16 +110,10 @@ namespace Awful.ViewModels
             PageType = pageType;
         }
 
-        public static ShellNavigationItem FromType<T>(string label, Symbol symbol)
+        public static ShellNavigationItem FromType<T>(string label, Symbol symbol, bool isEnabled = true)
             where T : Page
         {
-            return new ShellNavigationItem(label, symbol, typeof(T));
-        }
-
-        public static ShellNavigationItem FromType<T>(string label, IconElement icon)
-            where T : Page
-        {
-            return new ShellNavigationItem(label, icon, typeof(T));
+            return new ShellNavigationItem(label, symbol, isEnabled, typeof(T));
         }
 
         private SolidColorBrush GetStandardTextColorBrush()
