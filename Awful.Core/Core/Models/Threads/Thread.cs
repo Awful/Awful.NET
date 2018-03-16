@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Awful.Models.Threads
@@ -44,6 +45,7 @@ namespace Awful.Models.Threads
 
         public bool IsLocked { get; set; }
 
+        [NotMapped]
         public bool IsLoggedIn { get; set; }
 
         public bool IsAnnouncement { get; set; }

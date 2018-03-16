@@ -5,9 +5,114 @@
     xmlns:local="using:Awful.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Awful.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:listControls="using:Awful.Controls.ListControls"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:converters="using:Awful.Tools.Converters"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:UwpControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:threads="using:Awful.Models.Threads"
+    xmlns:viewModels="using:Awful.ViewModels"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.DataContext>
+        <viewModels:BookmarksViewModel />
+    </Page.DataContext>
 
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:MasterDetailViewControl VerticalAlignment="Stretch" x:Name="previewControl" PreviewItem="{Binding Selected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <controls:MasterDetailViewControl.MasterViewPaneContent>
+                <Grid BorderBrush="{ThemeResource ThreadListBorder}" BorderThickness="0,0,1,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <ProgressBar IsIndeterminate="True" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="2"/>
+                    <ListView Grid.Row="3" Padding="0"
+            IsItemClickEnabled="True"
+            ItemClick="AdaptiveGridView_ItemClick"
+            ItemContainerStyle="{ThemeResource ThreadItemStyle}"
+            ItemsSource="{Binding BookmarkedThreads, UpdateSourceTrigger=PropertyChanged}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="threads:Thread">
+                                <Grid BorderBrush="{ThemeResource ThreadListBorder}" BorderThickness="0,0,0,1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0" Background="{x:Bind IsSticky, Converter={StaticResource ThreadHeaderColorConverter}}" />
+                                    <Grid Grid.Column="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <UwpControls:ImageEx
+                                            Height="45" Width="45"
+                                            VerticalAlignment="Top"
+                                            Margin="5"
+                                            PlaceholderStretch="UniformToFill"
+                                            Source="{Binding ImageIconLocation, Converter={StaticResource ForumImageConverter}}"
+                                            PlaceholderSource="/Assets/missing.png"/>
+                                        <Grid Grid.Column="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="40"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock x:Phase="1" Margin="2" Style="{ThemeResource ForumTitleThreadBox}" FontFamily="{ThemeResource DefaultFont}" Foreground="{ThemeResource ForumFontColor}"  Text="{x:Bind Name}" TextWrapping="Wrap" />
+                                            <Grid Margin="2" Grid.Row="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <FontIcon Grid.Column="1" Margin="0,0,2,0" FontSize="12" FontFamily="Segoe MDL2 Assets" Glyph="&#xE7C3;"/>
+                                                <TextBlock Grid.Column="2" Margin="0,0,5,0" FontSize="12" Text="{x:Bind TotalPages, Mode=OneWay}" />
+                                                <TextBlock Grid.Column="3" Margin="0,0,2,0" FontSize="12" Text="Killed By: " />
+                                                <TextBlock Grid.Column="4" Margin="0,0,5,0" FontSize="12" Text="{x:Bind KilledBy, Mode=OneWay}" />
+                                            </Grid>
+                                        </Grid>
+                                        <TextBlock x:Phase="2" Grid.Column="2" VerticalAlignment="Center" Margin="15" Visibility="{x:Bind HasSeen, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{ThemeResource ForumReplyThreadBox}" FontFamily="{ThemeResource DefaultFont}" x:Name="ReplyCount"
+                                                   Text="{Binding RepliesSinceLastOpened, Mode=OneWay}" />
+                                    </Grid>
+                                    <FlyoutBase.AttachedFlyout>
+                                        <MenuFlyout>
+                                            <MenuFlyoutItem Text="Go to Last Page" Click="GoToLastPage"  CommandParameter="{Binding}"/>
+                                            <MenuFlyoutItem Click="AddRemoveBookmark" CommandParameter="{Binding}" Text="{Binding IsBookmark, Converter={StaticResource BookmarkTextConverter}}"/>
+                                            <MenuFlyoutItem Click="Unread" CommandParameter="{Binding}" Text="Unread"/>
+                                        </MenuFlyout>
+                                    </FlyoutBase.AttachedFlyout>
+                                    <interactivity:Interaction.Behaviors>
+                                        <Core:EventTriggerBehavior EventName="Holding">
+                                            <converters:OpenMenuFlyoutAction />
+                                        </Core:EventTriggerBehavior>
+                                        <Core:EventTriggerBehavior EventName="RightTapped">
+                                            <converters:OpenMenuFlyoutAction />
+                                        </Core:EventTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                </Grid>
+
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <CommandBar Height="97" x:Name="ForumCommandBar"  Grid.Row="4">
+                        <AppBarButton Label="Refresh" Click="{x:Bind ViewModel.Init}" Icon="Refresh"/>
+                    </CommandBar>
+                </Grid>
+            </controls:MasterDetailViewControl.MasterViewPaneContent>
+            <controls:MasterDetailViewControl.DetailViewPaneContent>
+                <Grid>
+                    <controls:ThreadView x:Name="ThreadPageView">
+
+                    </controls:ThreadView>
+                </Grid>
+            </controls:MasterDetailViewControl.DetailViewPaneContent>
+        </controls:MasterDetailViewControl>
     </Grid>
 </Page>

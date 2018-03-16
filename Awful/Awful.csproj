@@ -166,6 +166,7 @@
     <Compile Include="Tools\PageScrollingCollection.cs" />
     <Compile Include="Tools\ResultChecker.cs" />
     <Compile Include="ViewModels\AwfulViewModel.cs" />
+    <Compile Include="ViewModels\BookmarksViewModel.cs" />
     <Compile Include="ViewModels\ForumThreadListBaseViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
