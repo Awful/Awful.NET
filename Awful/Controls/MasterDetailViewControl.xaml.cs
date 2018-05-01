@@ -30,6 +30,9 @@ namespace Awful.Controls
         private double lastWindowHeight = 0;
         private SystemNavigationManager navigationManager = null;
         private string currentState = "";
+        public string MasterViewTitle { get; set; }
+
+        public string PreviewViewTitle { get; set; }
 
         public MasterDetailViewControl()
         {
@@ -38,10 +41,24 @@ namespace Awful.Controls
 
         public void Loaded()
         {
+            //ApplicationView.GetForCurrentView().VisibleBoundsChanged += OnVisibleBoundsChanged;
+            //this.DataContextChanged += MasterDetailViewControl_DataContextChanged;
+            //EvaluateLayout();
+        }
+
+        public void OnNavigated()
+        {
             ApplicationView.GetForCurrentView().VisibleBoundsChanged += OnVisibleBoundsChanged;
             this.DataContextChanged += MasterDetailViewControl_DataContextChanged;
             Window.Current.SizeChanged += Current_SizeChanged;
             EvaluateLayout();
+        }
+
+        public void FromNavigated()
+        {
+            ApplicationView.GetForCurrentView().VisibleBoundsChanged -= OnVisibleBoundsChanged;
+            this.DataContextChanged -= MasterDetailViewControl_DataContextChanged;
+            Window.Current.SizeChanged -= Current_SizeChanged;
         }
 
         private void OnVisibleBoundsChanged(ApplicationView sender, object args)
@@ -63,9 +80,8 @@ namespace Awful.Controls
 
         public void Unloaded()
         {
-            ApplicationView.GetForCurrentView().VisibleBoundsChanged -= OnVisibleBoundsChanged;
-            this.DataContextChanged -= MasterDetailViewControl_DataContextChanged;
-            Window.Current.SizeChanged -= Current_SizeChanged;
+            //ApplicationView.GetForCurrentView().VisibleBoundsChanged -= OnVisibleBoundsChanged;
+            //this.DataContextChanged -= MasterDetailViewControl_DataContextChanged;
         }
 
         public void NavigationManager_BackRequested(object sender, BackRequestedEventArgs e)
@@ -96,6 +112,7 @@ namespace Awful.Controls
 
         public void ShowMasterView()
         {
+            App.ShellViewModel.Header = MasterViewTitle;
             if (isInOnePaneMode)
             {
                 if (NullifyPreviewItemWhenGoingToMasterView)
@@ -112,6 +129,18 @@ namespace Awful.Controls
                 if (BackButtonVisibilityHinted != null)
                     BackButtonVisibilityHinted(this, new BackButtonVisibilityHintedEventArgs(false));
             }
+        }
+
+        public void SetMasterHeaderText(string text)
+        {
+            App.ShellViewModel.Header = text;
+            MasterViewTitle = text;
+        }
+
+        public void SetPreviewHeaderText(string text)
+        {
+            App.ShellViewModel.Header = text;
+            PreviewViewTitle = text;
         }
 
         public void EvaluateLayout()
@@ -163,6 +192,9 @@ namespace Awful.Controls
                         BackButtonVisibilityHinted(this, new BackButtonVisibilityHintedEventArgs(onePaneModeState == "OnePaneDetailVisualState"));
                 }
             }
+
+            App.ShellViewModel.Header = PreviewItem == null ? MasterViewTitle : PreviewViewTitle;
+
             PART_relativePanelParent.Height = height;
             lastWindowHeight = height;
             lastWindowWidth = width;

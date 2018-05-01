@@ -30,6 +30,8 @@ namespace Awful.Controls
 
         public ThreadViewModel ViewModel => this.DataContext as ThreadViewModel;
 
+        public MasterDetailViewControl MasterDetailViewControl { get; set; }
+
         public ThreadView()
         {
             this.InitializeComponent();
@@ -69,6 +71,7 @@ namespace Awful.Controls
 
         public async Task LoadThread(Thread thread, bool fromSuspend = false, bool lastPage = false)
         {
+            MasterDetailViewControl.SetPreviewHeaderText(thread.Name);
             ViewModel.Init();
             if (lastPage)
             {

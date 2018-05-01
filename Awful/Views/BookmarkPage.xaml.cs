@@ -26,9 +26,10 @@ namespace Awful.Views
         public BookmarkPage()
         {
             this.InitializeComponent();
-            App.ShellViewModel.Header = "Bookmarks";
             NavigationCacheMode = NavigationCacheMode.Enabled;
+            ThreadPageView.MasterDetailViewControl = previewControl;
             ViewModel.MasterDetailViewControl = previewControl;
+            previewControl.SetMasterHeaderText("Bookmarks");
             ViewModel.ThreadView = ThreadPageView;
             Application.Current.Resuming += new EventHandler<Object>(App_Resuming);
             Application.Current.Suspending += new SuspendingEventHandler(App_Suspending);
@@ -48,6 +49,7 @@ namespace Awful.Views
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            previewControl.OnNavigated();
             await ViewModel.Load();
             await ThreadPageView.LoadBaseView();
             App.ShellViewModel.BackNavigated -= NavigationService.BackRequested;
@@ -57,6 +59,7 @@ namespace Awful.Views
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
+            previewControl.FromNavigated();
             App.ShellViewModel.BackNavigated -= previewControl.NavigationManager_BackRequested;
             App.ShellViewModel.BackNavigated += NavigationService.BackRequested;
         }

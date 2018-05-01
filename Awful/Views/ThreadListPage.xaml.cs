@@ -28,6 +28,7 @@ namespace Awful.Views
         {
             this.InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Enabled;
+            ThreadPageView.MasterDetailViewControl = previewControl;
             ViewModel.MasterDetailViewControl = previewControl;
             ViewModel.ThreadView = ThreadPageView;
             Application.Current.Resuming += new EventHandler<Object>(App_Resuming);
@@ -48,6 +49,7 @@ namespace Awful.Views
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            previewControl.OnNavigated();
             if (e.Parameter == null) return; 
             ViewModel.Load(e.Parameter as string);
             await ThreadPageView.LoadBaseView();
@@ -58,6 +60,7 @@ namespace Awful.Views
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
+            previewControl.FromNavigated();
             App.ShellViewModel.BackNavigated -= previewControl.NavigationManager_BackRequested;
             App.ShellViewModel.BackNavigated += NavigationService.BackRequested;
         }
