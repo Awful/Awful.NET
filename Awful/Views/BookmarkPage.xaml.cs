@@ -50,15 +50,15 @@ namespace Awful.Views
             base.OnNavigatedTo(e);
             await ViewModel.Load();
             await ThreadPageView.LoadBaseView();
-            SystemNavigationManager.GetForCurrentView().BackRequested -= NavigationService.BackRequested;
-            SystemNavigationManager.GetForCurrentView().BackRequested += previewControl.NavigationManager_BackRequested;
+            App.ShellViewModel.BackNavigated -= NavigationService.BackRequested;
+            App.ShellViewModel.BackNavigated += previewControl.NavigationManager_BackRequested;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            SystemNavigationManager.GetForCurrentView().BackRequested -= previewControl.NavigationManager_BackRequested;
-            SystemNavigationManager.GetForCurrentView().BackRequested += NavigationService.BackRequested;
+            App.ShellViewModel.BackNavigated -= previewControl.NavigationManager_BackRequested;
+            App.ShellViewModel.BackNavigated += NavigationService.BackRequested;
         }
 
         private async void AdaptiveGridView_ItemClick(object sender, ItemClickEventArgs e)
