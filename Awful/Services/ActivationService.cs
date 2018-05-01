@@ -112,8 +112,9 @@ namespace Awful.Services
 
         private void Frame_Navigated(object sender, NavigationEventArgs e)
         {
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = NavigationService.CanGoBack ?
-                AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+            //SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = NavigationService.CanGoBack ?
+            //    AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
 
         internal async Task ActivateFromShareTargetAsync(ShareTargetActivatedEventArgs activationArgs)

@@ -8,7 +8,7 @@ using Awful.Services;
 using Awful.Views;
 
 using Microsoft.Toolkit.Uwp.UI.Controls;
-
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -22,6 +22,7 @@ namespace Awful.ViewModels
         private const string NarrowStateName = "NarrowState";
         private const double WideStateMinWindowWidth = 640;
         private const double PanoramicStateMinWindowWidth = 1024;
+        public EventHandler<BackRequestedEventArgs> BackNavigated;
 
         private string _header;
 
@@ -37,6 +38,14 @@ namespace Awful.ViewModels
         {
             get { return _isPaneOpen; }
             set { Set(ref _isPaneOpen, value); }
+        }
+
+        private bool _canGoBack;
+
+        public bool CanGoBack
+        {
+            get { return _canGoBack; }
+            set { Set(ref _canGoBack, value); }
         }
 
         private object _selected;
@@ -93,6 +102,11 @@ namespace Awful.ViewModels
 
                 return _itemSelected;
             }
+        }
+
+        public void NavigationMenu_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+        {
+            BackNavigated.Invoke(sender, null);
         }
 
         private ICommand _stateChangedCommand;

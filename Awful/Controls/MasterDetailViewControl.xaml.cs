@@ -91,7 +91,7 @@ namespace Awful.Controls
                     NavigationService.GoBack();
                 }
             }
-            e.Handled = true;
+            //e.Handled = true;
         }
 
         public void ShowMasterView()
