@@ -27,7 +27,6 @@ namespace Awful.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            NavigationService.Clear();
         }
 
         private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
