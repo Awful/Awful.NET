@@ -101,7 +101,7 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <CommandBar Height="97" x:Name="ForumCommandBar"  Grid.Row="4">
+                    <CommandBar Height="{ThemeResource CommandBarHeight}" x:Name="ForumCommandBar"  Grid.Row="4">
                         <AppBarButton Label="Refresh" Click="{x:Bind ViewModel.Init}" Icon="Refresh"/>
                     </CommandBar>
                 </Grid>

@@ -28,7 +28,7 @@
         </Grid>
         <WebView Grid.Row="2"  DefaultBackgroundColor="{ThemeResource AwfulWebBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                   NavigationStarting="OnNavigationStarting" NavigationCompleted="Web_NavigationCompleted" ScriptNotify="Web_ScriptNotify" Source="ms-appx-web:///Assets/Forums/WebPage.html" x:Name="Web" />
-        <CommandBar Height="97" Visibility="{x:Bind ViewModel.IsPageLoaded, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="ForumCommandBar" Grid.Row="3">
+        <CommandBar Height="{ThemeResource CommandBarHeight}" Visibility="{x:Bind ViewModel.IsPageLoaded, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="ForumCommandBar" Grid.Row="3">
             <AppBarButton Label="First Page" IsEnabled="{Binding Selected.CurrentPage, Converter={StaticResource BackButtonEnableConverter}}" Click="{x:Bind ViewModel.FirstThreadPage}">
                 <AppBarButton.Icon>
                     <uwp:FontAwesome Icon="FastBackward" HorizontalAlignment="Center" />

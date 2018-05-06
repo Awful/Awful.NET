@@ -38,7 +38,7 @@ namespace Awful.Services
                 frameworkElement.RequestedTheme = Theme;
             }
 
-           SetupTitlebar();
+           //SetupTitlebar();
         }
 
         private static async Task<ElementTheme> LoadThemeFromSettingsAsync()
