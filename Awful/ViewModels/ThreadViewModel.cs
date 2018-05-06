@@ -159,7 +159,22 @@ namespace Awful.ViewModels
             public bool ShowEmbeddedTweets { get; set; }
 
             public bool AutoplayGif { get; set; }
+
+            public Themes Theme { get; set; }
         }
+
+        public enum Themes
+        {
+            Light,
+            Dark,
+            YOSPOS
+        }
+
+        public Themes GetTheme()
+        {
+            return ThemeSelectorService.Theme == Windows.UI.Xaml.ElementTheme.Light ? Themes.Light : Themes.Dark;
+        }
+
 
         public ThreadSettings GetForumThreadSettings()
         {
@@ -170,14 +185,20 @@ namespace Awful.ViewModels
             threadSettings.ShowEmbeddedVideo = settings.ShowEmbeddedVideo;
             threadSettings.ShowEmbeddedTweets = settings.ShowEmbeddedTweets;
             threadSettings.AutoplayGif = settings.AutoplayGif;
+            threadSettings.Theme = GetTheme();
             return threadSettings;
+        }
+
+        public async Task SetupWebView()
+        {
+            await Web.InvokeScriptAsync("FromCSharp", ForumCommandCreator.CreateForumCommand("setupWebview", GetForumThreadSettings()));
         }
 
         public async Task ReloadThread(bool goToPageOverride = false)
         {
             IsLoading = true;
             await Web.InvokeScriptAsync("FromCSharp", ForumCommandCreator.CreateForumCommand("reset", null));
-            await Web.InvokeScriptAsync("FromCSharp", ForumCommandCreator.CreateForumCommand("setupWebview", GetForumThreadSettings()));
+            await SetupWebView();
             await LoadThread(goToPageOverride);
             IsLoading = false;
         }

@@ -41,6 +41,7 @@ namespace Awful.Controls
 
         public async Task LoadBaseView()
         {
+            // ViewModel.SetupWebView();
            // var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Forums/WebPage.html"));
           //  Web.NavigateToString(await FileIO.ReadTextAsync(file));
         }

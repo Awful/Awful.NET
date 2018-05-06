@@ -1,0 +1,30 @@
+﻿body {
+    background-color: #000;
+}
+
+body, tr, th, small, .postbody, p, li, blockquote, h4, .author, .breadcrumbs, .btn {
+    color: white !important;
+}
+
+#mods, div.pages, #copyright, #forum th, #forum td.lastpost, #forum span.pages, #thread div.postbar, td.postdate, td.postlinks, #thread dl.userinfo dd, #thread tr.postbar td, div.threadrate, div.subscribe {
+    color: white;
+}
+
+.bbc-spoiler, .bbc-spoiler li {
+    color: #000;
+    background: #000
+}
+
+.bbc-spoiler.reveal li, .bbc-spoiler.reveal, .bbc-spoiler.stay {
+    background-color: #fafafa;
+}
+
+.post-container.has-seen {
+    background-color: #1b1b1b;
+}
+
+.post-container {
+    background-color: rgba(20, 20, 20, 1);
+    border-top-color: #1e1e1e;
+    border-bottom-color: #1e1e1e;
+}
