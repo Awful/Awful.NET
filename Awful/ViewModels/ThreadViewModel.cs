@@ -148,10 +148,36 @@ namespace Awful.ViewModels
             await ReloadThread();
         }
 
+        public class ThreadSettings
+        {
+            public bool InfinitePageScrolling { get; set; }
+
+            public bool ShowEmbeddedGifv { get; set; }
+
+            public bool ShowEmbeddedVideo { get; set; }
+
+            public bool ShowEmbeddedTweets { get; set; }
+
+            public bool AutoplayGif { get; set; }
+        }
+
+        public ThreadSettings GetForumThreadSettings()
+        {
+            var settings = Awful.Services.SettingsService.Instance;
+            ThreadSettings threadSettings = new ThreadSettings();
+            threadSettings.InfinitePageScrolling = settings.InfinitePageScrolling;
+            threadSettings.ShowEmbeddedGifv = settings.ShowEmbeddedGifv;
+            threadSettings.ShowEmbeddedVideo = settings.ShowEmbeddedVideo;
+            threadSettings.ShowEmbeddedTweets = settings.ShowEmbeddedTweets;
+            threadSettings.AutoplayGif = settings.AutoplayGif;
+            return threadSettings;
+        }
+
         public async Task ReloadThread(bool goToPageOverride = false)
         {
             IsLoading = true;
             await Web.InvokeScriptAsync("FromCSharp", ForumCommandCreator.CreateForumCommand("reset", null));
+            await Web.InvokeScriptAsync("FromCSharp", ForumCommandCreator.CreateForumCommand("setupWebview", GetForumThreadSettings()));
             await LoadThread(goToPageOverride);
             IsLoading = false;
         }

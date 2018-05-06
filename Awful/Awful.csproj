@@ -141,6 +141,7 @@
     <Compile Include="Services\ActivationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\OnBackgroundEnteringEventArgs.cs" />
+    <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Services\SuspendAndResumeService.cs" />
     <Compile Include="Services\SuspensionState.cs" />
     <Compile Include="Services\ThemeSelectorService.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Tools\ForumCommandCreator.cs" />
     <Compile Include="Tools\PageScrollingCollection.cs" />
     <Compile Include="Tools\ResultChecker.cs" />
+    <Compile Include="Tools\SettingsHelper.cs" />
     <Compile Include="ViewModels\AwfulViewModel.cs" />
     <Compile Include="ViewModels\BookmarksViewModel.cs" />
     <Compile Include="ViewModels\ForumThreadListBaseViewModel.cs" />
