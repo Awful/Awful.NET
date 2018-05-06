@@ -308,6 +308,7 @@
     <Content Include="Assets\BadgeLogo.scale-150.png" />
     <Content Include="Assets\BadgeLogo.scale-200.png" />
     <Content Include="Assets\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\Forums\css\light.css" />
     <Content Include="Assets\Forums\jquery.js" />
     <Content Include="Assets\Forums\main.js" />
     <Content Include="Assets\Forums\threadTemplate.js" />
