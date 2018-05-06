@@ -102,7 +102,7 @@
                         </ListView.ItemTemplate>
                     </ListView>
                     <CommandBar Height="{ThemeResource CommandBarHeight}" x:Name="ForumCommandBar"  Grid.Row="4">
-                        <AppBarButton Label="Refresh" Click="{x:Bind ViewModel.Init}" Icon="Refresh"/>
+                        <AppBarButton Label="Refresh" Click="{x:Bind ViewModel.Refresh}" Icon="Refresh"/>
                     </CommandBar>
                 </Grid>
             </controls:MasterDetailViewControl.MasterViewPaneContent>

@@ -36,12 +36,17 @@ namespace Awful.Controls
         {
             this.InitializeComponent();
             ViewModel.Web = Web;
+            Web.LoadCompleted += Web_LoadCompleted;
             ViewModel.Init();
+        }
+
+        private async void Web_LoadCompleted(object sender, NavigationEventArgs e)
+        {
+            await ViewModel.SetupWebView();
         }
 
         public async Task LoadBaseView()
         {
-            // ViewModel.SetupWebView();
            // var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Forums/WebPage.html"));
           //  Web.NavigateToString(await FileIO.ReadTextAsync(file));
         }
