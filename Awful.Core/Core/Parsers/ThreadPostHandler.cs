@@ -32,8 +32,8 @@ namespace Awful.Parsers
             CheckPaywall(doc);
             GetThreadInfo(threadPosts.ForumThread, doc, url, responseUrl);
             await EmbedTweets(doc);
-            //if (!autoplayGifs)
-            //    RemoveAutoplayGifs(doc);
+            if (!autoplayGifs)
+                RemoveAutoplayGifs(doc);
             GetThreadPosts(threadPosts.Posts, doc);
         }
 
@@ -62,10 +62,10 @@ namespace Awful.Parsers
 
         public static void RemoveAutoplayGifs(HtmlDocument doc)
         {
-            var imgs = doc.DocumentNode.Descendants("img");
-            foreach(var img in imgs)
+            var imgs = doc.DocumentNode.Descendants("img").Where(n => n.GetAttributeValue("src", "").Contains(".gif") && !n.GetAttributeValue("src", "").Contains("somethingawful"));
+            foreach(var img in imgs.ToList())
             {
-                var imgUrlString = img.GetAttributeValue("src", "").ToLowerInvariant();
+                var imgUrlString = img.GetAttributeValue("src", "");
                 if (string.IsNullOrEmpty(imgUrlString))
                     continue;
                 var url = new Uri(imgUrlString);
@@ -73,22 +73,22 @@ namespace Awful.Parsers
                 var hostName = url.Host.ToLowerInvariant();
                 if (hostName.Contains("imgur.com"))
                 {
-                    imgUrlString.Replace(".gif", "h.jpg");
+                    imgUrlString = imgUrlString.Replace(".gif", "h.jpg");
                 }
                 else
                 {
                     switch (hostName)
                     {
                         case "i.kinja-img.com":
-                            imgUrlString.Replace(".gif", ".jpg");
+                            imgUrlString = imgUrlString.Replace(".gif", ".jpg");
                             break;
                         case "i.giphy.com":
-                            imgUrlString.Replace("://i.giphy.com", "s://media.giphy.com/media");
-                            imgUrlString.Replace(".gif", "/200_s.gif");
+                            imgUrlString = imgUrlString.Replace("://i.giphy.com", "s://media.giphy.com/media");
+                            imgUrlString = imgUrlString.Replace(".gif", "/200_s.gif");
                             break;
                         case "giant.gfycat.com":
-                            imgUrlString.Replace("giant.gfycat.com", "thumbs.gfycat.com");
-                            imgUrlString.Replace(".gif", "-poster.jpg");
+                            imgUrlString = imgUrlString.Replace("giant.gfycat.com", "thumbs.gfycat.com");
+                            imgUrlString = imgUrlString.Replace(".gif", "-poster.jpg");
                             break;
                         default:
                             break;
@@ -96,11 +96,16 @@ namespace Awful.Parsers
                 }
 
                 var wrapper = doc.CreateElement("div");
+                var newImg = doc.CreateElement("img");
+                foreach(var classnames in img.GetClasses())
+                {
+                    newImg.AddClass(classnames);
+                }
                 wrapper.AddClass("imgurGif");
-                img.SetAttributeValue("data-originalurl", img.GetAttributeValue("src", "").ToLowerInvariant());
-                img.SetAttributeValue("data-posterurl", imgUrlString);
-                img.SetAttributeValue("src", imgUrlString);
-                wrapper.AppendChild(img);
+                newImg.SetAttributeValue("data-originalurl", img.GetAttributeValue("src", "").ToLowerInvariant());
+                newImg.SetAttributeValue("data-posterurl", imgUrlString);
+                newImg.SetAttributeValue("src", imgUrlString);
+                wrapper.AppendChild(newImg);
                 img.ParentNode.ReplaceChild(wrapper, img);
             }
         }
