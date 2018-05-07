@@ -313,6 +313,8 @@
     <Content Include="Assets\Forums\css\light.css" />
     <Content Include="Assets\Forums\jquery.js" />
     <Content Include="Assets\Forums\main.js" />
+    <Content Include="Assets\Forums\play-button.png" />
+    <Content Include="Assets\Forums\spinner-button.png" />
     <Content Include="Assets\Forums\threadTemplate.js" />
     <Content Include="Assets\Forums\vendor.css" />
     <Content Include="Assets\Forums\vendor.js" />
