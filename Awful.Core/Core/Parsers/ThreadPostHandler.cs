@@ -2,12 +2,15 @@
 using Awful.Models.Threads;
 using Awful.Tools;
 using HtmlAgilityPack;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace Awful.Parsers
 {
@@ -22,13 +25,84 @@ namespace Awful.Parsers
             GetThreadPosts(thread.Posts, doc);
         }
 
-        public static void GetThread(ThreadPosts threadPosts, string html, string url, string responseUrl)
+        public static async Task GetThread(ThreadPosts threadPosts, string html, string url, string responseUrl, bool autoplayGifs = true)
         {
             var doc = new HtmlDocument();
             doc.LoadHtml(html);
             CheckPaywall(doc);
             GetThreadInfo(threadPosts.ForumThread, doc, url, responseUrl);
+            await EmbedTweets(doc);
+            //if (!autoplayGifs)
+            //    RemoveAutoplayGifs(doc);
             GetThreadPosts(threadPosts.Posts, doc);
+        }
+
+        public static async Task EmbedTweets (HtmlDocument doc)
+        {
+            var tweets = doc.DocumentNode.Descendants("a").Where(n => n.InnerHtml.Contains("twitter.com"));
+            using (var client = new HttpClient())
+            {
+                foreach (var tweet in tweets.ToList())
+                {
+                    try
+                    {
+                        var result = await client.GetAsync($"https://publish.twitter.com/oembed?omit_script=true&url={tweet.InnerHtml}");
+                        dynamic tweetResult = JsonConvert.DeserializeObject(await result.Content.ReadAsStringAsync());
+                        var node = doc.CreateElement("div");
+                        node.InnerHtml = tweetResult.html;
+                        tweet.ParentNode.ReplaceChild(node, tweet);
+                    }
+                    catch (Exception e)
+                    {
+                        continue;
+                    }
+                }
+            }
+        }
+
+        public static void RemoveAutoplayGifs(HtmlDocument doc)
+        {
+            var imgs = doc.DocumentNode.Descendants("img");
+            foreach(var img in imgs)
+            {
+                var imgUrlString = img.GetAttributeValue("src", "").ToLowerInvariant();
+                if (string.IsNullOrEmpty(imgUrlString))
+                    continue;
+                var url = new Uri(imgUrlString);
+
+                var hostName = url.Host.ToLowerInvariant();
+                if (hostName.Contains("imgur.com"))
+                {
+                    imgUrlString.Replace(".gif", "h.jpg");
+                }
+                else
+                {
+                    switch (hostName)
+                    {
+                        case "i.kinja-img.com":
+                            imgUrlString.Replace(".gif", ".jpg");
+                            break;
+                        case "i.giphy.com":
+                            imgUrlString.Replace("://i.giphy.com", "s://media.giphy.com/media");
+                            imgUrlString.Replace(".gif", "/200_s.gif");
+                            break;
+                        case "giant.gfycat.com":
+                            imgUrlString.Replace("giant.gfycat.com", "thumbs.gfycat.com");
+                            imgUrlString.Replace(".gif", "-poster.jpg");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                var wrapper = doc.CreateElement("div");
+                wrapper.AddClass("imgurGif");
+                img.SetAttributeValue("data-originalurl", img.GetAttributeValue("src", "").ToLowerInvariant());
+                img.SetAttributeValue("data-posterurl", imgUrlString);
+                img.SetAttributeValue("src", imgUrlString);
+                wrapper.AppendChild(img);
+                img.ParentNode.ReplaceChild(wrapper, img);
+            }
         }
 
         public static void GetThreadPosts(Thread thread, string html)

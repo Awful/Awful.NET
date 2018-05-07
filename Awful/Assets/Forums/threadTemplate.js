@@ -1,25 +1,72 @@
-﻿var ForumTemplate = function () {
-    var tweets = $('.post-body a[href*="twitter.com"]');
-    tweets = tweets.not(".post-body:has(img[title=':nws:']) a").not(".post-body:has(img[title=':nms:']) a");
-    tweets = tweets.not('.bbc-spoiler a');
-    tweets.each(function () {
-        var match = $(this).attr('href').match(/(https|http):\/\/twitter.com\/[0-9a-zA-Z_]+\/(status|statuses)\/([0-9]+)/);
-        if (match == null) {
-            return;
+﻿var GifWrap = function () {
+    $('.imgurGif').load(function (event) {
+        $(event.target).parent().addClass('overlay');
+    }).each(function () {
+        if (this.complete) {
+            $(this).load();
         }
-        var tweetId = match[3];
-        var link = this;
-        $.ajax({
-            url: "https://api.twitter.com/1/statuses/oembed.json?id=" + tweetId,
-            dataType: 'jsonp',
-            success: function (data) {
-                link = $(link).wrap("<div class='tweet'>").parent();
-                // WinRT Webviews hate calling out to external web javascript. So for now, we will load our own. :(
-                data.html = data.html.replace('<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script async src="ms-appx-web:///Assets/widgets.js" charset="utf-8"></script>');
-                $(link).html(data.html);
-            }
-        });
     });
+
+    // Toggles between first frame of Imgur gif and full-on animated gif.
+    $('body').on('tap', '.gifWrap', function (event) {
+        // .closest() because sometimes the img is the target for some reason.
+        var $gifwrap = $(event.target).closest('.gifWrap');
+        toggleAnimation($gifwrap);
+    });
+}
+
+function toggleAnimation($gifwrap) {
+    var $img = $gifwrap.find('img');
+    if (!$gifwrap.hasClass('playing')) {
+        $gifwrap.addClass('loading');
+
+        var link = $img.attr('src');
+        var newLink = $img.data('originalurl');
+
+        var image = new Image();
+        image.onload = function () {
+            $img.attr("src", newLink);
+            $gifwrap.addClass('playing');
+            $gifwrap.removeClass('loading');
+        };
+        image.src = newLink;
+    } else {
+        var link = $img.attr('src');
+        var newLink = $img.data('posterurl');
+        $gifwrap.removeClass('playing');
+        $img.attr('src', newLink);
+    }
+}
+
+var ForumTemplate = function () {
+    //var tweets = $('.post-body a[href*="twitter.com"]');
+    //tweets = tweets.not(".post-body:has(img[title=':nws:']) a").not(".post-body:has(img[title=':nms:']) a");
+    //tweets = tweets.not('.bbc-spoiler a');
+    //tweets.each(function () {
+    //    var match = $(this).attr('href').match(/(https|http):\/\/twitter.com\/[0-9a-zA-Z_]+\/(status|statuses)\/([0-9]+)/);
+    //    if (match == null) {
+    //        return;
+    //    }
+    //    var tweetId = match[3];
+    //    var link = this;
+    //    $.ajax({
+    //        url: "https://api.twitter.com/1/statuses/oembed.json?id=" + tweetId,
+    //        dataType: 'jsonp',
+    //        success: function (data) {
+    //            link = $(link).wrap("<div class='tweet'>").parent();
+    //            // WinRT Webviews hate calling out to external web javascript. So for now, we will load our own. :(
+    //            data.html = data.html.replace('<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>', '');
+    //            $(link).html(data.html);
+    //            try {
+    //                window.twttr.widgets.load(link);
+    //            } catch (e) {
+    //                console.log(e);
+    //            }
+    //        }
+    //    });
+    //});
+
+    window.twttr.widgets.load();
 
     var gifvs = $('a[href$="gifv"]');
     gifvs = gifvs.not(".post-body:has(img[title=':nws:']) a").not(".post-body:has(img[title=':nms:']) a");

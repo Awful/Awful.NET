@@ -19,7 +19,7 @@ namespace Awful.Views
             ViewModel.Initialize(shellFrame);
             App.ShellViewModel = ViewModel;
             NavigationService.Navigated += Navigated_Shell;
-            //Window.Current.SetTitleBar(AppTitleBar);
+            Window.Current.SetTitleBar(AppTitleBar);
         }
 
         private void Navigated_Shell(object sender, NavigationEventArgs e)

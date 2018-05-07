@@ -21,12 +21,12 @@ namespace Awful.Managers
             _webManager = webManager;
         }
 
-        public async Task<Result> GetUsersPostsInThreadAsync(string location, int userId, int currentPage, bool hasBeenViewed = false, bool goToPageOverride = false)
+        public async Task<Result> GetUsersPostsInThreadAsync(string location, int userId, int currentPage, bool hasBeenViewed = false, bool goToPageOverride = false, bool autoplayGifs = true)
         {
             return await GetThreadPostsAsync(location += $"&userid={userId}", currentPage, hasBeenViewed, goToPageOverride);
         }
 
-        public async Task<Result> GetThreadPostsAsync(string location, int currentPage, bool hasBeenViewed = false, bool goToPageOverride = false)
+        public async Task<Result> GetThreadPostsAsync(string location, int currentPage, bool hasBeenViewed = false, bool goToPageOverride = false, bool autoplayGifs = true)
         {
             var result = new Result();
             try
@@ -50,7 +50,7 @@ namespace Awful.Managers
                 }
                 result = await _webManager.GetDataAsync(url);
                 var threadPosts = new ThreadPosts();
-                ThreadPostHandler.GetThread(threadPosts, result.ResultHtml, url, result.AbsoluteUri);
+                await ThreadPostHandler.GetThread(threadPosts, result.ResultHtml, url, result.AbsoluteUri, autoplayGifs);
                 result.ResultJson = JsonConvert.SerializeObject(threadPosts);
                 return result;
             }

@@ -116,7 +116,7 @@ namespace Awful.ViewModels
 
         public async Task LoadThread(bool goToPageOverride = false)
         {
-            var result = await _postManager.GetThreadPostsAsync(Selected.Location, Selected.CurrentPage, Selected.HasBeenViewed, goToPageOverride);
+            var result = await _postManager.GetThreadPostsAsync(Selected.Location, Selected.CurrentPage, Selected.HasBeenViewed, goToPageOverride, Awful.Services.SettingsService.Instance.AutoplayGif);
             if (await CheckResult(result) == false) return;
             var threadPosts = JsonConvert.DeserializeObject<ThreadPosts>(result.ResultJson);
             await SetupPosts(threadPosts);
@@ -174,7 +174,6 @@ namespace Awful.ViewModels
         {
             return ThemeSelectorService.Theme == Windows.UI.Xaml.ElementTheme.Light ? Themes.Light : Themes.Dark;
         }
-
 
         public ThreadSettings GetForumThreadSettings()
         {
