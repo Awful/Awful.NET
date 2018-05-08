@@ -97,12 +97,13 @@ namespace Awful.Parsers
 
                 var wrapper = doc.CreateElement("div");
                 var newImg = doc.CreateElement("img");
-                foreach(var classnames in img.GetClasses())
-                {
-                    newImg.AddClass(classnames);
-                }
-                wrapper.AddClass("imgurGif");
-                newImg.SetAttributeValue("data-originalurl", img.GetAttributeValue("src", "").ToLowerInvariant());
+                wrapper.AddClass("gifWrap");
+                //foreach(var className in img.GetClasses())
+                //{
+                //    newImg.AddClass(className);
+                //}
+                newImg.AddClass("imgurGif");
+                newImg.SetAttributeValue("data-originalurl", img.GetAttributeValue("src", ""));
                 newImg.SetAttributeValue("data-posterurl", imgUrlString);
                 newImg.SetAttributeValue("src", imgUrlString);
                 wrapper.AppendChild(newImg);

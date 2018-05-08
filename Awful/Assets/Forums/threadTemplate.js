@@ -8,7 +8,7 @@
     });
 
     // Toggles between first frame of Imgur gif and full-on animated gif.
-    $('body').on('tap', '.gifWrap', function (event) {
+    $('body').unbind('click tap').on('click tap', '.gifWrap', function (event) {
         // .closest() because sometimes the img is the target for some reason.
         var $gifwrap = $(event.target).closest('.gifWrap');
         toggleAnimation($gifwrap);
