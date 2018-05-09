@@ -107,7 +107,7 @@
                 </Grid>
             </controls:MasterDetailViewControl.MasterViewPaneContent>
             <controls:MasterDetailViewControl.DetailViewPaneContent>
-                <Grid>
+                <Grid Padding="0,10,0,0">
                     <controls:ThreadView x:Name="ThreadPageView">
 
                     </controls:ThreadView>
