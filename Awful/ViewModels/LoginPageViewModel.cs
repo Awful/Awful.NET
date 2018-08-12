@@ -1,4 +1,4 @@
-﻿using Awful.Managers;
+﻿using Awful.Parser.Managers;
 using Awful.Tools;
 using Awful.Database.Functions;
 using System;
@@ -7,10 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using Windows.Web.Http.Filters;
-using Awful.Models.Users;
+using Awful.Parser.Models.Users;
 using Newtonsoft.Json;
 using Awful.Services;
 using System.IO;
+using Awful.Parser.Core;
+using Awful.Database.Context;
+using Awful.Parser.Handlers;
 
 namespace Awful.ViewModels
 {
@@ -64,24 +67,22 @@ namespace Awful.ViewModels
                 return;
             }
 
-            WebManager = new WebManager(result.AuthenticationCookieContainer);
+            WebManager = new WebClient(result.AuthenticationCookieContainer);
 
             var userManager = new UserManager(WebManager);
 
             // 0 gets us the default user.
-            var userResultJson = await userManager.GetUserFromProfilePageAsync(0);
-            if (userResultJson == null)
+            var userResult = await userManager.GetUserFromProfilePageAsync(0);
+            if (userResult == null)
             {
                 await ResultChecker.SendMessageDialogAsync("Failed to get user", false);
                 IsLoading = false;
                 return;
             }
 
-            var userResult = JsonConvert.DeserializeObject<UserAuth>(userResultJson.ResultJson);
-
             try
             {
-                var newUser = new UserAuth { AvatarLink = userResult.AvatarLink, IsDefaultUser = true, UserName = userResult.UserName, CookiePath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, Guid.NewGuid().ToString() + ".cookie") };
+                var newUser = new UserAuth { AvatarLink = userResult.AvatarLink, IsDefaultUser = true, UserName = userResult.Username, CookiePath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, Guid.NewGuid().ToString() + ".cookie") };
                 await UserAuthDatabase.AddOrUpdateUser(newUser);
                 CookieManager.SaveCookie(result.AuthenticationCookieContainer, newUser.CookiePath);
             }

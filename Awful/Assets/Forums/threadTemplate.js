@@ -50,12 +50,12 @@ var ForumTemplate = function () {
     //    var tweetId = match[3];
     //    var link = this;
     //    $.ajax({
-    //        url: "https://api.twitter.com/1/statuses/oembed.json?id=" + tweetId,
+    //        url: "https://publish.twitter.com/oembed?omit_script=true&url=" + $(this).attr('href'),
     //        dataType: 'jsonp',
     //        success: function (data) {
     //            link = $(link).wrap("<div class='tweet'>").parent();
-    //            // WinRT Webviews hate calling out to external web javascript. So for now, we will load our own. :(
-    //            data.html = data.html.replace('<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>', '');
+    //             WinRT Webviews hate calling out to external web javascript. So for now, we will load our own. :(
+    //            data.html = data.html.replace('<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script async src="ms-appx-web:///Assets/widgets.js" charset="utf-8"></script>');
     //            $(link).html(data.html);
     //            try {
     //                window.twttr.widgets.load(link);
@@ -65,8 +65,6 @@ var ForumTemplate = function () {
     //        }
     //    });
     //});
-
-    window.twttr.widgets.load();
 
     var gifvs = $('a[href$="gifv"]');
     gifvs = gifvs.not(".post-body:has(img[title=':nws:']) a").not(".post-body:has(img[title=':nms:']) a");

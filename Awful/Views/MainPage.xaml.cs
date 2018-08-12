@@ -1,5 +1,5 @@
 ﻿using System;
-using Awful.Models.Forums;
+using Awful.Parser.Models.Forums;
 using Awful.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

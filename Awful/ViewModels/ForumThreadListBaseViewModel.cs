@@ -1,6 +1,6 @@
 ﻿using Awful.Controls;
-using Awful.Managers;
-using Awful.Models.Threads;
+using Awful.Parser.Managers;
+using Awful.Parser.Models.Threads;
 using Awful.Services;
 using System;
 using System.Collections.Generic;

@@ -1,7 +1,7 @@
-﻿using Awful.Managers;
-using Awful.Models.Posts;
-using Awful.Models.Threads;
-using Awful.Models.Web;
+﻿using Awful.Parser.Managers;
+using Awful.Parser.Models.Posts;
+using Awful.Parser.Models.Threads;
+using Awful.Parser.Models.Web;
 using Awful.Tools;
 using Awful.Views;
 using Newtonsoft.Json;
@@ -56,13 +56,13 @@ namespace Awful.ViewModels
                 Set(ref _pageSelection, value);
             }
         }
-        private PostManager _postManager;
+        private ThreadManager _postManager;
         #endregion
 
         public void Init()
         {
             LoginUser();
-            _postManager = new PostManager(WebManager);
+            _postManager = new ThreadManager(WebManager);
         }
 
         public async Task AddRemoveBookmarkView()
@@ -93,7 +93,7 @@ namespace Awful.ViewModels
             Selected.ScrollToPost = 0;
             Selected.ScrollToPostString = string.Empty;
             // Force the new page number.
-            await ReloadThread(true);
+            await ReloadThread();
         }
 
         public async Task FirstThreadPage()
@@ -102,7 +102,7 @@ namespace Awful.ViewModels
             Selected.ScrollToPost = 0;
             Selected.ScrollToPostString = string.Empty;
             // Force the new page number.
-            await ReloadThread(true);
+            await ReloadThread();
         }
 
         public async Task LastThreadPage()
@@ -111,16 +111,14 @@ namespace Awful.ViewModels
             Selected.ScrollToPost = 0;
             Selected.ScrollToPostString = string.Empty;
             // Force the new page number.
-            await ReloadThread(true);
+            await ReloadThread();
         }
 
         public async Task LoadThread(bool goToPageOverride = false)
         {
-            var result = await _postManager.GetThreadPostsAsync(Selected.Location, Selected.CurrentPage, Selected.HasBeenViewed, goToPageOverride, Awful.Services.SettingsService.Instance.AutoplayGif);
-            if (await CheckResult(result) == false) return;
-            var threadPosts = JsonConvert.DeserializeObject<ThreadPosts>(result.ResultJson);
-            await SetupPosts(threadPosts);
-            await Web.InvokeScriptAsync("FromCSharp", ForumCommandCreator.CreateForumCommand("addPosts", threadPosts));
+            var result = await _postManager.GetThreadAsync(Selected, goToPageOverride);
+            await SetupPosts(result);
+            await Web.InvokeScriptAsync("FromCSharp", ForumCommandCreator.CreateForumCommand("addPosts", result));
             OnPropertyChanged("Selected");
         }
 
@@ -239,15 +237,15 @@ namespace Awful.ViewModels
             return true;
         }
 
-        private async Task SetupPosts(ThreadPosts postresult)
+        private async Task SetupPosts(Thread postresult)
         {
             var errorMessage = "";
             try
             {
-                Selected.LoggedInUserName = postresult.ForumThread.LoggedInUserName;
-                Selected.CurrentPage = postresult.ForumThread.CurrentPage;
-                Selected.TotalPages = postresult.ForumThread.TotalPages;
-                Selected.Posts = postresult.Posts;
+                //Selected.LoggedInUserName = postresult.LoggedInUserName;
+                //Selected.CurrentPage = postresult.CurrentPage;
+                //Selected.TotalPages = postresult.TotalPages;
+                //Selected.Posts = postresult.Posts;
                 // If the user is the "Test" user, say they are not logged in (even though they are)
                 if (Selected.LoggedInUserName == "Testy Susan")
                 {
@@ -255,7 +253,7 @@ namespace Awful.ViewModels
                     Selected.IsLoggedIn = false;
                 }
 
-                var count = postresult.Posts.Count(node => !node.HasSeen);
+                var count = Selected.Posts.Count(node => !node.HasSeen);
                 if (Selected.RepliesSinceLastOpened > 0)
                 {
                     if ((Selected.RepliesSinceLastOpened - count < 0) || count == 0)
@@ -267,8 +265,7 @@ namespace Awful.ViewModels
                         Selected.RepliesSinceLastOpened -= count;
                     }
                 }
-                Selected.Name = postresult.ForumThread.Name;
-
+                //Selected.Name = postresult.Name;
                 return;
             }
             catch (Exception ex)

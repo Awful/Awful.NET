@@ -1,4 +1,4 @@
-﻿using Awful.Models.Users;
+﻿using Awful.Parser.Models.Users;
 using Awful.Database.Context;
 using System;
 using System.Collections.Generic;

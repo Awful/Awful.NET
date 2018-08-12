@@ -8,7 +8,10 @@ using Windows.UI.Xaml;
 
 namespace Awful
 {
-    public sealed partial class App : Application
+    /// <summary>
+    /// Provides application-specific behavior to supplement the default Application class.
+    /// </summary>
+    sealed partial class App : Application
     {
         private Lazy<ActivationService> _activationService;
 
@@ -19,9 +22,13 @@ namespace Awful
 
         public static ShellViewModel ShellViewModel { get; set; }
 
+        /// <summary>
+        /// Initializes the singleton application object.  This is the first line of authored code
+        /// executed, and as such is the logical equivalent of main() or WinMain().
+        /// </summary>
         public App()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             #region Database
             using (var db = new UserAuthContext())

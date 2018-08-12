@@ -1,7 +1,7 @@
 ﻿using Awful.Database.Functions;
 using Awful.Helpers;
-using Awful.Managers;
-using Awful.Models.Threads;
+using Awful.Parser.Managers;
+using Awful.Parser.Models.Threads;
 using Awful.Tools;
 using Newtonsoft.Json;
 using System;
@@ -32,7 +32,7 @@ namespace Awful.ViewModels
             }
         }
 
-        private ThreadManager _threadManager;
+        private BookmarkManager _threadManager;
         #endregion
 
         public async Task Load()
@@ -69,7 +69,7 @@ namespace Awful.ViewModels
         {
             LoginUser();
 
-            _threadManager = new ThreadManager(WebManager);
+            _threadManager = new BookmarkManager(WebManager);
 
             if (BookmarkedThreads != null && BookmarkedThreads.Any())
             {
@@ -85,32 +85,11 @@ namespace Awful.ViewModels
             string error = "";
             try
             {
-                var pageNumber = 1;
-                var hasItems = false;
-                var oldList = true;
-                while (!hasItems)
+                var bookmarkResult = await _threadManager.GetAllBookmarks();
+                BookmarkedThreads = new ObservableCollection<Thread>();
+                foreach (var bookmark in bookmarkResult)
                 {
-                    var bookmarkResult = await _threadManager.GetBookmarksAsync(pageNumber);
-                    var bookmarks = JsonConvert.DeserializeObject<List<Thread>>(bookmarkResult.ResultJson);
-                    if (!bookmarks.Any())
-                    {
-                        hasItems = true;
-                    }
-                    else
-                    {
-                        pageNumber++;
-                    }
-
-                    if (oldList)
-                    {
-                        BookmarkedThreads = new ObservableCollection<Thread>();
-                        oldList = false;
-                    }
-
-                    foreach (var bookmark in bookmarks)
-                    {
-                        BookmarkedThreads.Add(bookmark);
-                    }
+                    BookmarkedThreads.Add(bookmark);
                 }
                 await ApplicationData.Current.LocalSettings.SaveAsync(RefreshKey, DateTime.UtcNow);
                 await ForumsDatabase.RefreshBookmarkedThreads(BookmarkedThreads.ToList());

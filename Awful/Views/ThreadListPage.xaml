@@ -12,7 +12,7 @@
     xmlns:converters="using:Awful.Tools.Converters"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:UwpControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:threads="using:Awful.Models.Threads"
+    xmlns:threads="using:Awful.Parser.Models.Threads"
     xmlns:viewModels="using:Awful.ViewModels"
     mc:Ignorable="d">
     

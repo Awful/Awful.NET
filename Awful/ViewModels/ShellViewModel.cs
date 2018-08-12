@@ -106,7 +106,8 @@ namespace Awful.ViewModels
 
         public void NavigationMenu_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
-            BackNavigated.Invoke(sender, null);
+            if (BackNavigated != null)
+                BackNavigated.Invoke(sender, null);
         }
 
         private ICommand _stateChangedCommand;
@@ -178,8 +179,12 @@ namespace Awful.ViewModels
             {
                 primaryItems.Add(ShellNavigationItem.FromType<BookmarkPage>("Bookmarks", Symbol.ShowResults));
                 primaryItems.Add(ShellNavigationItem.FromType<PrivateMessageListPage>("Private Messages", Symbol.Mail));
+                primaryItems.Add(ShellNavigationItem.FromType<LoginPage>("Profile", Symbol.Contact));
             }
-            primaryItems.Add(ShellNavigationItem.FromType<LoginPage>("Profile", Symbol.Contact));
+            else
+            {
+                primaryItems.Add(ShellNavigationItem.FromType<LoginPage>("Login", Symbol.Contact));
+            }
             PrimaryItems = primaryItems;
         }
 

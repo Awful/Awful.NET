@@ -1,5 +1,5 @@
-﻿using Awful.Models.Forums;
-using Awful.Models.Threads;
+﻿using Awful.Parser.Models.Forums;
+using Awful.Parser.Models.Threads;
 using Awful.Database.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -112,10 +112,11 @@ namespace Awful.Database.Functions
                     count++;
                 }
 
-                foreach(var thread in updatedBookmarkList)
+                foreach (var thread in updatedBookmarkList)
                 {
                     db.BookmarkedThreads.Add(thread);
                 }
+
                 return await db.SaveChangesAsync();
             }
         }

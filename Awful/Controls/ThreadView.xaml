@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:Awful.ViewModels"
     mc:Ignorable="d"
-    xmlns:uwp="using:FontAwesome.UWP"
+    xmlns:uwp="using:FontAwesome5.UWP"
     d:DesignHeight="300"
     d:DesignWidth="400">
     <UserControl.DataContext>
@@ -27,27 +27,27 @@
             <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" Height="48" Width="48" VerticalAlignment="Center" HorizontalAlignment="Center"></ProgressRing>
         </Grid>
         <WebView Grid.Row="2"  DefaultBackgroundColor="{ThemeResource AwfulWebBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                  NavigationStarting="OnNavigationStarting" NavigationCompleted="Web_NavigationCompleted" ScriptNotify="Web_ScriptNotify" Source="ms-appx-web:///Assets/Forums/WebPage.html" x:Name="Web" />
+                  NavigationStarting="OnNavigationStarting" NavigationCompleted="Web_NavigationCompleted" ScriptNotify="Web_ScriptNotify" x:Name="Web" />
         <CommandBar Height="{ThemeResource CommandBarHeight}" Visibility="{x:Bind ViewModel.IsPageLoaded, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="ForumCommandBar" Grid.Row="3">
             <AppBarButton Label="First Page" IsEnabled="{Binding Selected.CurrentPage, Converter={StaticResource BackButtonEnableConverter}}" Click="{x:Bind ViewModel.FirstThreadPage}">
                 <AppBarButton.Icon>
-                    <uwp:FontAwesome Icon="FastBackward" HorizontalAlignment="Center" />
+                    <uwp:FontAwesome Icon="Solid_FastBackward" HorizontalAlignment="Center" />
                 </AppBarButton.Icon>
             </AppBarButton>
             <AppBarButton Label="Previous Page" IsEnabled="{Binding Selected.CurrentPage, Converter={StaticResource BackButtonEnableConverter}}" Click="{x:Bind ViewModel.PreviousPage}">
                 <AppBarButton.Icon>
-                    <uwp:FontAwesome Icon="Backward" HorizontalAlignment="Center" />
+                    <uwp:FontAwesome Icon="Solid_Backward" HorizontalAlignment="Center" />
                 </AppBarButton.Icon>
             </AppBarButton>
             <AppBarButton Label="Refresh" IsEnabled="{Binding IsLoading, Converter={StaticResource BooleanInverter}}"  Click="{x:Bind ViewModel.RefreshThread}" Icon="Refresh"/>
             <AppBarButton Label="Next Page" IsEnabled="{Binding Selected, Converter={StaticResource ForwardButtonEnableConverter}}"  Click="{x:Bind ViewModel.NextPage}">
                 <AppBarButton.Icon>
-                    <uwp:FontAwesome Icon="Forward" HorizontalAlignment="Center" />
+                    <uwp:FontAwesome Icon="Solid_Forward" HorizontalAlignment="Center" />
                 </AppBarButton.Icon>
             </AppBarButton>
             <AppBarButton Label="Last Page" IsEnabled="{Binding Selected, Converter={StaticResource ForwardButtonEnableConverter}}"  Click="{x:Bind ViewModel.LastThreadPage}">
                 <AppBarButton.Icon>
-                    <uwp:FontAwesome Icon="FastForward" HorizontalAlignment="Center" />
+                    <uwp:FontAwesome Icon="Solid_FastForward" HorizontalAlignment="Center" />
                 </AppBarButton.Icon>
             </AppBarButton>
             <CommandBar.SecondaryCommands>

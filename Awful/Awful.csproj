@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{C32E6F52-B192-4685-AB6D-E17C2296E6F1}</ProjectGuid>
+    <ProjectGuid>{45A1493A-9064-429B-8807-DBDE1AE30319}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Awful</RootNamespace>
@@ -17,13 +17,13 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
-    <PackageCertificateKeyFile>Awful_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Awful.appx_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
-    <NoWarn>NU1603;2008;</NoWarn>
+    <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -34,7 +34,7 @@
     <OutputPath>bin\x86\Release\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <Optimize>true</Optimize>
-    <NoWarn>NU1603;2008;</NoWarn>
+    <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -46,7 +46,7 @@
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\ARM\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
-    <NoWarn>NU1603;2008;</NoWarn>
+    <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>ARM</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -57,7 +57,7 @@
     <OutputPath>bin\ARM\Release\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <Optimize>true</Optimize>
-    <NoWarn>NU1603;2008;</NoWarn>
+    <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>ARM</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -69,7 +69,7 @@
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
-    <NoWarn>NU1603;2008;</NoWarn>
+    <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -80,7 +80,7 @@
     <OutputPath>bin\x64\Release\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <Optimize>true</Optimize>
-    <NoWarn>NU1603;2008;</NoWarn>
+    <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -92,37 +92,11 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Fody">
-      <Version>2.4.4</Version>
-    </PackageReference>
-    <PackageReference Include="FontAwesome.UWP">
-      <Version>4.7.0.9</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite">
-      <Version>2.0.1</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.0.6</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
-      <Version>2.0.0</Version>
-    </PackageReference>
-    <!-- Nuget package references -->
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>11.0.1</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
-      <Version>2.2.0</Version>
-    </PackageReference>
-    <PackageReference Include="PropertyChanged.Fody">
-      <Version>2.2.9</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <PRIResource Include="Strings\en-us\Resources.resw" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Activation\ActivationHandler.cs" />
+    <Compile Include="Activation\DefaultLaunchActivationHandler.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ListControls\AdaptiveGridView.cs" />
     <Compile Include="Controls\MasterDetailViewControl.xaml.cs">
       <DependentUpon>MasterDetailViewControl.xaml</DependentUpon>
@@ -134,10 +108,12 @@
     <Compile Include="Helpers\Json.cs" />
     <Compile Include="Helpers\Observable.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
+    <Compile Include="Helpers\ResourceExtensions.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
-    <Compile Include="Activation\DefaultLaunchActivationHandler.cs" />
+    <Compile Include="Helpers\Singleton.cs" />
     <Compile Include="Helpers\TitleBarHelper.cs" />
     <Compile Include="Helpers\WindowsHelpers.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ActivationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\OnBackgroundEnteringEventArgs.cs" />
@@ -167,6 +143,7 @@
     <Compile Include="Tools\PageScrollingCollection.cs" />
     <Compile Include="Tools\ResultChecker.cs" />
     <Compile Include="Tools\SettingsHelper.cs" />
+    <Compile Include="Tools\UserAuthHandler.cs" />
     <Compile Include="ViewModels\AwfulViewModel.cs" />
     <Compile Include="ViewModels\BookmarksViewModel.cs" />
     <Compile Include="ViewModels\ForumThreadListBaseViewModel.cs" />
@@ -203,104 +180,34 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Controls\MasterDetailViewControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\ThreadView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\Custom.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\Dark.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\Forums.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\Light.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\Page.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\_Colors.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
-    <Page Include="Styles\_FontSizes.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
-    <Page Include="Styles\_Thickness.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
-    <Page Include="Styles\TextBlock.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
-    <Page Include="Views\BookmarkPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\LoginPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\PaywallPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PrivateMessageListPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SettingsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\ShellPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\ThreadListPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Helpers\ResourceExtensions.cs" />
-    <Compile Include="Helpers\Singleton.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
+    <None Include="Assets\Forums\asset-manifest.json" />
+    <None Include="Assets\Forums\manifest.json" />
+    <None Include="Assets\Forums\static\css\main.a93565b6.css.map" />
+    <None Include="Assets\Forums\static\js\main.da0b4f0b.js.map" />
+    <None Include="Assets\Forums\static\media\selawk.6ab68a1e.eot" />
+    <Content Include="Assets\Forums\favicon.ico" />
+    <Content Include="Assets\Forums\index.html" />
+    <Content Include="Assets\Forums\jquery.js" />
+    <Content Include="Assets\Forums\play-button.png" />
+    <Content Include="Assets\Forums\service-worker.js" />
+    <Content Include="Assets\Forums\spinner-button.png" />
+    <Content Include="Assets\Forums\static\media\selawk.c0c37a1e.ttf" />
+    <Content Include="Assets\Forums\static\media\selawkb.2e5d0806.ttf" />
+    <None Include="Assets\Forums\static\media\selawkb.a0c2f922.eot" />
+    <Content Include="Assets\Forums\static\media\selawkl.4b936248.ttf" />
+    <None Include="Assets\Forums\static\media\selawkl.b442c62c.eot" />
+    <None Include="Assets\Forums\static\media\selawksb.86745e35.eot" />
+    <Content Include="Assets\Forums\static\media\selawksb.e2b8a9a7.ttf" />
+    <Content Include="Assets\Forums\static\media\selawksl.b3a62850.ttf" />
+    <None Include="Assets\Forums\static\media\selawksl.f325f4eb.eot" />
+    <Content Include="Assets\Forums\static\media\winjs-symbols.8c598350.ttf" />
+    <None Include="Assets\Forums\static\media\winjs-symbols.a8e820ee.eot" />
+    <None Include="Assets\ThreadTags\README.md" />
+    <None Include="Awful.appx_TemporaryKey.pfx" />
+    <PRIResource Include="Strings\en-us\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\BadgeLogo.scale-100.png" />
@@ -308,17 +215,11 @@
     <Content Include="Assets\BadgeLogo.scale-150.png" />
     <Content Include="Assets\BadgeLogo.scale-200.png" />
     <Content Include="Assets\BadgeLogo.scale-400.png" />
-    <Content Include="Assets\Forums\css\dark.css" />
-    <Content Include="Assets\Forums\css\gifwrap.css" />
-    <Content Include="Assets\Forums\css\light.css" />
-    <Content Include="Assets\Forums\jquery.js" />
-    <Content Include="Assets\Forums\main.js" />
-    <Content Include="Assets\Forums\play-button.png" />
-    <Content Include="Assets\Forums\spinner-button.png" />
+    <Content Include="Assets\Forums\static\css\main.a93565b6.css" />
+    <Content Include="Assets\Forums\static\js\main.da0b4f0b.js" />
+    <Content Include="Assets\Forums\static\media\example_dark.d5f09669.jpg" />
+    <Content Include="Assets\Forums\static\media\example_light.320b18e5.jpg" />
     <Content Include="Assets\Forums\threadTemplate.js" />
-    <Content Include="Assets\Forums\vendor.css" />
-    <Content Include="Assets\Forums\vendor.js" />
-    <Content Include="Assets\Forums\WebPage.html" />
     <Content Include="Assets\Forums\widgets.js" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
@@ -326,11 +227,6 @@
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
     <Content Include="Assets\missing.png" />
-    <Content Include="Assets\NewStoreLogo.scale-100.png" />
-    <Content Include="Assets\NewStoreLogo.scale-125.png" />
-    <Content Include="Assets\NewStoreLogo.scale-150.png" />
-    <Content Include="Assets\NewStoreLogo.scale-200.png" />
-    <Content Include="Assets\NewStoreLogo.scale-400.png" />
     <Content Include="Assets\sa-clip.mp4" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-125.png" />
@@ -340,16 +236,13 @@
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-125.png" />
     <Content Include="Assets\SplashScreen.scale-150.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-400.png" />
     <Content Include="Assets\Square150x150Logo.scale-100.png" />
     <Content Include="Assets\Square150x150Logo.scale-125.png" />
     <Content Include="Assets\Square150x150Logo.scale-150.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-400.png" />
-    <Content Include="Assets\Square310x310Logo.scale-100.png" />
-    <Content Include="Assets\Square310x310Logo.scale-125.png" />
-    <Content Include="Assets\Square310x310Logo.scale-150.png" />
-    <Content Include="Assets\Square310x310Logo.scale-200.png" />
-    <Content Include="Assets\Square310x310Logo.scale-400.png" />
     <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png" />
     <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-24.png" />
     <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png" />
@@ -365,11 +258,6 @@
     <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-32.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
-    <Content Include="Assets\Square71x71Logo.scale-100.png" />
-    <Content Include="Assets\Square71x71Logo.scale-125.png" />
-    <Content Include="Assets\Square71x71Logo.scale-150.png" />
-    <Content Include="Assets\Square71x71Logo.scale-200.png" />
-    <Content Include="Assets\Square71x71Logo.scale-400.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-125.png" />
     <Content Include="Assets\StoreLogo.scale-150.png" />
@@ -1001,31 +889,128 @@
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="FodyWeavers.xml" />
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="Assets\SplashScreen.scale-200.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include=".editorconfig" />
-    <Content Include="Assets\Forums\forums.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="Assets\ThreadTags\README.md" />
-    <None Include="Awful_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\MasterDetailViewControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ThreadView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Custom.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Dark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Forums.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Light.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\TextBlock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\_Colors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\_FontSizes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\_Thickness.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BookmarkPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PaywallPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PrivateMessageListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ShellPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ThreadListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AngleSharp">
+      <Version>0.9.10</Version>
+    </PackageReference>
+    <PackageReference Include="Fody">
+      <Version>3.1.4</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="FontAwesome5.UWP">
+      <Version>1.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite">
+      <Version>2.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>4.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
+      <Version>2.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>11.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="PropertyChanged.Fody">
+      <Version>2.5.9</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
     <ProjectReference Include="..\Awful.Core\Awful.Core.csproj">
-      <Project>{610f9232-2edc-49ca-9c50-f775349f3777}</Project>
+      <Project>{9510267f-e46e-4475-a0e7-231935bdbd48}</Project>
       <Name>Awful.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Awful.Web\Awful.Web.csproj">

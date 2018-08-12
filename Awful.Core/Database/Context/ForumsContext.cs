@@ -1,5 +1,6 @@
-﻿using Awful.Models.Forums;
-using Awful.Models.Threads;
+﻿using Awful.Parser.Models.Forums;
+using Awful.Parser.Models.Threads;
+using Awful.Parser.Models.Users;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,9 @@ namespace Awful.Database.Context
             .WithMany(b => b.ForumList)
             .HasForeignKey(p => p.CategoryId)
             .HasConstraintName("ForeignKey_Forum_Category");
+
+            modelBuilder.Entity<Forum>().HasOne(t => t.ParentForum).WithMany().HasForeignKey(t => t.ParentForumId);
+            modelBuilder.Entity<Thread>().HasOne(t => t.ForumEntity).WithMany().HasForeignKey(t => t.ForumId);
         }
     }
 }

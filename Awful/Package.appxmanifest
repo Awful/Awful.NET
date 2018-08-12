@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:genTemplate="http://schemas.microsoft.com/appx/developer/windowsTemplateStudio" IgnorableNamespaces="uap mp genTemplate">
-  <Identity Name="B4A12390-BA47-4DCC-B314-0EAE63092282" Publisher="CN=t_mil" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="B4A12390-BA47-4DCC-B314-0EAE63092282" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
+  <Identity Name="09255185-fe60-4594-a83b-31ffd5398c51" Publisher="CN=t_mil" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="09255185-fe60-4594-a83b-31ffd5398c51" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Awful</DisplayName>
+    <DisplayName>Awful.appx</DisplayName>
     <PublisherDisplayName>t_mil</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -16,7 +16,13 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Awful.App">
       <uap:VisualElements DisplayName="Awful" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Awful" BackgroundColor="transparent">
+        <uap:LockScreen Notification="badge" BadgeLogo="Assets\BadgeLogo.png" />
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+            <uap:ShowOn Tile="wide310x150Logo" />
+            <uap:ShowOn Tile="square310x310Logo" />
+          </uap:ShowNameOnTiles>
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
@@ -25,11 +31,4 @@
   <Capabilities>
     <Capability Name="internetClient" />
   </Capabilities>
-  <genTemplate:Metadata>
-    <genTemplate:Item Name="generator" Value="Windows Template Studio" />
-    <genTemplate:Item Name="wizardVersion" Version="v0.17.18066.1" />
-    <genTemplate:Item Name="templatesVersion" Version="v0.17.18067.1" />
-    <genTemplate:Item Name="projectType" Value="SplitView" />
-    <genTemplate:Item Name="framework" Value="MVVMBasic" />
-  </genTemplate:Metadata>
 </Package>

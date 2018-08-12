@@ -1,7 +1,8 @@
-﻿using Awful.Managers;
-using Awful.Models.Forums;
-using Awful.Models.Threads;
-using Awful.Models.Web;
+﻿using Awful.Parser.Core;
+using Awful.Parser.Managers;
+using Awful.Parser.Models.Forums;
+using Awful.Parser.Models.Threads;
+using Awful.Parser.Models.Web;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,13 +18,13 @@ namespace Awful.Tools
 {
     public class PageScrollingCollection : ObservableCollection<Thread>, ISupportIncrementalLoading
     {
-        public PageScrollingCollection(Forum forumEntity, int pageCount, WebManager web)
+        public PageScrollingCollection(Forum forumEntity, int pageCount, WebClient web)
         {
             HasMoreItems = true;
             IsLoading = false;
             PageCount = pageCount;
             ForumEntity = forumEntity;
-            _threadManager = new ThreadManager(web);
+            _threadManager = new ThreadListManager(web);
         }
 
         public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
@@ -44,7 +45,7 @@ namespace Awful.Tools
             e1 = null;
         }
 
-        private readonly ThreadManager _threadManager;
+        private readonly ThreadListManager _threadManager;
 
         public async Task<LoadMoreItemsResult> LoadDataAsync(uint count)
         {
@@ -52,26 +53,14 @@ namespace Awful.Tools
             List<Thread> forumThreadEntities;
             try
             {
-                var result = await _threadManager.GetForumThreadsAsync(ForumEntity.Location, ForumEntity.ForumId, PageCount);
-                var resultCheck = await ResultChecker.CheckPaywallOrSuccess(result);
-                if (!resultCheck)
-                {
-                    if (result.Type == typeof(Error).ToString())
-                    {
-                        var error = JsonConvert.DeserializeObject<Error>(result.ResultJson);
-                        if (error.IsPaywall)
-                        {
-                            FireEvent(true);
-                        }
-                    }
-                    HasMoreItems = false;
-                    IsLoading = false;
-                    return new LoadMoreItemsResult { Count = count };
-                }
-                forumThreadEntities = JsonConvert.DeserializeObject<List<Thread>>(result.ResultJson);
+                forumThreadEntities = await _threadManager.GetForumThreadListAsync(ForumEntity, PageCount);
             }
             catch (Exception ex)
             {
+                if (ex.Message == "paywall")
+                {
+                    FireEvent(true);
+                }
                 HasMoreItems = false;
                 IsLoading = false;
                 return new LoadMoreItemsResult { Count = count };

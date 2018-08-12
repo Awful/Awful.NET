@@ -1,5 +1,5 @@
-﻿using Awful.Models.Forums;
-using Awful.Models.Threads;
+﻿using Awful.Parser.Models.Forums;
+using Awful.Parser.Models.Threads;
 using Awful.Services;
 using Awful.Tools;
 using Awful.Views;

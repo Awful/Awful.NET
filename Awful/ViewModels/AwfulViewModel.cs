@@ -1,16 +1,18 @@
 ﻿using Awful.Database.Functions;
 using Awful.Helpers;
-using Awful.Managers;
-using Awful.Models.Threads;
-using Awful.Models.Users;
-using Awful.Parsers;
-using Awful.Tools;
+using Awful.Parser.Managers;
+using Awful.Parser.Models.Threads;
+using Awful.Parser.Models.Users;
+using Awful.Parser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
+using Awful.Database.Context;
+using Awful.Parser.Core;
+using Awful.Tools;
 
 namespace Awful.ViewModels
 {
@@ -49,14 +51,14 @@ namespace Awful.ViewModels
             }
         }
 
-        public WebManager WebManager { get; set; }
+        public WebClient WebManager { get; set; }
 
         public async Task AddRemoveBookmark(Thread thread)
         {
             string error = "";
             try
             {
-                var threadManager = new ThreadManager(WebManager);
+                var threadManager = new BookmarkManager(WebManager);
                 string bookmarkstring;
                 if (thread.IsBookmark)
                 {
@@ -82,8 +84,6 @@ namespace Awful.ViewModels
             {
                 error = ex.Message;
             }
-
-            if (!string.IsNullOrEmpty(error)) await ResultChecker.SendMessageDialogAsync($"Failed to get Bookmarks: {error}", false);
         }
 
         public async Task AddRemoveNotification(Thread thread)
@@ -94,14 +94,11 @@ namespace Awful.ViewModels
                 if (!thread.IsBookmark) return;
                 thread.IsNotified = !thread.IsNotified;
                 await ForumsDatabase.AddRemoveNotification(thread.ThreadId, thread.IsNotified);
-                await ResultChecker.SendMessageDialogAsync(thread.IsNotified ? $"You will now be notified of updates to '{thread.Name}'." : $"'{thread.Name}' is now removed for your notification list.", true);
             }
             catch (Exception ex)
             {
                 error = ex.Message;
             }
-
-            if (!string.IsNullOrEmpty(error)) await ResultChecker.SendMessageDialogAsync($"Failed to get Bookmarks: {error}", false);
         }
 
         public void TestLoginUser()

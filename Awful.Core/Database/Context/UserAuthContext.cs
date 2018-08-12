@@ -1,12 +1,14 @@
-﻿using Awful.Models.Users;
+﻿using Awful.Parser.Models.Users;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Net;
 using System.Text;
 
 namespace Awful.Database.Context
 {
-   public class UserAuthContext : DbContext
+    public class UserAuthContext : DbContext
     {
         public DbSet<UserAuth> Users { get; set; }
 
@@ -31,5 +33,20 @@ namespace Awful.Database.Context
         {
             modelBuilder.Entity<UserAuth>().Ignore(b => b.AuthCookies);
         }
+    }
+
+    public class UserAuth
+    {
+        [Key]
+        public int UserAuthId { get; set; }
+        public string UserName { get; set; }
+
+        public string AvatarLink { get; set; }
+
+        public string CookiePath { get; set; }
+
+        public CookieContainer AuthCookies { get; set; }
+
+        public bool IsDefaultUser { get; set; }
     }
 }

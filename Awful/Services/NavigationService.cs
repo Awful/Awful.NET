@@ -49,7 +49,8 @@ namespace Awful.Services
             if (CanGoBack)
             {
                 GoBack();
-                e.Handled = true;
+                if (e != null)
+                    e.Handled = true;
             }
         }
 

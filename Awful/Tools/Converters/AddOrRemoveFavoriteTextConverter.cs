@@ -1,4 +1,4 @@
-﻿using Awful.Models.Forums;
+﻿using Awful.Parser.Models.Forums;
 using System;
 using Windows.UI.Xaml.Data;
 

@@ -1,4 +1,4 @@
-﻿using Awful.Models.Threads;
+﻿using Awful.Parser.Models.Threads;
 using System;
 using System.Collections.Generic;
 using System.Linq;

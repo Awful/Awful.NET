@@ -1,4 +1,4 @@
-﻿using Awful.Models.Web;
+﻿using Awful.Parser.Models.Web;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

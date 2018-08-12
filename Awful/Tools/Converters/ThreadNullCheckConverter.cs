@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
-using Awful.Models.Threads;
+using Awful.Parser.Models.Threads;
 
 namespace Awful.Tools.Converters
 {

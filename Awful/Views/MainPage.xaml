@@ -7,7 +7,7 @@
     Style="{StaticResource PageStyle}"
     xmlns:fcu ="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
     xmlns:cu ="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,5)"
-    xmlns:forums="using:Awful.Models.Forums"
+    xmlns:forums="using:Awful.Parser.Models.Forums"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:listControls="using:Awful.Controls.ListControls"
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
@@ -67,7 +67,7 @@
                                     <RowDefinition Height="5"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <Rectangle Fill="{x:Bind IsSubforum, Converter={StaticResource SubforumHeaderColorConverter}}" Grid.Row="0"/>
+                                <Rectangle Fill="{x:Bind IsSubForum, Converter={StaticResource SubforumHeaderColorConverter}}" Grid.Row="0"/>
                                 <TextBlock Style="{ThemeResource ForumBox}" Foreground="{ThemeResource ForumFontColor}" Grid.Row="1" Text="{x:Bind Name}" FontFamily="{ThemeResource DefaultFont}" TextWrapping="Wrap" TextAlignment="Left" Margin="15,5,15,0" />
                                 <FlyoutBase.AttachedFlyout>
                                     <MenuFlyout>

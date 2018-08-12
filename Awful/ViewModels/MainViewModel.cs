@@ -5,8 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Awful.Database.Functions;
 using Awful.Helpers;
-using Awful.Managers;
-using Awful.Models.Forums;
+using Awful.Parser.Managers;
+using Awful.Parser.Models.Forums;
 using Awful.Services;
 using Awful.Tools;
 using Newtonsoft.Json;
@@ -80,7 +80,7 @@ namespace Awful.ViewModels
             _favoritesEntity = new Category
             {
                 Name = "Favorites",
-                Location = string.Format(EndPoints.ForumPage, "forumid=48"),
+                Location = string.Format(Awful.Parser.Core.EndPoints.ForumPage, "forumid=48"),
                 ForumList = forumEntities
             };
             if (favorites == null)
@@ -97,37 +97,32 @@ namespace Awful.ViewModels
         private async Task GetMainPageForumsAsync(bool forceRefresh = false)
         {
             var forumCategoryEntities = ForumsDatabase.GetMainForumCategories();
-            if (forumCategoryEntities.Any() && !forceRefresh) { AddForumCategoryToPage(forumCategoryEntities); return; }
-            if (!IsLoggedIn) { forumCategoryEntities = await LoadDefaultForums(); }
-            if (IsLoggedIn && forceRefresh) forumCategoryEntities = await LoadForumsFromSite();
+            if (forumCategoryEntities.Any())
+            { AddForumCategoryToPage(forumCategoryEntities); return; }
+            else
+                forumCategoryEntities = await LoadForumsFromSite();
             ForumGroupList.Clear();
             foreach (var forumCategoryEntity in forumCategoryEntities) ForumGroupList.Add(forumCategoryEntity);
             OnPropertyChanged("ForumGroupList");
             await ForumsDatabase.SaveForumList(ForumGroupList.ToList());
         }
 
-        private async Task<List<Category>> LoadDefaultForums()
-        {
-            var sampleFile = @"Assets\Forums\forums.json";
-            var installationFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
-            var file = await installationFolder.GetFileAsync(sampleFile);
-            var sampleDataText = await FileIO.ReadTextAsync(file);
-            return JsonConvert.DeserializeObject<List<Category>>(sampleDataText);
-        }
-
         private async Task<List<Category>> LoadForumsFromSite()
         {
             if (_forumManager == null) _forumManager = new ForumManager(WebManager);
 
-            var forumResult = await _forumManager.GetForumCategoriesAsync();
-            var resultCheck = await ResultChecker.CheckSuccess(forumResult);
-            if (!resultCheck)
+            try
+            {
+                var forumResult = await _forumManager.GetForumCategoriesAsync();
+                IsLoading = false;
+                return forumResult;
+            }
+            catch (Exception ex)
             {
                 await ResultChecker.SendMessageDialogAsync("Failed to update initial forum list", false);
                 IsLoading = false;
                 return new List<Category>();
             }
-            return JsonConvert.DeserializeObject<List<Category>>(forumResult.ResultJson);
         }
 
         private Category RemoveCurrentFavoritesFromList(List<Forum> forumEntities)
