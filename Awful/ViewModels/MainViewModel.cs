@@ -39,7 +39,7 @@ namespace Awful.ViewModels
             }
         }
 
-        public async Task LoadAsync()
+        public async Task LoadAsync(bool forceRefresh = false)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace Awful.ViewModels
                 {
                     IsLoading = true;
                     GetFavoriteForums();
-                    await GetMainPageForumsAsync();
+                    await GetMainPageForumsAsync(forceRefresh);
                     IsLoading = false;
                 }
             }
@@ -97,8 +97,11 @@ namespace Awful.ViewModels
         private async Task GetMainPageForumsAsync(bool forceRefresh = false)
         {
             var forumCategoryEntities = ForumsDatabase.GetMainForumCategories();
-            if (forumCategoryEntities.Any())
-            { AddForumCategoryToPage(forumCategoryEntities); return; }
+            if (forumCategoryEntities.Any() || !forceRefresh)
+            {
+                AddForumCategoryToPage(forumCategoryEntities);
+                return;
+            }
             else
                 forumCategoryEntities = await LoadForumsFromSite();
             ForumGroupList.Clear();

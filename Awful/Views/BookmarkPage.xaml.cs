@@ -46,6 +46,13 @@ namespace Awful.Views
             previewControl.Loaded();
         }
 
+        private async void RefreshContainer_OnRefreshRequested(
+    RefreshContainer sender, RefreshRequestedEventArgs args)
+        {
+            await ViewModel.Refresh();
+        }
+
+
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);

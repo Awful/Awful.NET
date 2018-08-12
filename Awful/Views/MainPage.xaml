@@ -32,20 +32,24 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <SemanticZoom x:Name="semanticZoom">
-            <SemanticZoom.ZoomedOutView>
-                <ListView x:Name="ForumListView" Margin="5">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding Group.Name }" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </SemanticZoom.ZoomedOutView>
-            <SemanticZoom.ZoomedInView>
-                <listControls:AdaptiveGridView 
+        <RefreshContainer RefreshRequested="RefreshContainer_OnRefreshRequested">
+            <RefreshContainer.Visualizer>
+                <RefreshVisualizer />
+            </RefreshContainer.Visualizer>
+            <SemanticZoom x:Name="semanticZoom">
+                <SemanticZoom.ZoomedOutView>
+                    <ListView x:Name="ForumListView" Margin="5">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Group.Name }" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </SemanticZoom.ZoomedOutView>
+                <SemanticZoom.ZoomedInView>
+                    <listControls:AdaptiveGridView 
                 Grid.Row="0"
                 x:Name="MainForumListFull"
                 AutomationProperties.AutomationId="ItemGridView"
@@ -60,63 +64,64 @@
                 IsSwipeEnabled="True"
                 animations:ReorderGridAnimation.Duration="300"
                 IsItemClickEnabled="True">
-                    <listControls:AdaptiveGridView.ItemTemplate>
-                        <DataTemplate x:DataType="forums:Forum">
-                            <Grid Background="{ThemeResource ForumBackground}" x:Name="ForumTemplateGrid" HorizontalAlignment="Stretch">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="5"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Rectangle Fill="{x:Bind IsSubForum, Converter={StaticResource SubforumHeaderColorConverter}}" Grid.Row="0"/>
-                                <TextBlock Style="{ThemeResource ForumBox}" Foreground="{ThemeResource ForumFontColor}" Grid.Row="1" Text="{x:Bind Name}" FontFamily="{ThemeResource DefaultFont}" TextWrapping="Wrap" TextAlignment="Left" Margin="15,5,15,0" />
-                                <FlyoutBase.AttachedFlyout>
-                                    <MenuFlyout>
-                                        <MenuFlyoutItem Text="{Binding Converter={StaticResource AddOrRemoveFavoriteTextConverter}}" Click="AddOrRemoveFavorite"  CommandParameter="{Binding}"/>
-                                    </MenuFlyout>
-                                </FlyoutBase.AttachedFlyout>
-                                <Interactivity:Interaction.Behaviors>
-                                    <Core:EventTriggerBehavior EventName="Holding">
-                                        <converters:OpenMenuFlyoutAction />
-                                    </Core:EventTriggerBehavior>
-                                    <Core:EventTriggerBehavior EventName="RightTapped">
-                                        <converters:OpenMenuFlyoutAction />
-                                    </Core:EventTriggerBehavior>
-                                </Interactivity:Interaction.Behaviors>
-                            </Grid>
-                        </DataTemplate>
-                    </listControls:AdaptiveGridView.ItemTemplate>
-                    <listControls:AdaptiveGridView.ItemContainerStyle>
-                        <Style TargetType="GridViewItem">
-                            <Setter Property="HorizontalContentAlignment"
+                        <listControls:AdaptiveGridView.ItemTemplate>
+                            <DataTemplate x:DataType="forums:Forum">
+                                <Grid Background="{ThemeResource ForumBackground}" x:Name="ForumTemplateGrid" HorizontalAlignment="Stretch">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="5"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Rectangle Fill="{x:Bind IsSubForum, Converter={StaticResource SubforumHeaderColorConverter}}" Grid.Row="0"/>
+                                    <TextBlock Style="{ThemeResource ForumBox}" Foreground="{ThemeResource ForumFontColor}" Grid.Row="1" Text="{x:Bind Name}" FontFamily="{ThemeResource DefaultFont}" TextWrapping="Wrap" TextAlignment="Left" Margin="15,5,15,0" />
+                                    <FlyoutBase.AttachedFlyout>
+                                        <MenuFlyout>
+                                            <MenuFlyoutItem Text="{Binding Converter={StaticResource AddOrRemoveFavoriteTextConverter}}" Click="AddOrRemoveFavorite"  CommandParameter="{Binding}"/>
+                                        </MenuFlyout>
+                                    </FlyoutBase.AttachedFlyout>
+                                    <Interactivity:Interaction.Behaviors>
+                                        <Core:EventTriggerBehavior EventName="Holding">
+                                            <converters:OpenMenuFlyoutAction />
+                                        </Core:EventTriggerBehavior>
+                                        <Core:EventTriggerBehavior EventName="RightTapped">
+                                            <converters:OpenMenuFlyoutAction />
+                                        </Core:EventTriggerBehavior>
+                                    </Interactivity:Interaction.Behaviors>
+                                </Grid>
+                            </DataTemplate>
+                        </listControls:AdaptiveGridView.ItemTemplate>
+                        <listControls:AdaptiveGridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="HorizontalContentAlignment"
                             Value="Stretch" />
-                            <Setter Property="HorizontalAlignment"
+                                <Setter Property="HorizontalAlignment"
                             Value="Stretch" />
-                            <Setter Property="VerticalContentAlignment"
+                                <Setter Property="VerticalContentAlignment"
                             Value="Stretch" />
-                            <Setter Property="VerticalAlignment"
+                                <Setter Property="VerticalAlignment"
                             Value="Stretch" />
-                            <Setter Property="Margin"
+                                <Setter Property="Margin"
                             Value="5" />
-                        </Style>
-                    </listControls:AdaptiveGridView.ItemContainerStyle>
-                    <listControls:AdaptiveGridView.GroupStyle>
-                        <GroupStyle HeaderContainerStyle="{StaticResource ForumGridViewHeaderItemStyle}">
-                            <GroupStyle.HeaderTemplate>
-                                <DataTemplate x:DataType="forums:Category">
-                                    <Grid Margin="5,0,0,5" Width="300">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <TextBlock Foreground="{ThemeResource ForumFontColor}" FontFamily="{ThemeResource DefaultFont}" Text="{x:Bind Name}" FontSize="30" VerticalAlignment="Center"/>
-                                        <Rectangle Grid.Row="1" Fill="GreenYellow" Height="1" Margin="0,7,0,0"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </GroupStyle.HeaderTemplate>
-                        </GroupStyle>
-                    </listControls:AdaptiveGridView.GroupStyle>
-                </listControls:AdaptiveGridView>
-            </SemanticZoom.ZoomedInView>
-        </SemanticZoom>
+                            </Style>
+                        </listControls:AdaptiveGridView.ItemContainerStyle>
+                        <listControls:AdaptiveGridView.GroupStyle>
+                            <GroupStyle HeaderContainerStyle="{StaticResource ForumGridViewHeaderItemStyle}">
+                                <GroupStyle.HeaderTemplate>
+                                    <DataTemplate x:DataType="forums:Category">
+                                        <Grid Margin="5,0,0,5" Width="300">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Foreground="{ThemeResource ForumFontColor}" FontFamily="{ThemeResource DefaultFont}" Text="{x:Bind Name}" FontSize="30" VerticalAlignment="Center"/>
+                                            <Rectangle Grid.Row="1" Fill="GreenYellow" Height="1" Margin="0,7,0,0"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </GroupStyle.HeaderTemplate>
+                            </GroupStyle>
+                        </listControls:AdaptiveGridView.GroupStyle>
+                    </listControls:AdaptiveGridView>
+                </SemanticZoom.ZoomedInView>
+            </SemanticZoom>
+        </RefreshContainer>
     </Grid>
 </Page>

@@ -41,5 +41,11 @@ namespace Awful.Views
             var forum = e.ClickedItem as Forum;
             ViewModel.NavigateToThreadList(forum);
         }
+
+        private async void RefreshContainer_OnRefreshRequested(
+            RefreshContainer sender, RefreshRequestedEventArgs args)
+        {
+            await ViewModel.LoadAsync(true);
+        }
     }
 }
