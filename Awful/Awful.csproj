@@ -101,6 +101,9 @@
     <Compile Include="Controls\MasterDetailViewControl.xaml.cs">
       <DependentUpon>MasterDetailViewControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PrivateMessageView.xaml.cs">
+      <DependentUpon>PrivateMessageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ThreadView.xaml.cs">
       <DependentUpon>ThreadView.xaml</DependentUpon>
     </Compile>
@@ -141,6 +144,7 @@
     <Compile Include="Tools\ForumCommand.cs" />
     <Compile Include="Tools\ForumCommandCreator.cs" />
     <Compile Include="Tools\PageScrollingCollection.cs" />
+    <Compile Include="Tools\PrivateMessageScrollingCollection.cs" />
     <Compile Include="Tools\ResultChecker.cs" />
     <Compile Include="Tools\SettingsHelper.cs" />
     <Compile Include="Tools\UserAuthHandler.cs" />
@@ -149,6 +153,8 @@
     <Compile Include="ViewModels\ForumThreadListBaseViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\PrivateMessagesListViewModel.cs" />
+    <Compile Include="ViewModels\PrivateMessageViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellNavigationItem.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
@@ -902,6 +908,10 @@
     <Page Include="Controls\MasterDetailViewControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\PrivateMessageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ThreadView.xaml">
       <Generator>MSBuild:Compile</Generator>
