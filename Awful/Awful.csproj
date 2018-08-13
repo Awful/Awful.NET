@@ -153,11 +153,16 @@
     <Compile Include="ViewModels\ForumThreadListBaseViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\NewPostBaseViewModel.cs" />
+    <Compile Include="ViewModels\PreviewViewModel.cs" />
+    <Compile Include="ViewModels\PreviousPostsViewModel.cs" />
     <Compile Include="ViewModels\PrivateMessagesListViewModel.cs" />
     <Compile Include="ViewModels\PrivateMessageViewModel.cs" />
+    <Compile Include="ViewModels\ReplyThreadViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellNavigationItem.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\SmiliesViewModel.cs" />
     <Compile Include="ViewModels\ThreadListPageViewModel.cs" />
     <Compile Include="ViewModels\ThreadViewModel.cs" />
     <Compile Include="Views\BookmarkPage.xaml.cs">
@@ -174,6 +179,9 @@
     </Compile>
     <Compile Include="Views\PrivateMessageListPage.xaml.cs">
       <DependentUpon>PrivateMessageListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReplyPage.xaml.cs">
+      <DependentUpon>ReplyPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -972,6 +980,10 @@
     <Page Include="Views\PrivateMessageListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ReplyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
