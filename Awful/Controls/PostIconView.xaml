@@ -1,0 +1,62 @@
+﻿<UserControl
+    x:Class="Awful.Controls.PostIconView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Awful.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:Awful.ViewModels"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.DataContext>
+        <viewModels:PostIconViewModel />
+    </UserControl.DataContext>
+    <Grid>
+        <GridView
+                x:Name="ItemGridView"
+                Margin="15"
+                AutomationProperties.AutomationId="ItemGridView"
+                AutomationProperties.Name="Grouped Items"
+                Padding="0,0,0,0"
+                ItemsSource="{Binding PostIconEntities}"
+                SelectionMode="None"
+                ItemClick="{x:Bind ViewModel.SelectIcon}"
+                IsSwipeEnabled="false"
+                IsItemClickEnabled="True"
+                HorizontalAlignment="Stretch">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid HorizontalAlignment="Left" Width="100" Height="80">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border Background="{ThemeResource AwfulHeader}">
+                            <Image Source="{Binding ImageUrl}" Stretch="None"
+                                           AutomationProperties.Name="{Binding Title}" />
+                        </Border>
+                        <TextBlock Grid.Row="1"  FontSize="12" TextWrapping="Wrap" TextAlignment="Center" Text="{Binding Title}"
+                                           Height="30" Margin="15,0,15,0" />
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+            <GridView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5,0,0,5" Width="300">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Foreground="{StaticResource ForumFontColor}" FontFamily="{StaticResource DefaultFont}" Text="{Binding Name}" FontSize="30" VerticalAlignment="Center"/>
+                                <Rectangle Grid.Row="1" Fill="GreenYellow" Height="1" Margin="0,7,0,0"/>
+                            </Grid>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </GridView.GroupStyle>
+        </GridView>
+    </Grid>
+</UserControl>

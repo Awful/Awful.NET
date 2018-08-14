@@ -101,8 +101,14 @@
     <Compile Include="Controls\MasterDetailViewControl.xaml.cs">
       <DependentUpon>MasterDetailViewControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PostIconView.xaml.cs">
+      <DependentUpon>PostIconView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PrivateMessageView.xaml.cs">
       <DependentUpon>PrivateMessageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SmiliesView.xaml.cs">
+      <DependentUpon>SmiliesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ThreadView.xaml.cs">
       <DependentUpon>ThreadView.xaml</DependentUpon>
@@ -154,6 +160,7 @@
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\NewPostBaseViewModel.cs" />
+    <Compile Include="ViewModels\PostIconViewModel.cs" />
     <Compile Include="ViewModels\PreviewViewModel.cs" />
     <Compile Include="ViewModels\PreviousPostsViewModel.cs" />
     <Compile Include="ViewModels\PrivateMessagesListViewModel.cs" />
@@ -917,7 +924,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\PostIconView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\PrivateMessageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SmiliesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
