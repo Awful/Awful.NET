@@ -51,7 +51,7 @@ namespace Awful.Parser.Handlers
                 };
                 ParseStar(row.QuerySelector(".star"), thread);
                 ParseIcon(row.QuerySelector(".icon"), thread);
-                ParseTitle(row.QuerySelector(".info"), thread);
+                ParseTitle(row.QuerySelector(".title"), thread);
                 ParseAuthor(row.QuerySelector(".author"), thread);
                 ParseReplies(row.QuerySelector(".replies"), thread);
                 ParseViews(row.QuerySelector(".views"), thread);
@@ -162,7 +162,7 @@ namespace Awful.Parser.Handlers
                 return;
             if (element.ClassList.Contains("title_sticky"))
                 thread.IsSticky = true;
-            var threadList = element.QuerySelector("a");
+            var threadList = element.QuerySelector(".thread_title");
             thread.Name = threadList.TextContent;
         }
 

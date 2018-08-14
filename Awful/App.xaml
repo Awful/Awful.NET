@@ -23,6 +23,7 @@
             <converters:RatingVisibilityConverter x:Key="RatingVisibilityConverter" />
             <converters:RepliesSinceLastOpenedColorConverter x:Key="RepliesSinceLastOpenedColorConverter" />
             <converters:ThreadHeaderColorConverter x:Key="ThreadHeaderColorConverter" />
+            <converters:BookmarksThreadHeaderColorConverter x:Key="BookmarksThreadHeaderColorConverter" />
             <converters:SubforumHeaderColorConverter x:Key="SubforumHeaderColorConverter" />
             <converters:ThreadNullCheckConverter x:Key="ThreadNullCheckConverter"/>
             <converters:AddOrRemoveFavoriteTextConverter x:Key="AddOrRemoveFavoriteTextConverter" />

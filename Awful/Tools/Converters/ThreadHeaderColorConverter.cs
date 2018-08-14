@@ -23,4 +23,28 @@ namespace Awful.Tools.Converters
             throw new NotImplementedException();
         }
     }
+
+    public class BookmarksThreadHeaderColorConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            var item = (string)value;
+            switch(item)
+            {
+                case "bm0":
+                    return new SolidColorBrush(Colors.Orange);
+                case "bm1":
+                    return new SolidColorBrush(Colors.Red);
+                case "bm2":
+                    return new SolidColorBrush(Colors.Yellow);
+                default:
+                    return new SolidColorBrush(Colors.Orange);
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
