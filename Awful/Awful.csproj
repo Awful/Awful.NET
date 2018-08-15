@@ -104,6 +104,9 @@
     <Compile Include="Controls\PostIconView.xaml.cs">
       <DependentUpon>PostIconView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PreviousPostsView.xaml.cs">
+      <DependentUpon>PreviousPostsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PrivateMessageView.xaml.cs">
       <DependentUpon>PrivateMessageView.xaml</DependentUpon>
     </Compile>
@@ -925,6 +928,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\PostIconView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PreviousPostsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
