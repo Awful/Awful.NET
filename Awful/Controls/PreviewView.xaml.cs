@@ -23,19 +23,18 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Awful.Controls
 {
-    public sealed partial class PreviousPostsView : UserControl
+    public sealed partial class PreviewView : UserControl
     {
-        public static PreviousPostsView Instance { get; set; }
-
-        public PreviousPostsView()
+        public PreviewView()
         {
             this.InitializeComponent();
             ViewModel.LoginUser();
             ViewModel.Web = Web;
             Web.LoadCompleted += Web_LoadCompleted;
-            Instance = this;
             LoadBaseView();
         }
+
+        public PreviewViewModel ViewModel => this.DataContext as PreviewViewModel;
 
         private async void Web_LoadCompleted(object sender, NavigationEventArgs e)
         {
@@ -46,19 +45,6 @@ namespace Awful.Controls
         {
             ViewModel.WebCommands = new WebCommands();
             sender.AddWebAllowedObject("webCommands", ViewModel.WebCommands);
-        }
-
-        private async void Web_ScriptNotify(object sender, NotifyEventArgs e)
-        {
-            try
-            {
-                var test = JsonConvert.DeserializeObject<ForumCommand>(e.Value);
-                await ViewModel.HandleForumCommand(test);
-            }
-            catch (Exception ex)
-            {
-
-            }
         }
 
         private async void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
@@ -96,8 +82,5 @@ namespace Awful.Controls
 
             return "<!DOCTYPE html> " + basePage.DocumentElement.OuterHtml;
         }
-
-        // strongly-typed view models enable x:bind
-        public PreviousPostsViewModel ViewModel => this.DataContext as PreviousPostsViewModel;
     }
 }

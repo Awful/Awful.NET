@@ -15,10 +15,9 @@ namespace Awful.ViewModels
 
         public string Title
         {
-            get { return _title; }
             set
             {
-                Set(ref _title, value);
+                App.ShellViewModel.Header = value;
             }
         }
 

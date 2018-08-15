@@ -104,6 +104,9 @@
     <Compile Include="Controls\PostIconView.xaml.cs">
       <DependentUpon>PostIconView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PreviewView.xaml.cs">
+      <DependentUpon>PreviewView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PreviousPostsView.xaml.cs">
       <DependentUpon>PreviousPostsView.xaml</DependentUpon>
     </Compile>
@@ -117,6 +120,7 @@
       <DependentUpon>ThreadView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
+    <Compile Include="Helpers\FlyoutHelper.cs" />
     <Compile Include="Helpers\Json.cs" />
     <Compile Include="Helpers\Observable.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
@@ -928,6 +932,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\PostIconView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PreviewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

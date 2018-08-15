@@ -29,7 +29,14 @@ namespace Awful.Parser.Handlers
 
             var threadBody = doc.QuerySelector(".postbody");
             if (threadBody != null)
+            {
+                var attachments = threadBody.QuerySelectorAll(@"[src*=""attachment.php""]");
+                foreach(var attachment in attachments)
+                {
+                    attachment.SetAttribute("src", $"https://forums.somethingawful.com/{attachment.Attributes["src"].Value}");
+                }
                 post.PostHtml = threadBody.InnerHtml;
+            }
 
             return post;
         }

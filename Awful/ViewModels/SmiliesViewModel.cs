@@ -46,14 +46,14 @@ namespace Awful.ViewModels
         private SmileManager _smileManager;
         public ObservableCollection<SmileCategory> FullSmileCategoryEntities { get; set; }
 
-        public async Task LoadSmilies()
+        public async Task LoadSmiliesAsync()
         {
             if (WebManager == null)
             {
                 LoginUser();
-                _smileManager = new SmileManager(WebManager);
             }
 
+            _smileManager = new SmileManager(WebManager);
             if (!SmileCategoryList.Any())
             {
                 IsLoading = true;

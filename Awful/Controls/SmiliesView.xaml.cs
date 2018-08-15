@@ -23,6 +23,7 @@ namespace Awful.Controls
         public SmiliesView()
         {
             this.InitializeComponent();
+            ViewModel.LoginUser();
             ViewModel.SmiliesView = this;
         }
 

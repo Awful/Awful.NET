@@ -12,6 +12,7 @@ using AngleSharp.Dom.Html;
 using AngleSharp.Parser.Html;
 using Awful.Parser.Core;
 using Awful.Parser.Models.Forums;
+using Awful.Parser.Models.Posts;
 using Awful.Parser.Models.Threads;
 using Awful.Parser.Models.Users;
 
@@ -82,6 +83,19 @@ namespace Awful.Parser.Handlers
             ParseThreadPage(doc, thread);
             ParseThreadPosts(doc, thread);
             return thread;
+        }
+
+        public static List<Post> ParsePreviousPosts(IHtmlDocument doc)
+        {
+            var posts = new List<Post>();
+            var threadDivTableHolder = doc.QuerySelector("#thread");
+            foreach (var threadTable in threadDivTableHolder.QuerySelectorAll("table"))
+            {
+                if (string.IsNullOrEmpty(threadTable.GetAttribute("data-idx")))
+                    continue;
+                posts.Add(PostHandler.ParsePost(threadTable));
+            }
+            return posts;
         }
 
         private static void ParseThreadPosts(IHtmlDocument doc, Thread thread)

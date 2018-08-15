@@ -213,7 +213,7 @@ namespace Awful.ViewModels
                     TotalPages = Selected.TotalPages
                 }
             });
-            // NavigationService.Navigate(typeof(ReplyPage), reply);
+            NavigationService.Navigate(typeof(ReplyPage), reply);
         }
 
         public WebCommands WebCommands { get; set; }

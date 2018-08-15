@@ -1,10 +1,16 @@
-﻿using System;
+﻿using Awful.Parser.Models.Threads;
+using Awful.Services;
+using Awful.ViewModels;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -13,18 +19,29 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace Awful.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class ReplyPage : Page
     {
+        public ReplyThreadViewModel ViewModel => this.DataContext as ReplyThreadViewModel;
+
         public ReplyPage()
         {
             this.InitializeComponent();
+            SmiliesView.ViewModel.ReplyBox = ReplyText;
+            PreviousView.ViewModel.ReplyBox = ReplyText;
+            ViewModel.PreviousPostsViewModel = PreviousView.ViewModel;
+            ViewModel.PreviewViewModel = PreviewView.ViewModel;
+            ViewModel.SmiliesViewModel = SmiliesView.ViewModel;
+            ViewModel.ReplyBox = ReplyText;
+        }
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            if (e.Parameter == null) return;
+            await ViewModel.Init(JsonConvert.DeserializeObject<ThreadReply>(e.Parameter as string));
+
         }
     }
 }

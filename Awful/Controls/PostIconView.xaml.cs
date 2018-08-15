@@ -23,6 +23,7 @@ namespace Awful.Controls
         public PostIconView()
         {
             this.InitializeComponent();
+            ViewModel.LoginUser();
         }
 
         // strongly-typed view models enable x:bind
