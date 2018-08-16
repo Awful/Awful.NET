@@ -1,6 +1,9 @@
 ﻿using Awful.Controls;
 using Awful.Parser.Models.Messages;
+using Awful.Services;
 using Awful.Tools;
+using Awful.Views;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,7 +64,7 @@ namespace Awful.ViewModels
 
         public void CreatePM()
         {
-            // NavigationService.Navigate(typeof(NewThreadPage), JsonConvert.SerializeObject(Forum));
+           NavigationService.Navigate(typeof(NewPrivateMessagePage), JsonConvert.SerializeObject(new NewPrivateMessage()));
         }
 
         #endregion

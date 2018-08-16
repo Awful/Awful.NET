@@ -2,6 +2,7 @@
 using Awful.Parser.Models.Forums;
 using Awful.Parser.Models.Messages;
 using Awful.Parser.Models.Threads;
+using Awful.Parser.Models.Web;
 using Awful.Services;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,12 @@ namespace Awful.ViewModels
             {
                 Set(ref _recipient, value);
             }
+        }
+
+        public async void OpenPostIconView()
+        {
+            await PostIconViewModel.Initialize(0);
+            PostIconViewModel.IsOpen = true;
         }
 
         private PrivateMessageManager _postManager;
@@ -64,6 +71,35 @@ namespace Awful.ViewModels
                 Recipient.Text = Selected.Sender;
             }
             IsLoading = false;
+        }
+
+        public async Task CreatePmAsync()
+        {
+            IsLoading = true;
+            if (string.IsNullOrEmpty(ReplyBox.Text) || _newPrivateMessage == null) return;
+            IsLoading = true;
+            Result result = new Result();
+            try
+            {
+                _newPrivateMessage.Icon = PostIconViewModel.PostIcon;
+                _newPrivateMessage.Body = ReplyBox.Text;
+                _newPrivateMessage.Receiver = Recipient.Text;
+                _newPrivateMessage.Title = Subject.Text;
+                result = await _postManager.SendPrivateMessageAsync(_newPrivateMessage);
+            }
+            catch (Exception)
+            {
+                // TODO: Show error.
+            }
+            IsLoading = false;
+            if (result.IsSuccess)
+            {
+                NavigationService.GoBack();
+                IsLoading = false;
+                return;
+            }
+            IsLoading = false;
+            // TODO: Add error message when something screws up.
         }
     }
 }

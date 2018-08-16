@@ -78,7 +78,7 @@ namespace Awful.ViewModels
         {
             if (this.IsLoggedIn)
             {
-                // NavigationService.Navigate(typeof(NewThreadPage), JsonConvert.SerializeObject(Forum));
+                NavigationService.Navigate(typeof(NewThreadPage), JsonConvert.SerializeObject(Forum));
             }
         }
 

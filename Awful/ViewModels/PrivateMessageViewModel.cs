@@ -68,7 +68,7 @@ namespace Awful.ViewModels
 
         public void Reply()
         {
-
+            NavigationService.Navigate(typeof(NewPrivateMessagePage), JsonConvert.SerializeObject(Selected));
         }
 
         internal async Task HandleForumCommand(ForumCommand test)
