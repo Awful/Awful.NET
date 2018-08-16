@@ -101,10 +101,8 @@ namespace Awful.Parser.Handlers
         private static void ParseThreadPosts(IHtmlDocument doc, Thread thread)
         {
             var threadDivTableHolder = doc.QuerySelector("#thread");
-            foreach(var threadTable in threadDivTableHolder.QuerySelectorAll("table"))
+            foreach(var threadTable in threadDivTableHolder.QuerySelectorAll("table.post"))
             {
-                if (string.IsNullOrEmpty(threadTable.GetAttribute("data-idx")))
-                    continue;
                 thread.Posts.Add(PostHandler.ParsePost(threadTable));
             }
         }

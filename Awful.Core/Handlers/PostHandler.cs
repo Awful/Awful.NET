@@ -25,6 +25,9 @@ namespace Awful.Parser.Handlers
             var post = new Post();
             post.User = UserHandler.ParseUserFromPost(doc);
 
+            var authorTd = doc.QuerySelector(@"[class*=""userid""]");
+            authorTd.Remove();
+
             post.HasSeen = doc.QuerySelector(@"[class=""seen1""]") != null || doc.QuerySelector(@"[class=""seen2""]") != null;
 
             var threadBody = doc.QuerySelector(".postbody");
