@@ -58,8 +58,11 @@ namespace Awful.Views
             base.OnNavigatedTo(e);
             previewControl.OnNavigated();
             previewControl.SetMasterHeaderText("Bookmarks");
-            await ViewModel.Load();
-            await ThreadPageView.LoadBaseView();
+            if (ViewModel.Selected == null)
+            {
+                await ViewModel.Load();
+                await ThreadPageView.LoadBaseView();
+            }
             App.ShellViewModel.BackNavigated -= NavigationService.BackRequested;
             App.ShellViewModel.BackNavigated += previewControl.NavigationManager_BackRequested;
         }

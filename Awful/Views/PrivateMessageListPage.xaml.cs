@@ -58,8 +58,11 @@ namespace Awful.Views
         {
             base.OnNavigatedTo(e);
             previewControl.OnNavigated();
-            ViewModel.Init();
-            await ThreadPageView.LoadBaseView();
+            if (ViewModel.Selected == null)
+            {
+                ViewModel.Init();
+                await ThreadPageView.LoadBaseView();
+            }
             App.ShellViewModel.BackNavigated -= NavigationService.BackRequested;
             App.ShellViewModel.BackNavigated += previewControl.NavigationManager_BackRequested;
         }

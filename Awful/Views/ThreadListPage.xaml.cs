@@ -58,7 +58,8 @@ namespace Awful.Views
             previewControl.OnNavigated();
             if (e.Parameter == null) return; 
             ViewModel.Load(e.Parameter as string);
-            await ThreadPageView.LoadBaseView();
+            if (ViewModel.Selected == null)
+                await ThreadPageView.LoadBaseView();
             App.ShellViewModel.BackNavigated -= NavigationService.BackRequested;
             App.ShellViewModel.BackNavigated += previewControl.NavigationManager_BackRequested;
         }

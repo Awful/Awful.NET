@@ -55,7 +55,9 @@ namespace Awful.Parser.Handlers
 
             if (registered != null)
             {
-                user.DateJoined = DateTime.Parse(registered.TextContent);
+                DateTime reg = new DateTime();
+                DateTime.TryParse(registered.TextContent, out reg);
+                user.DateJoined = reg;
             }
 
             if (userTitleHtml == null)
