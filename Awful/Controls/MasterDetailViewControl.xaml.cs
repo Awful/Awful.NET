@@ -157,7 +157,7 @@ namespace Awful.Controls
              */
 
 
-            if (width >= 720)
+            if (width > 800)
             {
                 isInOnePaneMode = false;
                 lock (currentState)
@@ -173,9 +173,16 @@ namespace Awful.Controls
             else
             {
                 isInOnePaneMode = true;
-
-                PART_detailViewContentControl.Width = width;
-                PART_masterViewContentControl.Width = width;
+                if (width >= 640)
+                {
+                    PART_detailViewContentControl.Width = width - 50;
+                    PART_masterViewContentControl.Width = width - 50;
+                }
+                else
+                {
+                    PART_detailViewContentControl.Width = width;
+                    PART_masterViewContentControl.Width = width;
+                }
 
                 if (!isOrientationChange)
                 {
@@ -195,7 +202,14 @@ namespace Awful.Controls
 
             App.ShellViewModel.Header = PreviewItem == null ? MasterViewTitle : PreviewViewTitle;
 
-            PART_relativePanelParent.Height = height;
+            if (width >= 640)
+            {
+                PART_relativePanelParent.Height = height;
+            }
+            else
+            {
+                PART_relativePanelParent.Height = height + 10;
+            }
             lastWindowHeight = height;
             lastWindowWidth = width;
         }
