@@ -21,22 +21,9 @@ using Awful.Controls;
 
 namespace Awful.ViewModels
 {
-    public class PrivateMessageViewModel : AwfulViewModel
+    public class PrivateMessageViewModel : ThreadBaseViewModel
     {
         #region Properties
-
-        private bool _isPageLoaded = default(bool);
-
-        public bool IsPageLoaded
-        {
-            get { return _isPageLoaded; }
-            set
-            {
-                Set(ref _isPageLoaded, value);
-            }
-        }
-
-        public WebView Web { get; set; }
 
         private PrivateMessage _selected = default(PrivateMessage);
 
@@ -69,29 +56,6 @@ namespace Awful.ViewModels
             _postManager = new PrivateMessageManager(WebManager);
         }
 
-        public Themes GetTheme()
-        {
-            return ThemeSelectorService.Theme == Windows.UI.Xaml.ElementTheme.Light ? Themes.Light : Themes.Dark;
-        }
-
-        public ThreadSettings GetForumThreadSettings()
-        {
-            var settings = Awful.Services.SettingsService.Instance;
-            ThreadSettings threadSettings = new ThreadSettings();
-            threadSettings.InfinitePageScrolling = settings.InfinitePageScrolling;
-            threadSettings.ShowEmbeddedGifv = settings.ShowEmbeddedGifv;
-            threadSettings.ShowEmbeddedVideo = settings.ShowEmbeddedVideo;
-            threadSettings.ShowEmbeddedTweets = settings.ShowEmbeddedTweets;
-            threadSettings.AutoplayGif = settings.AutoplayGif;
-            threadSettings.Theme = GetTheme();
-            return threadSettings;
-        }
-
-        public async Task SetupWebView()
-        {
-            await Web.InvokeScriptAsync("FromCSharp", ForumCommandCreator.CreateForumCommand("setupWebview", GetForumThreadSettings()));
-        }
-
         public async Task LoadPrivateMessage()
         {
             IsLoading = true;
@@ -100,27 +64,6 @@ namespace Awful.ViewModels
             await Web.InvokeScriptAsync("FromCSharp", ForumCommandCreator.CreateForumCommand("addPosts", new Thread() { IsLoggedIn = false, Posts = new List<Post>() { postresult } } ));
             OnPropertyChanged("Selected");
             IsLoading = false;
-        }
-
-        public WebCommands WebCommands { get; set; }
-
-        private async Task<bool> CheckResult(Result result)
-        {
-            var resultCheck = await ResultChecker.CheckPaywallOrSuccess(result);
-            if (!resultCheck)
-            {
-                if (result.Type == typeof(Error).ToString())
-                {
-                    var error = JsonConvert.DeserializeObject<Error>(result.ResultJson);
-                    if (error.IsPaywall)
-                    {
-                        NavigationService.Navigate(typeof(PaywallPage));
-                    }
-                    return false;
-                }
-            }
-
-            return true;
         }
 
         public void Reply()

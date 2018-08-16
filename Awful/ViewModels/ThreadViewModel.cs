@@ -18,22 +18,9 @@ using Awful.Web;
 
 namespace Awful.ViewModels
 {
-    public class ThreadViewModel : AwfulViewModel
+    public class ThreadViewModel : ThreadBaseViewModel
     {
         #region Properties
-
-        private bool _isPageLoaded = default(bool);
-
-        public bool IsPageLoaded
-        {
-            get { return _isPageLoaded; }
-            set
-            {
-                Set(ref _isPageLoaded, value);
-            }
-        }
-
-        public WebView Web { get; set; }
 
         private Thread _selected = default(Thread);
 
@@ -138,57 +125,11 @@ namespace Awful.ViewModels
             Selected.ScrollToPost = 0;
             Selected.ScrollToPostString = string.Empty;
             await ReloadThread();
-
         }
 
         public async Task RefreshThread()
         {
             await ReloadThread();
-        }
-
-        public class ThreadSettings
-        {
-            public bool InfinitePageScrolling { get; set; }
-
-            public bool ShowEmbeddedGifv { get; set; }
-
-            public bool ShowEmbeddedVideo { get; set; }
-
-            public bool ShowEmbeddedTweets { get; set; }
-
-            public bool AutoplayGif { get; set; }
-
-            public Themes Theme { get; set; }
-        }
-
-        public enum Themes
-        {
-            Light,
-            Dark,
-            YOSPOS
-        }
-
-        public Themes GetTheme()
-        {
-            return ThemeSelectorService.Theme == Windows.UI.Xaml.ElementTheme.Light ? Themes.Light : Themes.Dark;
-        }
-
-        public ThreadSettings GetForumThreadSettings()
-        {
-            var settings = Awful.Services.SettingsService.Instance;
-            ThreadSettings threadSettings = new ThreadSettings();
-            threadSettings.InfinitePageScrolling = settings.InfinitePageScrolling;
-            threadSettings.ShowEmbeddedGifv = settings.ShowEmbeddedGifv;
-            threadSettings.ShowEmbeddedVideo = settings.ShowEmbeddedVideo;
-            threadSettings.ShowEmbeddedTweets = settings.ShowEmbeddedTweets;
-            threadSettings.AutoplayGif = settings.AutoplayGif;
-            threadSettings.Theme = GetTheme();
-            return threadSettings;
-        }
-
-        public async Task SetupWebView()
-        {
-            await Web.InvokeScriptAsync("FromCSharp", ForumCommandCreator.CreateForumCommand("setupWebview", GetForumThreadSettings()));
         }
 
         public async Task ReloadThread(bool goToPageOverride = false)
@@ -214,27 +155,6 @@ namespace Awful.ViewModels
                 }
             });
             NavigationService.Navigate(typeof(ReplyPage), reply);
-        }
-
-        public WebCommands WebCommands { get; set; }
-
-        private async Task<bool> CheckResult(Result result)
-        {
-            var resultCheck = await ResultChecker.CheckPaywallOrSuccess(result);
-            if (!resultCheck)
-            {
-                if (result.Type == typeof(Error).ToString())
-                {
-                    var error = JsonConvert.DeserializeObject<Error>(result.ResultJson);
-                    if (error.IsPaywall)
-                    {
-                        NavigationService.Navigate(typeof(PaywallPage));
-                    }
-                    return false;
-                }
-            }
-
-            return true;
         }
 
         private async Task SetupPosts(Thread postresult)

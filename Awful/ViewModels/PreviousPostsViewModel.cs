@@ -14,20 +14,12 @@ using static Awful.ViewModels.ThreadViewModel;
 
 namespace Awful.ViewModels
 {
-    public class PreviousPostsViewModel : AwfulViewModel
+    public class PreviousPostsViewModel : ThreadBaseViewModel
     {
         public TextBox ReplyBox { get; set; }
 
-        public WebView Web { get; set; }
-
-        public WebCommands WebCommands { get; set; }
-
         private ReplyManager _replyManager;
 
-        public async Task SetupWebView()
-        {
-           await Web.InvokeScriptAsync("FromCSharp", ForumCommandCreator.CreateForumCommand("setupWebview", GetForumThreadSettings()));
-        }
 
         private bool _isOpen = default(bool);
 
@@ -38,24 +30,6 @@ namespace Awful.ViewModels
             {
                 Set(ref _isOpen, value);
             }
-        }
-
-        public Themes GetTheme()
-        {
-            return ThemeSelectorService.Theme == Windows.UI.Xaml.ElementTheme.Light ? Themes.Light : Themes.Dark;
-        }
-
-        public ThreadSettings GetForumThreadSettings()
-        {
-            var settings = Awful.Services.SettingsService.Instance;
-            ThreadSettings threadSettings = new ThreadSettings();
-            threadSettings.InfinitePageScrolling = settings.InfinitePageScrolling;
-            threadSettings.ShowEmbeddedGifv = settings.ShowEmbeddedGifv;
-            threadSettings.ShowEmbeddedVideo = settings.ShowEmbeddedVideo;
-            threadSettings.ShowEmbeddedTweets = settings.ShowEmbeddedTweets;
-            threadSettings.AutoplayGif = settings.AutoplayGif;
-            threadSettings.Theme = GetTheme();
-            return threadSettings;
         }
 
         public async void LoadPreviousPosts(Thread thread, List<Post> posts)

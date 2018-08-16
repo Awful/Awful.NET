@@ -13,35 +13,8 @@ using static Awful.ViewModels.ThreadViewModel;
 
 namespace Awful.ViewModels
 {
-    public class PreviewViewModel : AwfulViewModel
+    public class PreviewViewModel : ThreadBaseViewModel
     {
-        public WebView Web { get; set; }
-
-        public WebCommands WebCommands { get; set; }
-
-        public async Task SetupWebView()
-        {
-            await Web.InvokeScriptAsync("FromCSharp", ForumCommandCreator.CreateForumCommand("setupWebview", GetForumThreadSettings()));
-        }
-
-        public Themes GetTheme()
-        {
-            return ThemeSelectorService.Theme == Windows.UI.Xaml.ElementTheme.Light ? Themes.Light : Themes.Dark;
-        }
-
-        public ThreadSettings GetForumThreadSettings()
-        {
-            var settings = Awful.Services.SettingsService.Instance;
-            ThreadSettings threadSettings = new ThreadSettings();
-            threadSettings.InfinitePageScrolling = settings.InfinitePageScrolling;
-            threadSettings.ShowEmbeddedGifv = settings.ShowEmbeddedGifv;
-            threadSettings.ShowEmbeddedVideo = settings.ShowEmbeddedVideo;
-            threadSettings.ShowEmbeddedTweets = settings.ShowEmbeddedTweets;
-            threadSettings.AutoplayGif = settings.AutoplayGif;
-            threadSettings.Theme = GetTheme();
-            return threadSettings;
-        }
-
         private bool _isOpen = default(bool);
 
         public bool IsOpen

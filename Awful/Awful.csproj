@@ -177,6 +177,7 @@
     <Compile Include="ViewModels\ShellNavigationItem.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\SmiliesViewModel.cs" />
+    <Compile Include="ViewModels\ThreadBaseViewModel.cs" />
     <Compile Include="ViewModels\ThreadListPageViewModel.cs" />
     <Compile Include="ViewModels\ThreadViewModel.cs" />
     <Compile Include="Views\BookmarkPage.xaml.cs">
