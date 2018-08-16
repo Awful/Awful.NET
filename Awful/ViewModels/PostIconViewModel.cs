@@ -61,20 +61,19 @@ namespace Awful.ViewModels
             if (WebManager == null)
             {
                 LoginUser();
+            }
 
+            _postIconManager = new PostIconManager(WebManager);
 
-                _postIconManager = new PostIconManager(WebManager);
-
-                if ((PostIconEntities == null || !PostIconEntities.Any()))
-                {
-                    var test = await _postIconManager.GetPostIconsAsync(false, forumId);
-                    PostIconEntities = test.ToObservableCollection();
-                }
-                else if (forumId == 0)
-                {
-                    var test = await _postIconManager.GetPostIconsAsync(true);
-                    PostIconEntities = test.ToObservableCollection();
-                }
+            if (forumId == 0)
+            {
+                var test = await _postIconManager.GetPostIconsAsync(true);
+                PostIconEntities = test.ToObservableCollection();
+            }
+            else
+            {
+                var test = await _postIconManager.GetPostIconsAsync(false, forumId);
+                PostIconEntities = test.ToObservableCollection();
             }
         }
     }

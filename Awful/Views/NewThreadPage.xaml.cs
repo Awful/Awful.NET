@@ -29,6 +29,12 @@ namespace Awful.Views
         public NewThreadPage()
         {
             this.InitializeComponent();
+            SmiliesView.ViewModel.ReplyBox = ReplyText;
+            ViewModel.Subject = Subject;
+            ViewModel.PostIconViewModel = PostIconView.ViewModel;
+            ViewModel.PreviewViewModel = PreviewView.ViewModel;
+            ViewModel.SmiliesViewModel = SmiliesView.ViewModel;
+            ViewModel.ReplyBox = ReplyText;
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)

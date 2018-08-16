@@ -29,6 +29,12 @@ namespace Awful.Views
         public NewPrivateMessagePage()
         {
             this.InitializeComponent();
+            SmiliesView.ViewModel.ReplyBox = ReplyText;
+            ViewModel.Subject = Subject;
+            ViewModel.PostIconViewModel = PostIconView.ViewModel;
+            ViewModel.SmiliesViewModel = SmiliesView.ViewModel;
+            ViewModel.ReplyBox = ReplyText;
+            ViewModel.Recipient = Recipient;
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
