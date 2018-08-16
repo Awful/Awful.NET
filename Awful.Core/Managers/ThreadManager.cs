@@ -84,7 +84,7 @@ namespace Awful.Parser.Managers
             return await _webManager.PostFormDataAsync(EndPoints.NewThreadBase, form);
         }
 
-        public async Task<Post> CreateNewThreadPreview(NewThread newThreadEntity)
+        public async Task<Post> CreateNewThreadPreviewAsync(NewThread newThreadEntity)
         {
             if (!_webManager.IsAuthenticated)
                 throw new Exception("User must be authenticated before using this method.");

@@ -2,6 +2,7 @@
 using Awful.Parser.Models.Replies;
 using Awful.Parser.Models.Threads;
 using Awful.Parser.Models.Web;
+using Awful.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,6 @@ namespace Awful.ViewModels
 {
     public class ReplyThreadViewModel : NewPostBaseViewModel
     {
-        public SmiliesViewModel SmiliesViewModel { get; set; }
-        public PreviewViewModel PreviewViewModel { get; set; }
         public PreviousPostsViewModel PreviousPostsViewModel { get; set; }
 
         private ThreadReply _selected = default(ThreadReply);
@@ -63,52 +62,6 @@ namespace Awful.ViewModels
             }
         }
 
-        public async void OpenSmiliesView()
-        {
-            await SmiliesViewModel.LoadSmiliesAsync();
-            SmiliesViewModel.IsOpen = true;
-        }
-
-        public void SelectBbCode(object sender, RoutedEventArgs e)
-        {
-            var menuFlyoutItem = sender as MenuFlyoutItem;
-            if (menuFlyoutItem == null) return;
-            var code = "";
-            if (menuFlyoutItem.CommandParameter != null)
-            {
-                switch (menuFlyoutItem.CommandParameter.ToString().ToLower())
-                {
-                    case "bold":
-                        code = "b";
-                        break;
-                    case "indent":
-                        code = "i";
-                        break;
-                    case "strike":
-                        code = "s";
-                        break;
-                    case "spoiler":
-                        code = "spoiler";
-                        break;
-                    case "quote":
-                        code = "quote";
-                        break;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(ReplyBox.SelectedText))
-            {
-                string selectedText = "[{0}]" + ReplyBox.SelectedText + "[/{0}]";
-                ReplyBox.SelectedText = string.Format(selectedText, code);
-            }
-            else
-            {
-                string text = string.Format("[{0}][/{0}]", code);
-                string replyText = string.IsNullOrEmpty(ReplyBox.Text) ? string.Empty : ReplyBox.Text;
-                if (replyText != null) ReplyBox.Text = replyText.Insert(ReplyBox.SelectionStart, text);
-            }
-        }
-
         public async Task ReplyToThread()
         {
             if (string.IsNullOrEmpty(ReplyBox.Text) || _forumReply == null) return;
@@ -129,7 +82,7 @@ namespace Awful.ViewModels
             if (result.IsSuccess)
             {
                 IsLoading = false;
-                //Template10.Common.BootStrapper.Current.NavigationService.GoBack();
+                NavigationService.GoBack();
                 return;
             }
             IsLoading = false;

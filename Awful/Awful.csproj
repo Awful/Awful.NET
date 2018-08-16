@@ -167,6 +167,8 @@
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\NewPostBaseViewModel.cs" />
+    <Compile Include="ViewModels\NewPrivateMessageViewModel.cs" />
+    <Compile Include="ViewModels\NewThreadViewModel.cs" />
     <Compile Include="ViewModels\PostIconViewModel.cs" />
     <Compile Include="ViewModels\PreviewViewModel.cs" />
     <Compile Include="ViewModels\PreviousPostsViewModel.cs" />
