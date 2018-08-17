@@ -98,6 +98,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ListControls\AdaptiveGridView.cs" />
+    <Compile Include="Controls\MasterDetailSplitViewControl.xaml.cs">
+      <DependentUpon>MasterDetailSplitViewControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MasterDetailViewControl.xaml.cs">
       <DependentUpon>MasterDetailViewControl.xaml</DependentUpon>
     </Compile>
@@ -936,6 +939,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\MasterDetailSplitViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MasterDetailViewControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

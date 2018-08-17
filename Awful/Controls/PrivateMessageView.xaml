@@ -28,7 +28,7 @@
         </Grid>
         <WebView Grid.Row="2"  DefaultBackgroundColor="{ThemeResource AwfulWebBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                   NavigationStarting="OnNavigationStarting" NavigationCompleted="Web_NavigationCompleted" ScriptNotify="Web_ScriptNotify" x:Name="Web" />
-        <CommandBar Height="{ThemeResource CommandBarHeight}" Visibility="{x:Bind ViewModel.IsPageLoaded, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="ForumCommandBar" Grid.Row="3">
+        <CommandBar Visibility="{x:Bind ViewModel.IsPageLoaded, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="ForumCommandBar" Grid.Row="3">
             <AppBarButton Click="{x:Bind ViewModel.Reply}" Icon="Send" Label="Reply">
             </AppBarButton>
         </CommandBar>

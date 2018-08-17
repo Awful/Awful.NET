@@ -16,7 +16,7 @@ namespace Awful.ViewModels
     {
         public ThreadView ThreadView { get; set; }
 
-        public MasterDetailViewControl MasterDetailViewControl { get; set; }
+        public MasterDetailSplitViewControl MasterDetailViewControl { get; set; }
 
         private Thread _selected = default(Thread);
 

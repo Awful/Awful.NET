@@ -38,7 +38,7 @@ namespace Awful.ViewModels
             }
         }
 
-        public MasterDetailViewControl MasterDetailViewControl { get; set; }
+        public MasterDetailSplitViewControl MasterDetailViewControl { get; set; }
 
         public PrivateMessageView ThreadView { get; set; }
 

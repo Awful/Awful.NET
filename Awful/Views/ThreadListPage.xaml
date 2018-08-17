@@ -21,8 +21,8 @@
     </Page.DataContext>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <controls:MasterDetailViewControl VerticalAlignment="Stretch" x:Name="previewControl" PreviewItem="{Binding Selected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-            <controls:MasterDetailViewControl.MasterViewPaneContent>
+        <controls:MasterDetailSplitViewControl VerticalAlignment="Stretch" x:Name="previewControl" PreviewItem="{Binding Selected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <controls:MasterDetailSplitViewControl.MasterViewPaneContent>
                 <Grid BorderBrush="{ThemeResource ThreadListBorder}" BorderThickness="0,0,1,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -106,19 +106,19 @@
                             </ListView.ItemTemplate>
                         </ListView>
                     </RefreshContainer>
-                    <CommandBar Height="{ThemeResource CommandBarHeight}" x:Name="ForumCommandBar"  Grid.Row="4">
+                    <CommandBar x:Name="ForumCommandBar"  Grid.Row="4">
                         <AppBarButton Label="Create Thread" Click="{x:Bind ViewModel.CreateThread}" Icon="Add"/>
                         <AppBarButton Label="Refresh" Click="{x:Bind ViewModel.Init}" Icon="Refresh"/>
                     </CommandBar>
                 </Grid>
-            </controls:MasterDetailViewControl.MasterViewPaneContent>
-            <controls:MasterDetailViewControl.DetailViewPaneContent>
+            </controls:MasterDetailSplitViewControl.MasterViewPaneContent>
+            <controls:MasterDetailSplitViewControl.DetailViewPaneContent>
                 <Grid Padding="0,10,0,0">
                     <controls:ThreadView x:Name="ThreadPageView">
 
                     </controls:ThreadView>
                 </Grid>
-            </controls:MasterDetailViewControl.DetailViewPaneContent>
-        </controls:MasterDetailViewControl>
+            </controls:MasterDetailSplitViewControl.DetailViewPaneContent>
+        </controls:MasterDetailSplitViewControl>
     </Grid>
 </Page>

@@ -30,7 +30,7 @@ namespace Awful.Controls
     {
         public PrivateMessageViewModel ViewModel => this.DataContext as PrivateMessageViewModel;
 
-        public MasterDetailViewControl MasterDetailViewControl { get; set; }
+        public MasterDetailSplitViewControl MasterDetailViewControl { get; set; }
 
         public PrivateMessageView()
         {

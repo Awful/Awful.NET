@@ -30,7 +30,7 @@ namespace Awful.Controls
 
         public ThreadViewModel ViewModel => this.DataContext as ThreadViewModel;
 
-        public MasterDetailViewControl MasterDetailViewControl { get; set; }
+        public MasterDetailSplitViewControl MasterDetailViewControl { get; set; }
 
         public ThreadView()
         {
