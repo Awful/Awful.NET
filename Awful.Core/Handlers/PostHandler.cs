@@ -24,7 +24,7 @@ namespace Awful.Parser.Handlers
         {
             var post = new Post();
             post.User = UserHandler.ParseUserFromPost(doc);
-
+            post.PostId = Convert.ToInt64(doc.Id.Replace("post", ""));
             var authorTd = doc.QuerySelector(@"[class*=""userid""]");
             authorTd.Remove();
 

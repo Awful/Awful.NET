@@ -49,7 +49,8 @@ namespace Awful.Views
         private void RefreshContainer_OnRefreshRequested(
             RefreshContainer sender, RefreshRequestedEventArgs args)
         {
-            ViewModel.Init();
+            if (!ViewModel.IsLoading)
+                ViewModel.Init();
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)

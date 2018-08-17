@@ -49,7 +49,8 @@ namespace Awful.Views
         private async void RefreshContainer_OnRefreshRequested(
     RefreshContainer sender, RefreshRequestedEventArgs args)
         {
-            await ViewModel.Refresh();
+            if (!ViewModel.IsLoading)
+                await ViewModel.Refresh();
         }
 
 

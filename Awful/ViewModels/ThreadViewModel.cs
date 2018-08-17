@@ -209,6 +209,21 @@ namespace Awful.ViewModels
                 case "loaded":
                     IsPageLoaded = true;
                     break;
+                case "quote":
+                    var reply = JsonConvert.SerializeObject(new ThreadReply()
+                    {
+                        Thread = new Thread()
+                        {
+                            ForumId = Selected.ForumId,
+                            ThreadId = Selected.ThreadId,
+                            Name = Selected.Name,
+                            CurrentPage = Selected.CurrentPage,
+                            TotalPages = Selected.TotalPages
+                        },
+                        QuoteId = test.Command.PostId
+                    });
+                    NavigationService.Navigate(typeof(ReplyPage), reply);
+                    break;
                 default:
                     break;
             }
