@@ -39,32 +39,31 @@ function toggleAnimation($gifwrap) {
 }
 
 var ForumTemplate = function () {
-    //var tweets = $('.post-body a[href*="twitter.com"]');
-    //tweets = tweets.not(".post-body:has(img[title=':nws:']) a").not(".post-body:has(img[title=':nms:']) a");
-    //tweets = tweets.not('.bbc-spoiler a');
-    //tweets.each(function () {
-    //    var match = $(this).attr('href').match(/(https|http):\/\/twitter.com\/[0-9a-zA-Z_]+\/(status|statuses)\/([0-9]+)/);
-    //    if (match == null) {
-    //        return;
-    //    }
-    //    var tweetId = match[3];
-    //    var link = this;
-    //    $.ajax({
-    //        url: "https://publish.twitter.com/oembed?omit_script=true&url=" + $(this).attr('href'),
-    //        dataType: 'jsonp',
-    //        success: function (data) {
-    //            link = $(link).wrap("<div class='tweet'>").parent();
-    //             WinRT Webviews hate calling out to external web javascript. So for now, we will load our own. :(
-    //            data.html = data.html.replace('<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script async src="ms-appx-web:///Assets/widgets.js" charset="utf-8"></script>');
-    //            $(link).html(data.html);
-    //            try {
-    //                window.twttr.widgets.load(link);
-    //            } catch (e) {
-    //                console.log(e);
-    //            }
-    //        }
-    //    });
-    //});
+    var tweets = $('.post-body a[href*="twitter.com"]');
+    tweets = tweets.not(".post-body:has(img[title=':nws:']) a").not(".post-body:has(img[title=':nms:']) a");
+    tweets = tweets.not('.bbc-spoiler a');
+    tweets.each(function () {
+       var match = $(this).attr('href').match(/(https|http):\/\/twitter.com\/[0-9a-zA-Z_]+\/(status|statuses)\/([0-9]+)/);
+       if (match == null) {
+           return;
+       }
+       var tweetId = match[3];
+       var link = this;
+       $.ajax({
+           url: "https://publish.twitter.com/oembed?omit_script=true&url=" + $(this).attr('href'),
+           dataType: 'jsonp',
+           success: function (data) {
+               link = $(link).wrap("<div class='tweet'>").parent();
+               data.html = data.html.replace('<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script async src="ms-appx-web:///Assets/Forums/widgets.js" charset="utf-8"></script>');
+               $(link).html(data.html);
+               try {
+                   window.twttr.widgets.load(link);
+               } catch (e) {
+                   console.log(e);
+               }
+           }
+       });
+    });
 
     var gifvs = $('a[href$="gifv"]');
     gifvs = gifvs.not(".post-body:has(img[title=':nws:']) a").not(".post-body:has(img[title=':nms:']) a");
@@ -89,6 +88,21 @@ var ForumTemplate = function () {
 
     $(".bbc-spoiler").click(function (e) {
         e.target === this && $(this).toggleClass("stay");
+    });
+
+    $('.imgurGif').load(function (event) {
+        $(event.target).parent().addClass('overlay');
+    }).each(function () {
+        if (this.complete) {
+            $(this).load();
+        }
+    });
+
+    // Toggles between first frame of Imgur gif and full-on animated gif.
+    $('body').unbind('click tap').on('click tap', '.gifWrap', function (event) {
+        // .closest() because sometimes the img is the target for some reason.
+        var $gifwrap = $(event.target).closest('.gifWrap');
+        toggleAnimation($gifwrap);
     });
 }
 

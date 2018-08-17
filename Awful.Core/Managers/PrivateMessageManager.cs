@@ -70,7 +70,7 @@ namespace Awful.Parser.Managers
                 throw new Exception("User must be authenticated before using this method.");
             var result = await _webManager.GetDataAsync(EndPoints.PrivateMessages + $"?action=show&privatemessageid={message.Id}");
             var document = await _webManager.Parser.ParseAsync(result.ResultHtml);
-            message.Post = PostHandler.ParsePost(document.Body);
+            message.Post = PostHandler.ParsePost(document, document.Body);
             return message.Post;
         }
 

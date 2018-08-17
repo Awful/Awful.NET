@@ -93,7 +93,7 @@ namespace Awful.Parser.Handlers
             {
                 if (string.IsNullOrEmpty(threadTable.GetAttribute("data-idx")))
                     continue;
-                posts.Add(PostHandler.ParsePost(threadTable));
+                posts.Add(PostHandler.ParsePost(doc, threadTable));
             }
             return posts;
         }
@@ -103,7 +103,7 @@ namespace Awful.Parser.Handlers
             var threadDivTableHolder = doc.QuerySelector("#thread");
             foreach(var threadTable in threadDivTableHolder.QuerySelectorAll("table.post"))
             {
-                thread.Posts.Add(PostHandler.ParsePost(threadTable));
+                thread.Posts.Add(PostHandler.ParsePost(doc, threadTable));
             }
         }
 

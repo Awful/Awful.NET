@@ -226,7 +226,7 @@
     <None Include="Assets\Forums\asset-manifest.json" />
     <None Include="Assets\Forums\manifest.json" />
     <None Include="Assets\Forums\static\css\main.a93565b6.css.map" />
-    <None Include="Assets\Forums\static\js\main.da0b4f0b.js.map" />
+    <None Include="Assets\Forums\static\js\main.f48b4014.js.map" />
     <None Include="Assets\Forums\static\media\selawk.6ab68a1e.eot" />
     <Content Include="Assets\Forums\favicon.ico" />
     <Content Include="Assets\Forums\index.html" />
@@ -256,7 +256,7 @@
     <Content Include="Assets\BadgeLogo.scale-200.png" />
     <Content Include="Assets\BadgeLogo.scale-400.png" />
     <Content Include="Assets\Forums\static\css\main.a93565b6.css" />
-    <Content Include="Assets\Forums\static\js\main.da0b4f0b.js" />
+    <Content Include="Assets\Forums\static\js\main.f48b4014.js" />
     <Content Include="Assets\Forums\static\media\example_dark.d5f09669.jpg" />
     <Content Include="Assets\Forums\static\media\example_light.320b18e5.jpg" />
     <Content Include="Assets\Forums\threadTemplate.js" />
