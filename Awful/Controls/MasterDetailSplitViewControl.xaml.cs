@@ -86,9 +86,9 @@ namespace Awful.Controls
         {
             if (isInOnePaneMode)
             {
-                if (PreviewItem != null)
+                if (!this.NavSplit.IsPaneOpen)
                 {
-                    ShowMasterView();
+                    this.NavSplit.IsPaneOpen = true;
                 }
                 else
                 {
@@ -109,94 +109,106 @@ namespace Awful.Controls
 
         public void EvaluateLayout()
         {
-            //double width = Window.Current.Bounds.Width;
+            
+            double width = Window.Current.Bounds.Width;
+            
+            if (width <= 800 && PreviewItem == null)
+            {
+                this.NavSplit.IsPaneOpen = true;
+            }
+            else if (width <= 800 && PreviewItem != null)
+            {
+                this.NavSplit.IsPaneOpen = false;
+            }
+
             //double height;
             //height = ApplicationView.GetForCurrentView().VisibleBounds.Height;
 
-            //bool isOrientationChange = width == lastWindowHeight && height == lastWindowWidth;
+                //bool isOrientationChange = width == lastWindowHeight && height == lastWindowWidth;
 
-            ///* According to https://msdn.microsoft.com/en-us/library/windows/apps/dn997765.aspx - The recommend style is as follows:
-            // * 320 epx-719 epx (Available window width) = Stacked (Single pane shown at one time)
-            // * 720 epx or wider (Available window width) = Side-by-Side (Two panes shown at one time)
-            // */
+                ///* According to https://msdn.microsoft.com/en-us/library/windows/apps/dn997765.aspx - The recommend style is as follows:
+                // * 320 epx-719 epx (Available window width) = Stacked (Single pane shown at one time)
+                // * 720 epx or wider (Available window width) = Side-by-Side (Two panes shown at one time)
+                // */
 
 
-            //if (width > 800)
+                //if (width > 800)
+                //{
+                //   // isInOnePaneMode = false;
+                //    lock (currentState)
+                //    {
+                //       // VisualStateManager.GoToState(this, "TwoPaneVisualState", true);
+
+                //      //  currentState = "TwoPaneVisualState";
+                //    }
+
+                //    if (BackButtonVisibilityHinted != null)
+                //        BackButtonVisibilityHinted(this, new BackButtonVisibilityHintedEventArgs(false));
+                //}
+                //else
+                //{
+                //    //isInOnePaneMode = true;
+                //    if (width >= 640)
+                //    {
+                //        PART_detailViewContentControl.Width = width - 50;
+                //        PART_masterViewContentControl.Width = width - 50;
+                //    }
+                //    else
+                //    {
+                //        PART_detailViewContentControl.Width = width;
+                //        PART_masterViewContentControl.Width = width;
+                //    }
+
+                //    if (!isOrientationChange)
+                //    {
+                //        var onePaneModeState = (PreviewItem != null ? "OnePaneDetailVisualState" : "OnePaneMasterVisualState");
+
+                //        lock (currentState)
+                //        {
+                //           // VisualStateManager.GoToState(this, onePaneModeState, true);
+
+                //            currentState = onePaneModeState;
+                //        }
+
+                //        if (BackButtonVisibilityHinted != null)
+                //            BackButtonVisibilityHinted(this, new BackButtonVisibilityHintedEventArgs(onePaneModeState == "OnePaneDetailVisualState"));
+                //    }
+                //}
+
+                //App.ShellViewModel.Header = PreviewItem == null ? MasterViewTitle : PreviewViewTitle;
+
+                //if (width >= 640)
+                //{
+                //    PART_masterViewContentControl.Height = height;
+                //}
+                //else
+                //{
+                //    PART_masterViewContentControl.Height = height + 10;
+                //}
+                //lastWindowHeight = height;
+                //lastWindowWidth = width;
+        }
+
+        public void ShowMasterView()
+        {
+            this.NavSplit.IsPaneOpen = true;
+            //App.ShellViewModel.Header = MasterViewTitle;
+            //if (isInOnePaneMode)
             //{
-            //   // isInOnePaneMode = false;
+            //    if (NullifyPreviewItemWhenGoingToMasterView)
+            //        PreviewItem = null;
+
+            //    //EvaluateLayout();
+
             //    lock (currentState)
             //    {
-            //       // VisualStateManager.GoToState(this, "TwoPaneVisualState", true);
-
-            //      //  currentState = "TwoPaneVisualState";
+            //       // VisualStateManager.GoToState(this, "OnePaneMasterVisualState", true);
+            //      //  currentState = "OnePaneMasterVisualState";
             //    }
 
             //    if (BackButtonVisibilityHinted != null)
             //        BackButtonVisibilityHinted(this, new BackButtonVisibilityHintedEventArgs(false));
             //}
-            //else
-            //{
-            //    //isInOnePaneMode = true;
-            //    if (width >= 640)
-            //    {
-            //        PART_detailViewContentControl.Width = width - 50;
-            //        PART_masterViewContentControl.Width = width - 50;
-            //    }
-            //    else
-            //    {
-            //        PART_detailViewContentControl.Width = width;
-            //        PART_masterViewContentControl.Width = width;
-            //    }
-
-            //    if (!isOrientationChange)
-            //    {
-            //        var onePaneModeState = (PreviewItem != null ? "OnePaneDetailVisualState" : "OnePaneMasterVisualState");
-
-            //        lock (currentState)
-            //        {
-            //           // VisualStateManager.GoToState(this, onePaneModeState, true);
-
-            //            currentState = onePaneModeState;
-            //        }
-
-            //        if (BackButtonVisibilityHinted != null)
-            //            BackButtonVisibilityHinted(this, new BackButtonVisibilityHintedEventArgs(onePaneModeState == "OnePaneDetailVisualState"));
-            //    }
-            //}
-
-            //App.ShellViewModel.Header = PreviewItem == null ? MasterViewTitle : PreviewViewTitle;
-
-            //if (width >= 640)
-            //{
-            //    PART_masterViewContentControl.Height = height;
-            //}
-            //else
-            //{
-            //    PART_masterViewContentControl.Height = height + 10;
-            //}
-            //lastWindowHeight = height;
-            //lastWindowWidth = width;
-        }
-
-        public void ShowMasterView()
-        {
-            App.ShellViewModel.Header = MasterViewTitle;
-            if (isInOnePaneMode)
-            {
-                if (NullifyPreviewItemWhenGoingToMasterView)
-                    PreviewItem = null;
-
-                //EvaluateLayout();
-
-                lock (currentState)
-                {
-                   // VisualStateManager.GoToState(this, "OnePaneMasterVisualState", true);
-                  //  currentState = "OnePaneMasterVisualState";
-                }
-
-                if (BackButtonVisibilityHinted != null)
-                    BackButtonVisibilityHinted(this, new BackButtonVisibilityHintedEventArgs(false));
-            }
         }
 
 

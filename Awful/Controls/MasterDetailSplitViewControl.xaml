@@ -11,7 +11,7 @@
     d:DesignWidth="400">
 
     <Grid>
-        <SplitView x:Name="NavSplit">
+        <SplitView IsPaneOpen="True" x:Name="NavSplit">
             <SplitView.Pane>
                 <ContentPresenter x:Name="PART_masterViewContentControl" 
                             VerticalContentAlignment="Stretch" VerticalAlignment="Stretch"
@@ -32,7 +32,7 @@
                 <!-- VisualState to be triggered when window width is >=1007 effective pixels -->
                 <VisualState x:Name="Large">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="600" />
+                        <AdaptiveTrigger MinWindowWidth="801" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <!-- SplitView pane shows as overlay -->
@@ -54,7 +54,7 @@
                         <Setter Target="NavSplit.DisplayMode"
                                 Value="Overlay" />
                         <Setter Target="NavSplit.IsPaneOpen"
-                                Value="False" />
+                                Value="True" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
