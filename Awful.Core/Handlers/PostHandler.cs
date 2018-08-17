@@ -33,7 +33,7 @@ namespace Awful.Parser.Handlers
             var threadBody = doc.QuerySelector(".postbody");
             if (threadBody != null)
             {
-                var imgurGifs = threadBody.QuerySelectorAll(@"[src*=""imgur.com""]");
+                var imgurGifs = threadBody.QuerySelectorAll(@"[src*=""imgur.com""][src*="".gif""]");
                 for(var i = 0; i < imgurGifs.Length; i++)
                 {
                     var imgurGif = imgurGifs[i];

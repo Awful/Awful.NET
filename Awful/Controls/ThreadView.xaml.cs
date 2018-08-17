@@ -48,34 +48,10 @@ namespace Awful.Controls
         public async Task LoadBaseView()
         {
            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Forums/index.html"));
-           var html = await ParsedHtmlBase(await FileIO.ReadTextAsync(file));
+           var html = await ViewModel.ParsedHtmlBase(await FileIO.ReadTextAsync(file));
            Web.NavigateToString(html);
         }
 
-        private async Task<string> ParsedHtmlBase(string html)
-        {
-            var basePage = await ViewModel.WebManager.Parser.ParseAsync(html);
-            var links = basePage.QuerySelectorAll("link");
-            foreach(var link in links)
-            {
-                var attribute = link.GetAttribute("href");
-                link.SetAttribute("href", $"ms-appx-web:///Assets/Forums{attribute}");
-            }
-            var scripts = basePage.QuerySelectorAll("script");
-            foreach (var script in scripts)
-            {
-                var attribute = script.GetAttribute("src");
-                if (attribute == null)
-                    continue;
-                if (attribute[0] != '/')
-                    script.SetAttribute("src", $"ms-appx-web:///Assets/Forums/{attribute}");
-                else
-                    script.SetAttribute("src", $"ms-appx-web:///Assets/Forums{attribute}");
-            }
-
-            return "<!DOCTYPE html> " + basePage.DocumentElement.OuterHtml;
-        }
-    
         private void OnNavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
             ViewModel.WebCommands = new WebCommands();
