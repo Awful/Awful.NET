@@ -104,5 +104,34 @@ namespace Awful.ViewModels
 
             return true;
         }
+
+        public async Task<string> ParsedHtmlBase(string html)
+        {
+            var basePage = await WebManager.Parser.ParseAsync(html);
+
+            var twitterTheme = basePage.QuerySelector(@"meta[name=""twitter:widgets:theme""]");
+            if (twitterTheme != null)
+                twitterTheme.SetAttribute("content", ThemeSelectorService.Theme == Windows.UI.Xaml.ElementTheme.Light ? "light" : "dark");
+
+            var links = basePage.QuerySelectorAll("link");
+            foreach (var link in links)
+            {
+                var attribute = link.GetAttribute("href");
+                link.SetAttribute("href", $"ms-appx-web:///Assets/Forums{attribute}");
+            }
+            var scripts = basePage.QuerySelectorAll("script");
+            foreach (var script in scripts)
+            {
+                var attribute = script.GetAttribute("src");
+                if (attribute == null)
+                    continue;
+                if (attribute[0] != '/')
+                    script.SetAttribute("src", $"ms-appx-web:///Assets/Forums/{attribute}");
+                else
+                    script.SetAttribute("src", $"ms-appx-web:///Assets/Forums{attribute}");
+            }
+
+            return "<!DOCTYPE html> " + basePage.DocumentElement.OuterHtml;
+        }
     }
 }

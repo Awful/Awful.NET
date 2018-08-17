@@ -97,7 +97,7 @@ namespace Awful.ViewModels
         private async Task GetMainPageForumsAsync(bool forceRefresh = false)
         {
             var forumCategoryEntities = ForumsDatabase.GetMainForumCategories();
-            if (forumCategoryEntities.Any() || !forceRefresh)
+            if (forumCategoryEntities.Any() && !forceRefresh)
             {
                 AddForumCategoryToPage(forumCategoryEntities);
                 return;
