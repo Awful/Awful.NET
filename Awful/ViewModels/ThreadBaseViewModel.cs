@@ -16,6 +16,8 @@ using System.IO;
 using Windows.UI.Xaml.Controls;
 using Awful.Web;
 using static Awful.ViewModels.ThreadViewModel;
+using Windows.System;
+using Awful.Parser.Core;
 
 namespace Awful.ViewModels
 {
@@ -103,6 +105,50 @@ namespace Awful.ViewModels
             }
 
             return true;
+        }
+
+        public void NavToThread(Uri uri)
+        {
+            try
+            {
+                var thread = new Thread();
+                var queryString = HtmlHelpers.ParseQueryString(uri.ToString());
+                thread.ThreadId = Convert.ToInt32(queryString["threadid"]);
+                NavigationService.Navigate(typeof(ThreadPage), JsonConvert.SerializeObject(thread));
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+        }
+
+        public async Task HandleSALink(Uri uri)
+        {
+            switch (uri.AbsolutePath)
+            {
+                case "/showthread.php":
+                    NavToThread(uri);
+                    return;
+                case "/banlist.php":
+                    return;
+            }
+        }
+
+        public async Task HandleLinks(Uri uri)
+        {
+            switch(uri.Host)
+            {
+                //case "forums.somethingawful.com":
+                //    await HandleSALink(uri);
+                //    return;
+                default:
+                    var options = new LauncherOptions();
+                    // For whatever reason, it won't launch t
+                    options.DisplayApplicationPicker = true;
+                    var test = await Windows.System.Launcher.LaunchUriAsync(uri, options);
+                    return;
+            }
         }
 
         public async Task<string> ParsedHtmlBase(string html)

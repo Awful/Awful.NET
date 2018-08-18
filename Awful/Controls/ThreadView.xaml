@@ -26,7 +26,7 @@
             </Grid.Background>
             <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" Height="48" Width="48" VerticalAlignment="Center" HorizontalAlignment="Center"></ProgressRing>
         </Grid>
-        <WebView Grid.Row="2"  DefaultBackgroundColor="{ThemeResource AwfulWebBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+        <WebView Grid.Row="2" PermissionRequested="WebView_PermissionRequested" NewWindowRequested="Web_NewWindowRequested"  DefaultBackgroundColor="{ThemeResource AwfulWebBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                   NavigationStarting="OnNavigationStarting" NavigationCompleted="Web_NavigationCompleted" ScriptNotify="Web_ScriptNotify" x:Name="Web" />
         <CommandBar Visibility="{x:Bind ViewModel.IsPageLoaded, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="ForumCommandBar" Grid.Row="3">
             <AppBarButton Label="First Page" IsEnabled="{Binding Selected.CurrentPage, Converter={StaticResource BackButtonEnableConverter}}" Click="{x:Bind ViewModel.FirstThreadPage}">

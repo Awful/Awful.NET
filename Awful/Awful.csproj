@@ -130,6 +130,7 @@
     <Compile Include="Helpers\ResourceExtensions.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
     <Compile Include="Helpers\Singleton.cs" />
+    <Compile Include="Helpers\ThreadHelpers.cs" />
     <Compile Include="Helpers\TitleBarHelper.cs" />
     <Compile Include="Helpers\WindowsHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="ViewModels\SmiliesViewModel.cs" />
     <Compile Include="ViewModels\ThreadBaseViewModel.cs" />
     <Compile Include="ViewModels\ThreadListPageViewModel.cs" />
+    <Compile Include="ViewModels\ThreadPageViewModel.cs" />
     <Compile Include="ViewModels\ThreadViewModel.cs" />
     <Compile Include="Views\BookmarkPage.xaml.cs">
       <DependentUpon>BookmarkPage.xaml</DependentUpon>
@@ -217,6 +219,9 @@
     </Compile>
     <Compile Include="Views\ThreadListPage.xaml.cs">
       <DependentUpon>ThreadListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ThreadPage.xaml.cs">
+      <DependentUpon>ThreadPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -1050,6 +1055,10 @@
     <Page Include="Views\ThreadListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ThreadPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

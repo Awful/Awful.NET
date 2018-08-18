@@ -1,10 +1,12 @@
-﻿using Awful.Parser.Models.Threads;
+﻿using Awful.Helpers;
+using Awful.Parser.Models.Threads;
 using Awful.Tools;
 using Awful.ViewModels;
 using Awful.Web;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -78,7 +80,6 @@ namespace Awful.Controls
 
         public async Task LoadThread(Thread thread, bool fromSuspend = false, bool lastPage = false)
         {
-            MasterDetailViewControl.SetPreviewHeaderText(thread.Name);
             ViewModel.Init();
             if (lastPage)
             {
@@ -95,6 +96,10 @@ namespace Awful.Controls
             }
             ViewModel.Selected = thread;
             await ViewModel.ReloadThread(!lastPage);
+            if (MasterDetailViewControl != null)
+                MasterDetailViewControl.SetPreviewHeaderText(thread.Name);
+            else
+                App.ShellViewModel.Header = thread.Name;
             ViewModel.IsPageLoaded = true;
         }
 
@@ -130,6 +135,18 @@ namespace Awful.Controls
             {
                 Console.WriteLine(exception);
             }
+        }
+
+        private async void Web_NewWindowRequested(WebView sender, WebViewNewWindowRequestedEventArgs args)
+        {
+            Debug.WriteLine(args.Uri);
+            args.Handled = true;
+            await ViewModel.HandleLinks(args.Uri);
+        }
+
+        private void WebView_PermissionRequested(WebView sender, WebViewPermissionRequestedEventArgs args)
+        {
+            args.PermissionRequest.Allow();
         }
     }
 }
