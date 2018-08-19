@@ -57,6 +57,15 @@ namespace Awful.Parser.Managers
             return ThreadHandler.ParseThread(document, thread);
         }
 
+        public async Task<Post> GetPostAsync(int postId)
+        {
+            var baseUri = string.Format(EndPoints.ShowPost, postId);
+            var result = await _webManager.GetDataAsync(baseUri);
+            var document = await _webManager.Parser.ParseAsync(result.ResultHtml);
+            var post = document.QuerySelector("table.post");
+            return PostHandler.ParsePost(document, post);
+        }
+
         public async Task<NewThread> GetThreadCookiesAsync(int forumId)
         {
             string url = string.Format(EndPoints.NewThread, forumId);

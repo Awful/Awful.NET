@@ -32,5 +32,7 @@ namespace Awful.Parser.Models.Posts
         public bool HasSeen { get; set; }
 
         public bool IsQuoting { get; set; }
+
+        public bool IsIgnored { get; set; }
     }
 }

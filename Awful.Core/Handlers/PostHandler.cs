@@ -15,6 +15,7 @@ using Awful.Parser.Models.Forums;
 using Awful.Parser.Models.Threads;
 using Awful.Parser.Models.Users;
 using Awful.Parser.Models.Posts;
+using Newtonsoft.Json;
 
 namespace Awful.Parser.Handlers
 {
@@ -33,24 +34,32 @@ namespace Awful.Parser.Handlers
             var threadBody = doc.QuerySelector(".postbody");
             if (threadBody != null)
             {
-                var imgurGifs = threadBody.QuerySelectorAll(@"[src*=""imgur.com""][src*="".gif""]");
-                for(var i = 0; i < imgurGifs.Length; i++)
+                var jerkBody = threadBody.QuerySelector(@"a[title=""DON'T DO IT!!""]");
+                if (jerkBody != null)
                 {
-                    var imgurGif = imgurGifs[i];
-                    var div = parent.CreateElement("div");
-                    div.ClassList.Add("gifWrap");
-                    var newImgur = parent.CreateElement("img");
-                    newImgur.ClassList.Add("imgurGif");
-                    newImgur.SetAttribute("data-originalurl", imgurGif.GetAttribute("src"));
-                    newImgur.SetAttribute("data-posterurl", imgurGif.GetAttribute("src").Replace(".gif", "h.jpg"));
-                    newImgur.SetAttribute("src", imgurGif.GetAttribute("src").Replace(".gif", "h.jpg"));
-                    div.AppendChild(newImgur);
-                    imgurGif.Replace(div);
+                    post.IsIgnored = true;
                 }
-                var attachments = threadBody.QuerySelectorAll(@"[src*=""attachment.php""]");
-                foreach(var attachment in attachments)
+                else
                 {
-                    attachment.SetAttribute("src", $"https://forums.somethingawful.com/{attachment.Attributes["src"].Value}");
+                    var imgurGifs = threadBody.QuerySelectorAll(@"[src*=""imgur.com""][src*="".gif""]");
+                    for (var i = 0; i < imgurGifs.Length; i++)
+                    {
+                        var imgurGif = imgurGifs[i];
+                        var div = parent.CreateElement("div");
+                        div.ClassList.Add("gifWrap");
+                        var newImgur = parent.CreateElement("img");
+                        newImgur.ClassList.Add("imgurGif");
+                        newImgur.SetAttribute("data-originalurl", imgurGif.GetAttribute("src"));
+                        newImgur.SetAttribute("data-posterurl", imgurGif.GetAttribute("src").Replace(".gif", "h.jpg"));
+                        newImgur.SetAttribute("src", imgurGif.GetAttribute("src").Replace(".gif", "h.jpg"));
+                        div.AppendChild(newImgur);
+                        imgurGif.Replace(div);
+                    }
+                    var attachments = threadBody.QuerySelectorAll(@"[src*=""attachment.php""]");
+                    foreach (var attachment in attachments)
+                    {
+                        attachment.SetAttribute("src", $"https://forums.somethingawful.com/{attachment.Attributes["src"].Value}");
+                    }
                 }
                 post.PostHtml = threadBody.InnerHtml;
             }

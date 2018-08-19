@@ -224,6 +224,13 @@ namespace Awful.ViewModels
                     });
                     NavigationService.Navigate(typeof(ReplyPage), reply);
                     break;
+                case "ignored":
+                    IsLoading = true;
+                    int postId = test.Command.PostId;
+                    var newPost = await _postManager.GetPostAsync(postId);
+                    await Web.InvokeScriptAsync("FromCSharp", ForumCommandCreator.CreateForumCommand("showIgnoredPost", newPost));
+                    IsLoading = false;
+                    break;
                 default:
                     break;
             }
