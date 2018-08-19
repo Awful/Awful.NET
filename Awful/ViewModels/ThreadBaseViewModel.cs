@@ -51,7 +51,8 @@ namespace Awful.ViewModels
 
         public Themes GetTheme()
         {
-            return ThemeSelectorService.Theme == Windows.UI.Xaml.ElementTheme.Light ? Themes.Light : Themes.Dark;
+            var isDark = ThemeSelectorService.IsDark;
+            return isDark ? Themes.Dark : Themes.Light;
         }
 
         public ThreadSettings GetForumThreadSettings()

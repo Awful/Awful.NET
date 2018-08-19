@@ -18,9 +18,17 @@ namespace Awful.Services
 
         public static ElementTheme Theme { get; set; } = ElementTheme.Default;
 
+        public static bool IsDark
+        {
+            get
+            {
+                return new Windows.UI.ViewManagement.UISettings().GetColorValue(Windows.UI.ViewManagement.UIColorType.Background) == Color.FromArgb(255,0,0,0);
+            }
+        }
+
         public static async Task InitializeAsync()
         {
-            Theme = await LoadThemeFromSettingsAsync();
+           Theme = await LoadThemeFromSettingsAsync();
         }
 
         public static async Task SetThemeAsync(ElementTheme theme)
