@@ -12,17 +12,6 @@ namespace Awful.ViewModels
     {
         public ThreadView ThreadView { get; set; }
 
-        private Thread _selected = default(Thread);
-
-        public Thread Selected
-        {
-            get { return _selected; }
-            set
-            {
-                Set(ref _selected, value);
-            }
-        }
-
         public async Task Init(Thread thread)
         {
             Selected = thread;

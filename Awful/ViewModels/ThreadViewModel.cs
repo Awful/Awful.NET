@@ -22,17 +22,6 @@ namespace Awful.ViewModels
     {
         #region Properties
 
-        private Thread _selected = default(Thread);
-
-        public Thread Selected
-        {
-            get { return _selected; }
-            set
-            {
-                Set(ref _selected, value);
-            }
-        }
-
         private string _pageSelection;
 
         public string PageSelection
@@ -136,8 +125,8 @@ namespace Awful.ViewModels
         {
             IsLoading = true;
             await Web.InvokeScriptAsync("FromCSharp", ForumCommandCreator.CreateForumCommand("reset", null));
-            await SetupWebView();
             await LoadThread(goToPageOverride);
+            await SetupWebView();
             IsLoading = false;
         }
 
@@ -230,6 +219,8 @@ namespace Awful.ViewModels
                     var newPost = await _postManager.GetPostAsync(postId);
                     await Web.InvokeScriptAsync("FromCSharp", ForumCommandCreator.CreateForumCommand("showIgnoredPost", newPost));
                     IsLoading = false;
+                    break;
+                case "error":
                     break;
                 default:
                     break;

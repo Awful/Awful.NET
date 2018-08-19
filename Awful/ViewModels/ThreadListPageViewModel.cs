@@ -17,17 +17,6 @@ namespace Awful.ViewModels
     {
         #region Properties
 
-        private Thread _selected = default(Thread);
-
-        public Thread Selected
-        {
-            get { return _selected; }
-            set
-            {
-                Set(ref _selected, value);
-            }
-        }
-
         private PageScrollingCollection _ForumPageScrollingCollection = default(PageScrollingCollection);
         public PageScrollingCollection ForumPageScrollingCollection
         {

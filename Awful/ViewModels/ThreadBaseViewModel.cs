@@ -25,6 +25,18 @@ namespace Awful.ViewModels
     {
         #region Properties
 
+        private Thread _selected = default(Thread);
+
+        public Thread Selected
+        {
+            get { return _selected; }
+            set
+            {
+                Set(ref _selected, value);
+            }
+        }
+
+
         public WebCommands WebCommands { get; set; }
 
         private bool _isPageLoaded = default(bool);
@@ -51,6 +63,14 @@ namespace Awful.ViewModels
 
         public Themes GetTheme()
         {
+            if (Selected != null)
+            {
+                switch(Selected.ForumId)
+                {
+                    case 219:
+                        return Themes.YOSPOS;
+                }
+            }
             var isDark = ThemeSelectorService.IsDark;
             return isDark ? Themes.Dark : Themes.Light;
         }
