@@ -112,13 +112,17 @@ namespace Awful.Controls
             
             double width = Window.Current.Bounds.Width;
             
-            if (width <= 800 && PreviewItem == null)
+            if (width <= 800 && PreviewItem == null && !this.NavSplit.IsPaneOpen)
             {
                 this.NavSplit.IsPaneOpen = true;
             }
-            else if (width <= 800 && PreviewItem != null)
+            else if (width <= 800 && PreviewItem != null && this.NavSplit.IsPaneOpen)
             {
                 this.NavSplit.IsPaneOpen = false;
+            }
+            else if (width > 800)
+            {
+                this.NavSplit.IsPaneOpen = true;
             }
 
             //double height;

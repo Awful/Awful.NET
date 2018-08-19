@@ -28,8 +28,6 @@
         </SplitView>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
-
-                <!-- VisualState to be triggered when window width is >=1007 effective pixels -->
                 <VisualState x:Name="Large">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="801" />
@@ -39,12 +37,8 @@
                         <!-- Splitview pane will close however :-( -->
                         <Setter Target="NavSplit.DisplayMode"
                                 Value="Inline" />
-                        <Setter Target="NavSplit.IsPaneOpen"
-                                Value="True" />
                     </VisualState.Setters>
                 </VisualState>
-
-                <!-- VisualState to be triggered when window width is >=0 and <641 effective pixels -->
                 <VisualState x:Name="Small">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="0" />
@@ -53,8 +47,6 @@
                         <!-- Collapse the SplitView pane into overlay mode -->
                         <Setter Target="NavSplit.DisplayMode"
                                 Value="Overlay" />
-                        <Setter Target="NavSplit.IsPaneOpen"
-                                Value="True" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
