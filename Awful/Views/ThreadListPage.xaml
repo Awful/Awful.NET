@@ -55,13 +55,23 @@
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
-                                            <UwpControls:ImageEx
-                                            Height="45" Width="45"
-                                            VerticalAlignment="Top"
-                                            Margin="5"
-                                            PlaceholderStretch="UniformToFill"
-                                            Source="{Binding ImageIconLocation, Converter={StaticResource ForumImageConverter}}"
-                                            PlaceholderSource="/Assets/missing.png"/>
+                                            <Grid Margin="5" Height="45" Width="45">
+                                                <UwpControls:ImageEx
+                                                Height="45" Width="45"
+                                                VerticalAlignment="Stretch"
+                                                HorizontalAlignment="Stretch"
+                                                Stretch="UniformToFill"
+                                                PlaceholderStretch="UniformToFill"
+                                                Source="{Binding ImageIconLocation, Converter={StaticResource ForumImageConverter}}"
+                                                PlaceholderSource="/Assets/missing.png"/>
+                                                <UwpControls:ImageEx
+                                                Height="14" Width="14"
+                                                VerticalAlignment="Top"
+                                                HorizontalAlignment="Right"
+                                                Stretch="UniformToFill"
+                                                Source="{Binding StoreImageIconLocation, Converter={StaticResource ForumImageConverter}}"
+                                                Canvas.ZIndex="20"/>
+                                            </Grid>
                                             <Grid Grid.Column="1">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="40"/>

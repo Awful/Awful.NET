@@ -52,6 +52,7 @@ namespace Awful.Parser.Handlers
                 };
                 ParseStar(row.QuerySelector(".star"), thread);
                 ParseIcon(row.QuerySelector(".icon"), thread);
+                ParseIcon2(row.QuerySelector(".icon2"), thread);
                 ParseTitle(row.QuerySelector(".title"), thread);
                 ParseAuthor(row.QuerySelector(".author"), thread);
                 ParseReplies(row.QuerySelector(".replies"), thread);
@@ -166,6 +167,15 @@ namespace Awful.Parser.Handlers
             var img = element.QuerySelector("img");
             thread.ImageIconUrl = img.GetAttribute("src");
             thread.ImageIconLocation = Path.GetFileNameWithoutExtension(thread.ImageIconUrl);
+        }
+
+        private static void ParseIcon2(IElement element, Thread thread)
+        {
+            if (element == null)
+                return;
+            var img = element.QuerySelector("img");
+            thread.StoreImageIconUrl = img.GetAttribute("src");
+            thread.StoreImageIconLocation = Path.GetFileNameWithoutExtension(thread.StoreImageIconUrl);
         }
 
         private static void ParseTitle(IElement element, Thread thread)
