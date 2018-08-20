@@ -47,5 +47,10 @@ namespace Awful.Views
         {
             await ViewModel.LoadAsync(true);
         }
+
+        private async void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            await ViewModel.LoadAsync(true);
+        }
     }
 }

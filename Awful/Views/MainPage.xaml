@@ -25,14 +25,19 @@
     </Page.Resources>
 
     <Grid
-        x:Name="ContentArea"
-        Margin="{StaticResource MediumLeftRightMargin}">
+        x:Name="ContentArea">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
-        <RefreshContainer RefreshRequested="RefreshContainer_OnRefreshRequested">
+        <Grid Grid.Row="0" Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" Canvas.ZIndex="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.Background>
+                <SolidColorBrush Opacity=".9" Color="{ThemeResource AwfulWebBackground}"></SolidColorBrush>
+            </Grid.Background>
+            <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" Height="48" Width="48" VerticalAlignment="Center" HorizontalAlignment="Center"></ProgressRing>
+        </Grid>
+        <RefreshContainer Margin="{StaticResource MediumLeftRightMargin}" Grid.Row="0"  RefreshRequested="RefreshContainer_OnRefreshRequested">
             <RefreshContainer.Visualizer>
                 <RefreshVisualizer />
             </RefreshContainer.Visualizer>
@@ -123,5 +128,8 @@
                 </SemanticZoom.ZoomedInView>
             </SemanticZoom>
         </RefreshContainer>
+        <CommandBar x:Name="ForumCommandBar"  Grid.Row="1">
+            <AppBarButton Label="Refresh" Click="AppBarButton_Click" Icon="Refresh"/>
+        </CommandBar>
     </Grid>
 </Page>

@@ -41,22 +41,18 @@ namespace Awful.ViewModels
 
         public async Task LoadAsync(bool forceRefresh = false)
         {
+            IsLoading = true;
             try
             {
                 LoginUser();
-
-                if (!ForumGroupList.Any())
-                {
-                    IsLoading = true;
-                    GetFavoriteForums();
-                    await GetMainPageForumsAsync(forceRefresh);
-                    IsLoading = false;
-                }
+                GetFavoriteForums();
+                await GetMainPageForumsAsync(forceRefresh);
             }
             catch (Exception e)
             {
                 await ResultChecker.SendMessageDialogAsync($"Failed to setup forum list: {e.Message}", false);
             }
+            IsLoading = false;
         }
 
         public void NavigateToThreadList(Forum forum)
