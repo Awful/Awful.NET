@@ -124,9 +124,9 @@
             </controls:MasterDetailSplitViewControl.MasterViewPaneContent>
             <controls:MasterDetailSplitViewControl.DetailViewPaneContent>
                 <Grid Padding="0,10,0,0">
-                    <controls:ThreadView x:Name="ThreadPageView">
-
-                    </controls:ThreadView>
+                    <UwpControls:TabView x:Name="Tabs">
+                        
+                    </UwpControls:TabView>
                 </Grid>
             </controls:MasterDetailSplitViewControl.DetailViewPaneContent>
         </controls:MasterDetailSplitViewControl>

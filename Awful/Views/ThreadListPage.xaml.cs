@@ -1,6 +1,8 @@
-﻿using Awful.Parser.Models.Threads;
+﻿using Awful.Controls;
+using Awful.Parser.Models.Threads;
 using Awful.Services;
 using Awful.ViewModels;
+using Microsoft.Toolkit.Uwp.UI.Controls;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,9 +30,10 @@ namespace Awful.Views
         {
             this.InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Enabled;
-            ThreadPageView.MasterDetailViewControl = previewControl;
+            //ThreadPageView.MasterDetailViewControl = previewControl;
             ViewModel.MasterDetailViewControl = previewControl;
-            ViewModel.ThreadView = ThreadPageView;
+            //ViewModel.ThreadView = ThreadPageView;
+            ViewModel.Tabs = Tabs;
             Application.Current.Resuming += new EventHandler<Object>(App_Resuming);
             Application.Current.Suspending += new SuspendingEventHandler(App_Suspending);
             previewControl.Loaded();
@@ -59,8 +62,8 @@ namespace Awful.Views
             previewControl.OnNavigated();
             if (e.Parameter == null) return; 
             ViewModel.Load(e.Parameter as string);
-            if (ViewModel.Selected == null)
-                await ThreadPageView.LoadBaseView();
+            //if (ViewModel.Selected == null)
+            //    await ThreadPageView.LoadBaseView();
             App.ShellViewModel.BackNavigated -= NavigationService.BackRequested;
             App.ShellViewModel.BackNavigated += previewControl.NavigationManager_BackRequested;
         }
@@ -79,7 +82,13 @@ namespace Awful.Views
             if (thread == null)
                 return;
             ViewModel.Selected = thread;
-            await ThreadPageView.LoadThread(thread);
+            ViewModel.Tabs.Items.Add(new TabViewItem()
+            {
+                Name = thread.ThreadId.ToString(),
+                Header = thread.Name,
+                Content = new ThreadView()
+            });
+            //await ThreadPageView.LoadThread(thread);
             ViewModel.IsThreadSelectedAndLoaded = true;
         }
 
@@ -90,7 +99,7 @@ namespace Awful.Views
             if (thread == null)
                 return;
             ViewModel.Selected = thread;
-            await ThreadPageView.LoadThread(thread, false, true);
+            //await ThreadPageView.LoadThread(thread, false, true);
             ViewModel.IsThreadSelectedAndLoaded = true;
         }
 

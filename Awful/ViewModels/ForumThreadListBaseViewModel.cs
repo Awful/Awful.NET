@@ -2,6 +2,7 @@
 using Awful.Parser.Managers;
 using Awful.Parser.Models.Threads;
 using Awful.Services;
+using Microsoft.Toolkit.Uwp.UI.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Awful.ViewModels
 {
     public class ForumThreadListBaseViewModel : AwfulViewModel
     {
+        public TabView Tabs { get; set; }
         public ThreadView ThreadView { get; set; }
 
         public MasterDetailSplitViewControl MasterDetailViewControl { get; set; }
