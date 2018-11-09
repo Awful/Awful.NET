@@ -104,6 +104,8 @@ namespace Awful.Parser.Handlers
             var threadDivTableHolder = doc.QuerySelector("#thread");
             foreach(var threadTable in threadDivTableHolder.QuerySelectorAll("table.post"))
             {
+                if (string.IsNullOrEmpty(threadTable.Id.Replace("post", "")))
+                    continue;
                 thread.Posts.Add(PostHandler.ParsePost(doc, threadTable));
             }
         }
