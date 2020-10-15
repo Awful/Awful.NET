@@ -17,22 +17,23 @@ namespace Awful.Test
     public class IndexPageManagerTest
     {
         /// <summary>
-        /// Test GetForumListAsync with an unauthenticated user.
+        /// Test GetSortedIndexPageAsync with an unauthenticated user.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [Fact]
         public async Task GetSortedIndexPageAsyncUnauthedTest()
         {
-            using var webClient = new AwfulClient();
+            using var webClient = await Setup.SetupWebClient(AwfulUser.Unauthenticated).ConfigureAwait(false);
             IndexPageManager indexManager = new IndexPageManager(webClient);
             var result = await indexManager.GetSortedIndexPageAsync().ConfigureAwait(false);
             Assert.NotNull(result);
+            Assert.True(result.User.Userid == 0);
             Assert.True(result.Forums.Any());
             Assert.True(result.Forums.TrueForAll(n => n.Id != 0));
         }
 
         /// <summary>
-        /// Test GetForumListAsync with an authenticated user.
+        /// Test GetSortedIndexPageAsync with an authenticated user.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [Fact]
@@ -42,6 +43,7 @@ namespace Awful.Test
             IndexPageManager indexManager = new IndexPageManager(webClient);
             var result = await indexManager.GetSortedIndexPageAsync().ConfigureAwait(false);
             Assert.NotNull(result);
+            Assert.True(result.User.Userid != 0);
             Assert.True(result.Forums.Any());
             Assert.True(result.Forums.TrueForAll(n => n.Id != 0));
         }
