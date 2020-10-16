@@ -6,4 +6,20 @@
 
   <Import Project="../Web.props" />
 
+  <ItemGroup>
+    <None Remove="Templates\SAclopedia.html.hbs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Templates\SAclopedia.html.hbs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Handlebars.Net" Version="1.11.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Awful.Core\Awful.Core.csproj" />
+  </ItemGroup>
+
 </Project>

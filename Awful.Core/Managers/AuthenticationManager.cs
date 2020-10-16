@@ -68,7 +68,7 @@ namespace Awful.Core.Managers
 
             if (queryString["loginerror"] == null)
             {
-                return await this.FetchUserAsync(authResult, token).ConfigureAwait(false);return authResult;
+                return await this.FetchUserAsync(authResult, token).ConfigureAwait(false);
             }
 
             switch (queryString["loginerror"])
