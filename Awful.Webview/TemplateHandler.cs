@@ -22,6 +22,7 @@ namespace Awful.Webview
         private readonly string saclopediaHtml;
         private readonly string frameworkCss;
         private readonly string frameworkJs;
+        private readonly string forumJs;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateHandler"/> class.
@@ -31,6 +32,7 @@ namespace Awful.Webview
             this.saclopediaHtml = TemplateHandler.GetResourceFileContentAsString("Templates.SAclopedia.html.hbs");
             this.frameworkCss = TemplateHandler.GetResourceFileContentAsString("CSS.framework7.bundle.min.css");
             this.frameworkJs = TemplateHandler.GetResourceFileContentAsString("JS.framework7.bundle.min.js");
+            this.forumJs = TemplateHandler.GetResourceFileContentAsString("JS.forum.js");
         }
 
         /// <summary>
@@ -70,7 +72,7 @@ namespace Awful.Webview
         private void SetDefaults(TemplateEntity entity, DefaultOptions options)
         {
             entity.CSS = new List<string>() { this.frameworkCss };
-            entity.JS = new List<string>() { this.frameworkJs };
+            entity.JS = new List<string>() { this.forumJs, this.frameworkJs };
             entity.DeviceColorTheme = options.DeviceColorTheme == DeviceColorTheme.Dark ? "theme-dark" : "theme";
             entity.Theme = options.DeviceTheme switch
             {
