@@ -2,11 +2,11 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using Awful.Core.Entities.Users;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using Awful.Core.Entities.Users;
 
 namespace Awful.Core.Entities.Web
 {

@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Awful.Core.Entities.JSON;
 using Awful.Core.Utilities;
+using Newtonsoft.Json;
 
 namespace Awful.Core.Managers.JSON
 {

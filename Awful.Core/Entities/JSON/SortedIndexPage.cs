@@ -1,4 +1,4 @@
-﻿// <copyright file="IndexPage.cs" company="Drastic Actions">
+﻿// <copyright file="SortedIndexPage.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
