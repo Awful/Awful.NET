@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+{{#each CSS}}
+<style>
+    {{{ this }}}
+</style>
+{{/each}}
+<title>Awful - Ban</title>
+
+<body>
+    <div id="app" class="framework7-root {{DeviceColorTheme}}">
+        <div class="view view-main view-init safe-areas">
+            <div class="page page-home page-current">
+                <div class="page-content">
+                    {{#Entry.Bans}}
+                    <div class="list">
+                        <ul>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title">
+                                            <div class="item-header">Type</div>
+                                            {{Type}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title">
+                                            <div class="item-header">Date</div>
+                                            {{Date}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title">
+                                            <div class="item-header">Horrible Jerk</div>
+                                            {{HorribleJerk}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title">
+                                            <div class="item-header">Punishment Reason</div>
+                                            <div>
+                                                {{{PunishmentReason}}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title">
+                                            <div class="item-header">Requested By</div>
+                                            {{RequestedBy}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title">
+                                            <div class="item-header">Approved By</div>
+                                            {{ApprovedBy}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    {{/Entry.Bans}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{#each JS}}
+    <script>
+     {{{ this }}}
+    </script>
+    {{/each}}
+    <script>
+        var theme = "{{{ Theme }}}";
+
+        var app = new Framework7({
+            id: 'drastic.somethingawful',
+            root: '#app',
+            theme: theme,
+        });
+    </script>
+</body>

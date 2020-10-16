@@ -23,9 +23,13 @@ namespace Awful.ConsoleApp
             TemplateHandler handler = new TemplateHandler();
             var defaultOptions = new DefaultOptions() { DeviceColorTheme = DeviceColorTheme.Dark };
 
-            UserManager manager = new UserManager(awfulClient);
-            var entry = await manager.GetUserFromProfilePageAsync(0).ConfigureAwait(false);
-            var result = handler.RenderProfileView(entry, defaultOptions);
+            BanManager manager = new BanManager(awfulClient);
+            var entry = await manager.GetBanPageAsync().ConfigureAwait(false);
+            var result = handler.RenderBanView(entry, defaultOptions);
+
+            //UserManager manager = new UserManager(awfulClient);
+            //var entry = await manager.GetUserFromProfilePageAsync(0).ConfigureAwait(false);
+            //var result = handler.RenderProfileView(entry, defaultOptions);
 
             //SAclopediaManager manager = new SAclopediaManager(awfulClient);
             //var entry = await manager.GetEntryAsync(2300).ConfigureAwait(false);

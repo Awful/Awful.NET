@@ -11,6 +11,7 @@
     <None Remove="CSS\framework7.bundle.min.css" />
     <None Remove="JS\forum.js" />
     <None Remove="JS\framework7.bundle.min.js" />
+    <None Remove="Templates\Ban.html.hbs" />
     <None Remove="Templates\Profile.html.hbs" />
     <None Remove="Templates\SAclopedia.html.hbs" />
   </ItemGroup>
@@ -20,6 +21,7 @@
     <EmbeddedResource Include="CSS\framework7.bundle.min.css" />
     <EmbeddedResource Include="JS\forum.js" />
     <EmbeddedResource Include="JS\framework7.bundle.min.js" />
+    <EmbeddedResource Include="Templates\Ban.html.hbs" />
     <EmbeddedResource Include="Templates\Profile.html.hbs" />
     <EmbeddedResource Include="Templates\SAclopedia.html.hbs" />
   </ItemGroup>

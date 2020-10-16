@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using Awful.Core.Entities.Bans;
 using Awful.Core.Entities.JSON;
 using Awful.Core.Entities.SAclopedia;
 using Awful.Webview.Entities;
@@ -22,9 +23,11 @@ namespace Awful.Webview
     {
         private readonly string saclopediaHtml;
         private readonly string profileHtml;
+        private readonly string banHtml;
         private readonly string frameworkCss;
         private readonly string frameworkJs;
         private readonly string forumJs;
+        private readonly string forumCss;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateHandler"/> class.
@@ -33,13 +36,15 @@ namespace Awful.Webview
         {
             this.saclopediaHtml = TemplateHandler.GetResourceFileContentAsString("Templates.SAclopedia.html.hbs");
             this.profileHtml = TemplateHandler.GetResourceFileContentAsString("Templates.Profile.html.hbs");
+            this.banHtml = TemplateHandler.GetResourceFileContentAsString("Templates.Ban.html.hbs");
             this.frameworkCss = TemplateHandler.GetResourceFileContentAsString("CSS.framework7.bundle.min.css");
+            this.forumCss = TemplateHandler.GetResourceFileContentAsString("CSS.app.css");
             this.frameworkJs = TemplateHandler.GetResourceFileContentAsString("JS.framework7.bundle.min.js");
             this.forumJs = TemplateHandler.GetResourceFileContentAsString("JS.forum.js");
         }
 
         /// <summary>
-        /// Renders SAsclopedia View.
+        /// Renders SAclopedia View.
         /// </summary>
         /// <param name="entry">SAclopedia Entry.</param>
         /// <param name="options">Default Theme Options.</param>
@@ -53,6 +58,25 @@ namespace Awful.Webview
 
             var template = Handlebars.Compile(this.saclopediaHtml);
             var entity = new SAclopedia() { Entry = entry };
+            this.SetDefaults(entity, options);
+            return template(entity);
+        }
+
+        /// <summary>
+        /// Renders SAsclopedia View.
+        /// </summary>
+        /// <param name="entry">BanEntity Entry.</param>
+        /// <param name="options">Default Theme Options.</param>
+        /// <returns>HTML Template String.</returns>
+        public string RenderBanView(BanPage entry, DefaultOptions options)
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            var template = Handlebars.Compile(this.banHtml);
+            var entity = new BanEntity() { Entry = entry };
             this.SetDefaults(entity, options);
             return template(entity);
         }
@@ -93,7 +117,7 @@ namespace Awful.Webview
 
         private void SetDefaults(TemplateEntity entity, DefaultOptions options)
         {
-            entity.CSS = new List<string>() { this.frameworkCss };
+            entity.CSS = new List<string>() { this.forumCss, this.frameworkCss };
             entity.JS = new List<string>() { this.forumJs, this.frameworkJs };
             entity.DeviceColorTheme = options.DeviceColorTheme == DeviceColorTheme.Dark ? "theme-dark" : "theme";
             entity.Theme = options.DeviceTheme switch
