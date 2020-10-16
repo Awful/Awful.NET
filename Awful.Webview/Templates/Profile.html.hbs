@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+{{#each CSS}}
+<style>
+    {{{ this }}}
+</style>
+{{/each}}
+<title>Awful - Profile</title>
+
+<body>
+    <div id="app" class="framework7-root {{DeviceColorTheme}}">
+        <div class="view view-main view-init safe-areas">
+            <div class="page page-home page-current">
+                <div style="text-align: center" class="block">
+                    {{{Entry.Usertitle}}}
+                </div>
+                <div class="list">
+                    <ul>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">Username</div>
+                                        {{Entry.Username}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">Recieve PMs</div>
+                                        {{Entry.Receivepm}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">Occupation</div>
+                                        {{Entry.Occupation}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">Location</div>
+                                        {{Entry.Location}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">Gender</div>
+                                        {{Entry.Gender}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">Interests</div>
+                                        {{Entry.Interests}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">Biography</div>
+                                        {{Entry.Biography}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">Member Since</div>
+                                        {{Entry.JoinDate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">Last Post</div>
+                                        {{Entry.LastPostDate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">Post Count</div>
+                                        {{Entry.Postsperday}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <div class="item-header">Role</div>
+                                        {{Entry.Role}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{#each JS}}
+    <script>
+     {{{ this }}}
+    </script>
+    {{/each}}
+    <script>
+        var theme = "{{{ Theme }}}";
+
+        var app = new Framework7({
+            id: 'drastic.somethingawful',
+            root: '#app',
+            theme: theme,
+        });
+    </script>
+</body>

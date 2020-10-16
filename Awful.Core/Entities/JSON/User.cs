@@ -70,10 +70,42 @@ namespace Awful.Core.Entities.JSON
         public long Joindate { get; set; }
 
         /// <summary>
+        /// Gets the join date from a user.
+        /// </summary>
+        public DateTime JoinDate
+        {
+            get
+            {
+                if (this.Joindate <= 0)
+                {
+                    return default;
+                }
+
+                return DateTimeOffset.FromUnixTimeSeconds(this.Joindate).DateTime;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the last post from the user (long).
         /// </summary>
         [JsonProperty("lastpost")]
         public long Lastpost { get; set; }
+
+        /// <summary>
+        /// Gets the last post date from a user.
+        /// </summary>
+        public DateTime LastPostDate
+        {
+            get
+            {
+                if (this.Lastpost <= 0)
+                {
+                    return default;
+                }
+
+                return DateTimeOffset.FromUnixTimeSeconds(this.Lastpost).DateTime;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the number of posts a user has made.
@@ -82,10 +114,10 @@ namespace Awful.Core.Entities.JSON
         public long Posts { get; set; }
 
         /// <summary>
-        /// Gets or sets if user can recieve PMs.
+        /// Gets or sets a value indicating whether the user can recieve PMs.
         /// </summary>
         [JsonProperty("receivepm")]
-        public long Receivepm { get; set; }
+        public bool Receivepm { get; set; }
 
         /// <summary>
         /// Gets or sets the number of posts the user makes per day.
@@ -103,13 +135,13 @@ namespace Awful.Core.Entities.JSON
         /// Gets or sets the biography of a user.
         /// </summary>
         [JsonProperty("biography")]
-        public string Biography { get; set; }
+        public string Biography { get; set; } = "None";
 
         /// <summary>
         /// Gets or sets the location of a user.
         /// </summary>
         [JsonProperty("location")]
-        public string Location { get; set; }
+        public string Location { get; set; } = "Unknown";
 
         /// <summary>
         /// Gets or sets the interests of a user.

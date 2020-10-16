@@ -46,7 +46,7 @@ namespace Awful.Core.Entities.Users
 
         public string LastPostDate { get; set; }
 
-        public string Location { get; set; }
+        public string Location { get; set; } = "Unknown";
 
         public string AboutUser { get; set; }
 

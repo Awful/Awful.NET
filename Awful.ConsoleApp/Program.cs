@@ -20,11 +20,17 @@ namespace Awful.ConsoleApp
         static async Task Main(string[] args)
         {
             var awfulClient = await CreateAwfulClient().ConfigureAwait(false);
-            SAclopediaManager manager = new SAclopediaManager(awfulClient);
             TemplateHandler handler = new TemplateHandler();
-            var entry = await manager.GetEntryAsync(2300).ConfigureAwait(false);
             var defaultOptions = new DefaultOptions() { DeviceColorTheme = DeviceColorTheme.Dark };
-            var result = handler.RenderSAclopediaView(entry, defaultOptions);
+
+            UserManager manager = new UserManager(awfulClient);
+            var entry = await manager.GetUserFromProfilePageAsync(0).ConfigureAwait(false);
+            var result = handler.RenderProfileView(entry, defaultOptions);
+
+            //SAclopediaManager manager = new SAclopediaManager(awfulClient);
+            //var entry = await manager.GetEntryAsync(2300).ConfigureAwait(false);
+            //var result = handler.RenderSAclopediaView(entry, defaultOptions);
+
             File.WriteAllText("test.html", result);
         }
 

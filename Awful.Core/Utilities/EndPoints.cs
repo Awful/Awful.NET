@@ -23,7 +23,7 @@ namespace Awful.Core.Utilities
         /// URL for a user profile.
         /// First parameter: User ID.
         /// </summary>
-        public const string UserProfile = BaseUrl + "member.php?action=getinfo&userid={0}";
+        public const string UserProfile = BaseUrl + "member.php?action=getinfo&userid={0}&json=1";
 
         /// <summary>
         /// URL for

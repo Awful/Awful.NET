@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using Awful.Core.Entities.JSON;
 using Awful.Core.Entities.SAclopedia;
 using Awful.Webview.Entities;
 using Awful.Webview.Entities.Themes;
@@ -20,6 +21,7 @@ namespace Awful.Webview
     public class TemplateHandler
     {
         private readonly string saclopediaHtml;
+        private readonly string profileHtml;
         private readonly string frameworkCss;
         private readonly string frameworkJs;
         private readonly string forumJs;
@@ -30,6 +32,7 @@ namespace Awful.Webview
         public TemplateHandler()
         {
             this.saclopediaHtml = TemplateHandler.GetResourceFileContentAsString("Templates.SAclopedia.html.hbs");
+            this.profileHtml = TemplateHandler.GetResourceFileContentAsString("Templates.Profile.html.hbs");
             this.frameworkCss = TemplateHandler.GetResourceFileContentAsString("CSS.framework7.bundle.min.css");
             this.frameworkJs = TemplateHandler.GetResourceFileContentAsString("JS.framework7.bundle.min.js");
             this.forumJs = TemplateHandler.GetResourceFileContentAsString("JS.forum.js");
@@ -50,6 +53,25 @@ namespace Awful.Webview
 
             var template = Handlebars.Compile(this.saclopediaHtml);
             var entity = new SAclopedia() { Entry = entry };
+            this.SetDefaults(entity, options);
+            return template(entity);
+        }
+
+        /// <summary>
+        /// Renders User Profile View.
+        /// </summary>
+        /// <param name="entry">User Entry.</param>
+        /// <param name="options">Default Theme Options.</param>
+        /// <returns>HTML Template String.</returns>
+        public string RenderProfileView(Awful.Core.Entities.JSON.User entry, DefaultOptions options)
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            var template = Handlebars.Compile(this.profileHtml);
+            var entity = new ProfileEntity() { Entry = entry };
             this.SetDefaults(entity, options);
             return template(entity);
         }
