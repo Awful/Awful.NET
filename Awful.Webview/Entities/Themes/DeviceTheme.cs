@@ -14,13 +14,20 @@ namespace Awful.Webview.Entities.Themes
     public enum DeviceTheme
     {
         /// <summary>
-        /// Light device theme.
+        /// Default device theme.
         /// </summary>
-        Light,
+        Default,
 
         /// <summary>
-        /// Dark device theme.
+        /// iOS device theme.
         /// </summary>
-        Dark,
+#pragma warning disable SA1300 // Element should begin with upper-case letter
+        iOS,
+#pragma warning restore SA1300 // Element should begin with upper-case letter
+
+        /// <summary>
+        /// Android device theme.
+        /// </summary>
+        Android,
     }
 }

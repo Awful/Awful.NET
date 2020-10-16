@@ -13,13 +13,8 @@ namespace Awful.Webview.Entities
     /// <summary>
     /// SAclopedia Template Item.
     /// </summary>
-    public class SAclopedia
+    public class SAclopedia : TemplateEntity
     {
-        /// <summary>
-        /// Gets or sets the device theme.
-        /// </summary>
-        public DeviceTheme DeviceTheme { get; set; }
-
         /// <summary>
         /// Gets or sets the SAclopedia Entry.
         /// </summary>

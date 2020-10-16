@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Sharprompt" Version="2.1.0-preview1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Awful.Core\Awful.Core.csproj" />
+    <ProjectReference Include="..\Awful.Webview\Awful.Webview.csproj" />
+  </ItemGroup>
+
+</Project>
