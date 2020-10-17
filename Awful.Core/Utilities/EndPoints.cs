@@ -92,7 +92,7 @@ namespace Awful.Core.Utilities
         /// <summary>
         /// URL for creating a new private message.
         /// </summary>
-        public const string NewPrivateMessageBase = BaseUrl + "private.php";
+        public const string NewPrivateMessageBase = BaseUrl + "private.php?action=newmessage";
 
         /// <summary>
         /// URL for creating a new thread.

@@ -41,7 +41,7 @@ namespace Awful.Core.Entities.Web
         /// <summary>
         /// Gets or sets the current user for this login.
         /// </summary>
-        public User CurrentUser { get; set; }
+        public Awful.Core.Entities.JSON.User CurrentUser { get; set; }
 
         /// <summary>
         /// Gets or sets the serialized authentication cookie from logging in.

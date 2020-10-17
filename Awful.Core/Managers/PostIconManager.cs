@@ -38,7 +38,7 @@ namespace Awful.Core.Managers
         /// <param name="forumId">The Forum Id.</param>
         /// <param name="token">A CancellationToken.</param>
         /// <returns>A list of PostIcon's for Threads.</returns>
-        public async Task<List<PostIcon>> GetForumPostIconsAsync(int forumId = 0, CancellationToken token = default)
+        public async Task<List<PostIcon>> GetForumPostIconsAsync(int forumId, CancellationToken token = default)
         {
             return await this.GetPostIcons_InternalAsync(false, forumId, token).ConfigureAwait(false);
         }

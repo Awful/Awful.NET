@@ -10,9 +10,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Awful.Core;
+using Awful.Core.Entities.JSON;
 using Awful.Core.Entities.Web;
 using Awful.Core.Handlers;
 using Awful.Core.Utilities;
+using Newtonsoft.Json;
 
 namespace Awful.Core.Managers
 {
@@ -100,8 +102,7 @@ namespace Awful.Core.Managers
         {
             string url = string.Format(CultureInfo.InvariantCulture, EndPoints.UserProfile, 0);
             var result = await this.webManager.GetDataAsync(url, token).ConfigureAwait(false);
-            var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            var user = UserHandler.ParseUserFromProfilePage(0, document);
+            var user = JsonConvert.DeserializeObject<User>(result.ResultHtml);
             authResult.CurrentUser = user;
             return authResult;
         }
