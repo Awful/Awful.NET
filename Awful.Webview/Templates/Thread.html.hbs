@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+{{#each CSS}}
+<style>
+    {{{ this }}}
+</style>
+{{/each}}
+<title>Awful - Thread</title>
+
+<body>
+    <div id="app" class="framework7-root {{DeviceColorTheme}}">
+        <div class="view view-main view-init safe-areas">
+            <div class="page page-home page-current">
+                <div class="page-content">
+                    {{#Entry.Posts}}
+                    <div class="card">
+                        <div class="card-content card-content-padding">
+                            {{{ PostHtml }}}
+                        </div>
+                        <div class="card-footer">
+                            <div>Posted By: {{ Username }}</div>
+                            <div>{{ PostedDate }}</div>
+                        </div>
+                    </div>
+                    {{/Entry.Posts}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{#each JS}}
+    <script>
+     {{{ this }}}
+    </script>
+    {{/each}}
+    <script>
+        var theme = "{{{ Theme }}}";
+
+        var app = new Framework7({
+            id: 'drastic.somethingawful',
+            root: '#app',
+            theme: theme,
+        });
+    </script>
+</body>

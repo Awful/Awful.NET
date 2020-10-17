@@ -21,6 +21,7 @@ namespace Awful.Webview
     /// </summary>
     public class TemplateHandler
     {
+        private readonly string threadHtml;
         private readonly string saclopediaHtml;
         private readonly string profileHtml;
         private readonly string banHtml;
@@ -34,6 +35,7 @@ namespace Awful.Webview
         /// </summary>
         public TemplateHandler()
         {
+            this.threadHtml = TemplateHandler.GetResourceFileContentAsString("Templates.Thread.html.hbs");
             this.saclopediaHtml = TemplateHandler.GetResourceFileContentAsString("Templates.SAclopedia.html.hbs");
             this.profileHtml = TemplateHandler.GetResourceFileContentAsString("Templates.Profile.html.hbs");
             this.banHtml = TemplateHandler.GetResourceFileContentAsString("Templates.Ban.html.hbs");
@@ -63,7 +65,7 @@ namespace Awful.Webview
         }
 
         /// <summary>
-        /// Renders SAsclopedia View.
+        /// Renders BanEntity View.
         /// </summary>
         /// <param name="entry">BanEntity Entry.</param>
         /// <param name="options">Default Theme Options.</param>
