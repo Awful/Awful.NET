@@ -139,16 +139,6 @@ namespace Awful.Core.Entities.Threads
         public int TotalPages { get; set; }
 
         /// <summary>
-        /// Gets or sets the scroll to post.
-        /// </summary>
-        public int ScrollToPost { get; set; }
-
-        /// <summary>
-        /// Gets or sets the scroll to post string.
-        /// </summary>
-        public string ScrollToPostString { get; set; }
-
-        /// <summary>
         /// Gets or sets the thread id.
         /// </summary>
         public int ThreadId { get; set; }

@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Linq;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
-using Awful.Core.Entities.Users;
+using Awful.Core.Entities.Posts;
 
 namespace Awful.Core.Handlers
 {
