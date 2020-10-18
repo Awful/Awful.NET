@@ -102,6 +102,25 @@ namespace Awful.Webview
             return template(entity);
         }
 
+        /// <summary>
+        /// Renders Thread View.
+        /// </summary>
+        /// <param name="entry">User Entry.</param>
+        /// <param name="options">Default Theme Options.</param>
+        /// <returns>HTML Template String.</returns>
+        public string RenderThreadPostView(Awful.Core.Entities.Threads.ThreadPost entry, DefaultOptions options)
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            var template = Handlebars.Compile(this.threadHtml);
+            var entity = new ThreadPostEntity() { Entry = entry };
+            this.SetDefaults(entity, options);
+            return template(entity);
+        }
+
         private static string GetResourceFileContentAsString(string fileName)
         {
             var assembly = Assembly.GetExecutingAssembly();

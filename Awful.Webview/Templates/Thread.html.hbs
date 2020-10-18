@@ -15,12 +15,12 @@
                 <div class="page-content">
                     {{#Entry.Posts}}
                     <div class="card">
+                        <div class="card-header">
+                            <div>{{ User.Username }}</div>
+                            <div>{{ PostDate }}</div>
+                        </div>
                         <div class="card-content card-content-padding">
                             {{{ PostHtml }}}
-                        </div>
-                        <div class="card-footer">
-                            <div>Posted By: {{ Username }}</div>
-                            <div>{{ PostedDate }}</div>
                         </div>
                     </div>
                     {{/Entry.Posts}}

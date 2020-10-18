@@ -23,9 +23,13 @@ namespace Awful.ConsoleApp
             TemplateHandler handler = new TemplateHandler();
             var defaultOptions = new DefaultOptions() { DeviceColorTheme = DeviceColorTheme.Dark };
 
-            BanManager manager = new BanManager(awfulClient);
-            var entry = await manager.GetBanPageAsync().ConfigureAwait(false);
-            var result = handler.RenderBanView(entry, defaultOptions);
+            ThreadPostManager manager = new ThreadPostManager(awfulClient);
+            var entry = await manager.GetThreadPostsAsync(3836680, 1).ConfigureAwait(false);
+            var result = handler.RenderThreadPostView(entry, defaultOptions);
+
+            //BanManager manager = new BanManager(awfulClient);
+            //var entry = await manager.GetBanPageAsync().ConfigureAwait(false);
+            //var result = handler.RenderBanView(entry, defaultOptions);
 
             //UserManager manager = new UserManager(awfulClient);
             //var entry = await manager.GetUserFromProfilePageAsync(0).ConfigureAwait(false);
