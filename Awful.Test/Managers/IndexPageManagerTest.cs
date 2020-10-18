@@ -9,7 +9,7 @@ using Awful.Core.Managers.JSON;
 using Awful.Core.Utilities;
 using Xunit;
 
-namespace Awful.Test
+namespace Awful.Test.Managers
 {
     /// <summary>
     /// Tests for the Index Page Manager.

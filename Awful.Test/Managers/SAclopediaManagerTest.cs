@@ -10,7 +10,7 @@ using Awful.Core.Managers.JSON;
 using Awful.Core.Utilities;
 using Xunit;
 
-namespace Awful.Test
+namespace Awful.Test.Managers
 {
     /// <summary>
     /// SAclopedia Manager Tests.

@@ -1,4 +1,4 @@
-﻿// <copyright file="ThreadListManagerTest.cs" company="Drastic Actions">
+﻿// <copyright file="ThreadPostManagerTest.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
@@ -10,27 +10,28 @@ using System.Threading.Tasks;
 using Awful.Core.Managers;
 using Xunit;
 
-namespace Awful.Test
+namespace Awful.Test.Managers
 {
     /// <summary>
     /// Tests for Thread List Manager.
     /// </summary>
-    public class ThreadListManagerTest
+    public class ThreadPostManagerTest
     {
         /// <summary>
-        /// Test GetForumThreadListAsync.
+        /// Test GetThreadPostsAsync.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [Fact]
-        public async Task GetForumThreadListAsyncTest()
+        public async Task GetThreadPostsAsyncTest()
         {
             using var webClient = await Setup.SetupWebClient(AwfulUser.Standard).ConfigureAwait(false);
-            ThreadListManager manager = new ThreadListManager(webClient);
-            var result = await manager.GetForumThreadListAsync(273, 1).ConfigureAwait(false);
+            ThreadPostManager manager = new ThreadPostManager(webClient);
+            var result = await manager.GetThreadPostsAsync(3836680, 1).ConfigureAwait(false);
             Assert.NotNull(result);
             Assert.True(result.CurrentPage == 1);
             Assert.True(result.TotalPages > 1);
-            Assert.True(result.Threads.Any());
+            Assert.True(result.Posts.Any());
+            Assert.NotNull(result.Posts.First().User);
         }
     }
 }

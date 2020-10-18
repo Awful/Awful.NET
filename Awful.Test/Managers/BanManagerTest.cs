@@ -9,7 +9,7 @@ using Awful.Core.Managers;
 using Awful.Core.Utilities;
 using Xunit;
 
-namespace Awful.Test
+namespace Awful.Test.Managers
 {
     /// <summary>
     /// Ban Manager Test.

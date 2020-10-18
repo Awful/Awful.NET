@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Awful.Core.Managers;
 using Xunit;
 
-namespace Awful.Test
+namespace Awful.Test.Managers
 {
     /// <summary>
     /// SmileManager Test.
