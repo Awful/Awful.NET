@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Awful.Core.Managers;
 using Awful.Core.Utilities;
+using Awful.Database.Context;
 
 namespace Awful.Test
 {
@@ -18,6 +19,16 @@ namespace Awful.Test
     /// </summary>
     public static class Setup
     {
+        /// <summary>
+        /// Setup Awful Database Context.
+        /// </summary>
+        /// <param name="properties">Test Properties.</param>
+        /// <returns>AwfulContext.</returns>
+        public static AwfulContext SetupContext(TestPlatformProperties properties)
+        {
+            return new AwfulContext(properties);
+        }
+
         /// <summary>
         /// Setup Web Client.
         /// </summary>

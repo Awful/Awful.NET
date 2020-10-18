@@ -61,7 +61,7 @@ namespace Awful.Core.Managers
                 throw new UserAuthenticationException(Awful.Core.Resources.ExceptionMessages.UserAuthenticationError);
             }
 
-            var result = await this.webManager.GetDataAsync(EndPoints.SAclopediaBase + $"?act={act}&i={id}", token).ConfigureAwait(false);
+            var result = await this.webManager.GetDataAsync(EndPoints.SAclopediaBase + $"?act={act}&l={id}", token).ConfigureAwait(false);
             var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
             return SAclopediaHandler.ParseEntryItemList(document);
         }

@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Awful.Core.Entities.SAclopedia;
+using Awful.Core.Tools;
 using Awful.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,19 +22,10 @@ namespace Awful.Database.Context
         /// <summary>
         /// Initializes a new instance of the <see cref="AwfulContext"/> class.
         /// </summary>
-        /// <param name="databasePath">Path to the database.</param>
-        public AwfulContext(string databasePath)
+        /// <param name="platformProperties">Path to the platform properties.</param>
+        public AwfulContext(IPlatformProperties platformProperties)
         {
-            this.DatabasePath = databasePath;
-            this.Database.EnsureCreated();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AwfulContext"/> class.
-        /// </summary>
-        public AwfulContext()
-        {
-            this.DatabasePath = "Awful.sqlite";
+            this.PlatformProperties = platformProperties;
             this.Database.EnsureCreated();
         }
 
@@ -41,14 +34,47 @@ namespace Awful.Database.Context
         /// </summary>
         public DbSet<UserAuth> Users { get; set; }
 
-        private string DatabasePath { get; set; }
+        /// <summary>
+        /// Gets or sets the SAclopediaEntryItems table.
+        /// </summary>
+        public DbSet<SAclopediaEntryItem> SAclopediaEntryItems { get; set; }
+
+        private IPlatformProperties PlatformProperties { get; set; }
+
+        #region SAclopedia
+
+        /// <summary>
+        /// Add All SAclopedia Entries.
+        /// </summary>
+        /// <param name="entries">Entries to be added.</param>
+        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
+        public async Task<int> AddAllSAclopediaEntry(List<SAclopediaEntryItem> entries)
+        {
+            await this.SAclopediaEntryItems.AddRangeAsync(entries).ConfigureAwait(false);
+            return await this.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Remove All SAclopedia Entry.
+        /// </summary>
+        /// <returns>Number of rows changed.</returns>
+        public async Task<int> RemoveAllSAclopediaEntryAsync()
+        {
+            var saclopedias = await this.SAclopediaEntryItems.ToListAsync().ConfigureAwait(false);
+            this.SAclopediaEntryItems.RemoveRange(saclopedias);
+            return await this.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Users
 
         /// <summary>
         /// Add or update user.
         /// </summary>
         /// <param name="userAuth">The user auth.</param>
         /// <returns>Number of rows changed.</returns>
-        public async Task<int> AddOrUpdateUser(UserAuth userAuth)
+        public async Task<int> AddOrUpdateUserAsync(UserAuth userAuth)
         {
             var user = this.Users.FirstOrDefault(node => node.UserAuthId == userAuth.UserAuthId);
             if (user == null)
@@ -61,6 +87,55 @@ namespace Awful.Database.Context
             }
 
             return await this.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Remove user.
+        /// </summary>
+        /// <param name="userAuth">The user auth.</param>
+        /// <returns>Number of rows changed.</returns>
+        public async Task<int> RemoveUserAsync(UserAuth userAuth)
+        {
+            this.Users.Remove(userAuth);
+            return await this.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Remove All Users.
+        /// </summary>
+        /// <returns>Number of rows changed.</returns>
+        public async Task<int> RemoveAllUsersAsync()
+        {
+            var users = await this.Users.ToListAsync().ConfigureAwait(false);
+            this.Users.RemoveRange(users);
+            return await this.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Run when configuring the database.
+        /// </summary>
+        /// <param name="optionsBuilder"><see cref="DbContextOptionsBuilder"/>.</param>
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite($"Filename={this.PlatformProperties.DatabasePath}");
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
+
+        /// <summary>
+        /// Run when building the model.
+        /// </summary>
+        /// <param name="modelBuilder"><see cref="ModelBuilder"/>.</param>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            if (modelBuilder == null)
+            {
+                throw new ArgumentNullException(nameof(modelBuilder));
+            }
+
+            modelBuilder.Entity<SAclopediaEntryItem>().HasKey(n => n.Id);
+            modelBuilder.Entity<UserAuth>().Ignore(b => b.AuthCookies);
         }
     }
 }
