@@ -12,6 +12,7 @@ using Awful.Core.Entities.SAclopedia;
 using Awful.Core.Managers;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
+using Awful.Webview;
 
 namespace Awful.UI.Actions
 {
@@ -22,16 +23,19 @@ namespace Awful.UI.Actions
     {
         private AwfulContext context;
         private SAclopediaManager manager;
+        private TemplateHandler templates;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SAclopediaAction"/> class.
         /// </summary>
         /// <param name="client">AwfulClient.</param>
         /// <param name="context">AwfulContext.</param>
-        public SAclopediaAction(AwfulClient client, AwfulContext context)
+        /// <param name="templates">Templates.</param>
+        public SAclopediaAction(AwfulClient client, AwfulContext context, TemplateHandler templates)
         {
             this.manager = new SAclopediaManager(client);
             this.context = context;
+            this.templates = templates;
         }
 
         public async Task<List<SAclopediaEntryItem>> LoadSAclopediaEntryItemsAsync(bool forceRefresh = false, CancellationToken token = default)

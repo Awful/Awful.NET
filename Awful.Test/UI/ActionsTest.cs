@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Awful.Database.Context;
 using Awful.UI.Actions;
+using Awful.Webview;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
@@ -20,11 +21,14 @@ namespace Awful.Test.UI
     /// </summary>
     public class ActionsTest
     {
+        private TemplateHandler templates;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ActionsTest"/> class.
         /// </summary>
         public ActionsTest()
         {
+            this.templates = new TemplateHandler();
         }
 
         /// <summary>
@@ -55,7 +59,7 @@ namespace Awful.Test.UI
             var properties = new TestPlatformProperties("saclopedia");
             using var context = new AwfulContext(properties);
             using var webClient = await Setup.SetupWebClient(AwfulUser.Standard).ConfigureAwait(false);
-            var saclopediaAction = new SAclopediaAction(webClient, context);
+            var saclopediaAction = new SAclopediaAction(webClient, context, this.templates);
             var entries = await saclopediaAction.LoadSAclopediaEntryItemsAsync().ConfigureAwait(false);
             Assert.NotNull(entries);
             Assert.True(entries.Any());
@@ -69,8 +73,6 @@ namespace Awful.Test.UI
             entries = await saclopediaAction.LoadSAclopediaEntryItemsAsync(true).ConfigureAwait(false);
             Assert.NotNull(entries);
             Assert.True(entries.Any());
-
-
         }
 
         private void SigninAction_OnSignin(object sender, Awful.UI.Events.SigninEventArgs e)
