@@ -13,6 +13,7 @@ using Awful.Core.Managers;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Webview;
+using Awful.Webview.Entities.Themes;
 
 namespace Awful.UI.Actions
 {
@@ -38,6 +39,23 @@ namespace Awful.UI.Actions
             this.templates = templates;
         }
 
+        /// <summary>
+        /// Generates SAclopedia Entry HTML.
+        /// </summary>
+        /// <param name="entry">SAclopedia Entry.</param>
+        /// <param name="defaultOptions">The default options for HTML template.</param>
+        /// <returns>HTML string.</returns>
+        public string GenerateSAclopediaEntryTemplate(SAclopediaEntry entry, DefaultOptions defaultOptions = default)
+        {
+            return this.templates.RenderSAclopediaView(entry, defaultOptions);
+        }
+
+        /// <summary>
+        /// Load SAclopedia Entry Items.
+        /// </summary>
+        /// <param name="forceRefresh">Force cached refresh into database.</param>
+        /// <param name="token">CancellationToken.</param>
+        /// <returns>List of SAclopediaEntryItems.</returns>
         public async Task<List<SAclopediaEntryItem>> LoadSAclopediaEntryItemsAsync(bool forceRefresh = false, CancellationToken token = default)
         {
             var list = this.context.SAclopediaEntryItems.ToList();
