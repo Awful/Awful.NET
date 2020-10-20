@@ -3,7 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="Awful.Mobile.Views.SAclopediaEntryListPage">
     <ContentPage.Content>
-        <CollectionView ItemsSource="{Binding Items}"
+        <CollectionView SelectionMode="Single" 
+                        x:Name="SAclopediaCollection"
+                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference SAclopediaCollection}}" 
+                        SelectionChangedCommand="{Binding SelectionCommand}" ItemsSource="{Binding Items}"
                 IsGrouped="True">
             <CollectionView.GroupHeaderTemplate>
                 <DataTemplate>

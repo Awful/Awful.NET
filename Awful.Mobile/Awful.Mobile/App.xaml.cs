@@ -21,7 +21,7 @@ namespace Awful.Mobile
         {
             this.InitializeComponent();
             Container = Awful.UI.AwfulContainer.BuildContainer(builder);
-            this.MainPage = new SigninPage();
+            this.MainPage = new SAclopediaEntryListPage();
         }
 
         protected override void OnStart()
