@@ -51,6 +51,16 @@ namespace Awful.UI.Actions
         }
 
         /// <summary>
+        /// Load SAclopedia Entry.
+        /// </summary>
+        /// <param name="item">SAclopediaEntryItem.</param>
+        /// <returns>SAclopediaEntry.</returns>
+        public async Task<SAclopediaEntry> LoadSAclopediaEntryAsync(SAclopediaEntryItem item)
+        {
+            return await this.manager.GetEntryAsync(item.Id).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Load SAclopedia Entry Items.
         /// </summary>
         /// <param name="forceRefresh">Force cached refresh into database.</param>

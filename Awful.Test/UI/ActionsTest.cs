@@ -73,6 +73,13 @@ namespace Awful.Test.UI
             entries = await saclopediaAction.LoadSAclopediaEntryItemsAsync(true).ConfigureAwait(false);
             Assert.NotNull(entries);
             Assert.True(entries.Any());
+
+            var entry = await saclopediaAction.LoadSAclopediaEntryAsync(entries.First()).ConfigureAwait(false);
+            Assert.NotNull(entry);
+            Assert.True(entry.Posts.Any());
+
+            var html = saclopediaAction.GenerateSAclopediaEntryTemplate(entry, new Webview.Entities.Themes.DefaultOptions());
+            Assert.True(!string.IsNullOrEmpty(html));
         }
 
         private void SigninAction_OnSignin(object sender, Awful.UI.Events.SigninEventArgs e)
