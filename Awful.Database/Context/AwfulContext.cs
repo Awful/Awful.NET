@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Awful.Core.Entities.SAclopedia;
+using Awful.Core.Handlers;
 using Awful.Core.Tools;
 using Awful.Database.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -74,8 +75,35 @@ namespace Awful.Database.Context
         /// </summary>
         /// <param name="userAuth">The user auth.</param>
         /// <returns>Number of rows changed.</returns>
+        public UserAuth GetDefaultUser()
+        {
+            var user = this.Users.FirstOrDefault(node => node.IsDefaultUser);
+            if (user != null)
+            {
+                user.AuthCookies = CookieManager.LoadCookie(user.CookiePath);
+            }
+
+            return user;
+        }
+
+        /// <summary>
+        /// Add or update user.
+        /// </summary>
+        /// <param name="userAuth">The user auth.</param>
+        /// <returns>Number of rows changed.</returns>
         public async Task<int> AddOrUpdateUserAsync(UserAuth userAuth)
         {
+            if (userAuth == null)
+            {
+                throw new ArgumentNullException(nameof(userAuth));
+            }
+
+            userAuth.IsDefaultUser = true;
+            foreach (var oldUser in this.Users)
+            {
+                oldUser.IsDefaultUser = false;
+            }
+
             var user = this.Users.FirstOrDefault(node => node.UserAuthId == userAuth.UserAuthId);
             if (user == null)
             {
@@ -96,7 +124,21 @@ namespace Awful.Database.Context
         /// <returns>Number of rows changed.</returns>
         public async Task<int> RemoveUserAsync(UserAuth userAuth)
         {
+            if (System.IO.File.Exists(userAuth.CookiePath))
+            {
+                System.IO.File.Delete(userAuth.CookiePath);
+            }
+
             this.Users.Remove(userAuth);
+            if (await this.Users.AnyAsync(n => n.IsDefaultUser).ConfigureAwait(false) == false)
+            {
+                var user = await this.Users.FirstOrDefaultAsync().ConfigureAwait(false);
+                if (user != null)
+                {
+                    user.IsDefaultUser = true;
+                }
+            }
+
             return await this.SaveChangesAsync().ConfigureAwait(false);
         }
 

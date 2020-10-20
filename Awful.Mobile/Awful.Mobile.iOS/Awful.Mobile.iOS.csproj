@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="../../UI.props" />
+  <Import Project="../../Database.props" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
@@ -63,6 +65,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="iOSPlatformProperties.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
@@ -122,12 +125,20 @@
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1239" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\..\Awful.Core\Awful.Core.csproj">
+      <Project>{9eac913e-0139-4a7a-9f95-cafdea30e1ef}</Project>
+      <Name>Awful.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Awful.Database\Awful.Database.csproj">
+      <Project>{65199a93-a502-4a1d-9f32-d802f6078ab4}</Project>
+      <Name>Awful.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Awful.UI\Awful.UI.csproj">
+      <Project>{4a2edb48-2471-4ec6-ac14-0b75dafb5da6}</Project>
+      <Name>Awful.UI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Awful.Mobile\Awful.Mobile.csproj">
       <Project>{D2033A98-EC6F-45D6-ACBB-CB5B2F43773E}</Project>
       <Name>Awful.Mobile</Name>

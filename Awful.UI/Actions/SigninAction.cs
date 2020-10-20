@@ -48,7 +48,6 @@ namespace Awful.UI.Actions
             this.platformProperties = platformProperties;
             this.context = context;
             this.CurrentUser = this.context.Users.FirstOrDefault();
-            this.IsSignedIn = this.CurrentUser != null;
         }
 
         /// <summary>
@@ -66,7 +65,7 @@ namespace Awful.UI.Actions
         /// <summary>
         /// Gets a value indicating whether the user is signed in.
         /// </summary>
-        public bool IsSignedIn { get; private set; }
+        public bool IsSignedIn { get { return this.CurrentUser != null; } }
 
         /// <summary>
         /// Gets the current user.
@@ -84,7 +83,6 @@ namespace Awful.UI.Actions
             using var client = new AwfulClient();
             var manager = new AuthenticationManager(client);
             var result = await manager.AuthenticateAsync(username, password).ConfigureAwait(false);
-            this.IsSignedIn = result.IsSuccess;
             if (result.IsSuccess)
             {
                 var captures = Regex.Match(result.CurrentUser.Usertitle, @"(http|ftp|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?");

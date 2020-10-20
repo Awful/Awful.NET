@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Awful.Mobile.Views.SigninPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1" VerticalOptions="CenterAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label FontSize="30" Grid.Row="1" Margin="0,25,0,0" HorizontalOptions="CenterAndExpand" Text="Awful Forums Reader"></Label>
+                <Grid Grid.Row="2">
+                    <StackLayout Margin="0,25,0,0">
+                        <Entry x:Name="Username" IsSpellCheckEnabled="False" Text="{Binding Username, Mode=TwoWay}" Placeholder="Username" Margin="0,0,0,15">
+                        </Entry>
+                        <Entry IsPassword="True" x:Name="Password" Text="{Binding Password, Mode=TwoWay}" Placeholder="Password" Margin="0,0,0,15">
+                        </Entry>
+                        <Button x:Name="LoginButton" IsEnabled="{Binding IsLoginEnabled, Mode=TwoWay}" Text="Login" Command="{Binding LoginCommand}"  HorizontalOptions="CenterAndExpand" />
+                    </StackLayout>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

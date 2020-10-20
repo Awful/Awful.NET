@@ -1,16 +1,27 @@
-﻿using System;
+﻿// <copyright file="App.xaml.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
+using System;
+using Autofac;
+using Awful.Mobile.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Awful.Mobile
 {
+    /// <summary>
+    /// Awful App Startup.
+    /// </summary>
     public partial class App : Application
     {
-        public App()
-        {
-            InitializeComponent();
+        public static IContainer Container;
 
-            MainPage = new MainPage();
+        public App(ContainerBuilder builder)
+        {
+            this.InitializeComponent();
+            Container = Awful.UI.AwfulContainer.BuildContainer(builder);
+            this.MainPage = new SigninPage();
         }
 
         protected override void OnStart()

@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{5D
 		Database.props = Database.props
 		Directory.Build.props = Directory.Build.props
 		stylecop.json = stylecop.json
+		UI.props = UI.props
 		Web.props = Web.props
 	EndProjectSection
 EndProject
@@ -25,9 +26,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{61031B20-E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{2B53D166-E87F-4165-9934-283A1EB30114}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Awful.Database", "Awful.Database\Awful.Database.csproj", "{65199A93-A502-4A1D-9F32-D802F6078AB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awful.Database", "Awful.Database\Awful.Database.csproj", "{65199A93-A502-4A1D-9F32-D802F6078AB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Awful.UI", "Awful.UI\Awful.UI.csproj", "{4A2EDB48-2471-4EC6-AC14-0B75DAFB5DA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awful.UI", "Awful.UI\Awful.UI.csproj", "{4A2EDB48-2471-4EC6-AC14-0B75DAFB5DA6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{16F7227E-7FA5-4899-AE65-E74362834645}"
 EndProject
@@ -37,7 +38,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Awful.Mobile.Android", "Awf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Awful.Mobile.iOS", "Awful.Mobile\Awful.Mobile.iOS\Awful.Mobile.iOS.csproj", "{F938F5E5-C856-4701-BB89-6A7334D971F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Awful.Mobile", "Awful.Mobile\Awful.Mobile\Awful.Mobile.csproj", "{D50E5AED-AEF5-4CBA-ACA1-267D06B95CD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awful.Mobile", "Awful.Mobile\Awful.Mobile\Awful.Mobile.csproj", "{D50E5AED-AEF5-4CBA-ACA1-267D06B95CD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
