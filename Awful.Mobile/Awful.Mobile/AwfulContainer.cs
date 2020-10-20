@@ -8,6 +8,7 @@ using System.Text;
 using Autofac;
 using Awful.Database.Context;
 using Awful.UI.ViewModels;
+using Awful.Webview;
 
 namespace Awful.UI
 {
@@ -15,10 +16,11 @@ namespace Awful.UI
     {
         public static IContainer BuildContainer(ContainerBuilder builder)
         {
+            builder.RegisterType<TemplateHandler>().SingleInstance();
             builder.RegisterType<AwfulContext>().SingleInstance();
             builder.RegisterType<AwfulViewModel>();
             builder.RegisterType<SigninViewModel>();
-            //builder.RegisterType<MainViewModel>();
+            builder.RegisterType<SAclopediaEntryListViewModel>();
 
             return builder.Build();
         }
