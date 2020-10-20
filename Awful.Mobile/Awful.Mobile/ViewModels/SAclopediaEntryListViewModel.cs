@@ -38,8 +38,8 @@ namespace Awful.UI.ViewModels
         {
             this.IsBusy = true;
             var items = await this.saclopedia.LoadSAclopediaEntryItemsAsync(refresh).ConfigureAwait(false);
-            this.EntryItems = items.GroupBy(n => n.Title.First().ToString()).Select(n => new SAclopediaGroup(n.Key, n.ToList())).OrderBy(n => n.Name).ToList();
-            this.OnPropertyChanged(nameof(this.EntryItems));
+            this.Items = items.GroupBy(n => n.Title[0].ToString().ToUpperInvariant()).Select(n => new SAclopediaGroup(n.Key, n.ToList())).OrderBy(n => n.Name).ToList();
+            this.OnPropertyChanged(nameof(this.Items));
             this.IsBusy = false;
         }
 
@@ -51,6 +51,6 @@ namespace Awful.UI.ViewModels
             }
         }
 
-        public List<SAclopediaGroup> EntryItems { get; set; }
+        public List<SAclopediaGroup> Items { get; set; } = new List<SAclopediaGroup>();
     }
 }
