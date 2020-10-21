@@ -47,6 +47,11 @@ namespace Awful.UI.Actions
         /// <returns>HTML string.</returns>
         public string GenerateSAclopediaEntryTemplate(SAclopediaEntry entry, DefaultOptions defaultOptions = default)
         {
+            if (entry == null)
+            {
+                throw new ArgumentNullException(nameof(entry));
+            }
+
             return this.templates.RenderSAclopediaView(entry, defaultOptions);
         }
 
@@ -57,6 +62,11 @@ namespace Awful.UI.Actions
         /// <returns>SAclopediaEntry.</returns>
         public async Task<SAclopediaEntry> LoadSAclopediaEntryAsync(SAclopediaEntryItem item)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
+
             return await this.manager.GetEntryAsync(item.Id).ConfigureAwait(false);
         }
 

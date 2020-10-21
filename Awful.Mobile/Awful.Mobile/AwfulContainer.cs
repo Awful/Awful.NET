@@ -21,6 +21,7 @@ namespace Awful.UI
             builder.RegisterType<AwfulViewModel>();
             builder.RegisterType<SigninViewModel>();
             builder.RegisterType<SAclopediaEntryListViewModel>();
+            builder.RegisterType<SAclopediaEntryViewModel>();
 
             return builder.Build();
         }

@@ -39,7 +39,13 @@ namespace Awful.UI.ViewModels
                 return;
             }
 
-            await this.signin.SigninAsync(this.Username, this.password).ConfigureAwait(false);
+            this.IsBusy = true;
+            var result = await this.signin.SigninAsync(this.Username, this.password).ConfigureAwait(false);
+            this.IsBusy = false;
+
+            Device.BeginInvokeOnMainThread(async () => {
+                await Shell.Current.GoToAsync("//ForumList").ConfigureAwait(false);
+            });
         }
 
         public bool IsLoginEnabled => !string.IsNullOrEmpty(this.Password) && !string.IsNullOrEmpty(this.Username);

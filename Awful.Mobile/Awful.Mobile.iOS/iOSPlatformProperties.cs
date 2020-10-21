@@ -14,8 +14,8 @@ namespace Awful.Mobile.iOS
 {
     public class iOSPlatformProperties : IPlatformProperties
     {
-        public string CookiePath => System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Cookie");
+        public string CookiePath => System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..", "Cookie");
 
-        public string DatabasePath => System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "DB");
+        public string DatabasePath => System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..", "DB");
     }
 }

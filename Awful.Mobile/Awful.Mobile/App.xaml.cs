@@ -4,6 +4,7 @@
 
 using System;
 using Autofac;
+using Awful.Database.Context;
 using Awful.Mobile.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -21,7 +22,7 @@ namespace Awful.Mobile
         {
             this.InitializeComponent();
             Container = Awful.UI.AwfulContainer.BuildContainer(builder);
-            this.MainPage = new SAclopediaEntryListPage();
+            this.MainPage = new AwfulShell();
         }
 
         protected override void OnStart()

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Awful.Mobile.Views"
+             x:Class="Awful.Mobile.AwfulShell">
+
+    <FlyoutItem Title="Forums">
+        <ShellContent Route="ForumList" ContentTemplate="{DataTemplate local:ForumListPage}" />
+    </FlyoutItem>
+    
+    <FlyoutItem Title="SAclopedia">
+        <ShellContent Route="SAclopediaEntryListPage" ContentTemplate="{DataTemplate local:SAclopediaEntryListPage}" />
+    </FlyoutItem>
+
+    <TabBar>
+        <ShellContent Route="SigninPage" ContentTemplate="{DataTemplate local:SigninPage}" />
+    </TabBar>
+    
+</Shell>

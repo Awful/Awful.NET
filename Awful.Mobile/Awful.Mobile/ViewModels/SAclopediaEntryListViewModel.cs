@@ -56,9 +56,13 @@ namespace Awful.UI.ViewModels
             {
                 return new Command<SAclopediaEntryItem>(async (item) =>
                 {
-                    if (item == null)
+                    if (item != null)
                     {
-                        return;
+                        Device.BeginInvokeOnMainThread(async() =>
+                            {
+                                await Shell.Current.GoToAsync($"saclopediaentrypage?entryId={item.Id}&title={item.Title}").ConfigureAwait(false);
+                            }
+                        );
                     }
                 });
             }
