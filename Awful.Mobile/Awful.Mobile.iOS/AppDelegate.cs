@@ -32,12 +32,12 @@ namespace Awful.Mobile.iOS
         /// <returns>Boolean.</returns>
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            SQLitePCL.Batteries.Init();
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             global::Xamarin.Forms.Forms.Init();
             var builder = new ContainerBuilder();
             builder.RegisterType<iOSPlatformProperties>().As<IPlatformProperties>();
             this.LoadApplication(new App(builder));
-
             return base.FinishedLaunching(app, options);
         }
     }

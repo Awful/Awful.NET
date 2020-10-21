@@ -18,7 +18,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidUseAapt2>true</AndroidUseAapt2>
@@ -101,7 +100,7 @@
       <Name>Awful.UI</Name>
     </ProjectReference>
     <ProjectReference Include="..\Awful.Mobile\Awful.Mobile.csproj">
-      <Project>{D2033A98-EC6F-45D6-ACBB-CB5B2F43773E}</Project>
+      <Project>{D50E5AED-AEF5-4CBA-ACA1-267D06B95CD4}</Project>
       <Name>Awful.Mobile</Name>
     </ProjectReference>
   </ItemGroup>
