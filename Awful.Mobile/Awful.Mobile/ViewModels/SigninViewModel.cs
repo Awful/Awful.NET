@@ -13,6 +13,9 @@ using Xamarin.Forms;
 
 namespace Awful.UI.ViewModels
 {
+    /// <summary>
+    /// Signin View Model.
+    /// </summary>
     public class SigninViewModel : AwfulViewModel
     {
         private string password = string.Empty;
@@ -32,24 +35,14 @@ namespace Awful.UI.ViewModels
             this.signin = new SigninAction(properties, context);
         }
 
-        public async void LoginUserWithPassword()
-        {
-            if (!this.IsLoginEnabled)
-            {
-                return;
-            }
-
-            this.IsBusy = true;
-            var result = await this.signin.SigninAsync(this.Username, this.password).ConfigureAwait(false);
-            this.IsBusy = false;
-
-            Device.BeginInvokeOnMainThread(async () => {
-                await Shell.Current.GoToAsync("//ForumList").ConfigureAwait(false);
-            });
-        }
-
+        /// <summary>
+        /// Gets a value indicating whether login is enabled.
+        /// </summary>
         public bool IsLoginEnabled => !string.IsNullOrEmpty(this.Password) && !string.IsNullOrEmpty(this.Username);
 
+        /// <summary>
+        /// Gets the login command.
+        /// </summary>
         public Command LoginCommand
         {
             get
@@ -58,6 +51,9 @@ namespace Awful.UI.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets or sets the password.
+        /// </summary>
         public string Password
         {
             get
@@ -72,6 +68,9 @@ namespace Awful.UI.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets or sets the username.
+        /// </summary>
         public string Username
         {
             get
@@ -84,6 +83,29 @@ namespace Awful.UI.ViewModels
                 this.SetProperty(ref this.username, value);
                 this.OnPropertyChanged(nameof(this.IsLoginEnabled));
             }
+        }
+
+        /// <summary>
+        /// Login User With Password.
+        /// </summary>
+        public async void LoginUserWithPassword()
+        {
+            if (!this.IsLoginEnabled)
+            {
+                return;
+            }
+
+            this.IsBusy = true;
+            var result = await this.signin.SigninAsync(this.Username, this.password).ConfigureAwait(false);
+            if (result.IsSuccess)
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await Shell.Current.GoToAsync("//ForumList").ConfigureAwait(false);
+                });
+            }
+
+            this.IsBusy = false;
         }
     }
 }

@@ -14,9 +14,15 @@ using Xamarin.Forms.Xaml;
 
 namespace Awful.Mobile.Views
 {
+    /// <summary>
+    /// SAclopedia Entry List Page.
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SAclopediaEntryListPage : ContentPage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SAclopediaEntryListPage"/> class.
+        /// </summary>
         public SAclopediaEntryListPage()
         {
             this.InitializeComponent();

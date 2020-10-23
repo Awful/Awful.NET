@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,29 +15,43 @@ using Xamarin.Forms.Xaml;
 
 namespace Awful.Mobile.Views
 {
+    /// <summary>
+    /// SAclopedia Entry Page.
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     [QueryProperty("EntryId", "entryId")]
-    [QueryProperty("Title", "title")]
+    [QueryProperty("SATitle", "title")]
     public partial class SAclopediaEntryPage : ContentPage
     {
         private SAclopediaEntryViewModel vm = App.Container.Resolve<SAclopediaEntryViewModel>();
 
-        public string EntryId { get; set; }
-
-        public string Title { get; set; }
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SAclopediaEntryPage"/> class.
+        /// </summary>
         public SAclopediaEntryPage()
         {
             this.InitializeComponent();
             this.vm.WebView = this.AwfulWebView;
             this.BindingContext = this.vm;
-            //Task.Run(async () => await this.vm.LoadTemplate(new Core.Entities.SAclopedia.SAclopediaEntryItem() { Id = Convert.ToInt32(this.EntryId), Title = Uri.UnescapeDataString(this.Title) }).ConfigureAwait(false));
         }
 
+        /// <summary>
+        /// Gets or sets the entry id.
+        /// </summary>
+        public string EntryId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the entry title.
+        /// </summary>
+        public string SATitle { get; set; }
+
+        /// <summary>
+        /// Shown On Appearing.
+        /// </summary>
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await this.vm.LoadTemplate(new Core.Entities.SAclopedia.SAclopediaEntryItem() { Id = Convert.ToInt32(this.EntryId), Title = Uri.UnescapeDataString(this.Title) }).ConfigureAwait(false);
+            await this.vm.LoadTemplate(new Core.Entities.SAclopedia.SAclopediaEntryItem() { Id = Convert.ToInt32(this.EntryId, CultureInfo.InvariantCulture), Title = Uri.UnescapeDataString(this.SATitle) }).ConfigureAwait(false);
         }
     }
 }

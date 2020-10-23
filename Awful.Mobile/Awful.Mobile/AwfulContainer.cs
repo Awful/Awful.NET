@@ -12,10 +12,23 @@ using Awful.Webview;
 
 namespace Awful.UI
 {
+    /// <summary>
+    /// Awful Container.
+    /// </summary>
     public static class AwfulContainer
     {
+        /// <summary>
+        /// Builds Awful Container.
+        /// </summary>
+        /// <param name="builder">Platform Specific Container.</param>
+        /// <returns>IContainer.</returns>
         public static IContainer BuildContainer(ContainerBuilder builder)
         {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
             builder.RegisterType<TemplateHandler>().SingleInstance();
             builder.RegisterType<AwfulContext>().SingleInstance();
             builder.RegisterType<AwfulViewModel>();

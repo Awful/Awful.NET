@@ -17,6 +17,9 @@ using Xamarin.Forms;
 
 namespace Awful.UI.ViewModels
 {
+    /// <summary>
+    /// SAclopedia Entry View Model.
+    /// </summary>
     public class SAclopediaEntryViewModel : AwfulViewModel
     {
         private SAclopediaAction saclopedia;
@@ -27,16 +30,29 @@ namespace Awful.UI.ViewModels
         /// <param name="handler">Awful Template Handler.</param>
         /// <param name="properties">Awful Properties.</param>
         /// <param name="context">Awful Context.</param>
-        public SAclopediaEntryViewModel(TemplateHandler handler, IPlatformProperties properties, AwfulContext context)
+        public SAclopediaEntryViewModel(TemplateHandler handler, AwfulContext context)
             : base(context)
         {
             this.saclopedia = new SAclopediaAction(this.Client, context, handler);
         }
 
+        /// <summary>
+        /// Gets or sets the internal webview.
+        /// </summary>
         public WebView WebView { get; set; }
 
+        /// <summary>
+        /// Loads SAclopedia Template into webview.
+        /// </summary>
+        /// <param name="entryListItem">SAclopedia Entry List Item.</param>
+        /// <returns>Task.</returns>
         public async Task LoadTemplate(SAclopediaEntryItem entryListItem)
         {
+            if (entryListItem == null)
+            {
+                throw new ArgumentNullException(nameof(entryListItem));
+            }
+
             this.IsBusy = true;
             this.Title = entryListItem.Title;
             var entry = await this.saclopedia.LoadSAclopediaEntryAsync(entryListItem).ConfigureAwait(false);

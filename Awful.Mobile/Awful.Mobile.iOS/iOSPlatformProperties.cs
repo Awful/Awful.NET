@@ -12,10 +12,19 @@ using UIKit;
 
 namespace Awful.Mobile.iOS
 {
+    /// <summary>
+    /// iOS Platform Properties.
+    /// </summary>
     public class iOSPlatformProperties : IPlatformProperties
     {
+        /// <summary>
+        /// Gets the cookie path.
+        /// </summary>
         public string CookiePath => System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "awful.cookie");
 
+        /// <summary>
+        /// Gets the database path.
+        /// </summary>
         public string DatabasePath => System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "awful.db");
     }
 }

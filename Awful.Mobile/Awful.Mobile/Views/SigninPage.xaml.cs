@@ -14,9 +14,15 @@ using Xamarin.Forms.Xaml;
 
 namespace Awful.Mobile.Views
 {
+    /// <summary>
+    /// Sigin Page.
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SigninPage : ContentPage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SigninPage"/> class.
+        /// </summary>
         public SigninPage()
         {
             this.InitializeComponent();

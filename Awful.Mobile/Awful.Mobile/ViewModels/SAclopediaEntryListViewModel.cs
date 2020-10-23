@@ -29,9 +29,8 @@ namespace Awful.UI.ViewModels
         /// Initializes a new instance of the <see cref="SAclopediaEntryListViewModel"/> class.
         /// </summary>
         /// <param name="handler">Awful Template Handler.</param>
-        /// <param name="properties">Awful Properties.</param>
         /// <param name="context">Awful Context.</param>
-        public SAclopediaEntryListViewModel(TemplateHandler handler, IPlatformProperties properties, AwfulContext context)
+        public SAclopediaEntryListViewModel(TemplateHandler handler, AwfulContext context)
             : base(context)
         {
             this.saclopedia = new SAclopediaAction(this.Client, context, handler);
@@ -41,33 +40,29 @@ namespace Awful.UI.ViewModels
             }
         }
 
-        public async Task RefreshEntryList(bool refresh)
-        {
-            this.IsBusy = true;
-            var items = await this.saclopedia.LoadSAclopediaEntryItemsAsync(refresh).ConfigureAwait(false);
-            this.Items = items.GroupBy(n => n.Title[0].ToString().ToUpperInvariant()).Select(n => new SAclopediaGroup(n.Key, n.ToList())).OrderBy(n => n.Name).ToList();
-            this.OnPropertyChanged(nameof(this.Items));
-            this.IsBusy = false;
-        }
-
-        public Command<SAclopediaEntryItem> SelectionCommand
+        /// <summary>
+        /// Gets the Selection Entry.
+        /// </summary>
+        public static Command<SAclopediaEntryItem> SelectionCommand
         {
             get
             {
-                return new Command<SAclopediaEntryItem>(async (item) =>
+                return new Command<SAclopediaEntryItem>((item) =>
                 {
                     if (item != null)
                     {
-                        Device.BeginInvokeOnMainThread(async() =>
+                        Device.BeginInvokeOnMainThread(async () =>
                             {
                                 await Shell.Current.GoToAsync($"saclopediaentrypage?entryId={item.Id}&title={item.Title}").ConfigureAwait(false);
-                            }
-                        );
+                            });
                     }
                 });
             }
         }
 
+        /// <summary>
+        /// Gets the refresh command.
+        /// </summary>
         public Command RefreshCommand
         {
             get
@@ -76,6 +71,23 @@ namespace Awful.UI.ViewModels
             }
         }
 
-        public List<SAclopediaGroup> Items { get; set; } = new List<SAclopediaGroup>();
+        /// <summary>
+        /// Gets the SAclopedia Items.
+        /// </summary>
+        public List<SAclopediaGroup> Items { get; private set; } = new List<SAclopediaGroup>();
+
+        /// <summary>
+        /// Refreshes SAclopedia Items.
+        /// </summary>
+        /// <param name="refresh">Force refresh of cache.</param>
+        /// <returns>A Task.</returns>
+        public async Task RefreshEntryList(bool refresh)
+        {
+            this.IsBusy = true;
+            var items = await this.saclopedia.LoadSAclopediaEntryItemsAsync(refresh).ConfigureAwait(false);
+            this.Items = items.GroupBy(n => n.Title[0].ToString().ToUpperInvariant()).Select(n => new SAclopediaGroup(n.Key, n.ToList())).OrderBy(n => n.Name).ToList();
+            this.OnPropertyChanged(nameof(this.Items));
+            this.IsBusy = false;
+        }
     }
 }
