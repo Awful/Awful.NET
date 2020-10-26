@@ -94,7 +94,7 @@ namespace Awful.Core.Managers
         /// <param name="threadId">The Thread Id.</param>
         /// <param name="token">A CancellationToken.</param>
         /// <returns>A SA Request Result.</returns>
-        public async Task<Result> AddBookmarkAsync(long threadId, CancellationToken token = default)
+        public async Task<Result> AddBookmarkAsync(int threadId, CancellationToken token = default)
         {
             if (!this.webManager.IsAuthenticated)
             {
@@ -117,7 +117,7 @@ namespace Awful.Core.Managers
         /// <param name="threadId">The Thread Id.</param>
         /// <param name="token">A CancellationToken.</param>
         /// <returns>A SA Request Result.</returns>
-        public async Task<Result> RemoveBookmarkAsync(long threadId, CancellationToken token = default)
+        public async Task<Result> RemoveBookmarkAsync(int threadId, CancellationToken token = default)
         {
             if (!this.webManager.IsAuthenticated)
             {

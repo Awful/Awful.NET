@@ -8,9 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Awful.Core.Entities.SAclopedia;
+using Awful.Core.Entities.Threads;
 using Awful.Core.Handlers;
 using Awful.Core.Tools;
 using Awful.Database.Entities;
+using Awful.Core.Utilities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Awful.Database.Context
@@ -39,6 +41,11 @@ namespace Awful.Database.Context
         /// Gets or sets the SAclopediaEntryItems table.
         /// </summary>
         public DbSet<SAclopediaEntryItem> SAclopediaEntryItems { get; set; }
+
+        /// <summary>
+        /// Gets or sets the BookmarkThreads table.
+        /// </summary>
+        public DbSet<AwfulThread> BookmarkThreads { get; set; }
 
         private IPlatformProperties PlatformProperties { get; set; }
 
@@ -151,6 +158,48 @@ namespace Awful.Database.Context
             var users = await this.Users.ToListAsync().ConfigureAwait(false);
             this.Users.RemoveRange(users);
             return await this.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Bookmarks
+
+        /// <summary>
+        /// Add All Bookmarks.
+        /// </summary>
+        /// <param name="threads">SA Threads.</param>
+        /// <returns>SA Database Threads.</returns>
+        public async Task<List<AwfulThread>> AddAllBookmarkThreads(List<Thread> threads)
+        {
+            if (threads == null)
+            {
+                throw new ArgumentNullException(nameof(threads));
+            }
+
+            var oldThreads = await this.BookmarkThreads.ToListAsync().ConfigureAwait(false);
+            this.BookmarkThreads.RemoveRange(oldThreads);
+            for (int i = 0; i < threads.Count; i++)
+            {
+                Thread thread = (Thread)threads[i];
+                var awfulThread = new AwfulThread(thread);
+                awfulThread.SortOrder = i;
+                this.BookmarkThreads.Add(awfulThread);
+            }
+
+            await this.SaveChangesAsync().ConfigureAwait(false);
+            return this.BookmarkThreads.OrderBy(n => n.SortOrder).ToList();
+        }
+
+        /// <summary>
+        /// Remove Bookmark Thread.
+        /// </summary>
+        /// <param name="thread">DB Thread.</param>
+        /// <returns>List of Threads.</returns>
+        public async Task<List<AwfulThread>> RemoveBookmarkThread(AwfulThread thread)
+        {
+            this.BookmarkThreads.Remove(thread);
+            await this.SaveChangesAsync().ConfigureAwait(false);
+            return await this.BookmarkThreads.ToListAsync().ConfigureAwait(false);
         }
 
         #endregion

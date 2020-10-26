@@ -82,6 +82,32 @@ namespace Awful.Test.UI
             Assert.True(!string.IsNullOrEmpty(html));
         }
 
+        /// <summary>
+        /// Test Bookmark Action.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
+        [Fact]
+        public async Task BookmarkActionTest()
+        {
+            var properties = new TestPlatformProperties("bookmarks");
+            using var context = new AwfulContext(properties);
+            using var webClient = await Setup.SetupWebClient(AwfulUser.Standard).ConfigureAwait(false);
+            var bookmarkAction = new BookmarkAction(webClient, context);
+            var bookmarks = await bookmarkAction.GetAllBookmarksAsync().ConfigureAwait(false);
+            Assert.NotNull(bookmarks);
+            Assert.True(bookmarks.Any());
+
+            bookmarks = await bookmarkAction.AddBookmarkAsync(3908659).ConfigureAwait(false);
+            Assert.NotNull(bookmarks);
+            Assert.True(bookmarks.Any());
+            Assert.Contains(bookmarks, n => n.ThreadId == 3908659);
+
+            bookmarks = await bookmarkAction.RemoveBookmarkAsync(3908659).ConfigureAwait(false);
+            Assert.NotNull(bookmarks);
+            Assert.True(bookmarks.Any());
+            Assert.DoesNotContain(bookmarks, n => n.ThreadId == 3908659);
+        }
+
         private void SigninAction_OnSignin(object sender, Awful.UI.Events.SigninEventArgs e)
         {
             Assert.True(e.IsSignedIn);
