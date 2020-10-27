@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="Awful.Windows.Bookmarks.Views.SigninPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Awful.Windows.Bookmarks.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock FontSize="30" Grid.Row="1" FontWeight="Thin" Margin="0,25,0,0" HorizontalAlignment="Center" Text="Awful Bookmarks"></TextBlock>
+            <Grid Grid.Row="2">
+                <StackPanel Margin="0,25,0,0" Width="300">
+                    <TextBox x:Name="Username" IsSpellCheckEnabled="False" Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Username" Margin="0,0,0,15">
+                    </TextBox>
+                    <PasswordBox PasswordRevealMode="Peek" x:Name="Password" Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Password" Margin="0,0,0,15">
+                    </PasswordBox>
+                    <Button x:Name="LoginButton" IsEnabled="{Binding IsLoginEnabled, Mode=TwoWay}" Content="Login" Click="{x:Bind ViewModel.LoginUserWithPassword}"  HorizontalAlignment="Center" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

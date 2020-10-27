@@ -28,7 +28,6 @@ namespace Awful.UI.ViewModels
         /// Initializes a new instance of the <see cref="SAclopediaEntryViewModel"/> class.
         /// </summary>
         /// <param name="handler">Awful Template Handler.</param>
-        /// <param name="properties">Awful Properties.</param>
         /// <param name="context">Awful Context.</param>
         public SAclopediaEntryViewModel(TemplateHandler handler, AwfulContext context)
             : base(context)
