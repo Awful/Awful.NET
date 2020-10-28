@@ -51,7 +51,7 @@ namespace Awful.UI.Actions
                 bookmarks = await this.context.AddAllBookmarkThreads(threads).ConfigureAwait(false);
             }
 
-            return bookmarks;
+            return bookmarks.OrderBy(n => n.SortOrder).ToList();
         }
 
         /// <summary>

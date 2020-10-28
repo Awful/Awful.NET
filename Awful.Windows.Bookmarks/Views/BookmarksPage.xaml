@@ -6,11 +6,25 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:threads="using:Awful.Database.Entities"
     mc:Ignorable="d"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" 
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
+    xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <ListView ItemsSource="{x:Bind ViewModel.Threads}">
+        <ListView x:Name="BookmarkListView" SelectionMode="Single" IsItemClickEnabled="True"
+            ItemsSource="{Binding Threads}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <Interactivity:Interaction.Behaviors>
+                <Interactions:EventTriggerBehavior EventName="SelectionChanged">
+                    <Interactions:InvokeCommandAction Command="{x:Bind ViewModel.SelectedItemCommand}" CommandParameter="{Binding ElementName=BookmarkListView}" />
+                </Interactions:EventTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="threads:AwfulThread">
                     <Grid 
@@ -28,6 +42,13 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
+                            <controls:ImageEx
+                                            Height="45" Width="45"
+                                            VerticalAlignment="Top"
+                                            Margin="5"
+                                            PlaceholderStretch="UniformToFill"
+                                            Source="{Binding ImageIconLocation, Converter={StaticResource ForumImageConverter}}"
+                                            PlaceholderSource="/Assets/missing.png"/>
                             <Grid Grid.Column="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="40"/>
@@ -51,6 +72,12 @@
                                     <TextBlock Grid.Column="4" Margin="0,0,5,0" FontSize="12" Text="{x:Bind KilledBy, Mode=OneWay}" />
                                 </Grid>
                             </Grid>
+                            <TextBlock Grid.Column="2" 
+                                       VerticalAlignment="Center" 
+                                       Margin="15" 
+                                       Visibility="{x:Bind HasSeen, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                       x:Name="ReplyCount"
+                                                   Text="{Binding RepliesSinceLastOpened, Mode=OneWay}" />
                         </Grid>
                     </Grid>
                 </DataTemplate>

@@ -123,6 +123,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\Commands\OpenThreadInBrowserCommand.cs" />
+    <Compile Include="Tools\Commands\RelayCommand.cs" />
+    <Compile Include="Tools\Converters\BookmarksThreadHeaderColorConverter.cs" />
+    <Compile Include="Tools\Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Tools\Converters\BooleanToVisibilityInverter.cs" />
+    <Compile Include="Tools\Converters\ForumImageConverter.cs" />
+    <Compile Include="Tools\Converters\ThreadHeaderColorConverter.cs" />
     <Compile Include="WindowsPlatformProperties.cs" />
     <EmbeddedResource Include="Properties\Awful.Windows.UI.rd.xml" />
   </ItemGroup>
@@ -140,6 +147,10 @@
     <ProjectReference Include="..\Awful.Core\Awful.Core.csproj">
       <Project>{9eac913e-0139-4a7a-9f95-cafdea30e1ef}</Project>
       <Name>Awful.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Awful.Database\Awful.Database.csproj">
+      <Project>{65199a93-a502-4a1d-9f32-d802f6078ab4}</Project>
+      <Name>Awful.Database</Name>
     </ProjectReference>
     <ProjectReference Include="..\Awful.UI\Awful.UI.csproj">
       <Project>{4a2edb48-2471-4ec6-ac14-0b75dafb5da6}</Project>

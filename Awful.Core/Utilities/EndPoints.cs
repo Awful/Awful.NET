@@ -72,6 +72,18 @@ namespace Awful.Core.Utilities
         public const string LastRead = ShowThreadBase + "?action=setseen&index={0}&threadid={1}";
 
         /// <summary>
+        /// URL for the last lost command in a given thread.
+        /// First parameter: Thread Id.
+        /// Second parameter: Page Number.
+        /// </summary>
+        public const string LastPost = ShowThreadBase + "?threadid={0}&pagenumber={1}#lastpost";
+
+        /// <summary>
+        /// Go to new post.
+        /// </summary>
+        public const string GotoNewPostEndpoint = ShowThreadBase + "?threadid={0}" + EndPoints.GotoNewPost;
+
+        /// <summary>
         /// URL for removing a bookmark.
         /// First Parameter: Thread Id.
         /// </summary>

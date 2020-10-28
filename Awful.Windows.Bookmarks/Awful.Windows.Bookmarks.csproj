@@ -136,6 +136,1905 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\Awful.Tags\0.0stars.png">
+      <Link>Assets\ThreadTags\0.0stars.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\0.5stars.png">
+      <Link>Assets\ThreadTags\0.5stars.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\1.0stars.png">
+      <Link>Assets\ThreadTags\1.0stars.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\1.5stars.png">
+      <Link>Assets\ThreadTags\1.5stars.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\2.0stars.png">
+      <Link>Assets\ThreadTags\2.0stars.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\2.5stars.png">
+      <Link>Assets\ThreadTags\2.5stars.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\3.0stars.png">
+      <Link>Assets\ThreadTags\3.0stars.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\3.5stars.png">
+      <Link>Assets\ThreadTags\3.5stars.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\4.0stars.png">
+      <Link>Assets\ThreadTags\4.0stars.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\4.5stars.png">
+      <Link>Assets\ThreadTags\4.5stars.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\5.0stars.png">
+      <Link>Assets\ThreadTags\5.0stars.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\adtrw-hokutonoken.png">
+      <Link>Assets\ThreadTags\adtrw-hokutonoken.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\adtrw-jojocherry.png">
+      <Link>Assets\ThreadTags\adtrw-jojocherry.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\adtrw.png">
+      <Link>Assets\ThreadTags\adtrw.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ai-cycles.png">
+      <Link>Assets\ThreadTags\ai-cycles.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ai-mods.png">
+      <Link>Assets\ThreadTags\ai-mods.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\AICA-TAG-60s.png">
+      <Link>Assets\ThreadTags\AICA-TAG-60s.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\AICA-TAG-70s.png">
+      <Link>Assets\ThreadTags\AICA-TAG-70s.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\AICA-TAG-80s.png">
+      <Link>Assets\ThreadTags\AICA-TAG-80s.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\AICA-TAG-classic.png">
+      <Link>Assets\ThreadTags\AICA-TAG-classic.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\AICA-TAG-newride.png">
+      <Link>Assets\ThreadTags\AICA-TAG-newride.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\AICA-TAG-race.png">
+      <Link>Assets\ThreadTags\AICA-TAG-race.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\AICA-TAG-trip.png">
+      <Link>Assets\ThreadTags\AICA-TAG-trip.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ama.png">
+      <Link>Assets\ThreadTags\ama.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\amine.png">
+      <Link>Assets\ThreadTags\amine.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\anime-hm6.png">
+      <Link>Assets\ThreadTags\anime-hm6.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\anime-hm8.png">
+      <Link>Assets\ThreadTags\anime-hm8.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\animehoneypot.png">
+      <Link>Assets\ThreadTags\animehoneypot.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ap-1999.png">
+      <Link>Assets\ThreadTags\ap-1999.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\art.png">
+      <Link>Assets\ThreadTags\art.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\asktell-jobs.png">
+      <Link>Assets\ThreadTags\asktell-jobs.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\asktell-lifestyle.png">
+      <Link>Assets\ThreadTags\asktell-lifestyle.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\asktell-travel.png">
+      <Link>Assets\ThreadTags\asktell-travel.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\attention.png">
+      <Link>Assets\ThreadTags\attention.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\audio.png">
+      <Link>Assets\ThreadTags\audio.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\bb-author.png">
+      <Link>Assets\ThreadTags\bb-author.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\bb-classics.png">
+      <Link>Assets\ThreadTags\bb-classics.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\bb-fantasy.png">
+      <Link>Assets\ThreadTags\bb-fantasy.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\bb-foreign.png">
+      <Link>Assets\ThreadTags\bb-foreign.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\bb-nonfiction.png">
+      <Link>Assets\ThreadTags\bb-nonfiction.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\books.png">
+      <Link>Assets\ThreadTags\books.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\bs-diablo.png">
+      <Link>Assets\ThreadTags\bs-diablo.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\bs-starcraft.png">
+      <Link>Assets\ThreadTags\bs-starcraft.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\bss-con.png">
+      <Link>Assets\ThreadTags\bss-con.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\bss-discussion.png">
+      <Link>Assets\ThreadTags\bss-discussion.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\bss-fanboy.png">
+      <Link>Assets\ThreadTags\bss-fanboy.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\bss-indie.png">
+      <Link>Assets\ThreadTags\bss-indie.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\bss-manga.png">
+      <Link>Assets\ThreadTags\bss-manga.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\BSS-Netflix.png">
+      <Link>Assets\ThreadTags\BSS-Netflix.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\bss-new.png">
+      <Link>Assets\ThreadTags\bss-new.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\bss-review.png">
+      <Link>Assets\ThreadTags\bss-review.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\bss-shipping.png">
+      <Link>Assets\ThreadTags\bss-shipping.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\bss-swag.png">
+      <Link>Assets\ThreadTags\bss-swag.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\bss-webcomic.png">
+      <Link>Assets\ThreadTags\bss-webcomic.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-anti.png">
+      <Link>Assets\ThreadTags\byob-anti.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-apu2.png">
+      <Link>Assets\ThreadTags\byob-apu2.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-cheer.png">
+      <Link>Assets\ThreadTags\byob-cheer.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-chill.png">
+      <Link>Assets\ThreadTags\byob-chill.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-crayons.png">
+      <Link>Assets\ThreadTags\byob-crayons.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-dent.png">
+      <Link>Assets\ThreadTags\byob-dent.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-dont.png">
+      <Link>Assets\ThreadTags\byob-dont.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-duckies.png">
+      <Link>Assets\ThreadTags\byob-duckies.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-effort.png">
+      <Link>Assets\ThreadTags\byob-effort.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-excuse.png">
+      <Link>Assets\ThreadTags\byob-excuse.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-explosion.png">
+      <Link>Assets\ThreadTags\byob-explosion.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-fluff.png">
+      <Link>Assets\ThreadTags\byob-fluff.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-friends.png">
+      <Link>Assets\ThreadTags\byob-friends.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-fuckyou.png">
+      <Link>Assets\ThreadTags\byob-fuckyou.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-gents.png">
+      <Link>Assets\ThreadTags\byob-gents.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-grouch.png">
+      <Link>Assets\ThreadTags\byob-grouch.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-grumpy.png">
+      <Link>Assets\ThreadTags\byob-grumpy.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-jerrynewman.png">
+      <Link>Assets\ThreadTags\byob-jerrynewman.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-mac.png">
+      <Link>Assets\ThreadTags\byob-mac.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-pepper.png">
+      <Link>Assets\ThreadTags\byob-pepper.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-pizzatime.png">
+      <Link>Assets\ThreadTags\byob-pizzatime.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-post.png">
+      <Link>Assets\ThreadTags\byob-post.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-safespace.png">
+      <Link>Assets\ThreadTags\byob-safespace.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-salt.png">
+      <Link>Assets\ThreadTags\byob-salt.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-secrets.png">
+      <Link>Assets\ThreadTags\byob-secrets.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-shocking.png">
+      <Link>Assets\ThreadTags\byob-shocking.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-slax.png">
+      <Link>Assets\ThreadTags\byob-slax.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-slayer.png">
+      <Link>Assets\ThreadTags\byob-slayer.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-sore.png">
+      <Link>Assets\ThreadTags\byob-sore.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-soulja.png">
+      <Link>Assets\ThreadTags\byob-soulja.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-treasure.png">
+      <Link>Assets\ThreadTags\byob-treasure.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-trip.png">
+      <Link>Assets\ThreadTags\byob-trip.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-unbyob.png">
+      <Link>Assets\ThreadTags\byob-unbyob.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-xfile.png">
+      <Link>Assets\ThreadTags\byob-xfile.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-yadon.png">
+      <Link>Assets\ThreadTags\byob-yadon.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob-zimboe.png">
+      <Link>Assets\ThreadTags\byob-zimboe.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\byob.png">
+      <Link>Assets\ThreadTags\byob.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\CA-TAG-CA-atb.png">
+      <Link>Assets\ThreadTags\CA-TAG-CA-atb.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\CA-TAG-CA-dirtmoto.png">
+      <Link>Assets\ThreadTags\CA-TAG-CA-dirtmoto.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\CA-TAG-CA-roadbike.png">
+      <Link>Assets\ThreadTags\CA-TAG-CA-roadbike.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\CA-TAG-CA-streetmoto.png">
+      <Link>Assets\ThreadTags\CA-TAG-CA-streetmoto.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cars.png">
+      <Link>Assets\ThreadTags\cars.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cc-critique.png">
+      <Link>Assets\ThreadTags\cc-critique.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cc-daily.png">
+      <Link>Assets\ThreadTags\cc-daily.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cc-design.png">
+      <Link>Assets\ThreadTags\cc-design.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cc-fiction.png">
+      <Link>Assets\ThreadTags\cc-fiction.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cc-film.png">
+      <Link>Assets\ThreadTags\cc-film.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cc-poetry.png">
+      <Link>Assets\ThreadTags\cc-poetry.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cc-project.png">
+      <Link>Assets\ThreadTags\cc-project.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cc-tutorial.png">
+      <Link>Assets\ThreadTags\cc-tutorial.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cc-writing.png">
+      <Link>Assets\ThreadTags\cc-writing.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cc_design.png">
+      <Link>Assets\ThreadTags\cc_design.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cd_action.png">
+      <Link>Assets\ThreadTags\cd_action.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cd_classic.png">
+      <Link>Assets\ThreadTags\cd_classic.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cd_comedy.png">
+      <Link>Assets\ThreadTags\cd_comedy.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cd_director.png">
+      <Link>Assets\ThreadTags\cd_director.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cd_drama.png">
+      <Link>Assets\ThreadTags\cd_drama.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cd_horror2.png">
+      <Link>Assets\ThreadTags\cd_horror2.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cd_hype.png">
+      <Link>Assets\ThreadTags\cd_hype.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cd_scifi.png">
+      <Link>Assets\ThreadTags\cd_scifi.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cell-cdma.png">
+      <Link>Assets\ThreadTags\cell-cdma.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cell-gsm.png">
+      <Link>Assets\ThreadTags\cell-gsm.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\chooch.png">
+      <Link>Assets\ThreadTags\chooch.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\coc-binbash.png">
+      <Link>Assets\ThreadTags\coc-binbash.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\coc-c.png">
+      <Link>Assets\ThreadTags\coc-c.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\coc-db.png">
+      <Link>Assets\ThreadTags\coc-db.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\coc-java.png">
+      <Link>Assets\ThreadTags\coc-java.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\coc-theory.png">
+      <Link>Assets\ThreadTags\coc-theory.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\coc-web.png">
+      <Link>Assets\ThreadTags\coc-web.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\computers.png">
+      <Link>Assets\ThreadTags\computers.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\coupon-coupon.png">
+      <Link>Assets\ThreadTags\coupon-coupon.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\coupon-free.png">
+      <Link>Assets\ThreadTags\coupon-free.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\coupon-instore.png">
+      <Link>Assets\ThreadTags\coupon-instore.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\coupon-nonus.png">
+      <Link>Assets\ThreadTags\coupon-nonus.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\cps-android.png">
+      <Link>Assets\ThreadTags\cps-android.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\dd-9-11.png">
+      <Link>Assets\ThreadTags\dd-9-11.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\dd-africa.png">
+      <Link>Assets\ThreadTags\dd-africa.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\dd-asia.png">
+      <Link>Assets\ThreadTags\dd-asia.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\dd-dems.png">
+      <Link>Assets\ThreadTags\dd-dems.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\dd-economics.png">
+      <Link>Assets\ThreadTags\dd-economics.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\dd-environment.png">
+      <Link>Assets\ThreadTags\dd-environment.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\dd-europe.png">
+      <Link>Assets\ThreadTags\dd-europe.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\dd-fox.png">
+      <Link>Assets\ThreadTags\dd-fox.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\dd-GOP.png">
+      <Link>Assets\ThreadTags\dd-GOP.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\dd-gotcha.png">
+      <Link>Assets\ThreadTags\dd-gotcha.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\dd-history.png">
+      <Link>Assets\ThreadTags\dd-history.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\dd-law.png">
+      <Link>Assets\ThreadTags\dd-law.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\dd-notracist.png">
+      <Link>Assets\ThreadTags\dd-notracist.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\dd-offmeds.png">
+      <Link>Assets\ThreadTags\dd-offmeds.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\dd-philosophy.png">
+      <Link>Assets\ThreadTags\dd-philosophy.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\dd-religion.png">
+      <Link>Assets\ThreadTags\dd-religion.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\dd-war.png">
+      <Link>Assets\ThreadTags\dd-war.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ddrd-dota.png">
+      <Link>Assets\ThreadTags\ddrd-dota.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ddrd-fuel.png">
+      <Link>Assets\ThreadTags\ddrd-fuel.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ddrd-gameboy.png">
+      <Link>Assets\ThreadTags\ddrd-gameboy.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ddrd-lol.png">
+      <Link>Assets\ThreadTags\ddrd-lol.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ddrd-minus.png">
+      <Link>Assets\ThreadTags\ddrd-minus.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ddrd-neogeo.png">
+      <Link>Assets\ThreadTags\ddrd-neogeo.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ddrd-scsa.png">
+      <Link>Assets\ThreadTags\ddrd-scsa.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ddrd-souls.png">
+      <Link>Assets\ThreadTags\ddrd-souls.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\diy-advice.png">
+      <Link>Assets\ThreadTags\diy-advice.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\diy-homeimprove.png">
+      <Link>Assets\ThreadTags\diy-homeimprove.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\diy-robots.png">
+      <Link>Assets\ThreadTags\diy-robots.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\diy-step.png">
+      <Link>Assets\ThreadTags\diy-step.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\diy-tips.png">
+      <Link>Assets\ThreadTags\diy-tips.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\diy-tools.png">
+      <Link>Assets\ThreadTags\diy-tools.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\diy-wood.png">
+      <Link>Assets\ThreadTags\diy-wood.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\Dorkroom-K-ROCK.png">
+      <Link>Assets\ThreadTags\Dorkroom-K-ROCK.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\Dorkroom-silkysmooth.png">
+      <Link>Assets\ThreadTags\Dorkroom-silkysmooth.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\drugs.png">
+      <Link>Assets\ThreadTags\drugs.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\en.png">
+      <Link>Assets\ThreadTags\en.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\event.png">
+      <Link>Assets\ThreadTags\event.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\feces.png">
+      <Link>Assets\ThreadTags\feces.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\flame.png">
+      <Link>Assets\ThreadTags\flame.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\food.png">
+      <Link>Assets\ThreadTags\food.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fps.png">
+      <Link>Assets\ThreadTags\fps.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fruity.png">
+      <Link>Assets\ThreadTags\fruity.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-alas.png">
+      <Link>Assets\ThreadTags\fyad-alas.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-archery.png">
+      <Link>Assets\ThreadTags\fyad-archery.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-atheist.png">
+      <Link>Assets\ThreadTags\fyad-atheist.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-bapes.png">
+      <Link>Assets\ThreadTags\fyad-bapes.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-bats.png">
+      <Link>Assets\ThreadTags\fyad-bats.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-blaagh.png">
+      <Link>Assets\ThreadTags\fyad-blaagh.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-blades.png">
+      <Link>Assets\ThreadTags\fyad-blades.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-blogs.png">
+      <Link>Assets\ThreadTags\fyad-blogs.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-brews.png">
+      <Link>Assets\ThreadTags\fyad-brews.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-burn.png">
+      <Link>Assets\ThreadTags\fyad-burn.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-cats.png">
+      <Link>Assets\ThreadTags\fyad-cats.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-champion.png">
+      <Link>Assets\ThreadTags\fyad-champion.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-cockfights.png">
+      <Link>Assets\ThreadTags\fyad-cockfights.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-dirigibles.png">
+      <Link>Assets\ThreadTags\fyad-dirigibles.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-dogfights.png">
+      <Link>Assets\ThreadTags\fyad-dogfights.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-eggs.png">
+      <Link>Assets\ThreadTags\fyad-eggs.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-falconry.png">
+      <Link>Assets\ThreadTags\fyad-falconry.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-flannel.png">
+      <Link>Assets\ThreadTags\fyad-flannel.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-framed.png">
+      <Link>Assets\ThreadTags\fyad-framed.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-ghostride.png">
+      <Link>Assets\ThreadTags\fyad-ghostride.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-ghosts.png">
+      <Link>Assets\ThreadTags\fyad-ghosts.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-gradients.png">
+      <Link>Assets\ThreadTags\fyad-gradients.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-hark.png">
+      <Link>Assets\ThreadTags\fyad-hark.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-haruhi.png">
+      <Link>Assets\ThreadTags\fyad-haruhi.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-hogyanker.png">
+      <Link>Assets\ThreadTags\fyad-hogyanker.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-horses.png">
+      <Link>Assets\ThreadTags\fyad-horses.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-hunting.png">
+      <Link>Assets\ThreadTags\fyad-hunting.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-imgay.png">
+      <Link>Assets\ThreadTags\fyad-imgay.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-lovecum.png">
+      <Link>Assets\ThreadTags\fyad-lovecum.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-madmax.png">
+      <Link>Assets\ThreadTags\fyad-madmax.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-magician.png">
+      <Link>Assets\ThreadTags\fyad-magician.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-menopause.png">
+      <Link>Assets\ThreadTags\fyad-menopause.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-moof.png">
+      <Link>Assets\ThreadTags\fyad-moof.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-mystery.png">
+      <Link>Assets\ThreadTags\fyad-mystery.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-nilbog.png">
+      <Link>Assets\ThreadTags\fyad-nilbog.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-otherforums.png">
+      <Link>Assets\ThreadTags\fyad-otherforums.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-parroty.png">
+      <Link>Assets\ThreadTags\fyad-parroty.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-puns.png">
+      <Link>Assets\ThreadTags\fyad-puns.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\FYAD-redants.png">
+      <Link>Assets\ThreadTags\FYAD-redants.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-robocop.png">
+      <Link>Assets\ThreadTags\fyad-robocop.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-salad.png">
+      <Link>Assets\ThreadTags\fyad-salad.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-sandwich.png">
+      <Link>Assets\ThreadTags\fyad-sandwich.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-smallthread.png">
+      <Link>Assets\ThreadTags\fyad-smallthread.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-socks.png">
+      <Link>Assets\ThreadTags\fyad-socks.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-space.png">
+      <Link>Assets\ThreadTags\fyad-space.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-speedrun.png">
+      <Link>Assets\ThreadTags\fyad-speedrun.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-spiny.png">
+      <Link>Assets\ThreadTags\fyad-spiny.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-starcraft.png">
+      <Link>Assets\ThreadTags\fyad-starcraft.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-suts.png">
+      <Link>Assets\ThreadTags\fyad-suts.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-thing.png">
+      <Link>Assets\ThreadTags\fyad-thing.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-thuggery.png">
+      <Link>Assets\ThreadTags\fyad-thuggery.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-tim.png">
+      <Link>Assets\ThreadTags\fyad-tim.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-toucan.png">
+      <Link>Assets\ThreadTags\fyad-toucan.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-tree.png">
+      <Link>Assets\ThreadTags\fyad-tree.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-troll.png">
+      <Link>Assets\ThreadTags\fyad-troll.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-trout.png">
+      <Link>Assets\ThreadTags\fyad-trout.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-wiki.png">
+      <Link>Assets\ThreadTags\fyad-wiki.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-words.png">
+      <Link>Assets\ThreadTags\fyad-words.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-yourrights.png">
+      <Link>Assets\ThreadTags\fyad-yourrights.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-yuck.png">
+      <Link>Assets\ThreadTags\fyad-yuck.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad-zounds.png">
+      <Link>Assets\ThreadTags\fyad-zounds.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\fyad.png">
+      <Link>Assets\ThreadTags\fyad.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-360.png">
+      <Link>Assets\ThreadTags\games-360.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-360ps3tag.png">
+      <Link>Assets\ThreadTags\games-360ps3tag.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-3ds.png">
+      <Link>Assets\ThreadTags\games-3ds.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-coop.png">
+      <Link>Assets\ThreadTags\games-coop.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-dlc.png">
+      <Link>Assets\ThreadTags\games-dlc.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-ds.png">
+      <Link>Assets\ThreadTags\games-ds.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-f2p.png">
+      <Link>Assets\ThreadTags\games-f2p.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-jewel.png">
+      <Link>Assets\ThreadTags\games-jewel.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-letsplay.png">
+      <Link>Assets\ThreadTags\games-letsplay.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-metalgear.png">
+      <Link>Assets\ThreadTags\games-metalgear.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-mlg.png">
+      <Link>Assets\ThreadTags\games-mlg.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-mods.png">
+      <Link>Assets\ThreadTags\games-mods.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-ps3.png">
+      <Link>Assets\ThreadTags\games-ps3.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-ps4.png">
+      <Link>Assets\ThreadTags\games-ps4.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-psp.png">
+      <Link>Assets\ThreadTags\games-psp.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-psx-pc-xbox.png">
+      <Link>Assets\ThreadTags\games-psx-pc-xbox.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-psx-pc.png">
+      <Link>Assets\ThreadTags\games-psx-pc.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-regret.png">
+      <Link>Assets\ThreadTags\games-regret.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-rng.png">
+      <Link>Assets\ThreadTags\games-rng.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\Games-vita.png">
+      <Link>Assets\ThreadTags\Games-vita.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-wii.png">
+      <Link>Assets\ThreadTags\games-wii.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-wiiu.png">
+      <Link>Assets\ThreadTags\games-wiiu.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-xbone.png">
+      <Link>Assets\ThreadTags\games-xbone.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-xbox-pc.png">
+      <Link>Assets\ThreadTags\games-xbox-pc.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-xbox-psx.png">
+      <Link>Assets\ThreadTags\games-xbox-psx.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games-youdied.png">
+      <Link>Assets\ThreadTags\games-youdied.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\games.png">
+      <Link>Assets\ThreadTags\games.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gip-airforce.png">
+      <Link>Assets\ThreadTags\gip-airforce.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gip-army.png">
+      <Link>Assets\ThreadTags\gip-army.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gip-EMT4.png">
+      <Link>Assets\ThreadTags\gip-EMT4.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gip-firetruck.png">
+      <Link>Assets\ThreadTags\gip-firetruck.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gip-fuck.png">
+      <Link>Assets\ThreadTags\gip-fuck.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gip-marines.png">
+      <Link>Assets\ThreadTags\gip-marines.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gip-money.png">
+      <Link>Assets\ThreadTags\gip-money.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gip-navy2.png">
+      <Link>Assets\ThreadTags\gip-navy2.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gip-pew.png">
+      <Link>Assets\ThreadTags\gip-pew.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gip-police3.png">
+      <Link>Assets\ThreadTags\gip-police3.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gip-uscg.png">
+      <Link>Assets\ThreadTags\gip-uscg.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gip.png">
+      <Link>Assets\ThreadTags\gip.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\goonmeet.png">
+      <Link>Assets\ThreadTags\goonmeet.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gross.png">
+      <Link>Assets\ThreadTags\gross.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\guns-airsoft.png">
+      <Link>Assets\ThreadTags\guns-airsoft.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\guns-ammo.png">
+      <Link>Assets\ThreadTags\guns-ammo.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\guns-ccw.png">
+      <Link>Assets\ThreadTags\guns-ccw.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\guns-hunting.png">
+      <Link>Assets\ThreadTags\guns-hunting.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\guns-milsurp.png">
+      <Link>Assets\ThreadTags\guns-milsurp.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\guns-ohshi.png">
+      <Link>Assets\ThreadTags\guns-ohshi.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\guns-paintball.png">
+      <Link>Assets\ThreadTags\guns-paintball.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\guns-review.png">
+      <Link>Assets\ThreadTags\guns-review.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\guns.png">
+      <Link>Assets\ThreadTags\guns.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gws-bread.png">
+      <Link>Assets\ThreadTags\gws-bread.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gws-dessert.png">
+      <Link>Assets\ThreadTags\gws-dessert.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gws-diet.png">
+      <Link>Assets\ThreadTags\gws-diet.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gws-drink.png">
+      <Link>Assets\ThreadTags\gws-drink.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gws-fish.png">
+      <Link>Assets\ThreadTags\gws-fish.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gws-local.png">
+      <Link>Assets\ThreadTags\gws-local.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gws-meat.png">
+      <Link>Assets\ThreadTags\gws-meat.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gws-snacks.png">
+      <Link>Assets\ThreadTags\gws-snacks.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gws-soup.png">
+      <Link>Assets\ThreadTags\gws-soup.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\gws-veggie.png">
+      <Link>Assets\ThreadTags\gws-veggie.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\hell-boot.png">
+      <Link>Assets\ThreadTags\hell-boot.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\hell-fuckthis.png">
+      <Link>Assets\ThreadTags\hell-fuckthis.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\hell-glomp.png">
+      <Link>Assets\ThreadTags\hell-glomp.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\hell-hive.png">
+      <Link>Assets\ThreadTags\hell-hive.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\hell-jabroni.png">
+      <Link>Assets\ThreadTags\hell-jabroni.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\hell-jorts.png">
+      <Link>Assets\ThreadTags\hell-jorts.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\hell-miso.png">
+      <Link>Assets\ThreadTags\hell-miso.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\hell-spergin.png">
+      <Link>Assets\ThreadTags\hell-spergin.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\hell-stfu.png">
+      <Link>Assets\ThreadTags\hell-stfu.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\hell-suck.png">
+      <Link>Assets\ThreadTags\hell-suck.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\hell-tim.png">
+      <Link>Assets\ThreadTags\hell-tim.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\hell-whore.png">
+      <Link>Assets\ThreadTags\hell-whore.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\help.png">
+      <Link>Assets\ThreadTags\help.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\humor.png">
+      <Link>Assets\ThreadTags\humor.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\icon-30-attnmod.png">
+      <Link>Assets\ThreadTags\icon-30-attnmod.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\icon-31-hotthread.png">
+      <Link>Assets\ThreadTags\icon-31-hotthread.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\icon-37-selling.png">
+      <Link>Assets\ThreadTags\icon-37-selling.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\icon-38-buying.png">
+      <Link>Assets\ThreadTags\icon-38-buying.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\icon-41-game-xbox.png">
+      <Link>Assets\ThreadTags\icon-41-game-xbox.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\icon-42-game-ps2.png">
+      <Link>Assets\ThreadTags\icon-42-game-ps2.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\icon-43-game-gamecube.png">
+      <Link>Assets\ThreadTags\icon-43-game-gamecube.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\icon-44-game-gba.png">
+      <Link>Assets\ThreadTags\icon-44-game-gba.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\icon-45-game-pc.png">
+      <Link>Assets\ThreadTags\icon-45-game-pc.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\icon-46-trading.png">
+      <Link>Assets\ThreadTags\icon-46-trading.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\icon-52-trading.png">
+      <Link>Assets\ThreadTags\icon-52-trading.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\icon-59-lobster.png">
+      <Link>Assets\ThreadTags\icon-59-lobster.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\icon-60-pig.png">
+      <Link>Assets\ThreadTags\icon-60-pig.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\icon-61-comics.png">
+      <Link>Assets\ThreadTags\icon-61-comics.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\icon-cute.png">
+      <Link>Assets\ThreadTags\icon-cute.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\icon-dear_richard.png">
+      <Link>Assets\ThreadTags\icon-dear_richard.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\icon-honk.png">
+      <Link>Assets\ThreadTags\icon-honk.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\icon23-banme.png">
+      <Link>Assets\ThreadTags\icon23-banme.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\itsame.png">
+      <Link>Assets\ThreadTags\itsame.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\kirby.png">
+      <Link>Assets\ThreadTags\kirby.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lan-asia.png">
+      <Link>Assets\ThreadTags\lan-asia.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lan-canada.png">
+      <Link>Assets\ThreadTags\lan-canada.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lan-europe.png">
+      <Link>Assets\ThreadTags\lan-europe.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lan-international.png">
+      <Link>Assets\ThreadTags\lan-international.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lan-midwest.png">
+      <Link>Assets\ThreadTags\lan-midwest.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lan-ne.png">
+      <Link>Assets\ThreadTags\lan-ne.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lan-nw.png">
+      <Link>Assets\ThreadTags\lan-nw.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lan-south.png">
+      <Link>Assets\ThreadTags\lan-south.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lan-south2.png">
+      <Link>Assets\ThreadTags\lan-south2.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lan-sw.png">
+      <Link>Assets\ThreadTags\lan-sw.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lan-west.png">
+      <Link>Assets\ThreadTags\lan-west.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-24yu5af.png">
+      <Link>Assets\ThreadTags\LF-24yu5af.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-25tjf47.png">
+      <Link>Assets\ThreadTags\LF-25tjf47.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-29qdqgy.png">
+      <Link>Assets\ThreadTags\LF-29qdqgy.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-2mfbryu.png">
+      <Link>Assets\ThreadTags\LF-2mfbryu.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-2wqxulw.png">
+      <Link>Assets\ThreadTags\LF-2wqxulw.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-9287.png">
+      <Link>Assets\ThreadTags\lf-9287.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-amerika.png">
+      <Link>Assets\ThreadTags\lf-amerika.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-arecountry.png">
+      <Link>Assets\ThreadTags\lf-arecountry.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-article.png">
+      <Link>Assets\ThreadTags\LF-article.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-BiCurious.png">
+      <Link>Assets\ThreadTags\LF-BiCurious.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-burden.png">
+      <Link>Assets\ThreadTags\lf-burden.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-choom.png">
+      <Link>Assets\ThreadTags\lf-choom.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-dad.png">
+      <Link>Assets\ThreadTags\LF-dad.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-dji.png">
+      <Link>Assets\ThreadTags\lf-dji.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-eu.png">
+      <Link>Assets\ThreadTags\lf-eu.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-eurabia.png">
+      <Link>Assets\ThreadTags\lf-eurabia.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-fem_LF_tag2.png">
+      <Link>Assets\ThreadTags\LF-fem_LF_tag2.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-fff.png">
+      <Link>Assets\ThreadTags\lf-fff.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-fuckit3.png">
+      <Link>Assets\ThreadTags\lf-fuckit3.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-fuckshitdamntag2.png">
+      <Link>Assets\ThreadTags\LF-fuckshitdamntag2.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-gay2.png">
+      <Link>Assets\ThreadTags\LF-gay2.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-gipper.png">
+      <Link>Assets\ThreadTags\lf-gipper.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-gitrdun2.png">
+      <Link>Assets\ThreadTags\LF-gitrdun2.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-gooddog.png">
+      <Link>Assets\ThreadTags\lf-gooddog.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-gotmine.png">
+      <Link>Assets\ThreadTags\lf-gotmine.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-hansen2.png">
+      <Link>Assets\ThreadTags\lf-hansen2.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-iraq.png">
+      <Link>Assets\ThreadTags\LF-iraq.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-japan_clean_fast.png">
+      <Link>Assets\ThreadTags\LF-japan_clean_fast.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-laters.png">
+      <Link>Assets\ThreadTags\lf-laters.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-legacy.png">
+      <Link>Assets\ThreadTags\LF-legacy.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-marx.png">
+      <Link>Assets\ThreadTags\lf-marx.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-migra.png">
+      <Link>Assets\ThreadTags\lf-migra.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-nazisrael2.png">
+      <Link>Assets\ThreadTags\LF-nazisrael2.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-pcc6-2-32-576.png">
+      <Link>Assets\ThreadTags\LF-pcc6-2-32-576.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-pennybags.png">
+      <Link>Assets\ThreadTags\LF-pennybags.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-perspective_1.png">
+      <Link>Assets\ThreadTags\LF-perspective_1.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-purestrain2.png">
+      <Link>Assets\ThreadTags\LF-purestrain2.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-race2.png">
+      <Link>Assets\ThreadTags\lf-race2.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LF-rungop.png">
+      <Link>Assets\ThreadTags\LF-rungop.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-trains.png">
+      <Link>Assets\ThreadTags\lf-trains.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lf-whites.png">
+      <Link>Assets\ThreadTags\lf-whites.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\LICENSE.txt">
+      <Link>Assets\ThreadTags\LICENSE.txt</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\link.png">
+      <Link>Assets\ThreadTags\link.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lp-adventure.png">
+      <Link>Assets\ThreadTags\lp-adventure.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lp-fps.png">
+      <Link>Assets\ThreadTags\lp-fps.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lp-romhack.png">
+      <Link>Assets\ThreadTags\lp-romhack.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lp-rpg.png">
+      <Link>Assets\ThreadTags\lp-rpg.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lp-strategy.png">
+      <Link>Assets\ThreadTags\lp-strategy.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\lp-text.png">
+      <Link>Assets\ThreadTags\lp-text.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\melon.png">
+      <Link>Assets\ThreadTags\melon.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ml-acoustic.png">
+      <Link>Assets\ThreadTags\ml-acoustic.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ml-amps.png">
+      <Link>Assets\ThreadTags\ml-amps.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ml-bass.png">
+      <Link>Assets\ThreadTags\ml-bass.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ml-contest.png">
+      <Link>Assets\ThreadTags\ml-contest.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ml-drums.png">
+      <Link>Assets\ThreadTags\ml-drums.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ml-dumbass.png">
+      <Link>Assets\ThreadTags\ml-dumbass.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ml-feedback.png">
+      <Link>Assets\ThreadTags\ml-feedback.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ml-gear.png">
+      <Link>Assets\ThreadTags\ml-gear.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ml-guitar.png">
+      <Link>Assets\ThreadTags\ml-guitar.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ml-recording.png">
+      <Link>Assets\ThreadTags\ml-recording.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ml-theory.png">
+      <Link>Assets\ThreadTags\ml-theory.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ml-voice.png">
+      <Link>Assets\ThreadTags\ml-voice.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\mods-expert.png">
+      <Link>Assets\ThreadTags\mods-expert.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\movies.png">
+      <Link>Assets\ThreadTags\movies.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\music.png">
+      <Link>Assets\ThreadTags\music.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\newbie.png">
+      <Link>Assets\ThreadTags\newbie.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\news.png">
+      <Link>Assets\ThreadTags\news.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\nintendo.png">
+      <Link>Assets\ThreadTags\nintendo.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\nmd-classical.png">
+      <Link>Assets\ThreadTags\nmd-classical.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\nmd-country.png">
+      <Link>Assets\ThreadTags\nmd-country.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\nmd-electronic.png">
+      <Link>Assets\ThreadTags\nmd-electronic.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\nmd-hiphop.png">
+      <Link>Assets\ThreadTags\nmd-hiphop.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\nmd-jazz.png">
+      <Link>Assets\ThreadTags\nmd-jazz.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\nmd-metal.png">
+      <Link>Assets\ThreadTags\nmd-metal.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\nmd-pop.png">
+      <Link>Assets\ThreadTags\nmd-pop.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\nmd-punk.png">
+      <Link>Assets\ThreadTags\nmd-punk.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\nmd-rock.png">
+      <Link>Assets\ThreadTags\nmd-rock.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\nmd-tour.png">
+      <Link>Assets\ThreadTags\nmd-tour.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\nmd-us.png">
+      <Link>Assets\ThreadTags\nmd-us.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\nmd-world.png">
+      <Link>Assets\ThreadTags\nmd-world.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ouya.png">
+      <Link>Assets\ThreadTags\ouya.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\pctag.png">
+      <Link>Assets\ThreadTags\pctag.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-ant.png">
+      <Link>Assets\ThreadTags\phiz-ant.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-aoki.png">
+      <Link>Assets\ThreadTags\phiz-aoki.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-crabcore.png">
+      <Link>Assets\ThreadTags\phiz-crabcore.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-dad.png">
+      <Link>Assets\ThreadTags\phiz-dad.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-dollas.png">
+      <Link>Assets\ThreadTags\phiz-dollas.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-donk.png">
+      <Link>Assets\ThreadTags\phiz-donk.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-dontlike.png">
+      <Link>Assets\ThreadTags\phiz-dontlike.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-emo.png">
+      <Link>Assets\ThreadTags\phiz-emo.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-grind.png">
+      <Link>Assets\ThreadTags\phiz-grind.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-irony.png">
+      <Link>Assets\ThreadTags\phiz-irony.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-kayne.png">
+      <Link>Assets\ThreadTags\phiz-kayne.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-kermit.png">
+      <Link>Assets\ThreadTags\phiz-kermit.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-phag.png">
+      <Link>Assets\ThreadTags\phiz-phag.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-powerband.png">
+      <Link>Assets\ThreadTags\phiz-powerband.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-prince.png">
+      <Link>Assets\ThreadTags\phiz-prince.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-rap.png">
+      <Link>Assets\ThreadTags\phiz-rap.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-robojax.png">
+      <Link>Assets\ThreadTags\phiz-robojax.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-rockist.png">
+      <Link>Assets\ThreadTags\phiz-rockist.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-sincere.png">
+      <Link>Assets\ThreadTags\phiz-sincere.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-smugwave.png">
+      <Link>Assets\ThreadTags\phiz-smugwave.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-style.png">
+      <Link>Assets\ThreadTags\phiz-style.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-sucks.png">
+      <Link>Assets\ThreadTags\phiz-sucks.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\phiz-vampire.png">
+      <Link>Assets\ThreadTags\phiz-vampire.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\photos.png">
+      <Link>Assets\ThreadTags\photos.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\photoshop.png">
+      <Link>Assets\ThreadTags\photoshop.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\pi-birds.png">
+      <Link>Assets\ThreadTags\pi-birds.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\pi-bugs.png">
+      <Link>Assets\ThreadTags\pi-bugs.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\pi-caged.png">
+      <Link>Assets\ThreadTags\pi-caged.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\pi-cats.png">
+      <Link>Assets\ThreadTags\pi-cats.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\pi-dogs.png">
+      <Link>Assets\ThreadTags\pi-dogs.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\pi-fierce.png">
+      <Link>Assets\ThreadTags\pi-fierce.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\pi-fish.png">
+      <Link>Assets\ThreadTags\pi-fish.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\pi-herps.png">
+      <Link>Assets\ThreadTags\pi-herps.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\pi-woofwoofwoof.png">
+      <Link>Assets\ThreadTags\pi-woofwoofwoof.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\pigfuckin.png">
+      <Link>Assets\ThreadTags\pigfuckin.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\pokeball.png">
+      <Link>Assets\ThreadTags\pokeball.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\politics.png">
+      <Link>Assets\ThreadTags\politics.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\poll.png">
+      <Link>Assets\ThreadTags\poll.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\psp-grappling.png">
+      <Link>Assets\ThreadTags\psp-grappling.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\psp-itstime.png">
+      <Link>Assets\ThreadTags\psp-itstime.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\psp-japan.png">
+      <Link>Assets\ThreadTags\psp-japan.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\psp-k1.png">
+      <Link>Assets\ThreadTags\psp-k1.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\psp-mma.png">
+      <Link>Assets\ThreadTags\psp-mma.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\psp-pride.png">
+      <Link>Assets\ThreadTags\psp-pride.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\psp-rumble.png">
+      <Link>Assets\ThreadTags\psp-rumble.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\psp-thonglor.png">
+      <Link>Assets\ThreadTags\psp-thonglor.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\psp-tuf.png">
+      <Link>Assets\ThreadTags\psp-tuf.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\psp-ufc.png">
+      <Link>Assets\ThreadTags\psp-ufc.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\pstag.png">
+      <Link>Assets\ThreadTags\pstag.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\qcs-c.png">
+      <Link>Assets\ThreadTags\qcs-c.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\qcs-green.png">
+      <Link>Assets\ThreadTags\qcs-green.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\qcs-mods.png">
+      <Link>Assets\ThreadTags\qcs-mods.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\qcs-q.png">
+      <Link>Assets\ThreadTags\qcs-q.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\qcs-s.png">
+      <Link>Assets\ThreadTags\qcs-s.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\question.png">
+      <Link>Assets\ThreadTags\question.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\rant.png">
+      <Link>Assets\ThreadTags\rant.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\repeat.png">
+      <Link>Assets\ThreadTags\repeat.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\request.png">
+      <Link>Assets\ThreadTags\request.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\RP-20a6zc0.png">
+      <Link>Assets\ThreadTags\RP-20a6zc0.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\RP-carling.png">
+      <Link>Assets\ThreadTags\RP-carling.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\RP-championship.png">
+      <Link>Assets\ThreadTags\RP-championship.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\RP-epl.png">
+      <Link>Assets\ThreadTags\RP-epl.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\RP-facup.png">
+      <Link>Assets\ThreadTags\RP-facup.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\RP-fifa.png">
+      <Link>Assets\ThreadTags\RP-fifa.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\RP-league.png">
+      <Link>Assets\ThreadTags\RP-league.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\RP-LFP.png">
+      <Link>Assets\ThreadTags\RP-LFP.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\RP-ligue1.png">
+      <Link>Assets\ThreadTags\RP-ligue1.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\RP-mls_tag.png">
+      <Link>Assets\ThreadTags\RP-mls_tag.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\RP-MOTD_TAG.png">
+      <Link>Assets\ThreadTags\RP-MOTD_TAG.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\RP-nonleague.png">
+      <Link>Assets\ThreadTags\RP-nonleague.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\RP-seriea.png">
+      <Link>Assets\ThreadTags\RP-seriea.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\RP-spl.png">
+      <Link>Assets\ThreadTags\RP-spl.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\RP-uefa_tag.png">
+      <Link>Assets\ThreadTags\RP-uefa_tag.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\RR-aew.png">
+      <Link>Assets\ThreadTags\RR-aew.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\RR-joshii.png">
+      <Link>Assets\ThreadTags\RR-joshii.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\RR-twitter.png">
+      <Link>Assets\ThreadTags\RR-twitter.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\sadev-bugs.png">
+      <Link>Assets\ThreadTags\sadev-bugs.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\sal_badscience.png">
+      <Link>Assets\ThreadTags\sal_badscience.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\sam-clothing.png">
+      <Link>Assets\ThreadTags\sam-clothing.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\samartd-interestcheck.png">
+      <Link>Assets\ThreadTags\samartd-interestcheck.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\samartd-organs.png">
+      <Link>Assets\ThreadTags\samartd-organs.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\samartd-potions.png">
+      <Link>Assets\ThreadTags\samartd-potions.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\samartd-water.png">
+      <Link>Assets\ThreadTags\samartd-water.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\sap-language.png">
+      <Link>Assets\ThreadTags\sap-language.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\sas-fantasy.png">
+      <Link>Assets\ThreadTags\sas-fantasy.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\sas-hockey2.png">
+      <Link>Assets\ThreadTags\sas-hockey2.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\school.png">
+      <Link>Assets\ThreadTags\school.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\science.png">
+      <Link>Assets\ThreadTags\science.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\seamonkeys.png">
+      <Link>Assets\ThreadTags\seamonkeys.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\serious.png">
+      <Link>Assets\ThreadTags\serious.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\sex.png">
+      <Link>Assets\ThreadTags\sex.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\shitpost.png">
+      <Link>Assets\ThreadTags\shitpost.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\shsc-apple.png">
+      <Link>Assets\ThreadTags\shsc-apple.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\shsc-bsd.png">
+      <Link>Assets\ThreadTags\shsc-bsd.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\shsc-code.png">
+      <Link>Assets\ThreadTags\shsc-code.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\shsc-hardware.png">
+      <Link>Assets\ThreadTags\shsc-hardware.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\shsc-laptop.png">
+      <Link>Assets\ThreadTags\shsc-laptop.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\shsc-linux.png">
+      <Link>Assets\ThreadTags\shsc-linux.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\shsc-networking.png">
+      <Link>Assets\ThreadTags\shsc-networking.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\shsc-sysadmin.png">
+      <Link>Assets\ThreadTags\shsc-sysadmin.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\shsc-win.png">
+      <Link>Assets\ThreadTags\shsc-win.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\sports-boxing.png">
+      <Link>Assets\ThreadTags\sports-boxing.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\sports-golf.png">
+      <Link>Assets\ThreadTags\sports-golf.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\sports-mlb.png">
+      <Link>Assets\ThreadTags\sports-mlb.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\sports-nascar.png">
+      <Link>Assets\ThreadTags\sports-nascar.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\sports-nba.png">
+      <Link>Assets\ThreadTags\sports-nba.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\sports-ncaa.png">
+      <Link>Assets\ThreadTags\sports-ncaa.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\sports-nfl.png">
+      <Link>Assets\ThreadTags\sports-nfl.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\sports-nhl.png">
+      <Link>Assets\ThreadTags\sports-nhl.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\sports-soccer.png">
+      <Link>Assets\ThreadTags\sports-soccer.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\sports-sylvia.png">
+      <Link>Assets\ThreadTags\sports-sylvia.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\sports-wwe.png">
+      <Link>Assets\ThreadTags\sports-wwe.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\sports.png">
+      <Link>Assets\ThreadTags\sports.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\steam.png">
+      <Link>Assets\ThreadTags\steam.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\stupid.png">
+      <Link>Assets\ThreadTags\stupid.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\switchtag.png">
+      <Link>Assets\ThreadTags\switchtag.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tag-thrad.png">
+      <Link>Assets\ThreadTags\tag-thrad.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tava-analog.png">
+      <Link>Assets\ThreadTags\tava-analog.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tava-cables.png">
+      <Link>Assets\ThreadTags\tava-cables.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tava-cellphone.png">
+      <Link>Assets\ThreadTags\tava-cellphone.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tava-gadget.png">
+      <Link>Assets\ThreadTags\tava-gadget.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tava-headphones.png">
+      <Link>Assets\ThreadTags\tava-headphones.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tava-highdef.png">
+      <Link>Assets\ThreadTags\tava-highdef.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tava-mp3.png">
+      <Link>Assets\ThreadTags\tava-mp3.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tava-speakers.png">
+      <Link>Assets\ThreadTags\tava-speakers.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tava-vintage.png">
+      <Link>Assets\ThreadTags\tava-vintage.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tcc-acid.png">
+      <Link>Assets\ThreadTags\tcc-acid.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tcc-addiction.png">
+      <Link>Assets\ThreadTags\tcc-addiction.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tcc-busted.png">
+      <Link>Assets\ThreadTags\tcc-busted.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tcc-downers.png">
+      <Link>Assets\ThreadTags\tcc-downers.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tcc-halluc.png">
+      <Link>Assets\ThreadTags\tcc-halluc.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tcc-research.png">
+      <Link>Assets\ThreadTags\tcc-research.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tcc-rx.png">
+      <Link>Assets\ThreadTags\tcc-rx.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tcc-shrooms.png">
+      <Link>Assets\ThreadTags\tcc-shrooms.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tcc-trip_report.png">
+      <Link>Assets\ThreadTags\tcc-trip_report.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tcc-txt.png">
+      <Link>Assets\ThreadTags\tcc-txt.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tcc-uppers.png">
+      <Link>Assets\ThreadTags\tcc-uppers.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tcc-weed.png">
+      <Link>Assets\ThreadTags\tcc-weed.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tech.png">
+      <Link>Assets\ThreadTags\tech.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\terrordome.png">
+      <Link>Assets\ThreadTags\terrordome.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tfr-box.png">
+      <Link>Assets\ThreadTags\tfr-box.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tg-boardgames.png">
+      <Link>Assets\ThreadTags\tg-boardgames.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tg-cards.png">
+      <Link>Assets\ThreadTags\tg-cards.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tg-d20.png">
+      <Link>Assets\ThreadTags\tg-d20.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tg-dd.png">
+      <Link>Assets\ThreadTags\tg-dd.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tg-gurps.png">
+      <Link>Assets\ThreadTags\tg-gurps.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tg-mafia.png">
+      <Link>Assets\ThreadTags\tg-mafia.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tg-poker.png">
+      <Link>Assets\ThreadTags\tg-poker.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tg-recruiting.png">
+      <Link>Assets\ThreadTags\tg-recruiting.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tg-starwars.png">
+      <Link>Assets\ThreadTags\tg-starwars.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tg-story.png">
+      <Link>Assets\ThreadTags\tg-story.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tg-wargames.png">
+      <Link>Assets\ThreadTags\tg-wargames.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tigerattack.png">
+      <Link>Assets\ThreadTags\tigerattack.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tinypastry.png">
+      <Link>Assets\ThreadTags\tinypastry.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tma.png">
+      <Link>Assets\ThreadTags\tma.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\trp-laliga.png">
+      <Link>Assets\ThreadTags\trp-laliga.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tv.png">
+      <Link>Assets\ThreadTags\tv.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tviv-bluray.png">
+      <Link>Assets\ThreadTags\tviv-bluray.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tviv-cable.png">
+      <Link>Assets\ThreadTags\tviv-cable.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tviv-cartoon.png">
+      <Link>Assets\ThreadTags\tviv-cartoon.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tviv-classic.png">
+      <Link>Assets\ThreadTags\tviv-classic.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tviv-competition.png">
+      <Link>Assets\ThreadTags\tviv-competition.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tviv-dvd.png">
+      <Link>Assets\ThreadTags\tviv-dvd.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tviv-on-demand.png">
+      <Link>Assets\ThreadTags\tviv-on-demand.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tviv-reality.png">
+      <Link>Assets\ThreadTags\tviv-reality.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\tviv-spoilers.png">
+      <Link>Assets\ThreadTags\tviv-spoilers.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\unfunny.png">
+      <Link>Assets\ThreadTags\unfunny.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\video.png">
+      <Link>Assets\ThreadTags\video.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\weird.png">
+      <Link>Assets\ThreadTags\weird.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\whine.png">
+      <Link>Assets\ThreadTags\whine.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\wrestlehut-ecw.png">
+      <Link>Assets\ThreadTags\wrestlehut-ecw.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\wrestlehut-global.png">
+      <Link>Assets\ThreadTags\wrestlehut-global.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\wrestlehut-indy.png">
+      <Link>Assets\ThreadTags\wrestlehut-indy.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\wrestlehut-thunder.png">
+      <Link>Assets\ThreadTags\wrestlehut-thunder.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\wrestlehut-tna.png">
+      <Link>Assets\ThreadTags\wrestlehut-tna.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\wrestling-raw.png">
+      <Link>Assets\ThreadTags\wrestling-raw.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\wrestling-roh.png">
+      <Link>Assets\ThreadTags\wrestling-roh.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\wrestling-sd.png">
+      <Link>Assets\ThreadTags\wrestling-sd.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ww-denim.png">
+      <Link>Assets\ThreadTags\ww-denim.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\xboxtag.png">
+      <Link>Assets\ThreadTags\xboxtag.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\YCS-01.png">
+      <Link>Assets\ThreadTags\YCS-01.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\YCS-02.png">
+      <Link>Assets\ThreadTags\YCS-02.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\YCS-04.png">
+      <Link>Assets\ThreadTags\YCS-04.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\YCS-05.png">
+      <Link>Assets\ThreadTags\YCS-05.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ycs-achieve.png">
+      <Link>Assets\ThreadTags\ycs-achieve.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ycs-emotion.png">
+      <Link>Assets\ThreadTags\ycs-emotion.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ycs-girl.png">
+      <Link>Assets\ThreadTags\ycs-girl.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ycs-goomba.png">
+      <Link>Assets\ThreadTags\ycs-goomba.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ycs-jap.png">
+      <Link>Assets\ThreadTags\ycs-jap.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ycs-jc.png">
+      <Link>Assets\ThreadTags\ycs-jc.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ycs-letsgo.png">
+      <Link>Assets\ThreadTags\ycs-letsgo.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ycs-link.png">
+      <Link>Assets\ThreadTags\ycs-link.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ycs-metal.png">
+      <Link>Assets\ThreadTags\ycs-metal.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ycs-ps3.png">
+      <Link>Assets\ThreadTags\ycs-ps3.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ycs-psyched.png">
+      <Link>Assets\ThreadTags\ycs-psyched.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ycs-redring.png">
+      <Link>Assets\ThreadTags\ycs-redring.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ycs-ryu.png">
+      <Link>Assets\ThreadTags\ycs-ryu.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ycs-sega.png">
+      <Link>Assets\ThreadTags\ycs-sega.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ycs-taint.png">
+      <Link>Assets\ThreadTags\ycs-taint.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\ycs-violence.png">
+      <Link>Assets\ThreadTags\ycs-violence.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\yospos-blurit.png">
+      <Link>Assets\ThreadTags\yospos-blurit.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\YOSPOS-DOS.png">
+      <Link>Assets\ThreadTags\YOSPOS-DOS.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\yospos-hackersafe.png">
+      <Link>Assets\ThreadTags\yospos-hackersafe.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\yospos-janitor.png">
+      <Link>Assets\ThreadTags\yospos-janitor.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\yospos-netscape.png">
+      <Link>Assets\ThreadTags\yospos-netscape.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\yospos-web20.png">
+      <Link>Assets\ThreadTags\yospos-web20.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\yp-amiga859.png">
+      <Link>Assets\ThreadTags\yp-amiga859.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\yp-apple.png">
+      <Link>Assets\ThreadTags\yp-apple.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\yp-bsod.png">
+      <Link>Assets\ThreadTags\yp-bsod.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\yp-c64.png">
+      <Link>Assets\ThreadTags\yp-c64.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\yp-gnugpl.png">
+      <Link>Assets\ThreadTags\yp-gnugpl.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\yp-snowcrash971.png">
+      <Link>Assets\ThreadTags\yp-snowcrash971.png</Link>
+    </Content>
+    <Content Include="..\Awful.Tags\yp-tubes296.png">
+      <Link>Assets\ThreadTags\yp-tubes296.png</Link>
+    </Content>
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -172,8 +2071,17 @@
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI">
       <Version>6.1.1</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>6.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
+      <Version>2.0.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Awful.Tags\README.md">
+      <Link>Assets\ThreadTags\README.md</Link>
+    </None>
     <None Include="..\stylecop.json">
       <Link>stylecop.json</Link>
     </None>
