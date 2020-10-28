@@ -8,7 +8,8 @@
     mc:Ignorable="d"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" 
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
-    xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core" 
+    xmlns:awfulControl="using:Awful.Windows.UI.Controls"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
@@ -83,14 +84,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <controls:Loading IsLoading="{Binding IsBusy}" x:Name="LoadingControl">
-            <controls:Loading.Background>
-                <SolidColorBrush Color="Black" Opacity="0.7" />
-            </controls:Loading.Background>
-            <StackPanel Orientation="Horizontal" Padding="12">
-                <ProgressRing IsActive="True" Margin="0,0,12,0" Foreground="Green" />
-                <TextBlock Text="Refreshing..." VerticalAlignment="Center" Foreground="White" />
-            </StackPanel>
-        </controls:Loading>
+        <awfulControl:AwfulLoading/>
     </Grid>
 </Page>

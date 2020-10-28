@@ -19,6 +19,7 @@ namespace Awful.UI.ViewModels
 
         private bool isBusy = false;
         private string title = string.Empty;
+        private string loadingText = "Loading...";
 
         public bool IsBusy
         {
@@ -30,6 +31,12 @@ namespace Awful.UI.ViewModels
         {
             get { return this.title; }
             set { this.SetProperty(ref this.title, value); }
+        }
+
+        public string LoadingText
+        {
+            get { return this.loadingText; }
+            set { this.SetProperty(ref this.loadingText, value); }
         }
 
         protected bool SetProperty<T>(ref T backingStore, T value,
