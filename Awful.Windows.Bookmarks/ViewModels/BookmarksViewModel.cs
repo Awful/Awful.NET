@@ -42,24 +42,23 @@ namespace Awful.Windows.Bookmarks.ViewModels
             this.bookmarks = new BookmarkAction(this.Client, context);
         }
 
-        public async Task LoadBookmarksAsync()
+        public async Task LoadBookmarksAsync(bool reload = false, int forceDelay = 0)
         {
-            var threads = await this.bookmarks.GetAllBookmarksAsync().ConfigureAwait(false);
+            this.IsBusy = true;
+            await Task.Delay(forceDelay).ConfigureAwait(false);
+            var threads = await this.bookmarks.GetAllBookmarksAsync(reload).ConfigureAwait(false);
             this.Threads = new ObservableCollection<AwfulThread>();
             foreach (var thread in threads)
             {
                 this.Threads.Add(thread);
             }
+
+            this.IsBusy = false;
         }
 
-        public async Task RefreshBookmarksAsync()
+        public async Task RefreshBookmarksAsync(int forceDelay = 0)
         {
-            var threads = await this.bookmarks.GetAllBookmarksAsync(true).ConfigureAwait(false);
-            this.Threads = new ObservableCollection<AwfulThread>();
-            foreach (var thread in threads)
-            {
-                this.Threads.Add(thread);
-            }
+            await this.LoadBookmarksAsync(true, forceDelay).ConfigureAwait(false);
         }
 
         public ObservableCollection<AwfulThread> Threads
@@ -69,6 +68,7 @@ namespace Awful.Windows.Bookmarks.ViewModels
         }
 
         private RelayCommand<object> _selectedItemCommand;
+
         public RelayCommand<object> SelectedItemCommand
         {
             get
@@ -82,7 +82,7 @@ namespace Awful.Windows.Bookmarks.ViewModels
                             {
                                 var endpoint = string.Format(CultureInfo.InvariantCulture, EndPoints.GotoNewPostEndpoint, thread.ThreadId);
                                 await Launcher.LaunchUriAsync(new Uri(endpoint));
-                                await this.RefreshBookmarksAsync().ConfigureAwait(false);
+                                await this.RefreshBookmarksAsync(2000).ConfigureAwait(false);
                             }
 
                             await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => {
