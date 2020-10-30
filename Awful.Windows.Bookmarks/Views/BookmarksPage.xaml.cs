@@ -40,7 +40,15 @@ namespace Awful.Windows.Bookmarks.Views
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            await this.ViewModel.LoadBookmarksAsync().ConfigureAwait(false);
+            await this.ViewModel.LoadBookmarksAsync(true).ConfigureAwait(false);
+        }
+
+        private async void RefreshContainer_RefreshRequested(RefreshContainer sender, RefreshRequestedEventArgs args)
+        {
+            using (var refreshCompletionDeferral = args.GetDeferral())
+            {
+                await this.ViewModel.RefreshBookmarksAsync().ConfigureAwait(false);
+            }
         }
     }
 }

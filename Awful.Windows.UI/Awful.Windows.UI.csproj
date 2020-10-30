@@ -129,9 +129,11 @@
     <Compile Include="Tools\Commands\OpenThreadInBrowserCommand.cs" />
     <Compile Include="Tools\Commands\RelayCommand.cs" />
     <Compile Include="Tools\Converters\BookmarksThreadHeaderColorConverter.cs" />
+    <Compile Include="Tools\Converters\BookmarkTextConverter.cs" />
     <Compile Include="Tools\Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Tools\Converters\BooleanToVisibilityInverter.cs" />
     <Compile Include="Tools\Converters\ForumImageConverter.cs" />
+    <Compile Include="Tools\Converters\OpenMenuFlyoutAction.cs" />
     <Compile Include="Tools\Converters\ThreadHeaderColorConverter.cs" />
     <Compile Include="WindowsPlatformProperties.cs" />
     <EmbeddedResource Include="Properties\Awful.Windows.UI.rd.xml" />
@@ -174,6 +176,22 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\AwfulLoading.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Custom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Dark.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Forums.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Light.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

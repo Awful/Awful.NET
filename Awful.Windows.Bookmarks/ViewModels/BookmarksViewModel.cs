@@ -67,14 +67,26 @@ namespace Awful.Windows.Bookmarks.ViewModels
             set { this.SetProperty(ref this.threads, value); }
         }
 
+        private RelayCommand refreshCommand;
+
+        public RelayCommand RefreshCommand
+        {
+            get
+            {
+                return this.refreshCommand ??= new RelayCommand(async () =>
+                {
+                    await this.RefreshBookmarksAsync().ConfigureAwait(false);
+                });
+            }
+        }
+
         private RelayCommand<object> _selectedItemCommand;
 
         public RelayCommand<object> SelectedItemCommand
         {
             get
             {
-                return this._selectedItemCommand
-                    ?? (this._selectedItemCommand = new RelayCommand<object>(async (param) =>
+                return this._selectedItemCommand ??= new RelayCommand<object>(async (param) =>
                     {
                         if (param is ListView listView)
                         {
@@ -89,7 +101,7 @@ namespace Awful.Windows.Bookmarks.ViewModels
                                 listView.SelectedItem = null;
                             });
                         }
-                    }));
+                    });
             }
         }
     }

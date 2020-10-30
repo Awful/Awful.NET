@@ -30,6 +30,12 @@ namespace Awful.Windows.UI.Tools.Converters
                     return new SolidColorBrush(Colors.Red);
                 case "bm2":
                     return new SolidColorBrush(Colors.Yellow);
+                case "bm3":
+                    return new SolidColorBrush(Colors.Blue);
+                case "bm4":
+                    return new SolidColorBrush(Colors.Green);
+                case "bm5":
+                    return new SolidColorBrush(Colors.Purple);
                 default:
                     return new SolidColorBrush(Colors.Orange);
             }

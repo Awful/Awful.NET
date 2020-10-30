@@ -6,7 +6,14 @@
     xmlns:converters="using:Awful.Windows.UI.Tools.Converters">
     <Application.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Awful.Windows.UI/Styles/Custom.xaml" />
+                <ResourceDictionary Source="Awful.Windows.UI/Styles/Forums.xaml" />
+            </ResourceDictionary.MergedDictionaries>
             <converters:ForumImageConverter  x:Key="ForumImageConverter" />
+            <converters:OpenMenuFlyoutAction  x:Key="OpenMenuFlyoutAction" />
+            <converters:BookmarkTextConverter  x:Key="BookmarkTextConverter" />
+            <converters:BookmarksThreadHeaderColorConverter  x:Key="BookmarksThreadHeaderColorConverter" />
             <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
     </Application.Resources>
