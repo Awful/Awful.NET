@@ -19,17 +19,18 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace Awful.Windows.Bookmarks.Views
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Bookmarks Page.
     /// </summary>
     public sealed partial class BookmarksPage : Page
     {
         public BookmarksViewModel ViewModel => this.DataContext as BookmarksViewModel;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BookmarksPage"/> class.
+        /// </summary>
         public BookmarksPage()
         {
             this.InitializeComponent();
@@ -49,6 +50,11 @@ namespace Awful.Windows.Bookmarks.Views
             {
                 await this.ViewModel.RefreshBookmarksAsync().ConfigureAwait(false);
             }
+        }
+
+        private void SmiliesButton_Click(object sender, UI.Xaml.RoutedEventArgs e)
+        {
+
         }
     }
 }

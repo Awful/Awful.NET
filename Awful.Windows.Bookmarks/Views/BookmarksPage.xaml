@@ -113,7 +113,7 @@
             </RefreshContainer>
             <CommandBar Grid.Row="1">
                 <AppBarButton Label="Refresh" Command="{x:Bind ViewModel.RefreshCommand}" Icon="Refresh"/>
-                <AppBarButton Label="Settings" Icon="Setting"/>
+                <AppBarButton Label="Settings" Command="{x:Bind ViewModel.OpenSettingsCommand}" Icon="Setting"/>
             </CommandBar>
         </Grid>
         <awfulControl:AwfulLoading/>

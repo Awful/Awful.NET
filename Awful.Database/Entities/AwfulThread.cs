@@ -41,6 +41,11 @@ namespace Awful.Database.Entities
         public int Id { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to enable notifications for updates.
+        /// </summary>
+        public bool EnableBookmarkNotifications { get; set; }
+
+        /// <summary>
         /// Gets or sets the Forum Id.
         /// </summary>
         public int ForumId { get; set; }

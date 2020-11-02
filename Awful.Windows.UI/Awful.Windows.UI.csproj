@@ -125,6 +125,7 @@
     <Compile Include="Controls\AwfulLoading.xaml.cs">
       <DependentUpon>AwfulLoading.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\FlyoutHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\Commands\OpenThreadInBrowserCommand.cs" />
     <Compile Include="Tools\Commands\RelayCommand.cs" />

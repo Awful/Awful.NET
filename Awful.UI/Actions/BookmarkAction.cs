@@ -55,6 +55,16 @@ namespace Awful.UI.Actions
         }
 
         /// <summary>
+        /// Enable or disable bookmark notifications for a given thread.
+        /// </summary>
+        /// <param name="thread">The AwfulThread.</param>
+        /// <returns>The AwfulThread with the updated value.</returns>
+        public async Task<AwfulThread> EnableDisableBookmarkNotificationAsync(AwfulThread thread)
+        {
+            return await this.context.EnableDisableBookmarkNotificationsEnable(thread).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Add Bookmark.
         /// </summary>
         /// <param name="threadId">Thread Id.</param>

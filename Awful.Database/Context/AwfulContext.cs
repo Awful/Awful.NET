@@ -43,6 +43,11 @@ namespace Awful.Database.Context
         public DbSet<SAclopediaEntryItem> SAclopediaEntryItems { get; set; }
 
         /// <summary>
+        /// Gets or sets the SettingOptions table.
+        /// </summary>
+        public DbSet<SettingOptions> SettingOptionsItems { get; set; }
+
+        /// <summary>
         /// Gets or sets the BookmarkThreads table.
         /// </summary>
         public DbSet<AwfulThread> BookmarkThreads { get; set; }
@@ -70,6 +75,35 @@ namespace Awful.Database.Context
         {
             var saclopedias = await this.SAclopediaEntryItems.ToListAsync().ConfigureAwait(false);
             this.SAclopediaEntryItems.RemoveRange(saclopedias);
+            return await this.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Settings
+
+        /// <summary>
+        /// Add or update settings.
+        /// </summary>
+        /// <param name="settings">The settings.</param>
+        /// <returns>Number of rows changed.</returns>
+        public async Task<int> AddOrUpdateSettingsAsync(SettingOptions settings)
+        {
+            if (settings == null)
+            {
+                throw new ArgumentNullException(nameof(settings));
+            }
+
+            var setting = this.SettingOptionsItems.FirstOrDefault();
+            if (setting == null)
+            {
+                await this.SettingOptionsItems.AddAsync(setting).ConfigureAwait(false);
+            }
+            else
+            {
+                this.SettingOptionsItems.Update(setting);
+            }
+
             return await this.SaveChangesAsync().ConfigureAwait(false);
         }
 
@@ -200,6 +234,33 @@ namespace Awful.Database.Context
             this.BookmarkThreads.Remove(thread);
             await this.SaveChangesAsync().ConfigureAwait(false);
             return await this.BookmarkThreads.ToListAsync().ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Enable or disable bookmark notifications for a given thread.
+        /// </summary>
+        /// <param name="thread">The AwfulThread.</param>
+        /// <returns>The AwfulThread with the updated value.</returns>
+        public async Task<AwfulThread> EnableDisableBookmarkNotificationsEnable(AwfulThread thread)
+        {
+            if (thread == null)
+            {
+                throw new ArgumentNullException(nameof(thread));
+            }
+
+            if (!this.BookmarkThreads.Contains(thread))
+            {
+                throw new Exception("Thread is not contained in the bookmark list.");
+            }
+
+            if (!thread.IsBookmark)
+            {
+                throw new Exception("Thread is not listed as a bookmark.");
+            }
+
+            thread.EnableBookmarkNotifications = !thread.EnableBookmarkNotifications;
+            await this.SaveChangesAsync().ConfigureAwait(false);
+            return thread;
         }
 
         #endregion

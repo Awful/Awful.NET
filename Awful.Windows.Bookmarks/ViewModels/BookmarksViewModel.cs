@@ -80,6 +80,19 @@ namespace Awful.Windows.Bookmarks.ViewModels
             }
         }
 
+        private RelayCommand openSettingsCommand;
+
+        public RelayCommand OpenSettingsCommand
+        {
+            get
+            {
+                return this.openSettingsCommand ??= new RelayCommand(async () =>
+                {
+                    
+                });
+            }
+        }
+
         private RelayCommand<object> _selectedItemCommand;
 
         public RelayCommand<object> SelectedItemCommand
