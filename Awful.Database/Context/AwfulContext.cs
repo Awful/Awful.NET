@@ -14,6 +14,7 @@ using Awful.Core.Tools;
 using Awful.Database.Entities;
 using Awful.Core.Utilities;
 using Microsoft.EntityFrameworkCore;
+using Awful.Webview.Entities.Themes;
 
 namespace Awful.Database.Context
 {
@@ -121,7 +122,7 @@ namespace Awful.Database.Context
             var user = this.Users.FirstOrDefault(node => node.IsDefaultUser);
             if (user != null)
             {
-                user.AuthCookies = CookieManager.LoadCookie(user.CookiePath);
+                user.AuthCookies = CookieManager.LoadCookie(this.PlatformProperties.CookiePath);
             }
 
             return user;
@@ -165,9 +166,9 @@ namespace Awful.Database.Context
         /// <returns>Number of rows changed.</returns>
         public async Task<int> RemoveUserAsync(UserAuth userAuth)
         {
-            if (System.IO.File.Exists(userAuth.CookiePath))
+            if (System.IO.File.Exists(this.PlatformProperties.CookiePath))
             {
-                System.IO.File.Delete(userAuth.CookiePath);
+                System.IO.File.Delete(this.PlatformProperties.CookiePath);
             }
 
             this.Users.Remove(userAuth);
@@ -286,6 +287,12 @@ namespace Awful.Database.Context
                 throw new ArgumentNullException(nameof(modelBuilder));
             }
 
+            //modelBuilder.Entity<SettingOptions>()
+            //    .Property(c => c.DeviceColorTheme)
+            //    .HasConversion<int>();
+            //modelBuilder.Entity<SettingOptions>()
+            //    .Property(c => c.DeviceTheme)
+            //    .HasConversion<int>();
             modelBuilder.Entity<SAclopediaEntryItem>().HasKey(n => n.Id);
             modelBuilder.Entity<UserAuth>().Ignore(b => b.AuthCookies);
         }

@@ -27,9 +27,14 @@ namespace Awful.Database.Entities
         public DateTime LastBookmarkRefreshTime { get; set; }
 
         /// <summary>
-        /// Gets or sets the default theme options.
+        /// Gets or sets the device color theme.
         /// </summary>
-        public DefaultOptions DefaultThemeOptions { get; set; }
+        public DeviceColorTheme DeviceColorTheme { get; set; }
+
+        /// <summary>
+        /// Gets or sets the device theme.
+        /// </summary>
+        public DeviceTheme DeviceTheme { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether to enable background tasks.

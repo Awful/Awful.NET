@@ -7,6 +7,10 @@
     <FlyoutItem Title="Forums">
         <ShellContent Route="ForumList" ContentTemplate="{DataTemplate local:ForumListPage}" />
     </FlyoutItem>
+
+    <FlyoutItem Title="Bookmarks">
+        <ShellContent Route="BookmarkListPage" ContentTemplate="{DataTemplate local:BookmarkListPage}" />
+    </FlyoutItem>
     
     <FlyoutItem Title="SAclopedia">
         <ShellContent Route="SAclopediaEntryListPage" ContentTemplate="{DataTemplate local:SAclopediaEntryListPage}" />

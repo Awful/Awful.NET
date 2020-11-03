@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 using Awful.Core.Tools;
+using Awful.Database.Context;
 using Foundation;
 using UIKit;
 

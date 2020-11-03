@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using Autofac;
 using Awful.Database.Context;
+using Awful.Mobile.ViewModels;
 using Awful.UI.ViewModels;
 using Awful.Webview;
 
@@ -32,6 +33,7 @@ namespace Awful.UI
             builder.RegisterType<TemplateHandler>().SingleInstance();
             builder.RegisterType<AwfulContext>().SingleInstance();
             builder.RegisterType<AwfulViewModel>();
+            builder.RegisterType<BookmarksViewModel>();
             builder.RegisterType<SigninViewModel>();
             builder.RegisterType<SAclopediaEntryListViewModel>();
             builder.RegisterType<SAclopediaEntryViewModel>();
