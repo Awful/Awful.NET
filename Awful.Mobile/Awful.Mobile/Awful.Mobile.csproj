@@ -41,6 +41,10 @@
     <EmbeddedResource Include="..\..\Awful.Tags\4.5stars.png">
       <Link>ThreadTags\4.5stars.png</Link>
     </EmbeddedResource>
+    <EmbeddedResource Include="ThreadTags\missing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="ThreadTags\missing.png" />
   </ItemGroup>
   <ItemGroup>
     <None Update="AwfulShell.xaml">

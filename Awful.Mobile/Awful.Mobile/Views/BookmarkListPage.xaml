@@ -32,6 +32,7 @@
                                WidthRequest="45"
                                VerticalOptions="Start"
                                Margin="5"
+                               
                                Source="{Binding ImageIconLocation, Converter={StaticResource ForumImageConverter}}"/>
                         <Grid Grid.Column="1">
                             <Grid.RowDefinitions>
