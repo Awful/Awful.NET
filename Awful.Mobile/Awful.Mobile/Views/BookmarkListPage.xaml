@@ -4,7 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Bookmarks"
     x:Class="Awful.Mobile.Views.BookmarkListPage">
-    <CollectionView ItemsSource="{Binding Threads}">
+    <RefreshView Command="{Binding RefreshCommand}"
+                 IsRefreshing="{Binding IsRefreshing}">
+        <CollectionView
+        ItemsSource="{Binding Threads}">
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <Grid Padding="6">
@@ -63,4 +66,5 @@
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>
+    </RefreshView>
 </ContentPage>

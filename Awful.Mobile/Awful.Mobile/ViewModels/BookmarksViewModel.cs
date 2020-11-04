@@ -4,12 +4,15 @@
 
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Awful.Core.Tools;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
+using Awful.Mobile.UI.Tools.Commands;
 using Awful.UI.Actions;
 using Awful.UI.ViewModels;
+using Xamarin.Forms;
 
 namespace Awful.Mobile.ViewModels
 {
@@ -59,6 +62,21 @@ namespace Awful.Mobile.ViewModels
         {
             get { return this.threads; }
             set { this.SetProperty(ref this.threads, value); }
+        }
+
+        private RelayCommand refreshCommand;
+
+        public RelayCommand RefreshCommand
+        {
+            get
+            {
+                return this.refreshCommand ??= new RelayCommand(async () =>
+                {
+                    this.IsRefreshing = true;
+                    await this.RefreshBookmarksAsync().ConfigureAwait(false);
+                    this.IsRefreshing = false;
+                });
+            }
         }
     }
 }

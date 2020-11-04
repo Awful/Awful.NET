@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace Awful.Windows.UI.Tools.Converters
+namespace Awful.Mobile.UI.Tools.Converters
 {
     /// <summary>
     /// Forum Image Converter.

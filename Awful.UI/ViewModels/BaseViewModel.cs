@@ -18,6 +18,7 @@ namespace Awful.UI.ViewModels
     {
 
         private bool isBusy = false;
+        private bool isRefreshing = false;
         private string title = string.Empty;
         private string loadingText = "Loading...";
 
@@ -25,6 +26,12 @@ namespace Awful.UI.ViewModels
         {
             get { return this.isBusy; }
             set { SetProperty(ref this.isBusy, value); }
+        }
+
+        public bool IsRefreshing
+        {
+            get { return this.isRefreshing; }
+            set { SetProperty(ref this.isRefreshing, value); }
         }
 
         public string Title
