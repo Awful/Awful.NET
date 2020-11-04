@@ -35,6 +35,7 @@ namespace Awful.Mobile.iOS
         {
             SQLitePCL.Batteries.Init();
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
+            global::Xamarin.Forms.Forms.SetFlags("Shapes_Experimental");
             global::Xamarin.Forms.Forms.Init();
             var builder = new ContainerBuilder();
             builder.RegisterType<iOSPlatformProperties>().As<IPlatformProperties>();

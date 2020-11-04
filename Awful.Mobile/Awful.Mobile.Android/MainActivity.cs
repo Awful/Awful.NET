@@ -35,7 +35,7 @@ namespace Awful.Mobile.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-
+            global::Xamarin.Forms.Forms.SetFlags("Shapes_Experimental");
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             var builder = new ContainerBuilder();
