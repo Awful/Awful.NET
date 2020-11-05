@@ -4,12 +4,12 @@
              xmlns:local="clr-namespace:Awful.Mobile.Views"
              x:Class="Awful.Mobile.AwfulShell">
 
-    <FlyoutItem Title="Forums">
-        <ShellContent Route="ForumList" ContentTemplate="{DataTemplate local:ForumListPage}" />
-    </FlyoutItem>
-
     <FlyoutItem Title="Bookmarks">
         <ShellContent Route="BookmarkListPage" ContentTemplate="{DataTemplate local:BookmarkListPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Forums">
+        <ShellContent Route="ForumList" ContentTemplate="{DataTemplate local:ForumListPage}" />
     </FlyoutItem>
     
     <FlyoutItem Title="SAclopedia">

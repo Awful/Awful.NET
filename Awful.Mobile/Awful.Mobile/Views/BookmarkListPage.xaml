@@ -3,6 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Bookmarks"
+    xmlns:local="clr-namespace:Awful.Mobile.Tools.Markup;assembly=Awful.Mobile"
     x:Class="Awful.Mobile.Views.BookmarkListPage">
     <RefreshView Command="{Binding RefreshCommand}"
                  IsRefreshing="{Binding IsRefreshing}">
@@ -32,7 +33,13 @@
                                WidthRequest="45"
                                VerticalOptions="Start"
                                Margin="5"
-                               
+                               Source="{local:ImageResource Awful.Mobile.ThreadTags.missing.png}"/>
+                        <!--Fix Placeholder-->
+                        <Image Grid.Column="0"
+                               HeightRequest="45"
+                               WidthRequest="45"
+                               VerticalOptions="Start"
+                               Margin="5"
                                Source="{Binding ImageIconLocation, Converter={StaticResource ForumImageConverter}}"/>
                         <Grid Grid.Column="1">
                             <Grid.RowDefinitions>

@@ -41,10 +41,9 @@
     <EmbeddedResource Include="..\..\Awful.Tags\4.5stars.png">
       <Link>ThreadTags\4.5stars.png</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="ThreadTags\missing.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="ThreadTags\missing.png" />
+    <EmbeddedResource Include="..\..\Awful.Tags.Local\missing.png">
+      <Link>ThreadTags\missing.png</Link>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Update="AwfulShell.xaml">
@@ -1960,5 +1959,6 @@
     <Folder Include="Tools\Converters\" />
     <Folder Include="ThreadTags\" />
     <Folder Include="Tools\Commands\" />
+    <Folder Include="Tools\Markup\" />
   </ItemGroup>
 </Project>

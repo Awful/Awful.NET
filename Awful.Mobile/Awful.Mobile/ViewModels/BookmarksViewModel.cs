@@ -23,6 +23,7 @@ namespace Awful.Mobile.ViewModels
     {
         private BookmarkAction bookmarks;
         private ObservableCollection<AwfulThread> threads;
+        private RelayCommand refreshCommand;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BookmarksViewModel"/> class.
@@ -39,6 +40,37 @@ namespace Awful.Mobile.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets or sets Forum Threads.
+        /// </summary>
+        public ObservableCollection<AwfulThread> Threads
+        {
+            get { return this.threads; }
+            set { this.SetProperty(ref this.threads, value); }
+        }
+
+        /// <summary>
+        /// Gets the refresh command.
+        /// </summary>
+        public RelayCommand RefreshCommand
+        {
+            get
+            {
+                return this.refreshCommand ??= new RelayCommand(async () =>
+                {
+                    this.IsRefreshing = true;
+                    await this.RefreshBookmarksAsync().ConfigureAwait(false);
+                    this.IsRefreshing = false;
+                });
+            }
+        }
+
+        /// <summary>
+        /// Load Bookmarks.
+        /// </summary>
+        /// <param name="reload">Force Reload.</param>
+        /// <param name="forceDelay">For Reload Delay, for allowing the forum list to update.</param>
+        /// <returns>Task.</returns>
         public async Task LoadBookmarksAsync(bool reload = false, int forceDelay = 0)
         {
             this.IsBusy = true;
@@ -53,30 +85,14 @@ namespace Awful.Mobile.ViewModels
             this.IsBusy = false;
         }
 
+        /// <summary>
+        /// Refresh Bookmarks.
+        /// </summary>
+        /// <param name="forceDelay">For Reload Delay, for allowing the forum list to update.</param>
+        /// <returns>Task.</returns>
         public async Task RefreshBookmarksAsync(int forceDelay = 0)
         {
             await this.LoadBookmarksAsync(true, forceDelay).ConfigureAwait(false);
-        }
-
-        public ObservableCollection<AwfulThread> Threads
-        {
-            get { return this.threads; }
-            set { this.SetProperty(ref this.threads, value); }
-        }
-
-        private RelayCommand refreshCommand;
-
-        public RelayCommand RefreshCommand
-        {
-            get
-            {
-                return this.refreshCommand ??= new RelayCommand(async () =>
-                {
-                    this.IsRefreshing = true;
-                    await this.RefreshBookmarksAsync().ConfigureAwait(false);
-                    this.IsRefreshing = false;
-                });
-            }
         }
     }
 }
