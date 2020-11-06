@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Awful.Mobile.Styles.AwfulThemeResources">
+    <!-- Set all Colors here -->
+            <Color x:Key="BackgroundColorDark">#111111</Color>
+            <Color x:Key="BackgroundColorLight">#ffffff</Color>
+            <Color x:Key="TextColorDark">#ffffff</Color>
+            <Color x:Key="TextColorLight">#000000</Color>
+
+            <Color x:Key="HeaderBarBackgroundColorLight">#2196F3</Color>
+            <Color x:Key="HeaderBarBackgroundColorDark">#111111</Color>
+            <Color x:Key="HeaderBarTextColorLight">#FFFFFF</Color>
+            <Color x:Key="HeaderBarTextColorDark">#FFFFFF</Color>
+
+            <Color x:Key="ButtonBackgroundColorLight">#2196F3</Color>
+            <Color x:Key="ButtonBackgroundColorDark">#2196F3</Color>
+            <Color x:Key="ButtonBackgroundDisabledColorLight">#332196F3</Color>
+            <Color x:Key="ButtonBackgroundDisabledColorDark">#332196F3</Color>
+            <Color x:Key="ButtonTextColorLight">#FFFFFF</Color>
+            <Color x:Key="ButtonTextColorDark">#FFFFFF</Color>
+
+
+            <Color x:Key="AccentColorLight">#96d1ff</Color>
+            <Color x:Key="AccentColorDark">#111111</Color>
+
+
+            <Color x:Key="PrimaryBackgroundDark">#2196F3</Color>
+            <Color x:Key="PrimaryBackgroundLight">#2196F3</Color>
+            <Color x:Key="PrimaryTextDark">#ffffff</Color>
+            <Color x:Key="PrimaryTextLight">#ffffff</Color>
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" 
+                        Value="{AppThemeBinding Dark={StaticResource TextColorDark}, 
+                                    Light={StaticResource TextColorLight}}" />
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="TextColor" 
+                        Value="{AppThemeBinding Dark={StaticResource ButtonTextColorDark}, 
+                                    Light={StaticResource ButtonTextColorLight}}" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" 
+                                            Value="{AppThemeBinding Dark={StaticResource ButtonBackgroundColorDark}, 
+                                    Light={StaticResource ButtonBackgroundColorLight}}"  />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" 
+                                            Value="{AppThemeBinding Dark={StaticResource ButtonBackgroundDisabledColorDark}, 
+                                    Light={StaticResource ButtonBackgroundDisabledColorLight}}"  />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+            <Style TargetType="CollectionView">
+                <Setter Property="BackgroundColor"
+                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
+                                    Light={StaticResource BackgroundColorLight}}" />
+            </Style>
+            <Style TargetType="Grid">
+                <Setter Property="BackgroundColor"
+                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
+                                    Light={StaticResource BackgroundColorLight}}" />
+            </Style>
+            <Style TargetType="StackLayout">
+                <Setter Property="BackgroundColor"
+                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
+                                    Light={StaticResource BackgroundColorLight}}" />
+            </Style>
+            <Style TargetType="RefreshView">
+                <Setter Property="BackgroundColor"
+                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
+                                    Light={StaticResource BackgroundColorLight}}" />
+                <Setter Property="RefreshColor"
+                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}" />
+            </Style>
+            <Style TargetType="TableView">
+                <Setter Property="BackgroundColor"
+                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
+                                    Light={StaticResource BackgroundColorLight}}" />
+            </Style>
+</ResourceDictionary>

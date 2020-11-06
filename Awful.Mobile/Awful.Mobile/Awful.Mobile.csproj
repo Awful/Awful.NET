@@ -1960,5 +1960,6 @@
     <Folder Include="ThreadTags\" />
     <Folder Include="Tools\Commands\" />
     <Folder Include="Tools\Markup\" />
+    <Folder Include="Styles\" />
   </ItemGroup>
 </Project>

@@ -3,6 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Settings"
+    BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
     x:Class="Awful.Mobile.Views.SettingsPage">
     <TableView Intent="Settings">
         <TableRoot>
@@ -19,9 +20,16 @@
                     </ViewCell.View>
                 </ViewCell>
             </TableSection>
-            <TableSection Title="Background Tasks">
-                <SwitchCell Text="Enable Background Tasks"
-                        On="{Binding EnableBackgroundTasks, Mode=OneTime}" />
+             <TableSection Title="Background Tasks">
+                <ViewCell>
+                    <ViewCell.View>
+                        <StackLayout Orientation="Horizontal" Padding="13, 0">
+                            <Label Text="Enable Background Tasks" VerticalOptions="Center"></Label>
+                            <Switch HorizontalOptions="EndAndExpand" VerticalOptions="Center"
+                                    IsToggled="{Binding EnableBackgroundTasks, Mode=OneTime}" />
+                        </StackLayout>
+                    </ViewCell.View>
+                </ViewCell>
             </TableSection>
         </TableRoot>
     </TableView>

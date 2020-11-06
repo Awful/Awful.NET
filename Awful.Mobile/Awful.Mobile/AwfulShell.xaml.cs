@@ -34,15 +34,15 @@ namespace Awful.Mobile
             Routing.RegisterRoute("saclopediaentrypage", typeof(SAclopediaEntryPage));
             Device.BeginInvokeOnMainThread(async () =>
             {
-                if (this.context.GetDefaultUser() == null)
-                {
-                    await Shell.Current.GoToAsync("//SigninPage").ConfigureAwait(false);
-                }
-
                 var settings = this.context.SettingOptionsItems.FirstOrDefault();
                 if (settings != null)
                 {
                     this.settings.SetAppTheme(settings.DeviceColorTheme);
+                }
+
+                if (this.context.GetDefaultUser() == null)
+                {
+                    await Shell.Current.GoToAsync("//SigninPage").ConfigureAwait(false);
                 }
             });
         }
