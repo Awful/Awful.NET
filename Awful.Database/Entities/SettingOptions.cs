@@ -42,7 +42,7 @@ namespace Awful.Database.Entities
         public bool EnableBackgroundTasks { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether to enable bokmark refresh on page.
+        /// Gets or sets a value indicating whether to enable bookmark refresh on page.
         /// </summary>
         public bool EnableBookmarkRefreshOnPage { get; set; }
 

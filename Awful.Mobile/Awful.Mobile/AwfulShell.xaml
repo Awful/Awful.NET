@@ -16,6 +16,10 @@
         <ShellContent Route="SAclopediaEntryListPage" ContentTemplate="{DataTemplate local:SAclopediaEntryListPage}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Settings">
+        <ShellContent Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
+    </FlyoutItem>
+
     <TabBar>
         <ShellContent Route="SigninPage" ContentTemplate="{DataTemplate local:SigninPage}" />
     </TabBar>

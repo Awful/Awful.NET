@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Settings"
+    x:Class="Awful.Mobile.Views.SettingsPage">
+    <TableView Intent="Settings">
+        <TableRoot>
+            <TableSection Title="Themes">
+                <ViewCell>
+                    <ViewCell.View>
+                        <StackLayout Orientation="Horizontal" Padding="13, 0">
+                            <Label Text="Device Theme" VerticalOptions="Center"></Label>
+                            <Picker ItemsSource="{Binding ThemeNames}"
+                                    SelectedIndex="{Binding DeviceColorTheme, Converter={StaticResource IntEnumConverter}}"
+                                    HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+                            </Picker>
+                        </StackLayout>
+                    </ViewCell.View>
+                </ViewCell>
+            </TableSection>
+            <TableSection Title="Background Tasks">
+                <SwitchCell Text="Enable Background Tasks"
+                        On="{Binding EnableBackgroundTasks, Mode=OneTime}" />
+            </TableSection>
+        </TableRoot>
+    </TableView>
+</ContentPage>

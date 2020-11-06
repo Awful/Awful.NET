@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:converters="clr-namespace:Awful.Mobile.UI.Tools.Converters"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:converters="clr-namespace:Awful.Mobile.UI.Tools.Converters" xmlns:converters1="clr-namespace:Awful.UI.Tools.Converters;assembly=Awful.UI"
              x:Class="Awful.Mobile.App">
     <Application.Resources>
         <ResourceDictionary>
+            <converters1:IntEnumConverter x:Key="IntEnumConverter"/>
             <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <converters:ForumImageConverter x:Key="ForumImageConverter"/>
             <converters:BookmarksThreadHeaderColorConverter x:Key="BookmarksThreadHeaderColorConverter"/>

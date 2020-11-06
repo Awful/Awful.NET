@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Awful.Database.Context;
 using Awful.Mobile.Views;
+using Awful.UI.Actions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,6 +22,7 @@ namespace Awful.Mobile
     public partial class AwfulShell : Xamarin.Forms.Shell
     {
         private AwfulContext context = App.Container.Resolve<AwfulContext>();
+        private SettingsAction settings;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AwfulShell"/> class.
@@ -28,12 +30,19 @@ namespace Awful.Mobile
         public AwfulShell()
         {
             this.InitializeComponent();
+            this.settings = new SettingsAction(this.context);
             Routing.RegisterRoute("saclopediaentrypage", typeof(SAclopediaEntryPage));
             Device.BeginInvokeOnMainThread(async () =>
             {
                 if (this.context.GetDefaultUser() == null)
                 {
                     await Shell.Current.GoToAsync("//SigninPage").ConfigureAwait(false);
+                }
+
+                var settings = this.context.SettingOptionsItems.FirstOrDefault();
+                if (settings != null)
+                {
+                    this.settings.SetAppTheme(settings.DeviceColorTheme);
                 }
             });
         }

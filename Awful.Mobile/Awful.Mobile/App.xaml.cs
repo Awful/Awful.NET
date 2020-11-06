@@ -20,6 +20,7 @@ namespace Awful.Mobile
 
         public App(ContainerBuilder builder)
         {
+            Device.SetFlags(new string[] { "AppTheme_Experimental", "CollectionView_Experimental", "Shapes_Experimental" });
             this.InitializeComponent();
             Container = Awful.UI.AwfulContainer.BuildContainer(builder);
             this.MainPage = new AwfulShell();

@@ -14,6 +14,11 @@ namespace Awful.Webview.Entities.Themes
     public enum DeviceColorTheme
     {
         /// <summary>
+        /// System device theme.
+        /// </summary>
+        Unspecified,
+
+        /// <summary>
         /// Light device theme.
         /// </summary>
         Light,

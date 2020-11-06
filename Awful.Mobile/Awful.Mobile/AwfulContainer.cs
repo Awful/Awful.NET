@@ -33,6 +33,7 @@ namespace Awful.UI
             builder.RegisterType<TemplateHandler>().SingleInstance();
             builder.RegisterType<AwfulContext>().SingleInstance();
             builder.RegisterType<AwfulViewModel>();
+            builder.RegisterType<SettingsViewModel>();
             builder.RegisterType<BookmarksViewModel>();
             builder.RegisterType<SigninViewModel>();
             builder.RegisterType<SAclopediaEntryListViewModel>();

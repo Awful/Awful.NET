@@ -98,14 +98,29 @@ namespace Awful.Database.Context
             var setting = this.SettingOptionsItems.FirstOrDefault();
             if (setting == null)
             {
-                await this.SettingOptionsItems.AddAsync(setting).ConfigureAwait(false);
+                await this.SettingOptionsItems.AddAsync(settings).ConfigureAwait(false);
             }
             else
             {
-                this.SettingOptionsItems.Update(setting);
+                this.SettingOptionsItems.Update(settings);
             }
 
             return await this.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get Default Setting Options.
+        /// </summary>
+        /// <returns>SettingOptions.</returns>
+        public async Task<SettingOptions> GetDefaultSettingsAsync()
+        {
+            var settingOptions = await this.SettingOptionsItems.FirstOrDefaultAsync().ConfigureAwait(false);
+            if (settingOptions == null)
+            {
+                return new SettingOptions();
+            }
+
+            return settingOptions;
         }
 
         #endregion

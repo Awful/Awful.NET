@@ -12,4 +12,8 @@
     <ProjectReference Include="..\Awful.Webview\Awful.Webview.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Tools\" />
+    <Folder Include="Tools\Converters\" />
+  </ItemGroup>
 </Project>
