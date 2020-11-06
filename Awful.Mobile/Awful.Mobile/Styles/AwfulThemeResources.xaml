@@ -67,6 +67,17 @@
                         Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
                                     Light={StaticResource BackgroundColorLight}}" />
             </Style>
+            <Style TargetType="Picker">
+                <Setter Property="BackgroundColor"
+                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
+                                    Light={StaticResource BackgroundColorLight}}" />
+                 <Setter Property="TitleColor"
+                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}" />
+                <Setter Property="TextColor"
+                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}" />
+            </Style>
             <Style TargetType="Grid">
                 <Setter Property="BackgroundColor"
                         Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
