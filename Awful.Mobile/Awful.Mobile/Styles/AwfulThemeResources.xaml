@@ -9,15 +9,15 @@
             <Color x:Key="TextColorDark">#ffffff</Color>
             <Color x:Key="TextColorLight">#000000</Color>
 
-            <Color x:Key="HeaderBarBackgroundColorLight">#2196F3</Color>
+            <Color x:Key="HeaderBarBackgroundColorLight">#1800F1</Color>
             <Color x:Key="HeaderBarBackgroundColorDark">#111111</Color>
             <Color x:Key="HeaderBarTextColorLight">#FFFFFF</Color>
             <Color x:Key="HeaderBarTextColorDark">#FFFFFF</Color>
 
-            <Color x:Key="ButtonBackgroundColorLight">#2196F3</Color>
-            <Color x:Key="ButtonBackgroundColorDark">#2196F3</Color>
-            <Color x:Key="ButtonBackgroundDisabledColorLight">#332196F3</Color>
-            <Color x:Key="ButtonBackgroundDisabledColorDark">#332196F3</Color>
+            <Color x:Key="ButtonBackgroundColorLight">#1800F1</Color>
+            <Color x:Key="ButtonBackgroundColorDark">#1800F1</Color>
+            <Color x:Key="ButtonBackgroundDisabledColorLight">#331800F1</Color>
+            <Color x:Key="ButtonBackgroundDisabledColorDark">#331800F1</Color>
             <Color x:Key="ButtonTextColorLight">#FFFFFF</Color>
             <Color x:Key="ButtonTextColorDark">#FFFFFF</Color>
 
@@ -26,8 +26,8 @@
             <Color x:Key="AccentColorDark">#111111</Color>
 
 
-            <Color x:Key="PrimaryBackgroundDark">#2196F3</Color>
-            <Color x:Key="PrimaryBackgroundLight">#2196F3</Color>
+            <Color x:Key="PrimaryBackgroundDark">#1800F1</Color>
+            <Color x:Key="PrimaryBackgroundLight">#1800F1</Color>
             <Color x:Key="PrimaryTextDark">#ffffff</Color>
             <Color x:Key="PrimaryTextLight">#ffffff</Color>
 

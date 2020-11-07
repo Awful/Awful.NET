@@ -122,6 +122,10 @@
             <ShellContent Title="SAclopedia" Route="SAclopediaEntryListPage" ContentTemplate="{DataTemplate local:SAclopediaEntryListPage}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Leper's Colony">
+            <ShellContent Title="Leper's Colony" Route="LepersPage" ContentTemplate="{DataTemplate local:LepersPage}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Settings">
             <ShellContent Title="Settings" Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
     </FlyoutItem>
