@@ -108,6 +108,24 @@ namespace Awful.Test.UI
             Assert.DoesNotContain(bookmarks, n => n.ThreadId == 3908659);
         }
 
+        /// <summary>
+        /// Test Setting Actions.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
+        [Fact]
+        public async Task SettingsActionTest()
+        {
+            var properties = new TestPlatformProperties("settings");
+            using var context = new AwfulContext(properties);
+            var settingAction = new SettingsAction(context);
+
+            var settings = await settingAction.LoadSettingOptionsAsync().ConfigureAwait(false);
+            Assert.NotNull(settings);
+            settings.EnableBackgroundTasks = true;
+            settings = await settingAction.SaveSettingOptionsAsync(settings).ConfigureAwait(false);
+            Assert.True(settings.EnableBackgroundTasks);
+        }
+
         private void SigninAction_OnSignin(object sender, Awful.UI.Events.SigninEventArgs e)
         {
             Assert.True(e.IsSignedIn);
