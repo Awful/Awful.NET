@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Awful.Mobile.Views"
              Shell.TabBarIsVisible="false"
-        BackgroundColor="Red"
+       FlyoutBackgroundColor="{AppThemeBinding Dark={StaticResource HeaderBarBackgroundColorDark}, 
+                                    Light={StaticResource HeaderBarBackgroundColorLight}}"
              x:Class="Awful.Mobile.AwfulShell">
 
      <Shell.Resources>
@@ -94,20 +95,35 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-    <FlyoutItem Title="Bookmarks">
-        <ShellContent Route="BookmarkListPage" ContentTemplate="{DataTemplate local:BookmarkListPage}" />
+    <Shell.FlyoutHeader>
+        <Grid
+            HeightRequest="200"
+            BackgroundColor="{AppThemeBinding
+            Dark={StaticResource HeaderBarBackgroundColorDark}, 
+            Light={StaticResource HeaderBarBackgroundColorLight}}">
+            <Image x:Name="HeaderImage" Aspect="AspectFill"
+               Opacity="0.6" />
+            <Label Text="Awful"
+                FontSize="40"
+               TextColor="White"
+               FontAttributes="Bold"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center" />
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <FlyoutItem Title="Forums"
+                FlyoutDisplayOptions="AsMultipleItems">
+         <ShellContent Title="All Forums" Route="ForumList" ContentTemplate="{DataTemplate local:ForumListPage}" />
+         <ShellContent Title="Bookmarks" Route="BookmarkListPage" ContentTemplate="{DataTemplate local:BookmarkListPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Forums">
-        <ShellContent Route="ForumList" ContentTemplate="{DataTemplate local:ForumListPage}" />
-    </FlyoutItem>
-    
     <FlyoutItem Title="SAclopedia">
-        <ShellContent Route="SAclopediaEntryListPage" ContentTemplate="{DataTemplate local:SAclopediaEntryListPage}" />
+            <ShellContent Title="SAclopedia" Route="SAclopediaEntryListPage" ContentTemplate="{DataTemplate local:SAclopediaEntryListPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Settings">
-        <ShellContent Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
+            <ShellContent Title="Settings" Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
     </FlyoutItem>
 
     <TabBar>

@@ -45,6 +45,8 @@ namespace Awful.Mobile
                     await Shell.Current.GoToAsync("//SigninPage").ConfigureAwait(false);
                 }
             });
+
+            this.HeaderImage.Source = ImageSource.FromResource("Awful.Mobile.ThreadTags.Mazui.png");
         }
     }
 }
