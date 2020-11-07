@@ -52,7 +52,7 @@ namespace Awful.Windows.Bookmarks.Views
             }
         }
 
-        private void SmiliesButton_Click(object sender, UI.Xaml.RoutedEventArgs e)
+        private void SmiliesButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
