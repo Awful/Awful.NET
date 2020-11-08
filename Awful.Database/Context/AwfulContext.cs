@@ -15,6 +15,7 @@ using Awful.Database.Entities;
 using Awful.Core.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Awful.Webview.Entities.Themes;
+using Awful.Core.Entities.Messages;
 
 namespace Awful.Database.Context
 {
@@ -52,6 +53,11 @@ namespace Awful.Database.Context
         /// Gets or sets the BookmarkThreads table.
         /// </summary>
         public DbSet<AwfulThread> BookmarkThreads { get; set; }
+
+        /// <summary>
+        /// Gets or sets the PrivateMessages table.
+        /// </summary>
+        public DbSet<AwfulPM> PrivateMessages { get; set; }
 
         private IPlatformProperties PlatformProperties { get; set; }
 
@@ -208,6 +214,48 @@ namespace Awful.Database.Context
             var users = await this.Users.ToListAsync().ConfigureAwait(false);
             this.Users.RemoveRange(users);
             return await this.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region PrivateMessage
+
+        /// <summary>
+        /// Add All PMs.
+        /// </summary>
+        /// <param name="threads">SA Threads.</param>
+        /// <returns>SA Database PMs.</returns>
+        public async Task<List<AwfulPM>> AddAllPrivateMessages(List<PrivateMessage> threads)
+        {
+            if (threads == null)
+            {
+                throw new ArgumentNullException(nameof(threads));
+            }
+
+            var oldThreads = await this.PrivateMessages.ToListAsync().ConfigureAwait(false);
+            this.PrivateMessages.RemoveRange(oldThreads);
+            for (int i = 0; i < threads.Count; i++)
+            {
+                PrivateMessage thread = (PrivateMessage)threads[i];
+                var awfulThread = new AwfulPM(thread);
+                awfulThread.SortOrder = i;
+                this.PrivateMessages.Add(awfulThread);
+            }
+
+            await this.SaveChangesAsync().ConfigureAwait(false);
+            return this.PrivateMessages.OrderBy(n => n.SortOrder).ToList();
+        }
+
+        /// <summary>
+        /// Remove Private Message.
+        /// </summary>
+        /// <param name="thread">DB PM.</param>
+        /// <returns>List of PMs.</returns>
+        public async Task<List<AwfulPM>> RemovePrivateMessage(AwfulPM thread)
+        {
+            this.PrivateMessages.Remove(thread);
+            await this.SaveChangesAsync().ConfigureAwait(false);
+            return await this.PrivateMessages.ToListAsync().ConfigureAwait(false);
         }
 
         #endregion
