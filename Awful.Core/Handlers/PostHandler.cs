@@ -116,6 +116,33 @@ namespace Awful.Core.Handlers
         }
 
         /// <summary>
+        /// Parses the previous posts shown when making a new post.
+        /// </summary>
+        /// <param name="doc">The IHtmlDocument of a new post page.</param>
+        /// <returns>List of Posts.</returns>
+        public static List<Post> ParsePreviousPosts(IHtmlDocument doc)
+        {
+            if (doc == null)
+            {
+                throw new ArgumentNullException(nameof(doc));
+            }
+
+            var posts = new List<Post>();
+            var threadDivTableHolder = doc.QuerySelector("#thread");
+            foreach (var threadTable in threadDivTableHolder.QuerySelectorAll("table"))
+            {
+                if (string.IsNullOrEmpty(threadTable.GetAttribute("data-idx")))
+                {
+                    continue;
+                }
+
+                posts.Add(PostHandler.ParsePost(doc, threadTable));
+            }
+
+            return posts;
+        }
+
+        /// <summary>
         /// Encodes a SA Posts HTML.
         /// In order to get Unicode characters fully working, we need to first encode the entire post.
         /// THEN we decode the bits we can safely pass in, like single/double quotes.

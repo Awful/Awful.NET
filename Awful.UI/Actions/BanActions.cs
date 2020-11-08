@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Awful.Core.Entities.Bans;
 using Awful.Core.Entities.Threads;
 using Awful.Core.Managers;
 using Awful.Core.Managers.JSON;
@@ -36,6 +37,27 @@ namespace Awful.UI.Actions
         {
             this.manager = new BanManager(client);
             this.context = context;
+        }
+
+        /// <summary>
+        /// Get the Banned Members page.
+        /// </summary>
+        /// <param name="page">The page number to start parsing from. Defaults to 1.</param>
+        /// <param name="token">A CancellationToken.</param>
+        /// <returns>A BanPage.</returns>
+        public async Task<BanPage> GetBanPageAsync(int page = 1, CancellationToken token = default)
+        {
+            return await this.manager.GetBanPageAsync(page, token).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Pings the main forums page and checks if the user under probation.
+        /// </summary>
+        /// <param name="token">A CancellationToken.</param>
+        /// <returns>A ProbationItem.</returns>
+        public async Task<ProbationItem> CheckForProbationAsync(CancellationToken token = default)
+        {
+            return await this.manager.CheckForProbationAsync(token).ConfigureAwait(false);
         }
     }
 }

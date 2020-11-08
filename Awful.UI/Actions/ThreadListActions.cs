@@ -37,5 +37,17 @@ namespace Awful.UI.Actions
             this.manager = new ThreadListManager(client);
             this.context = context;
         }
+
+        /// <summary>
+        /// Gets the list of threads in a given Forum.
+        /// </summary>
+        /// <param name="forumId">The Forum Id.</param>
+        /// <param name="page">The page of the forum to get.</param>
+        /// <param name="token">A CancellationToken.</param>
+        /// <returns>A ThreadList.</returns>
+        public async Task<ThreadList> GetForumThreadListAsync(int forumId, int page, CancellationToken token = default)
+        {
+            return await this.manager.GetForumThreadListAsync(forumId, page, token).ConfigureAwait(false);
+        }
     }
 }
