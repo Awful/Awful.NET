@@ -53,7 +53,7 @@ namespace Awful.Core.Entities.Replies
 
         public void MapEditPostInformation(string quote, long postId, string bookmark)
         {
-            this.Quote = WebUtility.HtmlDecode(quote);
+            this.Message = WebUtility.HtmlDecode(quote);
             this.PostId = postId;
             this.Bookmark = bookmark;
         }
