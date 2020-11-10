@@ -68,7 +68,9 @@ namespace Awful.Core.Managers
             string url = string.Format(CultureInfo.InvariantCulture, EndPoints.NewThread, forumId);
             var result = await this.webManager.GetDataAsync(url, token).ConfigureAwait(false);
             var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            return ThreadHandler.ParseNewThread(document);
+            var thread = ThreadHandler.ParseNewThread(document);
+            thread.ForumId = forumId;
+            return thread;
         }
 
         /// <summary>
