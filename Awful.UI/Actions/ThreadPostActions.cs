@@ -40,6 +40,7 @@ namespace Awful.UI.Actions
         {
             this.manager = new ThreadPostManager(client);
             this.context = context;
+            this.templates = templates;
         }
 
         /// <summary>

@@ -173,6 +173,25 @@ namespace Awful.Test.UI
             Assert.NotEmpty(userProfile);
         }
 
+        /// <summary>
+        /// Test ThreadPostActions.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
+        [Fact]
+        public async Task ThreadPostActions()
+        {
+            var properties = new TestPlatformProperties("threadpost");
+            using var webClient = await Setup.SetupWebClient(AwfulUser.Platinum).ConfigureAwait(false);
+            using var context = new AwfulContext(properties);
+            var tpActions = new ThreadPostActions(webClient, context, this.templates);
+            var thread = await tpActions.GetThreadPostsAsync(3606621).ConfigureAwait(false);
+            Assert.NotNull(thread);
+            Assert.True(thread.Posts.Any());
+
+            var threadHtml = tpActions.RenderThreadPostView(thread, new Webview.Entities.Themes.DefaultOptions());
+            Assert.NotEmpty(threadHtml);
+        }
+
         private void SigninAction_OnSignin(object sender, Awful.UI.Events.SigninEventArgs e)
         {
             Assert.True(e.IsSignedIn);
