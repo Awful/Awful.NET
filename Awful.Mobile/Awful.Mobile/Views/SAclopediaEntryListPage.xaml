@@ -2,31 +2,45 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              Title="SAclopedia"
+             xmlns:state="clr-namespace:Xamarin.Forms.StateSquid;assembly=Xamarin.Forms.StateSquid" 
              BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
              x:Class="Awful.Mobile.Views.SAclopediaEntryListPage">
     <ContentPage.Content>
-        <CollectionView SelectionMode="Single" 
+        <Grid 
+            state:StateLayout.CurrentState="{Binding CurrentState}"
+            state:StateLayout.CurrentCustomStateKey="{Binding CustomState}"
+            >
+            <state:StateLayout.StateViews>
+                <state:StateView StateKey="Loading">
+                    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
+                        <ActivityIndicator IsRunning="True"/>
+                        <Label Text="{Binding LoadingText}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
+                    </StackLayout>
+                </state:StateView>
+            </state:StateLayout.StateViews>
+            <CollectionView SelectionMode="Single" 
                         x:Name="SAclopediaCollection"
                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference SAclopediaCollection}}" 
                         SelectionChangedCommand="{Binding SelectionCommand}" ItemsSource="{Binding Items}"
                 IsGrouped="True">
-            <CollectionView.GroupHeaderTemplate>
-                <DataTemplate>
-                    <Label Text="{Binding Name}"
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding Name}"
                    BackgroundColor="LightGray"
                    FontSize="Large"
                    FontAttributes="Bold" />
-                </DataTemplate>
-            </CollectionView.GroupHeaderTemplate>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Padding="10">
-                        <Label
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Label
                        Text="{Binding Title}"
                        FontAttributes="Bold" />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

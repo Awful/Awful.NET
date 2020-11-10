@@ -14,6 +14,7 @@ using Awful.UI.Actions;
 using Awful.UI.Entities;
 using Awful.Webview;
 using Xamarin.Forms;
+using Xamarin.Forms.StateSquid;
 
 namespace Awful.UI.ViewModels
 {
@@ -83,11 +84,11 @@ namespace Awful.UI.ViewModels
         /// <returns>A Task.</returns>
         public async Task RefreshEntryList(bool refresh)
         {
-            this.IsBusy = true;
-            var items = await this.saclopedia.LoadSAclopediaEntryItemsAsync(refresh).ConfigureAwait(false);
-            this.Items = items.GroupBy(n => n.Title[0].ToString().ToUpperInvariant()).Select(n => new SAclopediaGroup(n.Key, n.ToList())).OrderBy(n => n.Name).ToList();
-            this.OnPropertyChanged(nameof(this.Items));
-            this.IsBusy = false;
+            this.SetState(State.Loading);
+            //var items = await this.saclopedia.LoadSAclopediaEntryItemsAsync(refresh).ConfigureAwait(false);
+            //this.Items = items.GroupBy(n => n.Title[0].ToString().ToUpperInvariant()).Select(n => new SAclopediaGroup(n.Key, n.ToList())).OrderBy(n => n.Name).ToList();
+            //this.OnPropertyChanged(nameof(this.Items));
+            //this.SetState(State.None);
         }
     }
 }
