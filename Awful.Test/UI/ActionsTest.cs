@@ -153,6 +153,26 @@ namespace Awful.Test.UI
             Assert.True(isUnderProbation.IsUnderProbation);
         }
 
+        /// <summary>
+        /// Test UserActions.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
+        [Fact]
+        public async Task UserActionsTest()
+        {
+            var properties = new TestPlatformProperties("user");
+            using var webClient = await Setup.SetupWebClient(AwfulUser.Standard).ConfigureAwait(false);            using var context = new AwfulContext(properties);
+            var userActions = new UserActions(webClient, context, this.templates);
+
+            var user = await userActions.GetLoggedInUserAsync().ConfigureAwait(false);
+            Assert.NotNull(user);
+            Assert.NotEmpty(user.Username);
+            Assert.Equal(Environment.GetEnvironmentVariable("AWFUL_USER"), user.Username);
+
+            var userProfile = userActions.RenderProfileView(user, new Webview.Entities.Themes.DefaultOptions());
+            Assert.NotEmpty(userProfile);
+        }
+
         private void SigninAction_OnSignin(object sender, Awful.UI.Events.SigninEventArgs e)
         {
             Assert.True(e.IsSignedIn);
