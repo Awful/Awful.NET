@@ -27,16 +27,19 @@ namespace Awful.UI.Actions
     {
         private AwfulContext context;
         private BanManager manager;
+        private TemplateHandler templates;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BanActions"/> class.
         /// </summary>
         /// <param name="client">AwfulClient.</param>
         /// <param name="context">AwfulContext.</param>
-        public BanActions(AwfulClient client, AwfulContext context)
+        /// <param name="templates">Templates.</param>
+        public BanActions(AwfulClient client, AwfulContext context, TemplateHandler templates)
         {
             this.manager = new BanManager(client);
             this.context = context;
+            this.templates = templates;
         }
 
         /// <summary>
@@ -48,6 +51,17 @@ namespace Awful.UI.Actions
         public async Task<BanPage> GetBanPageAsync(int page = 1, CancellationToken token = default)
         {
             return await this.manager.GetBanPageAsync(page, token).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Render Ban View.
+        /// </summary>
+        /// <param name="page">Ban Page.</param>
+        /// <param name="options">Default Webview Options.</param>
+        /// <returns>HTML string.</returns>
+        public string RenderBanView(BanPage page, DefaultOptions options)
+        {
+            return this.templates.RenderBanView(page, options);
         }
 
         /// <summary>

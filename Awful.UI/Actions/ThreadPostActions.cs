@@ -28,13 +28,15 @@ namespace Awful.UI.Actions
     {
         private AwfulContext context;
         private ThreadPostManager manager;
+        private TemplateHandler templates;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadPostActions"/> class.
         /// </summary>
         /// <param name="client">AwfulClient.</param>
         /// <param name="context">AwfulContext.</param>
-        public ThreadPostActions(AwfulClient client, AwfulContext context)
+        /// <param name="templates">Templates.</param>
+        public ThreadPostActions(AwfulClient client, AwfulContext context, TemplateHandler templates)
         {
             this.manager = new ThreadPostManager(client);
             this.context = context;
@@ -52,6 +54,17 @@ namespace Awful.UI.Actions
         public async Task<ThreadPost> GetThreadPostsAsync(int threadId, int pageNumber = 1, bool goToNewestPost = false, CancellationToken token = default)
         {
             return await this.manager.GetThreadPostsAsync(threadId, pageNumber, goToNewestPost, token).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Renders Thread as HTML string.
+        /// </summary>
+        /// <param name="entry">The Thread Post.</param>
+        /// <param name="defaultOptions">Default Webview Options.</param>
+        /// <returns>HTML string.</returns>
+        public string RenderThreadPostView(ThreadPost entry, DefaultOptions defaultOptions)
+        {
+            return this.templates.RenderThreadPostView(entry, defaultOptions);
         }
     }
 }

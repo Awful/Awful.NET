@@ -126,6 +126,33 @@ namespace Awful.Test.UI
             Assert.True(settings.EnableBackgroundTasks);
         }
 
+        /// <summary>
+        /// Test BanActions.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
+        [Fact]
+        public async Task BanActionsTest()
+        {
+            var properties = new TestPlatformProperties("ban");
+            using var webClient = await Setup.SetupWebClient(AwfulUser.Platinum).ConfigureAwait(false);
+            using var probationClient = await Setup.SetupWebClient(AwfulUser.Probation).ConfigureAwait(false);
+            using var context = new AwfulContext(properties);
+            var banActions = new BanActions(webClient, context, this.templates);
+            var proBanActions = new BanActions(probationClient, context, this.templates);
+            var entry = await banActions.GetBanPageAsync().ConfigureAwait(false);
+            Assert.NotNull(entry);
+            var htmlString = banActions.RenderBanView(entry, new Webview.Entities.Themes.DefaultOptions());
+            Assert.NotEmpty(htmlString);
+
+            var notProbation = await banActions.CheckForProbationAsync().ConfigureAwait(false);
+            Assert.NotNull(notProbation);
+            Assert.False(notProbation.IsUnderProbation);
+
+            var isUnderProbation = await proBanActions.CheckForProbationAsync().ConfigureAwait(false);
+            Assert.NotNull(isUnderProbation);
+            Assert.True(isUnderProbation.IsUnderProbation);
+        }
+
         private void SigninAction_OnSignin(object sender, Awful.UI.Events.SigninEventArgs e)
         {
             Assert.True(e.IsSignedIn);
