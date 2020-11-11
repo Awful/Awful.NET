@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace Awful.Mobile.Views
 {
-    public partial class BookmarkListPage : ContentPage
+    public partial class BookmarkListPage : AuthorizationPage
     {
         public BookmarkListPage()
         {

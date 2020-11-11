@@ -25,7 +25,7 @@ namespace Awful.UI.ViewModels
     public class SAclopediaEntryListViewModel : AwfulViewModel
     {
         private SAclopediaAction saclopedia;
-
+        private TemplateHandler handler;
         /// <summary>
         /// Initializes a new instance of the <see cref="SAclopediaEntryListViewModel"/> class.
         /// </summary>
@@ -34,11 +34,7 @@ namespace Awful.UI.ViewModels
         public SAclopediaEntryListViewModel(TemplateHandler handler, AwfulContext context)
             : base(context)
         {
-            this.saclopedia = new SAclopediaAction(this.Client, context, handler);
-            if (this.IsSignedIn)
-            {
-                Task.Run(async () => await this.RefreshEntryList(false).ConfigureAwait(false));
-            }
+            this.handler = handler;
         }
 
         /// <summary>
@@ -77,6 +73,15 @@ namespace Awful.UI.ViewModels
         /// </summary>
         public List<SAclopediaGroup> Items { get; private set; } = new List<SAclopediaGroup>();
 
+        public override async Task OnLoad()
+        {
+            if (this.IsSignedIn)
+            {
+                this.saclopedia = new SAclopediaAction(this.Client, this.Context, this.handler);
+                await this.RefreshEntryList(false).ConfigureAwait(false);
+            }
+        }
+
         /// <summary>
         /// Refreshes SAclopedia Items.
         /// </summary>
@@ -85,10 +90,10 @@ namespace Awful.UI.ViewModels
         public async Task RefreshEntryList(bool refresh)
         {
             this.SetState(State.Loading);
-            //var items = await this.saclopedia.LoadSAclopediaEntryItemsAsync(refresh).ConfigureAwait(false);
-            //this.Items = items.GroupBy(n => n.Title[0].ToString().ToUpperInvariant()).Select(n => new SAclopediaGroup(n.Key, n.ToList())).OrderBy(n => n.Name).ToList();
-            //this.OnPropertyChanged(nameof(this.Items));
-            //this.SetState(State.None);
+            var items = await this.saclopedia.LoadSAclopediaEntryItemsAsync(refresh).ConfigureAwait(false);
+            this.Items = items.GroupBy(n => n.Title[0].ToString().ToUpperInvariant()).Select(n => new SAclopediaGroup(n.Key, n.ToList())).OrderBy(n => n.Name).ToList();
+            this.OnPropertyChanged(nameof(this.Items));
+            this.SetState(State.None);
         }
     }
 }

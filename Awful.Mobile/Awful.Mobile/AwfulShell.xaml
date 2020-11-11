@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Awful.Mobile.Views"
              Shell.TabBarIsVisible="false"
+             xmlns:fontawesome="clr-namespace:FontAwesome"
+
        FlyoutBackgroundColor="{AppThemeBinding Dark={StaticResource HeaderBarBackgroundColorDark}, 
                                     Light={StaticResource HeaderBarBackgroundColorLight}}"
              x:Class="Awful.Mobile.AwfulShell">
@@ -157,7 +159,7 @@
     </FlyoutItem>
 
     <FlyoutItem Title="Settings">
-            <ShellContent Title="Settings" Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
+        <ShellContent Title="Settings" Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
         <FlyoutItem.Icon>
             <FontImageSource
                     FontFamily="FontAwesomeSolid"
@@ -167,8 +169,4 @@
         </FlyoutItem.Icon>
     </FlyoutItem>
 
-    <TabBar>
-        <ShellContent Route="SigninPage" ContentTemplate="{DataTemplate local:SigninPage}" />
-    </TabBar>
-    
 </Shell>

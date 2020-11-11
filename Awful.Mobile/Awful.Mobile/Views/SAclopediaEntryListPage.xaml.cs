@@ -18,7 +18,7 @@ namespace Awful.Mobile.Views
     /// SAclopedia Entry List Page.
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SAclopediaEntryListPage : ContentPage
+    public partial class SAclopediaEntryListPage : AuthorizationPage
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SAclopediaEntryListPage"/> class.

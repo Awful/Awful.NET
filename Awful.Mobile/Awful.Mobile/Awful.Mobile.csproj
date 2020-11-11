@@ -1975,4 +1975,9 @@
     <Folder Include="Styles\" />
     <Folder Include="Tools\Utilities\" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Controls\AuthorizationView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

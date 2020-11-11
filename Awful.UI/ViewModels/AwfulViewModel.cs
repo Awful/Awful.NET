@@ -5,9 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
+using Xamarin.Forms;
 
 namespace Awful.UI.ViewModels
 {
@@ -28,8 +30,7 @@ namespace Awful.UI.ViewModels
             }
 
             this.Context = context;
-            this.user = context.GetDefaultUser();
-            this.Client = new AwfulClient(this.user != null ? this.user.AuthCookies : new System.Net.CookieContainer());
+            this.SetupVM();
         }
 
         public AwfulClient Client { get; set; }
@@ -53,6 +54,27 @@ namespace Awful.UI.ViewModels
             get { return this.user != null; }
         }
 
+        public async Task SetupVM()
+        {
+            this.user = this.Context.GetDefaultUser();
+            this.Client = new AwfulClient(this.user != null ? this.user.AuthCookies : new System.Net.CookieContainer());
+            this.SetupLoginStatus();
+            await this.OnLoad().ConfigureAwait(false);
+        }
+
+        public virtual async Task OnLoad()
+        {
+
+        }
+
+        public void SetupLoginStatus()
+        {
+            if (!this.IsSignedIn)
+            {
+                this.SetState(Xamarin.Forms.StateSquid.State.Custom, "NotSignedIn");
+            }
+        }
+
         /// <summary>
         /// Disposing.
         /// </summary>
@@ -60,6 +82,39 @@ namespace Awful.UI.ViewModels
         {
             this.Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Gets the login command.
+        /// </summary>
+        public Command OpenLoginCommand
+        {
+            get
+            {
+                return new Command(this.OpenLogin);
+            }
+        }
+
+        /// <summary>
+        /// Gets the login command.
+        /// </summary>
+        public Command GoBackCommand
+        {
+            get
+            {
+                return new Command(this.GoBack);
+            }
+        }
+
+        public async void GoBack()
+        {
+            await Shell.Current.GoToAsync("..").ConfigureAwait(false);
+        }
+
+        public async void OpenLogin()
+        {
+            //var page = Routing.GetOrCreateContent("//SigninPage") as Page;
+            await Shell.Current.GoToAsync("signinpage").ConfigureAwait(false);
         }
 
         /// <summary>

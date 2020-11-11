@@ -1,46 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<views:AuthorizationPage  xmlns:views="clr-namespace:Awful.Mobile.Views"
+                          xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              Title="SAclopedia"
+             xmlns:fontawesome="clr-namespace:FontAwesome"
              xmlns:state="clr-namespace:Xamarin.Forms.StateSquid;assembly=Xamarin.Forms.StateSquid" 
              BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
              x:Class="Awful.Mobile.Views.SAclopediaEntryListPage">
-    <ContentPage.Content>
-        <Grid 
+    <StackLayout VerticalOptions="CenterAndExpand"
             state:StateLayout.CurrentState="{Binding CurrentState}"
             state:StateLayout.CurrentCustomStateKey="{Binding CustomState}"
             >
-            <state:StateLayout.StateViews>
-                <state:StateView StateKey="Loading">
-                    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
-                        <ActivityIndicator IsRunning="True"/>
-                        <Label Text="{Binding LoadingText}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
-                    </StackLayout>
-                </state:StateView>
-            </state:StateLayout.StateViews>
-            <CollectionView SelectionMode="Single" 
+        <state:StateLayout.StateViews>
+            <state:StateView StateKey="Loading">
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
+                    <Label FontSize="Header" 
+                   VerticalOptions="Center" 
+                   VerticalTextAlignment="Center" 
+                   HorizontalOptions="Center" 
+                   HorizontalTextAlignment="Center" 
+                   Text="{x:Static fontawesome:FontAwesomeIcons.Book}" 
+                   FontFamily="FontAwesomeSolid" />
+                    <ActivityIndicator IsRunning="True"/>
+                    <Label Text="{Binding LoadingText}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
+                </StackLayout>
+            </state:StateView>
+            <state:StateView StateKey="Custom" CustomStateKey="NotSignedIn">
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
+                    <Label FontSize="Header" 
+                   VerticalOptions="Center" 
+                   VerticalTextAlignment="Center" 
+                   HorizontalOptions="Center" 
+                   HorizontalTextAlignment="Center" 
+                   Text="{x:Static fontawesome:FontAwesomeIcons.SignInAlt}" 
+                   FontFamily="FontAwesomeSolid" />
+                    <Label FontSize="Title" Text="Authorization Required" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
+                    <Label FontSize="Subtitle" Text="In order to view this page, you must log in first." VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
+                    <Button VerticalOptions="Center" HorizontalOptions="Center" Text="Log In"/>
+                </StackLayout>
+            </state:StateView>
+            <state:StateView StateKey="Empty">
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
+                    <Label FontSize="Header" 
+                   VerticalOptions="Center" 
+                   VerticalTextAlignment="Center" 
+                   HorizontalOptions="Center" 
+                   HorizontalTextAlignment="Center" 
+                   Text="{x:Static fontawesome:FontAwesomeIcons.Book}" 
+                   FontFamily="FontAwesomeSolid" />
+                    <Label FontSize="Title" Text="SAclopedia" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
+                    <Button VerticalOptions="Center" HorizontalOptions="Center" Text="Load Entries"/>
+                </StackLayout>
+            </state:StateView>
+        </state:StateLayout.StateViews>
+        <CollectionView SelectionMode="Single" 
                         x:Name="SAclopediaCollection"
                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference SAclopediaCollection}}" 
                         SelectionChangedCommand="{Binding SelectionCommand}" ItemsSource="{Binding Items}"
                 IsGrouped="True">
-                <CollectionView.GroupHeaderTemplate>
-                    <DataTemplate>
-                        <Label Text="{Binding Name}"
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Name}"
                    BackgroundColor="LightGray"
                    FontSize="Large"
                    FontAttributes="Bold" />
-                    </DataTemplate>
-                </CollectionView.GroupHeaderTemplate>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Padding="10">
-                            <Label
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Label
                        Text="{Binding Title}"
                        FontAttributes="Bold" />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Grid>
-    </ContentPage.Content>
-</ContentPage>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</views:AuthorizationPage>

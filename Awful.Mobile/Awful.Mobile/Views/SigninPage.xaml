@@ -3,6 +3,7 @@
              Title="Awful Login"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Shell.NavBarIsVisible="False"
+             Shell.PresentationMode="ModalAnimated"
              BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
              x:Class="Awful.Mobile.Views.SigninPage">
     <ContentPage.Content>
@@ -22,11 +23,15 @@
                 <Label FontSize="30" Grid.Row="1" Margin="0,25,0,0" HorizontalOptions="CenterAndExpand" Text="Awful Forums Reader"></Label>
                 <Grid Grid.Row="2">
                     <StackLayout Margin="0,25,0,0">
-                        <Entry x:Name="Username" IsSpellCheckEnabled="False" Text="{Binding Username, Mode=TwoWay}" Placeholder="Username" Margin="0,0,0,15">
+                        <Entry x:Name="Username" 
+                               IsSpellCheckEnabled="False"
+                               Text="{Binding Username, Mode=TwoWay}" 
+                               Placeholder="Username" Margin="0,0,0,15">
                         </Entry>
                         <Entry IsPassword="True" x:Name="Password" Text="{Binding Password, Mode=TwoWay}" Placeholder="Password" Margin="0,0,0,15">
                         </Entry>
                         <Button x:Name="LoginButton" IsEnabled="{Binding IsLoginEnabled, Mode=TwoWay}" Text="Login" Command="{Binding LoginCommand}"  HorizontalOptions="CenterAndExpand" />
+                        <Button x:Name="GoBackButton" Text="Close" Command="{Binding GoBackCommand}"  HorizontalOptions="CenterAndExpand" />
                     </StackLayout>
                 </Grid>
             </Grid>

@@ -33,11 +33,6 @@ namespace Awful.Mobile.ViewModels
         public BookmarksViewModel(IPlatformProperties properties, AwfulContext context)
             : base(context)
         {
-            this.bookmarks = new BookmarkAction(this.Client, context);
-            if (this.IsSignedIn)
-            {
-                Task.Run(async () => await this.LoadBookmarksAsync().ConfigureAwait(false));
-            }
         }
 
         /// <summary>
@@ -58,9 +53,7 @@ namespace Awful.Mobile.ViewModels
             {
                 return this.refreshCommand ??= new RelayCommand(async () =>
                 {
-                    this.IsRefreshing = true;
                     await this.RefreshBookmarksAsync().ConfigureAwait(false);
-                    this.IsRefreshing = false;
                 });
             }
         }
@@ -73,7 +66,7 @@ namespace Awful.Mobile.ViewModels
         /// <returns>Task.</returns>
         public async Task LoadBookmarksAsync(bool reload = false, int forceDelay = 0)
         {
-            this.IsBusy = true;
+            this.SetState(Xamarin.Forms.StateSquid.State.Loading);
             await Task.Delay(forceDelay).ConfigureAwait(false);
             var threads = await this.bookmarks.GetAllBookmarksAsync(reload).ConfigureAwait(false);
             this.Threads = new ObservableCollection<AwfulThread>();
@@ -82,7 +75,23 @@ namespace Awful.Mobile.ViewModels
                 this.Threads.Add(thread);
             }
 
-            this.IsBusy = false;
+            if (this.Threads.Count <= 0)
+            {
+                this.SetState(Xamarin.Forms.StateSquid.State.Empty);
+            }
+            else
+            {
+                this.SetState(Xamarin.Forms.StateSquid.State.None);
+            }
+        }
+
+        public override async Task OnLoad()
+        {
+            if (this.IsSignedIn)
+            {
+                this.bookmarks = new BookmarkAction(this.Client, this.Context);
+                await this.LoadBookmarksAsync().ConfigureAwait(false);
+            }
         }
 
         /// <summary>

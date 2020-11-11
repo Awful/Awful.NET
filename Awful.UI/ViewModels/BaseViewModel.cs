@@ -20,7 +20,6 @@ namespace Awful.UI.ViewModels
         private State currentState;
         private string customState;
         private bool isBusy = false;
-        private bool isRefreshing = false;
         private string title = string.Empty;
         private string loadingText = "Loading...";
 
@@ -55,12 +54,11 @@ namespace Awful.UI.ViewModels
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the view is refreshing.
+        /// Gets a value indicating whether the view is refreshing.
         /// </summary>
         public bool IsRefreshing
         {
-            get { return this.isRefreshing; }
-            set { this.SetProperty(ref this.isRefreshing, value); }
+            get { return this.currentState == State.Loading; }
         }
 
         /// <summary>

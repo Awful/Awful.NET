@@ -32,6 +32,7 @@ namespace Awful.Mobile
             this.InitializeComponent();
             this.settings = new SettingsAction(this.context);
             Routing.RegisterRoute("saclopediaentrypage", typeof(SAclopediaEntryPage));
+            Routing.RegisterRoute("signinpage", typeof(SigninPage));
             Device.BeginInvokeOnMainThread(async () =>
             {
                 var settings = this.context.SettingOptionsItems.FirstOrDefault();
@@ -40,10 +41,10 @@ namespace Awful.Mobile
                     this.settings.SetAppTheme(settings.DeviceColorTheme);
                 }
 
-                if (this.context.GetDefaultUser() == null)
-                {
-                    await Shell.Current.GoToAsync("//SigninPage").ConfigureAwait(false);
-                }
+                //if (this.context.GetDefaultUser() == null)
+                //{
+                //    await Shell.Current.GoToAsync("//SigninPage").ConfigureAwait(false);
+                //}
             });
 
             this.HeaderImage.Source = ImageSource.FromResource("Awful.Mobile.ThreadTags.Mazui.png");

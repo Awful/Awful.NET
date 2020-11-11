@@ -1,79 +1,104 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentPage
+<views:AuthorizationPage
+    xmlns:views="clr-namespace:Awful.Mobile.Views"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Bookmarks"
-    xmlns:local="clr-namespace:Awful.Mobile.Tools.Markup;assembly=Awful.Mobile"
+    xmlns:fontawesome="clr-namespace:FontAwesome"
+    xmlns:state="clr-namespace:Xamarin.Forms.StateSquid;assembly=Xamarin.Forms.StateSquid" 
+    xmlns:local="clr-namespace:Awful.Mobile.Tools.Markup;assembly=Awful.Mobile" xmlns:controls="clr-namespace:Awful.Mobile.Controls"
     BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
     x:Class="Awful.Mobile.Views.BookmarkListPage">
-    <RefreshView Command="{Binding RefreshCommand}"
+    <StackLayout VerticalOptions="CenterAndExpand" 
+                 state:StateLayout.CurrentState="{Binding CurrentState}"
+            state:StateLayout.CurrentCustomStateKey="{Binding CustomState}">
+        <state:StateLayout.StateViews>
+            <state:StateView StateKey="Custom" CustomStateKey="NotSignedIn">
+                <controls:AuthorizationView/>
+            </state:StateView>
+            <state:StateView StateKey="Empty">
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
+                    <Label FontSize="Header" 
+                   VerticalOptions="Center" 
+                   VerticalTextAlignment="Center" 
+                   HorizontalOptions="Center" 
+                   HorizontalTextAlignment="Center" 
+                   Text="{x:Static fontawesome:FontAwesomeIcons.Bookmark}" 
+                   FontFamily="FontAwesomeRegular" />
+                    <Label FontSize="Title" Text="SAclopedia" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
+                    <Button VerticalOptions="Center" HorizontalOptions="Center" Text="Load Entries"/>
+                </StackLayout>
+            </state:StateView>
+        </state:StateLayout.StateViews>
+        <RefreshView Command="{Binding RefreshCommand}"
                  IsRefreshing="{Binding IsRefreshing}">
-        <CollectionView
+            <CollectionView
         ItemsSource="{Binding Threads}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Padding="6">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="1"/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Rectangle Grid.Column="0" BackgroundColor="{Binding StarColor, Converter={StaticResource BookmarksThreadHeaderColorConverter}}"/>
-                            <Grid Grid.Column="1">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="6">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <Image Grid.Column="0"
+                                <Rectangle Grid.Column="0" BackgroundColor="{Binding StarColor, Converter={StaticResource BookmarksThreadHeaderColorConverter}}"/>
+                                <Grid Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0"
                                HeightRequest="45"
                                WidthRequest="45"
                                VerticalOptions="Start"
                                Margin="5"
                                Source="{local:ImageResource Awful.Mobile.ThreadTags.missing.png}"/>
-                                <!--Fix Placeholder-->
-                                <Image Grid.Column="0"
+                                    <!--Fix Placeholder-->
+                                    <Image Grid.Column="0"
                                HeightRequest="45"
                                WidthRequest="45"
                                VerticalOptions="Start"
                                Margin="5"
                                Source="{Binding ImageIconLocation, Converter={StaticResource ForumImageConverter}}"/>
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <Label Grid.Row="0" FontSize="Medium" Margin="1" MaxLines="2" LineBreakMode="TailTruncation" Text="{Binding Name}" />
-                                    <Grid Margin="2" Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Label Grid.Column="0" Margin="0,0,-5,0" FontSize="Micro" Text="Pages:"/>
-                                        <Label Grid.Column="1" Margin="0,0,-3,0" FontAttributes="Bold" FontSize="Micro" Text="{Binding TotalPages, Mode=OneWay}" />
-                                        <Label Grid.Column="2" Margin="0,0,-3,0" FontSize="Micro" Text="Killed by" />
-                                        <Label Grid.Column="3" Margin="0,0,-5,0" FontAttributes="Bold" FontSize="Micro" Text="{Binding KilledBy, Mode=OneWay}" />
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0" FontSize="Medium" Margin="1" MaxLines="2" LineBreakMode="TailTruncation" Text="{Binding Name}" />
+                                        <Grid Margin="2" Grid.Row="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Column="0" Margin="0,0,-5,0" FontSize="Micro" Text="Pages:"/>
+                                            <Label Grid.Column="1" Margin="0,0,-3,0" FontAttributes="Bold" FontSize="Micro" Text="{Binding TotalPages, Mode=OneWay}" />
+                                            <Label Grid.Column="2" Margin="0,0,-3,0" FontSize="Micro" Text="Killed by" />
+                                            <Label Grid.Column="3" Margin="0,0,-5,0" FontAttributes="Bold" FontSize="Micro" Text="{Binding KilledBy, Mode=OneWay}" />
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                                <Label Grid.Column="2" 
+                                    <Label Grid.Column="2" 
                                        VerticalOptions="Center" 
                                        Margin="15" 
                                        IsVisible="{Binding HasSeen, Converter={StaticResource BooleanToVisibilityConverter}}"
                                        x:Name="ReplyCount"
                                        Text="{Binding RepliesSinceLastOpened}" />
+                                </Grid>
                             </Grid>
+                            <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
                         </Grid>
-                        <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </RefreshView>
-</ContentPage>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </StackLayout>
+</views:AuthorizationPage>

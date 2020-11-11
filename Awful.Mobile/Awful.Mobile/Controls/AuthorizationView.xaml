@@ -1,12 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             Title="Awful Forums Reader"
-             BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
-                                    Light={StaticResource BackgroundColorLight}}"
              xmlns:fontawesome="clr-namespace:FontAwesome"
-             x:Class="Awful.Mobile.Views.ForumListPage">
-    <ContentPage.Content>
+             BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
+             x:Class="Awful.Mobile.Controls.AuthorizationView">
+  <ContentView.Content>
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
             <Label FontSize="Header" 
                    VerticalOptions="Center" 
@@ -17,7 +15,7 @@
                    FontFamily="FontAwesomeSolid" />
             <Label FontSize="Title" Text="Authorization Required" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
             <Label FontSize="Subtitle" Text="In order to view this page, you must log in first." VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
-            <Button VerticalOptions="Center" HorizontalOptions="Center" Text="Log In"/>
+            <Button VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding OpenLoginCommand}"  Text="Log In"/>
         </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+    </ContentView.Content>
+</ContentView>
