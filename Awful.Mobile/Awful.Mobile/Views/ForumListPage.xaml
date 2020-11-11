@@ -4,11 +4,12 @@
              Title="Awful Forums Reader"
              BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
                                     Light={StaticResource BackgroundColorLight}}"
+             xmlns:fontawesome="clr-namespace:FontAwesome"
              x:Class="Awful.Mobile.Views.ForumListPage">
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
             <ActivityIndicator IsRunning="True"/>
-            <Label Text="&#xf26e;" FontFamily="{StaticResource FontAwesomeBrands}" />
+            <Label Text="{x:Static fontawesome:FontAwesomeIcons.Book}" FontFamily="FontAwesomeRegular" />
             <Label Text="Loading..." VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
         </StackLayout>
     </ContentPage.Content>
