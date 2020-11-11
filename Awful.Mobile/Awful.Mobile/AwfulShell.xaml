@@ -114,20 +114,57 @@
 
     <FlyoutItem Title="Forums"
                 FlyoutDisplayOptions="AsMultipleItems">
-         <ShellContent Title="All Forums" Route="ForumList" ContentTemplate="{DataTemplate local:ForumListPage}" />
-         <ShellContent Title="Bookmarks" Route="BookmarkListPage" ContentTemplate="{DataTemplate local:BookmarkListPage}" />
+        <ShellContent Title="All Forums" Route="ForumList" ContentTemplate="{DataTemplate local:ForumListPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="FontAwesomeSolid"
+                    Glyph=""
+                    Size="24"
+                    />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent Title="Bookmarks" Route="BookmarkListPage" ContentTemplate="{DataTemplate local:BookmarkListPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="FontAwesomeRegular"
+                    Glyph=""
+                    Size="24"
+                    />
+            </ShellContent.Icon>
+        </ShellContent>
     </FlyoutItem>
 
     <FlyoutItem Title="SAclopedia">
-            <ShellContent Title="SAclopedia" Route="SAclopediaEntryListPage" ContentTemplate="{DataTemplate local:SAclopediaEntryListPage}" />
+        <ShellContent Title="SAclopedia" Route="SAclopediaEntryListPage" ContentTemplate="{DataTemplate local:SAclopediaEntryListPage}"/>
+        <FlyoutItem.Icon>
+            <FontImageSource
+                    FontFamily="FontAwesomeSolid"
+                    Glyph=""
+                    Size="24"
+                    />
+        </FlyoutItem.Icon>
     </FlyoutItem>
 
     <FlyoutItem Title="Leper's Colony">
             <ShellContent Title="Leper's Colony" Route="LepersPage" ContentTemplate="{DataTemplate local:LepersPage}" />
+        <FlyoutItem.Icon>
+            <FontImageSource
+                    FontFamily="FontAwesomeSolid"
+                    Glyph=""
+                    Size="24"
+                    />
+        </FlyoutItem.Icon>
     </FlyoutItem>
 
     <FlyoutItem Title="Settings">
             <ShellContent Title="Settings" Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
+        <FlyoutItem.Icon>
+            <FontImageSource
+                    FontFamily="FontAwesomeSolid"
+                    Glyph=""
+                    Size="24"
+                    />
+        </FlyoutItem.Icon>
     </FlyoutItem>
 
     <TabBar>

@@ -8,8 +8,7 @@
              x:Class="Awful.Mobile.Views.ForumListPage">
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
-            <ActivityIndicator IsRunning="True"/>
-            <Label Text="{x:Static fontawesome:FontAwesomeIcons.Book}" FontFamily="FontAwesomeRegular" />
+            <Label FontSize="Header" Text="{x:Static fontawesome:FontAwesomeIcons.Book}" FontFamily="FontAwesomeSolid" />
             <Label Text="Loading..." VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
         </StackLayout>
     </ContentPage.Content>
