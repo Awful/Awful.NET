@@ -55,11 +55,12 @@ namespace Awful.UI.ViewModels
 
             this.IsRefreshing = true;
             this.Title = entryListItem.Title;
+            var defaults = await this.GenerateDefaultOptionsAsync().ConfigureAwait(false);
             var entry = await this.saclopedia.LoadSAclopediaEntryAsync(entryListItem).ConfigureAwait(false);
             var source = new HtmlWebViewSource();
-            source.Html = this.saclopedia.GenerateSAclopediaEntryTemplate(entry, new Webview.Entities.Themes.DefaultOptions());
+            source.Html = this.saclopedia.GenerateSAclopediaEntryTemplate(entry, defaults);
             Device.BeginInvokeOnMainThread(() => this.WebView.Source = source);
-            await Task.Delay(500).ConfigureAwait(false);
+            await Task.Delay(1000).ConfigureAwait(false);
             this.IsRefreshing = false;
         }
 

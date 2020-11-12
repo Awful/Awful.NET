@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
+using Awful.Webview.Entities.Themes;
 using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
 
@@ -119,6 +120,42 @@ namespace Awful.UI.ViewModels
         {
             //var page = Routing.GetOrCreateContent("//SigninPage") as Page;
             await Shell.Current.GoToAsync("signinpage").ConfigureAwait(false);
+        }
+
+        public async Task<DefaultOptions> GenerateDefaultOptionsAsync()
+        {
+            var defaults = await this.Context.GetDefaultSettingsAsync().ConfigureAwait(false);
+            var defaultOptions = new DefaultOptions() { DeviceColorTheme = defaults.DeviceColorTheme, DeviceTheme = defaults.DeviceTheme };
+            if (defaultOptions.DeviceColorTheme == DeviceColorTheme.Unspecified)
+            {
+                switch (Application.Current.UserAppTheme)
+                {
+                    case OSAppTheme.Dark:
+                        defaultOptions.DeviceColorTheme = DeviceColorTheme.Dark;
+                        break;
+                    case OSAppTheme.Light:
+                        defaultOptions.DeviceColorTheme = DeviceColorTheme.Light;
+                        break;
+                    case OSAppTheme.Unspecified:
+                        defaultOptions.DeviceColorTheme = DeviceColorTheme.Light;
+                        break;
+                }
+            }
+
+            if (defaultOptions.DeviceTheme == DeviceTheme.Default)
+            {
+                switch (Device.RuntimePlatform)
+                {
+                    case Device.iOS:
+                        defaultOptions.DeviceTheme = DeviceTheme.iOS;
+                        break;
+                    case Device.Android:
+                        defaultOptions.DeviceTheme = DeviceTheme.Android;
+                        break;
+                }
+            }
+
+            return defaultOptions;
         }
 
         /// <summary>
