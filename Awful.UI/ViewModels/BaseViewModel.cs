@@ -17,7 +17,7 @@ namespace Awful.UI.ViewModels
     /// </summary>
     public class BaseViewModel : INotifyPropertyChanged
     {
-        private LayoutState currentState;
+        private LayoutState currentState = LayoutState.None;
         private string customState;
         private bool isBusy = false;
         private bool isRefreshing = false;

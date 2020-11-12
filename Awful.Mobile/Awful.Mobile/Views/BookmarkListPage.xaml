@@ -25,12 +25,12 @@
                    HorizontalTextAlignment="Center" 
                    Text="{x:Static fontawesome:FontAwesomeIcons.Bookmark}" 
                    FontFamily="FontAwesomeRegular" />
-                    <Label FontSize="Title" Text="SAclopedia" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
-                    <Button VerticalOptions="Center" HorizontalOptions="Center" Text="Load Entries"/>
+                    <Label FontSize="Subtitle" Text="You have no bookmarks." VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
+                    <Button VerticalOptions="Center" HorizontalOptions="Center" Text="Refresh"/>
                 </StackLayout>
             </state:StateView>
-            <state:StateView StateKey="None">
-                <RefreshView Command="{Binding RefreshCommand}"
+        </state:StateLayout.StateViews>
+            <RefreshView Command="{Binding RefreshCommand}"
                  IsRefreshing="{Binding IsRefreshing}">
             <CollectionView
         ItemsSource="{Binding Threads}">
@@ -100,7 +100,5 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
-            </state:StateView>
-        </state:StateLayout.StateViews>
     </StackLayout>
 </views:AuthorizationPage>
