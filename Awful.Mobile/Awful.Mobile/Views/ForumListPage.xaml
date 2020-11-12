@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<views:AuthorizationPage  xmlns:views="clr-namespace:Awful.Mobile.Views"
+                          xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Title="Awful Forums Reader"
              BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
@@ -7,17 +8,18 @@
              xmlns:fontawesome="clr-namespace:FontAwesome"
              x:Class="Awful.Mobile.Views.ForumListPage">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
-            <Label FontSize="Header" 
+        <StackLayout Margin="10" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
+            <Label FontSize="{OnPlatform Android=Header, iOS=80}" 
                    VerticalOptions="Center" 
                    VerticalTextAlignment="Center" 
                    HorizontalOptions="Center" 
                    HorizontalTextAlignment="Center" 
                    Text="{x:Static fontawesome:FontAwesomeIcons.SignInAlt}" 
                    FontFamily="FontAwesomeSolid" />
+            <ActivityIndicator IsRunning="True"/>
             <Label FontSize="Title" Text="Authorization Required" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
             <Label FontSize="Subtitle" Text="In order to view this page, you must log in first." VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
-            <Button VerticalOptions="Center" HorizontalOptions="Center" Text="Log In"/>
+            <Button Padding="15" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding OpenLoginCommand}" Text="Log In"/>
         </StackLayout>
     </ContentPage.Content>
-</ContentPage>
+</views:AuthorizationPage>

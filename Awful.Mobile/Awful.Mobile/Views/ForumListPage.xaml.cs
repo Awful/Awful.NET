@@ -17,7 +17,7 @@ namespace Awful.Mobile.Views
     /// Forum List Page View.
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ForumListPage : ContentPage
+    public partial class ForumListPage : AuthorizationPage
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumListPage"/> class.

@@ -12,6 +12,7 @@ using Awful.Database.Entities;
 using Awful.Mobile.UI.Tools.Commands;
 using Awful.UI.Actions;
 using Awful.UI.ViewModels;
+using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.ViewModels
@@ -66,7 +67,7 @@ namespace Awful.Mobile.ViewModels
         /// <returns>Task.</returns>
         public async Task LoadBookmarksAsync(bool reload = false, int forceDelay = 0)
         {
-            this.SetState(Xamarin.Forms.StateSquid.State.Loading);
+            this.IsRefreshing = true;
             await Task.Delay(forceDelay).ConfigureAwait(false);
             var threads = await this.bookmarks.GetAllBookmarksAsync(reload).ConfigureAwait(false);
             this.Threads = new ObservableCollection<AwfulThread>();
@@ -77,14 +78,17 @@ namespace Awful.Mobile.ViewModels
 
             if (this.Threads.Count <= 0)
             {
-                this.SetState(Xamarin.Forms.StateSquid.State.Empty);
+                this.SetState(LayoutState.Empty);
             }
             else
             {
-                this.SetState(Xamarin.Forms.StateSquid.State.None);
+                this.SetState(LayoutState.None);
             }
+
+            this.IsRefreshing = false;
         }
 
+        /// <inheritdoc/>
         public override async Task OnLoad()
         {
             if (this.IsSignedIn)

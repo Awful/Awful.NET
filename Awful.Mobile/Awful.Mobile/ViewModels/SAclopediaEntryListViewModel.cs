@@ -13,8 +13,8 @@ using Awful.Database.Context;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
 using Awful.Webview;
+using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
-using Xamarin.Forms.StateSquid;
 
 namespace Awful.UI.ViewModels
 {
@@ -26,6 +26,7 @@ namespace Awful.UI.ViewModels
     {
         private SAclopediaAction saclopedia;
         private TemplateHandler handler;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SAclopediaEntryListViewModel"/> class.
         /// </summary>
@@ -89,11 +90,18 @@ namespace Awful.UI.ViewModels
         /// <returns>A Task.</returns>
         public async Task RefreshEntryList(bool refresh)
         {
-            this.SetState(State.Loading);
+            this.SetState(LayoutState.Loading);
             var items = await this.saclopedia.LoadSAclopediaEntryItemsAsync(refresh).ConfigureAwait(false);
-            this.Items = items.GroupBy(n => n.Title[0].ToString().ToUpperInvariant()).Select(n => new SAclopediaGroup(n.Key, n.ToList())).OrderBy(n => n.Name).ToList();
-            this.OnPropertyChanged(nameof(this.Items));
-            this.SetState(State.None);
+            if (items.Any())
+            {
+                this.Items = items.GroupBy(n => n.Title[0].ToString().ToUpperInvariant()).Select(n => new SAclopediaGroup(n.Key, n.ToList())).OrderBy(n => n.Name).ToList();
+                this.OnPropertyChanged(nameof(this.Items));
+                this.SetState(LayoutState.None);
+            }
+            else
+            {
+                this.SetState(LayoutState.Empty);
+            }
         }
     }
 }

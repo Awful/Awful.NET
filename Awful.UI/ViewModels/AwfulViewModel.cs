@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
+using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
 
 namespace Awful.UI.ViewModels
@@ -30,7 +31,6 @@ namespace Awful.UI.ViewModels
             }
 
             this.Context = context;
-            this.SetupVM();
         }
 
         public AwfulClient Client { get; set; }
@@ -62,6 +62,10 @@ namespace Awful.UI.ViewModels
             await this.OnLoad().ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Called on VM Load.
+        /// </summary>
+        /// <returns>Task.</returns>
         public virtual async Task OnLoad()
         {
 
@@ -71,7 +75,7 @@ namespace Awful.UI.ViewModels
         {
             if (!this.IsSignedIn)
             {
-                this.SetState(Xamarin.Forms.StateSquid.State.Custom, "NotSignedIn");
+                this.SetState(LayoutState.Custom, "NotSignedIn");
             }
         }
 

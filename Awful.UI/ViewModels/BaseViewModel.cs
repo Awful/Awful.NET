@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
-using Xamarin.Forms.StateSquid;
 
 namespace Awful.UI.ViewModels
 {
@@ -17,9 +17,10 @@ namespace Awful.UI.ViewModels
     /// </summary>
     public class BaseViewModel : INotifyPropertyChanged
     {
-        private State currentState;
+        private LayoutState currentState;
         private string customState;
         private bool isBusy = false;
+        private bool isRefreshing = false;
         private string title = string.Empty;
         private string loadingText = "Loading...";
 
@@ -29,7 +30,7 @@ namespace Awful.UI.ViewModels
         /// <summary>
         /// Gets or sets the current state of the view.
         /// </summary>
-        public State CurrentState
+        public LayoutState CurrentState
         {
             get { return this.currentState; }
             set { this.SetProperty(ref this.currentState, value); }
@@ -54,11 +55,12 @@ namespace Awful.UI.ViewModels
         }
 
         /// <summary>
-        /// Gets a value indicating whether the view is refreshing.
+        /// Gets or sets a value indicating whether the view is refreshing.
         /// </summary>
         public bool IsRefreshing
         {
-            get { return this.currentState == State.Loading; }
+            get { return this.isRefreshing; }
+            set { this.SetProperty(ref this.isRefreshing, value); }
         }
 
         /// <summary>
@@ -84,10 +86,10 @@ namespace Awful.UI.ViewModels
         /// </summary>
         /// <param name="state">State.</param>
         /// <param name="customState">Custom State.</param>
-        public void SetState(State state, string customState = "")
+        public void SetState(LayoutState state, string customState = "")
         {
             this.CurrentState = state;
-            if (state == State.Custom)
+            if (state == LayoutState.Custom)
             {
                 this.CustomState = customState;
             }
@@ -118,13 +120,20 @@ namespace Awful.UI.ViewModels
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                var changed = this.PropertyChanged;
-                if (changed == null)
+                try
                 {
-                    return;
-                }
+                    var changed = this.PropertyChanged;
+                    if (changed == null)
+                    {
+                        return;
+                    }
 
-                changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                    changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                }
+                catch
+                {
+
+                }
             });
         }
     }

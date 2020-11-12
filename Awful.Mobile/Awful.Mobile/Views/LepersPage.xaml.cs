@@ -4,7 +4,8 @@
 
 using System;
 using System.Collections.Generic;
-
+using Autofac;
+using Awful.Mobile.ViewModels;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.Views
@@ -12,7 +13,7 @@ namespace Awful.Mobile.Views
     /// <summary>
     /// Lepers Page.
     /// </summary>
-    public partial class LepersPage : ContentPage
+    public partial class LepersPage : AuthorizationPage
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LepersPage"/> class.
@@ -20,6 +21,7 @@ namespace Awful.Mobile.Views
         public LepersPage()
         {
             this.InitializeComponent();
+            this.BindingContext = App.Container.Resolve<LepersViewModel>();
         }
     }
 }

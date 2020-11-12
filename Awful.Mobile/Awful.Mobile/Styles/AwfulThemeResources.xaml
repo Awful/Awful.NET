@@ -80,11 +80,11 @@
             </Style>
             <Style TargetType="Entry">
                 <Setter Property="TextColor"
-                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
-                                    Light={StaticResource BackgroundColorDark}}" />
+                        Value="{AppThemeBinding Dark={OnPlatform Android={StaticResource BackgroundColorLight}, iOS=Default},
+                    Light={OnPlatform Android={StaticResource BackgroundColorDark}, iOS=Default}}" />
                  <Setter Property="PlaceholderColor"
-                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
-                                    Light={StaticResource BackgroundColorDark}}" />
+                        Value="{AppThemeBinding Dark={OnPlatform Android={StaticResource BackgroundColorLight}, iOS=Default},
+                    Light={OnPlatform Android={StaticResource BackgroundColorDark}, iOS=Default}}" />
             </Style>
             <Style TargetType="Grid">
                 <Setter Property="BackgroundColor"
@@ -95,6 +95,16 @@
                 <Setter Property="BackgroundColor"
                         Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
                                     Light={StaticResource BackgroundColorLight}}" />
+            </Style>
+            <Style TargetType="ActivityIndicator">
+                <Setter Property="Color"
+                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}"
+                        />
+                <Setter Property="Scale" Value="{OnPlatform Android=1, iOS=2}"
+                        />
+                <Setter Property="Margin" Value="{OnPlatform Android=0, iOS=15}"
+                        />
             </Style>
             <Style TargetType="RefreshView">
                 <Setter Property="BackgroundColor"

@@ -119,6 +119,8 @@
         <ShellContent Title="All Forums" Route="ForumList" ContentTemplate="{DataTemplate local:ForumListPage}">
             <ShellContent.Icon>
                 <FontImageSource
+                    Color="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}"
                     FontFamily="FontAwesomeSolid"
                     Glyph=""
                     Size="24"
@@ -128,6 +130,8 @@
         <ShellContent Title="Bookmarks" Route="BookmarkListPage" ContentTemplate="{DataTemplate local:BookmarkListPage}">
             <ShellContent.Icon>
                 <FontImageSource
+                    Color="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}"
                     FontFamily="FontAwesomeRegular"
                     Glyph=""
                     Size="24"
@@ -140,6 +144,8 @@
         <ShellContent Title="SAclopedia" Route="SAclopediaEntryListPage" ContentTemplate="{DataTemplate local:SAclopediaEntryListPage}"/>
         <FlyoutItem.Icon>
             <FontImageSource
+                    Color="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}"
                     FontFamily="FontAwesomeSolid"
                     Glyph=""
                     Size="24"
@@ -151,6 +157,8 @@
             <ShellContent Title="Leper's Colony" Route="LepersPage" ContentTemplate="{DataTemplate local:LepersPage}" />
         <FlyoutItem.Icon>
             <FontImageSource
+                    Color="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}"
                     FontFamily="FontAwesomeSolid"
                     Glyph=""
                     Size="24"
@@ -162,6 +170,8 @@
         <ShellContent Title="Settings" Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
         <FlyoutItem.Icon>
             <FontImageSource
+                    Color="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}"
                     FontFamily="FontAwesomeSolid"
                     Glyph=""
                     Size="24"

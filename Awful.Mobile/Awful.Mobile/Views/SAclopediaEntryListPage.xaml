@@ -4,7 +4,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              Title="SAclopedia"
              xmlns:fontawesome="clr-namespace:FontAwesome"
-             xmlns:state="clr-namespace:Xamarin.Forms.StateSquid;assembly=Xamarin.Forms.StateSquid" 
+             xmlns:state="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+                          xmlns:controls="clr-namespace:Awful.Mobile.Controls" 
              BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
              x:Class="Awful.Mobile.Views.SAclopediaEntryListPage">
     <StackLayout VerticalOptions="CenterAndExpand"
@@ -14,7 +15,7 @@
         <state:StateLayout.StateViews>
             <state:StateView StateKey="Loading">
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
-                    <Label FontSize="Header" 
+                    <Label FontSize="{OnPlatform Android=Header, iOS=80}" 
                    VerticalOptions="Center" 
                    VerticalTextAlignment="Center" 
                    HorizontalOptions="Center" 
@@ -26,22 +27,11 @@
                 </StackLayout>
             </state:StateView>
             <state:StateView StateKey="Custom" CustomStateKey="NotSignedIn">
-                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
-                    <Label FontSize="Header" 
-                   VerticalOptions="Center" 
-                   VerticalTextAlignment="Center" 
-                   HorizontalOptions="Center" 
-                   HorizontalTextAlignment="Center" 
-                   Text="{x:Static fontawesome:FontAwesomeIcons.SignInAlt}" 
-                   FontFamily="FontAwesomeSolid" />
-                    <Label FontSize="Title" Text="Authorization Required" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
-                    <Label FontSize="Subtitle" Text="In order to view this page, you must log in first." VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
-                    <Button VerticalOptions="Center" HorizontalOptions="Center" Text="Log In"/>
-                </StackLayout>
+                <controls:AuthorizationView></controls:AuthorizationView>
             </state:StateView>
             <state:StateView StateKey="Empty">
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
-                    <Label FontSize="Header" 
+                    <Label FontSize="{OnPlatform Android=Header, iOS=80}"
                    VerticalOptions="Center" 
                    VerticalTextAlignment="Center" 
                    HorizontalOptions="Center" 
@@ -49,11 +39,11 @@
                    Text="{x:Static fontawesome:FontAwesomeIcons.Book}" 
                    FontFamily="FontAwesomeSolid" />
                     <Label FontSize="Title" Text="SAclopedia" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
-                    <Button VerticalOptions="Center" HorizontalOptions="Center" Text="Load Entries"/>
+                    <Button Padding="{OnPlatform Android=0, iOS=15}" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding RefreshCommand}" Text="Load Entries"/>
                 </StackLayout>
             </state:StateView>
-        </state:StateLayout.StateViews>
-        <CollectionView SelectionMode="Single" 
+            <state:StateView StateKey="None">
+                <CollectionView SelectionMode="Single" 
                         x:Name="SAclopediaCollection"
                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference SAclopediaCollection}}" 
                         SelectionChangedCommand="{Binding SelectionCommand}" ItemsSource="{Binding Items}"
@@ -75,6 +65,8 @@
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-        </CollectionView>
+                </CollectionView>
+            </state:StateView>
+        </state:StateLayout.StateViews>
     </StackLayout>
 </views:AuthorizationPage>

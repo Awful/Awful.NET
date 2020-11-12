@@ -1,12 +1,21 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentPage
+<views:AuthorizationPage
+ xmlns:views="clr-namespace:Awful.Mobile.Views"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Leper's Colony"
+    xmlns:fontawesome="clr-namespace:FontAwesome"
+    xmlns:state="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+    xmlns:controls="clr-namespace:Awful.Mobile.Controls" 
      BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
                                     Light={StaticResource BackgroundColorLight}}"
     x:Class="Awful.Mobile.Views.LepersPage">
-    <ContentPage.Content>
-        
-    </ContentPage.Content>
-</ContentPage>
+    <StackLayout VerticalOptions="CenterAndExpand"
+            state:StateLayout.CurrentState="{Binding CurrentState}"
+            state:StateLayout.CurrentCustomStateKey="{Binding CustomState}"
+            >
+        <state:StateView StateKey="Custom" CustomStateKey="NotSignedIn">
+                <controls:AuthorizationView></controls:AuthorizationView>
+        </state:StateView>
+    </StackLayout>
+</views:AuthorizationPage>

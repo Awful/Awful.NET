@@ -79,7 +79,7 @@ namespace Awful.UI.Actions
         public async Task<List<SAclopediaEntryItem>> LoadSAclopediaEntryItemsAsync(bool forceRefresh = false, CancellationToken token = default)
         {
             var list = this.context.SAclopediaEntryItems.ToList();
-            if (!list.Any() || forceRefresh)
+            if (forceRefresh)
             {
                 await this.context.RemoveAllSAclopediaEntryAsync().ConfigureAwait(false);
                 list = new List<SAclopediaEntryItem>();

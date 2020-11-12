@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Bookmarks"
     xmlns:fontawesome="clr-namespace:FontAwesome"
-    xmlns:state="clr-namespace:Xamarin.Forms.StateSquid;assembly=Xamarin.Forms.StateSquid" 
+    xmlns:state="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
     xmlns:local="clr-namespace:Awful.Mobile.Tools.Markup;assembly=Awful.Mobile" xmlns:controls="clr-namespace:Awful.Mobile.Controls"
     BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
     x:Class="Awful.Mobile.Views.BookmarkListPage">
@@ -18,7 +18,7 @@
             </state:StateView>
             <state:StateView StateKey="Empty">
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
-                    <Label FontSize="Header" 
+                    <Label FontSize="{OnPlatform Android=Header, iOS=80}"
                    VerticalOptions="Center" 
                    VerticalTextAlignment="Center" 
                    HorizontalOptions="Center" 
@@ -29,8 +29,8 @@
                     <Button VerticalOptions="Center" HorizontalOptions="Center" Text="Load Entries"/>
                 </StackLayout>
             </state:StateView>
-        </state:StateLayout.StateViews>
-        <RefreshView Command="{Binding RefreshCommand}"
+            <state:StateView StateKey="None">
+                <RefreshView Command="{Binding RefreshCommand}"
                  IsRefreshing="{Binding IsRefreshing}">
             <CollectionView
         ItemsSource="{Binding Threads}">
@@ -100,5 +100,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
+            </state:StateView>
+        </state:StateLayout.StateViews>
     </StackLayout>
 </views:AuthorizationPage>
