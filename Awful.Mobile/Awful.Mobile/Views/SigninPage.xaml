@@ -30,8 +30,8 @@
                         </Entry>
                         <Entry IsPassword="True" x:Name="Password" Text="{Binding Password, Mode=TwoWay}" Placeholder="Password" Margin="0,0,0,15">
                         </Entry>
-                        <Button Padding="{OnPlatform Android=0, iOS=15}" x:Name="LoginButton" IsEnabled="{Binding IsLoginEnabled, Mode=TwoWay}" Text="Login" Command="{Binding LoginCommand}"  HorizontalOptions="CenterAndExpand" />
-                        <Button Padding="{OnPlatform Android=0, iOS=15}" x:Name="GoBackButton" Text="Close" Command="{Binding GoBackCommand}"  HorizontalOptions="CenterAndExpand" />
+                        <Button Padding="15" x:Name="LoginButton" IsEnabled="{Binding IsLoginEnabled, Mode=TwoWay}" Text="Login" Command="{Binding LoginCommand}"  HorizontalOptions="CenterAndExpand" />
+                        <Button Padding="15" x:Name="GoBackButton" Text="Close" Command="{Binding GoBackCommand}"  HorizontalOptions="CenterAndExpand" />
                     </StackLayout>
                 </Grid>
             </Grid>

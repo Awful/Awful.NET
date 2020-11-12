@@ -8,20 +8,13 @@
                           xmlns:controls="clr-namespace:Awful.Mobile.Controls" 
              BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
              x:Class="Awful.Mobile.Views.SAclopediaEntryListPage">
-    <StackLayout VerticalOptions="CenterAndExpand"
+    <!--<StackLayout VerticalOptions="CenterAndExpand"
             state:StateLayout.CurrentState="{Binding CurrentState}"
             state:StateLayout.CurrentCustomStateKey="{Binding CustomState}"
             >
         <state:StateLayout.StateViews>
             <state:StateView StateKey="Loading">
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
-                    <Label FontSize="{OnPlatform Android=Header, iOS=80}" 
-                   VerticalOptions="Center" 
-                   VerticalTextAlignment="Center" 
-                   HorizontalOptions="Center" 
-                   HorizontalTextAlignment="Center" 
-                   Text="{x:Static fontawesome:FontAwesomeIcons.Book}" 
-                   FontFamily="FontAwesomeSolid" />
                     <ActivityIndicator IsRunning="True"/>
                     <Label Text="{Binding LoadingText}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
                 </StackLayout>
@@ -39,10 +32,10 @@
                    Text="{x:Static fontawesome:FontAwesomeIcons.Book}" 
                    FontFamily="FontAwesomeSolid" />
                     <Label FontSize="Title" Text="SAclopedia" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
-                    <Button Padding="{OnPlatform Android=0, iOS=15}" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding RefreshCommand}" Text="Load Entries"/>
+                    <Button Padding="15" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding RefreshCommand}" Text="Load Entries"/>
                 </StackLayout>
             </state:StateView>
-            <state:StateView StateKey="None">
+            <state:StateView StateKey="Custom" CustomStateKey="SignedIn">
                 <CollectionView SelectionMode="Single" 
                         x:Name="SAclopediaCollection"
                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference SAclopediaCollection}}" 
@@ -68,5 +61,33 @@
                 </CollectionView>
             </state:StateView>
         </state:StateLayout.StateViews>
-    </StackLayout>
+    </StackLayout>-->
+    <CollectionView SelectionMode="Single" 
+                        x:Name="SAclopediaCollection"
+                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference SAclopediaCollection}}" 
+                        SelectionChangedCommand="{Binding SelectionCommand}" ItemsSource="{Binding Items}"
+                IsGrouped="True">
+        <CollectionView.GroupHeaderTemplate>
+            <DataTemplate>
+                <StackLayout>
+                    <Label 
+                    Padding="10,0,0,0"
+                    Text="{Binding Name}"
+                   FontSize="Title"
+                   FontAttributes="Bold" />
+                    <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.GroupHeaderTemplate>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid Padding="10">
+                    <Label
+                       FontSize="Large"
+                       Text="{Binding Title}"
+                       FontAttributes="Bold" />
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </views:AuthorizationPage>

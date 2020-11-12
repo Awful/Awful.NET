@@ -78,11 +78,11 @@ namespace Awful.Mobile.ViewModels
 
             if (this.Threads.Count <= 0)
             {
-                //this.SetState(LayoutState.Empty);
+                this.SetState(LayoutState.Empty);
             }
             else
             {
-                //this.SetState(LayoutState.None);
+                this.SetState(LayoutState.Custom, "SignedIn");
             }
 
             this.IsRefreshing = false;

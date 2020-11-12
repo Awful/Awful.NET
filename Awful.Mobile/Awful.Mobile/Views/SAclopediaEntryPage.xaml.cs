@@ -21,7 +21,7 @@ namespace Awful.Mobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     [QueryProperty("EntryId", "entryId")]
     [QueryProperty("SATitle", "title")]
-    public partial class SAclopediaEntryPage : ContentPage
+    public partial class SAclopediaEntryPage : AuthorizationPage
     {
         private SAclopediaEntryViewModel vm = App.Container.Resolve<SAclopediaEntryViewModel>();
 

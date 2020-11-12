@@ -23,6 +23,7 @@ namespace Awful.UI.ViewModels
     public class SAclopediaEntryViewModel : AwfulViewModel
     {
         private SAclopediaAction saclopedia;
+        private TemplateHandler handler;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SAclopediaEntryViewModel"/> class.
@@ -32,7 +33,7 @@ namespace Awful.UI.ViewModels
         public SAclopediaEntryViewModel(TemplateHandler handler, AwfulContext context)
             : base(context)
         {
-            this.saclopedia = new SAclopediaAction(this.Client, context, handler);
+            this.handler = handler;
         }
 
         /// <summary>
@@ -59,6 +60,13 @@ namespace Awful.UI.ViewModels
             source.Html = this.saclopedia.GenerateSAclopediaEntryTemplate(entry, new Webview.Entities.Themes.DefaultOptions());
             Device.BeginInvokeOnMainThread(() => this.WebView.Source = source);
             this.IsBusy = false;
+        }
+
+        /// <inheritdoc/>
+        public override Task OnLoad()
+        {
+            this.saclopedia = new SAclopediaAction(this.Client, this.Context, this.handler);
+            return base.OnLoad();
         }
     }
 }

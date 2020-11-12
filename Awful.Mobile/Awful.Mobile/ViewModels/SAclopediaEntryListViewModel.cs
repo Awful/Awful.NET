@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Awful.Core.Entities.SAclopedia;
 using Awful.Core.Tools;
+using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
@@ -41,7 +42,7 @@ namespace Awful.UI.ViewModels
         /// <summary>
         /// Gets the Selection Entry.
         /// </summary>
-        public static Command<SAclopediaEntryItem> SelectionCommand
+        public Command<SAclopediaEntryItem> SelectionCommand
         {
             get
             {
@@ -96,7 +97,7 @@ namespace Awful.UI.ViewModels
             {
                 this.Items = items.GroupBy(n => n.Title[0].ToString().ToUpperInvariant()).Select(n => new SAclopediaGroup(n.Key, n.ToList())).OrderBy(n => n.Name).ToList();
                 this.OnPropertyChanged(nameof(this.Items));
-                this.SetState(LayoutState.None);
+                this.SetState(LayoutState.Custom, "SignedIn");
             }
             else
             {

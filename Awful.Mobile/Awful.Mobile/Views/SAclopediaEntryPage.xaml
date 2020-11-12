@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<views:AuthorizationPage  xmlns:views="clr-namespace:Awful.Mobile.Views"
+                          xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Title="{Binding Title}"
              BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
@@ -7,4 +8,4 @@
     <ContentPage.Content>
         <WebView x:Name="AwfulWebView"/>
     </ContentPage.Content>
-</ContentPage>
+</views:AuthorizationPage>
