@@ -8,7 +8,7 @@
                           xmlns:controls="clr-namespace:Awful.Mobile.Controls" 
              BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
              x:Class="Awful.Mobile.Views.SAclopediaEntryListPage">
-    <!--<StackLayout VerticalOptions="CenterAndExpand"
+    <StackLayout VerticalOptions="CenterAndExpand"
             state:StateLayout.CurrentState="{Binding CurrentState}"
             state:StateLayout.CurrentCustomStateKey="{Binding CustomState}"
             >
@@ -41,53 +41,31 @@
                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference SAclopediaCollection}}" 
                         SelectionChangedCommand="{Binding SelectionCommand}" ItemsSource="{Binding Items}"
                 IsGrouped="True">
-            <CollectionView.GroupHeaderTemplate>
-                <DataTemplate>
-                    <Label Text="{Binding Name}"
-                   BackgroundColor="LightGray"
-                   FontSize="Large"
-                   FontAttributes="Bold" />
-                </DataTemplate>
-            </CollectionView.GroupHeaderTemplate>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Padding="10">
-                        <Label
-                       Text="{Binding Title}"
-                       FontAttributes="Bold" />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-                </CollectionView>
-            </state:StateView>
-        </state:StateLayout.StateViews>
-    </StackLayout>-->
-    <CollectionView SelectionMode="Single" 
-                        x:Name="SAclopediaCollection"
-                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference SAclopediaCollection}}" 
-                        SelectionChangedCommand="{Binding SelectionCommand}" ItemsSource="{Binding Items}"
-                IsGrouped="True">
-        <CollectionView.GroupHeaderTemplate>
-            <DataTemplate>
-                <StackLayout>
-                    <Label 
+                    <CollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label 
                     Padding="10,0,0,0"
                     Text="{Binding Name}"
                    FontSize="Title"
                    FontAttributes="Bold" />
-                    <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
-                </StackLayout>
-            </DataTemplate>
-        </CollectionView.GroupHeaderTemplate>
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Grid Padding="10">
-                    <Label
+                                <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.GroupHeaderTemplate>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10">
+                                <Label
                        FontSize="Large"
                        Text="{Binding Title}"
                        FontAttributes="Bold" />
-                </Grid>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </state:StateView>
+        </state:StateLayout.StateViews>
+    </StackLayout>
+    
 </views:AuthorizationPage>

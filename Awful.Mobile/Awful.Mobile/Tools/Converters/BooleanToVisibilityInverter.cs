@@ -6,7 +6,7 @@ using System;
 using System.Globalization;
 using Xamarin.Forms;
 
-namespace Awful.UI.Tools.Converters
+namespace Awful.Mobile.UI.Tools.Converters
 {
     /// <summary>
     /// Boolean to Visibility Inverter.

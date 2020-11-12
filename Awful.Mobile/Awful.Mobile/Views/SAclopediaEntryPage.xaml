@@ -3,9 +3,16 @@
                           xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Title="{Binding Title}"
+             xmlns:state="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
              BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
              x:Class="Awful.Mobile.Views.SAclopediaEntryPage">
     <ContentPage.Content>
-        <WebView x:Name="AwfulWebView"/>
+        <Grid>
+            <StackLayout IsVisible="{Binding IsRefreshing, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
+                <ActivityIndicator IsRunning="True"/>
+                <Label Text="{Binding LoadingText}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
+            </StackLayout>
+            <WebView IsVisible="{Binding IsRefreshing, Converter={StaticResource BooleanToVisibilityInverter}}" x:Name="AwfulWebView"/>
+        </Grid>
     </ContentPage.Content>
 </views:AuthorizationPage>

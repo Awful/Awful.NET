@@ -53,13 +53,14 @@ namespace Awful.UI.ViewModels
                 throw new ArgumentNullException(nameof(entryListItem));
             }
 
-            this.IsBusy = true;
+            this.IsRefreshing = true;
             this.Title = entryListItem.Title;
             var entry = await this.saclopedia.LoadSAclopediaEntryAsync(entryListItem).ConfigureAwait(false);
             var source = new HtmlWebViewSource();
             source.Html = this.saclopedia.GenerateSAclopediaEntryTemplate(entry, new Webview.Entities.Themes.DefaultOptions());
             Device.BeginInvokeOnMainThread(() => this.WebView.Source = source);
-            this.IsBusy = false;
+            await Task.Delay(500).ConfigureAwait(false);
+            this.IsRefreshing = false;
         }
 
         /// <inheritdoc/>
