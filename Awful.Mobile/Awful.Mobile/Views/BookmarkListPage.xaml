@@ -9,7 +9,7 @@
     xmlns:local="clr-namespace:Awful.Mobile.Tools.Markup;assembly=Awful.Mobile" xmlns:controls="clr-namespace:Awful.Mobile.Controls"
     BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
     x:Class="Awful.Mobile.Views.BookmarkListPage">
-    <StackLayout VerticalOptions="CenterAndExpand" 
+    <Grid
                  state:StateLayout.CurrentState="{Binding CurrentState}"
             state:StateLayout.CurrentCustomStateKey="{Binding CustomState}">
         <state:StateLayout.StateViews>
@@ -102,5 +102,5 @@
                 </RefreshView>
             </state:StateView>
         </state:StateLayout.StateViews>
-    </StackLayout>
+    </Grid>
 </views:AuthorizationPage>

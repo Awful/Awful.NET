@@ -5,21 +5,10 @@
              Title="Awful Forums Reader"
              BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
                                     Light={StaticResource BackgroundColorLight}}"
-             xmlns:fontawesome="clr-namespace:FontAwesome"
+             xmlns:fontawesome="clr-namespace:FontAwesome" 
+             xmlns:controls="clr-namespace:Awful.Mobile.Controls"
              x:Class="Awful.Mobile.Views.ForumListPage">
     <ContentPage.Content>
-        <StackLayout Margin="10" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
-            <Label FontSize="{OnPlatform Android=Header, iOS=80}" 
-                   VerticalOptions="Center" 
-                   VerticalTextAlignment="Center" 
-                   HorizontalOptions="Center" 
-                   HorizontalTextAlignment="Center" 
-                   Text="{x:Static fontawesome:FontAwesomeIcons.SignInAlt}" 
-                   FontFamily="FontAwesomeSolid" />
-            <ActivityIndicator IsRunning="True"/>
-            <Label FontSize="Title" Text="Authorization Required" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
-            <Label FontSize="Subtitle" Text="In order to view this page, you must log in first." VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
-            <Button Padding="15" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding OpenLoginCommand}" Text="Log In"/>
-        </StackLayout>
+        <controls:AuthorizationView></controls:AuthorizationView>
     </ContentPage.Content>
 </views:AuthorizationPage>

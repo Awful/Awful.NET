@@ -12,6 +12,7 @@ using Awful.Database.Entities;
 using Awful.Mobile.UI.Tools.Commands;
 using Awful.UI.Actions;
 using Awful.UI.ViewModels;
+using Awful.Webview;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.ViewModels
@@ -21,22 +22,47 @@ namespace Awful.Mobile.ViewModels
     /// </summary>
     public class LepersViewModel : AwfulViewModel
     {
+
+        private BanActions banActions;
+        private TemplateHandler handler;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LepersViewModel"/> class.
         /// </summary>
-        /// <param name="properties">Awful Properties.</param>
+        /// <param name="handler">Awful Properties.</param>
         /// <param name="context">Awful Context.</param>
-        public LepersViewModel(IPlatformProperties properties, AwfulContext context)
+        public LepersViewModel(TemplateHandler handler, AwfulContext context)
             : base(context)
         {
+            this.handler = handler;
         }
+
+        /// <summary>
+        /// Gets or sets the internal webview.
+        /// </summary>
+        public WebView WebView { get; set; }
 
         /// <inheritdoc/>
         public override async Task OnLoad()
         {
             if (this.IsSignedIn)
             {
+                this.banActions = new BanActions(this.Client, this.Context, this.handler);
+                this.SetState(Xamarin.CommunityToolkit.UI.Views.LayoutState.Custom, "SignedIn");
+                await this.LoadLepersPage().ConfigureAwait(false);
             }
+        }
+
+        public async Task LoadLepersPage()
+        {
+            this.IsRefreshing = true;
+            var defaults = await this.GenerateDefaultOptionsAsync().ConfigureAwait(false);
+            var banPage = await this.banActions.GetBanPageAsync().ConfigureAwait(false);
+            var source = new HtmlWebViewSource();
+            source.Html = this.banActions.RenderBanView(banPage, defaults);
+            Device.BeginInvokeOnMainThread(() => this.WebView.Source = source);
+            await Task.Delay(3000).ConfigureAwait(false);
+            this.IsRefreshing = false;
         }
     }
 }

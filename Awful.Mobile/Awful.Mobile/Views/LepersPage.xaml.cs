@@ -15,13 +15,16 @@ namespace Awful.Mobile.Views
     /// </summary>
     public partial class LepersPage : AuthorizationPage
     {
+        private LepersViewModel vm = App.Container.Resolve<LepersViewModel>();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LepersPage"/> class.
         /// </summary>
         public LepersPage()
         {
             this.InitializeComponent();
-            this.BindingContext = App.Container.Resolve<LepersViewModel>();
+            this.vm.WebView = this.AwfulWebView;
+            this.BindingContext = this.vm;
         }
     }
 }
