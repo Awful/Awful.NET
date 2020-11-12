@@ -11,7 +11,7 @@
 
             <Color x:Key="HeaderBarBackgroundColorLight">#1800F1</Color>
             <Color x:Key="HeaderBarBackgroundColorDark">#111111</Color>
-            <Color x:Key="HeaderBarTextColorLight">#FFFFFF</Color>
+            <Color x:Key="HeaderBarTextColorLight">#111111</Color>
             <Color x:Key="HeaderBarTextColorDark">#FFFFFF</Color>
 
             <Color x:Key="ButtonBackgroundColorLight">#1800F1</Color>

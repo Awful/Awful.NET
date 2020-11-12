@@ -9,6 +9,6 @@
              xmlns:controls="clr-namespace:Awful.Mobile.Controls"
              x:Class="Awful.Mobile.Views.ForumListPage">
     <ContentPage.Content>
-        <controls:AuthorizationView></controls:AuthorizationView>
+        
     </ContentPage.Content>
 </views:AuthorizationPage>

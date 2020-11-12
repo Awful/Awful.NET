@@ -10,10 +10,10 @@
     BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
     x:Class="Awful.Mobile.Views.BookmarkListPage">
     <Grid
-                 state:StateLayout.CurrentState="{Binding CurrentState}"
+            state:StateLayout.CurrentState="{Binding CurrentState}"
             state:StateLayout.CurrentCustomStateKey="{Binding CustomState}">
         <state:StateLayout.StateViews>
-            <state:StateView StateKey="Custom" CustomStateKey="NotSignedIn">
+            <state:StateView VerticalOptions="FillAndExpand" StateKey="Custom" CustomStateKey="NotSignedIn">
                 <controls:AuthorizationView/>
             </state:StateView>
             <state:StateView StateKey="Empty">

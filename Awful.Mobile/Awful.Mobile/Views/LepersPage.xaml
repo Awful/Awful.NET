@@ -14,19 +14,24 @@
             state:StateLayout.CurrentState="{Binding CurrentState}"
             state:StateLayout.CurrentCustomStateKey="{Binding CustomState}"
             >
-        <state:StateView StateKey="Custom" CustomStateKey="NotSignedIn">
-            <controls:AuthorizationView></controls:AuthorizationView>
-        </state:StateView>
-        <state:StateView StateKey="Custom" CustomStateKey="SignedIn">
-            <Grid>
-                <WebView x:Name="AwfulWebView"/>
-                <StackLayout IsVisible="{Binding IsRefreshing, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                        <ActivityIndicator IsRunning="True"/>
-                        <Label Text="{Binding LoadingText}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <state:StateLayout.StateViews>
+            <state:StateView VerticalOptions="FillAndExpand" StateKey="Custom" CustomStateKey="NotSignedIn">
+                <controls:AuthorizationView></controls:AuthorizationView>
+            </state:StateView>
+            <state:StateView StateKey="Custom" CustomStateKey="SignedIn">
+                <Grid>
+                    <WebView x:Name="AwfulWebView"/>
+                    <StackLayout IsVisible="{Binding IsRefreshing, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                            <ActivityIndicator IsRunning="True"/>
+                            <Label Text="{Binding LoadingText}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
+                        </StackLayout>
                     </StackLayout>
-                </StackLayout>
-            </Grid>
-        </state:StateView>
+                </Grid>
+            </state:StateView>
+        </state:StateLayout.StateViews>
     </Grid>
 </views:AuthorizationPage>

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Awful.Core.Entities.JSON;
 using Awful.Core.Entities.Threads;
 using Awful.Core.Managers;
 using Awful.Core.Managers.JSON;
@@ -36,6 +37,11 @@ namespace Awful.UI.Actions
         {
             this.manager = new IndexPageManager(client);
             this.context = context;
+        }
+
+        public async Task GetForumListAsync(bool forceReload, CancellationToken token = default)
+        {
+            var indexPageSorted = await this.manager.GetSortedIndexPageAsync().ConfigureAwait(false);
         }
     }
 }

@@ -166,6 +166,19 @@
         </FlyoutItem.Icon>
     </FlyoutItem>
 
+    <FlyoutItem Title="Debug">
+        <ShellContent Title="Debug" Route="DebugPage" ContentTemplate="{DataTemplate local:DebugPage}" />
+        <FlyoutItem.Icon>
+            <FontImageSource
+                    Color="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}"
+                    FontFamily="FontAwesomeSolid"
+                    Glyph=""
+                    Size="24"
+                    />
+        </FlyoutItem.Icon>
+    </FlyoutItem>
+
     <FlyoutItem Title="Settings">
         <ShellContent Title="Settings" Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
         <FlyoutItem.Icon>
