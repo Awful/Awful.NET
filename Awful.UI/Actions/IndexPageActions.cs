@@ -39,13 +39,24 @@ namespace Awful.UI.Actions
             this.context = context;
         }
 
-        public async Task GetForumListAsync(bool forceReload, CancellationToken token = default)
+        public async Task<List<AwfulForumCategory>> GetForumListAsync(bool forceReload, CancellationToken token = default)
         {
             var indexPageSorted = await this.manager.GetSortedIndexPageAsync().ConfigureAwait(false);
-            foreach (var category in indexPageSorted.ForumCategories)
+            var awfulCatList = new List<AwfulForumCategory>();
+            for (int i = 0; i < indexPageSorted.ForumCategories.Count; i++)
             {
-
+                Forum category = indexPageSorted.ForumCategories[i];
+                var awfulCategory = new AwfulForumCategory()
+                {
+                    Id = i,
+                    Title = category.Title,
+                    SortOrder = i,
+                    Forums = category.SubForums.Select(n => new AwfulForum(n) { ForumCategoryId = i }).ToList(),
+                };
+                awfulCatList.Add(awfulCategory);
             }
+
+            return awfulCatList;
         }
     }
 }

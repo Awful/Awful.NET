@@ -2,7 +2,9 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Awful.Core.Tools;
@@ -11,6 +13,7 @@ using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Mobile.UI.Tools.Commands;
 using Awful.UI.Actions;
+using Awful.UI.Entities;
 using Awful.UI.ViewModels;
 using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
@@ -31,9 +34,16 @@ namespace Awful.Mobile.ViewModels
         {
         }
 
+        /// <summary>
+        /// Gets the SAclopedia Items.
+        /// </summary>
+        public List<ForumGroup> Items { get; private set; } = new List<ForumGroup>();
+
         public async Task LoadForumsAsync(bool forceReload)
         {
-            await this.forumActions.GetForumListAsync(forceReload).ConfigureAwait(false);
+            var awfulCategories = await this.forumActions.GetForumListAsync(forceReload).ConfigureAwait(false);
+            this.Items = awfulCategories.Select(n => new ForumGroup(n.Title, n.Forums)).ToList();
+            this.OnPropertyChanged(nameof(this.Items));
         }
 
         /// <inheritdoc/>

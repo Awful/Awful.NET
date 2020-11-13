@@ -6,17 +6,18 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Awful.Core.Entities.JSON;
+using Awful.Database.Entities;
 
 namespace Awful.UI.Entities
 {
-    public class ForumGroup : List<Forum>
+    public class ForumGroup : List<AwfulForum>
     {
-        public string Name { get; private set; }
+        public string Title { get; private set; }
 
-        public ForumGroup(string name, List<Forum> entries)
+        public ForumGroup(string name, List<AwfulForum> entries)
             : base(entries)
         {
-            this.Name = name;
+            this.Title = name;
         }
     }
 }
