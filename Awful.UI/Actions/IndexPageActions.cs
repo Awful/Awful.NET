@@ -42,6 +42,10 @@ namespace Awful.UI.Actions
         public async Task GetForumListAsync(bool forceReload, CancellationToken token = default)
         {
             var indexPageSorted = await this.manager.GetSortedIndexPageAsync().ConfigureAwait(false);
+            foreach (var category in indexPageSorted.ForumCategories)
+            {
+
+            }
         }
     }
 }

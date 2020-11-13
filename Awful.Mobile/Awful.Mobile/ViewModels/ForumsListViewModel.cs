@@ -33,7 +33,7 @@ namespace Awful.Mobile.ViewModels
 
         public async Task LoadForumsAsync(bool forceReload)
         {
-
+            await this.forumActions.GetForumListAsync(forceReload).ConfigureAwait(false);
         }
 
         /// <inheritdoc/>

@@ -10,20 +10,23 @@
      BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
                                     Light={StaticResource BackgroundColorLight}}"
     x:Class="Awful.Mobile.Views.LepersPage">
-    <Grid
+    <Grid 
             state:StateLayout.CurrentState="{Binding CurrentState}"
             state:StateLayout.CurrentCustomStateKey="{Binding CustomState}"
             >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
         <state:StateLayout.StateViews>
             <state:StateView VerticalOptions="FillAndExpand" StateKey="Custom" CustomStateKey="NotSignedIn">
                 <controls:AuthorizationView></controls:AuthorizationView>
             </state:StateView>
-            <state:StateView StateKey="Custom" CustomStateKey="SignedIn">
+            <state:StateView VerticalOptions="FillAndExpand" StateKey="Custom" CustomStateKey="SignedIn">
                 <Grid>
-                    <WebView x:Name="AwfulWebView"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+                        <WebView Grid.Row="0" x:Name="AwfulWebView"/>
+                    </Grid>
                     <StackLayout IsVisible="{Binding IsRefreshing, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                             <ActivityIndicator IsRunning="True"/>

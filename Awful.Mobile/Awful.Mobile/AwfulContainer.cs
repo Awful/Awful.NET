@@ -35,6 +35,7 @@ namespace Awful.UI
             builder.RegisterType<AwfulViewModel>();
             builder.RegisterType<SettingsViewModel>();
             builder.RegisterType<LepersViewModel>();
+            builder.RegisterType<ForumsListViewModel>();
             builder.RegisterType<BookmarksViewModel>();
             builder.RegisterType<SigninViewModel>();
             builder.RegisterType<SAclopediaEntryListViewModel>();

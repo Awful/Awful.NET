@@ -7,7 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Autofac;
+using Awful.Mobile.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -25,6 +26,7 @@ namespace Awful.Mobile.Views
         public ForumListPage()
         {
             this.InitializeComponent();
+            this.BindingContext = App.Container.Resolve<ForumsListViewModel>();
         }
     }
 }
