@@ -20,6 +20,9 @@ using Xamarin.Forms;
 
 namespace Awful.Mobile.ViewModels
 {
+    /// <summary>
+    /// Awful Forums List View Model.
+    /// </summary>
     public class ForumsListViewModel : AwfulViewModel
     {
         private IndexPageActions forumActions;
@@ -28,9 +31,8 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumsListViewModel"/> class.
         /// </summary>
-        /// <param name="properties">Awful Properties.</param>
         /// <param name="context">Awful Context.</param>
-        public ForumsListViewModel(IPlatformProperties properties, AwfulContext context)
+        public ForumsListViewModel(AwfulContext context)
             : base(context)
         {
         }
