@@ -51,7 +51,7 @@ namespace Awful.UI.Actions
                     Id = i,
                     Title = category.Title,
                     SortOrder = i,
-                    Forums = category.SubForums.Select(n => new AwfulForum(n) { ForumCategoryId = i }).ToList(),
+                    Forums = indexPageSorted.Forums.Where(n => n.ParentId == category.Id).Select(n => new AwfulForum(n) { ForumCategoryId = i }).ToList(),
                 };
                 awfulCatList.Add(awfulCategory);
             }
