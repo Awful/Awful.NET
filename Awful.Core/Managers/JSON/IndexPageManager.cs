@@ -103,7 +103,14 @@ namespace Awful.Core.Managers.JSON
 
             foreach (var subForum in forum.SubForums)
             {
-                this.UpdateForumMetadata(subForum, forum);
+                if (parentForum != null)
+                {
+                    this.UpdateForumMetadata(subForum, parentForum);
+                }
+                else
+                {
+                    this.UpdateForumMetadata(subForum, forum);
+                }
             }
         }
     }

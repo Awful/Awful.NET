@@ -16,6 +16,7 @@ using Awful.Core.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Awful.Webview.Entities.Themes;
 using Awful.Core.Entities.Messages;
+using Awful.Core.Entities.JSON;
 
 namespace Awful.Database.Context
 {
@@ -38,6 +39,16 @@ namespace Awful.Database.Context
         /// Gets or sets the users table.
         /// </summary>
         public DbSet<UserAuth> Users { get; set; }
+
+        /// <summary>
+        /// Gets or sets the forums table.
+        /// </summary>
+        public DbSet<AwfulForum> Forums { get; set; }
+
+        /// <summary>
+        /// Gets or sets the forums categories table.
+        /// </summary>
+        public DbSet<AwfulForumCategory> ForumCategories { get; set; }
 
         /// <summary>
         /// Gets or sets the SAclopediaEntryItems table.
@@ -218,6 +229,54 @@ namespace Awful.Database.Context
 
         #endregion
 
+        #region
+
+        /// <summary>
+        /// Get Forum Categories.
+        /// </summary>
+        /// <returns>List of Forum Categories.</returns>
+        public async Task<List<AwfulForumCategory>> GetForumCategoriesAsync()
+        {
+            var categories = await this.ForumCategories.Include(y => y.Forums).ToListAsync().ConfigureAwait(false);
+            foreach (var cat in categories)
+            {
+                cat.Forums = cat.Forums.OrderBy(n => n.SortOrder).ToList();
+            }
+
+            var favorited = categories.SelectMany(n => n.Forums).Where(y => y.IsFavorited);
+            if (favorited.Any())
+            {
+                var favoriteCat = new AwfulForumCategory() { Forums = favorited.ToList(), Id = 0, SortOrder = 0 };
+                categories.Insert(0, favoriteCat);
+            }
+
+            return categories;
+        }
+
+        public async Task<List<AwfulForumCategory>> AddOrUpdateForumCategories(List<AwfulForumCategory> list)
+        {
+            var oldFavoritesCat = this.ForumCategories.FirstOrDefault(n => n.Id == 0);
+            var oldFavorites = oldFavoritesCat != null ? oldFavoritesCat.Forums : new List<AwfulForum>();
+            var filteredList = list.Where(n => n.Id != 0);
+            var forums = filteredList.SelectMany(n => n.Forums);
+            foreach (var forum in forums)
+            {
+                if (oldFavorites.Any(n => forum.Id == n.Id))
+                {
+                    forum.IsFavorited = true;
+                }
+            }
+
+            this.ForumCategories.RemoveRange(this.ForumCategories.ToList());
+            this.Forums.RemoveRange(this.Forums.ToList());
+
+            await this.ForumCategories.AddRangeAsync(filteredList).ConfigureAwait(false);
+            await this.SaveChangesAsync().ConfigureAwait(false);
+            return await this.GetForumCategoriesAsync().ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region PrivateMessage
 
         /// <summary>
@@ -357,6 +416,10 @@ namespace Awful.Database.Context
             //    .Property(c => c.DeviceTheme)
             //    .HasConversion<int>();
             modelBuilder.Entity<SAclopediaEntryItem>().HasKey(n => n.Id);
+            modelBuilder.Entity<Forum>().Ignore(b => b.Moderators);
+            modelBuilder.Entity<Forum>().Ignore(b => b.SubForums);
+            modelBuilder.Entity<Moderator>().HasNoKey();
+            modelBuilder.Entity<AwfulForumCategory>().HasMany(y => y.Forums).WithOne(yb => yb.ForumCategory);
             modelBuilder.Entity<UserAuth>().Ignore(b => b.AuthCookies);
         }
     }

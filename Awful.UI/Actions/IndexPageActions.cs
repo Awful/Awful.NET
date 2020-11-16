@@ -41,19 +41,26 @@ namespace Awful.UI.Actions
 
         public async Task<List<AwfulForumCategory>> GetForumListAsync(bool forceReload, CancellationToken token = default)
         {
-            var indexPageSorted = await this.manager.GetSortedIndexPageAsync().ConfigureAwait(false);
-            var awfulCatList = new List<AwfulForumCategory>();
-            for (int i = 0; i < indexPageSorted.ForumCategories.Count; i++)
+            var awfulCatList = await this.context.GetForumCategoriesAsync().ConfigureAwait(false);
+            if (!awfulCatList.Any() || forceReload)
             {
-                Forum category = indexPageSorted.ForumCategories[i];
-                var awfulCategory = new AwfulForumCategory()
+                var indexPageSorted = await this.manager.GetSortedIndexPageAsync().ConfigureAwait(false);
+                for (int i = 0; i < indexPageSorted.ForumCategories.Count; i++)
                 {
-                    Id = i,
-                    Title = category.Title,
-                    SortOrder = i,
-                    Forums = indexPageSorted.Forums.Where(n => n.ParentId == category.Id).Select(n => new AwfulForum(n) { ForumCategoryId = i }).ToList(),
-                };
-                awfulCatList.Add(awfulCategory);
+                    Forum category = indexPageSorted.ForumCategories[i];
+                    var id = i + 1;
+
+                    var awfulCategory = new AwfulForumCategory()
+                    {
+                        Id = id,
+                        Title = category.Title,
+                        SortOrder = id,
+                        Forums = indexPageSorted.Forums.Where(n => n.ParentId == category.Id).Select(n => new AwfulForum(n) { ForumCategoryId = id }).ToList(),
+                    };
+                    awfulCatList.Add(awfulCategory);
+                }
+
+                await this.context.AddOrUpdateForumCategories(awfulCatList).ConfigureAwait(false);
             }
 
             return awfulCatList;
