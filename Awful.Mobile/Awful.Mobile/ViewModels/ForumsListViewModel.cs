@@ -23,6 +23,7 @@ namespace Awful.Mobile.ViewModels
     public class ForumsListViewModel : AwfulViewModel
     {
         private IndexPageActions forumActions;
+        private RelayCommand refreshCommand;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumsListViewModel"/> class.
@@ -35,15 +36,39 @@ namespace Awful.Mobile.ViewModels
         }
 
         /// <summary>
-        /// Gets the SAclopedia Items.
+        /// Gets the refresh command.
+        /// </summary>
+        public RelayCommand RefreshCommand
+        {
+            get
+            {
+                return this.refreshCommand ??= new RelayCommand(async () =>
+                {
+                    if (!this.IsRefreshing)
+                    {
+                        await this.LoadForumsAsync(true).ConfigureAwait(false);
+                    }
+                });
+            }
+        }
+
+        /// <summary>
+        /// Gets the Forums Items.
         /// </summary>
         public List<ForumGroup> Items { get; private set; } = new List<ForumGroup>();
 
+        /// <summary>
+        /// Loads the Forum Categories.
+        /// </summary>
+        /// <param name="forceReload">Force Reload.</param>
+        /// <returns>Task.</returns>
         public async Task LoadForumsAsync(bool forceReload)
         {
+            this.IsRefreshing = true;
             var awfulCategories = await this.forumActions.GetForumListAsync(forceReload).ConfigureAwait(false);
             this.Items = awfulCategories.Select(n => new ForumGroup(n.Title, n.Forums)).ToList();
             this.OnPropertyChanged(nameof(this.Items));
+            this.IsRefreshing = false;
         }
 
         /// <inheritdoc/>

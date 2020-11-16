@@ -9,7 +9,9 @@
              xmlns:controls="clr-namespace:Awful.Mobile.Controls"
              x:Class="Awful.Mobile.Views.ForumListPage">
     <ContentPage.Content>
-         <CollectionView SelectionMode="Single" 
+        <RefreshView Command="{Binding RefreshCommand}"
+                 IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView SelectionMode="Single" 
                         x:Name="ForumCollection"
                          ItemsSource="{Binding Items}"
                 IsGrouped="True">
@@ -36,5 +38,6 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+            </RefreshView>
     </ContentPage.Content>
 </views:AuthorizationPage>

@@ -44,6 +44,7 @@ namespace Awful.UI.Actions
             var awfulCatList = await this.context.GetForumCategoriesAsync().ConfigureAwait(false);
             if (!awfulCatList.Any() || forceReload)
             {
+                awfulCatList = new List<AwfulForumCategory>();
                 var indexPageSorted = await this.manager.GetSortedIndexPageAsync().ConfigureAwait(false);
                 for (int i = 0; i < indexPageSorted.ForumCategories.Count; i++)
                 {

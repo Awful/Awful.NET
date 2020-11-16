@@ -269,7 +269,6 @@ namespace Awful.Database.Context
 
             this.ForumCategories.RemoveRange(this.ForumCategories.ToList());
             this.Forums.RemoveRange(this.Forums.ToList());
-
             await this.ForumCategories.AddRangeAsync(filteredList).ConfigureAwait(false);
             await this.SaveChangesAsync().ConfigureAwait(false);
             return await this.GetForumCategoriesAsync().ConfigureAwait(false);

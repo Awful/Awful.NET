@@ -103,6 +103,8 @@ namespace Awful.Core.Managers.JSON
 
             foreach (var subForum in forum.SubForums)
             {
+                // We're cheating. This is so we can get more
+                // of a flat list.
                 if (parentForum != null)
                 {
                     this.UpdateForumMetadata(subForum, parentForum);
