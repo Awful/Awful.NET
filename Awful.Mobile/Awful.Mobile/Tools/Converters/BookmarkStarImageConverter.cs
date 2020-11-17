@@ -16,7 +16,7 @@ namespace Awful.Mobile.UI.Tools.Converters
             {
                 return new FontImageSource
                 {
-                    Glyph = "",
+                    Glyph = FontAwesome.FontAwesomeIcons.Star,
                     FontFamily = "FontAwesomeSolid",
                     Size = 44
                 };
@@ -24,7 +24,7 @@ namespace Awful.Mobile.UI.Tools.Converters
 
             return new FontImageSource
             {
-                Glyph = "",
+                Glyph = FontAwesome.FontAwesomeIcons.Star,
                 FontFamily = "FontAwesomeRegular",
                 Size = 44
             };
