@@ -29,7 +29,7 @@ namespace Awful.Core.Entities.JSON
         /// <summary>
         /// Gets or sets the parent id of a forum.
         /// </summary>
-        public long ParentId { get; set; }
+        public int? ParentForumId { get; set; }
 
         /// <summary>
         /// Gets or sets the title.
@@ -65,7 +65,22 @@ namespace Awful.Core.Entities.JSON
         /// Gets or sets the list of subforums.
         /// </summary>
         [JsonProperty("sub_forums")]
-        public List<Forum> SubForums { get; set; } = new List<Forum>();
+        public virtual List<Forum> SubForums { get; set; } = new List<Forum>();
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the forum is a favorite.
+        /// </summary>
+        public bool IsFavorited { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the Sub forums is visible on the UI.
+        /// </summary>
+        public bool IsShowSubForumsVisible { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Parent Forum.
+        /// </summary>
+        public virtual Forum ParentForum { get; set; }
 
         /// <summary>
         /// Gets or sets the list of moderators for a given forum.

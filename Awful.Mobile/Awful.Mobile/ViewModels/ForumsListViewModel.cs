@@ -68,7 +68,8 @@ namespace Awful.Mobile.ViewModels
         {
             this.IsRefreshing = true;
             var awfulCategories = await this.forumActions.GetForumListAsync(forceReload).ConfigureAwait(false);
-            this.Items = awfulCategories.Select(n => new ForumGroup(n.Title, n.Forums)).ToList();
+            awfulCategories = awfulCategories.Where(y => !y.HasThreads && y.ParentForumId == null).OrderBy(y => y.SortOrder).ToList();
+            this.Items = awfulCategories.Select(n => new ForumGroup(n.Title, n.SubForums)).ToList();
             this.OnPropertyChanged(nameof(this.Items));
             this.IsRefreshing = false;
         }

@@ -4,18 +4,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Awful.Core.Entities.JSON;
 using Awful.Database.Entities;
 
 namespace Awful.UI.Entities
 {
-    public class ForumGroup : List<AwfulForum>
+    public class ForumGroup : List<Forum>
     {
         public string Title { get; private set; }
 
-        public ForumGroup(string name, List<AwfulForum> entries)
-            : base(entries)
+        public ForumGroup(string name, List<Forum> entries)
+            : base(entries.OrderBy(y => y.SortOrder))
         {
             this.Title = name;
         }
