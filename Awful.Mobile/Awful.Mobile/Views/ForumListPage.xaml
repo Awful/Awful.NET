@@ -15,29 +15,55 @@
                         x:Name="ForumCollection"
                          ItemsSource="{Binding Items}"
                 IsGrouped="True">
-                    <CollectionView.GroupHeaderTemplate>
-                        <DataTemplate>
-                            <StackLayout>
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
                                 <Label 
                     Padding="10,0,0,0"
                     Text="{Binding Title}"
                    FontSize="Title"
                    FontAttributes="Bold" />
-                                <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
-                            </StackLayout>
-                        </DataTemplate>
-                    </CollectionView.GroupHeaderTemplate>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Padding="10">
-                                <Label
+                            </Grid>
+                            <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" Padding="10">
+                             <Image WidthRequest="22"
+                                 Source="{Binding IsFavorited, Converter={StaticResource BookmarkStarImageConverter}}"
+                                 Grid.Column="0"/>
+                            <Label
+                                HorizontalOptions="FillAndExpand"
+                                Grid.Column="1"
                        FontSize="Large"
+                                VerticalOptions="Center"
                        Text="{Binding Title}"
                        FontAttributes="Bold" />
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </RefreshView>
+                             <Image WidthRequest="20" IsVisible="{Binding SubForums, Converter={StaticResource ListCountToVisibilityConverter}}"
+                                 Grid.Column="2">
+                                <Image.Source>
+                                    <FontImageSource
+                                        Glyph=""
+                                        Color="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                        Light={StaticResource BackgroundColorDark}}"
+                                        FontFamily="FontAwesomeSolid"
+                                        Size="44" />
+                                </Image.Source>
+                                </Image>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
     </ContentPage.Content>
 </views:AuthorizationPage>
