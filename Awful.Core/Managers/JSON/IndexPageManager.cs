@@ -59,7 +59,7 @@ namespace Awful.Core.Managers.JSON
 
             // The forums API returns null values for forums you can't access.
             // So if we see a zero for the ID, don't add it to the list.
-            var forums = data.Forums.SelectMany(n => this.Flatten(n)).Where(n => n.Id != 0).ToList();
+            var forums = data.Forums.SelectMany(n => this.Flatten(n)).ToList();
             for (int i = 0; i < forums.Count; i++)
             {
                 forums[i].SortOrder = i + 1;

@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Awful.Core.Entities.JSON;
 using Awful.Core.Tools;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
@@ -69,9 +70,24 @@ namespace Awful.Mobile.ViewModels
             this.IsRefreshing = true;
             var awfulCategories = await this.forumActions.GetForumListAsync(forceReload).ConfigureAwait(false);
             awfulCategories = awfulCategories.Where(y => !y.HasThreads && y.ParentForumId == null).OrderBy(y => y.SortOrder).ToList();
-            this.Items = awfulCategories.Select(n => new ForumGroup(n.Title, n.SubForums)).ToList();
+            this.Items = awfulCategories.Select(n => new ForumGroup(n.Title, n.SubForums.SelectMany(n => this.Flatten(n)).Where(y => !string.IsNullOrEmpty(y.Title)).OrderBy(n => n.SortOrder).ToList())).ToList();
             this.OnPropertyChanged(nameof(this.Items));
             this.IsRefreshing = false;
+        }
+
+        private IEnumerable<Forum> Flatten(Forum forum)
+        {
+            yield return forum;
+            if (forum.SubForums != null && forum.IsShowSubForumsVisible)
+            {
+                foreach (var child in forum.SubForums)
+                {
+                    foreach (var descendant in this.Flatten(child))
+                    {
+                        yield return descendant;
+                    }
+                }
+            }
         }
 
         /// <inheritdoc/>
