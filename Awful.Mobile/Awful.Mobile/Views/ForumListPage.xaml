@@ -49,17 +49,16 @@
                                 VerticalOptions="Center"
                        Text="{Binding Title}"
                        FontAttributes="Bold" />
-                             <Image WidthRequest="20" IsVisible="{Binding SubForums, Converter={StaticResource ListCountToVisibilityConverter}}"
+                             <Image WidthRequest="20"
+                                    Source="{Binding IsShowSubForumsVisible, Converter={StaticResource ShowSubforumsConverter}}"
+                                    IsVisible="{Binding SubForums, Converter={StaticResource ListCountToVisibilityConverter}}"
                                  Grid.Column="2">
-                                <Image.Source>
-                                    <FontImageSource
-                                        Glyph=""
-                                        Color="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
-                                        Light={StaticResource BackgroundColorDark}}"
-                                        FontFamily="FontAwesomeSolid"
-                                        Size="44" />
-                                </Image.Source>
-                                </Image>
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                NumberOfTapsRequired="1"
+                                                Command="{Binding ShowHideForumCommand}" />
+                                        </Image.GestureRecognizers>
+                                 </Image>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

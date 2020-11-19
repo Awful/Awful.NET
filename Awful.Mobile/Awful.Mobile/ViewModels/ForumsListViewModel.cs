@@ -28,6 +28,7 @@ namespace Awful.Mobile.ViewModels
     {
         private IndexPageActions forumActions;
         private RelayCommand refreshCommand;
+        private RelayCommand showHideForumCommand;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumsListViewModel"/> class.
@@ -51,6 +52,20 @@ namespace Awful.Mobile.ViewModels
                     {
                         await this.LoadForumsAsync(true).ConfigureAwait(false);
                     }
+                });
+            }
+        }
+
+        /// <summary>
+        /// Gets the refresh command.
+        /// </summary>
+        public RelayCommand ShowHideForumCommand
+        {
+            get
+            {
+                return this.showHideForumCommand ??= new RelayCommand(async () =>
+                {
+                    
                 });
             }
         }

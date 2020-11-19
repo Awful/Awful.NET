@@ -14,6 +14,7 @@
             <converters:BookmarksThreadHeaderColorConverter x:Key="BookmarksThreadHeaderColorConverter"/>
             <converters:BookmarkStarImageConverter x:Key="BookmarkStarImageConverter"/>
             <converters:ListCountToVisibilityConverter x:Key="ListCountToVisibilityConverter"/>
+            <converters:ShowSubforumsConverter x:Key="ShowSubforumsConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,4 +1,4 @@
-﻿// <copyright file="BookmarkStarImageConverter.cs" company="Drastic Actions">
+﻿// <copyright file="ShowSubforumsConverter.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
@@ -9,18 +9,18 @@ using Xamarin.Forms;
 namespace Awful.Mobile.UI.Tools.Converters
 {
     /// <summary>
-    /// Bookmark Star Image Converter.
+    /// Show Subforums Converter.
     /// </summary>
-    public class BookmarkStarImageConverter : IValueConverter
+    public class ShowSubforumsConverter : IValueConverter
     {
         /// <inheritdoc/>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool isFavorited && isFavorited)
+            if (value is bool isShowSubforums && !isShowSubforums)
             {
                 return new FontImageSource
                 {
-                    Glyph = FontAwesome.FontAwesomeIcons.Star,
+                    Glyph = FontAwesome.FontAwesomeIcons.Plus,
                     FontFamily = "FontAwesomeSolid",
                     Size = 44,
                 };
@@ -28,8 +28,8 @@ namespace Awful.Mobile.UI.Tools.Converters
 
             return new FontImageSource
             {
-                Glyph = FontAwesome.FontAwesomeIcons.Star,
-                FontFamily = "FontAwesomeRegular",
+                Glyph = FontAwesome.FontAwesomeIcons.Minus,
+                FontFamily = "FontAwesomeSolid",
                 Size = 44,
             };
         }
