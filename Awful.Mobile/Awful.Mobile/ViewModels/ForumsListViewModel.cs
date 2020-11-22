@@ -28,7 +28,9 @@ namespace Awful.Mobile.ViewModels
     {
         private IndexPageActions forumActions;
         private RelayCommand refreshCommand;
-        private RelayCommand showHideForumCommand;
+        private RelayCommand<AwfulForum> showHideForumCommand;
+        private RelayCommand<AwfulForum> isFavoriteCommand;
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumsListViewModel"/> class.
@@ -57,15 +59,31 @@ namespace Awful.Mobile.ViewModels
         }
 
         /// <summary>
-        /// Gets the refresh command.
+        /// Gets the show hide forum command.
         /// </summary>
-        public RelayCommand ShowHideForumCommand
+        public RelayCommand<AwfulForum> ShowHideForumCommand
         {
             get
             {
-                return this.showHideForumCommand ??= new RelayCommand(async () =>
+                return this.showHideForumCommand ??= new RelayCommand<AwfulForum>(async (forum) =>
                 {
-                    
+                    await this.forumActions.SetShowSubforumsForumAsync(forum).ConfigureAwait(false);
+                    await this.LoadForumsAsync(false).ConfigureAwait(false);
+                });
+            }
+        }
+
+        /// <summary>
+        /// Gets the isFavorite command.
+        /// </summary>
+        public RelayCommand<AwfulForum> IsFavoriteCommand
+        {
+            get
+            {
+                return this.isFavoriteCommand ??= new RelayCommand<AwfulForum>(async (forum) =>
+                {
+                    await this.forumActions.SetIsFavoriteForumAsync(forum).ConfigureAwait(false);
+                    await this.LoadForumsAsync(false).ConfigureAwait(false);
                 });
             }
         }
@@ -73,7 +91,7 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets the Forums Items.
         /// </summary>
-        public List<ForumGroup> Items { get; private set; } = new List<ForumGroup>();
+        public ObservableCollection<ForumGroup> Items { get; private set; } = new ObservableCollection<ForumGroup>();
 
         /// <summary>
         /// Loads the Forum Categories.
@@ -83,9 +101,15 @@ namespace Awful.Mobile.ViewModels
         public async Task LoadForumsAsync(bool forceReload)
         {
             this.IsRefreshing = true;
+            this.Items = new ObservableCollection<ForumGroup>();
             var awfulCategories = await this.forumActions.GetForumListAsync(forceReload).ConfigureAwait(false);
             awfulCategories = awfulCategories.Where(y => !y.HasThreads && y.ParentForumId == null).OrderBy(y => y.SortOrder).ToList();
-            this.Items = awfulCategories.Select(n => new ForumGroup(n.Title, n.SubForums.SelectMany(n => this.Flatten(n)).Where(y => !string.IsNullOrEmpty(y.Title)).OrderBy(n => n.SortOrder).ToList())).ToList();
+            var items = awfulCategories.Select(n => new ForumGroup(n, n.SubForums.SelectMany(n => this.Flatten(n)).OrderBy(n => n.SortOrder).ToList())).ToList();
+            foreach (var item in items)
+            {
+                this.Items.Add(item);
+            }
+
             this.OnPropertyChanged(nameof(this.Items));
             this.IsRefreshing = false;
         }

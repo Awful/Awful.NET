@@ -7,6 +7,7 @@
                                     Light={StaticResource BackgroundColorLight}}"
              xmlns:fontawesome="clr-namespace:FontAwesome" 
              xmlns:controls="clr-namespace:Awful.Mobile.Controls"
+                          x:Name="ForumsListPage"
              x:Class="Awful.Mobile.Views.ForumListPage">
     <ContentPage.Content>
         <RefreshView Command="{Binding RefreshCommand}"
@@ -41,7 +42,15 @@
                         <StackLayout Orientation="Horizontal" Padding="10">
                              <Image WidthRequest="22"
                                  Source="{Binding IsFavorited, Converter={StaticResource BookmarkStarImageConverter}}"
-                                 Grid.Column="0"/>
+                                 Grid.Column="0">
+                                  <Image.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Path=BindingContext.IsFavoriteCommand,
+                                            Source={x:Reference ForumsListPage}}"
+                                            CommandParameter="{Binding .}"
+                                            />
+                                        </Image.GestureRecognizers>
+                                 </Image>
                             <Label
                                 HorizontalOptions="FillAndExpand"
                                 Grid.Column="1"
@@ -54,9 +63,11 @@
                                     IsVisible="{Binding SubForums, Converter={StaticResource ListCountToVisibilityConverter}}"
                                  Grid.Column="2">
                                         <Image.GestureRecognizers>
-                                            <TapGestureRecognizer
-                                                NumberOfTapsRequired="1"
-                                                Command="{Binding ShowHideForumCommand}" />
+                                        <TapGestureRecognizer
+                                            Command="{Binding Path=BindingContext.ShowHideForumCommand,
+                                            Source={x:Reference ForumsListPage}}"
+                                            CommandParameter="{Binding .}"
+                                            />
                                         </Image.GestureRecognizers>
                                  </Image>
                         </StackLayout>

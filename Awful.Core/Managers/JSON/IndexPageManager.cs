@@ -89,11 +89,20 @@ namespace Awful.Core.Managers.JSON
             }
         }
 
-        private void UpdateForumMetadata(Forum forum, Forum parentForum = null)
+        private void UpdateForumMetadata(Forum forum, Forum parentForum = null, int? categoryId = null)
         {
             if (parentForum != null)
             {
                 forum.ParentForumId = parentForum.Id;
+            }
+
+            if (categoryId != null)
+            {
+                forum.ParentCategoryId = categoryId;
+            }
+            else
+            {
+                categoryId = forum.Id;
             }
 
             if (forum.SubForums == null)
@@ -101,9 +110,16 @@ namespace Awful.Core.Managers.JSON
                 return;
             }
 
+            var realForums = forum.SubForums.Where(n => n.Id > 0);
+            if (!realForums.Any())
+            {
+                forum.SubForums = null;
+                return;
+            }
+
             foreach (var subForum in forum.SubForums)
             {
-                this.UpdateForumMetadata(subForum, forum);
+                this.UpdateForumMetadata(subForum, forum, categoryId);
             }
         }
     }

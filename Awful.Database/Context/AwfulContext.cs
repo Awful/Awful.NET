@@ -273,6 +273,13 @@ namespace Awful.Database.Context
             return await this.GetForumCategoriesAsync().ConfigureAwait(false);
         }
 
+        public async Task<Forum> UpdateForumAsync(Forum forum)
+        {
+            var result = this.Forums.Update(forum);
+            await this.SaveChangesAsync().ConfigureAwait(false);
+            return forum;
+        }
+
         #endregion
 
         #region PrivateMessage

@@ -40,6 +40,40 @@ namespace Awful.UI.Actions
         }
 
         /// <summary>
+        /// Save existing forum.
+        /// </summary>
+        /// <param name="forum">Forum to update.</param>
+        /// <returns>Forum.</returns>
+        public async Task<Forum> SetIsFavoriteForumAsync(Forum forum)
+        {
+            var realForum = this.context.Forums.FirstOrDefault(n => n.Id == forum.Id);
+            if (realForum == null)
+            {
+                return forum;
+            }
+
+            realForum.IsFavorited = !realForum.IsFavorited;
+            return await this.context.UpdateForumAsync(realForum).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Save existing forum.
+        /// </summary>
+        /// <param name="forum">Forum to update.</param>
+        /// <returns>Forum.</returns>
+        public async Task<Forum> SetShowSubforumsForumAsync(Forum forum)
+        {
+            var realForum = this.context.Forums.FirstOrDefault(n => n.Id == forum.Id);
+            if (realForum == null)
+            {
+                return forum;
+            }
+
+            realForum.IsShowSubForumsVisible = !realForum.IsShowSubForumsVisible;
+            return await this.context.UpdateForumAsync(realForum).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Get the forums category list.
         /// </summary>
         /// <param name="forceReload">Force Reloading.</param>

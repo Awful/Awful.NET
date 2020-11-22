@@ -22,6 +22,7 @@ namespace Awful.Mobile.UI.Tools.Converters
                 {
                     Glyph = FontAwesome.FontAwesomeIcons.Star,
                     FontFamily = "FontAwesomeSolid",
+                    Color = Color.Yellow,
                     Size = 44,
                 };
             }

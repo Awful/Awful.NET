@@ -32,6 +32,11 @@ namespace Awful.Core.Entities.JSON
         public int? ParentForumId { get; set; }
 
         /// <summary>
+        /// Gets or sets the parent id category.
+        /// </summary>
+        public int? ParentCategoryId { get; set; }
+
+        /// <summary>
         /// Gets or sets the title.
         /// </summary>
         [JsonProperty("title")]
