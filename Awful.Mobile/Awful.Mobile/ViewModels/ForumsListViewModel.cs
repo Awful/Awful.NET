@@ -138,6 +138,26 @@ namespace Awful.Mobile.ViewModels
                 {
                     await this.forumActions.SetupFavoritesAsync(this.Items, forum).ConfigureAwait(false);
                     forum.OnPropertyChanged("IsFavorited");
+
+                    var cat = this.Items.FirstOrDefault(y => y.Id == forum.ParentCategoryId);
+                    if (cat == null)
+                    {
+                        return;
+                    }
+
+                    var forum2 = cat.FirstOrDefault(y => y.Id == forum.Id);
+                    if (forum2 == null)
+                    {
+                        return;
+                    }
+
+                    if (forum == forum2)
+                    {
+                        return;
+                    }
+
+                    forum2.IsFavorited = forum.IsFavorited;
+                    forum2.OnPropertyChanged("IsFavorited");
                 });
             }
         }
