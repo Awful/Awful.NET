@@ -238,13 +238,6 @@ namespace Awful.Database.Context
                 cat.SubForums = cat.SubForums.OrderBy(n => n.SortOrder).ToList();
             }
 
-            var favorited = categories.SelectMany(n => n.SubForums).Where(y => y.IsFavorited);
-            if (favorited.Any())
-            {
-                var favoriteCat = new Forum() { SubForums = favorited.ToList(), Id = 0, SortOrder = 0, Title = "Favorites" };
-                categories.Insert(0, favoriteCat);
-            }
-
             return categories;
         }
 

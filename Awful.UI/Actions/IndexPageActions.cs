@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -15,6 +16,7 @@ using Awful.Core.Managers.JSON;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
+using Awful.UI.Entities;
 using Awful.Webview;
 using Awful.Webview.Entities.Themes;
 
@@ -44,16 +46,23 @@ namespace Awful.UI.Actions
         /// </summary>
         /// <param name="forum">Forum to update.</param>
         /// <returns>Forum.</returns>
-        public async Task<Forum> SetIsFavoriteForumAsync(Forum forum)
+        public async Task<AwfulForum> SetIsFavoriteForumAsync(AwfulForum forum)
         {
+            if (forum == null)
+            {
+                throw new ArgumentNullException(nameof(forum));
+            }
+
             var realForum = this.context.Forums.FirstOrDefault(n => n.Id == forum.Id);
             if (realForum == null)
             {
                 return forum;
             }
 
+            forum.IsFavorited = !forum.IsFavorited;
             realForum.IsFavorited = !realForum.IsFavorited;
-            return await this.context.UpdateForumAsync(realForum).ConfigureAwait(false);
+            await this.context.UpdateForumAsync(realForum).ConfigureAwait(false);
+            return forum;
         }
 
         /// <summary>
@@ -61,16 +70,55 @@ namespace Awful.UI.Actions
         /// </summary>
         /// <param name="forum">Forum to update.</param>
         /// <returns>Forum.</returns>
-        public async Task<Forum> SetShowSubforumsForumAsync(Forum forum)
+        public async Task<AwfulForum> SetShowSubforumsForumAsync(AwfulForum forum)
         {
+            if (forum == null)
+            {
+                throw new ArgumentNullException(nameof(forum));
+            }
+
             var realForum = this.context.Forums.FirstOrDefault(n => n.Id == forum.Id);
             if (realForum == null)
             {
                 return forum;
             }
 
-            realForum.IsShowSubForumsVisible = !realForum.IsShowSubForumsVisible;
-            return await this.context.UpdateForumAsync(realForum).ConfigureAwait(false);
+            forum.IsShowSubForumsVisible = !forum.IsShowSubForumsVisible;
+            realForum.IsFavorited = !realForum.IsFavorited;
+            await this.context.UpdateForumAsync(realForum).ConfigureAwait(false);
+            return forum;
+        }
+
+        /// <summary>
+        /// Setup Favorites Groups.
+        /// </summary>
+        /// <param name="groups">Forum Groups.</param>
+        /// <param name="forum">Forum to be favorites.</param>
+        /// <returns>List of Groups.</returns>
+        public async Task<ObservableCollection<ForumGroup>> SetupFavoritesAsync(ObservableCollection<ForumGroup> groups, AwfulForum forum)
+        {
+            if (forum == null)
+            {
+                throw new ArgumentNullException(nameof(forum));
+            }
+
+            if (groups == null)
+            {
+                throw new ArgumentNullException(nameof(groups));
+            }
+
+            forum = await this.SetIsFavoriteForumAsync(forum).ConfigureAwait(false);
+            var favorites = groups.FirstOrDefault(n => n.Id == 0);
+            if (favorites != null && forum.IsFavorited)
+            {
+                favorites.Add(forum);
+            }
+            else if (favorites != null && !forum.IsFavorited)
+            {
+                favorites.Remove(forum);
+            }
+
+            return groups;
         }
 
         /// <summary>
@@ -88,6 +136,10 @@ namespace Awful.UI.Actions
                 awfulCatList = indexPageSorted.ForumCategories;
                 await this.context.AddOrUpdateForumCategories(awfulCatList).ConfigureAwait(false);
             }
+
+            var favorited = awfulCatList.SelectMany(n => n.SubForums).Where(y => y.IsFavorited);
+            var favoriteCat = new Forum() { SubForums = favorited.ToList(), Id = 0, SortOrder = 0, Title = "Favorites" };
+            awfulCatList.Insert(0, favoriteCat);
 
             return awfulCatList;
         }

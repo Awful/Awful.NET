@@ -67,9 +67,63 @@ namespace Awful.Mobile.ViewModels
             {
                 return this.showHideForumCommand ??= new RelayCommand<AwfulForum>(async (forum) =>
                 {
-                    await this.forumActions.SetShowSubforumsForumAsync(forum).ConfigureAwait(false);
-                    await this.LoadForumsAsync(false).ConfigureAwait(false);
+                    var group = this.Items.FirstOrDefault(y => y.Id == forum.ParentCategoryId);
+                    if (group == null)
+                    {
+                        return;
+                    }
+
+                    var forumIndex = group.IndexOf(forum);
+                    if (forumIndex < 0)
+                    {
+                        return;
+                    }
+
+                    forum = await this.forumActions.SetShowSubforumsForumAsync(forum).ConfigureAwait(false);
+
+                    if (forum.IsShowSubForumsVisible)
+                    {
+                        this.AddForumsFromView(group, forum);
+                    }
+                    else
+                    {
+                        this.RemoveForumsFromView(group, forum);
+                    }
+
+                    this.OnPropertyChanged(nameof(this.Items));
+                    forum.OnPropertyChanged(nameof(forum.IsShowSubForumsVisible));
                 });
+            }
+        }
+
+        private void AddForumsFromView(ForumGroup group, AwfulForum forum)
+        {
+            var forumIndex = group.IndexOf(forum);
+            for (int i = 0; i < forum.SubForums.Count; i++)
+            {
+                Forum subforum = (Forum)forum.SubForums[i];
+                group.Insert(forumIndex + (i + 1), new AwfulForum(subforum));
+            }
+        }
+
+        private void RemoveForumsFromView(ForumGroup group, AwfulForum forum)
+        {
+            var forumIndex = group.IndexOf(forum);
+            foreach (var subforum in forum.SubForums)
+            {
+                var temp = group.FirstOrDefault(n => n.Id == subforum.Id);
+                if (temp != null)
+                {
+                    group.Remove(temp);
+
+                    if (temp.SubForums.Any())
+                    {
+                        foreach (var t in temp.SubForums)
+                        {
+                            this.RemoveForumsFromView(group, (AwfulForum)t);
+                        }
+                    }
+                }
             }
         }
 
@@ -82,8 +136,8 @@ namespace Awful.Mobile.ViewModels
             {
                 return this.isFavoriteCommand ??= new RelayCommand<AwfulForum>(async (forum) =>
                 {
-                    await this.forumActions.SetIsFavoriteForumAsync(forum).ConfigureAwait(false);
-                    await this.LoadForumsAsync(false).ConfigureAwait(false);
+                    await this.forumActions.SetupFavoritesAsync(this.Items, forum).ConfigureAwait(false);
+                    forum.OnPropertyChanged("IsFavorited");
                 });
             }
         }
