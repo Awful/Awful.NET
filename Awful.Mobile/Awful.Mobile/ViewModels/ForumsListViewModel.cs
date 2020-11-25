@@ -53,13 +53,23 @@ namespace Awful.Mobile.ViewModels
             }
         }
 
-        private void AddForumsFromView(ForumGroup group, AwfulForum forum)
+        /// <summary>
+        /// Gets the Selection Entry.
+        /// </summary>
+        public Command<AwfulForum> SelectionCommand
         {
-            var forumIndex = group.IndexOf(forum);
-            for (int i = 0; i < forum.SubForums.Count; i++)
+            get
             {
-                Forum subforum = (Forum)forum.SubForums[i];
-                group.Insert(forumIndex + (i + 1), new AwfulForum(subforum));
+                return new Command<AwfulForum>((item) =>
+                {
+                    if (item != null)
+                    {
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            await Shell.Current.GoToAsync($"forumthreadlistpage?entryId={item.Id}&title={item.Title}").ConfigureAwait(false);
+                        });
+                    }
+                });
             }
         }
 

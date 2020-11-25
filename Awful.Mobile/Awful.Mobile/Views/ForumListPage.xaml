@@ -14,6 +14,8 @@
                  IsRefreshing="{Binding IsRefreshing}">
             <CollectionView SelectionMode="Single" 
                         x:Name="ForumCollection"
+                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ForumCollection}}" 
+                        SelectionChangedCommand="{Binding SelectionCommand}"
                          ItemsSource="{Binding Items}"
                 IsGrouped="True">
                 <CollectionView.GroupHeaderTemplate>

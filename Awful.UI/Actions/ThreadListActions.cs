@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Awful.Core.Entities.JSON;
 using Awful.Core.Entities.Threads;
 using Awful.Core.Managers;
 using Awful.Core.Managers.JSON;

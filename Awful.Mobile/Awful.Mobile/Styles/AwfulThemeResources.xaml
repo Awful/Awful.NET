@@ -2,126 +2,190 @@
 <ResourceDictionary
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Awful.Mobile.Tools.Markup;assembly=Awful.Mobile"
     x:Class="Awful.Mobile.Styles.AwfulThemeResources">
     <!-- Set all Colors here -->
-            <Color x:Key="BackgroundColorDark">#111111</Color>
-            <Color x:Key="BackgroundColorLight">#ffffff</Color>
-            <Color x:Key="TextColorDark">#ffffff</Color>
-            <Color x:Key="TextColorLight">#000000</Color>
+    <Color x:Key="BackgroundColorDark">#111111</Color>
+    <Color x:Key="BackgroundColorLight">#ffffff</Color>
+    <Color x:Key="TextColorDark">#ffffff</Color>
+    <Color x:Key="TextColorLight">#000000</Color>
 
-            <Color x:Key="HeaderBarBackgroundColorLight">#1483B1</Color>
-            <Color x:Key="HeaderBarBackgroundColorDark">#111111</Color>
-            <Color x:Key="HeaderBarTextColorLight">#111111</Color>
-            <Color x:Key="HeaderBarTextColorDark">#FFFFFF</Color>
+    <Color x:Key="HeaderBarBackgroundColorLight">#1483B1</Color>
+    <Color x:Key="HeaderBarBackgroundColorDark">#111111</Color>
+    <Color x:Key="HeaderBarTextColorLight">#111111</Color>
+    <Color x:Key="HeaderBarTextColorDark">#FFFFFF</Color>
 
-            <Color x:Key="ButtonBackgroundColorLight">#1483B1</Color>
-            <Color x:Key="ButtonBackgroundColorDark">#1483B1</Color>
-            <Color x:Key="ButtonBackgroundDisabledColorLight">#331483B1</Color>
-            <Color x:Key="ButtonBackgroundDisabledColorDark">#331483B1</Color>
-            <Color x:Key="ButtonTextColorLight">#FFFFFF</Color>
-            <Color x:Key="ButtonTextColorDark">#FFFFFF</Color>
+    <Color x:Key="ButtonBackgroundColorLight">#1483B1</Color>
+    <Color x:Key="ButtonBackgroundColorDark">#1483B1</Color>
+    <Color x:Key="ButtonBackgroundDisabledColorLight">#331483B1</Color>
+    <Color x:Key="ButtonBackgroundDisabledColorDark">#331483B1</Color>
+    <Color x:Key="ButtonTextColorLight">#FFFFFF</Color>
+    <Color x:Key="ButtonTextColorDark">#FFFFFF</Color>
 
 
-            <Color x:Key="AccentColorLight">#96d1ff</Color>
-            <Color x:Key="AccentColorDark">#111111</Color>
+    <Color x:Key="AccentColorLight">#96d1ff</Color>
+    <Color x:Key="AccentColorDark">#111111</Color>
 
-            <Color x:Key="ForumHeaderTextColorDark">#838383</Color>
-            <Color x:Key="ForumHeaderTextColorLight">#848484</Color>
+    <Color x:Key="ForumHeaderTextColorDark">#838383</Color>
+    <Color x:Key="ForumHeaderTextColorLight">#848484</Color>
 
-            <Color x:Key="ForumBackgroundDark">#1C1C1C</Color>
-            <Color x:Key="ForumBackgroundLight">#E4E4E4</Color>
+    <Color x:Key="ForumBackgroundDark">#1C1C1C</Color>
+    <Color x:Key="ForumBackgroundLight">#E4E4E4</Color>
 
-            <Color x:Key="PrimaryBackgroundDark">#1483B1</Color>
-            <Color x:Key="PrimaryBackgroundLight">#1483B1</Color>
-            <Color x:Key="PrimaryTextDark">#ffffff</Color>
-            <Color x:Key="PrimaryTextLight">#ffffff</Color>
+    <Color x:Key="PrimaryBackgroundDark">#1483B1</Color>
+    <Color x:Key="PrimaryBackgroundLight">#1483B1</Color>
+    <Color x:Key="PrimaryTextDark">#ffffff</Color>
+    <Color x:Key="PrimaryTextLight">#ffffff</Color>
 
-            <Style TargetType="Label">
-                <Setter Property="TextColor" 
+    <Style TargetType="Label">
+        <Setter Property="TextColor" 
                         Value="{AppThemeBinding Dark={StaticResource TextColorDark}, 
                                     Light={StaticResource TextColorLight}}" />
-            </Style>
+    </Style>
 
-            <Style TargetType="Button">
-                <Setter Property="TextColor" 
+    <Style TargetType="Button">
+        <Setter Property="TextColor" 
                         Value="{AppThemeBinding Dark={StaticResource ButtonTextColorDark}, 
                                     Light={StaticResource ButtonTextColorLight}}" />
-                <Setter Property="VisualStateManager.VisualStateGroups">
-                    <VisualStateGroupList>
-                        <VisualStateGroup x:Name="CommonStates">
-                            <VisualState x:Name="Normal">
-                                <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" 
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" 
                                             Value="{AppThemeBinding Dark={StaticResource ButtonBackgroundColorDark}, 
                                     Light={StaticResource ButtonBackgroundColorLight}}"  />
-                                </VisualState.Setters>
-                            </VisualState>
-                            <VisualState x:Name="Disabled">
-                                <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" 
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" 
                                             Value="{AppThemeBinding Dark={StaticResource ButtonBackgroundDisabledColorDark}, 
                                     Light={StaticResource ButtonBackgroundDisabledColorLight}}"  />
-                                </VisualState.Setters>
-                            </VisualState>
-                        </VisualStateGroup>
-                    </VisualStateGroupList>
-                </Setter>
-            </Style>
-            <Style TargetType="CollectionView">
-                <Setter Property="BackgroundColor"
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+    <Style TargetType="CollectionView">
+        <Setter Property="BackgroundColor"
                         Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
                                     Light={StaticResource BackgroundColorLight}}" />
-            </Style>
-            <Style TargetType="Picker">
-                <Setter Property="BackgroundColor"
+    </Style>
+    <Style TargetType="Picker">
+        <Setter Property="BackgroundColor"
                         Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
                                     Light={StaticResource BackgroundColorLight}}" />
-                 <Setter Property="TitleColor"
+        <Setter Property="TitleColor"
                         Value="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
                                     Light={StaticResource BackgroundColorDark}}" />
-                <Setter Property="TextColor"
+        <Setter Property="TextColor"
                         Value="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
                                     Light={StaticResource BackgroundColorDark}}" />
-            </Style>
-            <Style TargetType="Entry">
-                <Setter Property="TextColor"
+    </Style>
+    <Style TargetType="Entry">
+        <Setter Property="TextColor"
                         Value="{AppThemeBinding Dark={OnPlatform Android={StaticResource BackgroundColorLight}, iOS=Default},
                     Light={OnPlatform Android={StaticResource BackgroundColorDark}, iOS=Default}}" />
-                 <Setter Property="PlaceholderColor"
+        <Setter Property="PlaceholderColor"
                         Value="{AppThemeBinding Dark={OnPlatform Android={StaticResource BackgroundColorLight}, iOS=Default},
                     Light={OnPlatform Android={StaticResource BackgroundColorDark}, iOS=Default}}" />
-            </Style>
-            <Style TargetType="Grid">
-                <Setter Property="BackgroundColor"
+    </Style>
+    <Style TargetType="Grid">
+        <Setter Property="BackgroundColor"
                         Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
                                     Light={StaticResource BackgroundColorLight}}" />
-            </Style>
-            <Style TargetType="StackLayout">
-                <Setter Property="BackgroundColor"
+    </Style>
+    <Style TargetType="StackLayout">
+        <Setter Property="BackgroundColor"
                         Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
                                     Light={StaticResource BackgroundColorLight}}" />
-            </Style>
-            <Style TargetType="ActivityIndicator">
-                <Setter Property="Color"
+    </Style>
+    <Style TargetType="ActivityIndicator">
+        <Setter Property="Color"
                         Value="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
                                     Light={StaticResource BackgroundColorDark}}"
                         />
-                <Setter Property="Scale" Value="{OnPlatform Android=1, iOS=2}"
+        <Setter Property="Scale" Value="{OnPlatform Android=1, iOS=2}"
                         />
-                <Setter Property="Margin" Value="{OnPlatform Android=0, iOS=15}"
+        <Setter Property="Margin" Value="{OnPlatform Android=0, iOS=15}"
                         />
-            </Style>
-            <Style TargetType="RefreshView">
-                <Setter Property="BackgroundColor"
+    </Style>
+    <Style TargetType="RefreshView">
+        <Setter Property="BackgroundColor"
                         Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
                                     Light={StaticResource BackgroundColorLight}}" />
-                <Setter Property="RefreshColor"
+        <Setter Property="RefreshColor"
                         Value="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
                                     Light={StaticResource BackgroundColorDark}}" />
-            </Style>
-            <Style TargetType="TableView">
-                <Setter Property="BackgroundColor"
+    </Style>
+    <Style TargetType="TableView">
+        <Setter Property="BackgroundColor"
                         Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
                                     Light={StaticResource BackgroundColorLight}}" />
-            </Style>
+    </Style>
+
+    <DataTemplate x:Key="ThreadDataTemplate">
+        <Grid Padding="6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="1"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Rectangle Grid.Column="0" BackgroundColor="{Binding StarColor, Converter={StaticResource BookmarksThreadHeaderColorConverter}}"/>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0"
+                               HeightRequest="45"
+                               WidthRequest="45"
+                               VerticalOptions="Start"
+                               Margin="5"
+                               Source="{local:ImageResource Awful.Mobile.ThreadTags.missing.png}"/>
+                    <!--Fix Placeholder-->
+                    <Image Grid.Column="0"
+                               HeightRequest="45"
+                               WidthRequest="45"
+                               VerticalOptions="Start"
+                               Margin="5"
+                               Source="{Binding ImageIconLocation, Converter={StaticResource ForumImageConverter}}"/>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" FontSize="Medium" Margin="1" MaxLines="2" LineBreakMode="TailTruncation" Text="{Binding Name}" />
+                        <Grid Margin="2" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Margin="0,0,-5,0" FontSize="Micro" Text="Pages:"/>
+                            <Label Grid.Column="1" Margin="0,0,-3,0" FontAttributes="Bold" FontSize="Micro" Text="{Binding TotalPages, Mode=OneWay}" />
+                            <Label Grid.Column="2" Margin="0,0,-3,0" FontSize="Micro" Text="Killed by" />
+                            <Label Grid.Column="3" Margin="0,0,-5,0" FontAttributes="Bold" FontSize="Micro" Text="{Binding KilledBy, Mode=OneWay}" />
+                        </Grid>
+                    </Grid>
+                    <Label Grid.Column="2" 
+                                       VerticalOptions="Center" 
+                                       Margin="15" 
+                                       IsVisible="{Binding HasSeen, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                       x:Name="ReplyCount"
+                                       Text="{Binding RepliesSinceLastOpened}" />
+                </Grid>
+            </Grid>
+            <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
+        </Grid>
+    </DataTemplate>
 </ResourceDictionary>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:AuthorizationPage
+    xmlns:views="clr-namespace:Awful.Mobile.Views"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
+    x:Class="Awful.Mobile.Views.ForumThreadListPage">
+    <ContentPage.Content>
+        <CollectionView
+                        ItemTemplate="{StaticResource ThreadDataTemplate}"
+                        ItemsSource="{Binding Threads}">
+        </CollectionView>
+    </ContentPage.Content>
+</views:AuthorizationPage>

@@ -40,6 +40,7 @@ namespace Awful.UI
             builder.RegisterType<SigninViewModel>();
             builder.RegisterType<SAclopediaEntryListViewModel>();
             builder.RegisterType<SAclopediaEntryViewModel>();
+            builder.RegisterType<ForumThreadListViewModel>();
 
             return builder.Build();
         }
