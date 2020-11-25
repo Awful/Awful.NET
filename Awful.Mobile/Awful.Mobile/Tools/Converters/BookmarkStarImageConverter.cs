@@ -32,6 +32,7 @@ namespace Awful.Mobile.UI.Tools.Converters
                 Glyph = FontAwesome.FontAwesomeIcons.Star,
                 FontFamily = "FontAwesomeRegular",
                 Size = 44,
+                Color = Color.FromHex("#1483B1"),
             };
         }
 

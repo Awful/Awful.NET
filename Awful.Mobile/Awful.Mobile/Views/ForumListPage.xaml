@@ -2,7 +2,7 @@
 <views:AuthorizationPage  xmlns:views="clr-namespace:Awful.Mobile.Views"
                           xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             Title="Awful Forums Reader"
+             Title="Forums"
              BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
                                     Light={StaticResource BackgroundColorLight}}"
              xmlns:fontawesome="clr-namespace:FontAwesome" 
@@ -18,23 +18,13 @@
                 IsGrouped="True">
                 <CollectionView.GroupHeaderTemplate>
                     <DataTemplate>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="1" />
-                            </Grid.RowDefinitions>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Label 
-                    Padding="10,0,0,0"
-                    Text="{Binding Title}"
-                   FontSize="Title"
-                   FontAttributes="Bold" />
-                            </Grid>
-                            <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
-                        </Grid>
+                           <Label
+                               TextColor="{AppThemeBinding Dark={StaticResource ForumHeaderTextColorDark}, 
+                           Light={StaticResource ForumHeaderTextColorLight}}"
+                               BackgroundColor="{AppThemeBinding Dark={StaticResource ForumBackgroundDark}, 
+                           Light={StaticResource ForumBackgroundLight}}"
+                                  Padding="10"
+                                  Text="{Binding Title}" />
                     </DataTemplate>
                 </CollectionView.GroupHeaderTemplate>
                 <CollectionView.ItemTemplate>
@@ -51,13 +41,12 @@
                                             />
                                         </Image.GestureRecognizers>
                                  </Image>
-                            <Label
+                            <Label Padding="15,0,0,0"
                                 HorizontalOptions="FillAndExpand"
                                 Grid.Column="1"
-                       FontSize="Large"
+                       FontSize="19"
                        VerticalOptions="Center"
-                       Text="{Binding Title}"
-                       FontAttributes="Bold" />
+                       Text="{Binding Title}" />
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

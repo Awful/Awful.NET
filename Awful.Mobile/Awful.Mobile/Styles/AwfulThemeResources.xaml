@@ -25,6 +25,11 @@
             <Color x:Key="AccentColorLight">#96d1ff</Color>
             <Color x:Key="AccentColorDark">#111111</Color>
 
+            <Color x:Key="ForumHeaderTextColorDark">#838383</Color>
+            <Color x:Key="ForumHeaderTextColorLight">#848484</Color>
+
+            <Color x:Key="ForumBackgroundDark">#1C1C1C</Color>
+            <Color x:Key="ForumBackgroundLight">#E4E4E4</Color>
 
             <Color x:Key="PrimaryBackgroundDark">#1483B1</Color>
             <Color x:Key="PrimaryBackgroundLight">#1483B1</Color>
