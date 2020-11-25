@@ -10,6 +10,7 @@
     <Color x:Key="TextColorDark">#ffffff</Color>
     <Color x:Key="TextColorLight">#000000</Color>
 
+    <Color x:Key="ShellHeaderBarBackgroundColorLight">#FFFFFF</Color>
     <Color x:Key="HeaderBarBackgroundColorLight">#1483B1</Color>
     <Color x:Key="HeaderBarBackgroundColorDark">#111111</Color>
     <Color x:Key="HeaderBarTextColorLight">#FFFFFF</Color>

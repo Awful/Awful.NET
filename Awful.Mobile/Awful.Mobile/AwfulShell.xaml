@@ -6,7 +6,7 @@
              xmlns:fontawesome="clr-namespace:FontAwesome"
 
        FlyoutBackgroundColor="{AppThemeBinding Dark={StaticResource HeaderBarBackgroundColorDark}, 
-                                    Light={StaticResource HeaderBarBackgroundColorLight}}"
+                                    Light={StaticResource ShellHeaderBarBackgroundColorLight}}"
              x:Class="Awful.Mobile.AwfulShell">
 
      <Shell.Resources>
