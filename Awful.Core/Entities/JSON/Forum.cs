@@ -78,11 +78,6 @@ namespace Awful.Core.Entities.JSON
         public bool IsFavorited { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the Sub forums is visible on the UI.
-        /// </summary>
-        public bool IsShowSubForumsVisible { get; set; }
-
-        /// <summary>
         /// Gets or sets the Parent Forum.
         /// </summary>
         public virtual Forum ParentForum { get; set; }

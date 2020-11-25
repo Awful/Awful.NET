@@ -55,21 +55,9 @@
                                 HorizontalOptions="FillAndExpand"
                                 Grid.Column="1"
                        FontSize="Large"
-                                VerticalOptions="Center"
+                       VerticalOptions="Center"
                        Text="{Binding Title}"
                        FontAttributes="Bold" />
-                             <Image WidthRequest="20"
-                                    Source="{Binding IsShowSubForumsVisible, Converter={StaticResource ShowSubforumsConverter}}"
-                                    IsVisible="{Binding SubForums, Converter={StaticResource ListCountToVisibilityConverter}}"
-                                 Grid.Column="2">
-                                        <Image.GestureRecognizers>
-                                        <TapGestureRecognizer
-                                            Command="{Binding Path=BindingContext.ShowHideForumCommand,
-                                            Source={x:Reference ForumsListPage}}"
-                                            CommandParameter="{Binding .}"
-                                            />
-                                        </Image.GestureRecognizers>
-                                 </Image>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

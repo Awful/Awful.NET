@@ -243,21 +243,13 @@ namespace Awful.Database.Context
 
         public async Task<List<Forum>> AddOrUpdateForumCategories(List<Forum> list)
         {
-            var oldFavoritesCat = this.Forums.FirstOrDefault(n => n.Id == 0);
-            var oldFavorites = oldFavoritesCat != null ? oldFavoritesCat.SubForums : new List<Forum>();
+            var oldFavorites = await this.Forums.Where(n => n.IsFavorited).Select(n => n.Id).ToListAsync().ConfigureAwait(false);
             var filteredList = list.Where(n => n.Id != 0);
-            var forums = filteredList.SelectMany(n => n.SubForums);
-            foreach (var forum in forums)
+            var forums = filteredList.SelectMany(n => this.Flatten(n));
+            var newFavorites = forums.Where(n => oldFavorites.Contains(n.Id));
+            foreach (var forum in newFavorites)
             {
-                //if (!forums.Any(n => n.Id == forum.ParentForumId))
-                //{
-                //    forum.ParentForumId = null;
-                //}
-
-                if (oldFavorites.Any(n => forum.Id == n.Id))
-                {
-                    forum.IsFavorited = true;
-                }
+                forum.IsFavorited = true;
             }
 
             this.Forums.RemoveRange(this.Forums.ToList());
@@ -419,6 +411,21 @@ namespace Awful.Database.Context
             modelBuilder.Entity<Moderator>().HasNoKey();
             modelBuilder.Entity<Forum>().HasMany(y => y.SubForums).WithOne().HasForeignKey(p => p.ParentForumId);
             modelBuilder.Entity<UserAuth>().Ignore(b => b.AuthCookies);
+        }
+
+        private IEnumerable<Forum> Flatten(Forum forum)
+        {
+            yield return forum;
+            if (forum.SubForums != null)
+            {
+                foreach (var child in forum.SubForums)
+                {
+                    foreach (var descendant in this.Flatten(child))
+                    {
+                        yield return descendant;
+                    }
+                }
+            }
         }
     }
 }

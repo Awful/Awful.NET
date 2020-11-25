@@ -66,62 +66,6 @@ namespace Awful.UI.Actions
         }
 
         /// <summary>
-        /// Save existing forum.
-        /// </summary>
-        /// <param name="forum">Forum to update.</param>
-        /// <returns>Forum.</returns>
-        public async Task<AwfulForum> SetShowSubforumsForumAsync(AwfulForum forum)
-        {
-            if (forum == null)
-            {
-                throw new ArgumentNullException(nameof(forum));
-            }
-
-            var realForum = this.context.Forums.FirstOrDefault(n => n.Id == forum.Id);
-            if (realForum == null)
-            {
-                return forum;
-            }
-
-            forum.IsShowSubForumsVisible = !forum.IsShowSubForumsVisible;
-            realForum.IsFavorited = !realForum.IsFavorited;
-            await this.context.UpdateForumAsync(realForum).ConfigureAwait(false);
-            return forum;
-        }
-
-        /// <summary>
-        /// Setup Favorites Groups.
-        /// </summary>
-        /// <param name="groups">Forum Groups.</param>
-        /// <param name="forum">Forum to be favorites.</param>
-        /// <returns>List of Groups.</returns>
-        public async Task<ObservableCollection<ForumGroup>> SetupFavoritesAsync(ObservableCollection<ForumGroup> groups, AwfulForum forum)
-        {
-            if (forum == null)
-            {
-                throw new ArgumentNullException(nameof(forum));
-            }
-
-            if (groups == null)
-            {
-                throw new ArgumentNullException(nameof(groups));
-            }
-
-            forum = await this.SetIsFavoriteForumAsync(forum).ConfigureAwait(false);
-            var favorites = groups.FirstOrDefault(n => n.Id == 0);
-            if (favorites != null && forum.IsFavorited)
-            {
-                favorites.Add(forum);
-            }
-            else if (favorites != null && !forum.IsFavorited)
-            {
-                favorites.Remove(forum);
-            }
-
-            return groups;
-        }
-
-        /// <summary>
         /// Get the forums category list.
         /// </summary>
         /// <param name="forceReload">Force Reloading.</param>
@@ -136,11 +80,6 @@ namespace Awful.UI.Actions
                 awfulCatList = indexPageSorted.ForumCategories;
                 await this.context.AddOrUpdateForumCategories(awfulCatList).ConfigureAwait(false);
             }
-
-            var favorited = awfulCatList.SelectMany(n => n.SubForums).Where(y => y.IsFavorited);
-            var favoriteCat = new Forum() { SubForums = favorited.ToList(), Id = 0, SortOrder = 0, Title = "Favorites" };
-            awfulCatList.Insert(0, favoriteCat);
-
             return awfulCatList;
         }
     }

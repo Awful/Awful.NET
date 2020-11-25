@@ -79,7 +79,8 @@ namespace Awful.Core.Managers.JSON
             yield return forum;
             if (forum.SubForums != null)
             {
-                foreach (var child in forum.SubForums)
+                var forums = forum.SubForums.Where(n => n.Id > 0 && !string.IsNullOrEmpty(n.Title));
+                foreach (var child in forums)
                 {
                     foreach (var descendant in this.Flatten(child))
                     {
@@ -110,16 +111,16 @@ namespace Awful.Core.Managers.JSON
                 return;
             }
 
-            var realForums = forum.SubForums.Where(n => n.Id > 0);
-            if (!realForums.Any())
+            foreach (var subForum in forum.SubForums.ToList())
             {
-                forum.SubForums = null;
-                return;
-            }
-
-            foreach (var subForum in forum.SubForums)
-            {
-                this.UpdateForumMetadata(subForum, forum, categoryId);
+               if (subForum.Id > 0 && !string.IsNullOrEmpty(subForum.Title))
+               {
+                    this.UpdateForumMetadata(subForum, forum, categoryId);
+               }
+               else
+               {
+                    forum.SubForums.Remove(subForum);
+               }
             }
         }
     }

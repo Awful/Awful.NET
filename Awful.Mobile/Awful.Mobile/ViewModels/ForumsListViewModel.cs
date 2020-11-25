@@ -28,9 +28,7 @@ namespace Awful.Mobile.ViewModels
     {
         private IndexPageActions forumActions;
         private RelayCommand refreshCommand;
-        private RelayCommand<AwfulForum> showHideForumCommand;
         private RelayCommand<AwfulForum> isFavoriteCommand;
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumsListViewModel"/> class.
@@ -50,48 +48,7 @@ namespace Awful.Mobile.ViewModels
             {
                 return this.refreshCommand ??= new RelayCommand(async () =>
                 {
-                    if (!this.IsRefreshing)
-                    {
-                        await this.LoadForumsAsync(true).ConfigureAwait(false);
-                    }
-                });
-            }
-        }
-
-        /// <summary>
-        /// Gets the show hide forum command.
-        /// </summary>
-        public RelayCommand<AwfulForum> ShowHideForumCommand
-        {
-            get
-            {
-                return this.showHideForumCommand ??= new RelayCommand<AwfulForum>(async (forum) =>
-                {
-                    var group = this.Items.FirstOrDefault(y => y.Id == forum.ParentCategoryId);
-                    if (group == null)
-                    {
-                        return;
-                    }
-
-                    var forumIndex = group.IndexOf(forum);
-                    if (forumIndex < 0)
-                    {
-                        return;
-                    }
-
-                    forum = await this.forumActions.SetShowSubforumsForumAsync(forum).ConfigureAwait(false);
-
-                    if (forum.IsShowSubForumsVisible)
-                    {
-                        this.AddForumsFromView(group, forum);
-                    }
-                    else
-                    {
-                        this.RemoveForumsFromView(group, forum);
-                    }
-
-                    this.OnPropertyChanged(nameof(this.Items));
-                    forum.OnPropertyChanged(nameof(forum.IsShowSubForumsVisible));
+                    await this.LoadForumsAsync(true).ConfigureAwait(false);
                 });
             }
         }
@@ -136,28 +93,30 @@ namespace Awful.Mobile.ViewModels
             {
                 return this.isFavoriteCommand ??= new RelayCommand<AwfulForum>(async (forum) =>
                 {
-                    await this.forumActions.SetupFavoritesAsync(this.Items, forum).ConfigureAwait(false);
+                    await this.forumActions.SetIsFavoriteForumAsync(forum).ConfigureAwait(false);
                     forum.OnPropertyChanged("IsFavorited");
 
-                    var cat = this.Items.FirstOrDefault(y => y.Id == forum.ParentCategoryId);
-                    if (cat == null)
+                    var favoritedForumGroup = this.Items.FirstOrDefault(n => n.Id == 0);
+
+                    if (favoritedForumGroup == null)
                     {
-                        return;
+                        favoritedForumGroup = CreateFavoriteForumGroup();
+                        this.Items.Insert(0, favoritedForumGroup);
                     }
 
-                    var forum2 = cat.FirstOrDefault(y => y.Id == forum.Id);
-                    if (forum2 == null)
+                    if (forum.IsFavorited)
                     {
-                        return;
+                        favoritedForumGroup.Add(forum);
+                    }
+                    else
+                    {
+                        favoritedForumGroup.Remove(forum);
                     }
 
-                    if (forum == forum2)
+                    if (!favoritedForumGroup.Any())
                     {
-                        return;
+                        this.Items.Remove(favoritedForumGroup);
                     }
-
-                    forum2.IsFavorited = forum.IsFavorited;
-                    forum2.OnPropertyChanged("IsFavorited");
                 });
             }
         }
@@ -184,14 +143,39 @@ namespace Awful.Mobile.ViewModels
                 this.Items.Add(item);
             }
 
+            var favoritedForums = items.SelectMany(y => y).Where(y => y.IsFavorited);
+            if (favoritedForums.Any())
+            {
+                var favoritedForumGroup = CreateFavoriteForumGroup();
+
+                foreach (var item in favoritedForums)
+                {
+                    favoritedForumGroup.Add(item);
+                }
+
+                this.Items.Insert(0, favoritedForumGroup);
+            }
+
             this.OnPropertyChanged(nameof(this.Items));
             this.IsRefreshing = false;
+        }
+
+        /// <inheritdoc/>
+        public override async Task OnLoad()
+        {
+            this.forumActions = new IndexPageActions(this.Client, this.Context);
+            this.IsRefreshing = true;
+        }
+
+        private static ForumGroup CreateFavoriteForumGroup()
+        {
+            return new ForumGroup(new Forum() { Id = 0, Title = "Favorites" }, new List<Forum>());
         }
 
         private IEnumerable<Forum> Flatten(Forum forum)
         {
             yield return forum;
-            if (forum.SubForums != null && forum.IsShowSubForumsVisible)
+            if (forum.SubForums != null)
             {
                 foreach (var child in forum.SubForums)
                 {
@@ -201,13 +185,6 @@ namespace Awful.Mobile.ViewModels
                     }
                 }
             }
-        }
-
-        /// <inheritdoc/>
-        public override async Task OnLoad()
-        {
-            this.forumActions = new IndexPageActions(this.Client, this.Context);
-            await this.LoadForumsAsync(false).ConfigureAwait(false);
         }
     }
 }
