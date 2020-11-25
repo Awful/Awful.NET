@@ -12,7 +12,7 @@
 
     <Color x:Key="HeaderBarBackgroundColorLight">#1483B1</Color>
     <Color x:Key="HeaderBarBackgroundColorDark">#111111</Color>
-    <Color x:Key="HeaderBarTextColorLight">#111111</Color>
+    <Color x:Key="HeaderBarTextColorLight">#FFFFFF</Color>
     <Color x:Key="HeaderBarTextColorDark">#FFFFFF</Color>
 
     <Color x:Key="ButtonBackgroundColorLight">#1483B1</Color>
@@ -171,10 +171,10 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Margin="0,0,-5,0" FontSize="Micro" Text="Pages:"/>
-                            <Label Grid.Column="1" Margin="0,0,-3,0" FontAttributes="Bold" FontSize="Micro" Text="{Binding TotalPages, Mode=OneWay}" />
-                            <Label Grid.Column="2" Margin="0,0,-3,0" FontSize="Micro" Text="Killed by" />
-                            <Label Grid.Column="3" Margin="0,0,-5,0" FontAttributes="Bold" FontSize="Micro" Text="{Binding KilledBy, Mode=OneWay}" />
+                            <Label Grid.Column="0" Margin="0,0,-5,0" Text="Pages:"/>
+                            <Label Grid.Column="1" Margin="0,0,-3,0" FontAttributes="Bold" Text="{Binding TotalPages, Mode=OneWay}" />
+                            <Label Grid.Column="2" Margin="0,0,-3,0" Text="Killed by" />
+                            <Label Grid.Column="3" Margin="0,0,-5,0" FontAttributes="Bold" LineBreakMode="TailTruncation" Text="{Binding KilledBy, Mode=OneWay}" />
                         </Grid>
                     </Grid>
                     <Label Grid.Column="2" 
