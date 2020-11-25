@@ -32,7 +32,10 @@
             <state:StateView StateKey="Custom" CustomStateKey="SignedIn">
                 <RefreshView Command="{Binding RefreshCommand}"
                  IsRefreshing="{Binding IsRefreshing}">
-                    <CollectionView
+                    <CollectionView x:Name="ThreadListCollection"
+                        SelectionMode="Single"
+                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ThreadListCollection}}" 
+                        SelectionChangedCommand="{Binding SelectionCommand}"
                         ItemTemplate="{StaticResource ThreadDataTemplate}"
                         ItemsSource="{Binding Threads}">
                     </CollectionView>

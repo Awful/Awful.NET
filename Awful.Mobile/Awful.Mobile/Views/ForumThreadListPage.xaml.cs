@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Autofac;
 using Awful.Mobile.ViewModels;
 using Xamarin.Forms;
@@ -46,9 +47,9 @@ namespace Awful.Mobile.Views
         /// </summary>
         protected override async void OnAppearing()
         {
+            this.vm.Title = this.SATitle;
+            this.vm.ForumId = Convert.ToInt32(this.EntryId, CultureInfo.InvariantCulture);
             base.OnAppearing();
-            this.Title = this.SATitle;
-            await this.vm.LoadThreadListAsync(Convert.ToInt32(this.EntryId), 0).ConfigureAwait(false);
         }
     }
 }

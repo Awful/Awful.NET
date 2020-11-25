@@ -41,6 +41,7 @@ namespace Awful.UI
             builder.RegisterType<SAclopediaEntryListViewModel>();
             builder.RegisterType<SAclopediaEntryViewModel>();
             builder.RegisterType<ForumThreadListViewModel>();
+            builder.RegisterType<ForumThreadViewModel>();
 
             return builder.Build();
         }

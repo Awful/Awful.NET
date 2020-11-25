@@ -5,6 +5,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Awful.Core.Entities.Threads;
 using Awful.Core.Tools;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
@@ -55,6 +56,26 @@ namespace Awful.Mobile.ViewModels
                 return this.refreshCommand ??= new RelayCommand(async () =>
                 {
                     await this.RefreshBookmarksAsync().ConfigureAwait(false);
+                });
+            }
+        }
+
+        /// <summary>
+        /// Gets the Selection Entry.
+        /// </summary>
+        public Command<AwfulThread> SelectionCommand
+        {
+            get
+            {
+                return new Command<AwfulThread>((item) =>
+                {
+                    if (item != null)
+                    {
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            await Shell.Current.GoToAsync($"forumthreadpage?entryId={item.ThreadId}&title={item.Name}").ConfigureAwait(false);
+                        });
+                    }
                 });
             }
         }

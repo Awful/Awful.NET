@@ -3,12 +3,19 @@
     xmlns:views="clr-namespace:Awful.Mobile.Views"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="{Binding Title}"
     BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
     x:Class="Awful.Mobile.Views.ForumThreadListPage">
     <ContentPage.Content>
-        <CollectionView
+        <RefreshView Command="{Binding RefreshCommand}"
+                 IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView x:Name="ThreadListCollection"
+                        SelectionMode="Single"
+                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ThreadListCollection}}" 
+                        SelectionChangedCommand="{Binding SelectionCommand}"
                         ItemTemplate="{StaticResource ThreadDataTemplate}"
                         ItemsSource="{Binding Threads}">
-        </CollectionView>
+            </CollectionView>
+        </RefreshView>
     </ContentPage.Content>
 </views:AuthorizationPage>

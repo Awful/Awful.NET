@@ -33,6 +33,7 @@ namespace Awful.Mobile
             this.settings = new SettingsAction(this.context);
             Routing.RegisterRoute("saclopediaentrypage", typeof(SAclopediaEntryPage));
             Routing.RegisterRoute("forumthreadlistpage", typeof(ForumThreadListPage));
+            Routing.RegisterRoute("forumthreadpage", typeof(ForumThreadPage));
             Routing.RegisterRoute("signinpage", typeof(SigninPage));
             Device.BeginInvokeOnMainThread(async () =>
             {

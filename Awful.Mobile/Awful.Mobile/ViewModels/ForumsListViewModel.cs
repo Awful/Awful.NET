@@ -174,7 +174,10 @@ namespace Awful.Mobile.ViewModels
         public override async Task OnLoad()
         {
             this.forumActions = new IndexPageActions(this.Client, this.Context);
-            this.IsRefreshing = true;
+            if (!this.Items.Any())
+            {
+                this.IsRefreshing = true;
+            }
         }
 
         private static ForumGroup CreateFavoriteForumGroup()
