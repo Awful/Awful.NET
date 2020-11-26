@@ -32,6 +32,7 @@ namespace Awful.UI.ViewModels
         private TemplateHandler handler;
         private ThreadPostActions threadActions;
         private ThreadPost threadPost;
+        private RelayCommand refreshCommand;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumThreadViewModel"/> class.
@@ -55,6 +56,23 @@ namespace Awful.UI.ViewModels
         {
             get { return this.threadPost; }
             set { this.SetProperty(ref this.threadPost, value); }
+        }
+
+        /// <summary>
+        /// Gets the refresh command.
+        /// </summary>
+        public RelayCommand RefreshCommand
+        {
+            get
+            {
+                return this.refreshCommand ??= new RelayCommand(async () =>
+                {
+                    if (this.ThreadPost != null)
+                    {
+                        await this.LoadTemplate(this.threadPost.ThreadId, this.threadPost.CurrentPage).ConfigureAwait(false);
+                    }
+                });
+            }
         }
 
         /// <summary>

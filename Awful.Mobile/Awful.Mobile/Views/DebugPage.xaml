@@ -4,10 +4,7 @@
              Title="Debug"
              x:Class="Awful.Mobile.Views.DebugPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <WebView x:Name="TestWebview"
+            />
     </ContentPage.Content>
 </ContentPage>

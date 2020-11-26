@@ -12,8 +12,8 @@
                  Priority="0">
         <ToolbarItem.IconImageSource>
              <FontImageSource
-                    Color="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
-                                    Light={StaticResource BackgroundColorLight}}"
+                    Color="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}"
                     FontFamily="FontAwesomeSolid"
                     Glyph=""
                     Size="20"
@@ -28,7 +28,11 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <WebView Grid.Row="0" x:Name="AwfulWebView"/>
+                <RefreshView
+                    Command="{Binding RefreshCommand}"
+                    IsRefreshing="{Binding IsRefreshing}">
+                    <WebView Grid.Row="0" x:Name="AwfulWebView"/>
+                </RefreshView>
                 <Grid
                     HorizontalOptions="CenterAndExpand"
                     Grid.Row="1">

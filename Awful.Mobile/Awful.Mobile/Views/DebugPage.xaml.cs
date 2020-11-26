@@ -15,6 +15,9 @@ namespace Awful.Mobile.Views
         public DebugPage()
         {
             InitializeComponent();
+            var source = new HtmlWebViewSource();
+            source.Html = "<html style=\"background-color: black;\"></html>";
+            this.TestWebview.Source = source;
         }
     }
 }
