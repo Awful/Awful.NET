@@ -17,5 +17,11 @@ namespace Awful.Mobile.Views
             InitializeComponent();
             this.BindingContext = App.Container.Resolve<BookmarksViewModel>();
         }
+
+        protected override void OnAppearing()
+        {
+            this.ThreadListCollection.SelectedItem = null;
+            base.OnAppearing();
+        }
     }
 }

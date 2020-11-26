@@ -47,6 +47,7 @@ namespace Awful.Mobile.Views
         /// </summary>
         protected override async void OnAppearing()
         {
+            this.ThreadListCollection.SelectedItem = null;
             this.vm.Title = this.SATitle;
             this.vm.ForumId = Convert.ToInt32(this.EntryId, CultureInfo.InvariantCulture);
             base.OnAppearing();

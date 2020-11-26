@@ -6,6 +6,21 @@
     Title="{Binding Title}"
     BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
     x:Class="Awful.Mobile.Views.ForumThreadListPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Post" IsEnabled="{Binding IsSignedIn}"
+        Order="Primary"
+                 Priority="0">
+        <ToolbarItem.IconImageSource>
+             <FontImageSource
+                    Color="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}"
+                    FontFamily="FontAwesomeSolid"
+                    Glyph=""
+                    Size="20"
+                    />
+        </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <RefreshView Command="{Binding RefreshCommand}"
                  IsRefreshing="{Binding IsRefreshing}">

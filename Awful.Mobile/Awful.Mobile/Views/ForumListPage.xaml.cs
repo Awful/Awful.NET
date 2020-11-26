@@ -28,5 +28,11 @@ namespace Awful.Mobile.Views
             this.InitializeComponent();
             this.BindingContext = App.Container.Resolve<ForumsListViewModel>();
         }
+
+        protected override void OnAppearing()
+        {
+            this.ForumCollection.SelectedItem = null;
+            base.OnAppearing();
+        }
     }
 }

@@ -43,24 +43,22 @@
                         ItemsSource="{Binding Items}"
                 IsGrouped="True">
                     <CollectionView.GroupHeaderTemplate>
-                        <DataTemplate>
-                            <StackLayout>
-                                <Label 
-                    Padding="10,0,0,0"
-                    Text="{Binding Name}"
-                   FontSize="Title"
-                   FontAttributes="Bold" />
-                                <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
-                            </StackLayout>
-                        </DataTemplate>
+                    <DataTemplate>
+                           <Label
+                               TextColor="{AppThemeBinding Dark={StaticResource ForumHeaderTextColorDark}, 
+                           Light={StaticResource ForumHeaderTextColorLight}}"
+                               BackgroundColor="{AppThemeBinding Dark={StaticResource ForumBackgroundDark}, 
+                           Light={StaticResource ForumBackgroundLight}}"
+                                  Padding="10"
+                                  Text="{Binding Name}" />
+                    </DataTemplate>
                     </CollectionView.GroupHeaderTemplate>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid Padding="10">
                                 <Label
-                       FontSize="Large"
-                       Text="{Binding Title}"
-                       FontAttributes="Bold" />
+                       FontSize="19"
+                       Text="{Binding Title}" />
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

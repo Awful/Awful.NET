@@ -36,7 +36,7 @@ namespace Awful.Mobile.UI.Tools.Converters
                 case "bm5":
                     return Color.Purple;
                 default:
-                    return Color.Orange;
+                    return Color.FromHex("#1483B1");
             }
         }
 
