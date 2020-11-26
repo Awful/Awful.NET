@@ -159,13 +159,21 @@
                                VerticalOptions="Start"
                                Margin="5"
                                Source="{Binding ImageIconLocation, Converter={StaticResource ForumImageConverter}}"/>
+                    <Image
+                        Grid.Column="0"
+                        Margin="0,50,0,0"
+                        VerticalOptions="End"
+                        WidthRequest="45"
+                        HeightRequest="20"
+                        IsVisible="{Binding StoreImageIconEndpoint, Converter={StaticResource StringToVisibilityConverter}}"
+                        Source="{Binding StoreImageIconEndpoint}" />
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" FontSize="Medium" Margin="1" MaxLines="2" LineBreakMode="TailTruncation" Text="{Binding Name}" />
-                        <Grid Margin="2" Grid.Row="1">
+                        <Grid Margin="2" VerticalOptions="End" Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
