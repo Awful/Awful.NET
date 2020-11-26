@@ -3,6 +3,7 @@
                           xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Title="{Binding Title}"
+             xmlns:fontawesome="clr-namespace:FontAwesome"
              xmlns:state="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
              BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
              x:Class="Awful.Mobile.Views.ForumThreadPage">
@@ -22,29 +23,66 @@
     </ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <Grid>
-            <Grid>
+                    <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
-                <RefreshView
+                <RefreshView Grid.Row="0"
                     Command="{Binding RefreshCommand}"
                     IsRefreshing="{Binding IsRefreshing}">
-                    <WebView Grid.Row="0" x:Name="AwfulWebView"/>
+                    <WebView x:Name="AwfulWebView"/>
                 </RefreshView>
-                <Grid
-                    HorizontalOptions="CenterAndExpand"
-                    Grid.Row="1">
-                    <Label Text="{Binding ThreadPost, Converter={StaticResource ThreadPageTextConverter}}" />
-                </Grid>
-            </Grid>
-            <StackLayout IsVisible="{Binding IsRefreshing, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                <StackLayout Grid.Row="0" IsVisible="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                     <ActivityIndicator IsRunning="True"/>
                     <Label Text="{Binding LoadingText}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
                 </StackLayout>
-            </StackLayout>
-        </Grid>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal"
+                    Grid.Row="1">
+                     <Button Grid.Column="0"
+                             Margin="15,0,0,0"
+                            HorizontalOptions="StartAndExpand"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.Cogs}" 
+                            FontFamily="FontAwesomeSolid"
+                            BackgroundColor="Transparent"  />
+                    <Grid HorizontalOptions="CenterAndExpand">
+                        <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                          <Button Grid.Column="0"
+                            Command="{Binding FirstPageCommand}"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.FastBackward}" 
+                            FontFamily="FontAwesomeSolid"
+                            BackgroundColor="Transparent"  />
+                    <Button Grid.Column="1"
+                            Command="{Binding PreviousPageCommand}"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.ArrowLeft}" 
+                            FontFamily="FontAwesomeSolid"
+                            BackgroundColor="Transparent"  />
+                    <Label Grid.Column="2" VerticalOptions="Center"  Text="{Binding ThreadPost, Converter={StaticResource ThreadPageTextConverter}}" />
+                    <Button Grid.Column="3"
+                            Command="{Binding NextPageCommand}"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.ArrowRight}" 
+                            FontFamily="FontAwesomeSolid"
+                            BackgroundColor="Transparent"  />
+                      <Button Grid.Column="4"
+                            Command="{Binding LastPageCommand}"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.FastForward}" 
+                            FontFamily="FontAwesomeSolid"
+                            BackgroundColor="Transparent"  />
+                    </Grid>
+                    <Button Margin="0,0,15,0"
+                            HorizontalOptions="EndAndExpand"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.Hamburger}" 
+                            FontFamily="FontAwesomeSolid"
+                            BackgroundColor="Transparent"  />
+                </StackLayout>
+            </Grid>
     </ContentPage.Content>
 </views:AuthorizationPage>

@@ -2,6 +2,7 @@
 <ResourceDictionary
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fontawesome="clr-namespace:FontAwesome"
     xmlns:local="clr-namespace:Awful.Mobile.Tools.Markup;assembly=Awful.Mobile"
     x:Class="Awful.Mobile.Styles.AwfulThemeResources">
     <!-- Set all Colors here -->
@@ -138,7 +139,7 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Rectangle Grid.Column="0" BackgroundColor="{Binding StarColor, Converter={StaticResource BookmarksThreadHeaderColorConverter}}"/>
+                <Rectangle Grid.Column="0" BackgroundColor="{Binding ., Converter={StaticResource BookmarksThreadHeaderColorConverter}}"/>
                 <Grid Grid.Column="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -170,12 +171,11 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Margin="0,0,-5,0" Text="Pages:"/>
-                            <Label Grid.Column="1" Margin="0,0,-3,0" FontAttributes="Bold" Text="{Binding TotalPages, Mode=OneWay}" />
-                            <Label Grid.Column="2" Margin="0,0,-3,0" Text="Killed by" />
-                            <Label Grid.Column="3" Margin="0,0,-5,0" FontAttributes="Bold" LineBreakMode="TailTruncation" Text="{Binding KilledBy, Mode=OneWay}" />
+                            <Label Grid.Column="0" Margin="0,0,-3,0" FontSize="12" FontAttributes="Bold" Text="{Binding TotalPages, Mode=OneWay}" />
+                            <Label Grid.Column="1" Margin="0,0,-5,0" FontSize="10" VerticalTextAlignment="Center" FontFamily="FontAwesomeRegular" Text="{x:Static fontawesome:FontAwesomeIcons.File}"/>
+                            <Label Grid.Column="2" Margin="4,0,-3,0" FontSize="12" Text="Killed by" />
+                            <Label Grid.Column="3" Margin="0,0,0,0" FontSize="12" FontAttributes="Bold" LineBreakMode="TailTruncation" Text="{Binding KilledBy, Mode=OneWay}" />
                         </Grid>
                     </Grid>
                     <Label Grid.Column="2" 

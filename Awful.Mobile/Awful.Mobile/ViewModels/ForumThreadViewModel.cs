@@ -33,6 +33,7 @@ namespace Awful.UI.ViewModels
         private ThreadPostActions threadActions;
         private ThreadPost threadPost;
         private RelayCommand refreshCommand;
+        private bool selfInvoked;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumThreadViewModel"/> class.
@@ -76,19 +77,93 @@ namespace Awful.UI.ViewModels
         }
 
         /// <summary>
+        /// Gets the First Page Command.
+        /// </summary>
+        public Command FirstPageCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (this.ThreadPost != null)
+                    {
+                        await this.LoadTemplate(this.threadPost.ThreadId, 1).ConfigureAwait(false);
+                    }
+                });
+            }
+        }
+
+        /// <summary>
+        /// Gets the Previous Page Command.
+        /// </summary>
+        public Command PreviousPageCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (this.ThreadPost != null)
+                    {
+                        if (this.threadPost.CurrentPage - 1 >= 1)
+                        {
+                            await this.LoadTemplate(this.threadPost.ThreadId, this.threadPost.CurrentPage - 1).ConfigureAwait(false);
+                        }
+                    }
+                });
+            }
+        }
+
+        /// <summary>
+        /// Gets the Next Page Command.
+        /// </summary>
+        public Command NextPageCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (this.ThreadPost != null)
+                    {
+                        if (this.threadPost.CurrentPage + 1 <= this.threadPost.TotalPages)
+                        {
+                            await this.LoadTemplate(this.threadPost.ThreadId, this.threadPost.CurrentPage + 1).ConfigureAwait(false);
+                        }
+                    }
+                });
+            }
+        }
+
+        /// <summary>
+        /// Gets the Last Page Command.
+        /// </summary>
+        public Command LastPageCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (this.ThreadPost != null)
+                    {
+                        await this.LoadTemplate(this.threadPost.ThreadId, this.threadPost.TotalPages).ConfigureAwait(false);
+                    }
+                });
+            }
+        }
+
+        /// <summary>
         /// Loads Thread Template into webview.
         /// </summary>
         /// <returns>Task.</returns>
         public async Task LoadTemplate(int threadId, int pageNumber, bool gotoNewestPost = false)
         {
-            this.IsRefreshing = true;
+            this.IsBusy = true;
             var defaults = await this.GenerateDefaultOptionsAsync().ConfigureAwait(false);
             this.ThreadPost = await this.threadActions.GetThreadPostsAsync(threadId, pageNumber, gotoNewestPost).ConfigureAwait(false);
             var source = new HtmlWebViewSource();
             source.Html = this.threadActions.RenderThreadPostView(this.ThreadPost, defaults);
             Device.BeginInvokeOnMainThread(() => this.WebView.Source = source);
             await Task.Delay(2000).ConfigureAwait(false);
-            this.IsRefreshing = false;
+            this.IsBusy = false;
         }
 
         /// <inheritdoc/>

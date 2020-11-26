@@ -22,6 +22,7 @@ namespace Awful.Mobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     [QueryProperty("EntryId", "entryId")]
     [QueryProperty("PageNumber", "pageNumber")]
+    [QueryProperty("GoToNewPost", "goToNewPost")]
     [QueryProperty("SATitle", "title")]
     public partial class ForumThreadPage : AuthorizationPage
     {
@@ -49,6 +50,11 @@ namespace Awful.Mobile.Views
         public string PageNumber { get; set; } = "1";
 
         /// <summary>
+        /// Gets or sets a value indicating whether to go to the newest post.
+        /// </summary>
+        public bool GoToNewPost { get; set; } = false;
+
+        /// <summary>
         /// Gets or sets the entry title.
         /// </summary>
         public string SATitle { get; set; }
@@ -64,7 +70,9 @@ namespace Awful.Mobile.Views
                 this.vm.Title = this.SATitle;
             }
 
-            await this.vm.LoadTemplate(Convert.ToInt32(this.EntryId, CultureInfo.InvariantCulture), Convert.ToInt32(this.PageNumber, CultureInfo.InvariantCulture)).ConfigureAwait(false);
+            var entry = Convert.ToInt32(this.EntryId, CultureInfo.InvariantCulture);
+            var pageNumber = Convert.ToInt32(this.PageNumber, CultureInfo.InvariantCulture);
+            await this.vm.LoadTemplate(entry, pageNumber, this.GoToNewPost).ConfigureAwait(false);
         }
     }
 }

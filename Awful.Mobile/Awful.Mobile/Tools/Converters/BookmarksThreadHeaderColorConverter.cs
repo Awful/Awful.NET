@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Awful.Core.Entities.Threads;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.UI.Tools.Converters
@@ -20,24 +21,33 @@ namespace Awful.Mobile.UI.Tools.Converters
         /// <inheritdoc/>
         public object Convert(object value, Type targetType, object parameter, CultureInfo language)
         {
-            var item = (string)value;
-            switch (item)
+            if (value is Thread awfulThread)
             {
-                case "bm0":
-                    return Color.Orange;
-                case "bm1":
-                    return Color.Red;
-                case "bm2":
+                if (awfulThread.IsSticky)
+                {
                     return Color.Yellow;
-                case "bm3":
-                    return Color.Blue;
-                case "bm4":
-                    return Color.Green;
-                case "bm5":
-                    return Color.Purple;
-                default:
-                    return Color.FromHex("#1483B1");
+                }
+
+                switch (awfulThread.StarColor)
+                {
+                    case "bm0":
+                        return Color.Orange;
+                    case "bm1":
+                        return Color.Red;
+                    case "bm2":
+                        return Color.Yellow;
+                    case "bm3":
+                        return Color.Blue;
+                    case "bm4":
+                        return Color.Green;
+                    case "bm5":
+                        return Color.Purple;
+                    default:
+                        return Color.FromHex("#1483B1");
+                }
             }
+
+            return Color.FromHex("#1483B1");
         }
 
         /// <inheritdoc/>

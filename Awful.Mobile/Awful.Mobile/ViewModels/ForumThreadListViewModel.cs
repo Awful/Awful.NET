@@ -62,7 +62,7 @@ namespace Awful.Mobile.ViewModels
                     {
                         Device.BeginInvokeOnMainThread(async () =>
                         {
-                            await Shell.Current.GoToAsync($"forumthreadpage?entryId={item.ThreadId}&title={item.Name}").ConfigureAwait(false);
+                            await Shell.Current.GoToAsync($"forumthreadpage?entryId={item.ThreadId}&title={item.Name}&goToNewPost={item.HasSeen}").ConfigureAwait(false);
                         });
                     }
                 });
