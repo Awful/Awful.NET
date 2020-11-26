@@ -6,9 +6,35 @@
              xmlns:state="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
              BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
              x:Class="Awful.Mobile.Views.ForumThreadPage">
+    <ContentPage.ToolbarItems>
+    <ToolbarItem Text="Post" IsEnabled="{Binding IsSignedIn}"
+        Order="Primary"
+                 Priority="0">
+        <ToolbarItem.IconImageSource>
+             <FontImageSource
+                    Color="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
+                                    Light={StaticResource BackgroundColorLight}}"
+                    FontFamily="FontAwesomeSolid"
+                    Glyph=""
+                    Size="20"
+                    />
+        </ToolbarItem.IconImageSource>
+    </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>
-            <WebView x:Name="AwfulWebView"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <WebView Grid.Row="0" x:Name="AwfulWebView"/>
+                <Grid
+                    HorizontalOptions="CenterAndExpand"
+                    Grid.Row="1">
+                    <Label Text="{Binding ThreadPost, Converter={StaticResource ThreadPageTextConverter}}" />
+                </Grid>
+            </Grid>
             <StackLayout IsVisible="{Binding IsRefreshing, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                     <ActivityIndicator IsRunning="True"/>

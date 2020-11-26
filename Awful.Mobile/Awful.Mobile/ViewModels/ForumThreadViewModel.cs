@@ -31,6 +31,7 @@ namespace Awful.UI.ViewModels
     {
         private TemplateHandler handler;
         private ThreadPostActions threadActions;
+        private ThreadPost threadPost;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumThreadViewModel"/> class.
@@ -48,6 +49,15 @@ namespace Awful.UI.ViewModels
         public WebView WebView { get; set; }
 
         /// <summary>
+        /// Gets or sets the current state of the view.
+        /// </summary>
+        public ThreadPost ThreadPost
+        {
+            get { return this.threadPost; }
+            set { this.SetProperty(ref this.threadPost, value); }
+        }
+
+        /// <summary>
         /// Loads Thread Template into webview.
         /// </summary>
         /// <returns>Task.</returns>
@@ -55,9 +65,9 @@ namespace Awful.UI.ViewModels
         {
             this.IsRefreshing = true;
             var defaults = await this.GenerateDefaultOptionsAsync().ConfigureAwait(false);
-            var entry = await this.threadActions.GetThreadPostsAsync(threadId, pageNumber, gotoNewestPost).ConfigureAwait(false);
+            this.ThreadPost = await this.threadActions.GetThreadPostsAsync(threadId, pageNumber, gotoNewestPost).ConfigureAwait(false);
             var source = new HtmlWebViewSource();
-            source.Html = this.threadActions.RenderThreadPostView(entry, defaults);
+            source.Html = this.threadActions.RenderThreadPostView(this.ThreadPost, defaults);
             Device.BeginInvokeOnMainThread(() => this.WebView.Source = source);
             await Task.Delay(2000).ConfigureAwait(false);
             this.IsRefreshing = false;

@@ -7,6 +7,7 @@
     <Application.Resources>
         <ResourceDictionary Source="Styles/AwfulThemeResources.xaml" />
         <ResourceDictionary>
+            <converters:ThreadPageTextConverter x:Key="ThreadPageTextConverter"/>
             <converters1:IntEnumConverter x:Key="IntEnumConverter"/>
             <converters:BooleanToVisibilityInverter x:Key="BooleanToVisibilityInverter"/>
             <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
