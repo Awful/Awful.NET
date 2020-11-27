@@ -15,6 +15,7 @@ using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Webview;
 using Awful.Webview.Entities.Themes;
+using Microsoft.EntityFrameworkCore;
 
 namespace Awful.UI.Actions
 {
@@ -41,10 +42,20 @@ namespace Awful.UI.Actions
         /// Get all Bookmarks for given user.
         /// </summary>
         /// <returns>List of Thread Bookmarks.</returns>
+        public async Task<List<AwfulThread>> GetAllBookmarksCachedAsync()
+        {
+            var bookmarks = await this.context.BookmarkThreads.ToListAsync().ConfigureAwait(false);
+            return bookmarks.OrderBy(n => n.SortOrder).ToList();
+        }
+
+        /// <summary>
+        /// Get all Bookmarks for given user.
+        /// </summary>
+        /// <returns>List of Thread Bookmarks.</returns>
         /// <param name="forceRefresh">Force Refresh.</param>
         public async Task<List<AwfulThread>> GetAllBookmarksAsync(bool forceRefresh = false)
         {
-            var bookmarks = this.context.BookmarkThreads.ToList();
+            var bookmarks = await this.context.BookmarkThreads.ToListAsync().ConfigureAwait(false);
             if (!bookmarks.Any() || forceRefresh)
             {
                 var threads = await this.manager.GetAllBookmarksAsync().ConfigureAwait(false);

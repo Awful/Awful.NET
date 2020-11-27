@@ -5,9 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Autofac;
-using Awful.Core.Tools;
-using Awful.Database.Context;
+
 using Foundation;
 using UIKit;
 
@@ -21,25 +19,18 @@ namespace Awful.Mobile.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
-        /// <summary>
-        /// This method is invoked when the application has loaded and is ready to run. In this
-        /// method you should instantiate the window, load the UI into it and then make the window
-        /// visible.
-        ///
-        /// You have 17 seconds to return from this method, or iOS will terminate your application.
-        /// </summary>
-        /// <param name="app">UIApplication.</param>
-        /// <param name="options">iOS Dictionary.</param>
-        /// <returns>Boolean.</returns>
+        // This method is invoked when the application has loaded and is ready to run. In this 
+        // method you should instantiate the window, load the UI into it and then make the window
+        // visible.
+        //
+        // You have 17 seconds to return from this method, or iOS will terminate your application.
+
+        /// <inheritdoc/>
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            SQLitePCL.Batteries.Init();
-            global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
-            global::Xamarin.Forms.Forms.SetFlags("Shapes_Experimental");
             global::Xamarin.Forms.Forms.Init();
-            var builder = new ContainerBuilder();
-            builder.RegisterType<iOSPlatformProperties>().As<IPlatformProperties>();
-            this.LoadApplication(new App(builder));
+            this.LoadApplication(new App());
+
             return base.FinishedLaunching(app, options);
         }
     }

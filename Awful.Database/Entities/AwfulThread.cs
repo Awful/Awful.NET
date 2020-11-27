@@ -4,8 +4,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 using System.Text;
 using Awful.Core.Entities.Threads;
 using Force.DeepCloner;
@@ -15,7 +17,7 @@ namespace Awful.Database.Entities
     /// <summary>
     /// Awful Database Thread.
     /// </summary>
-    public class AwfulThread : Thread
+    public class AwfulThread : Thread, INotifyPropertyChanged
     {
 
         /// <summary>
@@ -33,6 +35,9 @@ namespace Awful.Database.Entities
         {
             parent.DeepCloneTo(this);
         }
+
+        /// <inheritdoc/>
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Gets or sets the ID.
@@ -54,5 +59,26 @@ namespace Awful.Database.Entities
         /// Gets or sets the Sort Order.
         /// </summary>
         public int SortOrder { get; set; }
+
+        public void Update(AwfulThread parent)
+        {
+            parent.DeepCloneTo(this);
+            this.OnPropertyChanged();
+        }
+
+        /// <summary>
+        /// On Property Changed.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        public void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            var changed = this.PropertyChanged;
+            if (changed == null)
+            {
+                return;
+            }
+
+            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:converters="clr-namespace:Awful.Mobile.UI.Tools.Converters" 
+             xmlns:converters1="clr-namespace:Awful.UI.Tools.Converters;assembly=Awful.UI"
+             x:Class="Awful.Mobile.App">
+    <Application.Resources>
+        <ResourceDictionary Source="Styles/AwfulThemeResources.xaml" />
+        <ResourceDictionary>
+            <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+            <converters:ThreadPageTextConverter x:Key="ThreadPageTextConverter"/>
+            <converters1:IntEnumConverter x:Key="IntEnumConverter"/>
+            <converters:BooleanToVisibilityInverter x:Key="BooleanToVisibilityInverter"/>
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <converters:ForumImageConverter x:Key="ForumImageConverter"/>
+            <converters:BookmarksThreadHeaderColorConverter x:Key="BookmarksThreadHeaderColorConverter"/>
+            <converters:BookmarkStarImageConverter x:Key="BookmarkStarImageConverter"/>
+            <converters:ListCountToVisibilityConverter x:Key="ListCountToVisibilityConverter"/>
+            <converters:ShowSubforumsConverter x:Key="ShowSubforumsConverter"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

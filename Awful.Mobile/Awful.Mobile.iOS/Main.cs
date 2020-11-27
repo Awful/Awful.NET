@@ -12,15 +12,15 @@ using UIKit;
 namespace Awful.Mobile.iOS
 {
     /// <summary>
-    /// Application.
+    /// iOS Application.
     /// </summary>
     public class Application
     {
         /// <summary>
         /// This is the main entry point of the application.
         /// </summary>
-        /// <param name="args">Arguments.</param>
-        private static void Main(string[] args)
+        /// <param name="args">iOS Arguments.</param>
+        static void Main(string[] args)
         {
             // if you want to use a different Application Delegate class from "AppDelegate"
             // you can specify it here.

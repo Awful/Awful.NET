@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Awful.Core.Entities.Threads;
@@ -26,6 +27,7 @@ namespace Awful.Mobile.ViewModels
         private BookmarkAction bookmarks;
         private ObservableCollection<AwfulThread> threads;
         private RelayCommand refreshCommand;
+        private AwfulThread selectedThread;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BookmarksViewModel"/> class.
@@ -55,7 +57,9 @@ namespace Awful.Mobile.ViewModels
             {
                 return this.refreshCommand ??= new RelayCommand(async () =>
                 {
+                    this.IsRefreshing = true;
                     await this.RefreshBookmarksAsync().ConfigureAwait(false);
+                    this.IsRefreshing = false;
                 });
             }
         }
@@ -88,7 +92,12 @@ namespace Awful.Mobile.ViewModels
         /// <returns>Task.</returns>
         public async Task LoadBookmarksAsync(bool reload = false, int forceDelay = 0)
         {
-            this.IsRefreshing = true;
+            if (this.IsBusy)
+            {
+                return;
+            }
+
+            this.IsBusy = true;
             await Task.Delay(forceDelay).ConfigureAwait(false);
             var threads = await this.bookmarks.GetAllBookmarksAsync(reload).ConfigureAwait(false);
             this.Threads = new ObservableCollection<AwfulThread>();
@@ -106,7 +115,7 @@ namespace Awful.Mobile.ViewModels
                 this.SetState(LayoutState.Custom, "SignedIn");
             }
 
-            this.IsRefreshing = false;
+            this.IsBusy = false;
         }
 
         /// <inheritdoc/>
@@ -115,7 +124,10 @@ namespace Awful.Mobile.ViewModels
             if (this.IsSignedIn)
             {
                 this.bookmarks = new BookmarkAction(this.Client, this.Context);
-                await this.LoadBookmarksAsync().ConfigureAwait(false);
+                if (!this.Threads.Any())
+                {
+                    await this.LoadBookmarksAsync().ConfigureAwait(false);
+                }
             }
         }
 

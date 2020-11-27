@@ -1,11 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="../../UI.props" />
   <Import Project="../../Database.props" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7C9302DF-E85A-4693-A04B-2176B2C22B41}</ProjectGuid>
+    <ProjectGuid>{562E5702-3483-47DA-B7F1-F1DA336CF5A2}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{c9e5eea5-ca05-42a1-839b-61506e0a37df}</TemplateGuid>
     <OutputType>Library</OutputType>
@@ -18,7 +18,7 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v11.0</TargetFrameworkVersion>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidUseAapt2>true</AndroidUseAapt2>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
@@ -55,7 +55,6 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AndroidPlatformProperties.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,8 +65,6 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\Tabbar.xml" />
-    <AndroidResource Include="Resources\layout\Toolbar.xml" />
     <AndroidResource Include="Resources\values\styles.xml" />
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\mipmap-anydpi-v26\icon.xml" />
@@ -87,27 +84,26 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Awful.Core\Awful.Core.csproj">
-      <Project>{9eac913e-0139-4a7a-9f95-cafdea30e1ef}</Project>
-      <Name>Awful.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Awful.Database\Awful.Database.csproj">
-      <Project>{65199a93-a502-4a1d-9f32-d802f6078ab4}</Project>
-      <Name>Awful.Database</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Awful.UI\Awful.UI.csproj">
-      <Project>{4a2edb48-2471-4ec6-ac14-0b75dafb5da6}</Project>
-      <Name>Awful.UI</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Awful.Mobile\Awful.Mobile.csproj">
       <Project>{D50E5AED-AEF5-4CBA-ACA1-267D06B95CD4}</Project>
       <Name>Awful.Mobile</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Awful.Core\Awful.Core.csproj">
+      <Project>{9EAC913E-0139-4A7A-9F95-CAFDEA30E1EF}</Project>
+      <Name>Awful.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Awful.Database\Awful.Database.csproj">
+      <Project>{65199A93-A502-4A1D-9F32-D802F6078AB4}</Project>
+      <Name>Awful.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Awful.UI\Awful.UI.csproj">
+      <Project>{4A2EDB48-2471-4EC6-AC14-0B75DAFB5DA6}</Project>
+      <Name>Awful.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Awful.Webview\Awful.Webview.csproj">
+      <Project>{BFB758D3-9E69-4201-9758-382FA090BAC5}</Project>
+      <Name>Awful.Webview</Name>
+    </ProjectReference>
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <ProjectExtensions>
-    <VisualStudio>
-      <UserProperties TriggeredFromHotReload="False" />
-    </VisualStudio>
-  </ProjectExtensions>
+ <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

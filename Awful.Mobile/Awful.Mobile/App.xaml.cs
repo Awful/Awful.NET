@@ -3,27 +3,24 @@
 // </copyright>
 
 using System;
-using Autofac;
-using Awful.Database.Context;
-using Awful.Mobile.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Awful.Mobile
 {
     /// <summary>
-    /// Awful App Startup.
+    /// Awful App.
     /// </summary>
     public partial class App : Application
     {
-        public static IContainer Container;
-
-        public App(ContainerBuilder builder)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="App"/> class.
+        /// </summary>
+        public App()
         {
-            Device.SetFlags(new string[] { "Shell_UWP_Experimental", "AppTheme_Experimental", "CollectionView_Experimental", "Shapes_Experimental" });
             this.InitializeComponent();
-            Container = Awful.UI.AwfulContainer.BuildContainer(builder);
-            this.MainPage = new AwfulShell();
+
+            this.MainPage = new MainPage();
         }
 
         protected override void OnStart()
