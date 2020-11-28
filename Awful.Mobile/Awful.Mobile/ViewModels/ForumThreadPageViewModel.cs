@@ -73,7 +73,9 @@ namespace Awful.Mobile.ViewModels
                 {
                     if (this.ThreadPost != null)
                     {
+                        this.IsRefreshing = true;
                         await this.LoadTemplate(this.threadPost.ThreadId, this.threadPost.CurrentPage).ConfigureAwait(false);
+                        this.IsRefreshing = false;
                     }
                 });
             }
@@ -160,20 +162,27 @@ namespace Awful.Mobile.ViewModels
         public async Task LoadTemplate(int threadId, int pageNumber, bool gotoNewestPost = false)
         {
             this.IsBusy = true;
-            defaults = await this.GenerateDefaultOptionsAsync().ConfigureAwait(false);
+            this.defaults = await this.GenerateDefaultOptionsAsync().ConfigureAwait(false);
             this.ThreadPost = await this.threadActions.GetThreadPostsAsync(threadId, pageNumber, gotoNewestPost).ConfigureAwait(false);
             this.Title = this.ThreadPost.Name;
-            if (this.thread != null)
+            if (this.thread != null && this.thread.RepliesSinceLastOpened > 0)
             {
-                var totalNumberReplies = (this.ThreadPost.TotalPages * EndPoints.DefaultNumberPerPage) - this.ThreadPost.Posts.Count(n => n.HasSeen);
-                var totalReplies = this.thread.ReplyCount - totalNumberReplies;
-                if (totalReplies < 0)
+                var test = ((this.ThreadPost.TotalPages - 1) * EndPoints.DefaultNumberPerPage) + this.ThreadPost.Posts.Count;
+                this.thread.ReplyCount = test;
+                var seenReplies = this.thread.ReplyCount - this.thread.RepliesSinceLastOpened;
+                var seenPages = seenReplies / EndPoints.DefaultNumberPerPage;
+                if (this.ThreadPost.CurrentPage > seenPages)
                 {
-                    totalReplies = 0;
-                }
+                    var readReplies = ((this.ThreadPost.CurrentPage - (seenPages + 1)) * EndPoints.DefaultNumberPerPage) + this.ThreadPost.Posts.Count;
+                    var totalReplies = this.thread.RepliesSinceLastOpened - readReplies;
+                    if (totalReplies < 0)
+                    {
+                        totalReplies = 0;
+                    }
 
-                this.thread.ReplyCount = totalReplies;
-                this.thread.OnPropertyChanged("ReplyCount");
+                    this.thread.RepliesSinceLastOpened = totalReplies;
+                    this.thread.OnPropertyChanged("RepliesSinceLastOpened");
+                }
             }
 
             var source = new HtmlWebViewSource();

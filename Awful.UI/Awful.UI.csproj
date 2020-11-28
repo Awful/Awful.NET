@@ -16,5 +16,6 @@
     <Folder Include="Tools\" />
     <Folder Include="Tools\Converters\" />
     <Folder Include="Styles\" />
+    <Folder Include="Pages\" />
   </ItemGroup>
 </Project>

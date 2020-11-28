@@ -95,8 +95,13 @@ namespace Awful.Mobile
             if (Device.Idiom == TargetIdiom.Desktop || Device.Idiom == TargetIdiom.Tablet)
             {
                 FlyoutPage flyout = (FlyoutPage)App.Current.MainPage;
-                TabbedPage mp = (TabbedPage)flyout.Flyout;
-                await mp.CurrentPage.Navigation.PushAsync(page).ConfigureAwait(false);
+                if (flyout.Flyout is NavigationPage navPage)
+                {
+                    if (navPage.CurrentPage is TabbedPage tb)
+                    {
+                        await tb.CurrentPage.Navigation.PushAsync(page).ConfigureAwait(false);
+                    }
+                }
             }
             else
             {

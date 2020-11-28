@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:Awful.Mobile.Pages"
     BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
-    Title="Master"
+    Title="Menu"
     NavigationPage.HasNavigationBar="False"
     x:Class="Awful.Mobile.Pages.MasterPage">
     <TabbedPage.Children>
