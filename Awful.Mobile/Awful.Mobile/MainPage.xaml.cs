@@ -15,7 +15,7 @@ namespace Awful.Mobile
     /// <summary>
     /// Main Page. Used for Navigation.
     /// </summary>
-    public partial class MainPage : ContentPage
+    public partial class MainPage : FlyoutPage
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MainPage"/> class.
@@ -23,6 +23,23 @@ namespace Awful.Mobile
         public MainPage()
         {
             this.InitializeComponent();
+            this.SizeChanged += this.MainPage_SizeChanged;
+        }
+
+        private void MainPage_SizeChanged(object sender, EventArgs e)
+        {
+            if (this.Width < 400)
+            {
+                this.FlyoutLayoutBehavior = FlyoutLayoutBehavior.Popover;
+            }
+            else
+            {
+                this.FlyoutLayoutBehavior = FlyoutLayoutBehavior.Split;
+            }
+        }
+
+        protected override void OnAppearing()
+        {
         }
     }
 }

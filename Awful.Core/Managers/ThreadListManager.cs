@@ -39,7 +39,7 @@ namespace Awful.Core.Managers
         /// <returns>A ThreadList.</returns>
         public async Task<ThreadList> GetForumThreadListAsync(int forumId, int page, CancellationToken token = default)
         {
-            var pageUrl = string.Format(CultureInfo.InvariantCulture, EndPoints.ForumPage, forumId) + string.Format(CultureInfo.InvariantCulture, EndPoints.PageNumber, page);
+            var pageUrl = string.Format(CultureInfo.InvariantCulture, EndPoints.ForumPage, forumId, EndPoints.DefaultNumberPerPage) + string.Format(CultureInfo.InvariantCulture, EndPoints.PageNumber, page);
             var result = await this.webManager.GetDataAsync(pageUrl, token).ConfigureAwait(false);
             var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
             var threadList = new ThreadList();

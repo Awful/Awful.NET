@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:BasePage
+    xmlns:pages="clr-namespace:Awful.Mobile.Pages"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="More"
+    x:Class="Awful.Mobile.Pages.ExtraPage">
+    <TableView Margin="0,-40,0,0" Intent="Settings">
+        <TableRoot>
+            <TableSection Title="">
+                <ImageCell ClassId="SAclopediaCell" Tapped="ImageCell_Tapped"
+                    TextColor="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                           Light={StaticResource BackgroundColorDark}}" Text="SAclopedia">
+                    <ImageCell.ImageSource>
+                        <FontImageSource
+                            Color="{StaticResource TabBarSelectedColor}"
+                            FontFamily="FontAwesomeSolid"
+                            Glyph=""
+                            Size="24"
+                        />
+                    </ImageCell.ImageSource>
+                </ImageCell>
+                <ImageCell ClassId="LepersCell" Tapped="ImageCell_Tapped"
+                    TextColor="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}"
+                    Text="Leper's Colony">
+                    <ImageCell.ImageSource>
+                        <FontImageSource
+                            Color="{StaticResource TabBarSelectedColor}"
+                            FontFamily="FontAwesomeSolid"
+                            Glyph=""
+                            Size="24"
+                        />
+                    </ImageCell.ImageSource>
+                </ImageCell>
+                <ImageCell ClassId="UserProfileCell" Tapped="ImageCell_Tapped"
+                    TextColor="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}"
+                    Text="User Profile">
+                    <ImageCell.ImageSource>
+                        <FontImageSource
+                            Color="{StaticResource TabBarSelectedColor}"
+                            FontFamily="FontAwesomeSolid"
+                            Glyph=""
+                            Size="24"
+                        />
+                    </ImageCell.ImageSource>
+                </ImageCell>
+                 <ImageCell ClassId="AboutCell" Tapped="ImageCell_Tapped"
+                    TextColor="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}"
+                    Text="About">
+                    <ImageCell.ImageSource>
+                        <FontImageSource
+                            Color="{StaticResource TabBarSelectedColor}"
+                            FontFamily="FontAwesomeSolid"
+                            Glyph=""
+                            Size="24"
+                        />
+                    </ImageCell.ImageSource>
+                </ImageCell>
+            </TableSection>
+        </TableRoot>
+    </TableView>
+</pages:BasePage>

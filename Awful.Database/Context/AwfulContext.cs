@@ -17,6 +17,7 @@ using Awful.Core.Utilities;
 using Awful.Database.Entities;
 using Awful.Webview.Entities.Themes;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Awful.Database.Context
 {
@@ -66,6 +67,13 @@ namespace Awful.Database.Context
         public DbSet<AwfulPM> PrivateMessages { get; set; }
 
         private IPlatformProperties PlatformProperties { get; set; }
+
+        public void ResetDatabase()
+        {
+            this.GetDependencies().StateManager.ResetState();
+            this.Database.EnsureDeleted();
+            this.Database.EnsureCreated();
+        }
 
         #region SAclopedia
 
@@ -144,9 +152,9 @@ namespace Awful.Database.Context
         /// </summary>
         /// <param name="userAuth">The user auth.</param>
         /// <returns>Number of rows changed.</returns>
-        public UserAuth GetDefaultUser()
+        public async Task<UserAuth> GetDefaultUserAsync()
         {
-            var user = this.Users.FirstOrDefault(node => node.IsDefaultUser);
+            var user = await this.Users.FirstOrDefaultAsync(node => node.IsDefaultUser).ConfigureAwait(false);
             if (user != null)
             {
                 user.AuthCookies = CookieManager.LoadCookie(this.PlatformProperties.CookiePath);

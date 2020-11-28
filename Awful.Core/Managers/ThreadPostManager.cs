@@ -46,7 +46,7 @@ namespace Awful.Core.Managers
                 pageNumber = 1;
             }
 
-            var baseUri = string.Format(CultureInfo.InvariantCulture, EndPoints.ThreadPage, threadId);
+            var baseUri = string.Format(CultureInfo.InvariantCulture, EndPoints.ThreadPage, threadId, EndPoints.DefaultNumberPerPage);
             if (goToNewestPost)
             {
                 baseUri += string.Format(CultureInfo.InvariantCulture, EndPoints.GotoNewPost);

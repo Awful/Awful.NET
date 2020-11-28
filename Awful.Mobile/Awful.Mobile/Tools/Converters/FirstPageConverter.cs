@@ -1,38 +1,34 @@
-﻿// <copyright file="IntEnumConverter.cs" company="Drastic Actions">
+﻿// <copyright file="FirstPageConverter.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
 using System;
 using System.Globalization;
+using Awful.Core.Entities.Threads;
 using Xamarin.Forms;
 
-namespace Awful.UI.Tools.Converters
+namespace Awful.Mobile.Tools.Converters
 {
     /// <summary>
-    /// Convert int to enum.
+    /// First Page Converter.
     /// </summary>
-    public class IntEnumConverter : IValueConverter
+    public class FirstPageConverter : IValueConverter
     {
         /// <inheritdoc/>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is Enum)
+            if (value is ThreadPost thread)
             {
-                return (int)value;
+                return thread.CurrentPage > 1;
             }
 
-            return 0;
+            return false;
         }
 
         /// <inheritdoc/>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is int)
-            {
-                return Enum.ToObject(targetType, value);
-            }
-
-            return 0;
+            throw new NotImplementedException();
         }
     }
 }

@@ -57,7 +57,8 @@ namespace Awful.UI.ViewModels
 
         public async Task SetupVM()
         {
-            this.user = this.Context.GetDefaultUser();
+            this.user = await this.Context.GetDefaultUserAsync().ConfigureAwait(false);
+            this.OnPropertyChanged("IsSignedIn");
             this.Client = new AwfulClient(this.user != null ? this.user.AuthCookies : new System.Net.CookieContainer());
             this.SetupLoginStatus();
             await this.OnLoad().ConfigureAwait(false);
@@ -101,19 +102,27 @@ namespace Awful.UI.ViewModels
         }
 
         /// <summary>
-        /// Gets the login command.
+        /// Gets the go back command.
         /// </summary>
-        public Command GoBackCommand
+        public Command GoBackModalCommand
         {
             get
             {
-                return new Command(this.GoBack);
+                return new Command(this.GoModalBack);
             }
         }
 
-        public async void GoBack()
+        public async void GoModalBack()
         {
-            await Shell.Current.GoToAsync("..").ConfigureAwait(false);
+            var mainPage = Application.Current.MainPage;
+            if (mainPage is FlyoutPage flyoutPage)
+            {
+                await flyoutPage.Navigation.PopModalAsync().ConfigureAwait(false);
+            }
+            else if (mainPage is TabbedPage tabbedPage)
+            {
+                await tabbedPage.CurrentPage.Navigation.PopModalAsync().ConfigureAwait(false);
+            }
         }
 
         public async void OpenLogin()

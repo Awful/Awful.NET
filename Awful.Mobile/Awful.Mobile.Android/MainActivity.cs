@@ -7,6 +7,8 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Autofac;
+using Awful.Core.Tools;
 
 namespace Awful.Mobile.Droid
 {
@@ -31,7 +33,9 @@ namespace Awful.Mobile.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            this.LoadApplication(new App());
+            var builder = new ContainerBuilder();
+            builder.RegisterType<AndroidPlatformProperties>().As<IPlatformProperties>();
+            this.LoadApplication(new App(builder));
         }
     }
 }

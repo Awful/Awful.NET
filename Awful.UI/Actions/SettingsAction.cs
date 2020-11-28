@@ -57,18 +57,20 @@ namespace Awful.UI.Actions
 
         public void SetAppTheme(DeviceColorTheme theme)
         {
-            switch (theme)
-            {
-                case DeviceColorTheme.Unspecified:
-                    Application.Current.UserAppTheme = OSAppTheme.Unspecified;
-                    break;
-                case DeviceColorTheme.Light:
-                    Application.Current.UserAppTheme = OSAppTheme.Light;
-                    break;
-                case DeviceColorTheme.Dark:
-                    Application.Current.UserAppTheme = OSAppTheme.Dark;
-                    break;
-            }
+            Device.BeginInvokeOnMainThread(() => {
+                switch (theme)
+                {
+                    case DeviceColorTheme.Unspecified:
+                        Application.Current.UserAppTheme = OSAppTheme.Unspecified;
+                        break;
+                    case DeviceColorTheme.Light:
+                        Application.Current.UserAppTheme = OSAppTheme.Light;
+                        break;
+                    case DeviceColorTheme.Dark:
+                        Application.Current.UserAppTheme = OSAppTheme.Dark;
+                        break;
+                }
+            });
         }
     }
 }

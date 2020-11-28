@@ -10,6 +10,11 @@ namespace Awful.Core.Utilities
     public static class EndPoints
     {
         /// <summary>
+        /// Default Threads/Posts Per Page.
+        /// </summary>
+        public const int DefaultNumberPerPage = 30;
+
+        /// <summary>
         /// Query string constant for going to a new post in a given thread.
         /// </summary>
         public const string GotoNewPost = "&goto=newpost";
@@ -46,7 +51,7 @@ namespace Awful.Core.Utilities
         /// URL for getting a given forum list.
         /// First parameter: Forum ID.
         /// </summary>
-        public const string ForumPage = BaseUrl + "forumdisplay.php?forumid={0}";
+        public const string ForumPage = BaseUrl + "forumdisplay.php?forumid={0}&perpage={1}";
 
         /// <summary>
         /// Base URL for resetting the read state of a given thread.
@@ -159,7 +164,7 @@ namespace Awful.Core.Utilities
         /// URL for getting a given thread.
         /// First Parameter: Thread Id.
         /// </summary>
-        public const string ThreadPage = BaseUrl + "showthread.php?threadid={0}";
+        public const string ThreadPage = BaseUrl + "showthread.php?threadid={0}&perpage={1}";
 
         /// <summary>
         /// URL for the front page of Something Awful. Not Used.

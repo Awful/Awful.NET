@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:BasePage
+    xmlns:pages="clr-namespace:Awful.Mobile.Pages"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Awful.Mobile.Pages.LoginPage">
+    <ContentPage.Resources>
+        <Style ApplyToDerivedTypes="True" TargetType="Button">
+            <Setter Property="Padding" Value="{OnPlatform Default=0, iOS=10}" />
+            <Setter Property="TextColor" 
+                        Value="{AppThemeBinding Dark={StaticResource ButtonTextColorDark}, 
+                                    Light={StaticResource ButtonTextColorLight}}" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" 
+                                            Value="{AppThemeBinding Dark={StaticResource ButtonBackgroundColorDark}, 
+                                    Light={StaticResource ButtonBackgroundColorLight}}"  />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" 
+                                            Value="{AppThemeBinding Dark={StaticResource ButtonBackgroundDisabledColorDark}, 
+                                    Light={StaticResource ButtonBackgroundDisabledColorLight}}"  />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1" VerticalOptions="CenterAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label FontSize="30" Grid.Row="1" Margin="0,25,0,0" HorizontalOptions="CenterAndExpand" Text="Awful.Mobile"></Label>
+                <Grid Grid.Row="2">
+                    <StackLayout Margin="0,25,0,0">
+                        <Entry x:Name="Username" 
+                               IsSpellCheckEnabled="False"
+                               Text="{Binding Username, Mode=TwoWay}" 
+                               Placeholder="Username" Margin="0,0,0,15">
+                        </Entry>
+                        <Entry IsPassword="True" x:Name="Password" Text="{Binding Password, Mode=TwoWay}" Placeholder="Password" Margin="0,0,0,15">
+                        </Entry>
+                        <Button Padding="15" x:Name="LoginButton" IsEnabled="{Binding IsLoginEnabled, Mode=TwoWay}" Text="Login" Command="{Binding LoginCommand}"  HorizontalOptions="CenterAndExpand" />
+                        <Button Padding="15" x:Name="GoBackButton" Text="Close" Command="{Binding GoBackModalCommand}"  HorizontalOptions="CenterAndExpand" />
+                    </StackLayout>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</pages:BasePage>

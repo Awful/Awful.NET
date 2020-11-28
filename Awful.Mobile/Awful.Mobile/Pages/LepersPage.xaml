@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:BasePage
+    xmlns:pages="clr-namespace:Awful.Mobile.Pages"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Leper's Colony"
+    x:Class="Awful.Mobile.Pages.LepersPage">
+    <ContentPage.Content>
+        
+    </ContentPage.Content>
+</pages:BasePage>
