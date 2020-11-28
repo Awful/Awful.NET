@@ -45,7 +45,7 @@ namespace Awful.Mobile.ViewModels
                         if (answer)
                         {
                             this.Context.ResetDatabase();
-                            Device.BeginInvokeOnMainThread(() => App.SetMainAppPage());
+                            Device.BeginInvokeOnMainThread(() => App.Current.MainPage = new LoginPage());
                         }
                     }
                 });

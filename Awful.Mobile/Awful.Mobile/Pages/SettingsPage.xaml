@@ -20,8 +20,8 @@
                     <ViewCell.View>
                        <Grid>
                            <Button Margin="5"
-                           BackgroundColor="{Binding IsSignedIn, Converter={StaticResource LoginColorConverter}}"
-                           Text="{Binding IsSignedIn, Converter={StaticResource LoginTextConverter}}"
+                           BackgroundColor="Red"
+                           Text="Log Out"
                            Command="{Binding LoginPageCommand}" />
                        </Grid>
                     </ViewCell.View>

@@ -148,6 +148,15 @@ namespace Awful.Database.Context
         #region Users
 
         /// <summary>
+        /// Test if users exist.
+        /// </summary>
+        /// <returns>Bool.</returns>
+        public async Task<bool> DoesUsersExistAsync()
+        {
+            return await this.Users.AnyAsync().ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Add or update user.
         /// </summary>
         /// <param name="userAuth">The user auth.</param>

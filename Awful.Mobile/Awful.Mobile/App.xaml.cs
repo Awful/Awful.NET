@@ -35,7 +35,16 @@ namespace Awful.Mobile
             this.InitializeComponent();
             Container = Awful.UI.AwfulContainer.BuildContainer(builder);
 
-            SetMainAppPage();
+            var context = App.Container.Resolve<AwfulContext>();
+            var user = context.DoesUsersExistAsync().Result;
+            if (!user)
+            {
+                App.Current.MainPage = new LoginPage();
+            }
+            else
+            {
+                SetMainAppPage();
+            }
         }
 
         public static void SetMainAppPage()

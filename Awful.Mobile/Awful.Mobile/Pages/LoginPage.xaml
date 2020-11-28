@@ -2,6 +2,7 @@
 <pages:BasePage
     xmlns:pages="clr-namespace:Awful.Mobile.Pages"
     xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:local="clr-namespace:Awful.Mobile.Tools.Markup;assembly=Awful.Mobile"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Awful.Mobile.Pages.LoginPage">
     <ContentPage.Resources>
@@ -46,9 +47,9 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label FontSize="30" Grid.Row="1" Margin="0,25,0,0" HorizontalOptions="CenterAndExpand" Text="Awful.Mobile"></Label>
+                <Label FontSize="50" Grid.Row="1" Margin="0,25,0,0" HorizontalOptions="CenterAndExpand" Text="Awful.Mobile"></Label>
                 <Grid Grid.Row="2">
-                    <StackLayout Margin="0,25,0,0">
+                    <StackLayout WidthRequest="350" HorizontalOptions="Center" Margin="0,25,0,0">
                         <Entry x:Name="Username" 
                                IsSpellCheckEnabled="False"
                                Text="{Binding Username, Mode=TwoWay}" 
@@ -56,8 +57,10 @@
                         </Entry>
                         <Entry IsPassword="True" x:Name="Password" Text="{Binding Password, Mode=TwoWay}" Placeholder="Password" Margin="0,0,0,15">
                         </Entry>
-                        <Button Padding="15" x:Name="LoginButton" IsEnabled="{Binding IsLoginEnabled, Mode=TwoWay}" Text="Login" Command="{Binding LoginCommand}"  HorizontalOptions="CenterAndExpand" />
-                        <Button Padding="15" x:Name="GoBackButton" Text="Close" Command="{Binding GoBackModalCommand}"  HorizontalOptions="CenterAndExpand" />
+                        <Button WidthRequest="350" HorizontalOptions="CenterAndExpand" x:Name="LoginButton" IsEnabled="{Binding IsLoginEnabled, Mode=TwoWay}" Text="Login" Command="{Binding LoginCommand}" />
+                        <Image Grid.Row="3"
+                         Margin="15"
+                            Source="{local:ImageResource Awful.Mobile.ThreadTags.Mazui.png}"/>
                     </StackLayout>
                 </Grid>
             </Grid>
