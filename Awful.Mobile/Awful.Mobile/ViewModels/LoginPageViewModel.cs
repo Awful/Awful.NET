@@ -39,7 +39,7 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets a value indicating whether login is enabled.
         /// </summary>
-        public bool IsLoginEnabled => !string.IsNullOrEmpty(this.Password) && !string.IsNullOrEmpty(this.Username);
+        public bool IsLoginEnabled => !string.IsNullOrEmpty(this.Password) && !string.IsNullOrEmpty(this.Username) && !this.IsBusy;
 
         /// <summary>
         /// Gets the login command.
@@ -104,6 +104,10 @@ namespace Awful.Mobile.ViewModels
                 {
                     App.SetMainAppPage();
                 });
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Error", result.Error, "Close").ConfigureAwait(false);
             }
 
             this.IsBusy = false;

@@ -100,7 +100,7 @@ namespace Awful.Core.Handlers
 
             var threadList = element.QuerySelector("a");
             pm.MessageEndpoint = threadList.GetAttribute("href");
-            pm.Id = Convert.ToInt32(pm.MessageEndpoint.Split('=').Last(), CultureInfo.InvariantCulture);
+            pm.PrivateMessageId = Convert.ToInt32(pm.MessageEndpoint.Split('=').Last(), CultureInfo.InvariantCulture);
             pm.Title = threadList.TextContent;
         }
 

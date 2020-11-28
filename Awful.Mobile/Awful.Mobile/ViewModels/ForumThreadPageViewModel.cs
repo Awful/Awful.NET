@@ -209,7 +209,7 @@ namespace Awful.Mobile.ViewModels
             this.threadActions = new ThreadPostActions(this.Client, this.Context, this.handler);
             if (this.thread != null && this.threadPost == null)
             {
-                await this.LoadTemplate(this.thread.ThreadId, 0, this.thread.HasBeenViewed).ConfigureAwait(false);
+                await this.LoadTemplate(this.thread.ThreadId, 0, this.thread.HasSeen).ConfigureAwait(false);
             }
         }
     }

@@ -1,6 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// <copyright file="PrivateMessagesPage.xaml.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
 
+using System;
+using System.Collections.Generic;
+using Autofac;
+using Awful.Mobile.ViewModels;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.Pages
@@ -9,7 +14,15 @@ namespace Awful.Mobile.Pages
     {
         public PrivateMessagesPage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            this.BindingContext = App.Container.Resolve<PrivateMessagesPageViewModel>();
+        }
+
+        /// <inheritdoc/>
+        protected override void OnAppearing()
+        {
+            this.ThreadListCollection.SelectedItem = null;
+            base.OnAppearing();
         }
     }
 }

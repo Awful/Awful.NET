@@ -42,7 +42,8 @@ namespace Awful.UI
             //builder.RegisterType<SAclopediaEntryViewModel>();
             builder.RegisterType<ForumThreadListPageViewModel>();
             builder.RegisterType<ForumThreadPageViewModel>();
-
+            builder.RegisterType<PrivateMessagesPageViewModel>();
+            builder.RegisterType<PrivateMessagePageViewModel>();
             return builder.Build();
         }
     }

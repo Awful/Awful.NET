@@ -18,7 +18,7 @@ namespace Awful.Core.Entities.Messages
         /// <summary>
         /// Gets or sets the ID.
         /// </summary>
-        public int Id { get; set; }
+        public int PrivateMessageId { get; set; }
 
         /// <summary>
         /// Gets or sets the Post Icon.
@@ -36,7 +36,7 @@ namespace Awful.Core.Entities.Messages
         public string Title { get; set; }
 
         /// <summary>
-        /// Gets or sets the 
+        /// Gets or sets the sender of the pm.
         /// </summary>
         public string Sender { get; set; }
 

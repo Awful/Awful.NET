@@ -130,6 +130,46 @@
                                     Light={StaticResource BackgroundColorLight}}" />
     </Style>
 
+    <DataTemplate x:Key="PrivateMessageTemplate">
+        <Grid Padding="6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="1"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0"
+                               HeightRequest="45"
+                               WidthRequest="45"
+                               VerticalOptions="Start"
+                               Margin="5"
+                               Source="{local:ImageResource Awful.Mobile.ThreadTags.missing.png}"/>
+                    <!--Fix Placeholder-->
+                    <Image Grid.Column="0"
+                               HeightRequest="45"
+                               WidthRequest="45"
+                               VerticalOptions="Start"
+                               Margin="5"
+                               Source="{Binding ImageIconLocation, Converter={StaticResource ForumImageConverter}}"/>
+                    <StackLayout Grid.Column="1">
+                        <Label FontSize="15" Margin="1" MaxLines="2" LineBreakMode="TailTruncation" Text="{Binding Title}" />
+                        <Label FontSize="14" Margin="1" MaxLines="2" LineBreakMode="TailTruncation" Text="{Binding Sender}" />
+                        <Label FontSize="10" Margin="1" MaxLines="2" LineBreakMode="TailTruncation" Text="{Binding Date}" />
+                    </StackLayout>
+                </Grid>
+            </Grid>
+            <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
+        </Grid>
+    </DataTemplate>
+
     <DataTemplate x:Key="ThreadDataTemplate">
         <Grid Padding="6">
             <Grid.RowDefinitions>

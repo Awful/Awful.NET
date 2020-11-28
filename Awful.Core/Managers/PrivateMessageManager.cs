@@ -101,8 +101,8 @@ namespace Awful.Core.Managers
                 throw new UserAuthenticationException(Awful.Core.Resources.ExceptionMessages.UserAuthenticationError);
             }
 
-            var message = new PrivateMessage() { Id = id };
-            var result = await this.webManager.GetDataAsync(EndPoints.PrivateMessages + $"?action=show&privatemessageid={message.Id}", token).ConfigureAwait(false);
+            var message = new PrivateMessage() { PrivateMessageId = id };
+            var result = await this.webManager.GetDataAsync(EndPoints.PrivateMessages + $"?action=show&privatemessageid={message.PrivateMessageId}", token).ConfigureAwait(false);
             var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
             message.Post = PostHandler.ParsePost(document, document.Body);
             return message.Post;

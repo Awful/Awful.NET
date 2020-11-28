@@ -1947,6 +1947,9 @@
     <EmbeddedResource Include="Fonts\fa-solid-900.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Styles\PrivateMessagesPage.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Styles\AwfulThemeResources.xaml.cs">
       <DependentUpon>AwfulThemeResources.xaml</DependentUpon>
     </Compile>
