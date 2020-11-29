@@ -115,7 +115,7 @@ namespace Awful.Database.Context
                 throw new ArgumentNullException(nameof(settings));
             }
 
-            var setting = this.SettingOptionsItems.FirstOrDefault();
+            var setting = await this.SettingOptionsItems.FirstOrDefaultAsync().ConfigureAwait(false);
             if (setting == null)
             {
                 await this.SettingOptionsItems.AddAsync(settings).ConfigureAwait(false);
@@ -185,12 +185,13 @@ namespace Awful.Database.Context
             }
 
             userAuth.IsDefaultUser = true;
-            foreach (var oldUser in this.Users)
+            var users = await this.Users.ToListAsync().ConfigureAwait(false);
+            foreach (var oldUser in users)
             {
                 oldUser.IsDefaultUser = false;
             }
 
-            var user = this.Users.FirstOrDefault(node => node.UserAuthId == userAuth.UserAuthId);
+            var user = await this.Users.FirstOrDefaultAsync(node => node.UserAuthId == userAuth.UserAuthId).ConfigureAwait(false);
             if (user == null)
             {
                 await this.Users.AddAsync(userAuth).ConfigureAwait(false);
@@ -269,7 +270,7 @@ namespace Awful.Database.Context
                 forum.IsFavorited = true;
             }
 
-            this.Forums.RemoveRange(this.Forums.ToList());
+            this.Forums.RemoveRange(await this.Forums.ToListAsync().ConfigureAwait(false));
             await this.Forums.AddRangeAsync(filteredList).ConfigureAwait(false);
             await this.SaveChangesAsync().ConfigureAwait(false);
             return await this.GetForumCategoriesAsync().ConfigureAwait(false);
@@ -305,11 +306,11 @@ namespace Awful.Database.Context
                 PrivateMessage thread = (PrivateMessage)threads[i];
                 var awfulThread = new AwfulPM(thread);
                 awfulThread.SortOrder = i;
-                this.PrivateMessages.Add(awfulThread);
+                await this.PrivateMessages.AddAsync(awfulThread).ConfigureAwait(false);
             }
 
             await this.SaveChangesAsync().ConfigureAwait(false);
-            return this.PrivateMessages.OrderBy(n => n.SortOrder).ToList();
+            return await this.PrivateMessages.OrderBy(n => n.SortOrder).ToListAsync().ConfigureAwait(false);
         }
 
         /// <summary>
@@ -347,11 +348,11 @@ namespace Awful.Database.Context
                 Thread thread = (Thread)threads[i];
                 var awfulThread = new AwfulThread(thread);
                 awfulThread.SortOrder = i;
-                this.BookmarkThreads.Add(awfulThread);
+                await this.BookmarkThreads.AddAsync(awfulThread).ConfigureAwait(false);
             }
 
             await this.SaveChangesAsync().ConfigureAwait(false);
-            return this.BookmarkThreads.OrderBy(n => n.SortOrder).ToList();
+            return await this.BookmarkThreads.OrderBy(n => n.SortOrder).ToListAsync().ConfigureAwait(false);
         }
 
         /// <summary>
@@ -378,7 +379,8 @@ namespace Awful.Database.Context
                 throw new ArgumentNullException(nameof(thread));
             }
 
-            if (!this.BookmarkThreads.Contains(thread))
+            var bookmarkContains = await this.BookmarkThreads.ContainsAsync(thread).ConfigureAwait(false);
+            if (!bookmarkContains)
             {
                 throw new Exception("Thread is not contained in the bookmark list.");
             }

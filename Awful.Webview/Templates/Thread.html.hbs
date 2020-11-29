@@ -8,38 +8,63 @@
 {{/each}}
 <title>Awful - Thread</title>
 
-<body>
-    <div id="app" class="framework7-root {{DeviceColorTheme}}">
-        <div class="view view-main view-init safe-areas">
-            <div class="page page-home page-current">
-                <div class="page-content">
-                    {{#Entry.Posts}}
-                    <div class="card">
-                        <div class="card-header">
-                            <div>{{ User.Username }}</div>
-                            <div>{{ PostDate }}</div>
-                        </div>
-                        <div class="card-content card-content-padding">
-                            {{{ PostHtml }}}
-                        </div>
-                    </div>
-                    {{/Entry.Posts}}
-                </div>
-            </div>
+<body class="iphone">
+    <div id="posts">
+        {{#Entry.Posts}}
+        <div id="{{ PostId }}" class="{{#if HasSeen}} seen {{/if}} {{#if User.IsAvatarHidden}} no-avatar {{/if}}">
+            <header class="userid-{{User.Id}}">
+                {{#if User.IsAvatarHidden}}
+                {{else}}
+                <img class="avatar" src="{{ User.AvatarLink }}" alt="">
+                {{/if}}
+
+            <section class="nameanddate">
+                <h1 class="username">
+                    {{ User.Username }}
+                </h1>
+
+                {{#if User.HasRoles}}
+
+                <span class="{{User.Roles}}"></span>
+
+                {{/if}}
+
+                <time class="regdate">
+                    Joined {{ User.DateJoined }}
+                </time>
+
+            </section>
+            </header>
+
+            <section class="postbody">
+                {{{ PostHtml }}}
+            </section>
+
+            <footer>
+                <span class="postdate">
+                    {{ PostDate }}
+                </span>
+
+                <button class="action-button" title="Post actions">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAAAYCAMAAABuvUuCAAAAHlBMVEX///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACGjDitAAAACnRSTlMAEHDQ/1DwYMCA7NclIgAAAHFJREFUeNrdlEsOwCAIRPmL979wK9Gk3QIrZzU8EgMqwP1CYnnFhDWuJlumFT7ko5HnKj9plqNFbO7bYI4DRTiXnWEpx4EPPxnOcYjyYCuqzXFc1k/CV5TgPQe1tdZ92fXnb/6Q9RHpHdr6GmlbbNfrAWChC8uPWXAAAAAAAElFTkSuQmCC">
+                </button>
+            </footer>
         </div>
+        {{/Entry.Posts}}
     </div>
+
+    {{#if LastPage}}
+    <div id="end">
+        End of the thread
+    </div>
+    {{/if}}
+
     {{#each JS}}
     <script>
      {{{ this }}}
     </script>
     {{/each}}
     <script>
-        var theme = "{{{ Theme }}}";
 
-        var app = new Framework7({
-            id: 'drastic.somethingawful',
-            root: '#app',
-            theme: theme,
-        });
     </script>
 </body>

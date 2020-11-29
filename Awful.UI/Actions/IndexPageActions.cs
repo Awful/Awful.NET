@@ -19,6 +19,7 @@ using Awful.Database.Entities;
 using Awful.UI.Entities;
 using Awful.Webview;
 using Awful.Webview.Entities.Themes;
+using Microsoft.EntityFrameworkCore;
 
 namespace Awful.UI.Actions
 {
@@ -53,7 +54,7 @@ namespace Awful.UI.Actions
                 throw new ArgumentNullException(nameof(forum));
             }
 
-            var realForum = this.context.Forums.FirstOrDefault(n => n.Id == forum.Id);
+            var realForum = await this.context.Forums.FirstOrDefaultAsync(n => n.Id == forum.Id).ConfigureAwait(false);
             if (realForum == null)
             {
                 return forum;

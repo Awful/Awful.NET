@@ -24,6 +24,14 @@ namespace Awful.Core.Entities.Posts
         public string AvatarLink { get; set; }
 
         /// <summary>
+        /// Gets a value indicating whether the avatar is visible or not.
+        /// </summary>
+        public bool IsAvatarHidden
+        {
+            get { return string.IsNullOrEmpty(this.AvatarLink); }
+        }
+
+        /// <summary>
         /// Gets or sets the avatar title.
         /// </summary>
         public string AvatarTitle { get; set; }
@@ -47,6 +55,11 @@ namespace Awful.Core.Entities.Posts
         /// Gets or sets the users roles.
         /// </summary>
         public string Roles { get; set; }
+
+        /// <summary>
+        /// Gets a value indicating whether the user has roles.
+        /// </summary>
+        public bool HasRoles => !string.IsNullOrEmpty(this.Roles);
 
         /// <summary>
         /// Gets or sets the users title.

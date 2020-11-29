@@ -5,6 +5,8 @@
     xmlns:views="clr-namespace:Awful.Mobile.Pages"
     BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, Light={StaticResource BackgroundColorLight}}"
     Title="Menu"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    android:TabbedPage.ToolbarPlacement="Bottom"
     NavigationPage.HasNavigationBar="False"
     x:Class="Awful.Mobile.Pages.MasterPage">
     <TabbedPage.Children>
@@ -34,7 +36,7 @@
             </NavigationPage.IconImageSource>
         </NavigationPage>
 
-        <NavigationPage Title="Messages">
+        <NavigationPage Title="PM">
             <x:Arguments>
                 <views:PrivateMessagesPage />
             </x:Arguments>
@@ -47,7 +49,7 @@
             </NavigationPage.IconImageSource>
         </NavigationPage>
 
-        <NavigationPage Title="Settings">
+        <NavigationPage Title="Setting">
             <x:Arguments>
                 <views:SettingsPage />
             </x:Arguments>

@@ -45,7 +45,13 @@ namespace Awful.Mobile.ViewModels
 
         public void LoadEntry(SAclopediaEntryItem entry)
         {
+            if (entry == null)
+            {
+                throw new ArgumentNullException(nameof(entry));
+            }
+
             this.entry = entry;
+            this.Title = entry.Title;
         }
 
         /// <summary>

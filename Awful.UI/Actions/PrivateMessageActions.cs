@@ -18,6 +18,7 @@ using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Webview;
 using Awful.Webview.Entities.Themes;
+using Microsoft.EntityFrameworkCore;
 
 namespace Awful.UI.Actions
 {
@@ -50,7 +51,7 @@ namespace Awful.UI.Actions
         /// <param name="forceRefresh">Force Refresh.</param>
         public async Task<List<AwfulPM>> GetAllPrivateMessagesAsync(bool forceRefresh = false)
         {
-            var pms = this.context.PrivateMessages.ToList();
+            var pms = await this.context.PrivateMessages.ToListAsync().ConfigureAwait(false);
             if (!pms.Any() || forceRefresh)
             {
                 var threads = await this.manager.GetAllPrivateMessageListAsync().ConfigureAwait(false);

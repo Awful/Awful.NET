@@ -21,7 +21,7 @@ namespace Awful.ConsoleApp
         {
             var awfulClient = await CreateAwfulClient().ConfigureAwait(false);
             TemplateHandler handler = new TemplateHandler();
-            var defaultOptions = new DefaultOptions() { DeviceColorTheme = DeviceColorTheme.Dark };
+            var defaultOptions = new DefaultOptions() { DeviceColorTheme = DeviceColorTheme.Light };
 
             ThreadPostManager manager = new ThreadPostManager(awfulClient);
             var entry = await manager.GetThreadPostsAsync(3836680, 1).ConfigureAwait(false);

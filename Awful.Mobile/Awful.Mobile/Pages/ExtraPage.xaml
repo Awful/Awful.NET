@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="More"
     x:Class="Awful.Mobile.Pages.ExtraPage">
-    <TableView Margin="0,-40,0,0" Intent="Settings">
+    <TableView Intent="Settings">
         <TableRoot>
             <TableSection Title="">
                 <ImageCell ClassId="SAclopediaCell" Tapped="ImageCell_Tapped"
@@ -16,7 +16,7 @@
                             Color="{StaticResource TabBarSelectedColor}"
                             FontFamily="FontAwesomeSolid"
                             Glyph=""
-                            Size="24"
+                            Size="50"
                         />
                     </ImageCell.ImageSource>
                 </ImageCell>

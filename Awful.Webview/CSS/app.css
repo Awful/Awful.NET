@@ -1,11 +1,8 @@
-﻿.username {
-
+﻿body {
+    font-family: system-ui;
+    margin: 15px !important;
 }
 
-.posted-date {
-
-}
-
-.img {
-    max-width: 100%;
+.postdate {
+    font-weight: normal;
 }

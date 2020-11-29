@@ -57,7 +57,10 @@
          <Setter Property="BarBackgroundColor"
                  Value="{AppThemeBinding Dark={StaticResource HeaderBarBackgroundColorDark}, 
                  Light={StaticResource ShellHeaderBarBackgroundColorLight}}"/>
-         <Setter Property="SelectedTabColor" Value="{StaticResource TabBarSelectedColor}" />
+        <Setter Property="BarTextColor"
+                 Value="{AppThemeBinding Dark={StaticResource TextColorDark}, 
+                 Light={StaticResource TextColorLight}}"/>
+        <Setter Property="SelectedTabColor" Value="{StaticResource TabBarSelectedColor}" />
      </Style>
 
     <Style x:Key="PageStyle" TargetType="ContentPage" ApplyToDerivedTypes="True">
@@ -222,7 +225,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0" FontSize="Medium" Margin="1" MaxLines="2" LineBreakMode="TailTruncation" Text="{Binding Name}" />
+                        <Label Grid.Row="0" FontSize="15" Margin="1" MaxLines="2" LineBreakMode="TailTruncation" Text="{Binding Name}" />
                         <Grid Margin="2" VerticalOptions="End" Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>

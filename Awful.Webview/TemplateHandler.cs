@@ -25,8 +25,9 @@ namespace Awful.Webview
         private readonly string saclopediaHtml;
         private readonly string profileHtml;
         private readonly string banHtml;
-        private readonly string frameworkCss;
-        private readonly string frameworkJs;
+        private readonly string postCss;
+        private readonly string postDarkCss;
+        private readonly string systemUiCss;
         private readonly string forumJs;
         private readonly string forumCss;
 
@@ -39,9 +40,10 @@ namespace Awful.Webview
             this.saclopediaHtml = TemplateHandler.GetResourceFileContentAsString("Templates.SAclopedia.html.hbs");
             this.profileHtml = TemplateHandler.GetResourceFileContentAsString("Templates.Profile.html.hbs");
             this.banHtml = TemplateHandler.GetResourceFileContentAsString("Templates.Ban.html.hbs");
-            this.frameworkCss = TemplateHandler.GetResourceFileContentAsString("CSS.framework7.bundle.min.css");
+            this.systemUiCss = TemplateHandler.GetResourceFileContentAsString("CSS.system-font.css");
+            this.postCss = TemplateHandler.GetResourceFileContentAsString("CSS.posts-view.css");
+            this.postDarkCss = TemplateHandler.GetResourceFileContentAsString("CSS.posts-view-dark.css");
             this.forumCss = TemplateHandler.GetResourceFileContentAsString("CSS.app.css");
-            this.frameworkJs = TemplateHandler.GetResourceFileContentAsString("JS.framework7.bundle.min.js");
             this.forumJs = TemplateHandler.GetResourceFileContentAsString("JS.forum.js");
         }
 
@@ -138,8 +140,17 @@ namespace Awful.Webview
 
         private void SetDefaults(TemplateEntity entity, DefaultOptions options)
         {
-            entity.CSS = new List<string>() { this.forumCss, this.frameworkCss };
-            entity.JS = new List<string>() { this.forumJs, this.frameworkJs };
+            entity.CSS = new List<string>() { this.systemUiCss, this.forumCss};
+            if (options.DeviceColorTheme == DeviceColorTheme.Dark)
+            {
+                entity.CSS.Add(this.postDarkCss);
+            }
+            else
+            {
+                entity.CSS.Add(this.postCss);
+            }
+
+            entity.JS = new List<string>() { this.forumJs };
             entity.DeviceColorTheme = options.DeviceColorTheme == DeviceColorTheme.Dark ? "theme-dark" : "theme";
             entity.Theme = options.DeviceTheme switch
             {

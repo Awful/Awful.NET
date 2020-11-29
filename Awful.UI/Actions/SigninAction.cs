@@ -47,7 +47,6 @@ namespace Awful.UI.Actions
 
             this.platformProperties = platformProperties;
             this.context = context;
-            this.CurrentUser = this.context.Users.FirstOrDefault();
         }
 
         /// <summary>

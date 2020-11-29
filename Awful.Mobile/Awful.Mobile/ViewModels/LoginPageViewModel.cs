@@ -107,7 +107,7 @@ namespace Awful.Mobile.ViewModels
             }
             else
             {
-                await App.Current.MainPage.DisplayAlert("Error", result.Error, "Close").ConfigureAwait(false);
+                Device.BeginInvokeOnMainThread(async () => { await App.Current.MainPage.DisplayAlert("Error", result.Error, "Close").ConfigureAwait(false); });
             }
 
             this.IsBusy = false;

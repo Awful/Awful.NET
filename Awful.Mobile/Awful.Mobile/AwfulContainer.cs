@@ -31,7 +31,7 @@ namespace Awful.UI
             }
 
             builder.RegisterType<TemplateHandler>().SingleInstance();
-            builder.RegisterType<AwfulContext>().SingleInstance();
+            builder.RegisterType<AwfulContext>();
             builder.RegisterType<AwfulViewModel>();
             builder.RegisterType<MobileSettingsPageViewModel>();
             builder.RegisterType<LepersPageViewModel>();

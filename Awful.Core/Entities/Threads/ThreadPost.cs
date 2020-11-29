@@ -18,6 +18,7 @@ namespace Awful.Core.Entities.Threads
         public string ScrollToPostString { get; internal set; }
         public int CurrentPage { get; internal set; }
         public int TotalPages { get; internal set; }
+        public bool LastPage => this.CurrentPage >= this.TotalPages;
         public string Name { get; internal set; }
         public int ThreadId { get; internal set; }
         public int ForumId { get; internal set; }

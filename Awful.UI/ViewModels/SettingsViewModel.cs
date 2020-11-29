@@ -11,6 +11,7 @@ using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.UI.Actions;
 using Awful.Webview.Entities.Themes;
+using Microsoft.EntityFrameworkCore;
 
 namespace Awful.UI.ViewModels
 {
@@ -30,7 +31,7 @@ namespace Awful.UI.ViewModels
         public SettingsViewModel(IPlatformProperties properties, AwfulContext context)
             : base(context)
         {
-            this.settings = context.SettingOptionsItems.FirstOrDefault() ?? new SettingOptions();
+            this.settings = new SettingOptions();
             this.settingActions = new SettingsAction(context);
         }
 
@@ -77,6 +78,12 @@ namespace Awful.UI.ViewModels
                 this.OnPropertyChanged(nameof(this.EnableBackgroundTasks));
                 Task.Run(async () => await this.SaveSettingsAsync().ConfigureAwait(false));
             }
+        }
+
+        public override async Task OnLoad()
+        {
+            await base.OnLoad().ConfigureAwait(false);
+            this.settings = await this.Context.SettingOptionsItems.FirstOrDefaultAsync().ConfigureAwait(false) ?? new SettingOptions();
         }
 
         private async Task SaveSettingsAsync()

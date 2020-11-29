@@ -8,9 +8,10 @@
 
   <ItemGroup>
     <None Remove="CSS\app.css" />
-    <None Remove="CSS\framework7.bundle.min.css" />
+    <None Remove="CSS\posts-view-dark.css" />
+    <None Remove="CSS\posts-view.css" />
+    <None Remove="CSS\system-font.css" />
     <None Remove="JS\forum.js" />
-    <None Remove="JS\framework7.bundle.min.js" />
     <None Remove="Templates\Ban.html.hbs" />
     <None Remove="Templates\Profile.html.hbs" />
     <None Remove="Templates\SAclopedia.html.hbs" />
@@ -19,9 +20,10 @@
 
   <ItemGroup>
     <EmbeddedResource Include="CSS\app.css" />
-    <EmbeddedResource Include="CSS\framework7.bundle.min.css" />
+    <EmbeddedResource Include="CSS\posts-view-dark.css" />
+    <EmbeddedResource Include="CSS\posts-view.css" />
+    <EmbeddedResource Include="CSS\system-font.css" />
     <EmbeddedResource Include="JS\forum.js" />
-    <EmbeddedResource Include="JS\framework7.bundle.min.js" />
     <EmbeddedResource Include="Templates\Ban.html.hbs" />
     <EmbeddedResource Include="Templates\Profile.html.hbs" />
     <EmbeddedResource Include="Templates\Thread.html.hbs" />
