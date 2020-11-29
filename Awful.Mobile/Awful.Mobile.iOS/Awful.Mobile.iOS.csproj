@@ -71,6 +71,7 @@
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="iOSPlatformProperties.cs" />
+    <Compile Include="Renderers\TransparentWebViewRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -147,5 +148,8 @@
       <Project>{9EAC913E-0139-4A7A-9F95-CAFDEA30E1EF}</Project>
       <Name>Awful.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Renderers\" />
   </ItemGroup>
 </Project>

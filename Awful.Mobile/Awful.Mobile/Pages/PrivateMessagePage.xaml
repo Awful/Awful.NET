@@ -3,6 +3,7 @@
     xmlns:pages="clr-namespace:Awful.Mobile.Pages"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Awful.Mobile.Controls"
     x:Class="Awful.Mobile.Pages.PrivateMessagePage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Reply" IsEnabled="{Binding IsSignedIn}"
@@ -27,7 +28,7 @@
             <RefreshView Grid.Row="0"
                     Command="{Binding RefreshCommand}"
                     IsRefreshing="{Binding IsRefreshing}">
-                <WebView x:Name="AwfulWebView"/>
+                <controls:TransparentWebView x:Name="AwfulWebView"/>
             </RefreshView>
             <StackLayout Grid.Row="0" IsVisible="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">

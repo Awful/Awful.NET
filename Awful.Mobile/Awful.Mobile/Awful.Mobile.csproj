@@ -1935,6 +1935,7 @@
     <Folder Include="Styles\" />
     <Folder Include="ThreadTags\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="Controls\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Fonts\fa-brands-400.ttf" />

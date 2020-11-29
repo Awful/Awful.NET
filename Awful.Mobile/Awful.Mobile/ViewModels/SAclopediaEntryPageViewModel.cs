@@ -67,7 +67,6 @@ namespace Awful.Mobile.ViewModels
             var source = new HtmlWebViewSource();
             source.Html = this.saclopedia.GenerateSAclopediaEntryTemplate(entry, defaults);
             Device.BeginInvokeOnMainThread(() => this.WebView.Source = source);
-            await Task.Delay(2000).ConfigureAwait(false);
             this.IsBusy = false;
         }
 

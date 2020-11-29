@@ -3,6 +3,7 @@
     xmlns:pages="clr-namespace:Awful.Mobile.Pages"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Awful.Mobile.Controls"
     Title="Leper's Colony"
     x:Class="Awful.Mobile.Pages.LepersPage">
     <ContentPage.Content>
@@ -12,7 +13,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
-                        <WebView Grid.Row="0" x:Name="AwfulWebView"/>
+                        <controls:TransparentWebView Grid.Row="0" x:Name="AwfulWebView"/>
                     </Grid>
                     <StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">

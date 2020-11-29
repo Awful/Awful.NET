@@ -59,7 +59,6 @@ namespace Awful.Mobile.ViewModels
             var source = new HtmlWebViewSource();
             source.Html = this.banActions.RenderBanView(banPage, defaults);
             Device.BeginInvokeOnMainThread(() => this.WebView.Source = source);
-            await Task.Delay(3000).ConfigureAwait(false);
             this.IsBusy = false;
         }
     }
