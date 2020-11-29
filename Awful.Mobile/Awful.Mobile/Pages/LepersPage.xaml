@@ -13,7 +13,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
-                        <controls:TransparentWebView Grid.Row="0" x:Name="AwfulWebView"/>
+                        <controls:HybridWebView Grid.Row="0" x:Name="AwfulWebView"/>
                     </Grid>
                     <StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">

@@ -7,7 +7,7 @@
     x:Class="Awful.Mobile.Pages.SAclopediaEntryPage">
     <ContentPage.Content>
       <Grid>
-            <controls:TransparentWebView x:Name="AwfulWebView"/>
+            <controls:HybridWebView x:Name="AwfulWebView"/>
             <StackLayout IsVisible="{Binding IsRefreshing, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                     <ActivityIndicator IsRunning="True"/>

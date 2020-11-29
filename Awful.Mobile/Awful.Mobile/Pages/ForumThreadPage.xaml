@@ -30,7 +30,7 @@
             <RefreshView Grid.Row="0"
                     Command="{Binding RefreshCommand}"
                     IsRefreshing="{Binding IsRefreshing}">
-                <controls:TransparentWebView x:Name="AwfulWebView"/>
+                <controls:HybridWebView x:Name="AwfulWebView"/>
             </RefreshView>
             <StackLayout Grid.Row="0" IsVisible="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
