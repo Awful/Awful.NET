@@ -34,12 +34,12 @@ namespace Awful.UI
             builder.RegisterType<AwfulContext>().SingleInstance();
             builder.RegisterType<AwfulViewModel>();
             builder.RegisterType<MobileSettingsPageViewModel>();
-            //builder.RegisterType<LepersViewModel>();
+            builder.RegisterType<LepersPageViewModel>();
             builder.RegisterType<ForumsListPageViewModel>();
             builder.RegisterType<BookmarksPageViewModel>();
             builder.RegisterType<LoginPageViewModel>();
-            //builder.RegisterType<SAclopediaEntryListViewModel>();
-            //builder.RegisterType<SAclopediaEntryViewModel>();
+            builder.RegisterType<SAclopediaEntryListPageViewModel>();
+            builder.RegisterType<SAclopediaEntryPageViewModel>();
             builder.RegisterType<ThreadReplyPageViewModel>();
             builder.RegisterType<ForumThreadListPageViewModel>();
             builder.RegisterType<ForumThreadPageViewModel>();

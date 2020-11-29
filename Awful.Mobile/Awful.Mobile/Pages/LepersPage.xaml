@@ -6,6 +6,20 @@
     Title="Leper's Colony"
     x:Class="Awful.Mobile.Pages.LepersPage">
     <ContentPage.Content>
-        
+        <Grid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+                        <WebView Grid.Row="0" x:Name="AwfulWebView"/>
+                    </Grid>
+                    <StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                            <ActivityIndicator IsRunning="True"/>
+                            <Label Text="{Binding LoadingText}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
+                        </StackLayout>
+                    </StackLayout>
+                </Grid>
     </ContentPage.Content>
 </pages:BasePage>

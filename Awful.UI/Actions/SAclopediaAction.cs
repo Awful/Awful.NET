@@ -14,6 +14,7 @@ using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Webview;
 using Awful.Webview.Entities.Themes;
+using Microsoft.EntityFrameworkCore;
 
 namespace Awful.UI.Actions
 {
@@ -78,8 +79,8 @@ namespace Awful.UI.Actions
         /// <returns>List of SAclopediaEntryItems.</returns>
         public async Task<List<SAclopediaEntryItem>> LoadSAclopediaEntryItemsAsync(bool forceRefresh = false, CancellationToken token = default)
         {
-            var list = this.context.SAclopediaEntryItems.ToList();
-            if (forceRefresh)
+            var list = await this.context.SAclopediaEntryItems.ToListAsync().ConfigureAwait(false);
+            if (forceRefresh || !list.Any())
             {
                 await this.context.RemoveAllSAclopediaEntryAsync().ConfigureAwait(false);
                 list = new List<SAclopediaEntryItem>();

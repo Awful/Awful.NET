@@ -1,6 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// <copyright file="SAclopediaEntryListPage.xaml.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
 
+using System;
+using System.Collections.Generic;
+using Autofac;
+using Awful.Mobile.ViewModels;
+using Awful.UI.ViewModels;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.Pages
@@ -9,7 +15,8 @@ namespace Awful.Mobile.Pages
     {
         public SAclopediaEntryListPage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            this.BindingContext = App.Container.Resolve<SAclopediaEntryListPageViewModel>();
         }
     }
 }
