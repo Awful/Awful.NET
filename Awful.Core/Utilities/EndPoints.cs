@@ -12,7 +12,7 @@ namespace Awful.Core.Utilities
         /// <summary>
         /// Default Threads/Posts Per Page.
         /// </summary>
-        public const int DefaultNumberPerPage = 30;
+        public const int DefaultNumberPerPage = 40;
 
         /// <summary>
         /// Query string constant for going to a new post in a given thread.

@@ -7,13 +7,13 @@
     Title="{Binding Title}"
     x:Class="Awful.Mobile.Pages.ForumThreadPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Post" IsEnabled="{Binding IsSignedIn}"
+        <ToolbarItem Text="Reply" Command="{Binding ReplyToThreadCommand}" IsEnabled="{Binding IsSignedIn}"
         Order="Primary"
                  Priority="0">
             <ToolbarItem.IconImageSource>
                 <FontImageSource
-                    Color="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
-                                    Light={StaticResource BackgroundColorLight}}"
+                    Color="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}"
                     FontFamily="FontAwesomeSolid"
                     Glyph=""
                     Size="20"
@@ -41,7 +41,7 @@
             <StackLayout Orientation="Horizontal"
                     Grid.Row="1">
                 <Button Grid.Column="0"
-                             Margin="15,0,0,0"
+                             Margin="5,0,0,0"
                              TextColor="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
                                     Light={StaticResource BackgroundColorDark}}"
                             HorizontalOptions="StartAndExpand"
@@ -90,7 +90,7 @@
                             FontFamily="FontAwesomeSolid"
                             BackgroundColor="Transparent"  />
                 </Grid>
-                <Button Margin="0,0,15,0"
+                <Button Margin="0,0,5,0"
                             TextColor="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
                                     Light={StaticResource BackgroundColorDark}}"
                             HorizontalOptions="EndAndExpand"

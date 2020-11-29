@@ -14,6 +14,7 @@ using Awful.Core.Tools;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
+using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
 using Awful.UI.ViewModels;
@@ -71,11 +72,33 @@ namespace Awful.Mobile.ViewModels
             {
                 return this.refreshCommand ??= new Command(async () =>
                 {
+                    await this.RefreshThreadAsync().ConfigureAwait(false);
+                });
+            }
+        }
+
+        public async Task RefreshThreadAsync()
+        {
+            if (this.ThreadPost != null)
+            {
+                this.IsRefreshing = true;
+                await this.LoadTemplate(this.threadPost.ThreadId, this.threadPost.CurrentPage).ConfigureAwait(false);
+                this.IsRefreshing = false;
+            }
+        }
+
+        /// <summary>
+        /// Gets the reply to thread command.
+        /// </summary>
+        public Command ReplyToThreadCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
                     if (this.ThreadPost != null)
                     {
-                        this.IsRefreshing = true;
-                        await this.LoadTemplate(this.threadPost.ThreadId, this.threadPost.CurrentPage).ConfigureAwait(false);
-                        this.IsRefreshing = false;
+                        await App.PushModalAsync(new ThreadReplyPage(this.thread.ThreadId)).ConfigureAwait(false);
                     }
                 });
             }

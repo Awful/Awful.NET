@@ -96,6 +96,14 @@
                         Value="{AppThemeBinding Dark={OnPlatform Android={StaticResource BackgroundColorLight}, iOS=Default, Default=Default},
                     Light={OnPlatform Android={StaticResource BackgroundColorDark}, iOS=Default, Default=Default}}" />
     </Style>
+     <Style TargetType="Editor">
+        <Setter Property="TextColor"
+                        Value="{AppThemeBinding Dark={StaticResource TextColorDark}, 
+                                    Light={StaticResource TextColorLight}}" />
+        <Setter Property="BackgroundColor"
+                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
+                                    Light={StaticResource BackgroundColorLight}}" />
+    </Style>
     <Style TargetType="Grid">
         <Setter Property="BackgroundColor"
                         Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 

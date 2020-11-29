@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:BasePage
+    xmlns:pages="clr-namespace:Awful.Mobile.Pages"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:Page.ModalPresentationStyle="FormSheet"
+    x:Class="Awful.Mobile.Pages.ThreadReplyPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Post"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Horizontal" Grid.Row="0">
+                <Button Command="{Binding CloseModalCommand}"  Margin="15,0,-15,0" HorizontalOptions="StartAndExpand" Text="Cancel"/>
+                <Button HorizontalOptions="CenterAndExpand" Text="Options"/>
+                <Button Command="{Binding PostReplyCommand}" Margin="0,0,15,0" HorizontalOptions="EndAndExpand" Text="Post"/>
+            </StackLayout>
+            <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
+            <Editor Grid.Row="2" Margin="15" x:Name="AwfulEditor"/>
+        </Grid>
+    </ContentPage.Content>
+</pages:BasePage>

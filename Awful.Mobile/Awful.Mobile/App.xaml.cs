@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Awful.Database.Context;
 using Awful.Mobile.Pages;
+using Awful.Mobile.ViewModels;
 using Awful.UI.Actions;
 using Microsoft.EntityFrameworkCore;
 using Xamarin.Forms;
@@ -90,6 +91,54 @@ namespace Awful.Mobile
             {
                 TabbedPage tabbedPage = (TabbedPage)App.Current.MainPage;
                 await tabbedPage.CurrentPage.Navigation.PushModalAsync(page).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary>
+        /// Refresh post page.
+        /// </summary>
+        /// <returns>Task.</returns>
+        public static async Task RefreshPostPage()
+        {
+            ForumThreadPageViewModel vm = null;
+            if (Device.Idiom == TargetIdiom.Desktop || Device.Idiom == TargetIdiom.Tablet)
+            {
+                FlyoutPage flyout = (FlyoutPage)App.Current.MainPage;
+                Page mp = (Page)flyout.Detail;
+                vm = mp.BindingContext as ForumThreadPageViewModel;
+            }
+            else
+            {
+                TabbedPage tabbedPage = (TabbedPage)App.Current.MainPage;
+                var navigationPage = tabbedPage.CurrentPage as NavigationPage;
+                if (navigationPage != null)
+                {
+                    vm = navigationPage.CurrentPage.BindingContext as ForumThreadPageViewModel;
+                }
+            }
+
+            if (vm != null)
+            {
+                await vm.RefreshThreadAsync().ConfigureAwait(false);
+            }
+        }
+
+        /// <summary>
+        /// Close Modal Async.
+        /// </summary>
+        /// <returns>Task.</returns>
+        public static async Task CloseModalAsync()
+        {
+            if (Device.Idiom == TargetIdiom.Desktop || Device.Idiom == TargetIdiom.Tablet)
+            {
+                FlyoutPage flyout = (FlyoutPage)App.Current.MainPage;
+                Page mp = (Page)flyout.Detail;
+                await mp.Navigation.PopModalAsync().ConfigureAwait(false);
+            }
+            else
+            {
+                TabbedPage tabbedPage = (TabbedPage)App.Current.MainPage;
+                await tabbedPage.CurrentPage.Navigation.PopModalAsync().ConfigureAwait(false);
             }
         }
 
