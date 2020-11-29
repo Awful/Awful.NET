@@ -1,5 +1,9 @@
-﻿var images = document.querySelectorAll("img:not([src*='somethingawful'])");
-for (var i = 0; i < images.length; ++i) {
-    images[i].classList.add('lazy');
-    images[i].classList.add('lazy-fade-in');
+﻿function showPostMenu(postId) {
+    if (window.invokeCSharpAction) {
+        var postItem = {
+            type: "showPostMenu",
+            id: postId
+        };
+        window.invokeCSharpAction(JSON.stringify(postItem));
+    }
 }

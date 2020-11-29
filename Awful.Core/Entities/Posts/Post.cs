@@ -34,6 +34,11 @@ namespace Awful.Core.Entities.Posts
         public long PostId { get; set; }
 
         /// <summary>
+        /// Gets or sets the post index.
+        /// </summary>
+        public long PostIndex { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether the post has been seen.
         /// </summary>
         public bool HasSeen { get; set; }

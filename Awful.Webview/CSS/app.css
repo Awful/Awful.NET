@@ -3,6 +3,10 @@
     margin: 15px !important;
 }
 
+.regdate {
+    font-weight: normal !important;
+}
+
 .postdate {
-    font-weight: normal;
+    font-weight: normal !important;
 }

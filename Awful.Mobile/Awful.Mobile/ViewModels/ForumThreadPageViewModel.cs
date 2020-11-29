@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -14,13 +15,16 @@ using Awful.Core.Tools;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
+using Awful.Mobile.Controls;
 using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
 using Awful.UI.ViewModels;
 using Awful.Webview;
 using Awful.Webview.Entities.Themes;
+using Newtonsoft.Json;
 using Xamarin.CommunityToolkit.UI.Views;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.ViewModels
@@ -31,7 +35,8 @@ namespace Awful.Mobile.ViewModels
     public class ForumThreadPageViewModel : AwfulViewModel
     {
         private TemplateHandler handler;
-        private ThreadPostActions threadActions;
+        private ThreadPostActions threadPostActions;
+        private ThreadActions threadActions;
         private ThreadPost threadPost;
         private Command refreshCommand;
         private bool selfInvoked;
@@ -52,7 +57,7 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets or sets the internal webview.
         /// </summary>
-        public WebView WebView { get; set; }
+        public HybridWebView WebView { get; set; }
 
         /// <summary>
         /// Gets or sets the current state of the view.
@@ -186,7 +191,7 @@ namespace Awful.Mobile.ViewModels
         {
             this.IsBusy = true;
             this.defaults = await this.GenerateDefaultOptionsAsync().ConfigureAwait(false);
-            this.ThreadPost = await this.threadActions.GetThreadPostsAsync(threadId, pageNumber, gotoNewestPost).ConfigureAwait(false);
+            this.ThreadPost = await this.threadPostActions.GetThreadPostsAsync(threadId, pageNumber, gotoNewestPost).ConfigureAwait(false);
             this.Title = this.ThreadPost.Name;
             if (this.thread != null && this.thread.RepliesSinceLastOpened > 0)
             {
@@ -209,9 +214,20 @@ namespace Awful.Mobile.ViewModels
             }
 
             var source = new HtmlWebViewSource();
-            source.Html = this.threadActions.RenderThreadPostView(this.ThreadPost, defaults);
+            source.Html = this.threadPostActions.RenderThreadPostView(this.ThreadPost, defaults);
             Device.BeginInvokeOnMainThread(() => this.WebView.Source = source);
             this.IsBusy = false;
+        }
+
+        public void LoadWebview(HybridWebView webview)
+        {
+            if (webview == null)
+            {
+                throw new ArgumentNullException(nameof(webview));
+            }
+
+            this.WebView = webview;
+            this.WebView.RegisterAction(this.HandleDataFromJavascript);
         }
 
         public void LoadThread(AwfulThread thread)
@@ -228,10 +244,50 @@ namespace Awful.Mobile.ViewModels
         /// <inheritdoc/>
         public override async Task OnLoad()
         {
-            this.threadActions = new ThreadPostActions(this.Client, this.Context, this.handler);
+            this.threadPostActions = new ThreadPostActions(this.Client, this.Context, this.handler);
+            this.threadActions = new ThreadActions(this.Client, this.Context);
             if (this.thread != null && this.threadPost == null)
             {
                 await this.LoadTemplate(this.thread.ThreadId, 0, this.thread.HasSeen).ConfigureAwait(false);
+            }
+        }
+
+        private async Task MarkPostAsUnreadAsync(int postId)
+        {
+            var postIndex = this.ThreadPost.Posts.FirstOrDefault(n => n.PostId == postId);
+            if (postIndex != null)
+            {
+                var result = await this.threadActions.MarkPostAsLastReadAsAsync(this.thread.ThreadId, postIndex.PostIndex).ConfigureAwait(false);
+            }
+        }
+
+        private void HandleDataFromJavascript(string data)
+        {
+            var json = JsonConvert.DeserializeObject<WebViewDataInterop>(data);
+            switch (json.Type)
+            {
+                case "showPostMenu":
+                    Device.BeginInvokeOnMainThread(async () => {
+
+                        var result = await App.Current.MainPage.DisplayActionSheet("Post Options", "Cancel", null,  "Share", "Mark Read", "Quote Post").ConfigureAwait(false);
+                        switch (result)
+                        {
+                            case "Share":
+                                await Share.RequestAsync(new ShareTextRequest
+                                {
+                                    Uri = string.Format(CultureInfo.InvariantCulture, EndPoints.ShowPost, json.Id),
+                                    Title = this.ThreadPost.Name,
+                                }).ConfigureAwait(false);
+                                break;
+                            case "Mark Read":
+                                Task.Run(() => this.MarkPostAsUnreadAsync(json.Id));
+                                break;
+                            case "Quote Post":
+                                await App.PushModalAsync(new ThreadReplyPage(this.thread.ThreadId, json.Id, false)).ConfigureAwait(false);
+                                break;
+                        }
+                    });
+                    break;
             }
         }
     }

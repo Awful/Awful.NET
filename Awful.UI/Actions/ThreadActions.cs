@@ -60,7 +60,7 @@ namespace Awful.UI.Actions
         /// <param name="index">The post number index.</param>
         /// <param name="token">A CancellationToken.</param>
         /// <returns>A Result.</returns>
-        public async Task<Result> MarkPostAsLastReadAsAsync(long threadId, int index, CancellationToken token = default)
+        public async Task<Result> MarkPostAsLastReadAsAsync(long threadId, long index, CancellationToken token = default)
         {
             return await this.manager.MarkPostAsLastReadAsAsync(threadId, index, token).ConfigureAwait(false);
         }

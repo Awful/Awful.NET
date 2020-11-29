@@ -40,9 +40,16 @@ namespace Awful.Core.Handlers
             var post = new Post();
             post.User = UserHandler.ParseUserFromPost(doc);
             var id = doc.Id.Replace("post", string.Empty);
+
             long idVal = 0;
             long.TryParse(id, out idVal);
             post.PostId = idVal;
+
+            var index = doc.GetAttribute("data-idx");
+            long indexVal = 0;
+            long.TryParse(index, out indexVal);
+            post.PostIndex = indexVal;
+
             var authorTd = doc.QuerySelector(@"[class*=""userid""]");
             authorTd.Remove();
 
