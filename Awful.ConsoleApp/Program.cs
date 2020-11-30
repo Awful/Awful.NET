@@ -31,9 +31,9 @@ namespace Awful.ConsoleApp
             //var entry = await manager.GetBanPageAsync().ConfigureAwait(false);
             //var result = handler.RenderBanView(entry, defaultOptions);
 
-            //UserManager manager = new UserManager(awfulClient);
-            //var entry = await manager.GetUserFromProfilePageAsync(0).ConfigureAwait(false);
-            //var result = handler.RenderProfileView(entry, defaultOptions);
+            UserManager manager = new UserManager(awfulClient);
+            var entry = await manager.GetUserFromProfilePageAsync(0).ConfigureAwait(false);
+            var result = handler.RenderProfileView(entry, defaultOptions);
 
             //SAclopediaManager manager = new SAclopediaManager(awfulClient);
             //var entry = await manager.GetEntryAsync(2300).ConfigureAwait(false);

@@ -19,5 +19,10 @@ namespace Awful.Webview.Entities
         /// Gets or sets the Profile Entry.
         /// </summary>
         public Awful.Core.Entities.JSON.User Entry { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether if the theme is dark.
+        /// </summary>
+        public bool IsDark { get; set; }
     }
 }

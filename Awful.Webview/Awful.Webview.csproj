@@ -10,6 +10,7 @@
     <None Remove="CSS\app.css" />
     <None Remove="CSS\posts-view-dark.css" />
     <None Remove="CSS\posts-view.css" />
+    <None Remove="CSS\profile.css" />
     <None Remove="CSS\system-font.css" />
     <None Remove="JS\forum.js" />
     <None Remove="JS\RenderView.js" />
@@ -23,6 +24,7 @@
     <EmbeddedResource Include="CSS\app.css" />
     <EmbeddedResource Include="CSS\posts-view-dark.css" />
     <EmbeddedResource Include="CSS\posts-view.css" />
+    <EmbeddedResource Include="CSS\profile.css" />
     <EmbeddedResource Include="CSS\system-font.css" />
     <EmbeddedResource Include="JS\forum.js" />
     <EmbeddedResource Include="JS\RenderView.js" />
@@ -34,6 +36,7 @@
 
   <ItemGroup>
     <PackageReference Include="Handlebars.Net" Version="1.11.5" />
+    <PackageReference Include="Handlebars.Net.Helpers" Version="1.1.1" />
   </ItemGroup>
 
   <ItemGroup>

@@ -62,5 +62,10 @@ namespace Awful.Core.Entities.Bans
         /// Gets or sets the id of the user who approved the ban.
         /// </summary>
         public int ApprovedById { get; set; }
+
+        /// <summary>
+        /// Gets a value indicating whether the user is permabanned.
+        /// </summary>
+        public bool IsPermaBanned { get { return this.Type.ToUpperInvariant() == "PERMABAN"; } }
     }
 }

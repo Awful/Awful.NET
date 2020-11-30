@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 
 using System.Globalization;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 
 namespace Awful.Core.Entities.JSON
@@ -62,6 +63,17 @@ namespace Awful.Core.Entities.JSON
         /// </summary>
         [JsonProperty("usertitle")]
         public string Usertitle { get; set; }
+
+        /// <summary>
+        /// Gets the Avatar.
+        /// </summary>
+        public string Avatar { get
+            {
+                var captures = Regex.Match(this.Usertitle, @"(http|ftp|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?");
+                var avatarLink = captures.Captures.Count > 0 ? captures.Captures[0].Value : string.Empty;
+                return avatarLink;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the join date (long).

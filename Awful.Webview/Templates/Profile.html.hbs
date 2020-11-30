@@ -8,7 +8,91 @@
 {{/each}}
 <title>Awful - Profile</title>
 
-<body>
+<body class="iphone {{#if IsDark}} dark {{/if}} ">
+    <section>
+
+        <div id="customTitle">
+            <div id="headerBackground" style="        background-image: url('{{ Entry.Avatar }}')"></div>
+
+            <header>
+                {{{ Entry.Usertitle }}}
+            </header>
+        </div>
+
+        <p>
+            There have been <b>{{ Entry.Posts }}</b> posts
+            made by <i>{{ Entry.Username }}</i>,
+            an average of {{ Entry.Postsperday }} posts per day,
+            since registering on <b>{{Entry.JoinDate}}</b>.
+            <i>{{ Entry.Username }}</i> is an {{Entry.Gender}}.
+        </p>
+
+        <p>{{ Entry.Biography }}</p>
+
+        <section>
+
+            <table id="contact">
+                <caption>Contact Information</caption>
+
+                {{#if Entry.Recievepm}}
+                <tr><th>Private Message</th><td>{{ Entry.Username }}</td></tr>
+                {{/if}}
+
+                {{#if Entry.Aim}}
+                <tr><th>AIM</th><td>{{ Entry.Aim }}</td></tr>
+                {{/if}}
+
+                {{#if Entry.Icq}}
+                <tr><th>ICQ</th><td>{{ Entry.Icq }}</td></tr>
+                {{/if}}
+
+                {{#if Entry.Yahoo}}
+                <tr><th>Yahoo!</th><td>{{ Entry.Yahoo }}</td></tr>
+                {{/if}}
+
+                {{#if Entry.Homepage}}
+                <tr><th>Homepage</th><td>{{ Entry.Homepage }}</td></tr>
+                {{/if}}
+            </table>
+
+            <table>
+                <caption>Additional Information</caption>
+
+                {{#if Entry.JoinDate}}
+                <tr><th>Member Since</th><td>{{  Entry.JoinDate }}</td></tr>
+                {{/if}}
+
+                {{#if Entry.Posts}}
+                <tr><th>Post Count</th><td>{{  Entry.Posts }}</td></tr>
+                {{/if}}
+
+                {{#if Entry.Postsperday}}
+                <tr><th>Posts Per Day</th><td>{{  Entry.Postsperday }}</td></tr>
+                {{/if}}
+
+                {{#if Entry.LastPostDate}}
+                <tr><th>Last Post</th><td>{{  Entry.LastPostDate }}</td></tr>
+                {{/if}}
+
+                {{#if Entry.Location}}
+                <tr><th>Location</th><td>{{  Entry.Location }}</td></tr>
+                {{/if}}
+
+                {{#if Entry.Interests}}
+                <tr><th>Interests</th><td>{{  Entry.Interests }}</td></tr>
+                {{/if}}
+
+                {{#if Entry.Occupation}}
+                <tr><th>Occupation</th><td>{{  Entry.Occupation }}</td></tr>
+                {{/if}}
+            </table>
+
+        </section>
+
+    </section>
+</body>
+
+<!--<body>
     <div id="app" class="framework7-root {{DeviceColorTheme}}">
         <div class="view view-main view-init safe-areas">
             <div class="page page-home page-current">
@@ -146,4 +230,4 @@
             theme: theme,
         });
     </script>
-</body>
+</body>-->

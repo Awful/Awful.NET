@@ -13,6 +13,8 @@ using Awful.Core.Entities.SAclopedia;
 using Awful.Webview.Entities;
 using Awful.Webview.Entities.Themes;
 using HandlebarsDotNet;
+using HandlebarsDotNet.Helpers;
+using HandlebarsDotNet.Helpers.Enums;
 
 namespace Awful.Webview
 {
@@ -25,6 +27,7 @@ namespace Awful.Webview
         private readonly string saclopediaHtml;
         private readonly string profileHtml;
         private readonly string banHtml;
+        private readonly string profileCss;
         private readonly string postCss;
         private readonly string postDarkCss;
         private readonly string systemUiCss;
@@ -42,6 +45,7 @@ namespace Awful.Webview
             this.profileHtml = TemplateHandler.GetResourceFileContentAsString("Templates.Profile.html.hbs");
             this.banHtml = TemplateHandler.GetResourceFileContentAsString("Templates.Ban.html.hbs");
             this.systemUiCss = TemplateHandler.GetResourceFileContentAsString("CSS.system-font.css");
+            this.profileCss = TemplateHandler.GetResourceFileContentAsString("CSS.profile.css");
             this.postCss = TemplateHandler.GetResourceFileContentAsString("CSS.posts-view.css");
             this.postDarkCss = TemplateHandler.GetResourceFileContentAsString("CSS.posts-view-dark.css");
             this.forumCss = TemplateHandler.GetResourceFileContentAsString("CSS.app.css");
@@ -102,7 +106,8 @@ namespace Awful.Webview
 
             var template = Handlebars.Compile(this.profileHtml);
             var entity = new ProfileEntity() { Entry = entry };
-            this.SetDefaults(entity, options);
+            entity.CSS = new List<string>() { this.systemUiCss, this.profileCss };
+            entity.IsDark = options.DeviceColorTheme == DeviceColorTheme.Dark;
             return template(entity);
         }
 
