@@ -9,6 +9,11 @@
 <title>Awful - Thread</title>
 
 <body class="iphone">
+
+    <div class="hidden" onclick="showPosts()" id="start">
+        Show Hidden Posts...
+    </div>
+
     <div id="posts">
         {{#Entry.Posts}}
         <post id="{{ PostId }}" class="{{User.Roles}} {{#if HasSeen}} seen {{/if}} {{#if User.IsAvatarHidden}} no-avatar {{/if}}">
@@ -18,22 +23,24 @@
                 <img class="avatar" src="{{ User.AvatarLink }}" alt="">
                 {{/if}}
 
-            <section class="nameanddate">
-                <h1 class="username">
-                    {{ User.Username }}
-                </h1>
+                <section class="nameanddate">
+                    <h1 class="username">
+                        {{ User.Username }}
+                    </h1>
 
-                <!--{{#if User.HasRoles}}
+                    <!--{{#if User.HasRoles}}
 
-                <span class="{{User.Roles}}"></span>
+                    <span class="{{User.Roles}}"></span>
 
-                {{/if}}-->
+                    {{/if}}-->
 
-                <time class="regdate">
-                    Joined {{ User.DateJoined }}
-                </time>
+                    <time class="regdate">
+                        at
 
-            </section>
+                        Joined {{ User.DateJoined }}
+                    </time>
+
+                </section>
             </header>
 
             <section class="postbody">

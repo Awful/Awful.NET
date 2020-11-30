@@ -21,19 +21,19 @@ namespace Awful.ConsoleApp
         {
             var awfulClient = await CreateAwfulClient().ConfigureAwait(false);
             TemplateHandler handler = new TemplateHandler();
-            var defaultOptions = new DefaultOptions() { DeviceColorTheme = DeviceColorTheme.Dark };
+            var defaultOptions = new DefaultOptions() { DeviceColorTheme = DeviceColorTheme.Light };
 
-            //ThreadPostManager manager = new ThreadPostManager(awfulClient);
-            //var entry = await manager.GetThreadPostsAsync(3606621, 1).ConfigureAwait(false);
-            //var result = handler.RenderThreadPostView(entry, defaultOptions);
+            ThreadPostManager manager = new ThreadPostManager(awfulClient);
+            var entry = await manager.GetThreadPostsAsync(3606621, 1).ConfigureAwait(false);
+            var result = handler.RenderThreadPostView(entry, defaultOptions);
 
             //BanManager manager = new BanManager(awfulClient);
             //var entry = await manager.GetBanPageAsync().ConfigureAwait(false);
             //var result = handler.RenderBanView(entry, defaultOptions);
 
-            UserManager manager = new UserManager(awfulClient);
-            var entry = await manager.GetUserFromProfilePageAsync(0).ConfigureAwait(false);
-            var result = handler.RenderProfileView(entry, defaultOptions);
+            //UserManager manager = new UserManager(awfulClient);
+            //var entry = await manager.GetUserFromProfilePageAsync(0).ConfigureAwait(false);
+            //var result = handler.RenderProfileView(entry, defaultOptions);
 
             //SAclopediaManager manager = new SAclopediaManager(awfulClient);
             //var entry = await manager.GetEntryAsync(2300).ConfigureAwait(false);

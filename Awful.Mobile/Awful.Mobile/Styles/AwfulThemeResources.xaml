@@ -53,13 +53,15 @@
         <Setter Property="NavigationPage.BarTextColor" Value="White"/>
     </Style>
 
-     <Style TargetType="TabbedPage" ApplyToDerivedTypes="True">
-         <Setter Property="BarBackgroundColor"
+    <Style TargetType="TabbedPage" ApplyToDerivedTypes="True">
+        <Setter Property="BarBackgroundColor"
                  Value="{AppThemeBinding Dark={StaticResource HeaderBarBackgroundColorDark}, 
                  Light={StaticResource ShellHeaderBarBackgroundColorLight}}"/>
         <Setter Property="BarTextColor"
                  Value="{AppThemeBinding Dark={StaticResource TextColorDark}, 
                  Light={StaticResource TextColorLight}}"/>
+        <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Dark={OnPlatform Android={StaticResource BackgroundColorLight}, iOS=Default, Default=Default},
+                    Light={OnPlatform Android={StaticResource BackgroundColorDark}, iOS=Default, Default=Default}}" />
         <Setter Property="SelectedTabColor" Value="{StaticResource TabBarSelectedColor}" />
      </Style>
 
