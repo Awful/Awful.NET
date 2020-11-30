@@ -29,6 +29,7 @@ namespace Awful.Webview
         private readonly string postDarkCss;
         private readonly string systemUiCss;
         private readonly string forumJs;
+        private readonly string forumRenderJs;
         private readonly string forumCss;
 
         /// <summary>
@@ -45,6 +46,7 @@ namespace Awful.Webview
             this.postDarkCss = TemplateHandler.GetResourceFileContentAsString("CSS.posts-view-dark.css");
             this.forumCss = TemplateHandler.GetResourceFileContentAsString("CSS.app.css");
             this.forumJs = TemplateHandler.GetResourceFileContentAsString("JS.forum.js");
+            this.forumRenderJs = TemplateHandler.GetResourceFileContentAsString("JS.RenderView.js");
         }
 
         /// <summary>
@@ -150,7 +152,7 @@ namespace Awful.Webview
                 entity.CSS.Add(this.postCss);
             }
 
-            entity.JS = new List<string>() { this.forumJs };
+            entity.JS = new List<string>() { this.forumJs, this.forumRenderJs };
             entity.DeviceColorTheme = options.DeviceColorTheme == DeviceColorTheme.Dark ? "theme-dark" : "theme";
             entity.Theme = options.DeviceTheme switch
             {

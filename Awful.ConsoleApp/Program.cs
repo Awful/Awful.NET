@@ -24,7 +24,7 @@ namespace Awful.ConsoleApp
             var defaultOptions = new DefaultOptions() { DeviceColorTheme = DeviceColorTheme.Light };
 
             ThreadPostManager manager = new ThreadPostManager(awfulClient);
-            var entry = await manager.GetThreadPostsAsync(3836680, 1).ConfigureAwait(false);
+            var entry = await manager.GetThreadPostsAsync(3606621, 1).ConfigureAwait(false);
             var result = handler.RenderThreadPostView(entry, defaultOptions);
 
             //BanManager manager = new BanManager(awfulClient);

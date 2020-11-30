@@ -12,6 +12,7 @@
     <None Remove="CSS\posts-view.css" />
     <None Remove="CSS\system-font.css" />
     <None Remove="JS\forum.js" />
+    <None Remove="JS\RenderView.js" />
     <None Remove="Templates\Ban.html.hbs" />
     <None Remove="Templates\Profile.html.hbs" />
     <None Remove="Templates\SAclopedia.html.hbs" />
@@ -24,6 +25,7 @@
     <EmbeddedResource Include="CSS\posts-view.css" />
     <EmbeddedResource Include="CSS\system-font.css" />
     <EmbeddedResource Include="JS\forum.js" />
+    <EmbeddedResource Include="JS\RenderView.js" />
     <EmbeddedResource Include="Templates\Ban.html.hbs" />
     <EmbeddedResource Include="Templates\Profile.html.hbs" />
     <EmbeddedResource Include="Templates\Thread.html.hbs" />

@@ -11,7 +11,7 @@
 <body class="iphone">
     <div id="posts">
         {{#Entry.Posts}}
-        <div id="{{ PostId }}" class="{{#if HasSeen}} seen {{/if}} {{#if User.IsAvatarHidden}} no-avatar {{/if}}">
+        <post id="{{ PostId }}" class="{{#if HasSeen}} seen {{/if}} {{#if User.IsAvatarHidden}} no-avatar {{/if}}">
             <header class="userid-{{User.Id}}">
                 {{#if User.IsAvatarHidden}}
                 {{else}}
@@ -45,11 +45,11 @@
                     {{ PostDate }}
                 </span>
 
-                <button onclick="showPostMenu({{PostId}})" class="action-button" title="Post actions">
+                <button class="action-button" title="Post actions">
                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAAAYCAMAAABuvUuCAAAAHlBMVEX///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACGjDitAAAACnRSTlMAEHDQ/1DwYMCA7NclIgAAAHFJREFUeNrdlEsOwCAIRPmL979wK9Gk3QIrZzU8EgMqwP1CYnnFhDWuJlumFT7ko5HnKj9plqNFbO7bYI4DRTiXnWEpx4EPPxnOcYjyYCuqzXFc1k/CV5TgPQe1tdZ92fXnb/6Q9RHpHdr6GmlbbNfrAWChC8uPWXAAAAAAAElFTkSuQmCC">
                 </button>
             </footer>
-        </div>
+        </post>
         {{/Entry.Posts}}
     </div>
 

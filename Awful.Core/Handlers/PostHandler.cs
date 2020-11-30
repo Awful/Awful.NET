@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using Awful.Core.Entities.Posts;
@@ -78,14 +79,25 @@ namespace Awful.Core.Handlers
                         {
                             var imgurGif = imgurGifs[i];
                             var div = parent.CreateElement("div");
-                            div.ClassList.Add("gifWrap");
+                            div.ClassList.Add("gif-wrap");
                             var newImgur = parent.CreateElement("img");
-                            newImgur.ClassList.Add("imgurGif");
-                            newImgur.SetAttribute("data-originalurl", imgurGif.GetAttribute("src"));
-                            newImgur.SetAttribute("data-posterurl", imgurGif.GetAttribute("src").Replace(".gif", "h.jpg"));
+                            newImgur.ClassList.Add("posterized");
+                            newImgur.SetAttribute("data-original-url", imgurGif.GetAttribute("src"));
+                            newImgur.SetAttribute("data-poster-url", imgurGif.GetAttribute("src").Replace(".gif", "h.jpg"));
                             newImgur.SetAttribute("src", imgurGif.GetAttribute("src").Replace(".gif", "h.jpg"));
                             div.AppendChild(newImgur);
                             imgurGif.Replace(div);
+                        }
+                    }
+
+                    var tweets = threadBody.QuerySelectorAll(@"a[href*=""twitter.com""]");
+                    foreach (var tweet in tweets)
+                    {
+                        var href = tweet.GetAttribute("href");
+                        var captures = Regex.Match(href, @"^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(?:es)?\/(\d+)(?:\/.*)?$");
+                        if (captures.Success && captures.Groups.Count >= 3)
+                        {
+                            tweet.SetAttribute("data-tweet-id", captures.Groups[2].Value);
                         }
                     }
 
