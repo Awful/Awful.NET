@@ -6,7 +6,7 @@
     Title="{Binding Title}"
     x:Class="Awful.Mobile.Pages.ForumThreadListPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Post" IsEnabled="{Binding IsSignedIn}"
+        <ToolbarItem Text="Post" Command="{Binding NewThreadCommand}" IsEnabled="{Binding IsSignedIn}"
         Order="Primary"
                  Priority="0">
         <ToolbarItem.IconImageSource>

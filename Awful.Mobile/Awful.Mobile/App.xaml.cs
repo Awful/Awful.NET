@@ -107,6 +107,35 @@ namespace Awful.Mobile
         /// Refresh post page.
         /// </summary>
         /// <returns>Task.</returns>
+        public static async Task RefreshForumPage()
+        {
+            ForumThreadListPageViewModel vm = null;
+            if (App.IsLargeDevice)
+            {
+                FlyoutPage flyout = (FlyoutPage)App.Current.MainPage;
+                Page mp = (Page)flyout.Detail;
+                vm = mp.BindingContext as ForumThreadListPageViewModel;
+            }
+            else
+            {
+                TabbedPage tabbedPage = (TabbedPage)App.Current.MainPage;
+                var navigationPage = tabbedPage.CurrentPage as NavigationPage;
+                if (navigationPage != null)
+                {
+                    vm = navigationPage.CurrentPage.BindingContext as ForumThreadListPageViewModel;
+                }
+            }
+
+            if (vm != null)
+            {
+                await vm.RefreshForums().ConfigureAwait(false);
+            }
+        }
+
+        /// <summary>
+        /// Refresh post page.
+        /// </summary>
+        /// <returns>Task.</returns>
         public static async Task RefreshPostPage()
         {
             ForumThreadPageViewModel vm = null;

@@ -20,6 +20,7 @@ namespace Awful.Mobile.ViewModels
         private TemplateHandler handler;
         protected ThreadReplyActions replyActions;
         protected ThreadPostCreationActions postActions;
+        protected ThreadActions threadActions;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadPostBaseViewModel"/> class.
@@ -56,6 +57,7 @@ namespace Awful.Mobile.ViewModels
         {
             this.replyActions = new ThreadReplyActions(this.Client, this.Context, this.handler);
             this.postActions = new ThreadPostCreationActions(this.Client);
+            this.threadActions = new ThreadActions(this.Client, this.Context);
 
             if (this.Editor != null)
             {

@@ -1948,6 +1948,10 @@
     <Compile Remove="Styles\PrivateMessagesPage.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="..\..\Awful.Tags.Local\empty-pm-tag.png" Link="ThreadTags\empty-pm-tag.png" />
+    <EmbeddedResource Include="..\..\Awful.Tags.Local\empty-thread-tag.png" Link="ThreadTags\empty-thread-tag.png" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="..\..\Awful.Tags.Local\1stars.png" Link="ThreadTags\1stars.png" />
     <EmbeddedResource Include="..\..\Awful.Tags.Local\2stars.png" Link="ThreadTags\2stars.png" />
     <EmbeddedResource Include="..\..\Awful.Tags.Local\3stars.png" Link="ThreadTags\3stars.png" />
@@ -1960,6 +1964,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Pages\ForumPostIconSelectionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Pages\NewThreadPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

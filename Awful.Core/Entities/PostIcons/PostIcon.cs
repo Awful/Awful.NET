@@ -31,6 +31,6 @@ namespace Awful.Core.Entities.PostIcons
         /// <summary>
         /// Gets the image location of the icon.
         /// </summary>
-        public string ImageLocation { get; internal set; }
+        public string ImageLocation { get; set; }
     }
 }

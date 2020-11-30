@@ -6,9 +6,6 @@
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     ios:Page.ModalPresentationStyle="FormSheet"
     x:Class="Awful.Mobile.Pages.ThreadReplyPage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Post"/>
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>

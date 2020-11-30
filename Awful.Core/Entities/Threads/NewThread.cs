@@ -20,7 +20,7 @@ namespace Awful.Core.Entities.Threads
 
         public string Content { get; set; }
 
-        public PostIcon PostIcon { get; set; }
+        public PostIcon PostIcon { get; set; } = new PostIcon();
 
         public string FormKey { get; set; }
 

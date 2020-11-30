@@ -53,11 +53,16 @@ namespace Awful.Mobile.ViewModels
             {
                 return this.refreshCommand ??= new Command(async () =>
                 {
-                    this.IsRefreshing = true;
-                    await this.LoadThreadListAsync(this.forum.Id, 1).ConfigureAwait(false);
-                    this.IsRefreshing = false;
+                    await this.RefreshForums().ConfigureAwait(false);
                 });
             }
+        }
+
+        public async Task RefreshForums()
+        {
+            this.IsRefreshing = true;
+            await this.LoadThreadListAsync(this.forum.Id, 1).ConfigureAwait(false);
+            this.IsRefreshing = false;
         }
 
         /// <summary>
@@ -72,6 +77,23 @@ namespace Awful.Mobile.ViewModels
                     if (item != null)
                     {
                         await App.SetDetailPageAsync(new ForumThreadPage(item)).ConfigureAwait(false);
+                    }
+                });
+            }
+        }
+
+        /// <summary>
+        /// Gets the new thread command.
+        /// </summary>
+        public Command NewThreadCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (this.forum != null)
+                    {
+                        await App.PushModalAsync(new NewThreadPage(this.forum)).ConfigureAwait(false);
                     }
                 });
             }
