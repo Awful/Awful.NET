@@ -11,7 +11,7 @@
 <body class="iphone">
     <div id="posts">
         {{#Entry.Posts}}
-        <post id="{{ PostId }}" class="{{#if HasSeen}} seen {{/if}} {{#if User.IsAvatarHidden}} no-avatar {{/if}}">
+        <post id="{{ PostId }}" class="{{User.Roles}} {{#if HasSeen}} seen {{/if}} {{#if User.IsAvatarHidden}} no-avatar {{/if}}">
             <header class="userid-{{User.Id}}">
                 {{#if User.IsAvatarHidden}}
                 {{else}}
@@ -23,11 +23,11 @@
                     {{ User.Username }}
                 </h1>
 
-                {{#if User.HasRoles}}
+                <!--{{#if User.HasRoles}}
 
                 <span class="{{User.Roles}}"></span>
 
-                {{/if}}
+                {{/if}}-->
 
                 <time class="regdate">
                     Joined {{ User.DateJoined }}
