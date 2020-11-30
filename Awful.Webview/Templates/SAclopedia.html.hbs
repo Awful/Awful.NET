@@ -8,7 +8,31 @@
 {{/each}}
 <title>Awful - SAclopedia</title>
 
-<body>
+<body class="iphone">
+    <div id="posts">
+        {{#Entry.Posts}}
+        <post class="no-avatar">
+            <header>
+                <h1 class="username">
+                    {{ Username }}
+                </h1>
+            </header>
+
+            <section class="postbody">
+                {{{ PostHtml }}}
+            </section>
+
+            <footer>
+                <span class="postdate">
+                    {{ PostedDate }}
+                </span>
+            </footer>
+        </post>
+        {{/Entry.Posts}}
+    </div>
+</body>
+
+<!--<body>
     <div id="app" class="framework7-root {{DeviceColorTheme}}">
         <div class="view view-main view-init safe-areas">
             <div class="page page-home page-current">
@@ -42,4 +66,4 @@
             theme: theme,
         });
     </script>
-</body>
+</body>-->
