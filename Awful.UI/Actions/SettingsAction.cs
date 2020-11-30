@@ -60,9 +60,6 @@ namespace Awful.UI.Actions
             Device.BeginInvokeOnMainThread(() => {
                 switch (theme)
                 {
-                    case DeviceColorTheme.Unspecified:
-                        Application.Current.UserAppTheme = OSAppTheme.Unspecified;
-                        break;
                     case DeviceColorTheme.Light:
                         Application.Current.UserAppTheme = OSAppTheme.Light;
                         break;

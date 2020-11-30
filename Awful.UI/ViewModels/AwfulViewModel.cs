@@ -135,22 +135,6 @@ namespace Awful.UI.ViewModels
         {
             var defaults = await this.Context.GetDefaultSettingsAsync().ConfigureAwait(false);
             var defaultOptions = new DefaultOptions() { DeviceColorTheme = defaults.DeviceColorTheme, DeviceTheme = defaults.DeviceTheme };
-            if (defaultOptions.DeviceColorTheme == DeviceColorTheme.Unspecified)
-            {
-                switch (Application.Current.UserAppTheme)
-                {
-                    case OSAppTheme.Dark:
-                        defaultOptions.DeviceColorTheme = DeviceColorTheme.Dark;
-                        break;
-                    case OSAppTheme.Light:
-                        defaultOptions.DeviceColorTheme = DeviceColorTheme.Light;
-                        break;
-                    case OSAppTheme.Unspecified:
-                        defaultOptions.DeviceColorTheme = DeviceColorTheme.Light;
-                        break;
-                }
-            }
-
             if (defaultOptions.DeviceTheme == DeviceTheme.Default)
             {
                 switch (Device.RuntimePlatform)

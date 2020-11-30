@@ -43,6 +43,7 @@ namespace Awful.Mobile
             var user = context.DoesUsersExistAsync().Result;
             if (!user)
             {
+                App.SetupTheme();
                 App.Current.MainPage = new LoginPage();
             }
             else
@@ -51,7 +52,7 @@ namespace Awful.Mobile
             }
         }
 
-        public static void SetMainAppPage()
+        public static void SetupTheme()
         {
             var context = App.Container.Resolve<AwfulContext>();
             var settings = new SettingsAction(context);
@@ -63,8 +64,13 @@ namespace Awful.Mobile
             }
             else
             {
-                settings.SetAppTheme(Webview.Entities.Themes.DeviceColorTheme.Unspecified);
+                settings.SetAppTheme(Webview.Entities.Themes.DeviceColorTheme.Light);
             }
+        }
+
+        public static void SetMainAppPage()
+        {
+            App.SetupTheme();
 
             if (App.IsLargeDevice)
             {
