@@ -22,7 +22,7 @@ namespace Awful.UI.ViewModels
     {
         private SettingsAction settingActions;
         private SettingOptions settings;
-
+        private DeviceColorTheme deviceColorTheme;
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsViewModel"/> class.
         /// </summary>
@@ -47,21 +47,22 @@ namespace Awful.UI.ViewModels
         {
             get
             {
-                return this.settings.DeviceColorTheme;
+                return this.deviceColorTheme;
             }
 
             set
             {
+                this.deviceColorTheme = value;
                 if (value != this.settings.DeviceColorTheme)
                 {
                     this.settings.DeviceColorTheme = value;
-                    this.OnPropertyChanged(nameof(this.DeviceColorTheme));
                     Task.Run(async () =>
                     {
                         this.settingActions.SetAppTheme(value);
                         await this.SaveSettingsAsync().ConfigureAwait(false);
                     });
                 }
+                this.OnPropertyChanged(nameof(this.DeviceColorTheme));
             }
         }
 
@@ -87,6 +88,7 @@ namespace Awful.UI.ViewModels
         {
             await base.OnLoad().ConfigureAwait(false);
             this.settings = await this.Context.SettingOptionsItems.FirstOrDefaultAsync().ConfigureAwait(false) ?? new SettingOptions();
+            this.DeviceColorTheme = this.settings.DeviceColorTheme;
         }
 
         private async Task SaveSettingsAsync()

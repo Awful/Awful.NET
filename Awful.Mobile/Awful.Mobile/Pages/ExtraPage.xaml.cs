@@ -29,6 +29,7 @@ namespace Awful.Mobile.Pages
                         await App.PushPageAsync(new LepersPage()).ConfigureAwait(false);
                         break;
                     case "UserProfileCell":
+                        await App.SetDetailPageAsync(new UserProfilePage(0)).ConfigureAwait(false);
                         break;
                     case "AboutCell":
                         break;
