@@ -41,9 +41,18 @@ namespace Awful.Core.Handlers
             }
 
             var select = pages.QuerySelector("select");
-            var selectedPageItem = select.QuerySelector("option:checked");
-            threadList.CurrentPage = Convert.ToInt32(selectedPageItem.TextContent, CultureInfo.InvariantCulture);
-            threadList.TotalPages = select.ChildElementCount;
+            if (select != null)
+            {
+                var selectedPageItem = select.QuerySelector("option:checked");
+                threadList.CurrentPage = Convert.ToInt32(selectedPageItem.TextContent, CultureInfo.InvariantCulture);
+                threadList.TotalPages = select.ChildElementCount;
+            }
+            else
+            {
+                threadList.CurrentPage = 1;
+                threadList.TotalPages = 1;
+            }
+
             return threadList;
         }
     }

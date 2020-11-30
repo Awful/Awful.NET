@@ -1929,11 +1929,9 @@
     <ProjectReference Include="..\..\Awful.Webview\Awful.Webview.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Pages\" />
     <Folder Include="Tools\Utilities\" />
     <Folder Include="Styles\" />
     <Folder Include="ThreadTags\" />
-    <Folder Include="ViewModels\" />
     <Folder Include="Controls\" />
   </ItemGroup>
   <ItemGroup>
@@ -1960,5 +1958,10 @@
     <Compile Update="Styles\AwfulThemeResources.xaml.cs">
       <DependentUpon>AwfulThemeResources.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Pages\NewThreadPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
