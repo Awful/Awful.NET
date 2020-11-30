@@ -26,6 +26,9 @@ namespace Awful.Mobile
         /// </summary>
         public static IContainer Container;
 
+        // public static bool IsLargeDevice => Device.Idiom == TargetIdiom.Tablet;
+        public static bool IsLargeDevice => false;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="App"/> class.
         /// </summary>
@@ -63,7 +66,7 @@ namespace Awful.Mobile
                 settings.SetAppTheme(Webview.Entities.Themes.DeviceColorTheme.Unspecified);
             }
 
-            if (Device.Idiom == TargetIdiom.Desktop || Device.Idiom == TargetIdiom.Tablet)
+            if (App.IsLargeDevice)
             {
                 App.Current.MainPage = new MainPage();
             }
@@ -81,7 +84,7 @@ namespace Awful.Mobile
         /// <returns>Task.</returns>
         public static async Task PushModalAsync(Page page)
         {
-            if (Device.Idiom == TargetIdiom.Desktop || Device.Idiom == TargetIdiom.Tablet)
+            if (App.IsLargeDevice)
             {
                 FlyoutPage flyout = (FlyoutPage)App.Current.MainPage;
                 Page mp = (Page)flyout.Detail;
@@ -101,7 +104,7 @@ namespace Awful.Mobile
         public static async Task RefreshPostPage()
         {
             ForumThreadPageViewModel vm = null;
-            if (Device.Idiom == TargetIdiom.Desktop || Device.Idiom == TargetIdiom.Tablet)
+            if (App.IsLargeDevice)
             {
                 FlyoutPage flyout = (FlyoutPage)App.Current.MainPage;
                 Page mp = (Page)flyout.Detail;
@@ -129,7 +132,7 @@ namespace Awful.Mobile
         /// <returns>Task.</returns>
         public static async Task CloseModalAsync()
         {
-            if (Device.Idiom == TargetIdiom.Desktop || Device.Idiom == TargetIdiom.Tablet)
+            if (App.IsLargeDevice)
             {
                 FlyoutPage flyout = (FlyoutPage)App.Current.MainPage;
                 Page mp = (Page)flyout.Detail;
@@ -150,7 +153,7 @@ namespace Awful.Mobile
         /// <returns>Task.</returns>
         public static async Task PushPageAsync(Page page)
         {
-            if (Device.Idiom == TargetIdiom.Desktop || Device.Idiom == TargetIdiom.Tablet)
+            if (App.IsLargeDevice)
             {
                 FlyoutPage flyout = (FlyoutPage)App.Current.MainPage;
                 if (flyout.Flyout is NavigationPage navPage)
@@ -175,7 +178,7 @@ namespace Awful.Mobile
         /// <returns>Task.</returns>
         public static async Task SetDetailPageAsync(Page page)
         {
-            if (Device.Idiom == TargetIdiom.Desktop || Device.Idiom == TargetIdiom.Tablet)
+            if (App.IsLargeDevice)
             {
                 FlyoutPage flyout = (FlyoutPage)App.Current.MainPage;
                 flyout.Detail = new NavigationPage(page);

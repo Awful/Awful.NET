@@ -1930,7 +1930,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
-    <Folder Include="Tools\" />
     <Folder Include="Tools\Utilities\" />
     <Folder Include="Styles\" />
     <Folder Include="ThreadTags\" />
@@ -1949,6 +1948,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Styles\PrivateMessagesPage.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\Awful.Tags.Local\1stars.png" Link="ThreadTags\1stars.png" />
+    <EmbeddedResource Include="..\..\Awful.Tags.Local\2stars.png" Link="ThreadTags\2stars.png" />
+    <EmbeddedResource Include="..\..\Awful.Tags.Local\3stars.png" Link="ThreadTags\3stars.png" />
+    <EmbeddedResource Include="..\..\Awful.Tags.Local\4stars.png" Link="ThreadTags\4stars.png" />
+    <EmbeddedResource Include="..\..\Awful.Tags.Local\5stars.png" Link="ThreadTags\5stars.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Styles\AwfulThemeResources.xaml.cs">

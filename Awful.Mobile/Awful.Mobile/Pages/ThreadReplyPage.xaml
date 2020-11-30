@@ -16,10 +16,10 @@
                 <RowDefinition Height="1" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <StackLayout Orientation="Horizontal" Grid.Row="0">
-                <Button Command="{Binding CloseModalCommand}"  Margin="15,0,-15,0" HorizontalOptions="StartAndExpand" Text="Cancel"/>
+            <StackLayout Margin="5" Orientation="Horizontal" Grid.Row="0">
+                <Button Command="{Binding CloseModalCommand}" HorizontalOptions="StartAndExpand" Text="Cancel"/>
                 <Button HorizontalOptions="CenterAndExpand" Text="Options"/>
-                <Button Command="{Binding PostReplyCommand}" Margin="0,0,15,0" HorizontalOptions="EndAndExpand" Text="Post"/>
+                <Button Command="{Binding PostReplyCommand}" HorizontalOptions="EndAndExpand" Text="Post"/>
             </StackLayout>
             <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
             <Editor Grid.Row="2" Margin="15" x:Name="AwfulEditor"/>

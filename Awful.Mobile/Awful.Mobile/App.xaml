@@ -20,6 +20,7 @@
             <converters:LoginTextConverter x:Key="LoginTextConverter"/>
             <converters:FirstPageConverter x:Key="FirstPageConverter"/>
             <converters:LastPageConverter x:Key="LastPageConverter"/>
+            <converters:RatingImageConverter x:Key="RatingImageConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

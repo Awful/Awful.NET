@@ -199,27 +199,29 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0"
-                               HeightRequest="45"
-                               WidthRequest="45"
-                               VerticalOptions="Start"
+                    <StackLayout VerticalOptions="Start" Grid.Column="0">
+                        <Grid HeightRequest="55" WidthRequest="55">
+                            <Image Grid.Column="0"
                                Margin="5"
                                Source="{local:ImageResource Awful.Mobile.ThreadTags.missing.png}"/>
-                    <!--Fix Placeholder-->
-                    <Image Grid.Column="0"
-                               HeightRequest="45"
-                               WidthRequest="45"
-                               VerticalOptions="Start"
+                            <!-- Fix Placeholder -->
+                            <Image Grid.Column="0"
                                Margin="5"
                                Source="{Binding ImageIconLocation, Converter={StaticResource ForumImageConverter}}"/>
-                    <Image
+                        </Grid>
+                        <Image
                         Grid.Column="0"
-                        Margin="0,50,0,0"
-                        VerticalOptions="End"
-                        WidthRequest="45"
+                        WidthRequest="55"
+                        HeightRequest="20"
+                        IsVisible="{Binding RatingImage, Converter={StaticResource StringToVisibilityConverter}}"
+                        Source="{Binding RatingImage, Converter={StaticResource RatingImageConverter}}" />
+                        <Image
+                        Grid.Column="0"
+                        WidthRequest="55"
                         HeightRequest="20"
                         IsVisible="{Binding StoreImageIconEndpoint, Converter={StaticResource StringToVisibilityConverter}}"
                         Source="{Binding StoreImageIconEndpoint}" />
+                    </StackLayout>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
