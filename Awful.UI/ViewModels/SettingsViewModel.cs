@@ -52,13 +52,16 @@ namespace Awful.UI.ViewModels
 
             set
             {
-                this.settings.DeviceColorTheme = value;
-                //this.OnPropertyChanged(nameof(this.DeviceColorTheme));
-                //Task.Run(async () =>
-                //{
-                //    this.settingActions.SetAppTheme(value);
-                //    await this.SaveSettingsAsync().ConfigureAwait(false);
-                //});
+                if (value != this.settings.DeviceColorTheme)
+                {
+                    this.settings.DeviceColorTheme = value;
+                    this.OnPropertyChanged(nameof(this.DeviceColorTheme));
+                    Task.Run(async () =>
+                    {
+                        this.settingActions.SetAppTheme(value);
+                        await this.SaveSettingsAsync().ConfigureAwait(false);
+                    });
+                }
             }
         }
 

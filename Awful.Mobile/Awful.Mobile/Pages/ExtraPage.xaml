@@ -16,7 +16,7 @@
                             Color="{StaticResource TabBarSelectedColor}"
                             FontFamily="FontAwesomeSolid"
                             Glyph=""
-                            Size="50"
+                            Size="24"
                         />
                     </ImageCell.ImageSource>
                 </ImageCell>

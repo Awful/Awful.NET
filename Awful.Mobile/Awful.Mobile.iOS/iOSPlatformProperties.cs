@@ -20,11 +20,11 @@ namespace Awful.Mobile.iOS
         /// <summary>
         /// Gets the cookie path.
         /// </summary>
-        public string CookiePath => System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "..", "awful.cookie");
+        public string CookiePath => System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "awful.cookie");
 
         /// <summary>
-        /// Gets the database path.
+        /// Gets the Database Path.
         /// </summary>
-        public string DatabasePath => System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "..", "awful.db");
+        public string DatabasePath => System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "awful.db");
     }
 }
