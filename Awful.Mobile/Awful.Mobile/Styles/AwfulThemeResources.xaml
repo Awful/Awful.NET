@@ -164,13 +164,6 @@
                                WidthRequest="45"
                                VerticalOptions="Start"
                                Margin="5"
-                               Source="{local:ImageResource Awful.Mobile.ThreadTags.missing.png}"/>
-                    <!--Fix Placeholder-->
-                    <Image Grid.Column="0"
-                               HeightRequest="45"
-                               WidthRequest="45"
-                               VerticalOptions="Start"
-                               Margin="5"
                                Source="{Binding ImageIconLocation, Converter={StaticResource ForumImageConverter}}"/>
                     <StackLayout Grid.Column="1">
                         <Label FontSize="15" Margin="1" MaxLines="2" LineBreakMode="TailTruncation" Text="{Binding Title}" />
@@ -203,10 +196,6 @@
                     </Grid.ColumnDefinitions>
                     <StackLayout VerticalOptions="Start" Grid.Column="0">
                         <Grid HeightRequest="55" WidthRequest="55">
-                            <Image Grid.Column="0"
-                               Margin="5"
-                               Source="{local:ImageResource Awful.Mobile.ThreadTags.missing.png}"/>
-                            <!-- Fix Placeholder -->
                             <Image Grid.Column="0"
                                Margin="5"
                                Source="{Binding ImageIconLocation, Converter={StaticResource ForumImageConverter}}"/>
