@@ -25,7 +25,7 @@ namespace Awful.Mobile.ViewModels
     /// <summary>
     /// Forum Thread Page View Model.
     /// </summary>
-    public class ForumThreadPageViewModel : MobileAwfulViewModel
+    public class ForumThreadPageViewModel : AwfulWebviewViewModel
     {
         private TemplateHandler handler;
         private ThreadPostActions threadPostActions;
@@ -44,11 +44,6 @@ namespace Awful.Mobile.ViewModels
         {
             this.handler = handler;
         }
-
-        /// <summary>
-        /// Gets or sets the internal webview.
-        /// </summary>
-        public HybridWebView WebView { get; set; }
 
         /// <summary>
         /// Gets or sets the current state of the view.
@@ -213,17 +208,6 @@ namespace Awful.Mobile.ViewModels
             this.IsBusy = false;
         }
 
-        public void LoadWebview(HybridWebView webview)
-        {
-            if (webview == null)
-            {
-                throw new ArgumentNullException(nameof(webview));
-            }
-
-            this.WebView = webview;
-            this.WebView.RegisterAction(this.HandleDataFromJavascript);
-        }
-
         public void LoadThread(AwfulThread thread)
         {
             if (thread == null)
@@ -252,36 +236,6 @@ namespace Awful.Mobile.ViewModels
             if (postIndex != null)
             {
                 var result = await this.threadActions.MarkPostAsLastReadAsAsync(this.thread.ThreadId, postIndex.PostIndex).ConfigureAwait(false);
-            }
-        }
-
-        private void HandleDataFromJavascript(string data)
-        {
-            var json = JsonConvert.DeserializeObject<WebViewDataInterop>(data);
-            switch (json.Type)
-            {
-                case "showPostMenu":
-                    Device.BeginInvokeOnMainThread(async () => {
-
-                        var result = await App.Current.MainPage.DisplayActionSheet("Post Options", "Cancel", null,  "Share", "Mark Read", "Quote Post").ConfigureAwait(false);
-                        switch (result)
-                        {
-                            case "Share":
-                                await Share.RequestAsync(new ShareTextRequest
-                                {
-                                    Uri = string.Format(CultureInfo.InvariantCulture, EndPoints.ShowPost, json.Id),
-                                    Title = this.ThreadPost.Name,
-                                }).ConfigureAwait(false);
-                                break;
-                            case "Mark Read":
-                                Task.Run(() => this.MarkPostAsUnreadAsync(json.Id));
-                                break;
-                            case "Quote Post":
-                                await PushModalAsync(new ThreadReplyPage(this.thread.ThreadId, json.Id, false)).ConfigureAwait(false);
-                                break;
-                        }
-                    });
-                    break;
             }
         }
     }
