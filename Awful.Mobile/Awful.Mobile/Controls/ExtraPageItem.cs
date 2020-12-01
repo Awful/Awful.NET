@@ -20,6 +20,9 @@ namespace Awful.Mobile.Controls
 
         /// <summary>
         /// Gets or sets the Font Awesome Glpyh icon for the page.
+        /// To set, go to FontAwesome, find an icon, click on the glyph,
+        /// and it will copy itself to your clipboard. You can then paste it
+        /// in for this field and it should render.
         /// </summary>
         public string Glyph { get; set; }
 

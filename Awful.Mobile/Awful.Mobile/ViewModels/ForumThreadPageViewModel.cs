@@ -3,15 +3,10 @@
 // </copyright>
 
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using Awful.Core.Entities.JSON;
 using Awful.Core.Entities.Threads;
-using Awful.Core.Tools;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
@@ -19,11 +14,9 @@ using Awful.Mobile.Controls;
 using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
-using Awful.UI.ViewModels;
 using Awful.Webview;
 using Awful.Webview.Entities.Themes;
 using Newtonsoft.Json;
-using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -39,10 +32,8 @@ namespace Awful.Mobile.ViewModels
         private ThreadActions threadActions;
         private ThreadPost threadPost;
         private Command refreshCommand;
-        private bool selfInvoked;
         private AwfulThread thread;
         private DefaultOptions defaults;
-        private DefaultOptions previousDefaults;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumThreadPageViewModel"/> class.
@@ -186,6 +177,9 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Loads Thread Template into webview.
         /// </summary>
+        /// <param name="threadId">Thread Id to load.</param>
+        /// <param name="pageNumber">Page Number to load.</param>
+        /// <param name="gotoNewestPost">Go to newest post on page. Ignores page number.</param>
         /// <returns>A <see cref="Task"/>.</returns>
         public async Task LoadTemplate(int threadId, int pageNumber, bool gotoNewestPost = false)
         {

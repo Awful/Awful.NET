@@ -32,6 +32,7 @@ namespace Awful.Mobile.Pages
         /// <inheritdoc/>
         protected override void OnAppearing()
         {
+            // Resets collection view on page load so you can retap on item.
             this.ThreadListCollection.SelectedItem = null;
             base.OnAppearing();
         }
