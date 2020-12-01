@@ -5,61 +5,30 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="More"
     x:Class="Awful.Mobile.Pages.ExtraPage">
-    <TableView Intent="Settings">
-        <TableRoot>
-            <TableSection Title="">
-                <ImageCell ClassId="SAclopediaCell" Tapped="ImageCell_Tapped"
-                    TextColor="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
-                           Light={StaticResource BackgroundColorDark}}" Text="SAclopedia">
-                    <ImageCell.ImageSource>
-                        <FontImageSource
+    <CollectionView SelectionMode="Single" SelectionChanged="ExtraPageCollectionView_SelectionChanged"  x:Name="ExtraPageCollectionView">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="1" />
+                    </Grid.RowDefinitions>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Margin="5" WidthRequest="35" HeightRequest="35">
+                         <Image.Source>
+                                <FontImageSource
                             Color="{StaticResource TabBarSelectedColor}"
                             FontFamily="FontAwesomeSolid"
-                            Glyph=""
+                            Glyph="{Binding Glyph}"
                             Size="24"
-                        />
-                    </ImageCell.ImageSource>
-                </ImageCell>
-                <ImageCell ClassId="LepersCell" Tapped="ImageCell_Tapped"
-                    TextColor="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
-                                    Light={StaticResource BackgroundColorDark}}"
-                    Text="Leper's Colony">
-                    <ImageCell.ImageSource>
-                        <FontImageSource
-                            Color="{StaticResource TabBarSelectedColor}"
-                            FontFamily="FontAwesomeSolid"
-                            Glyph=""
-                            Size="24"
-                        />
-                    </ImageCell.ImageSource>
-                </ImageCell>
-                <ImageCell ClassId="UserProfileCell" Tapped="ImageCell_Tapped"
-                    TextColor="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
-                                    Light={StaticResource BackgroundColorDark}}"
-                    Text="User Profile">
-                    <ImageCell.ImageSource>
-                        <FontImageSource
-                            Color="{StaticResource TabBarSelectedColor}"
-                            FontFamily="FontAwesomeSolid"
-                            Glyph=""
-                            Size="24"
-                        />
-                    </ImageCell.ImageSource>
-                </ImageCell>
-                 <ImageCell ClassId="AboutCell" Tapped="ImageCell_Tapped"
-                    TextColor="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
-                                    Light={StaticResource BackgroundColorDark}}"
-                    Text="About">
-                    <ImageCell.ImageSource>
-                        <FontImageSource
-                            Color="{StaticResource TabBarSelectedColor}"
-                            FontFamily="FontAwesomeSolid"
-                            Glyph=""
-                            Size="24"
-                        />
-                    </ImageCell.ImageSource>
-                </ImageCell>
-            </TableSection>
-        </TableRoot>
-    </TableView>
+                            />
+                         </Image.Source>
+                        </Image>
+                        <Label VerticalOptions="Center" Text="{Binding Title}" />
+                    </StackLayout>
+                 <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </pages:BasePage>

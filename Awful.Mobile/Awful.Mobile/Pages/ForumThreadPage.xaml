@@ -76,7 +76,7 @@
                             Text="{x:Static fontawesome:FontAwesomeIcons.ArrowLeft}" 
                             FontFamily="FontAwesomeSolid"
                             BackgroundColor="Transparent"  />
-                    <Label Grid.Column="2" VerticalOptions="Center"  Text="{Binding ThreadPost, Converter={StaticResource ThreadPageTextConverter}}" />
+                    <Label Grid.Column="2" VerticalOptions="Center"  Text="{Binding ThreadPost.CurrentPage}" />
                     <Button Grid.Column="3"
                             WidthRequest="40"
                             IsEnabled="{Binding ThreadPost, Converter={StaticResource LastPageConverter}}"
