@@ -19,7 +19,7 @@ namespace Awful.Mobile.ViewModels
     /// <summary>
     /// Forum Post Icon Selection View Model.
     /// </summary>
-    public class ForumPostIconSelectionViewModel : AwfulViewModel
+    public class ForumPostIconSelectionViewModel : MobileAwfulViewModel
     {
         private AwfulForum forum;
         private PostIcon selectedIcon;
@@ -52,7 +52,7 @@ namespace Awful.Mobile.ViewModels
             {
                 return new Command(async () =>
                 {
-                    await App.CloseModalAsync().ConfigureAwait(false);
+                    await PopModalAsync().ConfigureAwait(false);
                 });
             }
         }
@@ -71,7 +71,7 @@ namespace Awful.Mobile.ViewModels
                     this.selectedIcon.ImageLocation = icon.ImageLocation;
                     this.selectedIcon.Title = icon.Title;
 
-                    await App.CloseModalAsync().ConfigureAwait(false);
+                    await PopModalAsync().ConfigureAwait(false);
                 });
             }
         }

@@ -77,8 +77,8 @@ namespace Awful.Mobile.ViewModels
 
                         Device.BeginInvokeOnMainThread(async () =>
                         {
-                            await App.CloseModalAsync().ConfigureAwait(false);
-                            await App.RefreshPostPage().ConfigureAwait(false);
+                            await PopModalAsync().ConfigureAwait(false);
+                            await RefreshPostPageAsync().ConfigureAwait(false);
                         });
                     }
                 });

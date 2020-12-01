@@ -19,7 +19,7 @@ namespace Awful.Mobile.ViewModels
     /// <summary>
     /// Lepers View Model.
     /// </summary>
-    public class LepersPageViewModel : AwfulViewModel
+    public class LepersPageViewModel : MobileAwfulViewModel
     {
 
         private BanActions banActions;

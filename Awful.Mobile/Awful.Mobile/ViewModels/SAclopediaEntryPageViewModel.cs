@@ -21,7 +21,7 @@ namespace Awful.Mobile.ViewModels
     /// <summary>
     /// SAclopedia Entry View Model.
     /// </summary>
-    public class SAclopediaEntryPageViewModel : AwfulViewModel
+    public class SAclopediaEntryPageViewModel : MobileAwfulViewModel
     {
         private SAclopediaAction saclopedia;
         private TemplateHandler handler;

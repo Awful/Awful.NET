@@ -47,6 +47,7 @@ namespace Awful.UI
             builder.RegisterType<PrivateMessagePageViewModel>();
             builder.RegisterType<UserProfilePageViewModel>();
             builder.RegisterType<NewThreadPageViewModel>();
+            builder.RegisterType<MobileAwfulViewModel>();
             builder.RegisterType<ForumPostIconSelectionViewModel>();
             return builder.Build();
         }

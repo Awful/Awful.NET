@@ -16,7 +16,7 @@ using Xamarin.Forms;
 
 namespace Awful.Mobile.ViewModels
 {
-    public class ForumThreadListPageViewModel : AwfulViewModel
+    public class ForumThreadListPageViewModel : MobileAwfulViewModel
     {
         private ThreadListActions threadlistActions;
         private ThreadList threadList;
@@ -76,7 +76,7 @@ namespace Awful.Mobile.ViewModels
                 {
                     if (item != null)
                     {
-                        await App.SetDetailPageAsync(new ForumThreadPage(item)).ConfigureAwait(false);
+                        await PushDetailPageAsync(new ForumThreadPage(item)).ConfigureAwait(false);
                     }
                 });
             }
@@ -93,7 +93,7 @@ namespace Awful.Mobile.ViewModels
                 {
                     if (this.forum != null)
                     {
-                        await App.PushModalAsync(new NewThreadPage(this.forum)).ConfigureAwait(false);
+                        await PushModalAsync(new NewThreadPage(this.forum)).ConfigureAwait(false);
                     }
                 });
             }

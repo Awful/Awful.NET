@@ -25,7 +25,7 @@ namespace Awful.Mobile.ViewModels
     /// SAclopedia Entry List View Model.
     /// On load, if signed in, load new SAclopedia items.
     /// </summary>
-    public class SAclopediaEntryListPageViewModel : AwfulViewModel
+    public class SAclopediaEntryListPageViewModel : MobileAwfulViewModel
     {
         private SAclopediaAction saclopedia;
         private TemplateHandler handler;
@@ -54,7 +54,7 @@ namespace Awful.Mobile.ViewModels
                     {
                         Device.BeginInvokeOnMainThread(async () =>
                         {
-                            await App.SetDetailPageAsync(new SAclopediaEntryPage(item)).ConfigureAwait(false);
+                            await PushDetailPageAsync(new SAclopediaEntryPage(item)).ConfigureAwait(false);
                         });
                     }
                 });

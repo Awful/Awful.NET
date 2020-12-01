@@ -15,7 +15,7 @@ namespace Awful.Mobile.ViewModels
     /// <summary>
     /// Thread Post Base View Model.
     /// </summary>
-    public class ThreadPostBaseViewModel : AwfulViewModel
+    public class ThreadPostBaseViewModel : MobileAwfulViewModel
     {
         private TemplateHandler handler;
         protected ThreadReplyActions replyActions;
@@ -47,7 +47,7 @@ namespace Awful.Mobile.ViewModels
             {
                 return new Command(async () =>
                 {
-                    await App.CloseModalAsync().ConfigureAwait(false);
+                    await PopModalAsync().ConfigureAwait(false);
                 });
             }
         }

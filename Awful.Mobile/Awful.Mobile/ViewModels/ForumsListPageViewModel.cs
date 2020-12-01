@@ -24,7 +24,7 @@ namespace Awful.Mobile.ViewModels
     /// <summary>
     /// Awful Forums List View Model.
     /// </summary>
-    public class ForumsListPageViewModel : AwfulViewModel
+    public class ForumsListPageViewModel : MobileAwfulViewModel
     {
         private IndexPageActions forumActions;
         private Command refreshCommand;
@@ -66,7 +66,7 @@ namespace Awful.Mobile.ViewModels
                 {
                     if (item != null)
                     {
-                        await App.PushPageAsync(new ForumThreadListPage(item)).ConfigureAwait(false);
+                        await PushPageAsync(new ForumThreadListPage(item)).ConfigureAwait(false);
                     }
                 });
             }

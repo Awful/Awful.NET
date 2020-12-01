@@ -32,7 +32,7 @@ namespace Awful.Mobile.ViewModels
     /// <summary>
     /// Forum Thread Page View Model.
     /// </summary>
-    public class ForumThreadPageViewModel : AwfulViewModel
+    public class ForumThreadPageViewModel : MobileAwfulViewModel
     {
         private TemplateHandler handler;
         private ThreadPostActions threadPostActions;
@@ -103,7 +103,7 @@ namespace Awful.Mobile.ViewModels
                 {
                     if (this.ThreadPost != null)
                     {
-                        await App.PushModalAsync(new ThreadReplyPage(this.thread.ThreadId)).ConfigureAwait(false);
+                        await PushModalAsync(new ThreadReplyPage(this.thread.ThreadId)).ConfigureAwait(false);
                     }
                 });
             }
@@ -283,7 +283,7 @@ namespace Awful.Mobile.ViewModels
                                 Task.Run(() => this.MarkPostAsUnreadAsync(json.Id));
                                 break;
                             case "Quote Post":
-                                await App.PushModalAsync(new ThreadReplyPage(this.thread.ThreadId, json.Id, false)).ConfigureAwait(false);
+                                await PushModalAsync(new ThreadReplyPage(this.thread.ThreadId, json.Id, false)).ConfigureAwait(false);
                                 break;
                         }
                     });

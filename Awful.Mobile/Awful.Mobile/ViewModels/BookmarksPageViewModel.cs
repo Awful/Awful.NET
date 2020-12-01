@@ -22,7 +22,7 @@ namespace Awful.Mobile.ViewModels
     /// <summary>
     /// Bookmarks View Model.
     /// </summary>
-    public class BookmarksPageViewModel : AwfulViewModel
+    public class BookmarksPageViewModel : MobileAwfulViewModel
     {
         private BookmarkAction bookmarks;
         private ObservableCollection<AwfulThread> threads = new ObservableCollection<AwfulThread>();
@@ -74,10 +74,7 @@ namespace Awful.Mobile.ViewModels
                 {
                     if (item != null)
                     {
-                        Device.BeginInvokeOnMainThread(async () =>
-                        {
-                            await App.SetDetailPageAsync(new ForumThreadPage(item)).ConfigureAwait(false);
-                        });
+                        PushDetailPageAsync(new ForumThreadPage(item)).ConfigureAwait(false);
                     }
                 });
             }

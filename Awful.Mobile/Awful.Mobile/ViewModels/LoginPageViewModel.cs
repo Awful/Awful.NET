@@ -17,7 +17,7 @@ namespace Awful.Mobile.ViewModels
     /// <summary>
     /// Login Page View Model.
     /// </summary>
-    public class LoginPageViewModel : AwfulViewModel
+    public class LoginPageViewModel : MobileAwfulViewModel
     {
         private string password = string.Empty;
 
@@ -100,14 +100,11 @@ namespace Awful.Mobile.ViewModels
             var result = await this.signin.SigninAsync(this.Username, this.password).ConfigureAwait(false);
             if (result.IsSuccess)
             {
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    App.SetMainAppPage();
-                });
+                await SetMainAppPageAsync().ConfigureAwait(false);
             }
             else
             {
-                Device.BeginInvokeOnMainThread(async () => { await App.Current.MainPage.DisplayAlert("Error", result.Error, "Close").ConfigureAwait(false); });
+                await DisplayAlertAsync("Login Error", result.Error).ConfigureAwait(false);
             }
 
             this.IsBusy = false;

@@ -29,7 +29,7 @@ using Xamarin.Forms;
 
 namespace Awful.Mobile.ViewModels
 {
-    public class UserProfilePageViewModel : AwfulViewModel
+    public class UserProfilePageViewModel : MobileAwfulViewModel
     {
         private UserActions userActions;
         private TemplateHandler handler;

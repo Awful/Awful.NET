@@ -23,7 +23,7 @@ using Xamarin.Forms;
 
 namespace Awful.Mobile.ViewModels
 {
-    public class PrivateMessagesPageViewModel : AwfulViewModel
+    public class PrivateMessagesPageViewModel : MobileAwfulViewModel
     {
         PrivateMessageActions pmActions;
         private Command refreshCommand;
@@ -68,7 +68,7 @@ namespace Awful.Mobile.ViewModels
                 {
                     if (item != null)
                     {
-                        await App.SetDetailPageAsync(new PrivateMessagePage(item)).ConfigureAwait(false);
+                        await PushDetailPageAsync(new PrivateMessagePage(item)).ConfigureAwait(false);
                     }
                 });
             }

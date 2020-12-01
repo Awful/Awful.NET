@@ -37,7 +37,7 @@ namespace Awful.Mobile.ViewModels
                 {
                     if (!this.IsSignedIn)
                     {
-                        await App.PushModalAsync(new LoginPage()).ConfigureAwait(false);
+                        await MobileAwfulViewModel.PushModalAsync(new LoginPage()).ConfigureAwait(false);
                     }
                     else
                     {

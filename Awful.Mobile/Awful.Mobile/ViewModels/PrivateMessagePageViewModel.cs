@@ -24,7 +24,7 @@ using Xamarin.Forms;
 
 namespace Awful.Mobile.ViewModels
 {
-    public class PrivateMessagePageViewModel : AwfulViewModel
+    public class PrivateMessagePageViewModel : MobileAwfulViewModel
     {
         PrivateMessageActions pmActions;
         private Command refreshCommand;

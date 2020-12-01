@@ -57,7 +57,7 @@ namespace Awful.Mobile.ViewModels
             get
             {
                 return new Command(async () => {
-                    await App.PushModalAsync(new ForumPostIconSelectionPage(this.forum, this.PostIcon, this.postActions)).ConfigureAwait(false);
+                    await PushModalAsync(new ForumPostIconSelectionPage(this.forum, this.PostIcon, this.postActions)).ConfigureAwait(false);
                 });
             }
         }
@@ -99,8 +99,8 @@ namespace Awful.Mobile.ViewModels
 
                         Device.BeginInvokeOnMainThread(async () =>
                         {
-                            await App.CloseModalAsync().ConfigureAwait(false);
-                            await App.RefreshForumPage().ConfigureAwait(false);
+                            await PopModalAsync().ConfigureAwait(false);
+                            await RefreshForumPageAsync().ConfigureAwait(false);
                         });
                     }
                 });

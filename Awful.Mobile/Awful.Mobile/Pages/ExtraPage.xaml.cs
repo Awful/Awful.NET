@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using Awful.Mobile.Controls;
+using Awful.Mobile.ViewModels;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.Pages
@@ -73,13 +74,13 @@ namespace Awful.Mobile.Pages
                         switch (item.Type)
                         {
                             case "SAclopediaCell":
-                                await App.PushPageAsync(new SAclopediaEntryListPage()).ConfigureAwait(false);
+                                await MobileAwfulViewModel.PushPageAsync(new SAclopediaEntryListPage()).ConfigureAwait(false);
                                 break;
                             case "LepersCell":
-                                await App.PushPageAsync(new LepersPage()).ConfigureAwait(false);
+                                await MobileAwfulViewModel.PushPageAsync(new LepersPage()).ConfigureAwait(false);
                                 break;
                             case "UserProfileCell":
-                                await App.SetDetailPageAsync(new UserProfilePage(0)).ConfigureAwait(false);
+                                await MobileAwfulViewModel.PushDetailPageAsync(new UserProfilePage(0)).ConfigureAwait(false);
                                 break;
                             case "AboutCell":
                                 break;
