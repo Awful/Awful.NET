@@ -12,6 +12,7 @@ namespace Awful.Mobile.Controls
     /// <summary>
     /// Hybrid Webview.
     /// Used to invoke Javascript onto a webpage.
+    /// Originally posted at https://theconfuzedsourcecode.wordpress.com/2020/01/15/talking-to-your-webview-in-xamarin-forms/.
     /// </summary>
     public class HybridWebView : WebView
     {

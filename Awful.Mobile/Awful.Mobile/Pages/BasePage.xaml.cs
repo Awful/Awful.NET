@@ -2,8 +2,6 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
 using Awful.UI.ViewModels;
 using Xamarin.Forms;
 

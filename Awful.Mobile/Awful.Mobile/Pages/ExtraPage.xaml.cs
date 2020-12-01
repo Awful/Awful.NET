@@ -2,21 +2,27 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Awful.Mobile.Controls;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.Pages
 {
+    /// <summary>
+    /// Extra Page.
+    /// Used to link out to other pages in the app.
+    /// </summary>
     public partial class ExtraPage : BasePage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExtraPage"/> class.
+        /// </summary>
         public ExtraPage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
+        /// <inheritdoc/>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -37,7 +43,7 @@ namespace Awful.Mobile.Pages
                 new ExtraPageItem()
                 {
                     Type = "UserProfileCell",
-                    Glyph = "",
+                    Glyph = "",
                     Title = "User Profile",
                 },
                 new ExtraPageItem()
@@ -49,7 +55,13 @@ namespace Awful.Mobile.Pages
             };
         }
 
-        async void ExtraPageCollectionView_SelectionChanged(System.Object sender, Xamarin.Forms.SelectionChangedEventArgs e)
+        /// <summary>
+        /// Handle Extra Page Collection View Item Selection.
+        /// Navigate to new page.
+        /// </summary>
+        /// <param name="sender"><see cref="object"/>.</param>
+        /// <param name="e"><see cref="SelectionChangedEventArgs"/>.</param>
+        private void ExtraPageCollectionView_SelectionChanged(object sender, Xamarin.Forms.SelectionChangedEventArgs e)
         {
             if (e.CurrentSelection != null && e.CurrentSelection.Count > 0)
             {

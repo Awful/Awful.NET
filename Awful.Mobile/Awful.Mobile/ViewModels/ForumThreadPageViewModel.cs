@@ -186,7 +186,7 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Loads Thread Template into webview.
         /// </summary>
-        /// <returns>Task.</returns>
+        /// <returns>A <see cref="Task"/>.</returns>
         public async Task LoadTemplate(int threadId, int pageNumber, bool gotoNewestPost = false)
         {
             this.IsBusy = true;

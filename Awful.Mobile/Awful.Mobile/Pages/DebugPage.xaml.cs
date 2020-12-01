@@ -21,10 +21,5 @@ namespace Awful.Mobile.Pages
         {
             this.InitializeComponent();
         }
-
-        async void Button_Clicked(System.Object sender, System.EventArgs e)
-        {
-            await App.SetDetailPageAsync(new DefaultPage());
-        }
     }
 }

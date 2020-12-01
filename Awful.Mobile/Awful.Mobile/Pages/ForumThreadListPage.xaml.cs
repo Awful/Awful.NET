@@ -21,7 +21,7 @@ namespace Awful.Mobile.Pages
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumThreadListPage"/> class.
         /// </summary>
-        /// <param name="forum">Awful Forum.</param>
+        /// <param name="forum"><see cref="AwfulForum"/>.</param>
         public ForumThreadListPage(AwfulForum forum)
         {
             this.InitializeComponent();

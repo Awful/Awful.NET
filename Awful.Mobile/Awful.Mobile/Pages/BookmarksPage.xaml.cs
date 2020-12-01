@@ -2,11 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
 using Autofac;
 using Awful.Mobile.ViewModels;
-using Xamarin.Forms;
 
 namespace Awful.Mobile.Pages
 {
@@ -20,7 +17,7 @@ namespace Awful.Mobile.Pages
         /// </summary>
         public BookmarksPage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.BindingContext = App.Container.Resolve<BookmarksPageViewModel>();
         }
 
