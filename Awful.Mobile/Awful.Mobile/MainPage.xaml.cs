@@ -8,38 +8,29 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Autofac;
+using Awful.Mobile.Pages;
+using Awful.Mobile.ViewModels;
 using Xamarin.Forms;
 
 namespace Awful.Mobile
 {
     /// <summary>
-    /// Main Page. Used for Navigation.
+    /// Main Page. Used for Navigation on large devices.
+    /// Small devices use <see cref="MasterPage"/> alone.
     /// </summary>
     public partial class MainPage : FlyoutPage
     {
+        private MobileAwfulViewModel vm;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MainPage"/> class.
         /// </summary>
         public MainPage()
         {
             this.InitializeComponent();
-            this.SizeChanged += this.MainPage_SizeChanged;
-        }
-
-        private void MainPage_SizeChanged(object sender, EventArgs e)
-        {
-            if (this.Width < 400)
-            {
-                this.FlyoutLayoutBehavior = FlyoutLayoutBehavior.Popover;
-            }
-            else
-            {
-                this.FlyoutLayoutBehavior = FlyoutLayoutBehavior.Split;
-            }
-        }
-
-        protected override void OnAppearing()
-        {
+            this.vm = App.Container.Resolve<MobileAwfulViewModel>();
+            this.vm.SetupThemeAsync().ConfigureAwait(false);
         }
     }
 }

@@ -16,13 +16,16 @@ using Xamarin.Forms;
 
 namespace Awful.Mobile.ViewModels
 {
+    /// <summary>
+    /// Forum Thread List Page View Model.
+    /// </summary>
     public class ForumThreadListPageViewModel : MobileAwfulViewModel
     {
         private ThreadListActions threadlistActions;
         private ThreadList threadList;
         private Command refreshCommand;
         private AwfulForum forum;
-        private string description;
+        private int page = 1;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumThreadListPageViewModel"/> class.
@@ -36,15 +39,6 @@ namespace Awful.Mobile.ViewModels
         public ObservableCollection<AwfulThread> Threads { get; set; } = new ObservableCollection<AwfulThread>();
 
         /// <summary>
-        /// Gets or sets the description.
-        /// </summary>
-        public string Description
-        {
-            get { return this.description; }
-            set { this.SetProperty(ref this.description, value); }
-        }
-
-        /// <summary>
         /// Gets the refresh command.
         /// </summary>
         public Command RefreshCommand
@@ -54,6 +48,21 @@ namespace Awful.Mobile.ViewModels
                 return this.refreshCommand ??= new Command(async () =>
                 {
                     await this.RefreshForums().ConfigureAwait(false);
+                });
+            }
+        }
+
+        public Command NextPageCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (!this.IsBusy && this.threadList != null && this.page <= this.threadList.TotalPages)
+                    {
+                        this.page++;
+                        await this.LoadThreadListAsync(this.forum.Id, this.page).ConfigureAwait(false);
+                    }
                 });
             }
         }
@@ -140,7 +149,6 @@ namespace Awful.Mobile.ViewModels
 
             this.forum = forum;
             this.Title = forum.Title;
-            this.Description = forum.Description;
         }
 
         /// <inheritdoc/>
@@ -149,7 +157,7 @@ namespace Awful.Mobile.ViewModels
             this.threadlistActions = new ThreadListActions(this.Client, this.Context);
             if (!this.Threads.Any() && this.forum != null)
             {
-                await this.LoadThreadListAsync(this.forum.Id, 1).ConfigureAwait(false);
+                await this.LoadThreadListAsync(this.forum.Id, page).ConfigureAwait(false);
             }
         }
     }
