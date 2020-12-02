@@ -14,10 +14,7 @@
             <converters:ForumImageConverter x:Key="ForumImageConverter"/>
             <converters:BookmarksThreadHeaderColorConverter x:Key="BookmarksThreadHeaderColorConverter"/>
             <converters:BookmarkStarImageConverter x:Key="BookmarkStarImageConverter"/>
-            <converters:ListCountToVisibilityConverter x:Key="ListCountToVisibilityConverter"/>
             <converters:ShowSubforumsConverter x:Key="ShowSubforumsConverter"/>
-            <converters:LoginColorConverter x:Key="LoginColorConverter"/>
-            <converters:LoginTextConverter x:Key="LoginTextConverter"/>
             <converters:FirstPageConverter x:Key="FirstPageConverter"/>
             <converters:LastPageConverter x:Key="LastPageConverter"/>
             <converters:RatingImageConverter x:Key="RatingImageConverter"/>

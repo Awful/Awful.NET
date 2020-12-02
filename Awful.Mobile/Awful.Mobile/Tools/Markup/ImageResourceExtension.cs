@@ -9,14 +9,22 @@ using Xamarin.Forms.Xaml;
 
 namespace Awful.Mobile.Tools.Markup
 {
+    /// <summary>
+    /// Image Resource Extension.
+    /// Used to get values out of assembly files.
+    /// </summary>
     [ContentProperty(nameof(Source))]
     public class ImageResourceExtension : IMarkupExtension
     {
+        /// <summary>
+        /// Gets or sets the source of the file.
+        /// </summary>
         public string Source { get; set; }
 
+        /// <inheritdoc/>
         public object ProvideValue(IServiceProvider serviceProvider)
         {
-            if (Source == null)
+            if (this.Source == null)
             {
                 return null;
             }

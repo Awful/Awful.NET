@@ -32,12 +32,12 @@ namespace Awful.Mobile.ViewModels
         private ThreadActions threadActions;
         private ThreadPost threadPost;
         private Command refreshCommand;
-        private AwfulThread thread;
         private DefaultOptions defaults;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumThreadPageViewModel"/> class.
         /// </summary>
+        /// <param name="handler">Awful Handler.</param>
         /// <param name="context">Awful Context.</param>
         public ForumThreadPageViewModel(TemplateHandler handler, AwfulContext context)
             : base(context)
@@ -68,16 +68,6 @@ namespace Awful.Mobile.ViewModels
             }
         }
 
-        public async Task RefreshThreadAsync()
-        {
-            if (this.ThreadPost != null)
-            {
-                this.IsRefreshing = true;
-                await this.LoadTemplate(this.threadPost.ThreadId, this.threadPost.CurrentPage).ConfigureAwait(false);
-                this.IsRefreshing = false;
-            }
-        }
-
         /// <summary>
         /// Gets the reply to thread command.
         /// </summary>
@@ -89,7 +79,7 @@ namespace Awful.Mobile.ViewModels
                 {
                     if (this.ThreadPost != null)
                     {
-                        await PushModalAsync(new ThreadReplyPage(this.thread.ThreadId)).ConfigureAwait(false);
+                        await PushModalAsync(new ThreadReplyPage(this.Thread.ThreadId)).ConfigureAwait(false);
                     }
                 });
             }
@@ -170,6 +160,20 @@ namespace Awful.Mobile.ViewModels
         }
 
         /// <summary>
+        /// Refreshes the thread.
+        /// </summary>
+        /// <returns>A <see cref="Task"/>.</returns>
+        public async Task RefreshThreadAsync()
+        {
+            if (this.ThreadPost != null)
+            {
+                this.IsRefreshing = true;
+                await this.LoadTemplate(this.threadPost.ThreadId, this.threadPost.CurrentPage).ConfigureAwait(false);
+                this.IsRefreshing = false;
+            }
+        }
+
+        /// <summary>
         /// Loads Thread Template into webview.
         /// </summary>
         /// <param name="threadId">Thread Id to load.</param>
@@ -182,23 +186,23 @@ namespace Awful.Mobile.ViewModels
             this.defaults = await this.GenerateDefaultOptionsAsync().ConfigureAwait(false);
             this.ThreadPost = await this.threadPostActions.GetThreadPostsAsync(threadId, pageNumber, gotoNewestPost).ConfigureAwait(false);
             this.Title = this.ThreadPost.Name;
-            if (this.thread != null && this.thread.RepliesSinceLastOpened > 0)
+            if (this.Thread != null && this.Thread.RepliesSinceLastOpened > 0)
             {
                 var test = ((this.ThreadPost.TotalPages - 1) * EndPoints.DefaultNumberPerPage) + this.ThreadPost.Posts.Count;
-                this.thread.ReplyCount = test;
-                var seenReplies = this.thread.ReplyCount - this.thread.RepliesSinceLastOpened;
+                this.Thread.ReplyCount = test;
+                var seenReplies = this.Thread.ReplyCount - this.Thread.RepliesSinceLastOpened;
                 var seenPages = seenReplies / EndPoints.DefaultNumberPerPage;
                 if (this.ThreadPost.CurrentPage > seenPages)
                 {
                     var readReplies = ((this.ThreadPost.CurrentPage - (seenPages + 1)) * EndPoints.DefaultNumberPerPage) + this.ThreadPost.Posts.Count;
-                    var totalReplies = this.thread.RepliesSinceLastOpened - readReplies;
+                    var totalReplies = this.Thread.RepliesSinceLastOpened - readReplies;
                     if (totalReplies < 0)
                     {
                         totalReplies = 0;
                     }
 
-                    this.thread.RepliesSinceLastOpened = totalReplies;
-                    this.thread.OnPropertyChanged("RepliesSinceLastOpened");
+                    this.Thread.RepliesSinceLastOpened = totalReplies;
+                    this.Thread.OnPropertyChanged("RepliesSinceLastOpened");
                 }
             }
 
@@ -208,6 +212,10 @@ namespace Awful.Mobile.ViewModels
             this.IsBusy = false;
         }
 
+        /// <summary>
+        /// Loads the thread into the VM.
+        /// </summary>
+        /// <param name="thread"><see cref="AwfulThread"/>.</param>
         public void LoadThread(AwfulThread thread)
         {
             if (thread == null)
@@ -215,7 +223,7 @@ namespace Awful.Mobile.ViewModels
                 throw new ArgumentNullException(nameof(thread));
             }
 
-            this.thread = thread;
+            this.Thread = thread;
             this.Title = thread.Name;
         }
 
@@ -224,9 +232,38 @@ namespace Awful.Mobile.ViewModels
         {
             this.threadPostActions = new ThreadPostActions(this.Client, this.Context, this.handler);
             this.threadActions = new ThreadActions(this.Client, this.Context);
-            if (this.thread != null && this.threadPost == null)
+            if (this.Thread != null && this.threadPost == null)
             {
-                await this.LoadTemplate(this.thread.ThreadId, 0, this.thread.HasSeen).ConfigureAwait(false);
+                await this.LoadTemplate(this.Thread.ThreadId, 0, this.Thread.HasSeen).ConfigureAwait(false);
+            }
+        }
+
+        protected void HandleDataFromJavascript(string data)
+        {
+            var json = JsonConvert.DeserializeObject<WebViewDataInterop>(data);
+            switch (json.Type)
+            {
+                case "showPostMenu":
+                    Device.BeginInvokeOnMainThread(async () => {
+                        var result = await App.Current.MainPage.DisplayActionSheet("Post Options", "Cancel", null, "Share", "Mark Read", "Quote Post").ConfigureAwait(false);
+                        switch (result)
+                        {
+                            case "Share":
+                                await Share.RequestAsync(new ShareTextRequest
+                                {
+                                    Uri = string.Format(CultureInfo.InvariantCulture, EndPoints.ShowPost, json.Id),
+                                    Title = this.Title,
+                                }).ConfigureAwait(false);
+                                break;
+                            case "Mark Read":
+                                _ = Task.Run(async () => await this.MarkPostAsUnreadAsync(json.Id).ConfigureAwait(false)).ConfigureAwait(false);
+                                break;
+                            case "Quote Post":
+                                await PushModalAsync(new ThreadReplyPage(this.Thread.ThreadId, json.Id, false)).ConfigureAwait(false);
+                                break;
+                        }
+                    });
+                    break;
             }
         }
 
@@ -235,7 +272,7 @@ namespace Awful.Mobile.ViewModels
             var postIndex = this.ThreadPost.Posts.FirstOrDefault(n => n.PostId == postId);
             if (postIndex != null)
             {
-                var result = await this.threadActions.MarkPostAsLastReadAsAsync(this.thread.ThreadId, postIndex.PostIndex).ConfigureAwait(false);
+                var result = await this.threadActions.MarkPostAsLastReadAsAsync(this.Thread.ThreadId, postIndex.PostIndex).ConfigureAwait(false);
             }
         }
     }

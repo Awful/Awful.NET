@@ -140,4 +140,7 @@
   <data name="UserAuthenticationError" xml:space="preserve">
     <value>User must be authenticated before using this method.</value>
   </data>
+  <data name="AwfulClientError" xml:space="preserve">
+    <value>AwfulClient failed to make a request.</value>
+  </data>
 </root>

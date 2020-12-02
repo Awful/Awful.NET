@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 
 namespace Awful.Core.Entities.Web
@@ -16,15 +17,21 @@ namespace Awful.Core.Entities.Web
         /// <summary>
         /// Initializes a new instance of the <see cref="Result"/> class.
         /// </summary>
+        /// <param name="message">The request.</param>
         /// <param name="html">The HTML of the request.</param>
         /// <param name="json">The JSON of the request.</param>
         /// <param name="endpoint">The endpoint that was hit.</param>
-        public Result(string html = "", string json = "", string endpoint = "")
+        public Result(HttpResponseMessage message, string html = "", string endpoint = "")
         {
+            this.Message = message;
             this.ResultHtml = html;
-            this.ResultJson = json;
             this.AbsoluteEndpoint = endpoint;
         }
+
+        /// <summary>
+        /// Gets the raw HTTP Response Message.
+        /// </summary>
+        public HttpResponseMessage Message { get; }
 
         /// <summary>
         /// Gets the result of the request, in HTML form.
@@ -37,8 +44,8 @@ namespace Awful.Core.Entities.Web
         public string AbsoluteEndpoint { get; }
 
         /// <summary>
-        /// Gets the result of the request, in JSON form.
+        /// Gets a value indicating whether the request is successful.
         /// </summary>
-        public string ResultJson { get; }
+        public bool IsSuccess => this.Message != null && this.Message.IsSuccessStatusCode;
     }
 }

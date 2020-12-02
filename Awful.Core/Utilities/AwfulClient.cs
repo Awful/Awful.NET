@@ -98,13 +98,22 @@ namespace Awful.Core.Utilities
         /// <returns>A Result.</returns>
         public async Task<Result> GetDataAsync(string endpoint, CancellationToken token = default)
         {
-            this.Client.DefaultRequestHeaders.IfModifiedSince = DateTimeOffset.UtcNow;
-            var result = await this.Client.GetAsync(new Uri(endpoint), token).ConfigureAwait(false);
-            var stream = await result.Content.ReadAsStreamAsync().ConfigureAwait(false);
-            using var reader = new StreamReader(stream, System.Text.Encoding.GetEncoding("ISO-8859-1"));
-            string html = reader.ReadToEnd();
-            CheckForPaywall(html);
-            return new Result(html, endpoint: result.RequestMessage.RequestUri.AbsoluteUri);
+            HttpResponseMessage result = null;
+            string html = string.Empty;
+            try
+            {
+                this.Client.DefaultRequestHeaders.IfModifiedSince = DateTimeOffset.UtcNow;
+                result = await this.Client.GetAsync(new Uri(endpoint), token).ConfigureAwait(false);
+                html = await HttpClientHelpers.ReadHtmlAsync(result).ConfigureAwait(false);
+
+                CheckForPaywall(html);
+
+                return new Result(result, html, endpoint: result.RequestMessage.RequestUri.AbsoluteUri);
+            }
+            catch (Exception ex)
+            {
+                throw new AwfulClientException(ex, new Result(result, html, endpoint));
+            }
         }
 
         /// <summary>
@@ -116,19 +125,27 @@ namespace Awful.Core.Utilities
         /// <returns>A Result.</returns>
         public async Task<Result> PostDataAsync(string endpoint, FormUrlEncodedContent data, CancellationToken token = default)
         {
-            this.Client.DefaultRequestHeaders.IfModifiedSince = DateTimeOffset.UtcNow;
-            var result = await this.Client.PostAsync(new Uri(endpoint), data, token).ConfigureAwait(false);
-            var stream = await result.Content.ReadAsStreamAsync().ConfigureAwait(false);
-            using var reader = new StreamReader(stream, System.Text.Encoding.GetEncoding("ISO-8859-1"));
-            string html = reader.ReadToEnd();
-            CheckForPaywall(html);
-            var returnUrl = result.Headers.Location != null ? result.Headers.Location.OriginalString : string.Empty;
-            if (string.IsNullOrEmpty(returnUrl))
+            HttpResponseMessage result = null;
+            string html = string.Empty;
+            try
             {
-                returnUrl = result.RequestMessage.RequestUri != null ? result.RequestMessage.RequestUri.ToString() : string.Empty;
-            }
+                this.Client.DefaultRequestHeaders.IfModifiedSince = DateTimeOffset.UtcNow;
+                result = await this.Client.PostAsync(new Uri(endpoint), data, token).ConfigureAwait(false);
+                html = await HttpClientHelpers.ReadHtmlAsync(result).ConfigureAwait(false);
 
-            return new Result(html, endpoint: returnUrl);
+                CheckForPaywall(html);
+                var returnUrl = result.Headers.Location != null ? result.Headers.Location.OriginalString : string.Empty;
+                if (string.IsNullOrEmpty(returnUrl))
+                {
+                    returnUrl = result.RequestMessage.RequestUri != null ? result.RequestMessage.RequestUri.ToString() : string.Empty;
+                }
+
+                return new Result(result, html, endpoint: returnUrl);
+            }
+            catch (Exception ex)
+            {
+                throw new AwfulClientException(ex, new Result(result, html, endpoint));
+            }
         }
 
         /// <summary>
@@ -140,13 +157,21 @@ namespace Awful.Core.Utilities
         /// <returns>A Result.</returns>
         public async Task<Result> PostFormDataAsync(string endpoint, MultipartFormDataContent form, CancellationToken token = default)
         {
-            var result = await this.Client.PostAsync(new Uri(endpoint), form, token).ConfigureAwait(false);
-            var stream = await result.Content.ReadAsStreamAsync().ConfigureAwait(false);
-            using var reader = new StreamReader(stream, System.Text.Encoding.GetEncoding("ISO-8859-1"));
-            var html = reader.ReadToEnd();
-            CheckForPaywall(html);
-            var newResult = new Result(html, endpoint: result.RequestMessage.RequestUri.ToString());
-            return newResult;
+            HttpResponseMessage result = null;
+            string html = string.Empty;
+            try
+            {
+                result = await this.Client.PostAsync(new Uri(endpoint), form, token).ConfigureAwait(false);
+                html = await HttpClientHelpers.ReadHtmlAsync(result).ConfigureAwait(false);
+
+                CheckForPaywall(html);
+                var newResult = new Result(result, html, endpoint: result.RequestMessage.RequestUri.ToString());
+                return newResult;
+            }
+            catch (Exception ex)
+            {
+                throw new AwfulClientException(ex, new Result(result, html, endpoint));
+            }
         }
 
         /// <summary>

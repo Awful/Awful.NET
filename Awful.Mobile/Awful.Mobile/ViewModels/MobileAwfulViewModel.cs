@@ -3,6 +3,7 @@
 // </copyright>
 
 using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using Autofac;
 using Awful.Core.Tools;
@@ -10,6 +11,7 @@ using Awful.Database.Context;
 using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.ViewModels;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.ViewModels
