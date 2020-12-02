@@ -38,7 +38,7 @@ namespace Awful.Test.Managers
             pm.Icon = iconResult.First();
             var result = await manager.SendPrivateMessageAsync(pm).ConfigureAwait(false);
             Assert.NotNull(result);
-            Assert.NotEmpty(result.ResultHtml);
+            Assert.NotEmpty(result.Result.ResultText);
         }
     }
 }

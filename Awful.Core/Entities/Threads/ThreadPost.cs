@@ -9,7 +9,7 @@ using Awful.Core.Entities.Posts;
 
 namespace Awful.Core.Entities.Threads
 {
-    public class ThreadPost
+    public class ThreadPost : SAItem
     {
         public bool IsArchived { get; internal set; }
         public string LoggedInUserName { get; internal set; }

@@ -40,8 +40,17 @@ namespace Awful.Core.Managers
         public async Task<User> GetUserFromProfilePageAsync(long userId, CancellationToken token = default)
         {
             string url = string.Format(CultureInfo.InvariantCulture, EndPoints.UserProfile, userId);
-            var result = await this.webManager.GetDataAsync(url, token).ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<User>(result.ResultHtml);
+            var result = await this.webManager.GetDataAsync(url, true, token).ConfigureAwait(false);
+            try
+            {
+                var user = JsonConvert.DeserializeObject<User>(result.ResultText);
+                user.Result = result;
+                return user;
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
     }
 }

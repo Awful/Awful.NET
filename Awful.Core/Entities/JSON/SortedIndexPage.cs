@@ -13,7 +13,7 @@ namespace Awful.Core.Entities.JSON
     /// <summary>
     /// Index page stats.
     /// </summary>
-    public class SortedIndexPage
+    public class SortedIndexPage : SAItem
     {
         /// <summary>
         /// Gets or sets the stats of a given forum.

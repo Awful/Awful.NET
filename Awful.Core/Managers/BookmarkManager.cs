@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Awful.Core.Entities;
 using Awful.Core.Entities.Web;
 using Awful.Core.Handlers;
 using Awful.Core.Utilities;
@@ -83,9 +84,15 @@ namespace Awful.Core.Managers
                 url = string.Format(CultureInfo.InvariantCulture, EndPoints.BookmarksUrl, perPage) + string.Format(CultureInfo.InvariantCulture, EndPoints.PageNumber, page);
             }
 
-            var result = await this.webManager.GetDataAsync(url, token).ConfigureAwait(false);
-            var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            return ThreadHandler.ParseForumThreadList(document);
+            var result = await this.webManager.GetDataAsync(url, false, token).ConfigureAwait(false);
+            try
+            {
+                return ThreadHandler.ParseForumThreadList(result.Document);
+            }
+            catch (Exception ex)
+            {
+                throw new Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
 
         /// <summary>
@@ -94,7 +101,7 @@ namespace Awful.Core.Managers
         /// <param name="threadId">The Thread Id.</param>
         /// <param name="token">A CancellationToken.</param>
         /// <returns>A SA Request Result.</returns>
-        public async Task<Result> AddBookmarkAsync(int threadId, CancellationToken token = default)
+        public async Task<SAItem> AddBookmarkAsync(int threadId, CancellationToken token = default)
         {
             if (!this.webManager.IsAuthenticated)
             {
@@ -108,7 +115,8 @@ namespace Awful.Core.Managers
                 ["threadid"] = threadId.ToString(CultureInfo.InvariantCulture),
             };
             using var header = new FormUrlEncodedContent(dic);
-            return await this.webManager.PostDataAsync(EndPoints.Bookmark, header, token).ConfigureAwait(false);
+            var result = await this.webManager.PostDataAsync(EndPoints.Bookmark, header, true, token).ConfigureAwait(false);
+            return new SAItem(result);
         }
 
         /// <summary>
@@ -131,7 +139,7 @@ namespace Awful.Core.Managers
                 ["threadid"] = threadId.ToString(CultureInfo.InvariantCulture),
             };
             using var header = new FormUrlEncodedContent(dic);
-            return await this.webManager.PostDataAsync(EndPoints.Bookmark, header, token).ConfigureAwait(false);
+            return await this.webManager.PostDataAsync(EndPoints.Bookmark, header, true, token).ConfigureAwait(false);
         }
     }
 }

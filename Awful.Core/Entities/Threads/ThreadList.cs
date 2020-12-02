@@ -11,7 +11,7 @@ namespace Awful.Core.Entities.Threads
     /// <summary>
     /// Thread List.
     /// </summary>
-    public class ThreadList
+    public class ThreadList : SAItem
     {
         /// <summary>
         /// Gets or sets the current page.

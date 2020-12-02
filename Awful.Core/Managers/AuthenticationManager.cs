@@ -51,60 +51,76 @@ namespace Awful.Core.Managers
                 ["password"] = password,
             };
             using var header = new FormUrlEncodedContent(dic);
-            var webResult = await this.webManager.PostDataAsync(EndPoints.LoginUrl, header, token).ConfigureAwait(false);
-            var authResult = new AuthResult(this.webManager.CookieContainer, true);
-            if (string.IsNullOrEmpty(webResult.AbsoluteEndpoint))
+            var webResult = await this.webManager.PostDataAsync(EndPoints.LoginUrl, header, false, token).ConfigureAwait(false);
+            try
             {
+                var authResult = new AuthResult(this.webManager.CookieContainer, true);
+                if (string.IsNullOrEmpty(webResult.AbsoluteEndpoint))
+                {
+                    return authResult;
+                }
+
+                var location = webResult.AbsoluteEndpoint.StartsWith("\\", StringComparison.InvariantCulture) ? "http:" + webResult.AbsoluteEndpoint : webResult.AbsoluteEndpoint;
+                var uri = new Uri(location);
+
+                // TODO: Make DAMN sure that the cookie result and web query string are enough checks to verify being logged in.
+                var queryString = HtmlHelpers.ParseQueryString(uri.Query);
+                if (!queryString.ContainsKey("loginerror"))
+                {
+                    return await this.FetchUserAsync(authResult, token).ConfigureAwait(false);
+                }
+
+                if (queryString["loginerror"] == null)
+                {
+                    return await this.FetchUserAsync(authResult, token).ConfigureAwait(false);
+                }
+
+                switch (queryString["loginerror"])
+                {
+                    case "1":
+                        authResult.Error = "Failed to enter phrase from the security image.";
+                        break;
+                    case "2":
+                        authResult.Error = "The password you entered is wrong. Remember passwords are case-sensitive! Be careful... too many wrong passwords and you will be locked out temporarily.";
+                        break;
+                    case "3":
+                        authResult.Error = "The username you entered is wrong, maybe you should try 'idiot' instead? Watch out... too many failed login attempts and you will be locked out temporarily.";
+                        break;
+                    case "4":
+                        authResult.Error =
+                            "You've made too many failed login attempts. Your IP address is temporarily blocked.";
+                        break;
+                    default:
+                        authResult.Error =
+                            "Something happened and we couldn't log you in! That's a bummer :(.";
+                        break;
+                }
+
+                authResult.IsSuccess = false;
+                authResult.Result = webResult;
                 return authResult;
             }
-
-            var location = webResult.AbsoluteEndpoint.StartsWith("\\", StringComparison.InvariantCulture) ? "http:" + webResult.AbsoluteEndpoint : webResult.AbsoluteEndpoint;
-            var uri = new Uri(location);
-
-            // TODO: Make DAMN sure that the cookie result and web query string are enough checks to verify being logged in.
-            var queryString = HtmlHelpers.ParseQueryString(uri.Query);
-            if (!queryString.ContainsKey("loginerror"))
+            catch (Exception ex)
             {
-                return await this.FetchUserAsync(authResult, token).ConfigureAwait(false);
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(webResult));
             }
-
-            if (queryString["loginerror"] == null)
-            {
-                return await this.FetchUserAsync(authResult, token).ConfigureAwait(false);
-            }
-
-            switch (queryString["loginerror"])
-            {
-                case "1":
-                    authResult.Error = "Failed to enter phrase from the security image.";
-                    break;
-                case "2":
-                    authResult.Error = "The password you entered is wrong. Remember passwords are case-sensitive! Be careful... too many wrong passwords and you will be locked out temporarily.";
-                    break;
-                case "3":
-                    authResult.Error = "The username you entered is wrong, maybe you should try 'idiot' instead? Watch out... too many failed login attempts and you will be locked out temporarily.";
-                    break;
-                case "4":
-                    authResult.Error =
-                        "You've made too many failed login attempts. Your IP address is temporarily blocked.";
-                    break;
-                default:
-                    authResult.Error =
-                        "Something happened and we couldn't log you in! That's a bummer :(.";
-                    break;
-            }
-
-            authResult.IsSuccess = false;
-            return authResult;
         }
 
         private async Task<AuthResult> FetchUserAsync(AuthResult authResult, CancellationToken token)
         {
             string url = string.Format(CultureInfo.InvariantCulture, EndPoints.UserProfile, 0);
-            var result = await this.webManager.GetDataAsync(url, token).ConfigureAwait(false);
-            var user = JsonConvert.DeserializeObject<User>(result.ResultHtml);
-            authResult.CurrentUser = user;
-            return authResult;
+            var result = await this.webManager.GetDataAsync(url, true, token).ConfigureAwait(false);
+            try
+            {
+                var user = JsonConvert.DeserializeObject<User>(result.ResultText);
+                authResult.CurrentUser = user;
+                authResult.Result = result;
+                return authResult;
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
     }
 }

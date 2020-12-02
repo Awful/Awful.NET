@@ -37,8 +37,17 @@ namespace Awful.Core.Managers.JSON
         /// <returns>Index Page.</returns>
         public async Task<IndexPage> GetIndexPageAsync(CancellationToken token = default)
         {
-            var result = await this.webManager.GetDataAsync(EndPoints.IndexPageUrl, token).ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<IndexPage>(result.ResultHtml);
+            var result = await this.webManager.GetDataAsync(EndPoints.IndexPageUrl, true, token).ConfigureAwait(false);
+            try
+            {
+                var item = JsonConvert.DeserializeObject<IndexPage>(result.ResultText);
+                item.Result = result;
+                return item;
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
 
         /// <summary>
@@ -48,30 +57,37 @@ namespace Awful.Core.Managers.JSON
         /// <returns>List of Forums.</returns>
         public async Task<SortedIndexPage> GetSortedIndexPageAsync(CancellationToken token = default)
         {
-            var result = await this.webManager.GetDataAsync(EndPoints.IndexPageUrl, token).ConfigureAwait(false);
+            var result = await this.webManager.GetDataAsync(EndPoints.IndexPageUrl, true, token).ConfigureAwait(false);
 
-            var data = JsonConvert.DeserializeObject<IndexPage>(result.ResultHtml);
-
-            foreach (var forum in data.Forums)
+            try
             {
-                this.UpdateForumMetadata(forum);
+                var data = JsonConvert.DeserializeObject<IndexPage>(result.ResultText);
+                data.Result = result;
+                foreach (var forum in data.Forums)
+                {
+                    this.UpdateForumMetadata(forum);
+                }
+
+                // The forums API returns null values for forums you can't access.
+                // So if we see a zero for the ID, don't add it to the list.
+                var forums = data.Forums.SelectMany(n => this.Flatten(n)).ToList();
+                for (int i = 0; i < forums.Count; i++)
+                {
+                    forums[i].SortOrder = i + 1;
+                }
+
+                return new SortedIndexPage()
+                {
+                    ForumCategories = data.Forums,
+                    Forums = forums.Where(n => n.HasThreads == true).ToList(),
+                    User = data.User,
+                    Stats = data.Stats,
+                };
             }
-
-            // The forums API returns null values for forums you can't access.
-            // So if we see a zero for the ID, don't add it to the list.
-            var forums = data.Forums.SelectMany(n => this.Flatten(n)).ToList();
-            for (int i = 0; i < forums.Count; i++)
+            catch (Exception ex)
             {
-                forums[i].SortOrder = i + 1;
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
             }
-
-            return new SortedIndexPage()
-            {
-                ForumCategories = data.Forums,
-                Forums = forums.Where(n => n.HasThreads == true).ToList(),
-                User = data.User,
-                Stats = data.Stats,
-            };
         }
 
         private IEnumerable<Forum> Flatten(Forum forum)

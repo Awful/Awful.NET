@@ -52,6 +52,15 @@ namespace Awful.Core.Exceptions
         /// <summary>
         /// Initializes a new instance of the <see cref="AwfulClientException"/> class.
         /// </summary>
+        /// <param name="result"><see cref="Result"/> object.</param>
+        public AwfulClientException(Result result)
+        {
+            this.Data.Add(AwfulClientKey, result);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AwfulClientException"/> class.
+        /// </summary>
         /// <param name="message">Inner message.</param>
         public AwfulClientException(string message)
             : base(message)

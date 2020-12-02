@@ -22,6 +22,30 @@ namespace Awful.ConsoleApp.Options
         /// Testing Template Handler.
         /// </summary>
         TemplateHandler,
+
+        /// <summary>
+        /// Testing Awful Managers.
+        /// </summary>
+        AwfulManager,
+    }
+
+    /// <summary>
+    /// Awful Manager Options.
+    /// </summary>
+    public enum AwfulManagerOption
+    {
+        /// <summary>
+        /// Bookmark manager.
+        /// </summary>
+        BookmarkManager,
+    }
+
+    /// <summary>
+    /// Bookmark Manager Options.
+    /// </summary>
+    public enum BookmarkManagerOption
+    {
+        AddBookmark
     }
 
     /// <summary>

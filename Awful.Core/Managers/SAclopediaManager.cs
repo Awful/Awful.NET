@@ -42,9 +42,15 @@ namespace Awful.Core.Managers
                 throw new UserAuthenticationException(Awful.Core.Resources.ExceptionMessages.UserAuthenticationError);
             }
 
-            var result = await this.webManager.GetDataAsync(EndPoints.SAclopediaBase, token).ConfigureAwait(false);
-            var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            return SAclopediaHandler.ParseCategoryList(document);
+            var result = await this.webManager.GetDataAsync(EndPoints.SAclopediaBase, false, token).ConfigureAwait(false);
+            try
+            {
+                return SAclopediaHandler.ParseCategoryList(result.Document);
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
 
         /// <summary>
@@ -61,9 +67,15 @@ namespace Awful.Core.Managers
                 throw new UserAuthenticationException(Awful.Core.Resources.ExceptionMessages.UserAuthenticationError);
             }
 
-            var result = await this.webManager.GetDataAsync(EndPoints.SAclopediaBase + $"?act={act}&l={id}", token).ConfigureAwait(false);
-            var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            return SAclopediaHandler.ParseEntryItemList(document);
+            var result = await this.webManager.GetDataAsync(EndPoints.SAclopediaBase + $"?act={act}&l={id}", false, token).ConfigureAwait(false);
+            try
+            {
+                return SAclopediaHandler.ParseEntryItemList(result.Document);
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
 
         /// <summary>
@@ -80,9 +92,17 @@ namespace Awful.Core.Managers
                 throw new UserAuthenticationException(Awful.Core.Resources.ExceptionMessages.UserAuthenticationError);
             }
 
-            var result = await this.webManager.GetDataAsync(EndPoints.SAclopediaBase + $"?act={act}&topicid={id}", token).ConfigureAwait(false);
-            var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            return SAclopediaHandler.ParseEntry(document, id);
+            var result = await this.webManager.GetDataAsync(EndPoints.SAclopediaBase + $"?act={act}&topicid={id}", false, token).ConfigureAwait(false);
+            try
+            {
+                var entry = SAclopediaHandler.ParseEntry(result.Document, id);
+                entry.Result = result;
+                return entry;
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
     }
 }

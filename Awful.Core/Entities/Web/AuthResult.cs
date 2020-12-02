@@ -13,7 +13,7 @@ namespace Awful.Core.Entities.Web
     /// <summary>
     /// The AuthRequest request.
     /// </summary>
-    public class AuthResult
+    public class AuthResult : SAItem
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AuthResult"/> class.

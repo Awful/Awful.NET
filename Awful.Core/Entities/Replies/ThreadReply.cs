@@ -11,7 +11,7 @@ using Awful.Core.Entities.Threads;
 
 namespace Awful.Core.Entities.Replies
 {
-    public class ThreadReply
+    public class ThreadReply : SAItem
     {
         public string Message { get; set; }
 

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Awful.Core.Entities;
 using Awful.Core.Entities.Messages;
 using Awful.Core.Entities.Posts;
 using Awful.Core.Entities.Threads;
@@ -90,7 +91,7 @@ namespace Awful.UI.Actions
         /// <param name="newPrivateMessageEntity">New PM.</param>
         /// <param name="token">Cancellation Token.</param>
         /// <returns>Result.</returns>
-        public async Task<Result> SendPrivateMessageAsync(NewPrivateMessage newPrivateMessageEntity, CancellationToken token = default)
+        public async Task<SAItem> SendPrivateMessageAsync(NewPrivateMessage newPrivateMessageEntity, CancellationToken token = default)
         {
             return await this.manager.SendPrivateMessageAsync(newPrivateMessageEntity, token).ConfigureAwait(false);
         }

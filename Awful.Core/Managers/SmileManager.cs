@@ -36,9 +36,15 @@ namespace Awful.Core.Managers
         /// <returns>A list of Smile Categories, which includes the smiles.</returns>
         public async Task<List<SmileCategory>> GetSmileListAsync(CancellationToken token = default)
         {
-            var result = await this.webManager.GetDataAsync(EndPoints.SmileUrl, token).ConfigureAwait(false);
-            var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            return SmileHandler.ParseSmileList(document);
+            var result = await this.webManager.GetDataAsync(EndPoints.SmileUrl, false, token).ConfigureAwait(false);
+            try
+            {
+                return SmileHandler.ParseSmileList(result.Document);
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
     }
 }

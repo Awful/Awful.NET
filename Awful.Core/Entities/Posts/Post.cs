@@ -11,7 +11,7 @@ namespace Awful.Core.Entities.Posts
     /// <summary>
     /// Something Awful Post.
     /// </summary>
-    public class Post
+    public class Post : SAItem
     {
         /// <summary>
         /// Gets or sets the user post.

@@ -54,7 +54,15 @@ namespace Awful.Core.Managers
                 ["threadid"] = threadId.ToString(CultureInfo.InvariantCulture),
             };
             using var header = new FormUrlEncodedContent(dic);
-            return await this.webManager.PostDataAsync(EndPoints.ShowThreadBase, header, token).ConfigureAwait(false);
+            var result = await this.webManager.PostDataAsync(EndPoints.ShowThreadBase, header, true, token).ConfigureAwait(false);
+            try
+            {
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
 
         /// <summary>
@@ -66,11 +74,18 @@ namespace Awful.Core.Managers
         public async Task<NewThread> GetThreadCookiesAsync(int forumId, CancellationToken token = default)
         {
             string url = string.Format(CultureInfo.InvariantCulture, EndPoints.NewThread, forumId);
-            var result = await this.webManager.GetDataAsync(url, token).ConfigureAwait(false);
-            var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            var thread = ThreadHandler.ParseNewThread(document);
-            thread.ForumId = forumId;
-            return thread;
+            var result = await this.webManager.GetDataAsync(url, false, token).ConfigureAwait(false);
+            try
+            {
+                var thread = ThreadHandler.ParseNewThread(result.Document);
+                thread.ForumId = forumId;
+                thread.Result = result;
+                return thread;
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
 
         /// <summary>
@@ -103,7 +118,17 @@ namespace Awful.Core.Managers
                 { new StringContent(newThreadEntity.ParseUrl.ToString()), "parseurl" },
                 { new StringContent("Submit Reply"), "submit" },
             };
-            return await this.webManager.PostFormDataAsync(EndPoints.NewThreadBase, form, token).ConfigureAwait(false);
+
+            var result = await this.webManager.PostFormDataAsync(EndPoints.NewThreadBase, form, false, token).ConfigureAwait(false);
+
+            try
+            {
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
 
         /// <summary>
@@ -141,8 +166,16 @@ namespace Awful.Core.Managers
                 { new StringContent("Preview Post"), "preview" },
             };
 
-            var result = await this.webManager.PostFormDataAsync(EndPoints.NewThreadBase, form, token).ConfigureAwait(false);
-            return PostHandler.ParsePostPreview(await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false));
+            var result = await this.webManager.PostFormDataAsync(EndPoints.NewThreadBase, form, false, token).ConfigureAwait(false);
+            try
+            {
+                var post = PostHandler.ParsePostPreview(result.Document);
+                return post;
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
 
         /// <summary>
@@ -154,7 +187,15 @@ namespace Awful.Core.Managers
         /// <returns>A Result.</returns>
         public async Task<Result> MarkPostAsLastReadAsAsync(long threadId, long index, CancellationToken token = default)
         {
-            return await this.webManager.GetDataAsync(string.Format(CultureInfo.InvariantCulture, EndPoints.LastRead, index, threadId), token).ConfigureAwait(false);
+            var result = await this.webManager.GetDataAsync(string.Format(CultureInfo.InvariantCulture, EndPoints.LastRead, index, threadId), false, token).ConfigureAwait(false);
+            try
+            {
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
     }
 }

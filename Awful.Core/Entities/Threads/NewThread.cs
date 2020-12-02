@@ -12,7 +12,7 @@ namespace Awful.Core.Entities.Threads
     /// <summary>
     /// Something Awful New Thread.
     /// </summary>
-    public class NewThread
+    public class NewThread : SAItem
     {
         public int ForumId { get; set; }
 

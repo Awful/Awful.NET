@@ -14,6 +14,8 @@ using AngleSharp.Html.Parser;
 using Awful.Core.Entities.Bans;
 using Awful.Core.Entities.Web;
 using Awful.Core.Exceptions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Awful.Core.Utilities
 {
@@ -28,6 +30,8 @@ namespace Awful.Core.Utilities
         private const string UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2593.0 Safari/537.36";
         private readonly HttpClientHandler httpClientHandler;
         private bool isDisposed;
+        private HtmlParser parser;
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AwfulClient"/> class.
@@ -35,7 +39,7 @@ namespace Awful.Core.Utilities
         /// <param name="authenticationCookie">The users authentication cookie.</param>
         public AwfulClient(CookieContainer authenticationCookie = null)
         {
-            this.Parser = new HtmlParser();
+            this.parser = new HtmlParser();
             if (authenticationCookie != null)
             {
                 this.CookieContainer = authenticationCookie;
@@ -76,11 +80,6 @@ namespace Awful.Core.Utilities
         public bool IsAuthenticated => this.CookieContainer != null && this.CookieContainer.Count > 0;
 
         /// <summary>
-        /// Gets the HTML Parser.
-        /// </summary>
-        public HtmlParser Parser { get; }
-
-        /// <summary>
         /// Gets the (Actual) HttpClient used to make requests.
         /// </summary>
         public HttpClient Client { get; }
@@ -94,9 +93,10 @@ namespace Awful.Core.Utilities
         /// GETs data from SA.
         /// </summary>
         /// <param name="endpoint">The endpoint to GET data from.</param>
+        /// <param name="shouldBeJson">Checks if the resulting object is JSON.</param>
         /// <param name="token">A CancelationToken.</param>
         /// <returns>A Result.</returns>
-        public async Task<Result> GetDataAsync(string endpoint, CancellationToken token = default)
+        public async Task<Result> GetDataAsync(string endpoint, bool shouldBeJson = false, CancellationToken token = default)
         {
             HttpResponseMessage result = null;
             string html = string.Empty;
@@ -105,10 +105,11 @@ namespace Awful.Core.Utilities
                 this.Client.DefaultRequestHeaders.IfModifiedSince = DateTimeOffset.UtcNow;
                 result = await this.Client.GetAsync(new Uri(endpoint), token).ConfigureAwait(false);
                 html = await HttpClientHelpers.ReadHtmlAsync(result).ConfigureAwait(false);
-
-                CheckForPaywall(html);
-
-                return new Result(result, html, endpoint: result.RequestMessage.RequestUri.AbsoluteUri);
+                return this.CheckForErrors(result, html, result.RequestMessage.RequestUri.AbsoluteUri, shouldBeJson);
+            }
+            catch (AwfulClientException)
+            {
+                throw;
             }
             catch (Exception ex)
             {
@@ -121,9 +122,10 @@ namespace Awful.Core.Utilities
         /// </summary>
         /// <param name="endpoint">The SA Endpoint to POST to.</param>
         /// <param name="data">The FormUrlEncodedContent data.</param>
+        /// <param name="shouldBeJson">Checks if the resulting object is JSON.</param>
         /// <param name="token">A CancellationToken.</param>
         /// <returns>A Result.</returns>
-        public async Task<Result> PostDataAsync(string endpoint, FormUrlEncodedContent data, CancellationToken token = default)
+        public async Task<Result> PostDataAsync(string endpoint, FormUrlEncodedContent data, bool shouldBeJson = false, CancellationToken token = default)
         {
             HttpResponseMessage result = null;
             string html = string.Empty;
@@ -132,15 +134,17 @@ namespace Awful.Core.Utilities
                 this.Client.DefaultRequestHeaders.IfModifiedSince = DateTimeOffset.UtcNow;
                 result = await this.Client.PostAsync(new Uri(endpoint), data, token).ConfigureAwait(false);
                 html = await HttpClientHelpers.ReadHtmlAsync(result).ConfigureAwait(false);
-
-                CheckForPaywall(html);
                 var returnUrl = result.Headers.Location != null ? result.Headers.Location.OriginalString : string.Empty;
                 if (string.IsNullOrEmpty(returnUrl))
                 {
                     returnUrl = result.RequestMessage.RequestUri != null ? result.RequestMessage.RequestUri.ToString() : string.Empty;
                 }
 
-                return new Result(result, html, endpoint: returnUrl);
+                return this.CheckForErrors(result, html, returnUrl, shouldBeJson);
+            }
+            catch (AwfulClientException)
+            {
+                throw;
             }
             catch (Exception ex)
             {
@@ -153,9 +157,10 @@ namespace Awful.Core.Utilities
         /// </summary>
         /// <param name="endpoint">The endpoint URL to post to.</param>
         /// <param name="form">The Form.</param>
+        /// <param name="shouldBeJson">Checks if the resulting object is JSON.</param>
         /// <param name="token">A CancellationToken.</param>
         /// <returns>A Result.</returns>
-        public async Task<Result> PostFormDataAsync(string endpoint, MultipartFormDataContent form, CancellationToken token = default)
+        public async Task<Result> PostFormDataAsync(string endpoint, MultipartFormDataContent form, bool shouldBeJson = false, CancellationToken token = default)
         {
             HttpResponseMessage result = null;
             string html = string.Empty;
@@ -163,10 +168,11 @@ namespace Awful.Core.Utilities
             {
                 result = await this.Client.PostAsync(new Uri(endpoint), form, token).ConfigureAwait(false);
                 html = await HttpClientHelpers.ReadHtmlAsync(result).ConfigureAwait(false);
-
-                CheckForPaywall(html);
-                var newResult = new Result(result, html, endpoint: result.RequestMessage.RequestUri.ToString());
-                return newResult;
+                return this.CheckForErrors(result, html, endpoint: result.RequestMessage.RequestUri.ToString(), shouldBeJson);
+            }
+            catch (AwfulClientException)
+            {
+                throw;
             }
             catch (Exception ex)
             {
@@ -212,12 +218,54 @@ namespace Awful.Core.Utilities
             this.isDisposed = true;
         }
 
+        private Result CheckForErrors(HttpResponseMessage message, string text = "", string endpoint = "", bool shouldBeJson = false)
+        {
+            var result = new Result(message, text, endpoint);
+
+            if (shouldBeJson)
+            {
+                try
+                {
+                    result.Json = JsonConvert.DeserializeObject(text);
+                }
+                catch
+                {
+                }
+            }
+
+            this.CheckHtmlForErrors(result);
+            return result;
+        }
+
         private static void CheckForPaywall(string html)
         {
             if (html.Contains("Sorry, you must be a registered forums member to view this page."))
             {
                 throw new PaywallException(Awful.Core.Resources.ExceptionMessages.PaywallThreadHit);
             }
+        }
+
+        private async void CheckHtmlForErrors(Result result)
+        {
+            var document = await this.parser.ParseDocumentAsync(result.ResultText).ConfigureAwait(false);
+            if (!document.Body.ClassList.Contains("standarderror"))
+            {
+                result.Document = document;
+                return;
+            }
+
+            var errorNode = document.QuerySelector(".inner");
+            if (errorNode != null)
+            {
+                CheckForPaywall(errorNode.TextContent);
+                result.ErrorText = errorNode.TextContent.Trim();
+            }
+            else
+            {
+                result.ErrorText = "An error occured in the HTML, but couldn't be parsed.";
+            }
+
+            throw new AwfulClientException(result);
         }
     }
 }

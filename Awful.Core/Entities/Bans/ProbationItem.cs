@@ -9,7 +9,7 @@ namespace Awful.Core.Entities.Bans
     /// <summary>
     /// Something Awful Probation Item.
     /// </summary>
-    public class ProbationItem
+    public class ProbationItem : SAItem
     {
         /// <summary>
         /// Gets or sets the time until probation has concluded.

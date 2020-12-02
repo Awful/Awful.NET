@@ -56,9 +56,17 @@ namespace Awful.Core.Managers
                 baseUri += string.Format(CultureInfo.InvariantCulture, EndPoints.PageNumber, pageNumber);
             }
 
-            var result = await this.webManager.GetDataAsync(baseUri, token).ConfigureAwait(false);
-            var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            return ThreadPostHandler.ParseThread(document);
+            var result = await this.webManager.GetDataAsync(baseUri, false, token).ConfigureAwait(false);
+            try
+            {
+                var item = ThreadPostHandler.ParseThread(result.Document);
+                item.Result = result;
+                return item;
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Awful.Core.Entities.Bans;
+using Awful.Core.Exceptions;
 using Awful.Core.Utilities;
 using Awful.Exceptions;
 using Awful.Parser.Handlers;
@@ -49,9 +50,17 @@ namespace Awful.Core.Managers
                 throw new UserAuthenticationException(Awful.Core.Resources.ExceptionMessages.UserAuthenticationError);
             }
 
-            var result = await this.webManager.GetDataAsync(string.Format(CultureInfo.InvariantCulture, EndPoints.RapSheet, page), token).ConfigureAwait(false);
-            var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            return BanHandler.ParseBanPage(document);
+            var result = await this.webManager.GetDataAsync(string.Format(CultureInfo.InvariantCulture, EndPoints.RapSheet, page), false, token).ConfigureAwait(false);
+            try
+            {
+                var banPage = BanHandler.ParseBanPage(result.Document);
+                banPage.Result = result;
+                return banPage;
+            }
+            catch (Exception ex)
+            {
+                throw new Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
 
         /// <summary>
@@ -66,11 +75,18 @@ namespace Awful.Core.Managers
                 throw new UserAuthenticationException(Awful.Core.Resources.ExceptionMessages.UserAuthenticationError);
             }
 
-            var result = await this.webManager.GetDataAsync(EndPoints.BaseUrl, token).ConfigureAwait(false);
-            var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            var prob = BanHandler.ParseForProbation(document);
-            this.webManager.Probation = prob;
-            return prob;
+            var result = await this.webManager.GetDataAsync(EndPoints.BaseUrl, false, token).ConfigureAwait(false);
+            try
+            {
+                var prob = BanHandler.ParseForProbation(result.Document);
+                this.webManager.Probation = prob;
+                prob.Result = result;
+                return prob;
+            }
+            catch (Exception ex)
+            {
+                throw new AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
     }
 }

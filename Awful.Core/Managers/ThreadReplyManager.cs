@@ -47,17 +47,23 @@ namespace Awful.Core.Managers
             }
 
             string url = string.Format(CultureInfo.InvariantCulture, EndPoints.EditBase, postId);
-            var result = await this.webManager.GetDataAsync(url, token).ConfigureAwait(false);
-            var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            var inputs = document.QuerySelectorAll("input");
-            var forumReplyEntity = new ThreadReply();
-            var bookmarks = inputs["bookmark"].HasAttribute("checked") ? "yes" : "no";
-            string quote = System.Net.WebUtility.HtmlDecode(document.QuerySelector("textarea").TextContent);
-            forumReplyEntity.MapEditPostInformation(
-                quote,
-                postId,
-                bookmarks);
-            return forumReplyEntity;
+            var result = await this.webManager.GetDataAsync(url, false, token).ConfigureAwait(false);
+            try
+            {
+                var inputs = result.Document.QuerySelectorAll("input");
+                var forumReplyEntity = new ThreadReply();
+                var bookmarks = inputs["bookmark"].HasAttribute("checked") ? "yes" : "no";
+                string quote = System.Net.WebUtility.HtmlDecode(result.Document.QuerySelector("textarea").TextContent);
+                forumReplyEntity.MapEditPostInformation(
+                    quote,
+                    postId,
+                    bookmarks);
+                return forumReplyEntity;
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
 
         /// <summary>
@@ -76,19 +82,26 @@ namespace Awful.Core.Managers
 
             string url;
             url = threadId > 0 ? string.Format(CultureInfo.InvariantCulture, EndPoints.ReplyBase, threadId) : string.Format(CultureInfo.InvariantCulture, EndPoints.QuoteBase, postId);
-            var result = await this.webManager.GetDataAsync(url, token).ConfigureAwait(false);
-            var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            var inputs = document.QuerySelectorAll("input");
-            var posts = PostHandler.ParsePreviousPosts(document);
-            var forumReplyEntity = new ThreadReply();
-            string quote = System.Net.WebUtility.HtmlDecode(document.QuerySelector("textarea").TextContent);
-            forumReplyEntity.MapThreadInformation(
-                inputs["formkey"].GetAttribute("value"),
-                inputs["form_cookie"].GetAttribute("value"),
-                quote,
-                inputs["threadid"].GetAttribute("value"));
-            forumReplyEntity.ForumPosts.AddRange(posts);
-            return forumReplyEntity;
+            var result = await this.webManager.GetDataAsync(url, false, token).ConfigureAwait(false);
+            try
+            {
+                var inputs = result.Document.QuerySelectorAll("input");
+                var posts = PostHandler.ParsePreviousPosts(result.Document);
+                var forumReplyEntity = new ThreadReply();
+                string quote = System.Net.WebUtility.HtmlDecode(result.Document.QuerySelector("textarea").TextContent);
+                forumReplyEntity.MapThreadInformation(
+                    inputs["formkey"].GetAttribute("value"),
+                    inputs["form_cookie"].GetAttribute("value"),
+                    quote,
+                    inputs["threadid"].GetAttribute("value"));
+                forumReplyEntity.ForumPosts.AddRange(posts);
+                forumReplyEntity.Result = result;
+                return forumReplyEntity;
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
 
         /// <summary>
@@ -115,7 +128,15 @@ namespace Awful.Core.Managers
                 { new StringContent("2097152"), "MAX_FILE_SIZE" },
                 { new StringContent("Submit Reply"), "submit" },
             };
-            return await this.webManager.PostFormDataAsync(EndPoints.NewReply, form, token).ConfigureAwait(false);
+            var result = await this.webManager.PostFormDataAsync(EndPoints.NewReply, form, false, token).ConfigureAwait(false);
+            try
+            {
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
 
         /// <summary>
@@ -141,7 +162,15 @@ namespace Awful.Core.Managers
                 { new StringContent("2097152"), "MAX_FILE_SIZE" },
                 { new StringContent("Save Changes"), "submit" },
             };
-            return await this.webManager.PostFormDataAsync(EndPoints.EditPost, form, token).ConfigureAwait(false);
+            var result = await this.webManager.PostFormDataAsync(EndPoints.EditPost, form, false, token).ConfigureAwait(false);
+            try
+            {
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
 
         /// <summary>
@@ -173,9 +202,15 @@ namespace Awful.Core.Managers
             // We post to SA the same way we would for a normal reply, but instead of getting a redirect back to the
             // thread, we'll get redirected to back to the reply screen with the preview message on it.
             // From here we can parse that preview and return it to the user.
-            var result = await this.webManager.PostFormDataAsync(EndPoints.NewReply, form).ConfigureAwait(false);
-            var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            return new Post { PostHtml = document.QuerySelector(".postbody").InnerHtml };
+            var result = await this.webManager.PostFormDataAsync(EndPoints.NewReply, form, false).ConfigureAwait(false);
+            try
+            {
+                return new Post { PostHtml = result.Document.QuerySelector(".postbody").InnerHtml, Result = result };
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
 
         /// <summary>
@@ -200,9 +235,15 @@ namespace Awful.Core.Managers
                 { new StringContent("2097152"), "MAX_FILE_SIZE" },
                 { new StringContent("Preview Post"), "preview" },
             };
-            var result = await this.webManager.PostFormDataAsync(EndPoints.EditPost, form, token).ConfigureAwait(false);
-            var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            return new Post { PostHtml = document.QuerySelector(".postbody").InnerHtml };
+            var result = await this.webManager.PostFormDataAsync(EndPoints.EditPost, form, false, token).ConfigureAwait(false);
+            try
+            {
+                return new Post { PostHtml = result.Document.QuerySelector(".postbody").InnerHtml, Result = result };
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
 
         /// <summary>
@@ -219,9 +260,16 @@ namespace Awful.Core.Managers
             }
 
             string url = string.Format(CultureInfo.InvariantCulture, EndPoints.QuoteBase, postId);
-            var result = await this.webManager.GetDataAsync(url, token).ConfigureAwait(false);
-            var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            return System.Net.WebUtility.HtmlDecode(System.Net.WebUtility.HtmlDecode(document.QuerySelector("textarea").TextContent));
+            var result = await this.webManager.GetDataAsync(url, false, token).ConfigureAwait(false);
+            try
+            {
+                return System.Net.WebUtility.HtmlDecode(System.Net.WebUtility.HtmlDecode(result.Document.QuerySelector("textarea").TextContent));
+
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
     }
 }

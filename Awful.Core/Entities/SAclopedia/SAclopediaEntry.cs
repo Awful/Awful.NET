@@ -11,7 +11,7 @@ namespace Awful.Core.Entities.SAclopedia
     /// <summary>
     /// SAclopedia Entry.
     /// </summary>
-    public class SAclopediaEntry
+    public class SAclopediaEntry : SAItem
     {
         /// <summary>
         /// Gets or sets the id.

@@ -14,7 +14,7 @@ namespace Awful.Core.Entities.JSON
     /// <summary>
     /// Something Awful User Object.
     /// </summary>
-    public class User
+    public class User : SAItem
     {
         /// <summary>
         /// Gets or sets the user id.

@@ -61,9 +61,15 @@ namespace Awful.Core.Managers
             }
 
             string url = isPrivateMessage ? EndPoints.NewPrivateMessageBase : string.Format(CultureInfo.InvariantCulture, EndPoints.NewThread, forumId);
-            var result = await this.webManager.GetDataAsync(url, token).ConfigureAwait(false);
-            var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            return PostIconHandler.ParsePostIconList(document);
+            var result = await this.webManager.GetDataAsync(url, false, token).ConfigureAwait(false);
+            try
+            {
+                return PostIconHandler.ParsePostIconList(result.Document);
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
     }
 }

@@ -3,13 +3,14 @@
 // </copyright>
 
 using System.Collections.Generic;
+using Awful.Core.Entities.Web;
 
 namespace Awful.Core.Entities.Bans
 {
     /// <summary>
     /// Something Awful Ban Page.
     /// </summary>
-    public class BanPage
+    public class BanPage : SAItem
     {
         /// <summary>
         /// Gets or sets the current page.

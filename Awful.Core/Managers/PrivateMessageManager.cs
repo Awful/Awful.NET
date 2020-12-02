@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Awful.Core.Entities;
 using Awful.Core.Entities.Messages;
 using Awful.Core.Entities.Posts;
 using Awful.Core.Entities.Web;
@@ -83,9 +84,15 @@ namespace Awful.Core.Managers
                 url = EndPoints.PrivateMessages + string.Format(CultureInfo.InvariantCulture, EndPoints.PageNumber, page);
             }
 
-            var result = await this.webManager.GetDataAsync(url, token).ConfigureAwait(false);
-            var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            return PrivateMessageHandler.ParseList(document);
+            var result = await this.webManager.GetDataAsync(url, false, token).ConfigureAwait(false);
+            try
+            {
+                return PrivateMessageHandler.ParseList(result.Document);
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
 
         /// <summary>
@@ -102,10 +109,16 @@ namespace Awful.Core.Managers
             }
 
             var message = new PrivateMessage() { PrivateMessageId = id };
-            var result = await this.webManager.GetDataAsync(EndPoints.PrivateMessages + $"?action=show&privatemessageid={message.PrivateMessageId}", token).ConfigureAwait(false);
-            var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            message.Post = PostHandler.ParsePost(document, document.Body);
-            return message.Post;
+            var result = await this.webManager.GetDataAsync(EndPoints.PrivateMessages + $"?action=show&privatemessageid={message.PrivateMessageId}", false, token).ConfigureAwait(false);
+            try
+            {
+                message.Post = PostHandler.ParsePost(result.Document, result.Document.Body);
+                return message.Post;
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
 
         /// <summary>
@@ -114,7 +127,7 @@ namespace Awful.Core.Managers
         /// <param name="newPrivateMessageEntity">New PM.</param>
         /// <param name="token">Cancellation Token.</param>
         /// <returns>Result.</returns>
-        public async Task<Result> SendPrivateMessageAsync(NewPrivateMessage newPrivateMessageEntity, CancellationToken token = default)
+        public async Task<SAItem> SendPrivateMessageAsync(NewPrivateMessage newPrivateMessageEntity, CancellationToken token = default)
         {
             if (newPrivateMessageEntity == null)
             {
@@ -141,7 +154,8 @@ namespace Awful.Core.Managers
                 form.Add(new StringContent(newPrivateMessageEntity.Icon.Id.ToString(CultureInfo.InvariantCulture)), "iconid");
             }
 
-            return await this.webManager.PostFormDataAsync(EndPoints.NewPrivateMessageBase, form, token).ConfigureAwait(false);
+            var result = await this.webManager.PostFormDataAsync(EndPoints.NewPrivateMessageBase, form, false, token).ConfigureAwait(false);
+            return new SAItem(result);
         }
     }
 }

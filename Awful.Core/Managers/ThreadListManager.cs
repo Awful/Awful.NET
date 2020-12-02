@@ -40,12 +40,19 @@ namespace Awful.Core.Managers
         public async Task<ThreadList> GetForumThreadListAsync(int forumId, int page, CancellationToken token = default)
         {
             var pageUrl = string.Format(CultureInfo.InvariantCulture, EndPoints.ForumPage, forumId, EndPoints.DefaultNumberPerPage) + string.Format(CultureInfo.InvariantCulture, EndPoints.PageNumber, page);
-            var result = await this.webManager.GetDataAsync(pageUrl, token).ConfigureAwait(false);
-            var document = await this.webManager.Parser.ParseDocumentAsync(result.ResultHtml, token).ConfigureAwait(false);
-            var threadList = new ThreadList();
-            ForumHandler.GetForumPageInfo(document, threadList);
-            threadList.Threads.AddRange(ThreadHandler.ParseForumThreadList(document));
-            return threadList;
+            var result = await this.webManager.GetDataAsync(pageUrl, false, token).ConfigureAwait(false);
+            try
+            {
+                var threadList = new ThreadList();
+                ForumHandler.GetForumPageInfo(result.Document, threadList);
+                threadList.Threads.AddRange(ThreadHandler.ParseForumThreadList(result.Document));
+                threadList.Result = result;
+                return threadList;
+            }
+            catch (Exception ex)
+            {
+                throw new Awful.Core.Exceptions.AwfulParserException(ex, new Awful.Core.Entities.SAItem(result));
+            }
         }
     }
 }

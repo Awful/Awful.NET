@@ -28,7 +28,7 @@ namespace Awful.Test.Managers
             ThreadManager manager = new ThreadManager(webClient);
             var result = await manager.MarkThreadUnreadAsync(3910844).ConfigureAwait(false);
             Assert.NotNull(result);
-            Assert.NotEmpty(result.ResultHtml);
+            Assert.NotEmpty(result.ResultText);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Awful.Test.Managers
             ThreadManager manager = new ThreadManager(webClient);
             var result = await manager.MarkPostAsLastReadAsAsync(3910844, 1).ConfigureAwait(false);
             Assert.NotNull(result);
-            Assert.NotEmpty(result.ResultHtml);
+            Assert.NotEmpty(result.ResultText);
         }
 
         /// <summary>
