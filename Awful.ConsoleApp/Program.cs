@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
+using Awful.ConsoleApp.Options;
 using Awful.Core.Managers;
 using Awful.Core.Utilities;
 using Awful.Webview;
@@ -19,27 +20,53 @@ namespace Awful.ConsoleApp
     {
         static async Task Main(string[] args)
         {
-            var awfulClient = await CreateAwfulClient().ConfigureAwait(false);
-            TemplateHandler handler = new TemplateHandler();
-            var defaultOptions = new DefaultOptions() { DeviceColorTheme = DeviceColorTheme.Light };
+            using var awfulClient = await CreateAwfulClient().ConfigureAwait(false);
+            var menu = Prompt.Select<MainMenu>("Main Menu");
+            switch (menu)
+            {
+                case MainMenu.LocalParsing:
+                    break;
+                case MainMenu.TemplateHandler:
+                    TemplateHandler handler = new TemplateHandler();
+                    var templateMenu = Prompt.Select<TemplateHandlerOption>("Render Template");
+                    var deviceColor = Prompt.Select<DeviceColorTheme>("Device Color Theme");
+                    var defaultOptions = new DefaultOptions() { DeviceColorTheme = deviceColor };
+                    string result = string.Empty;
+                    switch (templateMenu)
+                    {
+                        case TemplateHandlerOption.ThreadPost:
+                            var threadId = Prompt.Input<int>("Enter Thread Id", 3836680);
+                            var page = Prompt.Input<int>("Enter Page", 1);
+                            var answer = Prompt.Confirm("Go To Last Page?");
+                            ThreadPostManager manager = new ThreadPostManager(awfulClient);
+                            var entry = await manager.GetThreadPostsAsync(threadId, page, answer).ConfigureAwait(false);
+                            result = handler.RenderThreadPostView(entry, defaultOptions);
+                            break;
+                        case TemplateHandlerOption.Ban:
+                            BanManager banManager = new BanManager(awfulClient);
+                            var banEntry = await banManager.GetBanPageAsync().ConfigureAwait(false);
+                            result = handler.RenderBanView(banEntry, defaultOptions);
+                            break;
+                        case TemplateHandlerOption.UserProfile:
+                            UserManager userManager = new UserManager(awfulClient);
+                            var profileId = Prompt.Input<int>("Enter Profile Id", 0);
+                            var profileEntry = await userManager.GetUserFromProfilePageAsync(profileId).ConfigureAwait(false);
+                            result = handler.RenderProfileView(profileEntry, defaultOptions);
+                            break;
+                        case TemplateHandlerOption.SAclopedia:
+                            var saId = Prompt.Input<int>("Enter SAclopedia Id", 2300);
+                            SAclopediaManager saManager = new SAclopediaManager(awfulClient);
+                            var saEntry = await saManager.GetEntryAsync(saId).ConfigureAwait(false);
+                            result = handler.RenderSAclopediaView(saEntry, defaultOptions);
+                            break;
+                    }
 
-            ThreadPostManager manager = new ThreadPostManager(awfulClient);
-            var entry = await manager.GetThreadPostsAsync(3606621, 1).ConfigureAwait(false);
-            var result = handler.RenderThreadPostView(entry, defaultOptions);
-
-            //BanManager manager = new BanManager(awfulClient);
-            //var entry = await manager.GetBanPageAsync().ConfigureAwait(false);
-            //var result = handler.RenderBanView(entry, defaultOptions);
-
-            //UserManager manager = new UserManager(awfulClient);
-            //var entry = await manager.GetUserFromProfilePageAsync(0).ConfigureAwait(false);
-            //var result = handler.RenderProfileView(entry, defaultOptions);
-
-            //SAclopediaManager manager = new SAclopediaManager(awfulClient);
-            //var entry = await manager.GetEntryAsync(2300).ConfigureAwait(false);
-            //var result = handler.RenderSAclopediaView(entry, defaultOptions);
-
-            File.WriteAllText("test.html", result);
+                    File.WriteAllText("test.html", result);
+                    Console.WriteLine("File written to test.html");
+                    break;
+                default:
+                    break;
+            }
         }
 
         private static async Task<AwfulClient> CreateAwfulClient()
