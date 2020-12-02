@@ -38,7 +38,7 @@ namespace Awful.Core.Managers
         /// <param name="forumId">The Forum Id.</param>
         /// <param name="token">A CancellationToken.</param>
         /// <returns>A list of PostIcon's for Threads.</returns>
-        public async Task<List<PostIcon>> GetForumPostIconsAsync(int forumId, CancellationToken token = default)
+        public async Task<PostIconList> GetForumPostIconsAsync(int forumId, CancellationToken token = default)
         {
             return await this.GetPostIcons_InternalAsync(false, forumId, token).ConfigureAwait(false);
         }
@@ -48,12 +48,12 @@ namespace Awful.Core.Managers
         /// </summary>
         /// <param name="token">A CancellationToken.</param>
         /// <returns>A list of PostIcon's that can be used for Private Messages.</returns>
-        public async Task<List<PostIcon>> GetPrivateMessagePostIconsAsync(CancellationToken token = default)
+        public async Task<PostIconList> GetPrivateMessagePostIconsAsync(CancellationToken token = default)
         {
             return await this.GetPostIcons_InternalAsync(true, 0, token).ConfigureAwait(false);
         }
 
-        private async Task<List<PostIcon>> GetPostIcons_InternalAsync(bool isPrivateMessage = false, int forumId = 0, CancellationToken token = default)
+        private async Task<PostIconList> GetPostIcons_InternalAsync(bool isPrivateMessage = false, int forumId = 0, CancellationToken token = default)
         {
             if (!this.webManager.IsAuthenticated)
             {
@@ -64,7 +64,9 @@ namespace Awful.Core.Managers
             var result = await this.webManager.GetDataAsync(url, false, token).ConfigureAwait(false);
             try
             {
-                return PostIconHandler.ParsePostIconList(result.Document);
+                var icons = PostIconHandler.ParsePostIconList(result.Document);
+                var iconList = new PostIconList(icons) { Result = result };
+                return iconList;
             }
             catch (Exception ex)
             {

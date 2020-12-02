@@ -24,7 +24,7 @@ namespace Awful.Core.Entities.Threads
         public int TotalPages { get; set; }
 
         /// <summary>
-        /// Gets or sets the threads.
+        /// Gets the threads.
         /// </summary>
         public List<Thread> Threads { get; } = new List<Thread>();
     }

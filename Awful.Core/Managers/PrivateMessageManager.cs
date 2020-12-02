@@ -41,7 +41,7 @@ namespace Awful.Core.Managers
         /// </summary>
         /// <param name="token">Cancellation Token.</param>
         /// <returns>List of Private Messages.</returns>
-        public async Task<List<PrivateMessage>> GetAllPrivateMessageListAsync(CancellationToken token = default)
+        public async Task<PrivateMessageList> GetAllPrivateMessageListAsync(CancellationToken token = default)
         {
             if (!this.webManager.IsAuthenticated)
             {
@@ -53,8 +53,8 @@ namespace Awful.Core.Managers
             while (true)
             {
                 var result = await this.GetPrivateMessageListAsync(page, token).ConfigureAwait(false);
-                pmList.AddRange(result);
-                if (!result.Any())
+                pmList.AddRange(result.PrivateMessages);
+                if (!result.PrivateMessages.Any())
                 {
                     break;
                 }
@@ -62,7 +62,7 @@ namespace Awful.Core.Managers
                 page++;
             }
 
-            return pmList;
+            return new PrivateMessageList(pmList);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Awful.Core.Managers
         /// <param name="page">Page number.</param>
         /// <param name="token">Cancellation Token.</param>
         /// <returns>List of private messages.</returns>
-        public async Task<List<PrivateMessage>> GetPrivateMessageListAsync(int page, CancellationToken token = default)
+        public async Task<PrivateMessageList> GetPrivateMessageListAsync(int page, CancellationToken token = default)
         {
             if (!this.webManager.IsAuthenticated)
             {
@@ -87,7 +87,9 @@ namespace Awful.Core.Managers
             var result = await this.webManager.GetDataAsync(url, false, token).ConfigureAwait(false);
             try
             {
-                return PrivateMessageHandler.ParseList(result.Document);
+                var list = PrivateMessageHandler.ParseList(result.Document);
+                var pmList = new PrivateMessageList(list) { Result = result };
+                return pmList;
             }
             catch (Exception ex)
             {
@@ -112,6 +114,7 @@ namespace Awful.Core.Managers
             var result = await this.webManager.GetDataAsync(EndPoints.PrivateMessages + $"?action=show&privatemessageid={message.PrivateMessageId}", false, token).ConfigureAwait(false);
             try
             {
+                message.Result = result;
                 message.Post = PostHandler.ParsePost(result.Document, result.Document.Body);
                 return message.Post;
             }

@@ -82,7 +82,7 @@ namespace Awful.Mobile.ViewModels
             {
                 this.IsBusy = true;
                 var icons = await this.threadPostCreationActions.GetForumPostIconsAsync(this.forum.Id).ConfigureAwait(false);
-                foreach (var icon in icons)
+                foreach (var icon in icons.Icons)
                 {
                     this.Icons.Add(icon);
                 }

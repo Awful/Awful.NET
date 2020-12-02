@@ -35,7 +35,7 @@ namespace Awful.Core.Managers
         /// </summary>
         /// <param name="token">A CancellationToken.</param>
         /// <returns>A list of SAclopedia Categories.</returns>
-        public async Task<List<SAclopediaCategory>> GetCategoryListAsync(CancellationToken token = default)
+        public async Task<SAclopediaCategoryList> GetCategoryListAsync(CancellationToken token = default)
         {
             if (!this.webManager.IsAuthenticated)
             {
@@ -45,7 +45,10 @@ namespace Awful.Core.Managers
             var result = await this.webManager.GetDataAsync(EndPoints.SAclopediaBase, false, token).ConfigureAwait(false);
             try
             {
-                return SAclopediaHandler.ParseCategoryList(result.Document);
+                var categories = SAclopediaHandler.ParseCategoryList(result.Document);
+                var categoryList = new SAclopediaCategoryList(categories);
+                categoryList.Result = result;
+                return categoryList;
             }
             catch (Exception ex)
             {
@@ -60,7 +63,7 @@ namespace Awful.Core.Managers
         /// <param name="act">The "act", defaults to 5 (Entry Item).</param>
         /// <param name="token">A CancellationToken.</param>
         /// <returns>A list of SAclopedia Entry Items.</returns>
-        public async Task<List<SAclopediaEntryItem>> GetEntryItemListAsync(int id, int act = 5, CancellationToken token = default)
+        public async Task<SAclopediaEntryItemList> GetEntryItemListAsync(int id, int act = 5, CancellationToken token = default)
         {
             if (!this.webManager.IsAuthenticated)
             {
@@ -70,7 +73,9 @@ namespace Awful.Core.Managers
             var result = await this.webManager.GetDataAsync(EndPoints.SAclopediaBase + $"?act={act}&l={id}", false, token).ConfigureAwait(false);
             try
             {
-                return SAclopediaHandler.ParseEntryItemList(result.Document);
+                var entries = SAclopediaHandler.ParseEntryItemList(result.Document);
+                var entryList = new SAclopediaEntryItemList(entries) { Result = result };
+                return entryList;
             }
             catch (Exception ex)
             {

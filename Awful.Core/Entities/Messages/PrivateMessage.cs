@@ -13,7 +13,7 @@ namespace Awful.Core.Entities.Messages
     /// <summary>
     /// SA Private Message.
     /// </summary>
-    public class PrivateMessage
+    public class PrivateMessage : SAItem
     {
         /// <summary>
         /// Gets or sets the ID.

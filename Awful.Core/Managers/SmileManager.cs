@@ -34,12 +34,14 @@ namespace Awful.Core.Managers
         /// </summary>
         /// <param name="token">A CancellationToken.</param>
         /// <returns>A list of Smile Categories, which includes the smiles.</returns>
-        public async Task<List<SmileCategory>> GetSmileListAsync(CancellationToken token = default)
+        public async Task<SmileCategoryList> GetSmileListAsync(CancellationToken token = default)
         {
             var result = await this.webManager.GetDataAsync(EndPoints.SmileUrl, false, token).ConfigureAwait(false);
             try
             {
-                return SmileHandler.ParseSmileList(result.Document);
+                var smiles = SmileHandler.ParseSmileList(result.Document);
+                var smilesList = new SmileCategoryList(smiles) { Result = result };
+                return smilesList;
             }
             catch (Exception ex)
             {

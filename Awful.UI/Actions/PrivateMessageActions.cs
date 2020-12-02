@@ -56,7 +56,7 @@ namespace Awful.UI.Actions
             if (!pms.Any() || forceRefresh)
             {
                 var threads = await this.manager.GetAllPrivateMessageListAsync().ConfigureAwait(false);
-                pms = await this.context.AddAllPrivateMessages(threads).ConfigureAwait(false);
+                pms = await this.context.AddAllPrivateMessages(threads.PrivateMessages).ConfigureAwait(false);
             }
 
             return pms.OrderBy(n => n.SortOrder).ToList();

@@ -85,10 +85,10 @@ namespace Awful.UI.Actions
                 await this.context.RemoveAllSAclopediaEntryAsync().ConfigureAwait(false);
                 list = new List<SAclopediaEntryItem>();
                 var categoryList = await this.manager.GetCategoryListAsync(token).ConfigureAwait(false);
-                foreach (var category in categoryList)
+                foreach (var category in categoryList.SAclopediaCategories)
                 {
                     var entryItemList = await this.manager.GetEntryItemListAsync(category.Id, token: token).ConfigureAwait(false);
-                    list.AddRange(entryItemList);
+                    list.AddRange(entryItemList.SAclopediaEntryItems);
                 }
 
                 var test = list.Distinct().ToList();

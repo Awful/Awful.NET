@@ -43,7 +43,7 @@ namespace Awful.UI.Actions
         /// Get Smile List.
         /// </summary>
         /// <returns>List of Smile Category.</returns>
-        public async Task<List<SmileCategory>> GetSmileListAsync()
+        public async Task<SmileCategoryList> GetSmileListAsync()
         {
             return await this.smileManager.GetSmileListAsync().ConfigureAwait(false);
         }
@@ -53,7 +53,7 @@ namespace Awful.UI.Actions
         /// </summary>
         /// <param name="forumId">Forum ID.</param>
         /// <returns>List of Forum Post Icons.</returns>
-        public async Task<List<PostIcon>> GetForumPostIconsAsync(int forumId)
+        public async Task<PostIconList> GetForumPostIconsAsync(int forumId)
         {
             return await this.postIconManager.GetForumPostIconsAsync(forumId).ConfigureAwait(false);
         }
@@ -62,7 +62,7 @@ namespace Awful.UI.Actions
         /// Get Private Message Post Icons.
         /// </summary>
         /// <returns>List of Private Message Post Icons.</returns>
-        public async Task<List<PostIcon>> GetPrivateMessagePostIconsAsync()
+        public async Task<PostIconList> GetPrivateMessagePostIconsAsync()
         {
             return await this.postIconManager.GetPrivateMessagePostIconsAsync().ConfigureAwait(false);
         }

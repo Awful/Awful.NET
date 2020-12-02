@@ -125,7 +125,7 @@ namespace Awful.Core.Managers
         /// <param name="threadId">The Thread Id.</param>
         /// <param name="token">A CancellationToken.</param>
         /// <returns>A SA Request Result.</returns>
-        public async Task<Result> RemoveBookmarkAsync(int threadId, CancellationToken token = default)
+        public async Task<SAItem> RemoveBookmarkAsync(int threadId, CancellationToken token = default)
         {
             if (!this.webManager.IsAuthenticated)
             {
@@ -139,7 +139,8 @@ namespace Awful.Core.Managers
                 ["threadid"] = threadId.ToString(CultureInfo.InvariantCulture),
             };
             using var header = new FormUrlEncodedContent(dic);
-            return await this.webManager.PostDataAsync(EndPoints.Bookmark, header, true, token).ConfigureAwait(false);
+            var result = await this.webManager.PostDataAsync(EndPoints.Bookmark, header, true, token).ConfigureAwait(false);
+            return new SAItem(result);
         }
     }
 }

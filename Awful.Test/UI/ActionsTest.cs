@@ -161,7 +161,8 @@ namespace Awful.Test.UI
         public async Task UserActionsTest()
         {
             var properties = new TestPlatformProperties("user");
-            using var webClient = await Setup.SetupWebClient(AwfulUser.Standard).ConfigureAwait(false);            using var context = new AwfulContext(properties);
+            using var webClient = await Setup.SetupWebClient(AwfulUser.Standard).ConfigureAwait(false);
+            using var context = new AwfulContext(properties);
             var userActions = new UserActions(webClient, context, this.templates);
 
             var user = await userActions.GetLoggedInUserAsync().ConfigureAwait(false);
