@@ -6,6 +6,8 @@ using System;
 using System.Globalization;
 using System.Threading.Tasks;
 using Autofac;
+using Awful.Core.Entities.Web;
+using Awful.Core.Exceptions;
 using Awful.Core.Tools;
 using Awful.Database.Context;
 using Awful.Mobile.Pages;
@@ -267,6 +269,40 @@ namespace Awful.Mobile.ViewModels
             {
                 App.Current.MainPage = new MasterPage();
             }
+        }
+
+        /// <summary>
+        /// Handles exceptions thrown by the VM.
+        /// Used to display to user and gather for stats.
+        /// </summary>
+        /// <param name="exception">Exception that was thrown.</param>
+        public static void HandleException(Exception exception)
+        {
+            if (exception == null)
+            {
+                return;
+            }
+
+            string errorMessage;
+
+            if (exception is AwfulClientException awfulClientException)
+            {
+                if (awfulClientException.InnerException is PaywallException paywallException)
+                {
+                    errorMessage = paywallException.Message;
+                }
+                else
+                {
+                    var result = (Result)awfulClientException.Data[AwfulClientException.AwfulClientKey];
+                    errorMessage = $"AwfulClient failed to make a request: {result.Message.StatusCode} - {result.Message.ReasonPhrase} - {result.AbsoluteEndpoint}";
+                }
+            }
+            else
+            {
+                errorMessage = $"An exception was thrown ${exception.Message}";
+            }
+
+            DisplayAlertAsync("Error", errorMessage);
         }
 
         /// <summary>

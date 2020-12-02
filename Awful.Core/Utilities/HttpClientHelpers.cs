@@ -9,8 +9,16 @@ using System.Threading.Tasks;
 
 namespace Awful.Core.Utilities
 {
-    public class HttpClientHelpers
+    /// <summary>
+    /// Http Client Helpers.
+    /// </summary>
+    public static class HttpClientHelpers
     {
+        /// <summary>
+        /// Read Html out of <see cref="HttpResponseMessage"/>.
+        /// </summary>
+        /// <param name="message"><see cref="HttpResponseMessage"/></param>
+        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         public static async Task<string> ReadHtmlAsync(HttpResponseMessage message)
         {
             if (message == null)
