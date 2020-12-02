@@ -11,6 +11,7 @@ using Awful.Core.Entities.JSON;
 using Awful.Core.Entities.Messages;
 using Awful.Core.Entities.SAclopedia;
 using Awful.Core.Entities.Threads;
+using Awful.Core.Entities.Web;
 using Awful.Core.Handlers;
 using Awful.Core.Tools;
 using Awful.Core.Utilities;
@@ -418,12 +419,7 @@ namespace Awful.Database.Context
                 throw new ArgumentNullException(nameof(modelBuilder));
             }
 
-            //modelBuilder.Entity<SettingOptions>()
-            //    .Property(c => c.DeviceColorTheme)
-            //    .HasConversion<int>();
-            //modelBuilder.Entity<SettingOptions>()
-            //    .Property(c => c.DeviceTheme)
-            //    .HasConversion<int>();
+            modelBuilder.Ignore<Result>();
             modelBuilder.Entity<SAclopediaEntryItem>().HasKey(n => n.Id);
             modelBuilder.Entity<Forum>().Ignore(b => b.Moderators);
             //modelBuilder.Entity<Forum>().Ignore(b => b.SubForums);

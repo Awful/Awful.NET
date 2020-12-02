@@ -61,13 +61,13 @@ namespace Awful.Test
                     return new AwfulClient();
             }
 
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-            {
-                throw new Exception("Username/Password is missing from environment variables!");
-            }
-
             if (!File.Exists(cookiePath))
             {
+                if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                {
+                    throw new Exception("Username/Password is missing from environment variables!");
+                }
+
                 var webClient = new AwfulClient();
                 if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 {
