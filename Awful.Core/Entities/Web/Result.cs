@@ -63,7 +63,10 @@ namespace Awful.Core.Entities.Web
 
         /// <summary>
         /// Gets a value indicating whether the request is successful.
+        /// Sometimes the request returns as a success (200) but there's
+        /// actual error text on the screen.
+        /// So if we set the error text to something, the request actually failed.
         /// </summary>
-        public bool IsSuccess => this.Message != null && this.Message.IsSuccessStatusCode;
+        public bool IsSuccess => this.Message != null && this.Message.IsSuccessStatusCode && string.IsNullOrEmpty(this.ErrorText);
     }
 }

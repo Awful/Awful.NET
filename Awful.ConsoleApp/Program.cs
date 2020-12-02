@@ -99,7 +99,9 @@ namespace Awful.ConsoleApp
             }
             catch (Exception ex)
             {
-                // TODO: List out each exception. If we hit a generic exception, create a new wrapper.
+                Console.WriteLine(ex.GetType().Name);
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
                 throw;
             }
         }
