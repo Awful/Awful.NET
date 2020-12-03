@@ -15,13 +15,16 @@ namespace Awful.Mobile.Pages
     /// </summary>
     public partial class DebugPage : BasePage
     {
+        private DebugPageViewModel vm;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DebugPage"/> class.
         /// </summary>
         public DebugPage()
         {
             this.InitializeComponent();
-            this.BindingContext = App.Container.Resolve<DebugPageViewModel>();
+            this.BindingContext = this.vm = App.Container.Resolve<DebugPageViewModel>();
+            this.vm.AwfulEditor = this.AwfulEditor;
         }
     }
 }

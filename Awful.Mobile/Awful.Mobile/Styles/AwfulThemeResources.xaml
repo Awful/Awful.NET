@@ -3,6 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:fontawesome="clr-namespace:FontAwesome"
+    xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
     xmlns:local="clr-namespace:Awful.Mobile.Tools.Markup;assembly=Awful.Mobile"
     x:Class="Awful.Mobile.Styles.AwfulThemeResources">
     <Color x:Key="BackgroundColorDark">#111111</Color>

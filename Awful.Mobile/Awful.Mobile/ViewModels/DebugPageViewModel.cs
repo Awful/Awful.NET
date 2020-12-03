@@ -51,17 +51,24 @@ namespace Awful.Mobile.ViewModels
                 {
                     if (this.Popup != null)
                     {
-                        var forum = await this.Context.Forums.FirstOrDefaultAsync(n => n.Id == 273);
-                        var awfulForum = new AwfulForum(forum);
-                        var postIcon = new PostIcon();
-                        var view = new ForumPostIconSelectionView(awfulForum, postIcon);
-                        this.Popup.SetContent(view, true);
+                        //var forum = await this.Context.Forums.FirstOrDefaultAsync(n => n.Id == 273);
+                        //var awfulForum = new AwfulForum(forum);
+                        //var postIcon = new PostIcon();
+                        //var view = new ForumPostIconSelectionView(awfulForum, postIcon);
+
+                        if (this.AwfulEditor != null)
+                        {
+                            var view = new PostEditItemSelectionView(this.AwfulEditor);
+                            this.Popup.SetContent(view, true);
+                        }
                     }
                 },
                     null,
                     this);
             }
         }
+
+        public Editor AwfulEditor { get; set; }
 
         public override async Task OnLoad()
         {

@@ -24,6 +24,7 @@
                     Text="Make Popup Visible"
                     Command="{Binding MakePopupVisible}"
                     />
+                <Editor x:Name="AwfulEditor" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
             </StackLayout>
             <!--<StackL
             ayout Grid.Row="0" IsVisible="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >

@@ -50,6 +50,7 @@ namespace Awful.UI
             builder.RegisterType<NewThreadPageViewModel>();
             builder.RegisterType<MobileAwfulViewModel>();
             builder.RegisterType<ForumPostIconSelectionViewModel>();
+            builder.RegisterType<PostEditItemSelectionViewModel>();
             builder.RegisterType<AwfulPopup>().SingleInstance();
 #if DEBUG
             builder.RegisterType<DebugPageViewModel>();

@@ -26,6 +26,14 @@ namespace Awful.UI.ViewModels
         /// Initializes a new instance of the <see cref="AwfulViewModel"/> class.
         /// </summary>
         /// <param name="context">Awful Database Context.</param>
+        public AwfulViewModel()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AwfulViewModel"/> class.
+        /// </summary>
+        /// <param name="context">Awful Database Context.</param>
         public AwfulViewModel(AwfulContext context)
         {
             if (context == null)
@@ -71,9 +79,13 @@ namespace Awful.UI.ViewModels
         /// <returns><see cref="Task"/>.</returns>
         public async Task SetupVM()
         {
-            this.user = await this.Context.GetDefaultUserAsync().ConfigureAwait(false);
-            this.OnPropertyChanged(nameof(this.IsSignedIn));
-            this.Client = new AwfulClient(this.user != null ? this.user.AuthCookies : new System.Net.CookieContainer());
+            if (this.Context != null)
+            {
+                this.user = await this.Context.GetDefaultUserAsync().ConfigureAwait(false);
+                this.OnPropertyChanged(nameof(this.IsSignedIn));
+                this.Client = new AwfulClient(this.user != null ? this.user.AuthCookies : new System.Net.CookieContainer());
+            }
+
             await this.OnLoad().ConfigureAwait(false);
         }
 

@@ -30,6 +30,17 @@ namespace Awful.Mobile.ViewModels
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MobileAwfulViewModel"/> class.
+        /// Does not initialize AwfulClient and AwfulContext.
+        /// Use when you don't need to interact with SA.
+        /// </summary>
+        public MobileAwfulViewModel()
+            : base()
+        {
+            this.Popup = App.Container.Resolve<AwfulPopup>();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MobileAwfulViewModel"/> class.
         /// </summary>
         /// <param name="context">Awful Context.</param>
         public MobileAwfulViewModel(AwfulContext context)

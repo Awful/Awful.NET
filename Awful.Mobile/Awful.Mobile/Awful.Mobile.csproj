@@ -1932,7 +1932,6 @@
     <Folder Include="Tools\Utilities\" />
     <Folder Include="Styles\" />
     <Folder Include="ThreadTags\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Fonts\fa-brands-400.ttf" />
@@ -1968,6 +1967,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\UserProfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PostEditItemSelectionView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

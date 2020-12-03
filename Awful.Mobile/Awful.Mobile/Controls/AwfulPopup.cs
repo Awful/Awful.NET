@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using Awful.Mobile.Views;
 using Forms9Patch;
+using Xamarin.Forms;
 
 namespace Awful.Mobile.Controls
 {
@@ -52,6 +53,7 @@ namespace Awful.Mobile.Controls
         /// <param name="callback">Callback after modal is closed.</param>
         public void SetContent(Xamarin.Forms.ContentView view, bool launchModal = false, Action callback = default)
         {
+            this.popup.BackgroundColor = App.GetCurrentBackgroundColor();
             this.popup.Content = view;
             this.callback = callback;
 

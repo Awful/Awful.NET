@@ -23,6 +23,13 @@ namespace Awful.Mobile
     public partial class App : Application
     {
         /// <summary>
+        /// Autofac Container.
+        /// </summary>
+#pragma warning disable CA2211 // Non-constant fields should not be visible
+        public static IContainer Container;
+#pragma warning restore CA2211 // Non-constant fields should not be visible
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="App"/> class.
         /// </summary>
         /// <param name="builder">Container Builder.</param>
@@ -37,9 +44,23 @@ namespace Awful.Mobile
         }
 
         /// <summary>
-        /// Autofac Container.
+        /// Gets the current pages background color.
         /// </summary>
-        public static IContainer Container;
+        /// <returns>Xamarin Forms Color.</returns>
+        public static Xamarin.Forms.Color GetCurrentBackgroundColor()
+        {
+            return App.Current.MainPage.BackgroundColor;
+        }
+
+        /// <summary>
+        /// Gets an application resource.
+        /// </summary>
+        /// <param name="name">Name of the resource.</param>
+        /// <returns>Resource.</returns>
+        public static object GetApplicationResource(string name)
+        {
+           return App.Current.Resources[name];
+        }
 
         protected override void OnStart()
         {
