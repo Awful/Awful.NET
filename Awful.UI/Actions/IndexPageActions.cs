@@ -77,10 +77,11 @@ namespace Awful.UI.Actions
             var awfulCatList = await this.context.GetForumCategoriesAsync().ConfigureAwait(false);
             if (!awfulCatList.Any() || forceReload)
             {
-                var indexPageSorted = await this.manager.GetSortedIndexPageAsync().ConfigureAwait(false);
+                var indexPageSorted = await this.manager.GetSortedIndexPageAsync(token).ConfigureAwait(false);
                 awfulCatList = indexPageSorted.ForumCategories;
                 await this.context.AddOrUpdateForumCategories(awfulCatList).ConfigureAwait(false);
             }
+
             return awfulCatList;
         }
     }

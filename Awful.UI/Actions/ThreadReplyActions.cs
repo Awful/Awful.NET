@@ -129,9 +129,8 @@ namespace Awful.UI.Actions
         /// </summary>
         /// <param name="post">Post.</param>
         /// <param name="defaultOptions">Default Options.</param>
-        /// <param name="token">Cancellation Token.</param>
         /// <returns>String.</returns>
-        public async Task<string> GetThreadPreviewAsync(Post post, DefaultOptions defaultOptions, CancellationToken token = default)
+        public string GetThreadPreview(Post post, DefaultOptions defaultOptions)
         {
             var threadPost = new ThreadPost();
             threadPost.Posts.Add(post);

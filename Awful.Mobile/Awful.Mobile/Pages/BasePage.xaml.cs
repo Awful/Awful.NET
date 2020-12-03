@@ -2,7 +2,6 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using Awful.Mobile.Tools.Utilities;
 using Awful.Mobile.ViewModels;
 using Awful.UI.Tools;
 using Awful.UI.ViewModels;
@@ -24,7 +23,7 @@ namespace Awful.Mobile.Pages
         }
 
         /// <inheritdoc/>
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
             if (this.BindingContext is MobileAwfulViewModel vm)

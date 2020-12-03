@@ -23,18 +23,22 @@ namespace Awful.UI.ViewModels
         private SettingsAction settingActions;
         private SettingOptions settings;
         private DeviceColorTheme deviceColorTheme;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsViewModel"/> class.
         /// </summary>
         /// <param name="properties">Awful Properties.</param>
         /// <param name="context">Awful Context.</param>
-        public SettingsViewModel(IPlatformProperties properties, AwfulContext context)
+        public SettingsViewModel(AwfulContext context)
             : base(context)
         {
             this.settings = new SettingOptions();
             this.settingActions = new SettingsAction(context);
         }
 
+        /// <summary>
+        /// Gets the theme names.
+        /// </summary>
         public List<string> ThemeNames
         {
             get
@@ -43,6 +47,9 @@ namespace Awful.UI.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets or sets the device color theme.
+        /// </summary>
         public DeviceColorTheme DeviceColorTheme
         {
             get
@@ -62,6 +69,7 @@ namespace Awful.UI.ViewModels
                         await this.SaveSettingsAsync().ConfigureAwait(false);
                     });
                 }
+
                 this.OnPropertyChanged(nameof(this.DeviceColorTheme));
             }
         }
@@ -84,6 +92,7 @@ namespace Awful.UI.ViewModels
             }
         }
 
+        /// <inheritdoc/>
         public override async Task OnLoad()
         {
             await base.OnLoad().ConfigureAwait(false);

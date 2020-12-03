@@ -6,9 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using Xamarin.CommunityToolkit.UI.Views;
-using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace Awful.UI.ViewModels
 {
@@ -17,8 +15,6 @@ namespace Awful.UI.ViewModels
     /// </summary>
     public class BaseViewModel : INotifyPropertyChanged
     {
-        private LayoutState currentState = LayoutState.None;
-        private string customState;
         private bool isBusy = false;
         private bool isRefreshing = false;
         private string title = string.Empty;
@@ -26,24 +22,6 @@ namespace Awful.UI.ViewModels
 
         /// <inheritdoc/>
         public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Gets or sets the current state of the view.
-        /// </summary>
-        public LayoutState CurrentState
-        {
-            get { return this.currentState; }
-            set { this.SetProperty(ref this.currentState, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets the current state of the view.
-        /// </summary>
-        public string CustomState
-        {
-            get { return this.customState; }
-            set { this.SetProperty(ref this.customState, value); }
-        }
 
         /// <summary>
         /// Gets or sets a value indicating whether the view is busy.
@@ -81,25 +59,9 @@ namespace Awful.UI.ViewModels
             set { this.SetProperty(ref this.loadingText, value); }
         }
 
-        /// <summary>
-        /// Set State.
-        /// </summary>
-        /// <param name="state">State.</param>
-        /// <param name="customState">Custom State.</param>
-        public void SetState(LayoutState state, string customState = "")
-        {
-            this.CurrentState = state;
-            if (state == LayoutState.Custom)
-            {
-                this.CustomState = customState;
-            }
-            else
-            {
-                this.CustomState = string.Empty;
-            }
-        }
-
+#pragma warning disable SA1600 // Elements should be documented
         protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName] string propertyName = "", Action onChanged = null)
+#pragma warning restore SA1600 // Elements should be documented
         {
             if (EqualityComparer<T>.Default.Equals(backingStore, value))
             {
@@ -118,22 +80,15 @@ namespace Awful.UI.ViewModels
         /// <param name="propertyName">Name of the property.</param>
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            Device.BeginInvokeOnMainThread(() =>
+            MainThread.BeginInvokeOnMainThread(() =>
             {
-                try
+                var changed = this.PropertyChanged;
+                if (changed == null)
                 {
-                    var changed = this.PropertyChanged;
-                    if (changed == null)
-                    {
-                        return;
-                    }
-
-                    changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                    return;
                 }
-                catch
-                {
 
-                }
+                changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
             });
         }
     }

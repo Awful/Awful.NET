@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Awful.Core.Entities.Web;
 using Awful.Core.Handlers;
@@ -76,12 +77,13 @@ namespace Awful.UI.Actions
         /// </summary>
         /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>
+        /// <param name="token">Cancelation Token.</param>
         /// <returns>A AuthResult object.</returns>
-        public async Task<AuthResult> SigninAsync(string username, string password)
+        public async Task<AuthResult> SigninAsync(string username, string password, CancellationToken token = default)
         {
             using var client = new AwfulClient();
             var manager = new AuthenticationManager(client);
-            var result = await manager.AuthenticateAsync(username, password).ConfigureAwait(false);
+            var result = await manager.AuthenticateAsync(username, password, token).ConfigureAwait(false);
             if (result.IsSuccess)
             {
                 var captures = Regex.Match(result.CurrentUser.Usertitle, @"(http|ftp|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?");

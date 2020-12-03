@@ -6,11 +6,16 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Awful.UI.Interfaces;
-using Awful.UI.Tools;
 
-namespace Awful.Mobile.Tools.Utilities
+namespace Awful.UI.Tools
 {
+    /// <summary>
+    /// Awful Async Command.
+    /// </summary>
+    /// <typeparam name="T">Generic Parameter.</typeparam>
+#pragma warning disable SA1649 // File name should match first type name
     public class AwfulAsyncCommand<T> : IAwfulAsyncCommand<T>
+#pragma warning restore SA1649 // File name should match first type name
     {
         private readonly Func<T, Task> execute;
         private readonly Func<T, bool> canExecute;

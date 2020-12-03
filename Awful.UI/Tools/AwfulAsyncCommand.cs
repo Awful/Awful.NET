@@ -6,10 +6,9 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Awful.UI.Interfaces;
-using Awful.UI.Tools;
 using Xamarin.Essentials;
 
-namespace Awful.Mobile.Tools.Utilities
+namespace Awful.UI.Tools
 {
     /// <summary>
     /// Awful Async Command.

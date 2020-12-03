@@ -10,12 +10,14 @@ using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Webview.Entities.Themes;
-using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
 
 namespace Awful.UI.ViewModels
 {
-    public class AwfulViewModel : BaseViewModel
+    /// <summary>
+    /// Awful View Model.
+    /// </summary>
+    public class AwfulViewModel : BaseViewModel, IDisposable
     {
         private UserAuth user;
         private bool disposed;
@@ -63,82 +65,30 @@ namespace Awful.UI.ViewModels
             this.OnPropertyChanged();
         }
 
+        /// <summary>
+        /// Setup VM on load.
+        /// </summary>
+        /// <returns><see cref="Task"/>.</returns>
         public async Task SetupVM()
         {
             this.user = await this.Context.GetDefaultUserAsync().ConfigureAwait(false);
-            this.OnPropertyChanged("IsSignedIn");
+            this.OnPropertyChanged(nameof(this.IsSignedIn));
             this.Client = new AwfulClient(this.user != null ? this.user.AuthCookies : new System.Net.CookieContainer());
-            this.SetupLoginStatus();
             await this.OnLoad().ConfigureAwait(false);
         }
 
         /// <summary>
         /// Called on VM Load.
         /// </summary>
-        /// <returns>Task.</returns>
+        /// <returns><see cref="Task"/>.</returns>
         public virtual async Task OnLoad()
         {
-
-        }
-
-        public void SetupLoginStatus()
-        {
-            if (!this.IsSignedIn)
-            {
-                this.SetState(LayoutState.Custom, "NotSignedIn");
-            }
         }
 
         /// <summary>
-        /// Disposing.
+        /// Generates the default options for Awful.NET.
         /// </summary>
-        public void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Gets the login command.
-        /// </summary>
-        public Command OpenLoginCommand
-        {
-            get
-            {
-                return new Command(this.OpenLogin);
-            }
-        }
-
-        /// <summary>
-        /// Gets the go back command.
-        /// </summary>
-        public Command GoBackModalCommand
-        {
-            get
-            {
-                return new Command(this.GoModalBack);
-            }
-        }
-
-        public async void GoModalBack()
-        {
-            var mainPage = Application.Current.MainPage;
-            if (mainPage is FlyoutPage flyoutPage)
-            {
-                await flyoutPage.Navigation.PopModalAsync().ConfigureAwait(false);
-            }
-            else if (mainPage is TabbedPage tabbedPage)
-            {
-                await tabbedPage.CurrentPage.Navigation.PopModalAsync().ConfigureAwait(false);
-            }
-        }
-
-        public async void OpenLogin()
-        {
-            //var page = Routing.GetOrCreateContent("//SigninPage") as Page;
-            await Shell.Current.GoToAsync("signinpage").ConfigureAwait(false);
-        }
-
+        /// <returns><see cref="DefaultOptions"/>.</returns>
         public async Task<DefaultOptions> GenerateDefaultOptionsAsync()
         {
             var defaults = await this.Context.GetDefaultSettingsAsync().ConfigureAwait(false);
@@ -157,6 +107,15 @@ namespace Awful.UI.ViewModels
             }
 
             return defaultOptions;
+        }
+
+        /// <summary>
+        /// Disposing.
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>

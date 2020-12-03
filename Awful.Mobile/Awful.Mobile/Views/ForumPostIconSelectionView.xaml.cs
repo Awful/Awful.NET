@@ -7,7 +7,7 @@ using Autofac;
 using Awful.Core.Entities.PostIcons;
 using Awful.Database.Entities;
 using Awful.Mobile.Controls;
-using Awful.Mobile.Tools.Utilities;
+using Awful.UI.Tools;
 using Awful.Mobile.ViewModels;
 using Awful.UI.Actions;
 using Awful.UI.Tools;

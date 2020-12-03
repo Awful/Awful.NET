@@ -12,7 +12,7 @@ using Awful.Core.Entities.Web;
 using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Mobile.Pages;
-using Awful.Mobile.Tools.Utilities;
+using Awful.UI.Tools;
 using Awful.Mobile.Views;
 using Awful.UI.ViewModels;
 using Awful.Webview;
@@ -61,18 +61,21 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets the SelectPostIcon Command.
         /// </summary>
-        public AwfulCommand SelectPostIconCommand
+        public AwfulAsyncCommand SelectPostIconCommand
         {
             get
             {
-                return new AwfulCommand(
+                return new AwfulAsyncCommand(
                     () =>
                     {
-                    if (this.Popup != null)
-                    {
-                        this.Popup.SetContent(new ForumPostIconSelectionView(this.forum, this.PostIcon, this.postActions), true, this.OnCloseModal);
-                    }
+                        if (this.Popup != null)
+                        {
+                            this.Popup.SetContent(new ForumPostIconSelectionView(this.forum, this.PostIcon, this.postActions), true, this.OnCloseModal);
+                        }
+
+                        return Task.CompletedTask;
                     },
+                    null,
                     this);
             }
         }

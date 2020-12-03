@@ -10,7 +10,7 @@ using Awful.Core.Entities.Threads;
 using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Mobile.Pages;
-using Awful.Mobile.Tools.Utilities;
+using Awful.UI.Tools;
 using Awful.UI.Actions;
 using Awful.UI.ViewModels;
 using Xamarin.Forms;

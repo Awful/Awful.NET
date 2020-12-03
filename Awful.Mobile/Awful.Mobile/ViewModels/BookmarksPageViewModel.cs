@@ -12,8 +12,8 @@ using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Mobile.Pages;
-using Awful.Mobile.Tools.Utilities;
 using Awful.UI.Actions;
+using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
@@ -32,9 +32,8 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="BookmarksPageViewModel"/> class.
         /// </summary>
-        /// <param name="properties">Awful Properties.</param>
         /// <param name="context">Awful Context.</param>
-        public BookmarksPageViewModel(IPlatformProperties properties, AwfulContext context)
+        public BookmarksPageViewModel(AwfulContext context)
             : base(context)
         {
         }
@@ -107,15 +106,6 @@ namespace Awful.Mobile.ViewModels
             foreach (var thread in threads)
             {
                 this.Threads.Add(thread);
-            }
-
-            if (this.Threads.Count <= 0)
-            {
-                this.SetState(LayoutState.Empty);
-            }
-            else
-            {
-                this.SetState(LayoutState.Custom, "SignedIn");
             }
 
             this.IsBusy = false;

@@ -9,11 +9,21 @@ using Newtonsoft.Json;
 
 namespace Awful.UI.Entities
 {
+    /// <summary>
+    /// WebView Data Interop.
+    /// </summary>
     public class WebViewDataInterop
     {
+        /// <summary>
+        /// Gets or sets the type of data being sent.
+        /// </summary>
         [JsonProperty("type")]
         public string Type { get; set; }
 
+        /// <summary>
+        /// Gets or sets the "Id."
+        /// This could depend on the type of data being sent.
+        /// </summary>
         [JsonProperty("id")]
         public int Id { get; set; }
     }

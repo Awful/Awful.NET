@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using Awful.Core.Managers;
 using Awful.Core.Tools;
 using Awful.Database.Context;
-using Awful.Mobile.Tools.Utilities;
 using Awful.UI.Actions;
+using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Xamarin.Forms;
 

@@ -14,7 +14,7 @@ using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Mobile.Controls;
 using Awful.Mobile.Pages;
-using Awful.Mobile.Tools.Utilities;
+using Awful.UI.Tools;
 using Awful.Mobile.Views;
 using Awful.UI.Actions;
 using Awful.UI.ViewModels;
@@ -37,17 +37,6 @@ namespace Awful.Mobile.ViewModels
             : base(context)
         {
             this.ThrowAsyncExceptionCommand = new AwfulAsyncCommand(this.ThrowAsyncDebugException, null, this);
-        }
-
-        /// <summary>,
-        /// Gets the throw exception command.
-        /// </summary>
-        public AwfulCommand ThrowExceptionCommand
-        {
-            get
-            {
-                return new AwfulCommand(this.ThrowDebugException, this);
-            }
         }
 
         /// <summary>,

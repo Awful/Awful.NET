@@ -50,12 +50,13 @@ namespace Awful.UI.Actions
         /// </summary>
         /// <returns>List of Thread Bookmarks.</returns>
         /// <param name="forceRefresh">Force Refresh.</param>
-        public async Task<List<AwfulPM>> GetAllPrivateMessagesAsync(bool forceRefresh = false)
+        /// <param name="token">Cancelation Token.</param>
+        public async Task<List<AwfulPM>> GetAllPrivateMessagesAsync(bool forceRefresh = false, CancellationToken token = default)
         {
             var pms = await this.context.PrivateMessages.ToListAsync().ConfigureAwait(false);
             if (!pms.Any() || forceRefresh)
             {
-                var threads = await this.manager.GetAllPrivateMessageListAsync().ConfigureAwait(false);
+                var threads = await this.manager.GetAllPrivateMessageListAsync(token).ConfigureAwait(false);
                 pms = await this.context.AddAllPrivateMessages(threads.PrivateMessages).ConfigureAwait(false);
             }
 
@@ -79,10 +80,11 @@ namespace Awful.UI.Actions
         /// Get Private Message.
         /// </summary>
         /// <param name="id">PM id.</param>
+        /// <param name="token">Cancelation Token.</param>
         /// <returns>Post</returns>
-        public async Task<Post> GetPrivateMessageAsync(int id)
+        public async Task<Post> GetPrivateMessageAsync(int id, CancellationToken token = default)
         {
-            return await this.manager.GetPrivateMessageAsync(id).ConfigureAwait(false);
+            return await this.manager.GetPrivateMessageAsync(id, token).ConfigureAwait(false);
         }
 
         /// <summary>

@@ -60,15 +60,16 @@ namespace Awful.UI.Actions
         /// Load SAclopedia Entry.
         /// </summary>
         /// <param name="item">SAclopediaEntryItem.</param>
+        /// <param name="token">CancellationToken.</param>
         /// <returns>SAclopediaEntry.</returns>
-        public async Task<SAclopediaEntry> LoadSAclopediaEntryAsync(SAclopediaEntryItem item)
+        public async Task<SAclopediaEntry> LoadSAclopediaEntryAsync(SAclopediaEntryItem item, CancellationToken token = default)
         {
             if (item == null)
             {
                 throw new ArgumentNullException(nameof(item));
             }
 
-            return await this.manager.GetEntryAsync(item.Id).ConfigureAwait(false);
+            return await this.manager.GetEntryAsync(item.Id, token: token).ConfigureAwait(false);
         }
 
         /// <summary>
