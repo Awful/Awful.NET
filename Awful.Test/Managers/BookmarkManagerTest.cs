@@ -28,7 +28,7 @@ namespace Awful.Test.Managers
             BookmarkManager manager = new BookmarkManager(webClient);
             var result = await manager.GetAllBookmarksAsync().ConfigureAwait(false);
             Assert.NotNull(result);
-            Assert.True(result.Any());
+            Assert.True(result.Threads.Any());
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Awful.Test.Managers
             BookmarkManager manager = new BookmarkManager(webClient);
             var result = await manager.GetBookmarkListAsync(1).ConfigureAwait(false);
             Assert.NotNull(result);
-            Assert.True(result.Any());
+            Assert.True(result.Threads.Any());
         }
     }
 }

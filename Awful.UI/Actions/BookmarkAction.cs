@@ -59,7 +59,7 @@ namespace Awful.UI.Actions
             if (!bookmarks.Any() || forceRefresh)
             {
                 var threads = await this.manager.GetAllBookmarksAsync().ConfigureAwait(false);
-                bookmarks = await this.context.AddAllBookmarkThreads(threads).ConfigureAwait(false);
+                bookmarks = await this.context.AddAllBookmarkThreads(threads.Threads).ConfigureAwait(false);
             }
 
             return bookmarks.OrderBy(n => n.SortOrder).ToList();

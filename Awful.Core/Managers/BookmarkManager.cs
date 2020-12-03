@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Awful.Core.Entities;
+using Awful.Core.Entities.Threads;
 using Awful.Core.Entities.Web;
 using Awful.Core.Handlers;
 using Awful.Core.Utilities;
@@ -40,7 +41,7 @@ namespace Awful.Core.Managers
         /// <param name="perPage">Amount of bookmarked threads to gather, default is 40.</param>
         /// <param name="token">A CancellationToken.</param>
         /// <returns>List of Threads.</returns>
-        public async Task<List<Entities.Threads.Thread>> GetAllBookmarksAsync(int perPage = 40, CancellationToken token = default)
+        public async Task<ThreadList> GetAllBookmarksAsync(int perPage = 40, CancellationToken token = default)
         {
             if (!this.webManager.IsAuthenticated)
             {
@@ -52,16 +53,16 @@ namespace Awful.Core.Managers
             while (true)
             {
                 var threads = await this.GetBookmarkListAsync(page, perPage, token).ConfigureAwait(false);
-                if (!threads.Any())
+                if (!threads.Threads.Any())
                 {
                     break;
                 }
 
-                threadList.AddRange(threads);
+                threadList.AddRange(threads.Threads);
                 page++;
             }
 
-            return threadList;
+            return new ThreadList(threadList);
         }
 
         /// <summary>
@@ -71,7 +72,7 @@ namespace Awful.Core.Managers
         /// <param name="perPage">Amount of bookmarked threads to gather, default is 40.</param>
         /// <param name="token">A CancellationToken.</param>
         /// <returns>List of Threads.</returns>
-        public async Task<List<Entities.Threads.Thread>> GetBookmarkListAsync(int page, int perPage = 40, CancellationToken token = default)
+        public async Task<ThreadList> GetBookmarkListAsync(int page, int perPage = 40, CancellationToken token = default)
         {
             if (!this.webManager.IsAuthenticated)
             {
@@ -87,7 +88,9 @@ namespace Awful.Core.Managers
             var result = await this.webManager.GetDataAsync(url, false, token).ConfigureAwait(false);
             try
             {
-                return ThreadHandler.ParseForumThreadList(result.Document);
+                var threads = ThreadHandler.ParseForumThreadList(result.Document);
+                var threadList = new ThreadList(threads) { CurrentPage = page, Result = result };
+                return threadList;
             }
             catch (Exception ex)
             {

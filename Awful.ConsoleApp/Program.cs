@@ -82,6 +82,17 @@ namespace Awful.ConsoleApp
                                         var bmAddId = Prompt.Input<int>("Enter Thread Id", 0);
                                         item = await bmManager.AddBookmarkAsync(bmAddId).ConfigureAwait(false);
                                         break;
+                                    case BookmarkManagerOption.RemoveBookmark:
+                                        var bmRemoveId = Prompt.Input<int>("Enter Thread Id", 0);
+                                        item = await bmManager.RemoveBookmarkAsync(bmRemoveId).ConfigureAwait(false);
+                                        break;
+                                    case BookmarkManagerOption.ListBookmarksByPage:
+                                        var bmPage = Prompt.Input<int>("Enter Page", 0);
+                                        item = await bmManager.GetBookmarkListAsync(bmPage).ConfigureAwait(false);
+                                        break;
+                                    case BookmarkManagerOption.ListAllBookmarks:
+                                        item = await bmManager.GetAllBookmarksAsync().ConfigureAwait(false);
+                                        break;
                                 }
 
                                 break;
@@ -112,6 +123,8 @@ namespace Awful.ConsoleApp
             {
                 Console.WriteLine($"IsSuccess: {item.Result.IsSuccess}");
                 Console.WriteLine($"Message: {item.Result.Message}");
+                Console.WriteLine($"ResultText: {item.Result.ResultText}");
+                Console.WriteLine($"ErrorText: {item.Result.ErrorText}");
             }
             else
             {

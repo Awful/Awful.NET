@@ -45,7 +45,25 @@ namespace Awful.ConsoleApp.Options
     /// </summary>
     public enum BookmarkManagerOption
     {
-        AddBookmark
+        /// <summary>
+        /// Add Bookmark.
+        /// </summary>
+        AddBookmark,
+
+        /// <summary>
+        /// Remove Bookmark.
+        /// </summary>
+        RemoveBookmark,
+
+        /// <summary>
+        /// List Bookmarks By Page.
+        /// </summary>
+        ListBookmarksByPage,
+
+        /// <summary>
+        /// List All Bookmarks.
+        /// </summary>
+        ListAllBookmarks,
     }
 
     /// <summary>

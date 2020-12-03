@@ -14,6 +14,23 @@ namespace Awful.Core.Entities.Threads
     public class ThreadList : SAItem
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="ThreadList"/> class.
+        /// </summary>
+        public ThreadList()
+        {
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ThreadList"/> class.
+        /// </summary>
+        /// <param name="threads">List of <see cref="Thread"/>.</param>
+        public ThreadList(List<Thread> threads)
+        {
+            this.Threads = threads;
+        }
+
+        /// <summary>
         /// Gets or sets the current page.
         /// </summary>
         public int CurrentPage { get; set; }
@@ -26,6 +43,6 @@ namespace Awful.Core.Entities.Threads
         /// <summary>
         /// Gets the threads.
         /// </summary>
-        public List<Thread> Threads { get; } = new List<Thread>();
+        public List<Thread> Threads { get; internal set; } = new List<Thread>();
     }
 }
