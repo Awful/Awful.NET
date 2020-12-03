@@ -27,7 +27,7 @@ namespace Awful.Test.Managers
             PostIconManager manager = new PostIconManager(webClient);
             var result = await manager.GetForumPostIconsAsync(273).ConfigureAwait(false);
             Assert.NotNull(result);
-            Assert.True(result.Any());
+            Assert.True(result.Icons.Any());
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Awful.Test.Managers
             PostIconManager manager = new PostIconManager(webClient);
             var result = await manager.GetPrivateMessagePostIconsAsync().ConfigureAwait(false);
             Assert.NotNull(result);
-            Assert.True(result.Any());
+            Assert.True(result.Icons.Any());
         }
     }
 }

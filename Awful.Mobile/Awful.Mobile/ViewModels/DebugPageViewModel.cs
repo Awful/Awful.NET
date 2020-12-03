@@ -12,6 +12,7 @@ using Awful.Core.Exceptions;
 using Awful.Core.Tools;
 using Awful.Database.Context;
 using Awful.Database.Entities;
+using Awful.Mobile.Controls;
 using Awful.Mobile.Pages;
 using Awful.Mobile.Tools.Utilities;
 using Awful.Mobile.Views;
@@ -28,8 +29,6 @@ namespace Awful.Mobile.ViewModels
     /// </summary>
     public class DebugPageViewModel : MobileAwfulViewModel
     {
-        Forms9Patch.ModalPopup popup;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="DebugPageViewModel"/> class.
         /// </summary>
@@ -38,12 +37,6 @@ namespace Awful.Mobile.ViewModels
             : base(context)
         {
             this.ThrowAsyncExceptionCommand = new AwfulAsyncCommand(this.ThrowAsyncDebugException, null, this);
-            this.popup = new Forms9Patch.ModalPopup()
-            {
-                Content = new DefaultView(),
-                //Margin = 0,
-                //Padding = -5,
-            };
         }
 
         /// <summary>,
@@ -64,19 +57,20 @@ namespace Awful.Mobile.ViewModels
         {
             get
             {
-                return new AwfulAsyncCommand(async () =>
+                return new AwfulAsyncCommand(
+                    async () =>
                 {
-                    if (this.popup != null)
+                    if (this.Popup != null)
                     {
                         var forum = await this.Context.Forums.FirstOrDefaultAsync(n => n.Id == 273);
                         var awfulForum = new AwfulForum(forum);
                         var postIcon = new PostIcon();
-                        var view = new ForumPostIconSelectionView(popup, awfulForum, postIcon, new ThreadPostCreationActions(this.Client));
-                        this.popup.Content = view;
-                        this.popup.IsVisible = true;
-                        await view.vm.OnLoad();
+                        var view = new ForumPostIconSelectionView(awfulForum, postIcon, new ThreadPostCreationActions(this.Client));
+                        this.Popup.SetContent(view, true);
                     }
-                }, null, this);
+                },
+                    null,
+                    this);
             }
         }
 

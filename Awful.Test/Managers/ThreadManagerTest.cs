@@ -57,7 +57,7 @@ namespace Awful.Test.Managers
             PostIconManager iconManager = new PostIconManager(webClient);
             var iconResult = await iconManager.GetForumPostIconsAsync(261).ConfigureAwait(false);
             Assert.NotNull(iconResult);
-            var icon = iconResult.First(n => n.Title == "Windows");
+            var icon = iconResult.Icons.First(n => n.Title == "Windows");
             var result = await manager.GetThreadCookiesAsync(261).ConfigureAwait(false);
             var date = DateTime.UtcNow;
             result.Content = $"Awful.NET Unit Test Thread Create: {date}";

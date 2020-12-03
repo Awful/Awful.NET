@@ -10,6 +10,7 @@ using Awful.Core.Entities.Web;
 using Awful.Core.Exceptions;
 using Awful.Core.Tools;
 using Awful.Database.Context;
+using Awful.Mobile.Controls;
 using Awful.Mobile.Pages;
 using Awful.Mobile.Tools.Utilities;
 using Awful.UI.Actions;
@@ -35,6 +36,7 @@ namespace Awful.Mobile.ViewModels
             : base(context)
         {
             this.SettingsAction = new SettingsAction(context);
+            this.Popup = App.Container.Resolve<AwfulPopup>();
         }
 
         /// <summary>
@@ -44,6 +46,14 @@ namespace Awful.Mobile.ViewModels
         /// </summary>
         public static bool IsLargeDevice => false;
 
+        /// <summary>
+        /// Gets the default AwfulPopup.
+        /// </summary>
+        public AwfulPopup Popup { get; internal set; }
+
+        /// <summary>
+        /// Gets the OnLoad Command.
+        /// </summary>
         public AwfulAsyncCommand OnLoadCommand
         {
             get { return new AwfulAsyncCommand(async () => { await this.SetupVM().ConfigureAwait(false); }, null, this); }

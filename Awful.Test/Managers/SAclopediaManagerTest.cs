@@ -27,10 +27,10 @@ namespace Awful.Test.Managers
             using var webClient = await Setup.SetupWebClient(AwfulUser.Standard).ConfigureAwait(false);
             SAclopediaManager manager = new SAclopediaManager(webClient);
             var categoryList = await manager.GetCategoryListAsync().ConfigureAwait(false);
-            Assert.True(categoryList.Any());
-            var entryList = await manager.GetEntryItemListAsync(categoryList.First().Id).ConfigureAwait(false);
-            Assert.True(entryList.Any());
-            var entry = await manager.GetEntryAsync(entryList.First().Id).ConfigureAwait(false);
+            Assert.True(categoryList.SAclopediaCategories.Any());
+            var entryList = await manager.GetEntryItemListAsync(categoryList.SAclopediaCategories.First().Id).ConfigureAwait(false);
+            Assert.True(entryList.SAclopediaEntryItems.Any());
+            var entry = await manager.GetEntryAsync(entryList.SAclopediaEntryItems.First().Id).ConfigureAwait(false);
             Assert.True(entry.Posts.Any());
         }
     }

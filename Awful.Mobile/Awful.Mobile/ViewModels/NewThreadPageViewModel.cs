@@ -12,6 +12,8 @@ using Awful.Core.Entities.Web;
 using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Mobile.Pages;
+using Awful.Mobile.Tools.Utilities;
+using Awful.Mobile.Views;
 using Awful.UI.ViewModels;
 using Awful.Webview;
 using Xamarin.Forms;
@@ -37,76 +39,108 @@ namespace Awful.Mobile.ViewModels
         {
         }
 
+        /// <summary>
+        /// Gets or sets the subject of the post.
+        /// </summary>
         public string Subject { get; set; }
 
+        /// <summary>
+        /// Gets or sets the message of the post.
+        /// </summary>
         public string Message { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Post Icon.
+        /// </summary>
         public PostIcon PostIcon
         {
             get { return this.postIcon; }
             set { this.SetProperty(ref this.postIcon, value); }
         }
 
-        public void LoadForum (AwfulForum forum)
-        {
-            this.forum = forum;
-        }
-
-        public Command SelectPostIconCommand
+        /// <summary>
+        /// Gets the SelectPostIcon Command.
+        /// </summary>
+        public AwfulCommand SelectPostIconCommand
         {
             get
             {
-                return new Command(async () => {
-                    await PushModalAsync(new ForumPostIconSelectionPage(this.forum, this.PostIcon, this.postActions)).ConfigureAwait(false);
-                });
+                return new AwfulCommand(
+                    () =>
+                    {
+                    if (this.Popup != null)
+                    {
+                        this.Popup.SetContent(new ForumPostIconSelectionView(this.forum, this.PostIcon, this.postActions), true, this.OnCloseModal);
+                    }
+                    },
+                    this);
             }
         }
 
         /// <summary>
         /// Gets the post thread command.
         /// </summary>
-        public Command PostThreadCommand
+        public AwfulAsyncCommand PostThreadCommand
         {
             get
             {
-                return new Command(async () =>
-                {
-                    if (this.newThread != null)
+                return new AwfulAsyncCommand(
+                    async () =>
                     {
-                        var threadText = this.Message.Trim();
-                        if (string.IsNullOrEmpty(threadText))
+                        if (this.newThread != null)
                         {
-                            return;
+                            var threadText = this.Message.Trim();
+                            if (string.IsNullOrEmpty(threadText))
+                            {
+                                return;
+                            }
+
+                            var threadTitle = this.Title.Trim();
+                            if (string.IsNullOrEmpty(threadTitle))
+                            {
+                                return;
+                            }
+
+                            if (string.IsNullOrEmpty(this.PostIcon.ImageLocation))
+                            {
+                                return;
+                            }
+
+                            this.newThread.PostIcon = this.PostIcon;
+                            this.newThread.Subject = threadTitle;
+                            this.newThread.Content = threadText;
+                            Result result;
+
+                            result = await this.threadActions.PostNewThreadAsync(this.newThread).ConfigureAwait(false);
+
+                            Device.BeginInvokeOnMainThread(async () =>
+                            {
+                                await PopModalAsync().ConfigureAwait(false);
+                                await RefreshForumPageAsync().ConfigureAwait(false);
+                            });
                         }
-
-                        var threadTitle = this.Title.Trim();
-                        if (string.IsNullOrEmpty(threadTitle))
-                        {
-                            return;
-                        }
-
-                        if (string.IsNullOrEmpty(this.PostIcon.ImageLocation))
-                        {
-                            return;
-                        }
-
-                        this.newThread.PostIcon = this.PostIcon;
-                        this.newThread.Subject = threadTitle;
-                        this.newThread.Content = threadText;
-                        Result result;
-
-                        result = await this.threadActions.PostNewThreadAsync(this.newThread).ConfigureAwait(false);
-
-                        Device.BeginInvokeOnMainThread(async () =>
-                        {
-                            await PopModalAsync().ConfigureAwait(false);
-                            await RefreshForumPageAsync().ConfigureAwait(false);
-                        });
-                    }
-                });
+                    },
+                    null,
+                    this);
             }
         }
 
+        /// <summary>
+        /// Loads Forum into VM.
+        /// </summary>
+        /// <param name="forum"><see cref="AwfulForum"/>.</param>
+        public void LoadForum (AwfulForum forum)
+        {
+            this.forum = forum;
+        }
+
+        /// <inheritdoc/>
+        public override void OnCloseModal()
+        {
+            this.OnPropertyChanged(nameof(this.PostIcon));
+        }
+
+        /// <inheritdoc/>
         public override async Task OnLoad()
         {
             await base.OnLoad().ConfigureAwait(false);
@@ -116,7 +150,7 @@ namespace Awful.Mobile.ViewModels
             }
             else
             {
-                this.OnPropertyChanged("PostIcon");
+                this.OnPropertyChanged(nameof(this.PostIcon));
             }
         }
     }

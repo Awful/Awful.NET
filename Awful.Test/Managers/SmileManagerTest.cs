@@ -25,7 +25,7 @@ namespace Awful.Test.Managers
             SmileManager manager = new SmileManager(webClient);
             var result = await manager.GetSmileListAsync().ConfigureAwait(false);
             Assert.NotNull(result);
-            Assert.True(result.Any());
+            Assert.True(result.SmileCategories.Any());
         }
     }
 }

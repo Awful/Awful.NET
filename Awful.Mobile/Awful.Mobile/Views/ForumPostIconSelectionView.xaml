@@ -7,7 +7,20 @@
     x:Class="Awful.Mobile.Views.ForumPostIconSelectionView">
     <ContentView.Content>
           <Grid>
-            <CollectionView ItemsLayout="VerticalGrid, 4" ItemsSource="{Binding Icons}" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" 
+                   Margin="15"
+                   VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Center"
+                   FontSize="Title" 
+                   Text="Select Post Icon" />
+            <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
+            <CollectionView Grid.Row="2" ItemsLayout="VerticalGrid, 4" ItemsSource="{Binding Icons}" Margin="5">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid HeightRequest="60" WidthRequest="60">
@@ -25,7 +38,7 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            <StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+            <StackLayout Grid.Row="2" IsVisible="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                     <ActivityIndicator IsRunning="True"/>
                     <Label Text="{Binding LoadingText}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />

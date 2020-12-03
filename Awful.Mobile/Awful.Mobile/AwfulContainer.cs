@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using Autofac;
 using Awful.Database.Context;
+using Awful.Mobile.Controls;
 using Awful.Mobile.ViewModels;
 using Awful.UI.ViewModels;
 using Awful.Webview;
@@ -49,6 +50,7 @@ namespace Awful.UI
             builder.RegisterType<NewThreadPageViewModel>();
             builder.RegisterType<MobileAwfulViewModel>();
             builder.RegisterType<ForumPostIconSelectionViewModel>();
+            builder.RegisterType<AwfulPopup>().SingleInstance();
 #if DEBUG
             builder.RegisterType<DebugPageViewModel>();
 #endif

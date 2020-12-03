@@ -35,7 +35,7 @@ namespace Awful.Test.Managers
             pm.Body = $"Awful.NET Unit Test PM Create: {date}";
             pm.Title = $"Awful.NET Unit Test PM Create: {date}";
             pm.Receiver = Environment.GetEnvironmentVariable("AWFUL_PLATINUM_USER");
-            pm.Icon = iconResult.First();
+            pm.Icon = iconResult.Icons.First();
             var result = await manager.SendPrivateMessageAsync(pm).ConfigureAwait(false);
             Assert.NotNull(result);
             Assert.NotEmpty(result.Result.ResultText);

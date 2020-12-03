@@ -2,11 +2,15 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Threading.Tasks;
 using Autofac;
 using Awful.Core.Entities.PostIcons;
 using Awful.Database.Entities;
+using Awful.Mobile.Controls;
+using Awful.Mobile.Tools.Utilities;
 using Awful.Mobile.ViewModels;
 using Awful.UI.Actions;
+using Awful.UI.Tools;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,13 +18,14 @@ namespace Awful.Mobile.Views
 {
     public partial class ForumPostIconSelectionView : ContentView
     {
-        public ForumPostIconSelectionViewModel vm;
+        private ForumPostIconSelectionViewModel vm;
 
-        public ForumPostIconSelectionView(Forms9Patch.PopupBase popup, AwfulForum forum, PostIcon icon, ThreadPostCreationActions actions)
+        public ForumPostIconSelectionView(AwfulForum forum, PostIcon icon, ThreadPostCreationActions actions)
         {
             this.InitializeComponent();
             this.BindingContext = this.vm = App.Container.Resolve<ForumPostIconSelectionViewModel>();
-            this.vm.LoadPostIcon(popup, forum, icon, actions);
+            this.vm.LoadPostIcon(forum, icon, actions);
+            this.vm.OnLoadCommand.ExecuteAsync().FireAndForgetSafeAsync(this.vm);
         }
     }
 }

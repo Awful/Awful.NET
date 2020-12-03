@@ -55,6 +55,14 @@ namespace Awful.UI.ViewModels
             get { return this.user != null; }
         }
 
+        /// <summary>
+        /// Called when modal closes.
+        /// </summary>
+        public virtual void OnCloseModal()
+        {
+            this.OnPropertyChanged();
+        }
+
         public async Task SetupVM()
         {
             this.user = await this.Context.GetDefaultUserAsync().ConfigureAwait(false);

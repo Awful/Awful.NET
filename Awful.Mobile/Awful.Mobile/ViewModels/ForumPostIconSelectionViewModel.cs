@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Awful.Core.Entities.PostIcons;
 using Awful.Database.Context;
 using Awful.Database.Entities;
+using Awful.Mobile.Controls;
 using Awful.UI.Actions;
 using Awful.UI.ViewModels;
 using Forms9Patch;
@@ -25,7 +26,6 @@ namespace Awful.Mobile.ViewModels
         private AwfulForum forum;
         private PostIcon selectedIcon;
         private ThreadPostCreationActions threadPostCreationActions;
-        private PopupBase popup;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumPostIconSelectionViewModel"/> class.
@@ -36,36 +36,10 @@ namespace Awful.Mobile.ViewModels
         {
         }
 
-        public ObservableCollection<PostIcon> Icons { get; set; } = new ObservableCollection<PostIcon>();
-
-        public void LoadPostIcon (AwfulForum forum, PostIcon icon, ThreadPostCreationActions actions)
-        {
-            this.forum = forum;
-            this.selectedIcon = icon;
-            this.threadPostCreationActions = actions;
-        }
-
-        public void LoadPostIcon(PopupBase popup, AwfulForum forum, PostIcon icon, ThreadPostCreationActions actions)
-        {
-            this.popup = popup;
-            this.forum = forum;
-            this.selectedIcon = icon;
-            this.threadPostCreationActions = actions;
-        }
-
         /// <summary>
-        /// Gets the close modal command.
+        /// Gets the thread post icons.
         /// </summary>
-        public Command CloseModalCommand
-        {
-            get
-            {
-                return new Command(async () =>
-                {
-                    await PopModalAsync().ConfigureAwait(false);
-                });
-            }
-        }
+        public ObservableCollection<PostIcon> Icons { get; internal set; } = new ObservableCollection<PostIcon>();
 
         /// <summary>
         /// Gets the close modal command.
@@ -81,9 +55,9 @@ namespace Awful.Mobile.ViewModels
                     this.selectedIcon.ImageLocation = icon.ImageLocation;
                     this.selectedIcon.Title = icon.Title;
 
-                    if (this.popup != null)
+                    if (this.Popup != null)
                     {
-                        this.popup.IsVisible = false;
+                        this.Popup.SetIsVisible(false);
                     }
                     else
                     {
@@ -93,11 +67,26 @@ namespace Awful.Mobile.ViewModels
             }
         }
 
+        /// <summary>
+        /// Load Post Icon into VM.
+        /// </summary>
+        /// <param name="forum"><see cref="AwfulForum"/> to load.</param>
+        /// <param name="icon">Original PostIcon from view.</param>
+        /// <param name="actions">ThreadPostCreationActions from VM.</param>
+        public void LoadPostIcon(AwfulForum forum, PostIcon icon, ThreadPostCreationActions actions)
+        {
+            this.forum = forum;
+            this.selectedIcon = icon;
+            this.threadPostCreationActions = actions;
+        }
+
+        /// <inheritdoc/>
         public override async Task OnLoad()
         {
             if (this.forum != null && this.selectedIcon != null && this.threadPostCreationActions != null)
             {
                 this.IsBusy = true;
+                this.Icons.Clear();
                 var icons = await this.threadPostCreationActions.GetForumPostIconsAsync(this.forum.Id).ConfigureAwait(false);
                 foreach (var icon in icons.Icons)
                 {

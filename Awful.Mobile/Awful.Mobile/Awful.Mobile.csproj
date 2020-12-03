@@ -1932,7 +1932,6 @@
     <Folder Include="Tools\Utilities\" />
     <Folder Include="Styles\" />
     <Folder Include="ThreadTags\" />
-    <Folder Include="Controls\" />
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
@@ -1965,9 +1964,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Pages\ForumPostIconSelectionPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Pages\NewThreadPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
