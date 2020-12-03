@@ -51,7 +51,7 @@ namespace Awful.Mobile.ViewModels
                     async () =>
                 {
                     this.IsRefreshing = true;
-                    await this.LoadForumsAsync(true).ConfigureAwait(false);
+                    await this.LoadForumsAsync(this.Items.Count > 0).ConfigureAwait(false);
                     this.IsRefreshing = false;
                 },
                     null,
@@ -131,8 +131,7 @@ namespace Awful.Mobile.ViewModels
         /// <returns>Task.</returns>
         public async Task LoadForumsAsync(bool forceReload)
         {
-            this.IsBusy = true;
-            this.Items = new ObservableCollection<ForumGroup>();
+            this.Items.Clear();
             var awfulCategories = await this.forumActions.GetForumListAsync(forceReload).ConfigureAwait(false);
             awfulCategories = awfulCategories.Where(y => !y.HasThreads && y.ParentForumId == null).OrderBy(y => y.SortOrder).ToList();
             var items = awfulCategories.Select(n => new ForumGroup(n, n.SubForums.SelectMany(n => this.Flatten(n)).OrderBy(n => n.SortOrder).ToList())).ToList();
@@ -155,7 +154,6 @@ namespace Awful.Mobile.ViewModels
             }
 
             this.OnPropertyChanged(nameof(this.Items));
-            this.IsBusy = false;
         }
 
         /// <inheritdoc/>
@@ -164,7 +162,7 @@ namespace Awful.Mobile.ViewModels
             this.forumActions = new IndexPageActions(this.Client, this.Context);
             if (!this.Items.Any())
             {
-                await this.LoadForumsAsync(false).ConfigureAwait(false);
+                await this.RefreshCommand.ExecuteAsync().ConfigureAwait(false);
             }
         }
 
