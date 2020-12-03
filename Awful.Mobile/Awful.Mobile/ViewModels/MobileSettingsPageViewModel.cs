@@ -19,10 +19,9 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="MobileSettingsPageViewModel"/> class.
         /// </summary>
-        /// <param name="properties">Awful Properties.</param>
         /// <param name="context">Awful Context.</param>
-        public MobileSettingsPageViewModel(IPlatformProperties properties, AwfulContext context)
-            : base(properties, context)
+        public MobileSettingsPageViewModel(AwfulContext context)
+            : base(context)
         {
         }
 
