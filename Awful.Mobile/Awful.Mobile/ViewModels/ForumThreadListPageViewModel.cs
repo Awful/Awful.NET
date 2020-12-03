@@ -10,6 +10,7 @@ using Awful.Core.Entities.Threads;
 using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Mobile.Pages;
+using Awful.Mobile.Tools.Utilities;
 using Awful.UI.Actions;
 using Awful.UI.ViewModels;
 using Xamarin.Forms;
@@ -23,7 +24,7 @@ namespace Awful.Mobile.ViewModels
     {
         private ThreadListActions threadlistActions;
         private ThreadList threadList;
-        private Command refreshCommand;
+        private AwfulAsyncCommand refreshCommand;
         private AwfulForum forum;
         private int page = 1;
 
@@ -41,32 +42,45 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets the refresh command.
         /// </summary>
-        public Command RefreshCommand
+        public AwfulAsyncCommand RefreshCommand
         {
             get
             {
-                return this.refreshCommand ??= new Command(async () =>
+                return this.refreshCommand ??= new AwfulAsyncCommand(
+                    async () =>
                 {
                     await this.RefreshForums().ConfigureAwait(false);
-                });
+                },
+                    null,
+                    this);
             }
         }
 
-        public Command NextPageCommand
+        /// <summary>
+        /// Gets the next page command.
+        /// </summary>
+        public AwfulAsyncCommand NextPageCommand
         {
             get
             {
-                return new Command(async () =>
+                return new AwfulAsyncCommand(
+                    async () =>
                 {
                     if (!this.IsBusy && this.threadList != null && this.page <= this.threadList.TotalPages)
                     {
                         this.page++;
                         await this.LoadThreadListAsync(this.forum.Id, this.page).ConfigureAwait(false);
                     }
-                });
+                },
+                    null,
+                    this);
             }
         }
 
+        /// <summary>
+        /// Reset forum thread list and reload it.
+        /// </summary>
+        /// <returns><see cref="Task"/>.</returns>
         public async Task RefreshForums()
         {
             this.IsRefreshing = true;
@@ -77,34 +91,40 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets the Selection Entry.
         /// </summary>
-        public Command<AwfulThread> SelectionCommand
+        public AwfulAsyncCommand<AwfulThread> SelectionCommand
         {
             get
             {
-                return new Command<AwfulThread>(async (item) =>
+                return new AwfulAsyncCommand<AwfulThread>(
+                    async (item) =>
                 {
                     if (item != null)
                     {
                         await PushDetailPageAsync(new ForumThreadPage(item)).ConfigureAwait(false);
                     }
-                });
+                },
+                    null,
+                    this);
             }
         }
 
         /// <summary>
         /// Gets the new thread command.
         /// </summary>
-        public Command NewThreadCommand
+        public AwfulAsyncCommand NewThreadCommand
         {
             get
             {
-                return new Command(async () =>
+                return new AwfulAsyncCommand(
+                    async () =>
                 {
                     if (this.forum != null)
                     {
                         await PushModalAsync(new NewThreadPage(this.forum)).ConfigureAwait(false);
                     }
-                });
+                },
+                    null,
+                    this);
             }
         }
 
@@ -157,7 +177,7 @@ namespace Awful.Mobile.ViewModels
             this.threadlistActions = new ThreadListActions(this.Client, this.Context);
             if (!this.Threads.Any() && this.forum != null)
             {
-                await this.LoadThreadListAsync(this.forum.Id, page).ConfigureAwait(false);
+                await this.RefreshCommand.ExecuteAsync().ConfigureAwait(false);
             }
         }
     }
