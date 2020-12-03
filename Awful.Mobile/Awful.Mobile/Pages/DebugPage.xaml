@@ -6,6 +6,25 @@
     Title="Debug"
     x:Class="Awful.Mobile.Pages.DebugPage">
     <ContentPage.Content>
-        <ListView />
+        <Grid>
+            <StackLayout>
+                <Button HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Text="Throw Exception"
+                    Command="{Binding ThrowExceptionCommand}"
+                    />
+                <Button HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Text="Throw Async Exception"
+                    Command="{Binding ThrowAsyncExceptionCommand}"
+                    />
+            </StackLayout>
+            <!--<StackLayout Grid.Row="0" IsVisible="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <ActivityIndicator IsRunning="True"/>
+                <Label Text="{Binding LoadingText}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
+            </StackLayout>
+        </StackLayout>-->
+        </Grid>
     </ContentPage.Content>
 </pages:BasePage>

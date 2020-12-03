@@ -12,6 +12,7 @@ using Awful.Core.Tools;
 using Awful.Database.Context;
 using Awful.Mobile.Pages;
 using Awful.UI.Actions;
+using Awful.UI.Interfaces;
 using Awful.UI.ViewModels;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -23,7 +24,7 @@ namespace Awful.Mobile.ViewModels
     /// Used as the base for other View Models in the app.
     /// Contains base level functions like handling windows.
     /// </summary>
-    public class MobileAwfulViewModel : AwfulViewModel
+    public class MobileAwfulViewModel : AwfulViewModel, IAwfulErrorHandler
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MobileAwfulViewModel"/> class.
@@ -272,11 +273,28 @@ namespace Awful.Mobile.ViewModels
         }
 
         /// <summary>
+        /// Setup the theme of the app on load.
+        /// </summary>
+        /// <returns>A <see cref="Task"/>.</returns>
+        public async Task SetupThemeAsync()
+        {
+            var options = await this.SettingsAction.LoadSettingOptionsAsync().ConfigureAwait(false);
+            if (options != null)
+            {
+                this.SettingsAction.SetAppTheme(options.DeviceColorTheme);
+            }
+            else
+            {
+                this.SettingsAction.SetAppTheme(Webview.Entities.Themes.DeviceColorTheme.Light);
+            }
+        }
+
+        /// <summary>
         /// Handles exceptions thrown by the VM.
         /// Used to display to user and gather for stats.
         /// </summary>
         /// <param name="exception">Exception that was thrown.</param>
-        public static void HandleException(Exception exception)
+        public void HandleError(Exception exception)
         {
             if (exception == null)
             {
@@ -299,27 +317,13 @@ namespace Awful.Mobile.ViewModels
             }
             else
             {
-                errorMessage = $"An exception was thrown ${exception.Message}";
+                errorMessage = $"An {exception.GetType().FullName} was thrown: {exception.Message}";
             }
 
             DisplayAlertAsync("Error", errorMessage);
-        }
 
-        /// <summary>
-        /// Setup the theme of the app on load.
-        /// </summary>
-        /// <returns>A <see cref="Task"/>.</returns>
-        public async Task SetupThemeAsync()
-        {
-            var options = await this.SettingsAction.LoadSettingOptionsAsync().ConfigureAwait(false);
-            if (options != null)
-            {
-                this.SettingsAction.SetAppTheme(options.DeviceColorTheme);
-            }
-            else
-            {
-                this.SettingsAction.SetAppTheme(Webview.Entities.Themes.DeviceColorTheme.Light);
-            }
+            this.IsBusy = false;
+            this.IsRefreshing = false;
         }
     }
 }

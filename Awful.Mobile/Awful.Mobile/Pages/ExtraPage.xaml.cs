@@ -27,7 +27,7 @@ namespace Awful.Mobile.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            this.ExtraPageCollectionView.ItemsSource = new List<ExtraPageItem>()
+            var itemList = new List<ExtraPageItem>()
             {
                 new ExtraPageItem()
                 {
@@ -54,6 +54,17 @@ namespace Awful.Mobile.Pages
                     Title = "About",
                 },
             };
+
+#if DEBUG
+            itemList.Add(new ExtraPageItem()
+            {
+                Type = "DebugCell",
+                Glyph = "",
+                Title = "Debug",
+            });
+#endif
+
+            this.ExtraPageCollectionView.ItemsSource = itemList;
         }
 
         /// <summary>
@@ -83,6 +94,9 @@ namespace Awful.Mobile.Pages
                                 await MobileAwfulViewModel.PushDetailPageAsync(new UserProfilePage(0)).ConfigureAwait(false);
                                 break;
                             case "AboutCell":
+                                break;
+                            case "DebugCell":
+                                await MobileAwfulViewModel.PushPageAsync(new DebugPage()).ConfigureAwait(false);
                                 break;
                         }
                     });

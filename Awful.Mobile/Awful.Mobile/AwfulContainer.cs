@@ -49,6 +49,9 @@ namespace Awful.UI
             builder.RegisterType<NewThreadPageViewModel>();
             builder.RegisterType<MobileAwfulViewModel>();
             builder.RegisterType<ForumPostIconSelectionViewModel>();
+#if DEBUG
+            builder.RegisterType<DebugPageViewModel>();
+#endif
             return builder.Build();
         }
     }
