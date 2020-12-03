@@ -31,6 +31,7 @@ namespace Awful.Mobile.iOS
         {
             SQLitePCL.Batteries.Init();
             global::Xamarin.Forms.Forms.Init();
+            Forms9Patch.iOS.Settings.Initialize(this);
             var builder = new ContainerBuilder();
             builder.RegisterType<iOSPlatformProperties>().As<IPlatformProperties>();
             this.LoadApplication(new App(builder));

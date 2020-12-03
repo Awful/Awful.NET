@@ -5,9 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Awful.Core.Managers;
 using Awful.Core.Tools;
 using Awful.Database.Context;
+using Awful.Mobile.Tools.Utilities;
 using Awful.UI.Actions;
 using Awful.UI.ViewModels;
 using Xamarin.Forms;
@@ -25,6 +27,8 @@ namespace Awful.Mobile.ViewModels
 
         private SigninAction signin;
 
+        private AwfulAsyncCommand loginCommand;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LoginPageViewModel"/> class.
         /// </summary>
@@ -39,16 +43,16 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets a value indicating whether login is enabled.
         /// </summary>
-        public bool IsLoginEnabled => !string.IsNullOrEmpty(this.Password) && !string.IsNullOrEmpty(this.Username) && !this.IsBusy;
+        public bool IsLoginEnabled => !string.IsNullOrEmpty(this.Password) && !string.IsNullOrEmpty(this.Username);
 
         /// <summary>
         /// Gets the login command.
         /// </summary>
-        public Command LoginCommand
+        public AwfulAsyncCommand LoginCommand
         {
             get
             {
-                return new Command(this.LoginUserWithPassword);
+                return this.loginCommand ??= new AwfulAsyncCommand(this.LoginUserWithPassword, () => this.IsLoginEnabled, this);
             }
         }
 
@@ -65,7 +69,7 @@ namespace Awful.Mobile.ViewModels
             set
             {
                 this.SetProperty(ref this.password, value);
-                this.OnPropertyChanged(nameof(this.IsLoginEnabled));
+                this.LoginCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -82,14 +86,15 @@ namespace Awful.Mobile.ViewModels
             set
             {
                 this.SetProperty(ref this.username, value);
-                this.OnPropertyChanged(nameof(this.IsLoginEnabled));
+                this.LoginCommand.RaiseCanExecuteChanged();
             }
         }
 
         /// <summary>
         /// Login User With Password.
         /// </summary>
-        public async void LoginUserWithPassword()
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task LoginUserWithPassword()
         {
             if (!this.IsLoginEnabled)
             {

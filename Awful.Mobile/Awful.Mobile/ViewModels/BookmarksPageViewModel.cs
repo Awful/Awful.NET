@@ -12,6 +12,7 @@ using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Mobile.Pages;
+using Awful.Mobile.Tools.Utilities;
 using Awful.UI.Actions;
 using Awful.UI.ViewModels;
 using Xamarin.CommunityToolkit.UI.Views;
@@ -26,7 +27,7 @@ namespace Awful.Mobile.ViewModels
     {
         private BookmarkAction bookmarks;
         private ObservableCollection<AwfulThread> threads = new ObservableCollection<AwfulThread>();
-        private Command refreshCommand;
+        private AwfulAsyncCommand refreshCommand;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BookmarksPageViewModel"/> class.
@@ -50,33 +51,39 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets the refresh command.
         /// </summary>
-        public Command RefreshCommand
+        public AwfulAsyncCommand RefreshCommand
         {
             get
             {
-                return this.refreshCommand ??= new Command(async () =>
+                return this.refreshCommand ??= new AwfulAsyncCommand(
+                    async () =>
                 {
                     this.IsRefreshing = true;
                     await this.RefreshBookmarksAsync().ConfigureAwait(false);
                     this.IsRefreshing = false;
-                });
+                },
+                    null,
+                    this);
             }
         }
 
         /// <summary>
         /// Gets the Selection Entry.
         /// </summary>
-        public Command<AwfulThread> SelectionCommand
+        public AwfulAsyncCommand<AwfulThread> SelectionCommand
         {
             get
             {
-                return new Command<AwfulThread>((item) =>
+                return new AwfulAsyncCommand<AwfulThread>(
+                    async (item) =>
                 {
                     if (item != null)
                     {
-                        PushDetailPageAsync(new ForumThreadPage(item)).ConfigureAwait(false);
+                        await PushDetailPageAsync(new ForumThreadPage(item)).ConfigureAwait(false);
                     }
-                });
+                },
+                    null,
+                    this);
             }
         }
 

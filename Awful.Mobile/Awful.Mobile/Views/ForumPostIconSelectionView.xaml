@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="ForumPostIconView"
+    HeightRequest="500"
+    xmlns:local="clr-namespace:Awful.Mobile.Tools.Markup;assembly=Awful.Mobile"
+    x:Class="Awful.Mobile.Views.ForumPostIconSelectionView">
+    <ContentView.Content>
+          <Grid>
+            <CollectionView ItemsLayout="VerticalGrid, 4" ItemsSource="{Binding Icons}" Margin="5">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HeightRequest="60" WidthRequest="60">
+                                <Image Grid.Column="0"
+                               Margin="5"
+                               Source="{Binding ImageLocation, Converter={StaticResource ForumImageConverter}}"/>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                            Command="{Binding Path=BindingContext.SelectPostIconCommand,
+                                            Source={x:Reference ForumPostIconView}}"
+                                            CommandParameter="{Binding .}"
+                                            />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            <StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                    <ActivityIndicator IsRunning="True"/>
+                    <Label Text="{Binding LoadingText}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

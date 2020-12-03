@@ -58,7 +58,11 @@
                         </Entry>
                         <Entry IsPassword="True" x:Name="Password" Text="{Binding Password, Mode=TwoWay}" Placeholder="Password" Margin="0,0,0,15">
                         </Entry>
-                        <Button WidthRequest="350" HorizontalOptions="CenterAndExpand" x:Name="LoginButton" IsEnabled="{Binding IsLoginEnabled, Mode=TwoWay}" Text="Login" Command="{Binding LoginCommand}" />
+                        <Button WidthRequest="350"
+                                HorizontalOptions="CenterAndExpand"
+                                x:Name="LoginButton"
+                                Text="Login"
+                                Command="{Binding LoginCommand}" />
                         <Image HeightRequest="200" Grid.Row="3"
                          Margin="15"
                             Source="{local:ImageResource Awful.Mobile.ThreadTags.Mazui.png}"/>

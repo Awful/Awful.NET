@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Awful.Mobile.Tools.Markup;assembly=Awful.Mobile"
+    x:Class="Awful.Mobile.Views.DefaultView">
+    <ContentView.Content>
+         <Grid Margin="15" VerticalOptions="CenterAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0"
+                   Margin="15"
+                   Source="{local:ImageResource Awful.Mobile.ThreadTags.Mazui.png}"/>
+            <Label Grid.Row="1" FontAttributes="Bold" FontSize="40" HorizontalOptions="Center" Text="Awful.NET" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>

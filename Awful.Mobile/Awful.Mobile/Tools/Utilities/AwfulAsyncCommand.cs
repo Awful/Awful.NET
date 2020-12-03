@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Awful.UI.Interfaces;
 using Awful.UI.Tools;
+using Xamarin.Essentials;
 
 namespace Awful.Mobile.Tools.Utilities
 {
@@ -85,7 +86,7 @@ namespace Awful.Mobile.Tools.Utilities
         public void RaiseCanExecuteChanged()
 #pragma warning restore CA1030 // Use events where appropriate
         {
-            this.CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+            MainThread.BeginInvokeOnMainThread(() => this.CanExecuteChanged?.Invoke(this, EventArgs.Empty));
         }
 
         /// <inheritdoc/>

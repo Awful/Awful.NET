@@ -7,6 +7,7 @@ using Awful.Core.Entities.PostIcons;
 using Awful.Database.Entities;
 using Awful.Mobile.ViewModels;
 using Awful.UI.Actions;
+using Forms9Patch;
 using Xamarin.Forms.Xaml;
 
 namespace Awful.Mobile.Pages

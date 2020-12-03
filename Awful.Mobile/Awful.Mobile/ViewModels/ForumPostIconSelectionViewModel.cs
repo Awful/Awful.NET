@@ -12,6 +12,7 @@ using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.UI.Actions;
 using Awful.UI.ViewModels;
+using Forms9Patch;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.ViewModels
@@ -24,6 +25,7 @@ namespace Awful.Mobile.ViewModels
         private AwfulForum forum;
         private PostIcon selectedIcon;
         private ThreadPostCreationActions threadPostCreationActions;
+        private PopupBase popup;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumPostIconSelectionViewModel"/> class.
@@ -38,6 +40,14 @@ namespace Awful.Mobile.ViewModels
 
         public void LoadPostIcon (AwfulForum forum, PostIcon icon, ThreadPostCreationActions actions)
         {
+            this.forum = forum;
+            this.selectedIcon = icon;
+            this.threadPostCreationActions = actions;
+        }
+
+        public void LoadPostIcon(PopupBase popup, AwfulForum forum, PostIcon icon, ThreadPostCreationActions actions)
+        {
+            this.popup = popup;
             this.forum = forum;
             this.selectedIcon = icon;
             this.threadPostCreationActions = actions;
@@ -71,7 +81,14 @@ namespace Awful.Mobile.ViewModels
                     this.selectedIcon.ImageLocation = icon.ImageLocation;
                     this.selectedIcon.Title = icon.Title;
 
-                    await PopModalAsync().ConfigureAwait(false);
+                    if (this.popup != null)
+                    {
+                        this.popup.IsVisible = false;
+                    }
+                    else
+                    {
+                        await PopModalAsync().ConfigureAwait(false);
+                    }
                 });
             }
         }

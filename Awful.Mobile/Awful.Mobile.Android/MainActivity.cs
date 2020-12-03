@@ -33,6 +33,7 @@ namespace Awful.Mobile.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Forms9Patch.Droid.Settings.Initialize(this);
             var builder = new ContainerBuilder();
             builder.RegisterType<AndroidPlatformProperties>().As<IPlatformProperties>();
             this.LoadApplication(new App(builder));
