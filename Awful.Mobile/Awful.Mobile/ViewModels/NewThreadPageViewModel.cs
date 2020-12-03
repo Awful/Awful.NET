@@ -28,6 +28,9 @@ namespace Awful.Mobile.ViewModels
         private NewThread newThread;
         private AwfulForum forum;
         private PostIcon postIcon = new PostIcon();
+        private AwfulAsyncCommand postThreadCommand;
+        private string message;
+        private string subject;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NewThreadPageViewModel"/> class.
@@ -42,20 +45,51 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets or sets the subject of the post.
         /// </summary>
-        public string Subject { get; set; }
+        public string Subject
+        {
+            get
+            {
+                return this.subject;
+            }
+
+            set
+            {
+                this.SetProperty(ref this.subject, value);
+                this.PostThreadCommand.RaiseCanExecuteChanged();
+            }
+        }
 
         /// <summary>
         /// Gets or sets the message of the post.
         /// </summary>
-        public string Message { get; set; }
+        public string Message
+        {
+            get
+            {
+                return this.message;
+            }
+
+            set
+            {
+                this.SetProperty(ref this.message, value);
+                this.PostThreadCommand.RaiseCanExecuteChanged();
+            }
+        }
 
         /// <summary>
         /// Gets or sets the Post Icon.
         /// </summary>
         public PostIcon PostIcon
         {
-            get { return this.postIcon; }
-            set { this.SetProperty(ref this.postIcon, value); }
+            get
+            {
+                return this.postIcon;
+            }
+
+            set
+            {
+                this.SetProperty(ref this.postIcon, value);
+            }
         }
 
         /// <summary>
@@ -87,7 +121,7 @@ namespace Awful.Mobile.ViewModels
         {
             get
             {
-                return new AwfulAsyncCommand(
+                return postThreadCommand ??= new AwfulAsyncCommand(
                     async () =>
                     {
                         if (this.newThread != null)
@@ -98,7 +132,7 @@ namespace Awful.Mobile.ViewModels
                                 return;
                             }
 
-                            var threadTitle = this.Title.Trim();
+                            var threadTitle = this.Subject.Trim();
                             if (string.IsNullOrEmpty(threadTitle))
                             {
                                 return;
@@ -112,9 +146,10 @@ namespace Awful.Mobile.ViewModels
                             this.newThread.PostIcon = this.PostIcon;
                             this.newThread.Subject = threadTitle;
                             this.newThread.Content = threadText;
-                            Result result;
 
-                            result = await this.threadActions.PostNewThreadAsync(this.newThread).ConfigureAwait(false);
+                            // The Manager will throw if we couldn't post.
+                            // That will be captured by AwfulAsyncCommand.
+                            await this.threadActions.PostNewThreadAsync(this.newThread).ConfigureAwait(false);
 
                             Device.BeginInvokeOnMainThread(async () =>
                             {
@@ -123,9 +158,14 @@ namespace Awful.Mobile.ViewModels
                             });
                         }
                     },
-                    null,
+                    () => this.CanPost,
                     this);
             }
+        }
+
+        private bool CanPost
+        {
+            get { return !string.IsNullOrEmpty(this.Subject) && !string.IsNullOrEmpty(this.Message) && !string.IsNullOrEmpty(this.postIcon.ImageEndpoint); }
         }
 
         /// <summary>
@@ -141,6 +181,7 @@ namespace Awful.Mobile.ViewModels
         public override void OnCloseModal()
         {
             this.OnPropertyChanged(nameof(this.PostIcon));
+            this.PostThreadCommand.RaiseCanExecuteChanged();
         }
 
         /// <inheritdoc/>

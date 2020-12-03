@@ -44,7 +44,7 @@
                                             />
                         </Grid.GestureRecognizers>
                     </Grid>
-                    <Entry Text="{Binding Title}" HorizontalOptions="FillAndExpand" Placeholder="Subject"/>
+                    <Entry Text="{Binding Subject}" HorizontalOptions="FillAndExpand" Placeholder="Subject"/>
                 </StackLayout>
                 <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
             </Grid>
