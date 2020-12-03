@@ -11,6 +11,7 @@ using Awful.Core.Exceptions;
 using Awful.Core.Tools;
 using Awful.Database.Context;
 using Awful.Mobile.Pages;
+using Awful.Mobile.Tools.Utilities;
 using Awful.UI.Actions;
 using Awful.UI.Interfaces;
 using Awful.UI.ViewModels;
@@ -42,6 +43,11 @@ namespace Awful.Mobile.ViewModels
         /// or not.
         /// </summary>
         public static bool IsLargeDevice => false;
+
+        public AwfulAsyncCommand OnLoadCommand
+        {
+            get { return new AwfulAsyncCommand(async () => { await this.SetupVM().ConfigureAwait(false); }, null, this); }
+        }
 
         /// <summary>
         /// Gets the Settings Actions. Used to handle settings.

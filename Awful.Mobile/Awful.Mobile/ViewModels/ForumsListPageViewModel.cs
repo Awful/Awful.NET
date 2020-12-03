@@ -13,6 +13,7 @@ using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Mobile.Pages;
+using Awful.Mobile.Tools.Utilities;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
 using Awful.UI.ViewModels;
@@ -27,8 +28,8 @@ namespace Awful.Mobile.ViewModels
     public class ForumsListPageViewModel : MobileAwfulViewModel
     {
         private IndexPageActions forumActions;
-        private Command refreshCommand;
-        private Command<AwfulForum> isFavoriteCommand;
+        private AwfulAsyncCommand refreshCommand;
+        private AwfulAsyncCommand<AwfulForum> isFavoriteCommand;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumsListPageViewModel"/> class.
@@ -42,44 +43,51 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets the refresh command.
         /// </summary>
-        public Command RefreshCommand
+        public AwfulAsyncCommand RefreshCommand
         {
             get
             {
-                return this.refreshCommand ??= new Command(async () =>
+                return this.refreshCommand ??= new AwfulAsyncCommand(
+                    async () =>
                 {
                     this.IsRefreshing = true;
                     await this.LoadForumsAsync(true).ConfigureAwait(false);
                     this.IsRefreshing = false;
-                });
+                },
+                    null,
+                    this);
             }
         }
 
         /// <summary>
         /// Gets the Selection Entry.
         /// </summary>
-        public Command<AwfulForum> SelectionCommand
+        public AwfulAsyncCommand<AwfulForum> SelectionCommand
         {
             get
             {
-                return new Command<AwfulForum>(async (item) =>
+                return new AwfulAsyncCommand<AwfulForum>(
+                    async (item) =>
                 {
                     if (item != null)
                     {
                         await PushPageAsync(new ForumThreadListPage(item)).ConfigureAwait(false);
                     }
-                });
+                },
+                    null,
+                    this);
             }
         }
 
         /// <summary>
         /// Gets the isFavorite command.
         /// </summary>
-        public Command<AwfulForum> IsFavoriteCommand
+        public AwfulAsyncCommand<AwfulForum> IsFavoriteCommand
         {
             get
             {
-                return this.isFavoriteCommand ??= new Command<AwfulForum>(async (forum) =>
+                return this.isFavoriteCommand ??= new AwfulAsyncCommand<AwfulForum>(
+                    async (forum) =>
                 {
                     await this.forumActions.SetIsFavoriteForumAsync(forum).ConfigureAwait(false);
                     forum.OnPropertyChanged("IsFavorited");
@@ -105,7 +113,9 @@ namespace Awful.Mobile.ViewModels
                     {
                         this.Items.Remove(favoritedForumGroup);
                     }
-                });
+                },
+                    null,
+                    this);
             }
         }
 

@@ -28,7 +28,7 @@ namespace Awful.Mobile.ViewModels
     /// </summary>
     public class DebugPageViewModel : MobileAwfulViewModel
     {
-        Forms9Patch.FlyoutPopup popup;
+        Forms9Patch.ModalPopup popup;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DebugPageViewModel"/> class.
@@ -38,13 +38,11 @@ namespace Awful.Mobile.ViewModels
             : base(context)
         {
             this.ThrowAsyncExceptionCommand = new AwfulAsyncCommand(this.ThrowAsyncDebugException, null, this);
-            this.popup = new Forms9Patch.FlyoutPopup()
+            this.popup = new Forms9Patch.ModalPopup()
             {
-                Alignment = Forms9Patch.FlyoutAlignment.End,
-                Orientation = StackOrientation.Vertical,
                 Content = new DefaultView(),
-                Margin = 0,
-                Padding = -5,
+                //Margin = 0,
+                //Padding = -5,
             };
         }
 
@@ -82,9 +80,9 @@ namespace Awful.Mobile.ViewModels
             }
         }
 
-        private bool CanExecuteButtonPress()
+        public override async Task OnLoad()
         {
-            return !this.IsBusy;
+            throw new Exception("OH NO!");
         }
 
         /// <summary>

@@ -3,7 +3,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Name="ForumPostIconView"
-    HeightRequest="500"
     xmlns:local="clr-namespace:Awful.Mobile.Tools.Markup;assembly=Awful.Mobile"
     x:Class="Awful.Mobile.Views.ForumPostIconSelectionView">
     <ContentView.Content>

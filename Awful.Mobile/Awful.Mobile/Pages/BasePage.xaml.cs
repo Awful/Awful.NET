@@ -2,6 +2,9 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using Awful.Mobile.Tools.Utilities;
+using Awful.Mobile.ViewModels;
+using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Xamarin.Forms;
 
@@ -24,9 +27,9 @@ namespace Awful.Mobile.Pages
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            if (this.BindingContext is AwfulViewModel vm)
+            if (this.BindingContext is MobileAwfulViewModel vm)
             {
-                await vm.SetupVM().ConfigureAwait(false);
+                vm.OnLoadCommand.ExecuteAsync().FireAndForgetSafeAsync(vm);
             }
         }
     }
