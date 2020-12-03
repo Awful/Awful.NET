@@ -36,7 +36,7 @@
             </NavigationPage.IconImageSource>
         </NavigationPage>
 
-        <NavigationPage Title="PM">
+        <NavigationPage Title="Messages">
             <x:Arguments>
                 <views:PrivateMessagesPage />
             </x:Arguments>
@@ -49,7 +49,7 @@
             </NavigationPage.IconImageSource>
         </NavigationPage>
 
-        <NavigationPage Title="Setting">
+        <NavigationPage Title="Settings">
             <x:Arguments>
                 <views:SettingsPage />
             </x:Arguments>
