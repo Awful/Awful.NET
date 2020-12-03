@@ -90,5 +90,10 @@ namespace Awful.ConsoleApp.Options
         /// SAclopedia.
         /// </summary>
         SAclopedia,
+
+        /// <summary>
+        /// Acknowledgements.
+        /// </summary>
+        Acknowledgements,
     }
 }

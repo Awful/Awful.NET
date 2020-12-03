@@ -1958,11 +1958,17 @@
     <EmbeddedResource Include="..\..\Awful.Tags.Local\5stars.png" Link="ThreadTags\5stars.png" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Pages\AcknowledgmentsPage.xaml.cs">
+      <DependentUpon>AcknowledgmentsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Styles\AwfulThemeResources.xaml.cs">
       <DependentUpon>AwfulThemeResources.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Pages\AcknowledgmentsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Pages\NewThreadPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

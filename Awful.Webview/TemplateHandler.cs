@@ -13,8 +13,6 @@ using Awful.Core.Entities.SAclopedia;
 using Awful.Webview.Entities;
 using Awful.Webview.Entities.Themes;
 using HandlebarsDotNet;
-using HandlebarsDotNet.Helpers;
-using HandlebarsDotNet.Helpers.Enums;
 
 namespace Awful.Webview
 {
@@ -23,6 +21,7 @@ namespace Awful.Webview
     /// </summary>
     public class TemplateHandler
     {
+        private readonly string acknowledgmentsHtml;
         private readonly string threadHtml;
         private readonly string saclopediaHtml;
         private readonly string profileHtml;
@@ -40,6 +39,7 @@ namespace Awful.Webview
         /// </summary>
         public TemplateHandler()
         {
+            this.acknowledgmentsHtml = TemplateHandler.GetResourceFileContentAsString("Templates.Acknowledgments.html.hbs");
             this.threadHtml = TemplateHandler.GetResourceFileContentAsString("Templates.Thread.html.hbs");
             this.saclopediaHtml = TemplateHandler.GetResourceFileContentAsString("Templates.SAclopedia.html.hbs");
             this.profileHtml = TemplateHandler.GetResourceFileContentAsString("Templates.Profile.html.hbs");
@@ -126,6 +126,24 @@ namespace Awful.Webview
 
             var template = Handlebars.Compile(this.threadHtml);
             var entity = new ThreadPostEntity() { Entry = entry };
+            this.SetDefaults(entity, options);
+            return template(entity);
+        }
+
+        /// <summary>
+        /// Renders Acknowledgements View.
+        /// </summary>
+        /// <param name="options">Default Theme Options.</param>
+        /// <returns>HTML Template String.</returns>
+        public string RenderAcknowledgementstView(DefaultOptions options)
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            var template = Handlebars.Compile(this.acknowledgmentsHtml);
+            var entity = new TemplateEntity();
             this.SetDefaults(entity, options);
             return template(entity);
         }

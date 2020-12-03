@@ -49,9 +49,9 @@ namespace Awful.Mobile.Pages
                 },
                 new ExtraPageItem()
                 {
-                    Type = "AboutCell",
-                    Glyph = "",
-                    Title = "About",
+                    Type = "AcknowledgmentsCell",
+                    Glyph = "",
+                    Title = "Acknowledgments",
                 },
             };
 
@@ -93,7 +93,8 @@ namespace Awful.Mobile.Pages
                             case "UserProfileCell":
                                 await MobileAwfulViewModel.PushDetailPageAsync(new UserProfilePage(0)).ConfigureAwait(false);
                                 break;
-                            case "AboutCell":
+                            case "AcknowledgmentsCell":
+                                await MobileAwfulViewModel.PushPageAsync(new AcknowledgmentsPage()).ConfigureAwait(false);
                                 break;
                             case "DebugCell":
                                 await MobileAwfulViewModel.PushPageAsync(new DebugPage()).ConfigureAwait(false);

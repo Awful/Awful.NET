@@ -64,6 +64,9 @@ namespace Awful.ConsoleApp
                                 var saEntry = await saManager.GetEntryAsync(saId).ConfigureAwait(false);
                                 result = handler.RenderSAclopediaView(saEntry, defaultOptions);
                                 break;
+                            case TemplateHandlerOption.Acknowledgements:
+                                result = handler.RenderAcknowledgementstView(defaultOptions);
+                                break;
                         }
 
                         File.WriteAllText("test.html", result);
