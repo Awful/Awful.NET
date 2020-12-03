@@ -72,17 +72,16 @@ namespace Awful.Mobile.ViewModels
         /// </summary>
         /// <param name="forum"><see cref="AwfulForum"/> to load.</param>
         /// <param name="icon">Original PostIcon from view.</param>
-        /// <param name="actions">ThreadPostCreationActions from VM.</param>
-        public void LoadPostIcon(AwfulForum forum, PostIcon icon, ThreadPostCreationActions actions)
+        public void LoadPostIcon(AwfulForum forum, PostIcon icon)
         {
             this.forum = forum;
             this.selectedIcon = icon;
-            this.threadPostCreationActions = actions;
         }
 
         /// <inheritdoc/>
         public override async Task OnLoad()
         {
+            this.threadPostCreationActions = new ThreadPostCreationActions(this.Client);
             if (this.forum != null && this.selectedIcon != null && this.threadPostCreationActions != null)
             {
                 this.IsBusy = true;

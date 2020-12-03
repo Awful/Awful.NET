@@ -70,7 +70,7 @@ namespace Awful.Mobile.ViewModels
                     {
                         if (this.Popup != null)
                         {
-                            this.Popup.SetContent(new ForumPostIconSelectionView(this.forum, this.PostIcon, this.postActions), true, this.OnCloseModal);
+                            this.Popup.SetContent(new ForumPostIconSelectionView(this.forum, this.PostIcon), true, this.OnCloseModal);
                         }
 
                         return Task.CompletedTask;

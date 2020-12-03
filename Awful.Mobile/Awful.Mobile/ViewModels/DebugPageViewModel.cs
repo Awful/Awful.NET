@@ -54,7 +54,7 @@ namespace Awful.Mobile.ViewModels
                         var forum = await this.Context.Forums.FirstOrDefaultAsync(n => n.Id == 273);
                         var awfulForum = new AwfulForum(forum);
                         var postIcon = new PostIcon();
-                        var view = new ForumPostIconSelectionView(awfulForum, postIcon, new ThreadPostCreationActions(this.Client));
+                        var view = new ForumPostIconSelectionView(awfulForum, postIcon);
                         this.Popup.SetContent(view, true);
                     }
                 },
