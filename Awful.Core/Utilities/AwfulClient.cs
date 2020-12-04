@@ -246,6 +246,9 @@ namespace Awful.Core.Utilities
 
         private async Task CheckHtmlForErrorsAsync(Result result)
         {
+            // SA can return HTML errors, even from JSON endpoints.
+            // If we get JSON, this will still parse and return a document.
+            // So it should be safe to still check it for HTML errors and return it.
             var document = await this.parser.ParseDocumentAsync(result.ResultText).ConfigureAwait(false);
             if (!document.Body.ClassList.Contains("standarderror"))
             {
