@@ -5,15 +5,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Debug"
     xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+    xmlns:views="clr-namespace:Awful.Mobile.Views"
     x:Class="Awful.Mobile.Pages.DebugPage">
     <ContentPage.Content>
         <Grid>
-            <StackLayout>
-                <Button HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    Text="Throw Exception"
-                    Command="{Binding ThrowExceptionCommand}"
-                    />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <views:ProbationView IsVisible="{Binding OnProbation}" Grid.Row="0"/>
+            <StackLayout Grid.Row="1">
                 <Button HorizontalOptions="Center"
                     VerticalOptions="Center"
                     Text="Throw Async Exception"

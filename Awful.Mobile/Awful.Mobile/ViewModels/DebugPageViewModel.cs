@@ -3,23 +3,10 @@
 // </copyright>
 
 using System;
-using System.Globalization;
 using System.Threading.Tasks;
-using Autofac;
-using Awful.Core.Entities.PostIcons;
-using Awful.Core.Entities.Web;
-using Awful.Core.Exceptions;
-using Awful.Core.Tools;
 using Awful.Database.Context;
-using Awful.Database.Entities;
-using Awful.Mobile.Controls;
-using Awful.Mobile.Pages;
-using Awful.UI.Tools;
 using Awful.Mobile.Views;
-using Awful.UI.Actions;
-using Awful.UI.ViewModels;
-using Microsoft.EntityFrameworkCore;
-using Xamarin.Essentials;
+using Awful.UI.Tools;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.ViewModels
@@ -36,6 +23,8 @@ namespace Awful.Mobile.ViewModels
         public DebugPageViewModel(AwfulContext context)
             : base(context)
         {
+            this.OnProbation = true;
+            this.OnProbationText = "TAKE A BREAK\nYou have been put on probation until Jun 25, 2025 13:50. You cannot post while\non probation. You might find out why you are on probation if you\ncheck the Leper's\nColony. If you read the fucking rules,\nmaybe this won't happen again!";
             this.ThrowAsyncExceptionCommand = new AwfulAsyncCommand(this.ThrowAsyncDebugException, null, this);
         }
 

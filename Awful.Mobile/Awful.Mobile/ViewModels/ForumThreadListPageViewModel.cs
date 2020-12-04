@@ -10,10 +10,8 @@ using Awful.Core.Entities.Threads;
 using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Mobile.Pages;
-using Awful.UI.Tools;
 using Awful.UI.Actions;
-using Awful.UI.ViewModels;
-using Xamarin.Forms;
+using Awful.UI.Tools;
 
 namespace Awful.Mobile.ViewModels
 {
@@ -25,6 +23,7 @@ namespace Awful.Mobile.ViewModels
         private ThreadListActions threadlistActions;
         private ThreadList threadList;
         private AwfulAsyncCommand refreshCommand;
+        private AwfulAsyncCommand newThreadCommand;
         private AwfulForum forum;
         private int page = 1;
 
@@ -104,7 +103,7 @@ namespace Awful.Mobile.ViewModels
         {
             get
             {
-                return new AwfulAsyncCommand(
+                return this.newThreadCommand ??= new AwfulAsyncCommand(
                     async () =>
                 {
                     if (this.forum != null)
@@ -112,7 +111,7 @@ namespace Awful.Mobile.ViewModels
                         await PushModalAsync(new NewThreadPage(this.forum)).ConfigureAwait(false);
                     }
                 },
-                    null,
+                    () => !this.IsBusy && !this.OnProbation,
                     this);
             }
         }
@@ -148,6 +147,8 @@ namespace Awful.Mobile.ViewModels
 
             this.IsBusy = true;
             this.threadList = await this.threadlistActions.GetForumThreadListAsync(forumId, page).ConfigureAwait(false);
+            this.OnProbation = this.threadList.Result.OnProbation;
+            this.OnProbationText = this.threadList.Result.OnProbationText;
             foreach (var thread in this.threadList.Threads)
             {
                 this.Threads.Add(new AwfulThread(thread));
@@ -169,6 +170,12 @@ namespace Awful.Mobile.ViewModels
 
             this.forum = forum;
             this.Title = forum.Title;
+        }
+
+        /// <inheritdoc/>
+        public override void RaiseCanExecuteChanged()
+        {
+            this.NewThreadCommand.RaiseCanExecuteChanged();
         }
 
         /// <inheritdoc/>

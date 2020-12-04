@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Awful.Mobile.Views.ProbationView">
+    <ContentView.Content>
+        <StackLayout BackgroundColor="Pink">
+            <Label TextColor="Black" HorizontalTextAlignment="Center" FontSize="10" Text="{Binding OnProbationText}"/>
+            <Rectangle BackgroundColor="Black"/>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

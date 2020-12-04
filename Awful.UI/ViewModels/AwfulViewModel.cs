@@ -19,6 +19,8 @@ namespace Awful.UI.ViewModels
     /// </summary>
     public class AwfulViewModel : BaseViewModel, IDisposable
     {
+        private bool onProbation;
+        private string onProbationText;
         private UserAuth user;
         private bool disposed;
 
@@ -44,8 +46,40 @@ namespace Awful.UI.ViewModels
             this.Context = context;
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the user is on probation.
+        /// </summary>
+        public bool OnProbation
+        {
+            get
+            {
+                return this.onProbation;
+            }
+
+            set
+            {
+                this.SetProperty(ref this.onProbation, value);
+                this.RaiseCanExecuteChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the inner probation error text.
+        /// </summary>
+        public string OnProbationText
+        {
+            get { return this.onProbationText; }
+            set { this.SetProperty(ref this.onProbationText, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the Awful Client.
+        /// </summary>
         public AwfulClient Client { get; set; }
 
+        /// <summary>
+        /// Gets or sets the awful Database Context.
+        /// </summary>
         public AwfulContext Context { get; set; }
 
         /// <summary>

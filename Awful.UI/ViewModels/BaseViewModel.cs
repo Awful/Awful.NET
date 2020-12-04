@@ -28,8 +28,16 @@ namespace Awful.UI.ViewModels
         /// </summary>
         public bool IsBusy
         {
-            get { return this.isBusy; }
-            set { this.SetProperty(ref this.isBusy, value); }
+            get
+            {
+                return this.isBusy;
+            }
+
+            set
+            {
+                this.SetProperty(ref this.isBusy, value);
+                this.RaiseCanExecuteChanged();
+            }
         }
 
         /// <summary>
@@ -37,8 +45,16 @@ namespace Awful.UI.ViewModels
         /// </summary>
         public bool IsRefreshing
         {
-            get { return this.isRefreshing; }
-            set { this.SetProperty(ref this.isRefreshing, value); }
+            get
+            {
+                return this.isRefreshing;
+            }
+
+            set
+            {
+                this.SetProperty(ref this.isRefreshing, value);
+                this.RaiseCanExecuteChanged();
+            }
         }
 
         /// <summary>
@@ -57,6 +73,13 @@ namespace Awful.UI.ViewModels
         {
             get { return this.loadingText; }
             set { this.SetProperty(ref this.loadingText, value); }
+        }
+
+        /// <summary>
+        /// Called when wanting to raise a Command Can Execute.
+        /// </summary>
+        public virtual void RaiseCanExecuteChanged()
+        {
         }
 
 #pragma warning disable SA1600 // Elements should be documented

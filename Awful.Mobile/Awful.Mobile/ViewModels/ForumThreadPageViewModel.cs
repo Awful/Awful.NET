@@ -14,6 +14,7 @@ using Awful.Mobile.Controls;
 using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
+using Awful.UI.Tools;
 using Awful.Webview;
 using Awful.Webview.Entities.Themes;
 using Newtonsoft.Json;
@@ -31,7 +32,8 @@ namespace Awful.Mobile.ViewModels
         private ThreadPostActions threadPostActions;
         private ThreadActions threadActions;
         private ThreadPost threadPost;
-        private Command refreshCommand;
+        private AwfulAsyncCommand refreshCommand;
+        private AwfulAsyncCommand replyToThreadCommand;
         private DefaultOptions defaults;
 
         /// <summary>
@@ -57,59 +59,69 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets the refresh command.
         /// </summary>
-        public Command RefreshCommand
+        public AwfulAsyncCommand RefreshCommand
         {
             get
             {
-                return this.refreshCommand ??= new Command(async () =>
+                return this.refreshCommand ??= new AwfulAsyncCommand(
+                    async () =>
                 {
                     await this.RefreshThreadAsync().ConfigureAwait(false);
-                });
+                },
+                    null,
+                    this);
             }
         }
 
         /// <summary>
         /// Gets the reply to thread command.
         /// </summary>
-        public Command ReplyToThreadCommand
+        public AwfulAsyncCommand ReplyToThreadCommand
         {
             get
             {
-                return new Command(async () =>
+                return this.replyToThreadCommand ??= new AwfulAsyncCommand(
+                    async () =>
                 {
                     if (this.ThreadPost != null)
                     {
                         await PushModalAsync(new ThreadReplyPage(this.Thread.ThreadId)).ConfigureAwait(false);
                     }
-                });
+                },
+                    () => !this.IsBusy && !this.OnProbation,
+                    this);
             }
         }
 
         /// <summary>
         /// Gets the First Page Command.
         /// </summary>
-        public Command FirstPageCommand
+        public AwfulAsyncCommand FirstPageCommand
         {
             get
             {
-                return new Command(async () =>
+                return new AwfulAsyncCommand(
+                    async () =>
                 {
                     if (this.ThreadPost != null)
                     {
                         await this.LoadTemplate(this.threadPost.ThreadId, 1).ConfigureAwait(false);
                     }
-                });
+                },
+                    null,
+                    this);
             }
         }
 
         /// <summary>
         /// Gets the Previous Page Command.
         /// </summary>
-        public Command PreviousPageCommand
+        public AwfulAsyncCommand PreviousPageCommand
         {
             get
             {
-                return new Command(async () =>
+                return new AwfulAsyncCommand(
+                    async () =>
                 {
                     if (this.ThreadPost != null)
                     {
@@ -118,18 +130,21 @@ namespace Awful.Mobile.ViewModels
                             await this.LoadTemplate(this.threadPost.ThreadId, this.threadPost.CurrentPage - 1).ConfigureAwait(false);
                         }
                     }
-                });
+                },
+                    null,
+                    this);
             }
         }
 
         /// <summary>
         /// Gets the Next Page Command.
         /// </summary>
-        public Command NextPageCommand
+        public AwfulAsyncCommand NextPageCommand
         {
             get
             {
-                return new Command(async () =>
+                return new AwfulAsyncCommand(
+                    async () =>
                 {
                     if (this.ThreadPost != null)
                     {
@@ -138,24 +153,29 @@ namespace Awful.Mobile.ViewModels
                             await this.LoadTemplate(this.threadPost.ThreadId, this.threadPost.CurrentPage + 1).ConfigureAwait(false);
                         }
                     }
-                });
+                },
+                    null,
+                    this);
             }
         }
 
         /// <summary>
         /// Gets the Last Page Command.
         /// </summary>
-        public Command LastPageCommand
+        public AwfulAsyncCommand LastPageCommand
         {
             get
             {
-                return new Command(async () =>
+                return new AwfulAsyncCommand(
+                    async () =>
                 {
                     if (this.ThreadPost != null)
                     {
                         await this.LoadTemplate(this.threadPost.ThreadId, this.threadPost.TotalPages).ConfigureAwait(false);
                     }
-                });
+                },
+                    null,
+                    this);
             }
         }
 
@@ -185,6 +205,8 @@ namespace Awful.Mobile.ViewModels
             this.IsBusy = true;
             this.defaults = await this.GenerateDefaultOptionsAsync().ConfigureAwait(false);
             this.ThreadPost = await this.threadPostActions.GetThreadPostsAsync(threadId, pageNumber, gotoNewestPost).ConfigureAwait(false);
+            this.OnProbation = this.ThreadPost.Result.OnProbation;
+            this.OnProbationText = this.ThreadPost.Result.OnProbationText;
             this.Title = this.ThreadPost.Name;
             if (this.Thread != null && this.Thread.RepliesSinceLastOpened > 0)
             {
@@ -238,12 +260,24 @@ namespace Awful.Mobile.ViewModels
             }
         }
 
+        /// <inheritdoc/>
+        public override void RaiseCanExecuteChanged()
+        {
+            this.ReplyToThreadCommand.RaiseCanExecuteChanged();
+        }
+
+        /// <summary>
+        /// Handles post data from Javascript.
+        /// </summary>
+        /// <param name="data">JSON string from post.</param>
         protected void HandleDataFromJavascript(string data)
         {
             var json = JsonConvert.DeserializeObject<WebViewDataInterop>(data);
             switch (json.Type)
             {
                 case "showPostMenu":
+                    // TODO: Refactor into generic method.
+                    // TODO: Place into action? Command?
                     Device.BeginInvokeOnMainThread(async () => {
                         var result = await App.Current.MainPage.DisplayActionSheet("Post Options", "Cancel", null, "Share", "Mark Read", "Quote Post").ConfigureAwait(false);
                         switch (result)
@@ -259,7 +293,11 @@ namespace Awful.Mobile.ViewModels
                                 _ = Task.Run(async () => await this.MarkPostAsUnreadAsync(json.Id).ConfigureAwait(false)).ConfigureAwait(false);
                                 break;
                             case "Quote Post":
-                                await PushModalAsync(new ThreadReplyPage(this.Thread.ThreadId, json.Id, false)).ConfigureAwait(false);
+                                if (!this.OnProbation)
+                                {
+                                    await PushModalAsync(new ThreadReplyPage(this.Thread.ThreadId, json.Id, false)).ConfigureAwait(false);
+                                }
+
                                 break;
                         }
                     });
