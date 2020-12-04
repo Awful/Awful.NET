@@ -339,7 +339,7 @@ namespace Awful.Mobile.ViewModels
                 else
                 {
                     var result = (Result)awfulClientException.Data[AwfulClientException.AwfulClientKey];
-                    errorMessage = $"AwfulClient failed to make a request: {result.Message.StatusCode} - {result.Message.ReasonPhrase} - {result.AbsoluteEndpoint}";
+                    errorMessage = !string.IsNullOrEmpty(result.ErrorText) ? result.ErrorText : $"AwfulClient failed to make a request: {result.Message.StatusCode} - {result.Message.ReasonPhrase} - {result.AbsoluteEndpoint}";
                 }
             }
             else

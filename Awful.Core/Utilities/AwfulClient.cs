@@ -32,7 +32,6 @@ namespace Awful.Core.Utilities
         private bool isDisposed;
         private HtmlParser parser;
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AwfulClient"/> class.
         /// </summary>
@@ -105,7 +104,7 @@ namespace Awful.Core.Utilities
                 this.Client.DefaultRequestHeaders.IfModifiedSince = DateTimeOffset.UtcNow;
                 result = await this.Client.GetAsync(new Uri(endpoint), token).ConfigureAwait(false);
                 html = await HttpClientHelpers.ReadHtmlAsync(result).ConfigureAwait(false);
-                return this.CheckForErrors(result, html, result.RequestMessage.RequestUri.AbsoluteUri, shouldBeJson);
+                return await this.CheckForErrorsAsync(result, html, result.RequestMessage.RequestUri.AbsoluteUri, shouldBeJson).ConfigureAwait(false);
             }
             catch (AwfulClientException)
             {
@@ -140,7 +139,7 @@ namespace Awful.Core.Utilities
                     returnUrl = result.RequestMessage.RequestUri != null ? result.RequestMessage.RequestUri.ToString() : string.Empty;
                 }
 
-                return this.CheckForErrors(result, html, returnUrl, shouldBeJson);
+                return await this.CheckForErrorsAsync(result, html, returnUrl, shouldBeJson).ConfigureAwait(false);
             }
             catch (AwfulClientException)
             {
@@ -168,7 +167,7 @@ namespace Awful.Core.Utilities
             {
                 result = await this.Client.PostAsync(new Uri(endpoint), form, token).ConfigureAwait(false);
                 html = await HttpClientHelpers.ReadHtmlAsync(result).ConfigureAwait(false);
-                return this.CheckForErrors(result, html, endpoint: result.RequestMessage.RequestUri.ToString(), shouldBeJson);
+                return await this.CheckForErrorsAsync(result, html, endpoint: result.RequestMessage.RequestUri.ToString(), shouldBeJson).ConfigureAwait(false);
             }
             catch (AwfulClientException)
             {
@@ -218,7 +217,15 @@ namespace Awful.Core.Utilities
             this.isDisposed = true;
         }
 
-        private Result CheckForErrors(HttpResponseMessage message, string text = "", string endpoint = "", bool shouldBeJson = false)
+        private static void CheckForPaywall(string html)
+        {
+            if (html.Contains("Sorry, you must be a registered forums member to view this page."))
+            {
+                throw new PaywallException(Awful.Core.Resources.ExceptionMessages.PaywallThreadHit);
+            }
+        }
+
+        private async Task<Result> CheckForErrorsAsync(HttpResponseMessage message, string text = "", string endpoint = "", bool shouldBeJson = false)
         {
             var result = new Result(message, text, endpoint);
 
@@ -233,19 +240,11 @@ namespace Awful.Core.Utilities
                 }
             }
 
-            this.CheckHtmlForErrors(result);
+            await this.CheckHtmlForErrorsAsync(result).ConfigureAwait(false);
             return result;
         }
 
-        private static void CheckForPaywall(string html)
-        {
-            if (html.Contains("Sorry, you must be a registered forums member to view this page."))
-            {
-                throw new PaywallException(Awful.Core.Resources.ExceptionMessages.PaywallThreadHit);
-            }
-        }
-
-        private async void CheckHtmlForErrors(Result result)
+        private async Task CheckHtmlForErrorsAsync(Result result)
         {
             var document = await this.parser.ParseDocumentAsync(result.ResultText).ConfigureAwait(false);
             if (!document.Body.ClassList.Contains("standarderror"))
