@@ -35,7 +35,7 @@ Windows
 
 Mac
 
-- Download [Visual Studio](https://visualstudio.microsoft.com)
+- Download [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/)
 - For Workloads, make sure iOS, Android, and Mac are checked.
 - After installing, open `Awful.sln`
 - Visual Studio for Mac may prompt to install Android SDKs, install them.
