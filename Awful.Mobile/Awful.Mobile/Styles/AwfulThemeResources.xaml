@@ -219,7 +219,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0" FontSize="{OnPlatform Android=15, iOS=18, Default=15}" Margin="1" MaxLines="2" LineBreakMode="TailTruncation" Text="{Binding Name}" />
+                        <Label Grid.Row="0" FontSize="{OnPlatform Android=15, iOS=18, Default=15}" Margin="1" MaxLines="4" LineBreakMode="TailTruncation" Text="{Binding Name}" />
                         <Grid Margin="2" VerticalOptions="End" Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
