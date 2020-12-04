@@ -78,17 +78,6 @@ namespace Awful.Mobile.ViewModels
         }
 
         /// <summary>
-        /// Reset forum thread list and reload it.
-        /// </summary>
-        /// <returns><see cref="Task"/>.</returns>
-        public async Task RefreshForums()
-        {
-            this.IsRefreshing = true;
-            await this.LoadThreadListAsync(this.forum.Id, 1).ConfigureAwait(false);
-            this.IsRefreshing = false;
-        }
-
-        /// <summary>
         /// Gets the Selection Entry.
         /// </summary>
         public AwfulAsyncCommand<AwfulThread> SelectionCommand
@@ -126,6 +115,17 @@ namespace Awful.Mobile.ViewModels
                     null,
                     this);
             }
+        }
+
+        /// <summary>
+        /// Reset forum thread list and reload it.
+        /// </summary>
+        /// <returns><see cref="Task"/>.</returns>
+        public async Task RefreshForums()
+        {
+            this.IsRefreshing = true;
+            await this.LoadThreadListAsync(this.forum.Id, 1).ConfigureAwait(false);
+            this.IsRefreshing = false;
         }
 
         /// <summary>
