@@ -2,6 +2,11 @@
 
 Awful.NET is a cross-platform browser for the Something Awful forums, based on [Xamarin](https://dotnet.microsoft.com/apps/xamarin) and [.NET](https://dotnet.microsoft.com). It's not a replacement for the existing apps available. Instead, it's a way to experiment with getting Something Awful apps on the broadest range of platforms, all under the same codebase.
 
+![Simulator Screen Shot - iPhone 12 - 2020-12-03 at 19 39 47](https://user-images.githubusercontent.com/898335/101108310-40055f00-35a2-11eb-9382-b2713229a9ad.png)
+
+![Screenshot_20201203-200151](https://user-images.githubusercontent.com/898335/101108484-97a3ca80-35a2-11eb-91b0-68d39becac79.png)
+
+![image0](https://user-images.githubusercontent.com/898335/101108483-970b3400-35a2-11eb-8692-55aef2adcebd.png)
 
 ## An Unofficial App
 
@@ -30,6 +35,22 @@ Mac
 - Visual Studio for Mac may prompt to install Android SDKs, install them.
 - To run the Android build, select `Awful.Mobile.Droid` in the project selection dropdown, and deploy. It should build and deploy to your device or simulator.
 - To run the iOS app, you need XCode installed. If you don't, you will be prompted to install it. Select `Awful.Mobile.iOS` and deploy.
+
+## Awful.Mobile
+
+Awful.Mobile is the mobile application. We are using Xamarin.Forms and currently targeting iOS and Android. Using Forms, we can make a shared UI that can span multiple platforms with the vast majority of the same code.
+
+## Awful.Core
+
+Awful.Core is the main entry point for interacting with Something Awful. It handles the requests to Something Awful (`AwfulClient` and `Manager`) and parsing the HTML and JSON endpoints to return to the caller (`Handler').
+
+## Awful.Webview
+
+Awful.Webview contains a .NET Standard library for creating new Webviews our of Something Awful assets. The majority of the existing Handlebars templates were based on [Awful.app](https://github.com/Awful/Awful.app). The goal is to overlay their existing templates and Javascript with code that can work cross-platform.
+
+## Awful.Database
+
+Awful.Database is an Entity Framework Core database, using SQlite.
 
 ## Awful.Console
 

@@ -16,6 +16,7 @@ using Awful.Database.Entities;
 using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
+using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Awful.Webview;
 using Xamarin.CommunityToolkit.UI.Views;
@@ -26,7 +27,7 @@ namespace Awful.Mobile.ViewModels
     public class PrivateMessagesPageViewModel : MobileAwfulViewModel
     {
         PrivateMessageActions pmActions;
-        private Command refreshCommand;
+        private AwfulAsyncCommand refreshCommand;
         private TemplateHandler handler;
 
         /// <summary>
@@ -44,33 +45,39 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets the refresh command.
         /// </summary>
-        public Command RefreshCommand
+        public AwfulAsyncCommand RefreshCommand
         {
             get
             {
-                return this.refreshCommand ??= new Command(async () =>
+                return this.refreshCommand ??= new AwfulAsyncCommand(
+                    async () =>
                 {
                     this.IsRefreshing = true;
-                    await this.LoadThreadListAsync(true).ConfigureAwait(false);
+                    await this.LoadThreadListAsync(this.Threads.Count > 0).ConfigureAwait(false);
                     this.IsRefreshing = false;
-                });
+                },
+                    null,
+                    this);
             }
         }
 
         /// <summary>
         /// Gets the Selection Entry.
         /// </summary>
-        public Command<AwfulPM> SelectionCommand
+        public AwfulAsyncCommand<AwfulPM> SelectionCommand
         {
             get
             {
-                return new Command<AwfulPM>(async (item) =>
+                return new AwfulAsyncCommand<AwfulPM>(
+                    async (item) =>
                 {
                     if (item != null)
                     {
                         await PushDetailPageAsync(new PrivateMessagePage(item)).ConfigureAwait(false);
                     }
-                });
+                },
+                    null,
+                    this);
             }
         }
 
@@ -97,7 +104,7 @@ namespace Awful.Mobile.ViewModels
             this.pmActions = new PrivateMessageActions(this.Client, this.Context, this.handler);
             if (!this.Threads.Any())
             {
-                await this.LoadThreadListAsync().ConfigureAwait(false);
+                await this.RefreshCommand.ExecuteAsync().ConfigureAwait(false);
             }
         }
     }

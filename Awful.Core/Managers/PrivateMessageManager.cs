@@ -48,42 +48,7 @@ namespace Awful.Core.Managers
                 throw new UserAuthenticationException(Awful.Core.Resources.ExceptionMessages.UserAuthenticationError);
             }
 
-            var pmList = new List<PrivateMessage>();
-            var page = 0;
-            while (true)
-            {
-                var result = await this.GetPrivateMessageListAsync(page, token).ConfigureAwait(false);
-                pmList.AddRange(result.PrivateMessages);
-                if (!result.PrivateMessages.Any())
-                {
-                    break;
-                }
-
-                page++;
-            }
-
-            return new PrivateMessageList(pmList);
-        }
-
-        /// <summary>
-        /// Get Private Message List per page.
-        /// </summary>
-        /// <param name="page">Page number.</param>
-        /// <param name="token">Cancellation Token.</param>
-        /// <returns>List of private messages.</returns>
-        public async Task<PrivateMessageList> GetPrivateMessageListAsync(int page, CancellationToken token = default)
-        {
-            if (!this.webManager.IsAuthenticated)
-            {
-                throw new UserAuthenticationException(Awful.Core.Resources.ExceptionMessages.UserAuthenticationError);
-            }
-
             var url = EndPoints.PrivateMessages;
-            if (page > 0)
-            {
-                url = EndPoints.PrivateMessages + string.Format(CultureInfo.InvariantCulture, EndPoints.PageNumber, page);
-            }
-
             var result = await this.webManager.GetDataAsync(url, false, token).ConfigureAwait(false);
             try
             {
