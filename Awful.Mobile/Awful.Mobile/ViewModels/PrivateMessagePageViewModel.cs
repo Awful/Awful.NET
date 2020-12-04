@@ -16,6 +16,7 @@ using Awful.Database.Entities;
 using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
+using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Awful.Webview;
 using Awful.Webview.Entities.Themes;
@@ -24,10 +25,13 @@ using Xamarin.Forms;
 
 namespace Awful.Mobile.ViewModels
 {
+    /// <summary>
+    /// Private Message Page View Model.
+    /// </summary>
     public class PrivateMessagePageViewModel : MobileAwfulViewModel
     {
-        PrivateMessageActions pmActions;
-        private Command refreshCommand;
+        private PrivateMessageActions pmActions;
+        private AwfulAsyncCommand refreshCommand;
         private AwfulPM pm;
         private DefaultOptions defaults;
         private TemplateHandler handler;
@@ -35,6 +39,7 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="PrivateMessagePageViewModel"/> class.
         /// </summary>
+        /// <param name="handler">Template Handler.</param>
         /// <param name="context">Awful Context.</param>
         public PrivateMessagePageViewModel(TemplateHandler handler, AwfulContext context)
             : base(context)
@@ -50,11 +55,12 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets the refresh command.
         /// </summary>
-        public Command RefreshCommand
+        public AwfulAsyncCommand RefreshCommand
         {
             get
             {
-                return this.refreshCommand ??= new Command(async () =>
+                return this.refreshCommand ??= new AwfulAsyncCommand(
+                    async () =>
                 {
                     if (this.pm != null)
                     {
@@ -62,7 +68,9 @@ namespace Awful.Mobile.ViewModels
                         await this.LoadTemplate(this.pm.PrivateMessageId).ConfigureAwait(false);
                         this.IsRefreshing = false;
                     }
-                });
+                },
+                    null,
+                    this);
             }
         }
 
@@ -84,6 +92,7 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Loads PM Template into webview.
         /// </summary>
+        /// <param name="pmId">Private Message Id.</param>
         /// <returns>Task.</returns>
         public async Task LoadTemplate(int pmId)
         {

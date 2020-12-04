@@ -9,6 +9,7 @@ using Awful.Core.Entities.Web;
 using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.UI.Actions;
+using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Awful.Webview;
 using Xamarin.Forms;
@@ -24,6 +25,7 @@ namespace Awful.Mobile.ViewModels
         private int threadId = 0;
         private int id = 0;
         private bool isEdit;
+        private AwfulAsyncCommand postReplyCommand;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadReplyPageViewModel"/> class.
@@ -36,24 +38,14 @@ namespace Awful.Mobile.ViewModels
         }
 
         /// <summary>
-        /// Load thread into view.
-        /// </summary>
-        /// <param name="thread">Thread.</param>
-        public void LoadThread(int threadId, int id = 0, bool isEdit = false)
-        {
-            this.threadId = threadId;
-            this.id = id;
-            this.isEdit = isEdit;
-        }
-
-        /// <summary>
         /// Gets the post Reply.
         /// </summary>
-        public Command PostReplyCommand
+        public AwfulAsyncCommand PostReplyCommand
         {
             get
             {
-                return new Command(async () =>
+                return this.postReplyCommand ??= new AwfulAsyncCommand(
+                    async () =>
                 {
                     if (this.reply != null)
                     {
@@ -81,8 +73,27 @@ namespace Awful.Mobile.ViewModels
                             await RefreshPostPageAsync().ConfigureAwait(false);
                         });
                     }
-                });
+                },
+                    () => this.reply != null && !string.IsNullOrEmpty(this.Message.Trim()),
+                    this);
             }
+        }
+
+        /// <summary>
+        /// Load thread into view.
+        /// </summary>
+        /// <param name="thread">Thread.</param>
+        public void LoadThread(int threadId, int id = 0, bool isEdit = false)
+        {
+            this.threadId = threadId;
+            this.id = id;
+            this.isEdit = isEdit;
+        }
+
+        /// <inheritdoc/>
+        public override void RaiseCanExecuteChanged()
+        {
+            this.PostReplyCommand.RaiseCanExecuteChanged();
         }
 
         /// <inheritdoc/>

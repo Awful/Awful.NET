@@ -19,7 +19,7 @@
                 <Button Command="{Binding PostReplyCommand}" HorizontalOptions="EndAndExpand" Text="Post"/>
             </StackLayout>
             <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
-            <Editor Grid.Row="2" Margin="15" x:Name="AwfulEditor"/>
+            <Editor Text="{Binding Message}" Grid.Row="2" Margin="15" x:Name="AwfulEditor"/>
         </Grid>
     </ContentPage.Content>
 </pages:BasePage>

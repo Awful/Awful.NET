@@ -14,6 +14,7 @@ using Awful.Database.Context;
 using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
+using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Awful.Webview;
 using Xamarin.CommunityToolkit.UI.Views;
@@ -29,6 +30,7 @@ namespace Awful.Mobile.ViewModels
     {
         private SAclopediaAction saclopedia;
         private TemplateHandler handler;
+        private AwfulAsyncCommand refreshCommand;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SAclopediaEntryListPageViewModel"/> class.
@@ -44,11 +46,12 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets the Selection Entry.
         /// </summary>
-        public Command<SAclopediaEntryItem> SelectionCommand
+        public AwfulAsyncCommand<SAclopediaEntryItem> SelectionCommand
         {
             get
             {
-                return new Command<SAclopediaEntryItem>((item) =>
+                return new AwfulAsyncCommand<SAclopediaEntryItem>(
+                    async (item) =>
                 {
                     if (item != null)
                     {
@@ -57,18 +60,20 @@ namespace Awful.Mobile.ViewModels
                             await PushDetailPageAsync(new SAclopediaEntryPage(item)).ConfigureAwait(false);
                         });
                     }
-                });
+                },
+                    null,
+                    this);
             }
         }
 
         /// <summary>
         /// Gets the refresh command.
         /// </summary>
-        public Command RefreshCommand
+        public AwfulAsyncCommand RefreshCommand
         {
             get
             {
-                return new Command(async () => await this.RefreshEntryList(true).ConfigureAwait(false));
+                return this.refreshCommand ??= new AwfulAsyncCommand(async () => await this.RefreshEntryList(true).ConfigureAwait(false), null, this);
             }
         }
 
@@ -77,6 +82,7 @@ namespace Awful.Mobile.ViewModels
         /// </summary>
         public List<SAclopediaGroup> Items { get; private set; } = new List<SAclopediaGroup>();
 
+        /// <inheritdoc/>
         public override async Task OnLoad()
         {
             if (this.IsSignedIn)

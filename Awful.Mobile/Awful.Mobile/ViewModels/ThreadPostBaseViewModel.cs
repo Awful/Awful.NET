@@ -6,6 +6,7 @@ using System;
 using System.Threading.Tasks;
 using Awful.Database.Context;
 using Awful.UI.Actions;
+using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Awful.Webview;
 using Xamarin.Forms;
@@ -17,10 +18,12 @@ namespace Awful.Mobile.ViewModels
     /// </summary>
     public class ThreadPostBaseViewModel : MobileAwfulViewModel
     {
-        private TemplateHandler handler;
         protected ThreadReplyActions replyActions;
         protected ThreadPostCreationActions postActions;
         protected ThreadActions threadActions;
+        private TemplateHandler handler;
+        private string subject = string.Empty;
+        private string message = string.Empty;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadPostBaseViewModel"/> class.
@@ -34,6 +37,40 @@ namespace Awful.Mobile.ViewModels
         }
 
         /// <summary>
+        /// Gets or sets the subject of the post.
+        /// </summary>
+        public string Subject
+        {
+            get
+            {
+                return this.subject;
+            }
+
+            set
+            {
+                this.SetProperty(ref this.subject, value);
+                this.RaiseCanExecuteChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the message of the post.
+        /// </summary>
+        public string Message
+        {
+            get
+            {
+                return this.message;
+            }
+
+            set
+            {
+                this.SetProperty(ref this.message, value);
+                this.RaiseCanExecuteChanged();
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the thread editor.
         /// </summary>
         public Editor Editor { get; set; }
@@ -41,14 +78,17 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets the close modal command.
         /// </summary>
-        public Command CloseModalCommand
+        public AwfulAsyncCommand CloseModalCommand
         {
             get
             {
-                return new Command(async () =>
+                return new AwfulAsyncCommand(
+                    async () =>
                 {
                     await PopModalAsync().ConfigureAwait(false);
-                });
+                },
+                    null,
+                    this);
             }
         }
 

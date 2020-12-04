@@ -2,19 +2,13 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Awful.Core.Entities.PostIcons;
 using Awful.Core.Entities.Threads;
-using Awful.Core.Entities.Web;
 using Awful.Database.Context;
 using Awful.Database.Entities;
-using Awful.Mobile.Pages;
-using Awful.UI.Tools;
 using Awful.Mobile.Views;
-using Awful.UI.ViewModels;
+using Awful.UI.Tools;
 using Awful.Webview;
 using Xamarin.Forms;
 
@@ -29,8 +23,6 @@ namespace Awful.Mobile.ViewModels
         private AwfulForum forum;
         private PostIcon postIcon = new PostIcon();
         private AwfulAsyncCommand postThreadCommand;
-        private string message;
-        private string subject;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NewThreadPageViewModel"/> class.
@@ -40,40 +32,6 @@ namespace Awful.Mobile.ViewModels
         public NewThreadPageViewModel(TemplateHandler handler, AwfulContext context)
             : base(handler, context)
         {
-        }
-
-        /// <summary>
-        /// Gets or sets the subject of the post.
-        /// </summary>
-        public string Subject
-        {
-            get
-            {
-                return this.subject;
-            }
-
-            set
-            {
-                this.SetProperty(ref this.subject, value);
-                this.PostThreadCommand.RaiseCanExecuteChanged();
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the message of the post.
-        /// </summary>
-        public string Message
-        {
-            get
-            {
-                return this.message;
-            }
-
-            set
-            {
-                this.SetProperty(ref this.message, value);
-                this.PostThreadCommand.RaiseCanExecuteChanged();
-            }
         }
 
         /// <summary>
@@ -181,6 +139,12 @@ namespace Awful.Mobile.ViewModels
         public override void OnCloseModal()
         {
             this.OnPropertyChanged(nameof(this.PostIcon));
+            this.PostThreadCommand.RaiseCanExecuteChanged();
+        }
+
+        /// <inheritdoc/>
+        public override void RaiseCanExecuteChanged()
+        {
             this.PostThreadCommand.RaiseCanExecuteChanged();
         }
 
