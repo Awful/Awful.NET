@@ -250,6 +250,14 @@ namespace Awful.Core.Utilities
             // If we get JSON, this will still parse and return a document.
             // So it should be safe to still check it for HTML errors and return it.
             var document = await this.parser.ParseDocumentAsync(result.ResultText).ConfigureAwait(false);
+
+            var probationNode = document.QuerySelector("#probation_warn");
+            if (probationNode != null)
+            {
+                result.OnProbation = true;
+                result.OnProbationText = probationNode.TextContent.Trim();
+            }
+
             if (!document.Body.ClassList.Contains("standarderror"))
             {
                 result.Document = document;
