@@ -27,14 +27,17 @@ namespace Awful.Mobile.ViewModels
         private SettingsAction settingActions;
         private SettingOptions settings;
         private DeviceColorTheme deviceColorTheme;
+        private IPlatformProperties platformProperties;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MobileSettingsPageViewModel"/> class.
         /// </summary>
+        /// <param name="platformProperties">Platform Properties.</param>
         /// <param name="context">Awful Context.</param>
-        public MobileSettingsPageViewModel(AwfulContext context)
+        public MobileSettingsPageViewModel(IPlatformProperties platformProperties, AwfulContext context)
             : base(context)
         {
+            this.platformProperties = platformProperties;
             this.settings = new SettingOptions();
             this.settingActions = new SettingsAction(context);
         }
@@ -105,18 +108,12 @@ namespace Awful.Mobile.ViewModels
                 return new AwfulAsyncCommand(
                     async () =>
                 {
-                    if (!this.IsSignedIn)
+                    bool answer = await Application.Current.MainPage.DisplayAlert("Log Out", "Are you sure you want to log out?", "Yep", "Nope").ConfigureAwait(false);
+                    if (answer)
                     {
-                        await MobileAwfulViewModel.PushModalAsync(new LoginPage()).ConfigureAwait(false);
-                    }
-                    else
-                    {
-                        bool answer = await Application.Current.MainPage.DisplayAlert("Log Out", "Are you sure you want to log out?", "Yep", "Nope").ConfigureAwait(false);
-                        if (answer)
-                        {
-                            this.Context.ResetDatabase();
-                            Device.BeginInvokeOnMainThread(() => App.Current.MainPage = new LoginPage());
-                        }
+                        System.IO.File.Delete(this.platformProperties.CookiePath);
+                        this.Context.ResetDatabase();
+                        Device.BeginInvokeOnMainThread(() => App.Current.MainPage = new LoginPage());
                     }
                 },
                     null,
