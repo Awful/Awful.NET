@@ -1,4 +1,4 @@
-﻿// <copyright file="NewThreadPage.xaml.cs" company="Drastic Actions">
+﻿// <copyright file="NewPrivateMessagePage.xaml.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
-using Awful.Database.Entities;
 using Awful.Mobile.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,23 +15,21 @@ using Xamarin.Forms.Xaml;
 namespace Awful.Mobile.Pages
 {
     /// <summary>
-    /// New Thread Page.
+    /// New Private Message Page.
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NewThreadPage : BasePage
+    public partial class NewPrivateMessagePage : BasePage
     {
-        private NewThreadPageViewModel vm;
+        private NewPrivateMessagePageViewModel vm;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NewThreadPage"/> class.
+        /// Initializes a new instance of the <see cref="NewPrivateMessagePage"/> class.
         /// </summary>
-        /// <param name="forum">Forum.</param>
-        public NewThreadPage(AwfulForum forum)
+        public NewPrivateMessagePage()
         {
             this.InitializeComponent();
-            this.BindingContext = this.vm = App.Container.Resolve<NewThreadPageViewModel>();
+            this.BindingContext = this.vm = App.Container.Resolve<NewPrivateMessagePageViewModel>();
             this.vm.Editor = this.AwfulEditor;
-            this.vm.LoadForum(forum);
         }
     }
 }

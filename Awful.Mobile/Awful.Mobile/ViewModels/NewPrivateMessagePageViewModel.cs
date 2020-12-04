@@ -1,13 +1,15 @@
-﻿// <copyright file="NewThreadPageViewModel.cs" company="Drastic Actions">
+﻿// <copyright file="NewPrivateMessagePageViewModel.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
 using System.Threading.Tasks;
+using Awful.Core.Entities.Messages;
 using Awful.Core.Entities.PostIcons;
 using Awful.Core.Entities.Threads;
 using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Mobile.Views;
+using Awful.UI.Actions;
 using Awful.UI.Tools;
 using Awful.Webview;
 using Xamarin.Forms;
@@ -15,23 +17,41 @@ using Xamarin.Forms;
 namespace Awful.Mobile.ViewModels
 {
     /// <summary>
-    /// New Thread Page View Model.
+    /// New Private Message Page View Model.
     /// </summary>
-    public class NewThreadPageViewModel : ThreadPostBaseViewModel
+    public class NewPrivateMessagePageViewModel : ThreadPostBaseViewModel
     {
-        private NewThread newThread;
-        private AwfulForum forum;
+        private PrivateMessageActions pmActions;
+        private NewPrivateMessage newPrivateMessage = new NewPrivateMessage();
         private PostIcon postIcon = new PostIcon();
-        private AwfulAsyncCommand postThreadCommand;
+        private AwfulAsyncCommand postPMCommand;
+        private string to = string.Empty;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NewThreadPageViewModel"/> class.
+        /// Initializes a new instance of the <see cref="NewPrivateMessagePageViewModel"/> class.
         /// </summary>
         /// <param name="handler">Awful handler.</param>
         /// <param name="context">Awful Context.</param>
-        public NewThreadPageViewModel(TemplateHandler handler, AwfulContext context)
+        public NewPrivateMessagePageViewModel(TemplateHandler handler, AwfulContext context)
             : base(handler, context)
         {
+        }
+
+        /// <summary>
+        /// Gets or sets the subject of the post.
+        /// </summary>
+        public string To
+        {
+            get
+            {
+                return this.to;
+            }
+
+            set
+            {
+                this.SetProperty(ref this.to, value);
+                this.RaiseCanExecuteChanged();
+            }
         }
 
         /// <summary>
@@ -62,7 +82,7 @@ namespace Awful.Mobile.ViewModels
                     {
                         if (this.Popup != null)
                         {
-                            this.Popup.SetContent(new ForumPostIconSelectionView(this.forum, this.PostIcon), true, this.OnCloseModal);
+                            this.Popup.SetContent(new ForumPostIconSelectionView(null, this.PostIcon), true, this.OnCloseModal);
                         }
 
                         return Task.CompletedTask;
@@ -73,93 +93,78 @@ namespace Awful.Mobile.ViewModels
         }
 
         /// <summary>
-        /// Gets the post thread command.
+        /// Gets the post pm command.
         /// </summary>
-        public AwfulAsyncCommand PostThreadCommand
+        public AwfulAsyncCommand PostPMCommand
         {
             get
             {
-                return this.postThreadCommand ??= new AwfulAsyncCommand(
+                return this.postPMCommand ??= new AwfulAsyncCommand(
                     async () =>
                     {
-                        if (this.newThread != null)
+                        if (this.newPrivateMessage != null)
                         {
-                            var threadText = this.Message.Trim();
-                            if (string.IsNullOrEmpty(threadText))
+                            var pmText = this.Message.Trim();
+                            if (string.IsNullOrEmpty(pmText))
                             {
                                 return;
                             }
 
-                            var threadTitle = this.Subject.Trim();
-                            if (string.IsNullOrEmpty(threadTitle))
+                            var pmTitle = this.Subject.Trim();
+                            if (string.IsNullOrEmpty(pmTitle))
                             {
                                 return;
                             }
 
-                            if (string.IsNullOrEmpty(this.PostIcon.ImageLocation))
+                            var to = this.To.Trim();
+                            if (string.IsNullOrEmpty(to))
                             {
                                 return;
                             }
 
-                            this.newThread.PostIcon = this.PostIcon;
-                            this.newThread.Subject = threadTitle;
-                            this.newThread.Content = threadText;
+                            this.newPrivateMessage.Icon = this.PostIcon;
+                            this.newPrivateMessage.Title = pmTitle;
+                            this.newPrivateMessage.Body = pmText;
+                            this.newPrivateMessage.Receiver = to;
 
                             // The Manager will throw if we couldn't post.
                             // That will be captured by AwfulAsyncCommand.
-                            await this.threadActions.PostNewThreadAsync(this.newThread).ConfigureAwait(false);
+                            await this.pmActions.SendPrivateMessageAsync(this.newPrivateMessage).ConfigureAwait(false);
 
                             Device.BeginInvokeOnMainThread(async () =>
                             {
                                 await PopModalAsync().ConfigureAwait(false);
-                                await RefreshForumPageAsync().ConfigureAwait(false);
                             });
                         }
                     },
-                    () => this.CanPost,
+                    () => this.CanPostPm,
                     this);
             }
         }
 
-        private bool CanPost
+        private bool CanPostPm
         {
-            get { return !string.IsNullOrEmpty(this.Subject) && !string.IsNullOrEmpty(this.Message) && !string.IsNullOrEmpty(this.postIcon.ImageEndpoint); }
-        }
-
-        /// <summary>
-        /// Loads Forum into VM.
-        /// </summary>
-        /// <param name="forum"><see cref="AwfulForum"/>.</param>
-        public void LoadForum (AwfulForum forum)
-        {
-            this.forum = forum;
+            get { return !string.IsNullOrEmpty(this.Subject) && !string.IsNullOrEmpty(this.To) && !string.IsNullOrEmpty(this.Message); }
         }
 
         /// <inheritdoc/>
         public override void OnCloseModal()
         {
             this.OnPropertyChanged(nameof(this.PostIcon));
-            this.PostThreadCommand.RaiseCanExecuteChanged();
+            this.PostPMCommand.RaiseCanExecuteChanged();
         }
 
         /// <inheritdoc/>
         public override void RaiseCanExecuteChanged()
         {
-            this.PostThreadCommand.RaiseCanExecuteChanged();
+            this.PostPMCommand.RaiseCanExecuteChanged();
         }
 
         /// <inheritdoc/>
         public override async Task OnLoad()
         {
             await base.OnLoad().ConfigureAwait(false);
-            if (this.newThread == null)
-            {
-                this.newThread = await this.threadActions.CreateNewThreadAsync(this.forum.Id).ConfigureAwait(false);
-            }
-            else
-            {
-                this.OnPropertyChanged(nameof(this.PostIcon));
-            }
+            this.pmActions = new PrivateMessageActions(this.Client, this.Context, null);
         }
     }
 }

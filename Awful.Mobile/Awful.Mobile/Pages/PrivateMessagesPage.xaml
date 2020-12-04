@@ -8,7 +8,7 @@
     xmlns:local="clr-namespace:Awful.Mobile.Tools.Markup;assembly=Awful.Mobile"
     x:Class="Awful.Mobile.Pages.PrivateMessagesPage">
    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Post" IsEnabled="{Binding IsSignedIn}"
+        <ToolbarItem Command="{Binding NewPMCommand}" Text="Post"
         Order="Primary"
                  Priority="0">
             <ToolbarItem.IconImageSource>

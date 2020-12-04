@@ -24,11 +24,15 @@ using Xamarin.Forms;
 
 namespace Awful.Mobile.ViewModels
 {
+    /// <summary>
+    /// Private Message Page View Model.
+    /// </summary>
     public class PrivateMessagesPageViewModel : MobileAwfulViewModel
     {
-        PrivateMessageActions pmActions;
+        private PrivateMessageActions pmActions;
         private AwfulAsyncCommand refreshCommand;
         private TemplateHandler handler;
+        private AwfulAsyncCommand newPMCommand;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PrivateMessagesPageViewModel"/> class.
@@ -52,9 +56,7 @@ namespace Awful.Mobile.ViewModels
                 return this.refreshCommand ??= new AwfulAsyncCommand(
                     async () =>
                 {
-                    this.IsRefreshing = true;
-                    await this.LoadThreadListAsync(this.Threads.Count > 0).ConfigureAwait(false);
-                    this.IsRefreshing = false;
+                    await this.RefreshPMs(this.Threads.Count > 0).ConfigureAwait(false);
                 },
                     null,
                     this);
@@ -82,6 +84,35 @@ namespace Awful.Mobile.ViewModels
         }
 
         /// <summary>
+        /// Gets the new pm command.
+        /// </summary>
+        public AwfulAsyncCommand NewPMCommand
+        {
+            get
+            {
+                return this.newPMCommand ??= new AwfulAsyncCommand(
+                    async () =>
+                    {
+                        await PushModalAsync(new NewPrivateMessagePage()).ConfigureAwait(false);
+                    },
+                    () => !this.IsBusy,
+                    this);
+            }
+        }
+
+        /// <summary>
+        /// Refresh all PMs.
+        /// </summary>
+        /// <param name="forceRefresh">Force refresh PMs.</param>
+        /// <returns>Task.</returns>
+        public async Task RefreshPMs(bool forceRefresh = false)
+        {
+            this.IsRefreshing = true;
+            await this.LoadThreadListAsync(forceRefresh).ConfigureAwait(false);
+            this.IsRefreshing = false;
+        }
+
+        /// <summary>
         /// Load PMs into the Thread List.
         /// </summary>
         /// <param name="forceRefresh">Force refresh PMs.</param>
@@ -89,6 +120,7 @@ namespace Awful.Mobile.ViewModels
         public async Task LoadThreadListAsync(bool forceRefresh = false)
         {
             this.IsBusy = true;
+            this.Threads.Clear();
             var threadList = await this.pmActions.GetAllPrivateMessagesAsync(forceRefresh).ConfigureAwait(false);
             foreach (var thread in threadList)
             {
@@ -96,6 +128,12 @@ namespace Awful.Mobile.ViewModels
             }
 
             this.IsBusy = false;
+        }
+
+        /// <inheritdoc/>
+        public override void RaiseCanExecuteChanged()
+        {
+            this.NewPMCommand.RaiseCanExecuteChanged();
         }
 
         /// <inheritdoc/>

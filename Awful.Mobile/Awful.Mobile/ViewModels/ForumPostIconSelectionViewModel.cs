@@ -82,11 +82,20 @@ namespace Awful.Mobile.ViewModels
         public override async Task OnLoad()
         {
             this.threadPostCreationActions = new ThreadPostCreationActions(this.Client);
-            if (this.forum != null && this.selectedIcon != null && this.threadPostCreationActions != null)
+            if (this.selectedIcon != null && this.threadPostCreationActions != null)
             {
                 this.IsBusy = true;
                 this.Icons.Clear();
-                var icons = await this.threadPostCreationActions.GetForumPostIconsAsync(this.forum.Id).ConfigureAwait(false);
+                PostIconList icons;
+                if (this.forum == null)
+                {
+                    icons = await this.threadPostCreationActions.GetPrivateMessagePostIconsAsync().ConfigureAwait(false);
+                }
+                else
+                {
+                    icons = await this.threadPostCreationActions.GetForumPostIconsAsync(this.forum.Id).ConfigureAwait(false);
+                }
+
                 foreach (var icon in icons.Icons)
                 {
                     this.Icons.Add(icon);
