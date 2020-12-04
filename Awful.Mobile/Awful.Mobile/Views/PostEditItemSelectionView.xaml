@@ -20,7 +20,7 @@
                             />
                                 </Image.Source>
                             </Image>
-                            <Label HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Title}" />
+                            <Label FontSize="Caption" HorizontalTextAlignment="Center" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Title}" />
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
