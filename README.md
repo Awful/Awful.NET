@@ -2,11 +2,17 @@
 
 Awful.NET is a cross-platform browser for the Something Awful forums, based on [Xamarin](https://dotnet.microsoft.com/apps/xamarin) and [.NET](https://dotnet.microsoft.com). It's not a replacement for the existing apps available. Instead, it's a way to experiment with getting Something Awful apps on the broadest range of platforms, all under the same codebase.
 
-![Simulator Screen Shot - iPhone 12 - 2020-12-03 at 19 39 47](https://user-images.githubusercontent.com/898335/101108310-40055f00-35a2-11eb-9382-b2713229a9ad.png)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/898335/101108310-40055f00-35a2-11eb-9382-b2713229a9ad.png" width="414" height="896">
+</p>
 
-![Screenshot_20201203-200151](https://user-images.githubusercontent.com/898335/101108484-97a3ca80-35a2-11eb-91b0-68d39becac79.png)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/898335/101109309-96739d00-35a4-11eb-8aea-61bfb3ee6790.png" width="414" height="896">
+</p>
 
-![image0](https://user-images.githubusercontent.com/898335/101108483-970b3400-35a2-11eb-8692-55aef2adcebd.png)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/898335/101109305-95427000-35a4-11eb-86d1-049b7c4c0630.png" width="414" height="896">
+</p>
 
 ## An Unofficial App
 
