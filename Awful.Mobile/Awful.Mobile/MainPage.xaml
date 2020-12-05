@@ -10,7 +10,7 @@
      <FlyoutPage.Flyout>
        <NavigationPage Title="Menu">
            <x:Arguments>
-               <mobile:MasterPage/>
+               <mobile:MainTabbedPage/>
            </x:Arguments>
        </NavigationPage>
     </FlyoutPage.Flyout>

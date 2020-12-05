@@ -2,25 +2,15 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using Awful.Core.Entities.JSON;
-using Awful.Core.Tools;
-using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Mobile.Pages;
 using Awful.UI.Actions;
-using Awful.UI.Entities;
 using Awful.UI.Tools;
-using Awful.UI.ViewModels;
 using Awful.Webview;
-using Xamarin.CommunityToolkit.UI.Views;
-using Xamarin.Forms;
 
 namespace Awful.Mobile.ViewModels
 {
@@ -37,6 +27,7 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="PrivateMessagesPageViewModel"/> class.
         /// </summary>
+        /// <param name="handler">Awful Handler.</param>
         /// <param name="context">Awful Context.</param>
         public PrivateMessagesPageViewModel(TemplateHandler handler, AwfulContext context)
             : base(context)
@@ -44,6 +35,9 @@ namespace Awful.Mobile.ViewModels
             this.handler = handler;
         }
 
+        /// <summary>
+        /// Gets or sets the private message threads.
+        /// </summary>
         public ObservableCollection<AwfulPM> Threads { get; set; } = new ObservableCollection<AwfulPM>();
 
         /// <summary>
@@ -58,7 +52,7 @@ namespace Awful.Mobile.ViewModels
                 {
                     await this.RefreshPMs(this.Threads.Count > 0).ConfigureAwait(false);
                 },
-                    null,
+                    () => this.CanPM,
                     this);
             }
         }
@@ -78,7 +72,7 @@ namespace Awful.Mobile.ViewModels
                         await PushDetailPageAsync(new PrivateMessagePage(item)).ConfigureAwait(false);
                     }
                 },
-                    null,
+                    (item) => this.CanPM,
                     this);
             }
         }
@@ -95,7 +89,7 @@ namespace Awful.Mobile.ViewModels
                     {
                         await PushModalAsync(new NewPrivateMessagePage()).ConfigureAwait(false);
                     },
-                    () => !this.IsBusy,
+                    () => !this.IsBusy && this.CanPM,
                     this);
             }
         }
@@ -140,7 +134,7 @@ namespace Awful.Mobile.ViewModels
         public override async Task OnLoad()
         {
             this.pmActions = new PrivateMessageActions(this.Client, this.Context, this.handler);
-            if (!this.Threads.Any())
+            if (!this.Threads.Any() && this.CanPM)
             {
                 await this.RefreshCommand.ExecuteAsync().ConfigureAwait(false);
             }

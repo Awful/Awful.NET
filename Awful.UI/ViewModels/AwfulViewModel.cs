@@ -23,6 +23,7 @@ namespace Awful.UI.ViewModels
         private string onProbationText;
         private UserAuth user;
         private bool disposed;
+        private bool canPM;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AwfulViewModel"/> class.
@@ -59,6 +60,23 @@ namespace Awful.UI.ViewModels
             set
             {
                 this.SetProperty(ref this.onProbation, value);
+                this.RaiseCanExecuteChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the user can private message.
+        /// </summary>
+        public bool CanPM
+        {
+            get
+            {
+                return this.canPM;
+            }
+
+            set
+            {
+                this.SetProperty(ref this.canPM, value);
                 this.RaiseCanExecuteChanged();
             }
         }
@@ -116,6 +134,7 @@ namespace Awful.UI.ViewModels
             if (this.Context != null)
             {
                 this.user = await this.Context.GetDefaultUserAsync().ConfigureAwait(false);
+                this.CanPM = this.user.RecievePM;
                 this.OnPropertyChanged(nameof(this.IsSignedIn));
                 this.Client = new AwfulClient(this.user != null ? this.user.AuthCookies : new System.Net.CookieContainer());
             }

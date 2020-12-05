@@ -37,6 +37,11 @@ namespace Awful.Database.Entities
         public string CookiePath { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating if the user can recieve PMs.
+        /// </summary>
+        public bool RecievePM { get; set; }
+
+        /// <summary>
         /// Gets or sets the Users Auth Cookies.
         /// </summary>
         public CookieContainer AuthCookies { get; set; }

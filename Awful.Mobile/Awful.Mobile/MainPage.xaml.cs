@@ -17,7 +17,7 @@ namespace Awful.Mobile
 {
     /// <summary>
     /// Main Page. Used for Navigation on large devices.
-    /// Small devices use <see cref="MasterPage"/> alone.
+    /// Small devices use <see cref="MainTabbedPage"/> alone.
     /// </summary>
     public partial class MainPage : FlyoutPage
     {

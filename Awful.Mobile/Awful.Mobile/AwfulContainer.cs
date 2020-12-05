@@ -39,6 +39,7 @@ namespace Awful.UI
             builder.RegisterType<ForumsListPageViewModel>();
             builder.RegisterType<BookmarksPageViewModel>();
             builder.RegisterType<LoginPageViewModel>();
+            builder.RegisterType<MainTabbedPageViewModel>();
             builder.RegisterType<SAclopediaEntryListPageViewModel>();
             builder.RegisterType<SAclopediaEntryPageViewModel>();
             builder.RegisterType<ThreadReplyPageViewModel>();

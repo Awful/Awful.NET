@@ -88,7 +88,7 @@ namespace Awful.UI.Actions
             {
                 var captures = Regex.Match(result.CurrentUser.Usertitle, @"(http|ftp|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?");
                 var avatarLink = captures.Captures.Count > 0 ? captures.Captures[0].Value : string.Empty;
-                this.CurrentUser = new UserAuth { AvatarLink = avatarLink, IsDefaultUser = true, UserName = result.CurrentUser.Username, CookiePath = this.platformProperties.CookiePath };
+                this.CurrentUser = new UserAuth { RecievePM = result.CurrentUser.Receivepm, AvatarLink = avatarLink, IsDefaultUser = true, UserName = result.CurrentUser.Username, CookiePath = this.platformProperties.CookiePath };
                 await this.context.AddOrUpdateUserAsync(this.CurrentUser).ConfigureAwait(false);
                 CookieManager.SaveCookie(result.AuthenticationCookieContainer, this.CurrentUser.CookiePath);
             }

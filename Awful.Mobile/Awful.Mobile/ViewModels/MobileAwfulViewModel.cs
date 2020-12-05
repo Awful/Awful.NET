@@ -283,7 +283,7 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Sets the main page of the application.
         /// Based on the device type.
-        /// MasterPage is the tabbed view.
+        /// MainTabbedPage is the tabbed view.
         /// MainPage is a Flyout containing the MasterPage,
         /// And the detail page on the same screen.
         /// </summary>
@@ -295,7 +295,7 @@ namespace Awful.Mobile.ViewModels
             }
             else
             {
-                App.Current.MainPage = new MasterPage();
+                App.Current.MainPage = new MainTabbedPage();
             }
         }
 
