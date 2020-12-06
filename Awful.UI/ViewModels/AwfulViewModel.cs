@@ -134,7 +134,7 @@ namespace Awful.UI.ViewModels
             if (this.Context != null)
             {
                 this.user = await this.Context.GetDefaultUserAsync().ConfigureAwait(false);
-                this.CanPM = this.user.RecievePM;
+                this.CanPM = this.user != null && this.user.RecievePM;
                 this.OnPropertyChanged(nameof(this.IsSignedIn));
                 this.Client = new AwfulClient(this.user != null ? this.user.AuthCookies : new System.Net.CookieContainer());
             }
