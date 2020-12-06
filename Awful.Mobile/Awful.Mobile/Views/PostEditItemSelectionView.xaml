@@ -5,7 +5,12 @@
              x:Class="Awful.Mobile.Views.PostEditItemSelectionView">
   <ContentView.Content>
         <Grid>
-            <CollectionView x:Name="AwfulCollection" ItemsLayout="VerticalGrid, 3" ItemsSource="{Binding EditPostItems}">
+            <CollectionView x:Name="AwfulCollection"
+                            ItemsLayout="VerticalGrid, 3"
+                            SelectionMode="Single"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference AwfulCollection}}" 
+                            SelectionChangedCommand="{Binding SelectionCommand}"
+                            ItemsSource="{Binding EditPostItems}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Margin="5" Orientation="Vertical">

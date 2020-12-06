@@ -8,10 +8,13 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using Awful.Core.Entities.PostIcons;
+using Awful.Core.Entities.Smilies;
 using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Mobile.Controls;
+using Awful.Mobile.Views;
 using Awful.UI.Actions;
+using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Forms9Patch;
 using Xamarin.Forms;
@@ -30,6 +33,62 @@ namespace Awful.Mobile.ViewModels
         /// </summary>
         public PostEditItemSelectionViewModel()
         {
+        }
+
+        /// <summary>
+        /// Gets the selection command.
+        /// </summary>
+        public AwfulAsyncCommand<EditPostItem> SelectionCommand
+        {
+            get
+            {
+                return new AwfulAsyncCommand<EditPostItem>(
+                    async (item) =>
+                    {
+                        if (item != null)
+                        {
+                            switch (item.Type)
+                            {
+                                case EditPostItemType.Emotes:
+                                    var emotePage = new EmoteItemSelectionView();
+                                    this.Popup.SetContentWithParameter(emotePage, false, this.OnCloseModal);
+                                    break;
+                                case EditPostItemType.InsertImgur:
+                                    break;
+                                case EditPostItemType.InsertVideo:
+                                    break;
+                                case EditPostItemType.InsertUrl:
+                                    break;
+                                case EditPostItemType.QuoteBlock:
+                                    break;
+                                case EditPostItemType.List:
+                                    break;
+                                case EditPostItemType.CodeBlock:
+                                    break;
+                                case EditPostItemType.PreserveSpace:
+                                    break;
+                                case EditPostItemType.Bold:
+                                    break;
+                                case EditPostItemType.Italics:
+                                    break;
+                                case EditPostItemType.Underline:
+                                    break;
+                                case EditPostItemType.Strikeout:
+                                    break;
+                                case EditPostItemType.SpoilerText:
+                                    break;
+                                case EditPostItemType.Superscript:
+                                    break;
+                                case EditPostItemType.Subscript:
+                                    break;
+                                case EditPostItemType.FixedWidth:
+                                    break;
+                            }
+                        }
+                    },
+                    null,
+                    this);
+            }
         }
 
         /// <summary>
@@ -137,6 +196,18 @@ namespace Awful.Mobile.ViewModels
                 },
             };
             }
+        }
+
+        private void OnCloseModal(object response)
+        {
+            if (response is Smile smile)
+            {
+                this.SetTextInEditor(smile.Title);
+            }
+        }
+
+        private void SetTextInEditor(string text)
+        {
         }
 
         /// <summary>

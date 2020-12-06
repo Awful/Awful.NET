@@ -20,6 +20,7 @@ namespace Awful.Mobile.Controls
         private ModalPopup popup;
         private bool disposedValue;
         private Action callback;
+        private Action<object> callbackWithParameter;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AwfulPopup"/> class.
@@ -36,12 +37,18 @@ namespace Awful.Mobile.Controls
         /// Set popup to appear.
         /// </summary>
         /// <param name="isVisible">Set is visibile.</param>
-        public void SetIsVisible(bool isVisible)
+        /// <param name="parameter">Optional parameter to be called on callback.</param>
+        public void SetIsVisible(bool isVisible, object parameter = default)
         {
             this.popup.IsVisible = isVisible;
             if (!isVisible && this.callback != null)
             {
                 this.callback.Invoke();
+            }
+
+            if (!isVisible && this.callbackWithParameter != null)
+            {
+                this.callbackWithParameter.Invoke(parameter);
             }
         }
 
@@ -56,6 +63,24 @@ namespace Awful.Mobile.Controls
             this.popup.BackgroundColor = App.GetCurrentBackgroundColor();
             this.popup.Content = view;
             this.callback = callback;
+
+            if (launchModal)
+            {
+                this.SetIsVisible(true);
+            }
+        }
+
+        /// <summary>
+        /// Set popups internal content.
+        /// </summary>
+        /// <param name="view"><see cref="Xamarin.Forms.ContentView"/>.</param>
+        /// <param name="launchModal">Launch the modal after setting the content.</param>
+        /// <param name="callback">Callback after modal is closed.</param>
+        public void SetContentWithParameter(Xamarin.Forms.ContentView view, bool launchModal = false, Action<object> callback = default)
+        {
+            this.popup.BackgroundColor = App.GetCurrentBackgroundColor();
+            this.popup.Content = view;
+            this.callbackWithParameter = callback;
 
             if (launchModal)
             {
