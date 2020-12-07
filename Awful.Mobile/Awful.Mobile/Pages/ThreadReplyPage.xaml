@@ -4,6 +4,8 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:controls="clr-namespace:Awful.Mobile.Controls"
+    xmlns:views="clr-namespace:Awful.Mobile.Views"
     ios:Page.ModalPresentationStyle="FormSheet"
     x:Class="Awful.Mobile.Pages.ThreadReplyPage">
     <ContentPage.Content>
@@ -13,13 +15,9 @@
                 <RowDefinition Height="1" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <StackLayout Margin="5" Orientation="Horizontal" Grid.Row="0">
-                <Button Command="{Binding CloseModalCommand}" HorizontalOptions="StartAndExpand" Text="Cancel"/>
-                <Button HorizontalOptions="CenterAndExpand" Text="Options"/>
-                <Button Command="{Binding PostReplyCommand}" HorizontalOptions="EndAndExpand" Text="Post"/>
-            </StackLayout>
+            <views:ForumHeaderView Grid.Row="0" />
             <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
-            <Editor Text="{Binding Message}" Grid.Row="2" Margin="15" x:Name="AwfulEditor"/>
+            <controls:AwfulEditor Text="{Binding Message}" Grid.Row="2" Margin="15" x:Name="AwfulEditor"/>
         </Grid>
     </ContentPage.Content>
 </pages:BasePage>

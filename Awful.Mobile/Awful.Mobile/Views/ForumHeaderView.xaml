@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fontawesome="clr-namespace:FontAwesome"
+    x:Class="Awful.Mobile.Views.ForumHeaderView">
+    <ContentView.Content>
+        <StackLayout Margin="5" Orientation="Horizontal" Grid.Row="0">
+                <Button Margin="5,0,0,0"
+                        WidthRequest="40"
+                        TextColor="Red"
+                        Command="{Binding CloseModalCommand}"
+                        HorizontalOptions="StartAndExpand"
+                        Text="{x:Static fontawesome:FontAwesomeIcons.TimesCircle}" 
+                        FontFamily="FontAwesomeSolid"
+                        FontSize="30"
+                        BackgroundColor="Transparent"  />
+                <Button Margin="0,0,0,0"
+                            WidthRequest="40"
+                            FontSize="30"
+                            Command="{Binding OpenOptionsCommand}"
+                            TextColor="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}"
+                            HorizontalOptions="CenterAndExpand"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.Code}" 
+                            FontFamily="FontAwesomeSolid"
+                            BackgroundColor="Transparent"  />
+                <Button Margin="0,0,5,0"
+                            WidthRequest="40"
+                            FontSize="30"
+                            Command="{Binding PostThreadCommand}"
+                            TextColor="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}"
+                            HorizontalOptions="EndAndExpand"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.Pen}" 
+                            FontFamily="FontAwesomeSolid"
+                            BackgroundColor="Transparent"  />
+            </StackLayout>
+    </ContentView.Content>
+</ContentView>

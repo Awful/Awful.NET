@@ -5,6 +5,8 @@
 using System;
 using System.Threading.Tasks;
 using Awful.Database.Context;
+using Awful.Mobile.Controls;
+using Awful.Mobile.Views;
 using Awful.UI.Actions;
 using Awful.UI.Tools;
 using Awful.UI.ViewModels;
@@ -71,9 +73,35 @@ namespace Awful.Mobile.ViewModels
         }
 
         /// <summary>
+        /// Gets the options command.
+        /// </summary>
+        public AwfulAsyncCommand OpenOptionsCommand
+        {
+            get
+            {
+                return new AwfulAsyncCommand(
+                    () =>
+                    {
+                        if (this.Popup != null)
+                        {
+                            if (this.Editor != null)
+                            {
+                                var view = new PostEditItemSelectionView(this.Editor);
+                                this.Popup.SetContent(view, true);
+                            }
+                        }
+
+                        return Task.CompletedTask;
+                    },
+                    null,
+                    this);
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the thread editor.
         /// </summary>
-        public Editor Editor { get; set; }
+        public AwfulEditor Editor { get; set; }
 
         /// <summary>
         /// Gets the close modal command.

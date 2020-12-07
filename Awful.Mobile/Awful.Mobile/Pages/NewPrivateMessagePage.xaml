@@ -4,6 +4,10 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Awful.Mobile.Tools.Markup;assembly=Awful.Mobile"
+             xmlns:controls="clr-namespace:Awful.Mobile.Controls"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:views="clr-namespace:Awful.Mobile.Views"
+             ios:Page.ModalPresentationStyle="FormSheet"
              x:Name="NewPmPageView"
              x:Class="Awful.Mobile.Pages.NewPrivateMessagePage">
     <ContentPage.Content>
@@ -14,11 +18,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <StackLayout Margin="5" Orientation="Horizontal" Grid.Row="0">
-                <Button Command="{Binding CloseModalCommand}" HorizontalOptions="StartAndExpand" Text="Cancel"/>
-                <Button HorizontalOptions="CenterAndExpand" Text="Options"/>
-                <Button Command="{Binding PostPMCommand}" HorizontalOptions="EndAndExpand" Text="Send"/>
-            </StackLayout>
+            <views:ForumHeaderView Grid.Row="0" />
             <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
             <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
@@ -46,7 +46,7 @@
                 </StackLayout>
                 <Rectangle Grid.Row="2" BackgroundColor="Gray"/>
             </Grid>
-            <Editor Grid.Row="3" Margin="15" Text="{Binding Message}" x:Name="AwfulEditor"/>
+            <controls:AwfulEditor Grid.Row="3" Margin="15" Text="{Binding Message}" x:Name="AwfulEditor"/>
         </Grid>
     </ContentPage.Content>
 </pages:BasePage>

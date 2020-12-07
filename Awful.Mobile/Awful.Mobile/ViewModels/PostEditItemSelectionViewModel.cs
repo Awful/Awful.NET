@@ -97,8 +97,6 @@ namespace Awful.Mobile.ViewModels
                                     await this.AddTag(item, "fixed").ConfigureAwait(false);
                                     break;
                             }
-
-                            this.Popup.SetIsVisible(false);
                         }
                     },
                     null,
@@ -294,6 +292,8 @@ namespace Awful.Mobile.ViewModels
                     }
                 }
             });
+
+            this.Popup.SetIsVisible(false);
         }
     }
 }
