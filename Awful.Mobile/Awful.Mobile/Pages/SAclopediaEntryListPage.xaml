@@ -9,6 +9,7 @@
           <Grid>
                 <CollectionView SelectionMode="Single" 
                         x:Name="SAclopediaCollection"
+                        ItemSizingStrategy="MeasureFirstItem"
                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference SAclopediaCollection}}" 
                         SelectionChangedCommand="{Binding SelectionCommand}"
                         ItemsSource="{Binding Items}"
@@ -27,9 +28,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid Padding="10">
-                                <Label
-                       FontSize="19"
-                       Text="{Binding Title}" />
+                       <Label FontSize="19" MaxLines="1" LineBreakMode="TailTruncation" Text="{Binding Title}" />
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

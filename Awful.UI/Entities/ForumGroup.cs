@@ -36,6 +36,19 @@ namespace Awful.UI.Entities
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="ForumGroup"/> class.
+        /// </summary>
+        /// <param name="title">Fake Title.</param>
+        /// <param name="id">Fake id.</param>
+        /// <param name="entries">List of Subforums.</param>
+        public ForumGroup(string title, int id, List<Forum> entries)
+            : base(entries.OrderBy(y => y.SortOrder).Select(n => new AwfulForum(n)))
+        {
+            this.Title = title;
+            this.Id = id;
+        }
+
+        /// <summary>
         /// Gets the id of the forum group.
         /// </summary>
         public int Id { get; private set; }

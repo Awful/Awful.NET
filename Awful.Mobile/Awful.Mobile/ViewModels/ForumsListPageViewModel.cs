@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,6 +14,7 @@ using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
 using Awful.UI.Tools;
+using Force.DeepCloner;
 
 namespace Awful.Mobile.ViewModels
 {
@@ -24,7 +26,7 @@ namespace Awful.Mobile.ViewModels
         private IndexPageActions forumActions;
         private AwfulAsyncCommand refreshCommand;
         private AwfulAsyncCommand<AwfulForum> isFavoriteCommand;
-        private List<ForumGroup> originalList;
+        private List<Forum> originalList = new List<Forum>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumsListPageViewModel"/> class.
@@ -87,6 +89,11 @@ namespace Awful.Mobile.ViewModels
                     await this.forumActions.SetIsFavoriteForumAsync(forum).ConfigureAwait(false);
                     forum.OnPropertyChanged("IsFavorited");
 
+                    if (this.Items.Any() && this.Items.First().Title == "Search")
+                    {
+                        return;
+                    }
+
                     var favoritedForumGroup = this.Items.FirstOrDefault(n => n.Id == 0);
 
                     if (favoritedForumGroup == null)
@@ -125,6 +132,12 @@ namespace Awful.Mobile.ViewModels
         /// <param name="text">Text to filter by.</param>
         public void FilterForums(string text)
         {
+            if (!this.originalList.Any())
+            {
+                return;
+            }
+
+            this.SortForumsIntoList(this.originalList.DeepClone(), text);
         }
 
         /// <summary>
@@ -134,16 +147,40 @@ namespace Awful.Mobile.ViewModels
         /// <returns>Task.</returns>
         public async Task LoadForumsAsync(bool forceReload)
         {
+            this.originalList = await this.forumActions.GetForumListAsync(forceReload).ConfigureAwait(false);
+            this.SortForumsIntoList(this.originalList.DeepClone());
+        }
+
+        /// <inheritdoc/>
+        public override async Task OnLoad()
+        {
+            this.forumActions = new IndexPageActions(this.Client, this.Context);
+            if (!this.Items.Any())
+            {
+                await this.RefreshCommand.ExecuteAsync().ConfigureAwait(false);
+            }
+        }
+
+        private void SortForumsIntoList(List<Forum> forums, string filter = "")
+        {
             this.Items.Clear();
-            var awfulCategories = await this.forumActions.GetForumListAsync(forceReload).ConfigureAwait(false);
-            awfulCategories = awfulCategories.Where(y => !y.HasThreads && y.ParentForumId == null).OrderBy(y => y.SortOrder).ToList();
-            this.originalList = awfulCategories.Select(n => new ForumGroup(n, n.SubForums.SelectMany(n => this.Flatten(n)).OrderBy(n => n.SortOrder).ToList())).ToList();
-            foreach (var item in this.originalList)
+            forums = forums.Where(y => !y.HasThreads && y.ParentForumId == null).OrderBy(y => y.SortOrder).ToList();
+            List<ForumGroup> items;
+            if (string.IsNullOrEmpty(filter))
+            {
+                items = forums.Select(n => new ForumGroup(n, n.SubForums.SelectMany(n => this.Flatten(n)).OrderBy(n => n.SortOrder).ToList())).ToList();
+            }
+            else
+            {
+                items = forums.Select(n => new ForumGroup(n, n.SubForums.SelectMany(n => this.Flatten(n)).Where(n => n.Title.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0).OrderBy(n => n.SortOrder).ToList())).ToList();
+            }
+
+            foreach (var item in items)
             {
                 this.Items.Add(item);
             }
 
-            var favoritedForums = this.originalList.SelectMany(y => y).Where(y => y.IsFavorited);
+            var favoritedForums = items.SelectMany(y => y).Where(y => y.IsFavorited);
             if (favoritedForums.Any())
             {
                 var favoritedForumGroup = CreateFavoriteForumGroup();
@@ -157,16 +194,6 @@ namespace Awful.Mobile.ViewModels
             }
 
             this.OnPropertyChanged(nameof(this.Items));
-        }
-
-        /// <inheritdoc/>
-        public override async Task OnLoad()
-        {
-            this.forumActions = new IndexPageActions(this.Client, this.Context);
-            if (!this.Items.Any())
-            {
-                await this.RefreshCommand.ExecuteAsync().ConfigureAwait(false);
-            }
         }
 
         private static ForumGroup CreateFavoriteForumGroup()

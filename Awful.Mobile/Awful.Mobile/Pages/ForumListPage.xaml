@@ -7,10 +7,9 @@
     x:Name="ForumsListPage"
     x:Class="Awful.Mobile.Pages.ForumListPage">
  <ContentPage.Content>
-        <RefreshView Command="{Binding RefreshCommand}"
-                 IsRefreshing="{Binding IsRefreshing}">
-            <CollectionView SelectionMode="Single" 
+        <CollectionView SelectionMode="Single" 
                         x:Name="ForumCollection"
+                        ItemSizingStrategy="MeasureFirstItem"
                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ForumCollection}}" 
                         SelectionChangedCommand="{Binding SelectionCommand}"
                          ItemsSource="{Binding Items}"
@@ -44,12 +43,13 @@
                                 HorizontalOptions="FillAndExpand"
                                 Grid.Column="1"
                        FontSize="19"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="1"
                        VerticalOptions="Center"
                        Text="{Binding Title}" />
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </RefreshView>
     </ContentPage.Content>
 </pages:BasePage>

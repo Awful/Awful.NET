@@ -9,16 +9,21 @@ using Awful.Mobile.Controls;
 using Awful.Mobile.ViewModels;
 using Awful.UI.ViewModels;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace Awful.Mobile.Pages
 {
     /// <summary>
     /// SAclopedia Entry List.
     /// </summary>
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SAclopediaEntryListPage : BasePage, IAwfulSearchPage
     {
         private SAclopediaEntryListPageViewModel vm;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SAclopediaEntryListPage"/> class.
+        /// </summary>
         public SAclopediaEntryListPage()
         {
             this.InitializeComponent();
