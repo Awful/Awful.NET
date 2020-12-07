@@ -57,34 +57,47 @@ namespace Awful.Mobile.ViewModels
                                 case EditPostItemType.InsertImgur:
                                     break;
                                 case EditPostItemType.InsertVideo:
+                                    await this.AddTag(item, "video").ConfigureAwait(false);
                                     break;
                                 case EditPostItemType.InsertUrl:
                                     break;
                                 case EditPostItemType.QuoteBlock:
+                                    await this.AddTag(item, "quote").ConfigureAwait(false);
                                     break;
                                 case EditPostItemType.List:
                                     break;
                                 case EditPostItemType.CodeBlock:
                                     break;
                                 case EditPostItemType.PreserveSpace:
+                                    await this.AddTag(item, "pre").ConfigureAwait(false);
                                     break;
                                 case EditPostItemType.Bold:
+                                    await this.AddTag(item, "b").ConfigureAwait(false);
                                     break;
                                 case EditPostItemType.Italics:
+                                    await this.AddTag(item, "i").ConfigureAwait(false);
                                     break;
                                 case EditPostItemType.Underline:
+                                    await this.AddTag(item, "u").ConfigureAwait(false);
                                     break;
                                 case EditPostItemType.Strikeout:
+                                    await this.AddTag(item, "s").ConfigureAwait(false);
                                     break;
                                 case EditPostItemType.SpoilerText:
+                                    await this.AddTag(item, "spoiler").ConfigureAwait(false);
                                     break;
                                 case EditPostItemType.Superscript:
+                                    await this.AddTag(item, "super").ConfigureAwait(false);
                                     break;
                                 case EditPostItemType.Subscript:
+                                    await this.AddTag(item, "sub").ConfigureAwait(false);
                                     break;
                                 case EditPostItemType.FixedWidth:
+                                    await this.AddTag(item, "fixed").ConfigureAwait(false);
                                     break;
                             }
+
+                            this.Popup.SetIsVisible(false);
                         }
                     },
                     null,
@@ -95,7 +108,9 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets the list of Edit Post Items.
         /// </summary>
-        public List<EditPostItem> EditPostItems { get
+        public List<EditPostItem> EditPostItems
+        {
+            get
             {
             return new List<EditPostItem>()
             {
@@ -208,6 +223,22 @@ namespace Awful.Mobile.ViewModels
             this.editor = editor;
         }
 
+        private async Task AddTag(EditPostItem item, string tag)
+        {
+            if (this.editor.IsTextSelected)
+            {
+                this.SetTextInEditor($"[{tag}]{this.editor.SelectedText}[/{tag}]");
+            }
+            else
+            {
+                var result = await MobileAwfulViewModel.DisplayPromptAsync($"Insert Text: {item.Title}", "Enter text to insert").ConfigureAwait(false);
+                if (!string.IsNullOrEmpty(result))
+                {
+                    this.SetTextInEditor($"[{tag}]{result}[/{tag}]");
+                }
+            }
+        }
+
         private void OnCloseModal(object response)
         {
             if (response is Smile smile)
@@ -218,19 +249,22 @@ namespace Awful.Mobile.ViewModels
 
         private void SetTextInEditor(string text)
         {
-            if (this.editor != null)
+            Device.BeginInvokeOnMainThread(() =>
             {
-                // If user has selected text, replace it.
-                // Or else, add it to whereever they have the cursor.
-                if (this.editor.IsTextSelected)
+                if (this.editor != null)
                 {
-                    this.editor.Text = this.editor.Text.ReplaceAt(this.editor.SelectedTextStart, this.editor.SelectedTextLength, text);
+                    // If user has selected text, replace it.
+                    // Or else, add it to whereever they have the cursor.
+                    if (this.editor.IsTextSelected)
+                    {
+                        this.editor.Text = this.editor.Text.ReplaceAt(this.editor.SelectedTextStart, this.editor.SelectedTextLength, text);
+                    }
+                    else
+                    {
+                        this.editor.Text = this.editor.Text.Insert(this.editor.SelectedTextStart, text);
+                    }
                 }
-                else
-                {
-                    this.editor.Text = this.editor.Text.Insert(this.editor.SelectedTextStart, text);
-                }
-            }
+            });
         }
     }
 }

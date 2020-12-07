@@ -12,6 +12,14 @@ namespace Awful.Mobile.Controls
     /// </summary>
     public class AwfulEditor : Editor
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AwfulEditor"/> class.
+        /// </summary>
+        public AwfulEditor()
+        {
+            this.Text = string.Empty;
+        }
+
         public bool IsTextSelected => !string.IsNullOrEmpty(this.SelectedText);
 
         /// <summary>

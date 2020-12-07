@@ -134,6 +134,18 @@ namespace Awful.Mobile.ViewModels
         }
 
         /// <summary>
+        /// Display Prompt to User.
+        /// </summary>
+        /// <param name="title">Title of message.</param>
+        /// <param name="message">Message to user.</param>
+        /// <param name="placeholder">Placeholder for message.</param>
+        /// <returns>String.</returns>
+        public static async Task<string> DisplayPromptAsync(string title, string message, string placeholder = "Text")
+        {
+            return await App.Current.MainPage.DisplayPromptAsync(title, message, placeholder: placeholder).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Push Modal Page to current navigation stack.
         /// If on tablet, pushes on top of Detail.
         /// </summary>
