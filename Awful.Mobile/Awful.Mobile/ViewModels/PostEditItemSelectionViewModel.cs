@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Awful.Core.Entities.PostIcons;
 using Awful.Core.Entities.Smilies;
+using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Mobile.Controls;
@@ -26,7 +27,7 @@ namespace Awful.Mobile.ViewModels
     /// </summary>
     public class PostEditItemSelectionViewModel : MobileAwfulViewModel
     {
-        private Editor editor;
+        private AwfulEditor editor;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PostEditItemSelectionViewModel"/> class.
@@ -198,6 +199,15 @@ namespace Awful.Mobile.ViewModels
             }
         }
 
+        /// <summary>
+        /// Loads editor into VM.
+        /// </summary>
+        /// <param name="editor">SA Post Editor.</param>
+        public void LoadEditor(AwfulEditor editor)
+        {
+            this.editor = editor;
+        }
+
         private void OnCloseModal(object response)
         {
             if (response is Smile smile)
@@ -208,15 +218,19 @@ namespace Awful.Mobile.ViewModels
 
         private void SetTextInEditor(string text)
         {
-        }
-
-        /// <summary>
-        /// Loads editor into VM.
-        /// </summary>
-        /// <param name="editor">SA Post Editor.</param>
-        public void LoadEditor(Editor editor)
-        {
-            this.editor = editor;
+            if (this.editor != null)
+            {
+                // If user has selected text, replace it.
+                // Or else, add it to whereever they have the cursor.
+                if (this.editor.IsTextSelected)
+                {
+                    this.editor.Text = this.editor.Text.ReplaceAt(this.editor.SelectedTextStart, this.editor.SelectedTextLength, text);
+                }
+                else
+                {
+                    this.editor.Text = this.editor.Text.Insert(this.editor.SelectedTextStart, text);
+                }
+            }
         }
     }
 }

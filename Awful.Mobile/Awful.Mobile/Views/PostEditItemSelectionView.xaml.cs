@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
+using Awful.Mobile.Controls;
 using Awful.Mobile.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -26,7 +27,7 @@ namespace Awful.Mobile.Views
         /// Initializes a new instance of the <see cref="PostEditItemSelectionView"/> class.
         /// </summary>
         /// <param name="editor">Post Editor.</param>
-        public PostEditItemSelectionView(Editor editor)
+        public PostEditItemSelectionView(AwfulEditor editor)
         {
             this.InitializeComponent();
             this.BindingContext = this.vm = App.Container.Resolve<PostEditItemSelectionViewModel>();

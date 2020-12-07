@@ -5,6 +5,7 @@
 using System;
 using System.Threading.Tasks;
 using Awful.Database.Context;
+using Awful.Mobile.Controls;
 using Awful.Mobile.Views;
 using Awful.UI.Tools;
 using Xamarin.Forms;
@@ -57,7 +58,7 @@ namespace Awful.Mobile.ViewModels
             }
         }
 
-        public Editor AwfulEditor { get; set; }
+        public AwfulEditor AwfulEditor { get; set; }
 
         public override async Task OnLoad()
         {

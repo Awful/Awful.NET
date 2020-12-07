@@ -6,6 +6,7 @@
     Title="Debug"
     xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
     xmlns:views="clr-namespace:Awful.Mobile.Views"
+    xmlns:controls="clr-namespace:Awful.Mobile.Controls"
     x:Class="Awful.Mobile.Pages.DebugPage">
     <ContentPage.Content>
         <Grid>
@@ -25,7 +26,7 @@
                     Text="Make Popup Visible"
                     Command="{Binding MakePopupVisible}"
                     />
-                <Editor x:Name="AwfulEditor" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                <controls:AwfulEditor x:Name="AwfulEditor" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
             </StackLayout>
             <!--<StackL
             ayout Grid.Row="0" IsVisible="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
