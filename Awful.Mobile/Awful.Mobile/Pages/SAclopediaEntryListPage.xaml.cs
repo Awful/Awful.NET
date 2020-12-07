@@ -5,18 +5,30 @@
 using System;
 using System.Collections.Generic;
 using Autofac;
+using Awful.Mobile.Controls;
 using Awful.Mobile.ViewModels;
 using Awful.UI.ViewModels;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.Pages
 {
-    public partial class SAclopediaEntryListPage : BasePage
+    /// <summary>
+    /// SAclopedia Entry List.
+    /// </summary>
+    public partial class SAclopediaEntryListPage : BasePage, IAwfulSearchPage
     {
+        private SAclopediaEntryListPageViewModel vm;
+
         public SAclopediaEntryListPage()
         {
             this.InitializeComponent();
-            this.BindingContext = App.Container.Resolve<SAclopediaEntryListPageViewModel>();
+            this.BindingContext = this.vm = App.Container.Resolve<SAclopediaEntryListPageViewModel>();
         }
+
+        /// <inheritdoc/>
+        public event EventHandler<string> SearchBarTextChanged;
+
+        /// <inheritdoc/>
+        public void OnSearchBarTextChanged(in string text) => this.vm.FilterList(text);
     }
 }

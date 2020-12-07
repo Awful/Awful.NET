@@ -6,19 +6,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Awful.Core.Entities.JSON;
-using Awful.Core.Tools;
-using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Mobile.Pages;
-using Awful.UI.Tools;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
-using Awful.UI.ViewModels;
-using Xamarin.CommunityToolkit.UI.Views;
-using Xamarin.Forms;
+using Awful.UI.Tools;
 
 namespace Awful.Mobile.ViewModels
 {
@@ -30,6 +24,7 @@ namespace Awful.Mobile.ViewModels
         private IndexPageActions forumActions;
         private AwfulAsyncCommand refreshCommand;
         private AwfulAsyncCommand<AwfulForum> isFavoriteCommand;
+        private List<ForumGroup> originalList;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumsListPageViewModel"/> class.
@@ -125,6 +120,14 @@ namespace Awful.Mobile.ViewModels
         public ObservableCollection<ForumGroup> Items { get; private set; } = new ObservableCollection<ForumGroup>();
 
         /// <summary>
+        /// Filter the forums list, based on text.
+        /// </summary>
+        /// <param name="text">Text to filter by.</param>
+        public void FilterForums(string text)
+        {
+        }
+
+        /// <summary>
         /// Loads the Forum Categories.
         /// </summary>
         /// <param name="forceReload">Force Reload.</param>
@@ -134,13 +137,13 @@ namespace Awful.Mobile.ViewModels
             this.Items.Clear();
             var awfulCategories = await this.forumActions.GetForumListAsync(forceReload).ConfigureAwait(false);
             awfulCategories = awfulCategories.Where(y => !y.HasThreads && y.ParentForumId == null).OrderBy(y => y.SortOrder).ToList();
-            var items = awfulCategories.Select(n => new ForumGroup(n, n.SubForums.SelectMany(n => this.Flatten(n)).OrderBy(n => n.SortOrder).ToList())).ToList();
-            foreach (var item in items)
+            this.originalList = awfulCategories.Select(n => new ForumGroup(n, n.SubForums.SelectMany(n => this.Flatten(n)).OrderBy(n => n.SortOrder).ToList())).ToList();
+            foreach (var item in this.originalList)
             {
                 this.Items.Add(item);
             }
 
-            var favoritedForums = items.SelectMany(y => y).Where(y => y.IsFavorited);
+            var favoritedForums = this.originalList.SelectMany(y => y).Where(y => y.IsFavorited);
             if (favoritedForums.Any())
             {
                 var favoritedForumGroup = CreateFavoriteForumGroup();

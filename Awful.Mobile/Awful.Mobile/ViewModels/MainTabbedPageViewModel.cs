@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using Awful.Database.Context;
 using Awful.Mobile.Pages;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace Awful.Mobile.ViewModels
 {
@@ -18,7 +20,7 @@ namespace Awful.Mobile.ViewModels
     /// </summary>
     public class MainTabbedPageViewModel : MobileAwfulViewModel
     {
-        private TabbedPage page;
+        private Xamarin.Forms.TabbedPage page;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainTabbedPageViewModel"/> class.
@@ -33,7 +35,7 @@ namespace Awful.Mobile.ViewModels
         /// Loads TabbedPage into VM.
         /// </summary>
         /// <param name="page"><see cref="TabbedPage"/>.</param>
-        public void LoadTabbedPage(TabbedPage page)
+        public void LoadTabbedPage(Xamarin.Forms.TabbedPage page)
         {
             this.page = page;
         }
@@ -49,9 +51,10 @@ namespace Awful.Mobile.ViewModels
             return base.OnLoad();
         }
 
-        private static NavigationPage CreateNavigationPage (Page page, string glyph, string title, string fontFamily)
+        private static Xamarin.Forms.NavigationPage CreateNavigationPage (Xamarin.Forms.Page page, string glyph, string title, string fontFamily)
         {
-            NavigationPage navigationPage = new NavigationPage(page);
+            Xamarin.Forms.NavigationPage navigationPage = new Xamarin.Forms.NavigationPage(page);
+            // navigationPage.On<iOS>().SetPrefersLargeTitles(true);
             navigationPage.IconImageSource = new FontImageSource()
             {
                 FontFamily = fontFamily,
@@ -64,7 +67,7 @@ namespace Awful.Mobile.ViewModels
 
         private void RenderPages()
         {
-            List<NavigationPage> pages = new List<NavigationPage>();
+            List<Xamarin.Forms.NavigationPage> pages = new List<Xamarin.Forms.NavigationPage>();
             pages.Add(CreateNavigationPage(new ForumListPage(), "", "Forums", "FontAwesomeSolid"));
             pages.Add(CreateNavigationPage(new BookmarksPage(), "", "Bookmarks", "FontAwesomeRegular"));
             pages.Add(CreateNavigationPage(new PrivateMessagesPage(), "", "Messages", "FontAwesomeRegular"));
