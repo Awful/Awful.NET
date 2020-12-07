@@ -42,10 +42,10 @@
                             <Label Padding="15,0,0,0"
                                 HorizontalOptions="FillAndExpand"
                                 Grid.Column="1"
-                       FontSize="19"
+                                   FontSize="{OnPlatform Android=15, iOS=19, Default=19}"
                                    LineBreakMode="TailTruncation"
                                    MaxLines="1"
-                       VerticalOptions="Center"
+                                VerticalOptions="CenterAndExpand"
                        Text="{Binding Title}" />
                         </StackLayout>
                     </DataTemplate>

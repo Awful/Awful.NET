@@ -28,7 +28,10 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid Padding="10">
-                       <Label FontSize="19" MaxLines="1" LineBreakMode="TailTruncation" Text="{Binding Title}" />
+                            <Label  FontSize="{OnPlatform Android=15, iOS=19, Default=19}"
+                                    MaxLines="1" 
+                                    LineBreakMode="TailTruncation" 
+                                    Text="{Binding Title}" />
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
