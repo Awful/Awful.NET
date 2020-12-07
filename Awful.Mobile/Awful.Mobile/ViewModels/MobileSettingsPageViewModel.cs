@@ -125,7 +125,7 @@ namespace Awful.Mobile.ViewModels
         public override async Task OnLoad()
         {
             await base.OnLoad().ConfigureAwait(false);
-            this.settings = await this.Context.SettingOptionsItems.FirstOrDefaultAsync().ConfigureAwait(false) ?? new SettingOptions();
+            this.settings = await this.Context.SettingOptionsItems.FirstOrDefaultAsync().ConfigureAwait(false) ?? new SettingOptions() { DeviceColorTheme = this.platformProperties.GetTheme() };
             this.DeviceColorTheme = this.settings.DeviceColorTheme;
         }
 

@@ -32,7 +32,7 @@
                     <ViewCell.View>
                         <StackLayout Orientation="Horizontal" Padding="13, 0">
                             <Label Text="Device Theme" VerticalOptions="Center"></Label>
-                            <Picker ItemsSource="{Binding ThemeNames}"
+                            <Picker ItemsSource="{Binding ThemeNames}" WidthRequest="50"
                                     SelectedIndex="{Binding DeviceColorTheme, Converter={StaticResource IntEnumConverter}}"
                                     HorizontalOptions="EndAndExpand" VerticalOptions="Center">
                             </Picker>

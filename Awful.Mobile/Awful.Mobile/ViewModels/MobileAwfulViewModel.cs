@@ -28,6 +28,8 @@ namespace Awful.Mobile.ViewModels
     /// </summary>
     public class MobileAwfulViewModel : AwfulViewModel, IAwfulErrorHandler
     {
+        IPlatformProperties platformProperties;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MobileAwfulViewModel"/> class.
         /// Does not initialize AwfulClient and AwfulContext.
@@ -48,6 +50,7 @@ namespace Awful.Mobile.ViewModels
         {
             this.SettingsAction = new SettingsAction(context);
             this.Popup = App.Container.Resolve<AwfulPopup>();
+            this.platformProperties = App.Container.Resolve<IPlatformProperties>();
         }
 
         /// <summary>
@@ -330,7 +333,7 @@ namespace Awful.Mobile.ViewModels
             }
             else
             {
-                this.SettingsAction.SetAppTheme(Webview.Entities.Themes.DeviceColorTheme.Light);
+                this.SettingsAction.SetAppTheme(this.platformProperties.GetTheme());
             }
         }
 

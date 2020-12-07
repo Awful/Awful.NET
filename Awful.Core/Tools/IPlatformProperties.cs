@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Awful.Webview.Entities.Themes;
 
 namespace Awful.Core.Tools
 {
@@ -13,6 +14,12 @@ namespace Awful.Core.Tools
     /// </summary>
     public interface IPlatformProperties
     {
+        /// <summary>
+        /// Gets the device theme.
+        /// </summary>
+        /// <returns><see cref="DeviceColorTheme"/>.</returns>
+        DeviceColorTheme GetTheme();
+
         /// <summary>
         /// Gets the path to where cookies are stored.
         /// </summary>

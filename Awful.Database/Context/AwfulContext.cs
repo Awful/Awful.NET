@@ -138,7 +138,9 @@ namespace Awful.Database.Context
             var settingOptions = await this.SettingOptionsItems.FirstOrDefaultAsync().ConfigureAwait(false);
             if (settingOptions == null)
             {
-                return new SettingOptions();
+                var options = new SettingOptions();
+                options.DeviceColorTheme = this.PlatformProperties.GetTheme();
+                return options;
             }
 
             return settingOptions;

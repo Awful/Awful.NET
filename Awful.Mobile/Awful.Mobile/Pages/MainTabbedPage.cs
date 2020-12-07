@@ -25,6 +25,7 @@ namespace Awful.Mobile.Pages
         {
             this.On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
             this.BindingContext = this.vm = App.Container.Resolve<MainTabbedPageViewModel>();
+            this.vm.SetupThemeAsync().ConfigureAwait(false);
             this.vm.LoadTabbedPage(this);
         }
 
