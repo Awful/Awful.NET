@@ -40,7 +40,7 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets the post Reply.
         /// </summary>
-        public AwfulAsyncCommand PostReplyCommand
+        public AwfulAsyncCommand PostThreadCommand
         {
             get
             {
@@ -93,7 +93,7 @@ namespace Awful.Mobile.ViewModels
         /// <inheritdoc/>
         public override void RaiseCanExecuteChanged()
         {
-            this.PostReplyCommand.RaiseCanExecuteChanged();
+            this.PostThreadCommand.RaiseCanExecuteChanged();
         }
 
         /// <inheritdoc/>

@@ -95,7 +95,7 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets the post pm command.
         /// </summary>
-        public AwfulAsyncCommand PostPMCommand
+        public AwfulAsyncCommand PostThreadCommand
         {
             get
             {
@@ -151,13 +151,13 @@ namespace Awful.Mobile.ViewModels
         public override void OnCloseModal()
         {
             this.OnPropertyChanged(nameof(this.PostIcon));
-            this.PostPMCommand.RaiseCanExecuteChanged();
+            this.PostThreadCommand.RaiseCanExecuteChanged();
         }
 
         /// <inheritdoc/>
         public override void RaiseCanExecuteChanged()
         {
-            this.PostPMCommand.RaiseCanExecuteChanged();
+            this.PostThreadCommand.RaiseCanExecuteChanged();
         }
 
         /// <inheritdoc/>
