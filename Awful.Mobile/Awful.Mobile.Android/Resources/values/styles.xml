@@ -14,5 +14,10 @@
     <!-- colorAccent is used as the default value for colorControlActivated
          which is used to tint widgets -->
     <item name="colorAccent">#1483B1</item>
+    <!--If you are using revision 22.1 please use just windowNoTitle. Without android:-->
+    <item name="windowNoTitle">true</item>
+    <!--We will be using the toolbar so no need to show ActionBar-->
+    <item name="windowActionBar">false</item>
+    <item name="windowActionModeOverlay">true</item>
   </style>
 </resources>

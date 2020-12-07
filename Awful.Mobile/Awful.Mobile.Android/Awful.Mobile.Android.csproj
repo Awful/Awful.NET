@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="Renderers\AwfulEditorRenderer.cs" />
+    <Compile Include="Renderers\AwfulSearchPageRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AndroidPlatformProperties.cs" />
@@ -159,6 +160,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\MainMenu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\sizes.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>

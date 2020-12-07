@@ -17,6 +17,7 @@ namespace Awful.Mobile.Pages
     public partial class ForumListPage : BasePage, IAwfulSearchPage
     {
         private ForumsListPageViewModel vm;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumListPage"/> class.
         /// </summary>
