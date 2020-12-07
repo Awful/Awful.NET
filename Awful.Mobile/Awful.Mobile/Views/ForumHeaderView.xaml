@@ -7,7 +7,7 @@
     <ContentView.Content>
         <StackLayout Margin="5" Orientation="Horizontal" Grid.Row="0">
                 <Button Margin="5,0,0,0"
-                        WidthRequest="40"
+                        WidthRequest="60"
                         TextColor="Red"
                         Command="{Binding CloseModalCommand}"
                         HorizontalOptions="StartAndExpand"
@@ -16,7 +16,7 @@
                         FontSize="30"
                         BackgroundColor="Transparent"  />
                 <Button Margin="0,0,0,0"
-                            WidthRequest="40"
+                            WidthRequest="60"
                             FontSize="30"
                             Command="{Binding OpenOptionsCommand}"
                             TextColor="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
@@ -26,7 +26,7 @@
                             FontFamily="FontAwesomeSolid"
                             BackgroundColor="Transparent"  />
                 <Button Margin="0,0,5,0"
-                            WidthRequest="40"
+                            WidthRequest="60"
                             FontSize="30"
                             Command="{Binding PostThreadCommand}"
                             TextColor="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
