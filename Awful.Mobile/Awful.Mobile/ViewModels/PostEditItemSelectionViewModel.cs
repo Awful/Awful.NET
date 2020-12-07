@@ -60,6 +60,7 @@ namespace Awful.Mobile.ViewModels
                                     await this.AddTag(item, "video").ConfigureAwait(false);
                                     break;
                                 case EditPostItemType.InsertUrl:
+                                    await this.AddUrl().ConfigureAwait(false);
                                     break;
                                 case EditPostItemType.QuoteBlock:
                                     await this.AddTag(item, "quote").ConfigureAwait(false);
@@ -223,6 +224,37 @@ namespace Awful.Mobile.ViewModels
             this.editor = editor;
         }
 
+        private async Task AddUrl()
+        {
+            string uri = string.Empty;
+            string innerText = string.Empty;
+            if (this.editor.IsTextSelected)
+            {
+                Uri test;
+                var success = Uri.TryCreate(this.editor.SelectedText, UriKind.Absolute, out test);
+                if (success)
+                {
+                    uri = this.editor.SelectedText;
+                }
+                else
+                {
+                    innerText = this.editor.SelectedText;
+                }
+            }
+
+            uri = await MobileAwfulViewModel.DisplayPromptAsync($"Insert URL", "Enter link to insert", "URL", uri, Keyboard.Url).ConfigureAwait(false);
+            innerText = await MobileAwfulViewModel.DisplayPromptAsync($"Insert URL Inner Text", "Enter inner text", "Text", innerText).ConfigureAwait(false);
+
+            if (string.IsNullOrEmpty(innerText))
+            {
+                this.SetTextInEditor($"[url]{uri}[/url]");
+            }
+            else
+            {
+                this.SetTextInEditor($"[url={uri}]{innerText}[/url]");
+            }
+        }
+
         private async Task AddTag(EditPostItem item, string tag)
         {
             if (this.editor.IsTextSelected)
@@ -232,10 +264,7 @@ namespace Awful.Mobile.ViewModels
             else
             {
                 var result = await MobileAwfulViewModel.DisplayPromptAsync($"Insert Text: {item.Title}", "Enter text to insert").ConfigureAwait(false);
-                if (!string.IsNullOrEmpty(result))
-                {
-                    this.SetTextInEditor($"[{tag}]{result}[/{tag}]");
-                }
+                this.SetTextInEditor($"[{tag}]{result}[/{tag}]");
             }
         }
 

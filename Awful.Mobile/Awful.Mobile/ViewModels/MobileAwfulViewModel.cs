@@ -140,9 +140,15 @@ namespace Awful.Mobile.ViewModels
         /// <param name="message">Message to user.</param>
         /// <param name="placeholder">Placeholder for message.</param>
         /// <returns>String.</returns>
-        public static async Task<string> DisplayPromptAsync(string title, string message, string placeholder = "Text")
+        public static Task<string> DisplayPromptAsync(string title, string message, string placeholder = "Text", string initialValue = "", Keyboard keyboard = null)
         {
-            return await App.Current.MainPage.DisplayPromptAsync(title, message, placeholder: placeholder).ConfigureAwait(false);
+            var tcs = new TaskCompletionSource<string>();
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                string result = await App.Current.MainPage.DisplayPromptAsync(title, message, placeholder: placeholder, keyboard: keyboard, initialValue: initialValue).ConfigureAwait(false);
+                tcs.TrySetResult(result);
+            });
+            return tcs.Task;
         }
 
         /// <summary>
