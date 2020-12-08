@@ -7,7 +7,8 @@
     x:Name="ForumsListPage"
     x:Class="Awful.Mobile.Pages.ForumListPage">
  <ContentPage.Content>
-        <CollectionView SelectionMode="Single" 
+       <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
+            <CollectionView SelectionMode="Single" 
                         x:Name="ForumCollection"
                         ItemSizingStrategy="MeasureFirstItem"
                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ForumCollection}}" 
@@ -51,5 +52,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+       </RefreshView>
     </ContentPage.Content>
 </pages:BasePage>

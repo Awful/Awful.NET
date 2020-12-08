@@ -14,7 +14,7 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(ForumListPage), typeof(AwfulSearchPageRenderer))]
+//[assembly: ExportRenderer(typeof(ForumListPage), typeof(AwfulSearchPageRenderer))]
 [assembly: ExportRenderer(typeof(SAclopediaEntryListPage), typeof(AwfulSearchPageRenderer))]
 
 #pragma warning disable SA1300 // Element should begin with upper-case letter
