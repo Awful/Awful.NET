@@ -270,7 +270,7 @@ namespace Awful.Mobile.ViewModels
         /// Handles post data from Javascript.
         /// </summary>
         /// <param name="data">JSON string from post.</param>
-        protected void HandleDataFromJavascript(string data)
+        public void HandleDataFromJavascript(string data)
         {
             var json = JsonConvert.DeserializeObject<WebViewDataInterop>(data);
             switch (json.Type)
@@ -298,6 +298,24 @@ namespace Awful.Mobile.ViewModels
                                     await PushModalAsync(new ThreadReplyPage(this.Thread.ThreadId, json.Id, false)).ConfigureAwait(false);
                                 }
 
+                                break;
+                        }
+                    });
+                    break;
+                case "showUserMenu":
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        var options = !this.CanPM ? new string[2] { "Profile", "Their Posts" } : new string[3] { "Profile", "PM", "Their Posts" };
+                        var result = await App.Current.MainPage.DisplayActionSheet("User Options", "Cancel", null, options).ConfigureAwait(false);
+                        switch (result)
+                        {
+                            case "Profile":
+                                await PushDetailPageAsync(new UserProfilePage(json.Id)).ConfigureAwait(false);
+                                break;
+                            case "PM":
+                                await PushModalAsync(new NewPrivateMessagePage(json.Text)).ConfigureAwait(false);
+                                break;
+                            case "Their Posts":
                                 break;
                         }
                     });

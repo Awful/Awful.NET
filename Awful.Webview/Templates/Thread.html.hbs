@@ -17,7 +17,7 @@
     <div id="posts">
         {{#Entry.Posts}}
         <post id="{{ PostId }}" class="{{User.Roles}} {{#if HasSeen}} seen {{/if}} {{#if User.IsAvatarHidden}} no-avatar {{/if}}">
-            <header class="userid-{{User.Id}}">
+            <header onclick="showUserMenu({{User.Id}}, '{{User.Username}}')" class="userid-{{User.Id}}">
                 {{#if User.IsAvatarHidden}}
                 {{else}}
                 <img class="avatar" src="{{ User.AvatarLink }}" alt="">

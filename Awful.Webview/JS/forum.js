@@ -8,6 +8,17 @@
     }
 }
 
+function showUserMenu(userId, userName) {
+    if (window.invokeCSharpAction) {
+        var postItem = {
+            type: "showUserMenu",
+            id: userId,
+            text: userName
+        };
+        window.invokeCSharpAction(JSON.stringify(postItem));
+    }
+}
+
 function hidePosts() {
     var start = document.querySelector("#start");
     var seenPosts = document.querySelectorAll("post.seen");

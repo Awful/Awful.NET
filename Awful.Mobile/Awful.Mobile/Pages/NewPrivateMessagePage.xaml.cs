@@ -25,10 +25,12 @@ namespace Awful.Mobile.Pages
         /// <summary>
         /// Initializes a new instance of the <see cref="NewPrivateMessagePage"/> class.
         /// </summary>
-        public NewPrivateMessagePage()
+        /// <param name="username">Username to send to, optional.</param>
+        public NewPrivateMessagePage(string username = "")
         {
             this.InitializeComponent();
             this.BindingContext = this.vm = App.Container.Resolve<NewPrivateMessagePageViewModel>();
+            this.vm.To = username;
             this.vm.Editor = this.AwfulEditor;
         }
     }

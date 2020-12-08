@@ -26,5 +26,12 @@ namespace Awful.UI.Entities
         /// </summary>
         [JsonProperty("id")]
         public int Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the "Text."
+        /// Could be JSON, could be a string. Depends on the type.
+        /// </summary>
+        [JsonProperty("text")]
+        public string Text { get; set; }
     }
 }

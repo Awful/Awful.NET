@@ -51,7 +51,8 @@ namespace Awful.Mobile.ViewModels
         /// Sets the webview on the view model.
         /// </summary>
         /// <param name="webview">The Webview.</param>
-        public void LoadWebview(HybridWebView webview)
+        /// <param name="callback">The webview callback.</param>
+        public void LoadWebview(HybridWebView webview, Action<string> callback = default)
         {
             if (webview == null)
             {
@@ -59,6 +60,10 @@ namespace Awful.Mobile.ViewModels
             }
 
             this.WebView = webview;
+            if (callback != null)
+            {
+                this.WebView.RegisterAction(callback);
+            }
         }
     }
 }

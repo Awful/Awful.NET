@@ -25,7 +25,7 @@ namespace Awful.Mobile.Pages
         {
             this.InitializeComponent();
             this.BindingContext = this.vm = App.Container.Resolve<ForumThreadPageViewModel>();
-            this.vm.LoadWebview(this.AwfulWebView);
+            this.vm.LoadWebview(this.AwfulWebView, this.vm.HandleDataFromJavascript);
             this.vm.LoadThread(thread);
         }
     }
