@@ -10,6 +10,7 @@ using Awful.Core.Entities.Web;
 using Awful.Core.Exceptions;
 using Awful.Core.Tools;
 using Awful.Database.Context;
+using Awful.Database.Entities;
 using Awful.Mobile.Controls;
 using Awful.Mobile.Pages;
 using Awful.UI.Actions;
@@ -71,6 +72,25 @@ namespace Awful.Mobile.ViewModels
         public AwfulAsyncCommand OnLoadCommand
         {
             get { return new AwfulAsyncCommand(async () => { await this.SetupVM().ConfigureAwait(false); }, null, this); }
+        }
+
+        public AwfulAsyncCommand<AwfulThread> LongPressThreadCommand
+        {
+            get
+            {
+                return new AwfulAsyncCommand<AwfulThread>(
+                    async (item) =>
+                {
+                    if (item != null)
+                    {
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                        });
+                    }
+                },
+                    null,
+                    this);
+            }
         }
 
         /// <summary>

@@ -7999,6 +7999,13 @@ namespace Awful.Mobile.Droid
 			global::Xamarin.CommunityToolkit.Resource.Animation.EnterFromRight = global::Awful.Mobile.Droid.Resource.Animation.EnterFromRight;
 			global::Xamarin.CommunityToolkit.Resource.Animation.ExitToLeft = global::Awful.Mobile.Droid.Resource.Animation.ExitToLeft;
 			global::Xamarin.CommunityToolkit.Resource.Animation.ExitToRight = global::Awful.Mobile.Droid.Resource.Animation.ExitToRight;
+			global::Xamarin.CommunityToolkit.Resource.Animation.fragment_close_enter = global::Awful.Mobile.Droid.Resource.Animation.fragment_close_enter;
+			global::Xamarin.CommunityToolkit.Resource.Animation.fragment_close_exit = global::Awful.Mobile.Droid.Resource.Animation.fragment_close_exit;
+			global::Xamarin.CommunityToolkit.Resource.Animation.fragment_fade_enter = global::Awful.Mobile.Droid.Resource.Animation.fragment_fade_enter;
+			global::Xamarin.CommunityToolkit.Resource.Animation.fragment_fade_exit = global::Awful.Mobile.Droid.Resource.Animation.fragment_fade_exit;
+			global::Xamarin.CommunityToolkit.Resource.Animation.fragment_fast_out_extra_slow_in = global::Awful.Mobile.Droid.Resource.Animation.fragment_fast_out_extra_slow_in;
+			global::Xamarin.CommunityToolkit.Resource.Animation.fragment_open_enter = global::Awful.Mobile.Droid.Resource.Animation.fragment_open_enter;
+			global::Xamarin.CommunityToolkit.Resource.Animation.fragment_open_exit = global::Awful.Mobile.Droid.Resource.Animation.fragment_open_exit;
 			global::Xamarin.CommunityToolkit.Resource.Animator.design_appbar_state_list_animator = global::Awful.Mobile.Droid.Resource.Animator.design_appbar_state_list_animator;
 			global::Xamarin.CommunityToolkit.Resource.Animator.design_fab_hide_motion_spec = global::Awful.Mobile.Droid.Resource.Animator.design_fab_hide_motion_spec;
 			global::Xamarin.CommunityToolkit.Resource.Animator.design_fab_show_motion_spec = global::Awful.Mobile.Droid.Resource.Animator.design_fab_show_motion_spec;
@@ -8361,6 +8368,7 @@ namespace Awful.Mobile.Droid
 			global::Xamarin.CommunityToolkit.Resource.Attribute.scrimAnimationDuration = global::Awful.Mobile.Droid.Resource.Attribute.scrimAnimationDuration;
 			global::Xamarin.CommunityToolkit.Resource.Attribute.scrimBackground = global::Awful.Mobile.Droid.Resource.Attribute.scrimBackground;
 			global::Xamarin.CommunityToolkit.Resource.Attribute.scrimVisibleHeightTrigger = global::Awful.Mobile.Droid.Resource.Attribute.scrimVisibleHeightTrigger;
+			global::Xamarin.CommunityToolkit.Resource.Attribute.scrollViewStyle = global::Awful.Mobile.Droid.Resource.Attribute.scrollViewStyle;
 			global::Xamarin.CommunityToolkit.Resource.Attribute.searchHintIcon = global::Awful.Mobile.Droid.Resource.Attribute.searchHintIcon;
 			global::Xamarin.CommunityToolkit.Resource.Attribute.searchIcon = global::Awful.Mobile.Droid.Resource.Attribute.searchIcon;
 			global::Xamarin.CommunityToolkit.Resource.Attribute.searchViewStyle = global::Awful.Mobile.Droid.Resource.Attribute.searchViewStyle;
@@ -8532,6 +8540,8 @@ namespace Awful.Mobile.Droid
 			global::Xamarin.CommunityToolkit.Resource.Color.abc_tint_switch_track = global::Awful.Mobile.Droid.Resource.Color.abc_tint_switch_track;
 			global::Xamarin.CommunityToolkit.Resource.Color.accent_material_dark = global::Awful.Mobile.Droid.Resource.Color.accent_material_dark;
 			global::Xamarin.CommunityToolkit.Resource.Color.accent_material_light = global::Awful.Mobile.Droid.Resource.Color.accent_material_light;
+			global::Xamarin.CommunityToolkit.Resource.Color.androidx_core_ripple_material_light = global::Awful.Mobile.Droid.Resource.Color.androidx_core_ripple_material_light;
+			global::Xamarin.CommunityToolkit.Resource.Color.androidx_core_secondary_text_default_material_light = global::Awful.Mobile.Droid.Resource.Color.androidx_core_secondary_text_default_material_light;
 			global::Xamarin.CommunityToolkit.Resource.Color.background_floating_material_dark = global::Awful.Mobile.Droid.Resource.Color.background_floating_material_dark;
 			global::Xamarin.CommunityToolkit.Resource.Color.background_floating_material_light = global::Awful.Mobile.Droid.Resource.Color.background_floating_material_light;
 			global::Xamarin.CommunityToolkit.Resource.Color.background_material_dark = global::Awful.Mobile.Droid.Resource.Color.background_material_dark;
@@ -9098,6 +9108,7 @@ namespace Awful.Mobile.Droid
 			global::Xamarin.CommunityToolkit.Resource.Id.flyoutcontent_appbar = global::Awful.Mobile.Droid.Resource.Id.flyoutcontent_appbar;
 			global::Xamarin.CommunityToolkit.Resource.Id.flyoutcontent_recycler = global::Awful.Mobile.Droid.Resource.Id.flyoutcontent_recycler;
 			global::Xamarin.CommunityToolkit.Resource.Id.forever = global::Awful.Mobile.Droid.Resource.Id.forever;
+			global::Xamarin.CommunityToolkit.Resource.Id.fragment_container_view_tag = global::Awful.Mobile.Droid.Resource.Id.fragment_container_view_tag;
 			global::Xamarin.CommunityToolkit.Resource.Id.FUNCTION = global::Awful.Mobile.Droid.Resource.Id.FUNCTION;
 			global::Xamarin.CommunityToolkit.Resource.Id.ghost_view = global::Awful.Mobile.Droid.Resource.Id.ghost_view;
 			global::Xamarin.CommunityToolkit.Resource.Id.ghost_view_holder = global::Awful.Mobile.Droid.Resource.Id.ghost_view_holder;
@@ -9232,7 +9243,9 @@ namespace Awful.Mobile.Droid
 			global::Xamarin.CommunityToolkit.Resource.Id.up = global::Awful.Mobile.Droid.Resource.Id.up;
 			global::Xamarin.CommunityToolkit.Resource.Id.useLogo = global::Awful.Mobile.Droid.Resource.Id.useLogo;
 			global::Xamarin.CommunityToolkit.Resource.Id.view_offset_helper = global::Awful.Mobile.Droid.Resource.Id.view_offset_helper;
+			global::Xamarin.CommunityToolkit.Resource.Id.view_tree_saved_state_registry_owner = global::Awful.Mobile.Droid.Resource.Id.view_tree_saved_state_registry_owner;
 			global::Xamarin.CommunityToolkit.Resource.Id.visible = global::Awful.Mobile.Droid.Resource.Id.visible;
+			global::Xamarin.CommunityToolkit.Resource.Id.visible_removing_fragment_view_tag = global::Awful.Mobile.Droid.Resource.Id.visible_removing_fragment_view_tag;
 			global::Xamarin.CommunityToolkit.Resource.Id.withText = global::Awful.Mobile.Droid.Resource.Id.withText;
 			global::Xamarin.CommunityToolkit.Resource.Id.wrap_content = global::Awful.Mobile.Droid.Resource.Id.wrap_content;
 			global::Xamarin.CommunityToolkit.Resource.Integer.abc_config_activityDefaultDur = global::Awful.Mobile.Droid.Resource.Integer.abc_config_activityDefaultDur;
@@ -9371,6 +9384,7 @@ namespace Awful.Mobile.Droid
 			global::Xamarin.CommunityToolkit.Resource.String.fab_transformation_sheet_behavior = global::Awful.Mobile.Droid.Resource.String.fab_transformation_sheet_behavior;
 			global::Xamarin.CommunityToolkit.Resource.String.hide_bottom_view_on_scroll_behavior = global::Awful.Mobile.Droid.Resource.String.hide_bottom_view_on_scroll_behavior;
 			global::Xamarin.CommunityToolkit.Resource.String.mtrl_chip_close_icon_content_description = global::Awful.Mobile.Droid.Resource.String.mtrl_chip_close_icon_content_description;
+			global::Xamarin.CommunityToolkit.Resource.String.overflow_tab_title = global::Awful.Mobile.Droid.Resource.String.overflow_tab_title;
 			global::Xamarin.CommunityToolkit.Resource.String.password_toggle_content_description = global::Awful.Mobile.Droid.Resource.String.password_toggle_content_description;
 			global::Xamarin.CommunityToolkit.Resource.String.path_password_eye = global::Awful.Mobile.Droid.Resource.String.path_password_eye;
 			global::Xamarin.CommunityToolkit.Resource.String.path_password_eye_mask_strike_through = global::Awful.Mobile.Droid.Resource.String.path_password_eye_mask_strike_through;
@@ -9611,6 +9625,8 @@ namespace Awful.Mobile.Droid
 			global::Xamarin.CommunityToolkit.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Text = global::Awful.Mobile.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Text;
 			global::Xamarin.CommunityToolkit.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton = global::Awful.Mobile.Droid.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton;
 			global::Xamarin.CommunityToolkit.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton_Overflow = global::Awful.Mobile.Droid.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton_Overflow;
+			global::Xamarin.CommunityToolkit.Resource.Style.scrollViewScrollBars = global::Awful.Mobile.Droid.Resource.Style.scrollViewScrollBars;
+			global::Xamarin.CommunityToolkit.Resource.Style.scrollViewTheme = global::Awful.Mobile.Droid.Resource.Style.scrollViewTheme;
 			global::Xamarin.CommunityToolkit.Resource.Style.TextAppearance_AppCompat = global::Awful.Mobile.Droid.Resource.Style.TextAppearance_AppCompat;
 			global::Xamarin.CommunityToolkit.Resource.Style.TextAppearance_AppCompat_Body1 = global::Awful.Mobile.Droid.Resource.Style.TextAppearance_AppCompat_Body1;
 			global::Xamarin.CommunityToolkit.Resource.Style.TextAppearance_AppCompat_Body2 = global::Awful.Mobile.Droid.Resource.Style.TextAppearance_AppCompat_Body2;
@@ -10310,6 +10326,13 @@ namespace Awful.Mobile.Droid
 			global::Xamarin.CommunityToolkit.Resource.Styleable.ForegroundLinearLayout_android_foreground = global::Awful.Mobile.Droid.Resource.Styleable.ForegroundLinearLayout_android_foreground;
 			global::Xamarin.CommunityToolkit.Resource.Styleable.ForegroundLinearLayout_android_foregroundGravity = global::Awful.Mobile.Droid.Resource.Styleable.ForegroundLinearLayout_android_foregroundGravity;
 			global::Xamarin.CommunityToolkit.Resource.Styleable.ForegroundLinearLayout_foregroundInsidePadding = global::Awful.Mobile.Droid.Resource.Styleable.ForegroundLinearLayout_foregroundInsidePadding;
+			global::Xamarin.CommunityToolkit.Resource.Styleable.Fragment = global::Awful.Mobile.Droid.Resource.Styleable.Fragment;
+			global::Xamarin.CommunityToolkit.Resource.Styleable.FragmentContainerView = global::Awful.Mobile.Droid.Resource.Styleable.FragmentContainerView;
+			global::Xamarin.CommunityToolkit.Resource.Styleable.FragmentContainerView_android_name = global::Awful.Mobile.Droid.Resource.Styleable.FragmentContainerView_android_name;
+			global::Xamarin.CommunityToolkit.Resource.Styleable.FragmentContainerView_android_tag = global::Awful.Mobile.Droid.Resource.Styleable.FragmentContainerView_android_tag;
+			global::Xamarin.CommunityToolkit.Resource.Styleable.Fragment_android_id = global::Awful.Mobile.Droid.Resource.Styleable.Fragment_android_id;
+			global::Xamarin.CommunityToolkit.Resource.Styleable.Fragment_android_name = global::Awful.Mobile.Droid.Resource.Styleable.Fragment_android_name;
+			global::Xamarin.CommunityToolkit.Resource.Styleable.Fragment_android_tag = global::Awful.Mobile.Droid.Resource.Styleable.Fragment_android_tag;
 			global::Xamarin.CommunityToolkit.Resource.Styleable.GradientColor = global::Awful.Mobile.Droid.Resource.Styleable.GradientColor;
 			global::Xamarin.CommunityToolkit.Resource.Styleable.GradientColorItem = global::Awful.Mobile.Droid.Resource.Styleable.GradientColorItem;
 			global::Xamarin.CommunityToolkit.Resource.Styleable.GradientColorItem_android_color = global::Awful.Mobile.Droid.Resource.Styleable.GradientColorItem_android_color;
@@ -10479,6 +10502,8 @@ namespace Awful.Mobile.Droid
 			global::Xamarin.CommunityToolkit.Resource.Styleable.ScrimInsetsFrameLayout_insetForeground = global::Awful.Mobile.Droid.Resource.Styleable.ScrimInsetsFrameLayout_insetForeground;
 			global::Xamarin.CommunityToolkit.Resource.Styleable.ScrollingViewBehavior_Layout = global::Awful.Mobile.Droid.Resource.Styleable.ScrollingViewBehavior_Layout;
 			global::Xamarin.CommunityToolkit.Resource.Styleable.ScrollingViewBehavior_Layout_behavior_overlapTop = global::Awful.Mobile.Droid.Resource.Styleable.ScrollingViewBehavior_Layout_behavior_overlapTop;
+			global::Xamarin.CommunityToolkit.Resource.Styleable.ScrollViewRendererTheme = global::Awful.Mobile.Droid.Resource.Styleable.ScrollViewRendererTheme;
+			global::Xamarin.CommunityToolkit.Resource.Styleable.ScrollViewRendererTheme_scrollViewStyle = global::Awful.Mobile.Droid.Resource.Styleable.ScrollViewRendererTheme_scrollViewStyle;
 			global::Xamarin.CommunityToolkit.Resource.Styleable.SearchView = global::Awful.Mobile.Droid.Resource.Styleable.SearchView;
 			global::Xamarin.CommunityToolkit.Resource.Styleable.SearchView_android_focusable = global::Awful.Mobile.Droid.Resource.Styleable.SearchView_android_focusable;
 			global::Xamarin.CommunityToolkit.Resource.Styleable.SearchView_android_imeOptions = global::Awful.Mobile.Droid.Resource.Styleable.SearchView_android_imeOptions;

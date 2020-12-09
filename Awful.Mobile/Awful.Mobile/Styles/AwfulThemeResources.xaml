@@ -3,7 +3,9 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:fontawesome="clr-namespace:FontAwesome"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+    xmlns:vm="clr-namespace:Awful.Mobile.ViewModels;assembly=Awful.Mobile"
     xmlns:local="clr-namespace:Awful.Mobile.Tools.Markup;assembly=Awful.Mobile"
     x:Class="Awful.Mobile.Styles.AwfulThemeResources">
     <Color x:Key="BackgroundColorDark">#111111</Color>
@@ -178,7 +180,13 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ThreadDataTemplate">
-        <Grid Padding="6">
+        <Grid Padding="6"
+              xct:TouchEffect.HoveredScale="1.2"
+              xct:TouchEffect.NativeAnimation="True"
+              xct:TouchEffect.LongPressCommandParameter="{Binding .}"
+              xct:TouchEffect.LongPressCommand="{Binding
+            Source={RelativeSource AncestorType={x:Type vm:MobileAwfulViewModel}}, 
+                                              Path=LongPressThreadCommand}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="1"/>
