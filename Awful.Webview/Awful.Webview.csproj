@@ -19,6 +19,10 @@
     <None Remove="Templates\Profile.html.hbs" />
     <None Remove="Templates\SAclopedia.html.hbs" />
     <None Remove="Templates\Thread.html.hbs" />
+    <None Remove="CSS\posts-view-byob.css" />
+    <None Remove="CSS\posts-view-fyad.css" />
+    <None Remove="CSS\posts-view-oled-dark.css" />
+    <None Remove="CSS\posts-view-yospos.css" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +38,10 @@
     <EmbeddedResource Include="Templates\Profile.html.hbs" />
     <EmbeddedResource Include="Templates\Thread.html.hbs" />
     <EmbeddedResource Include="Templates\SAclopedia.html.hbs" />
+    <EmbeddedResource Include="CSS\posts-view-byob.css" />
+    <EmbeddedResource Include="CSS\posts-view-fyad.css" />
+    <EmbeddedResource Include="CSS\posts-view-oled-dark.css" />
+    <EmbeddedResource Include="CSS\posts-view-yospos.css" />
   </ItemGroup>
 
   <ItemGroup>

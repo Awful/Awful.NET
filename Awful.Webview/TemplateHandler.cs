@@ -29,6 +29,9 @@ namespace Awful.Webview
         private readonly string profileCss;
         private readonly string postCss;
         private readonly string postDarkCss;
+        private readonly string postYosposCss;
+        private readonly string postFyadCss;
+        private readonly string postByobCss;
         private readonly string systemUiCss;
         private readonly string forumJs;
         private readonly string forumRenderJs;
@@ -47,7 +50,10 @@ namespace Awful.Webview
             this.systemUiCss = TemplateHandler.GetResourceFileContentAsString("CSS.system-font.css");
             this.profileCss = TemplateHandler.GetResourceFileContentAsString("CSS.profile.css");
             this.postCss = TemplateHandler.GetResourceFileContentAsString("CSS.posts-view.css");
-            this.postDarkCss = TemplateHandler.GetResourceFileContentAsString("CSS.posts-view-dark.css");
+            this.postDarkCss = TemplateHandler.GetResourceFileContentAsString("CSS.posts-view-oled-dark.css");
+            this.postYosposCss = TemplateHandler.GetResourceFileContentAsString("CSS.posts-view-yospos.css");
+            this.postFyadCss = TemplateHandler.GetResourceFileContentAsString("CSS.posts-view-fyad.css");
+            this.postByobCss = TemplateHandler.GetResourceFileContentAsString("CSS.posts-view-byob.css");
             this.forumCss = TemplateHandler.GetResourceFileContentAsString("CSS.app.css");
             this.forumJs = TemplateHandler.GetResourceFileContentAsString("JS.forum.js");
             this.forumRenderJs = TemplateHandler.GetResourceFileContentAsString("JS.RenderView.js");
@@ -119,6 +125,11 @@ namespace Awful.Webview
         /// <returns>HTML Template String.</returns>
         public string RenderThreadPostView(Awful.Core.Entities.Threads.ThreadPost entry, DefaultOptions options)
         {
+            if (entry == null)
+            {
+                throw new ArgumentNullException(nameof(entry));
+            }
+
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -126,7 +137,7 @@ namespace Awful.Webview
 
             var template = Handlebars.Compile(this.threadHtml);
             var entity = new ThreadPostEntity() { Entry = entry };
-            this.SetDefaults(entity, options);
+            this.SetDefaults(entity, options, entry.ForumId);
             return template(entity);
         }
 
@@ -163,16 +174,32 @@ namespace Awful.Webview
             return resource;
         }
 
-        private void SetDefaults(TemplateEntity entity, DefaultOptions options)
+        private void SetDefaults(TemplateEntity entity, DefaultOptions options, int forumId = 0)
         {
-            entity.CSS = new List<string>() { this.systemUiCss, this.forumCss};
-            if (options.DeviceColorTheme == DeviceColorTheme.Dark)
+            entity.CSS = new List<string>() { this.systemUiCss, this.forumCss };
+
+            switch (forumId)
             {
-                entity.CSS.Add(this.postDarkCss);
-            }
-            else
-            {
-                entity.CSS.Add(this.postCss);
+                case 26:
+                    entity.CSS.Add(this.postFyadCss);
+                    break;
+                case 219:
+                    entity.CSS.Add(this.postYosposCss);
+                    break;
+                case 268:
+                    entity.CSS.Add(this.postByobCss);
+                    break;
+                default:
+                    if (options.DeviceColorTheme == DeviceColorTheme.Dark)
+                    {
+                        entity.CSS.Add(this.postDarkCss);
+                    }
+                    else
+                    {
+                        entity.CSS.Add(this.postCss);
+                    }
+
+                    break;
             }
 
             entity.JS = new List<string>() { this.forumJs, this.forumRenderJs };
