@@ -228,9 +228,7 @@ namespace Awful.Mobile.ViewModels
                 }
             }
 
-            var source = new HtmlWebViewSource();
-            source.Html = this.threadPostActions.RenderThreadPostView(this.ThreadPost, defaults);
-            Device.BeginInvokeOnMainThread(() => this.WebView.Source = source);
+            this.WebView.SetSource(this.threadPostActions.RenderThreadPostView(this.ThreadPost, this.defaults));
             this.IsBusy = false;
         }
 

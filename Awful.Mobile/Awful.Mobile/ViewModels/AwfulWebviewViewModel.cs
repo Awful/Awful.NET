@@ -14,6 +14,7 @@ using Awful.Mobile.Controls;
 using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
+using Awful.UI.Interfaces;
 using Awful.UI.ViewModels;
 using Newtonsoft.Json;
 using Xamarin.Essentials;
@@ -40,7 +41,7 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets or sets the internal webview.
         /// </summary>
-        public HybridWebView WebView { get; set; }
+        public IAwfulWebview WebView { get; set; }
 
         /// <summary>
         /// Gets or sets the thread.
@@ -52,7 +53,7 @@ namespace Awful.Mobile.ViewModels
         /// </summary>
         /// <param name="webview">The Webview.</param>
         /// <param name="callback">The webview callback.</param>
-        public void LoadWebview(HybridWebView webview, Action<string> callback = default)
+        public void LoadWebview(IAwfulWebview webview, Action<string> callback = default)
         {
             if (webview == null)
             {

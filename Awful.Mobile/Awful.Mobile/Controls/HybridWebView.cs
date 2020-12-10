@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Awful.UI.Interfaces;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.Controls
@@ -14,7 +15,7 @@ namespace Awful.Mobile.Controls
     /// Used to invoke Javascript onto a webpage.
     /// Originally posted at https://theconfuzedsourcecode.wordpress.com/2020/01/15/talking-to-your-webview-in-xamarin-forms/.
     /// </summary>
-    public class HybridWebView : WebView
+    public class HybridWebView : WebView, IAwfulWebview
     {
         private Action<string> action;
 
@@ -47,6 +48,14 @@ namespace Awful.Mobile.Controls
             }
 
             this.action.Invoke(data);
+        }
+
+        /// <inheritdoc/>
+        public void SetSource(string html)
+        {
+            var source = new HtmlWebViewSource();
+            source.Html = html;
+            Device.BeginInvokeOnMainThread(() => this.Source = source);
         }
     }
 }

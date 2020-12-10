@@ -37,9 +37,7 @@ namespace Awful.Mobile.ViewModels
         {
             this.IsBusy = true;
             this.defaults = await this.GenerateDefaultOptionsAsync().ConfigureAwait(false);
-            var source = new HtmlWebViewSource();
-            source.Html = this.handler.RenderAcknowledgementstView(this.defaults);
-            Device.BeginInvokeOnMainThread(() => this.WebView.Source = source);
+            this.WebView.SetSource(this.handler.RenderAcknowledgementstView(this.defaults));
             this.IsBusy = false;
         }
 
