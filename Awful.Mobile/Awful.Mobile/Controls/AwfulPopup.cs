@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Awful.Mobile.Views;
+using Awful.UI.Interfaces;
 using Forms9Patch;
 using Xamarin.Forms;
 
@@ -15,7 +16,7 @@ namespace Awful.Mobile.Controls
     /// Awful Popup.
     /// Used to render modal content.
     /// </summary>
-    public class AwfulPopup : IDisposable
+    public class AwfulPopup : IAwfulPopup, IDisposable
     {
         private ModalPopup popup;
         private bool disposedValue;
@@ -58,10 +59,10 @@ namespace Awful.Mobile.Controls
         /// <param name="view"><see cref="Xamarin.Forms.ContentView"/>.</param>
         /// <param name="launchModal">Launch the modal after setting the content.</param>
         /// <param name="callback">Callback after modal is closed.</param>
-        public void SetContent(Xamarin.Forms.ContentView view, bool launchModal = false, Action callback = default)
+        public void SetContent(object view, bool launchModal = false, Action callback = default)
         {
             this.popup.BackgroundColor = App.GetCurrentBackgroundColor();
-            this.popup.Content = view;
+            this.popup.Content = (Xamarin.Forms.ContentView)view;
             this.callback = callback;
 
             if (launchModal)
@@ -76,10 +77,10 @@ namespace Awful.Mobile.Controls
         /// <param name="view"><see cref="Xamarin.Forms.ContentView"/>.</param>
         /// <param name="launchModal">Launch the modal after setting the content.</param>
         /// <param name="callback">Callback after modal is closed.</param>
-        public void SetContentWithParameter(Xamarin.Forms.ContentView view, bool launchModal = false, Action<object> callback = default)
+        public void SetContentWithParameter(object view, bool launchModal = false, Action<object> callback = default)
         {
             this.popup.BackgroundColor = App.GetCurrentBackgroundColor();
-            this.popup.Content = view;
+            this.popup.Content = (Xamarin.Forms.ContentView)view;
             this.callbackWithParameter = callback;
 
             if (launchModal)

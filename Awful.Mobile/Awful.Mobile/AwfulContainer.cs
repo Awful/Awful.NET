@@ -58,7 +58,8 @@ namespace Awful.UI
             builder.RegisterType<AcknowledgmentsPageViewModel>();
             builder.RegisterType<NewPrivateMessagePageViewModel>();
             builder.RegisterType<EmoteItemSelectionViewModel>();
-            builder.RegisterType<AwfulPopup>().SingleInstance();
+            builder.RegisterType<AwfulPopup>().As<IAwfulPopup>().SingleInstance();
+            builder.RegisterType<AwfulEditor>().As<IAwfulEditor>();
 #if DEBUG
             builder.RegisterType<DebugPageViewModel>();
 #endif

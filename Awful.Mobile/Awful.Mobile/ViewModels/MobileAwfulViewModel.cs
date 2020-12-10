@@ -39,7 +39,7 @@ namespace Awful.Mobile.ViewModels
         public MobileAwfulViewModel()
             : base()
         {
-            this.Popup = App.Container.Resolve<AwfulPopup>();
+            this.Popup = App.Container.Resolve<IAwfulPopup>();
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets the default AwfulPopup.
         /// </summary>
-        public AwfulPopup Popup { get; internal set; }
+        public IAwfulPopup Popup { get; internal set; }
 
         /// <summary>
         /// Gets the OnLoad Command.
