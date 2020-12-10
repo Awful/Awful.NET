@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Awful.Database.Context;
 using Awful.Mobile.Pages;
+using Awful.UI.Interfaces;
+using Awful.UI.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
@@ -18,16 +20,18 @@ namespace Awful.Mobile.ViewModels
     /// <summary>
     /// Main Tabbed Page View Model.
     /// </summary>
-    public class MainTabbedPageViewModel : MobileAwfulViewModel
+    public class MainTabbedPageViewModel : AwfulViewModel
     {
         private Xamarin.Forms.TabbedPage page;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainTabbedPageViewModel"/> class.
         /// </summary>
+        /// <param name="navigation">Awful Navigation handler.</param>
+        /// <param name="error">Awful Error handler.</param>
         /// <param name="context">Awful Context.</param>
-        public MainTabbedPageViewModel(AwfulContext context)
-            : base(context)
+        public MainTabbedPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, AwfulContext context)
+            : base(navigation, error, context)
         {
         }
 

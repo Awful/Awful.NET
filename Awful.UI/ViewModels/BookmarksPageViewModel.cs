@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,8 +12,8 @@ using Awful.Core.Tools;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
-using Awful.Mobile.Pages;
 using Awful.UI.Actions;
+using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Xamarin.CommunityToolkit.UI.Views;
@@ -23,7 +24,7 @@ namespace Awful.Mobile.ViewModels
     /// <summary>
     /// Bookmarks View Model.
     /// </summary>
-    public class BookmarksPageViewModel : MobileAwfulViewModel
+    public class BookmarksPageViewModel : AwfulViewModel
     {
         private BookmarkAction bookmarks;
         private ObservableCollection<AwfulThread> threads = new ObservableCollection<AwfulThread>();
@@ -32,9 +33,11 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="BookmarksPageViewModel"/> class.
         /// </summary>
+        /// <param name="navigation">Awful Navigation handler.</param>
+        /// <param name="error">Awful Error handler.</param>
         /// <param name="context">Awful Context.</param>
-        public BookmarksPageViewModel(AwfulContext context)
-            : base(context)
+        public BookmarksPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, AwfulContext context)
+            : base(navigation, error, context)
         {
         }
 
@@ -62,7 +65,7 @@ namespace Awful.Mobile.ViewModels
                     this.IsRefreshing = false;
                 },
                     null,
-                    this);
+                    this.Error);
             }
         }
 
@@ -78,11 +81,11 @@ namespace Awful.Mobile.ViewModels
                 {
                     if (item != null)
                     {
-                        await PushDetailPageAsync(new ForumThreadPage(item)).ConfigureAwait(false);
+                        await this.NavigateToForumThreadPageAsync(item).ConfigureAwait(false);
                     }
                 },
                     null,
-                    this);
+                    this.Error);
             }
         }
 
@@ -132,6 +135,16 @@ namespace Awful.Mobile.ViewModels
         public async Task RefreshBookmarksAsync(int forceDelay = 0)
         {
             await this.LoadBookmarksAsync(true, forceDelay).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Navigate to Forum Thread Page.
+        /// </summary>
+        /// <param name="thread">AwfulThread.</param>
+        /// <returns>Task.</returns>
+        protected virtual Task NavigateToForumThreadPageAsync(AwfulThread thread)
+        {
+            throw new NotImplementedException();
         }
     }
 }

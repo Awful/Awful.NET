@@ -2,38 +2,38 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
 using Awful.Core.Entities.PostIcons;
 using Awful.Database.Context;
 using Awful.Database.Entities;
-using Awful.Mobile.Controls;
 using Awful.UI.Actions;
-using Awful.UI.ViewModels;
-using Forms9Patch;
-using Xamarin.Forms;
+using Awful.UI.Interfaces;
+using Awful.UI.Tools;
 
-namespace Awful.Mobile.ViewModels
+namespace Awful.UI.ViewModels
 {
     /// <summary>
     /// Forum Post Icon Selection View Model.
     /// </summary>
-    public class ForumPostIconSelectionViewModel : MobileAwfulViewModel
+    public class ForumPostIconSelectionViewModel : AwfulViewModel
     {
         private AwfulForum forum;
         private PostIcon selectedIcon;
         private ThreadPostCreationActions threadPostCreationActions;
+        private IAwfulPopup popup;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumPostIconSelectionViewModel"/> class.
         /// </summary>
+        /// <param name="popup">Awful Popup.</param>
+        /// <param name="navigation">Awful Navigation handler.</param>
+        /// <param name="error">Awful Error handler.</param>
         /// <param name="context">Awful Context.</param>
-        public ForumPostIconSelectionViewModel(AwfulContext context)
-            : base(context)
+        public ForumPostIconSelectionViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, AwfulContext context)
+            : base(navigation, error, context)
         {
+            this.popup = popup;
         }
 
         /// <summary>
@@ -44,26 +44,29 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets the close modal command.
         /// </summary>
-        public Command<PostIcon> SelectPostIconCommand
+        public AwfulAsyncCommand<PostIcon> SelectPostIconCommand
         {
             get
             {
-                return new Command<PostIcon>(async (icon) =>
+                return new AwfulAsyncCommand<PostIcon>(
+                    async (icon) =>
                 {
                     this.selectedIcon.Id = icon.Id;
                     this.selectedIcon.ImageEndpoint = icon.ImageEndpoint;
                     this.selectedIcon.ImageLocation = icon.ImageLocation;
                     this.selectedIcon.Title = icon.Title;
 
-                    if (this.Popup != null)
+                    if (this.popup != null)
                     {
-                        this.Popup.SetIsVisible(false);
+                        this.popup.SetIsVisible(false);
                     }
                     else
                     {
-                        await PopModalAsync().ConfigureAwait(false);
+                        await this.Navigation.PopModalAsync().ConfigureAwait(false);
                     }
-                });
+                },
+                    null,
+                    this.Error);
             }
         }
 

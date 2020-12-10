@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Awful.Core.Tools;
+using Awful.Database.Context;
 
 namespace Awful.UI.Interfaces
 {
@@ -97,5 +98,13 @@ namespace Awful.UI.Interfaces
         /// <param name="initialValue">Initial value for message.</param>
         /// <returns>String.</returns>
         Task<string> DisplayPromptAsync(string title, string message, string placeholder = "Text", string initialValue = "");
+
+        /// <summary>
+        /// Log out of SA.
+        /// </summary>
+        /// <param name="context">Awful Context.</param>
+        /// <param name="properties">Awful Properties.</param>
+        /// <returns>Task.</returns>
+        Task LogoutAsync(AwfulContext context, IPlatformProperties properties);
     }
 }

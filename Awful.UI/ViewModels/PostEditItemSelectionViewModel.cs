@@ -12,8 +12,6 @@ using Awful.Core.Entities.Smilies;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
-using Awful.Mobile.Controls;
-using Awful.Mobile.Views;
 using Awful.UI.Actions;
 using Awful.UI.Interfaces;
 using Awful.UI.Tools;
@@ -21,20 +19,23 @@ using Awful.UI.ViewModels;
 using Forms9Patch;
 using Xamarin.Forms;
 
-namespace Awful.Mobile.ViewModels
+namespace Awful.UI.ViewModels
 {
     /// <summary>
     /// Post Edit Items Seleciton View Model.
     /// </summary>
-    public class PostEditItemSelectionViewModel : MobileAwfulViewModel
+    public class PostEditItemSelectionViewModel : AwfulViewModel
     {
         private IAwfulEditor editor;
+        private IAwfulPopup popup;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PostEditItemSelectionViewModel"/> class.
         /// </summary>
-        public PostEditItemSelectionViewModel()
+        /// <param name="popup">Awful Popup.</param>
+        public PostEditItemSelectionViewModel(IAwfulPopup popup)
         {
+            this.popup = popup;
         }
 
         /// <summary>
@@ -52,8 +53,8 @@ namespace Awful.Mobile.ViewModels
                             switch (item.Type)
                             {
                                 case EditPostItemType.Emotes:
-                                    var emotePage = new EmoteItemSelectionView();
-                                    this.Popup.SetContentWithParameter(emotePage, false, this.OnCloseModal);
+                                    //var emotePage = new EmoteItemSelectionView();
+                                    //this.popup.SetContentWithParameter(emotePage, false, this.OnCloseModal);
                                     break;
                                 case EditPostItemType.InsertImgur:
                                     break;
@@ -101,7 +102,7 @@ namespace Awful.Mobile.ViewModels
                         }
                     },
                     null,
-                    this);
+                    this.Error);
             }
         }
 
@@ -241,8 +242,8 @@ namespace Awful.Mobile.ViewModels
                 }
             }
 
-            uri = await MobileAwfulViewModel.DisplayPromptAsync($"Insert URL", "Enter link to insert", "URL", uri, Keyboard.Url).ConfigureAwait(false);
-            innerText = await MobileAwfulViewModel.DisplayPromptAsync($"Insert URL Inner Text", "Enter inner text", "Text", innerText).ConfigureAwait(false);
+            uri = await this.Navigation.DisplayPromptAsync($"Insert URL", "Enter link to insert", "URL", uri).ConfigureAwait(false);
+            innerText = await this.Navigation.DisplayPromptAsync($"Insert URL Inner Text", "Enter inner text", "Text", innerText).ConfigureAwait(false);
 
             if (string.IsNullOrEmpty(innerText))
             {
@@ -262,7 +263,7 @@ namespace Awful.Mobile.ViewModels
             }
             else
             {
-                var result = await MobileAwfulViewModel.DisplayPromptAsync($"Insert Text: {item.Title}", "Enter text to insert").ConfigureAwait(false);
+                var result = await this.Navigation.DisplayPromptAsync($"Insert Text: {item.Title}", "Enter text to insert").ConfigureAwait(false);
                 this.SetTextInEditor($"[{tag}]{result}[/{tag}]");
             }
         }
@@ -278,7 +279,7 @@ namespace Awful.Mobile.ViewModels
         private void SetTextInEditor(string text)
         {
             this.editor.UpdateText(text);
-            this.Popup.SetIsVisible(false);
+            this.popup.SetIsVisible(false);
         }
     }
 }

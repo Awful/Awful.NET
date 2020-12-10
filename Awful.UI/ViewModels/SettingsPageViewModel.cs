@@ -1,4 +1,4 @@
-﻿// <copyright file="MobileSettingsPageViewModel.cs" company="Drastic Actions">
+﻿// <copyright file="SettingsPageViewModel.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
@@ -9,20 +9,19 @@ using System.Threading.Tasks;
 using Awful.Core.Tools;
 using Awful.Database.Context;
 using Awful.Database.Entities;
-using Awful.Mobile.Pages;
 using Awful.UI.Actions;
+using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Awful.Webview.Entities.Themes;
 using Microsoft.EntityFrameworkCore;
-using Xamarin.Forms;
 
 namespace Awful.Mobile.ViewModels
 {
     /// <summary>
     /// Mobile Settings Page View Model.
     /// </summary>
-    public class MobileSettingsPageViewModel : MobileAwfulViewModel
+    public class SettingsPageViewModel : AwfulViewModel
     {
         private SettingsAction settingActions;
         private SettingOptions settings;
@@ -30,12 +29,14 @@ namespace Awful.Mobile.ViewModels
         private IPlatformProperties platformProperties;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MobileSettingsPageViewModel"/> class.
+        /// Initializes a new instance of the <see cref="SettingsPageViewModel"/> class.
         /// </summary>
         /// <param name="platformProperties">Platform Properties.</param>
+        /// <param name="navigation">Awful Navigation handler.</param>
+        /// <param name="error">Awful Error handler.</param>
         /// <param name="context">Awful Context.</param>
-        public MobileSettingsPageViewModel(IPlatformProperties platformProperties, AwfulContext context)
-            : base(context)
+        public SettingsPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, IPlatformProperties platformProperties, AwfulContext context)
+            : base(navigation, error, context)
         {
             this.platformProperties = platformProperties;
             this.settings = new SettingOptions();
@@ -108,16 +109,10 @@ namespace Awful.Mobile.ViewModels
                 return new AwfulAsyncCommand(
                     async () =>
                 {
-                    bool answer = await Application.Current.MainPage.DisplayAlert("Log Out", "Are you sure you want to log out?", "Yep", "Nope").ConfigureAwait(false);
-                    if (answer)
-                    {
-                        System.IO.File.Delete(this.platformProperties.CookiePath);
-                        this.Context.ResetDatabase();
-                        Device.BeginInvokeOnMainThread(() => App.Current.MainPage = new LoginPage());
-                    }
+                    await this.Navigation.LogoutAsync(this.Context, this.platformProperties).ConfigureAwait(false);
                 },
                     null,
-                    this);
+                    this.Error);
             }
         }
 

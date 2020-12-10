@@ -7,17 +7,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Awful.Database.Context;
 using Awful.Database.Entities;
-using Awful.Mobile.Pages;
 using Awful.UI.Actions;
+using Awful.UI.Interfaces;
 using Awful.UI.Tools;
+using Awful.UI.ViewModels;
 using Awful.Webview;
 
-namespace Awful.Mobile.ViewModels
+namespace Awful.UI.ViewModels
 {
     /// <summary>
     /// Private Message Page View Model.
     /// </summary>
-    public class PrivateMessagesPageViewModel : MobileAwfulViewModel
+    public class PrivateMessagesPageViewModel : AwfulViewModel
     {
         private PrivateMessageActions pmActions;
         private AwfulAsyncCommand refreshCommand;
@@ -27,10 +28,12 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="PrivateMessagesPageViewModel"/> class.
         /// </summary>
+        /// <param name="navigation">Awful Navigation handler.</param>
+        /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful Handler.</param>
         /// <param name="context">Awful Context.</param>
-        public PrivateMessagesPageViewModel(TemplateHandler handler, AwfulContext context)
-            : base(context)
+        public PrivateMessagesPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, AwfulContext context)
+            : base(navigation, error, context)
         {
             this.handler = handler;
         }
@@ -53,46 +56,19 @@ namespace Awful.Mobile.ViewModels
                     await this.RefreshPMs(this.Threads.Count > 0).ConfigureAwait(false);
                 },
                     () => this.CanPM,
-                    this);
+                    this.Error);
             }
         }
 
         /// <summary>
-        /// Gets the Selection Entry.
+        /// Gets or sets the Selection Entry.
         /// </summary>
-        public AwfulAsyncCommand<AwfulPM> SelectionCommand
-        {
-            get
-            {
-                return new AwfulAsyncCommand<AwfulPM>(
-                    async (item) =>
-                {
-                    if (item != null)
-                    {
-                        await PushDetailPageAsync(new PrivateMessagePage(item)).ConfigureAwait(false);
-                    }
-                },
-                    (item) => this.CanPM,
-                    this);
-            }
-        }
+        public AwfulAsyncCommand<AwfulPM> SelectionCommand { get; set; }
 
         /// <summary>
-        /// Gets the new pm command.
+        /// Gets or sets the new pm command.
         /// </summary>
-        public AwfulAsyncCommand NewPMCommand
-        {
-            get
-            {
-                return this.newPMCommand ??= new AwfulAsyncCommand(
-                    async () =>
-                    {
-                        await PushModalAsync(new NewPrivateMessagePage()).ConfigureAwait(false);
-                    },
-                    () => !this.IsBusy && this.CanPM,
-                    this);
-            }
-        }
+        public AwfulAsyncCommand NewPMCommand { get; set; }
 
         /// <summary>
         /// Refresh all PMs.

@@ -5,8 +5,6 @@
 using System;
 using System.Threading.Tasks;
 using Awful.Database.Context;
-using Awful.Mobile.Controls;
-using Awful.Mobile.Views;
 using Awful.UI.Actions;
 using Awful.UI.Interfaces;
 using Awful.UI.Tools;
@@ -14,16 +12,17 @@ using Awful.UI.ViewModels;
 using Awful.Webview;
 using Xamarin.Forms;
 
-namespace Awful.Mobile.ViewModels
+namespace Awful.UI.ViewModels
 {
     /// <summary>
     /// Thread Post Base View Model.
     /// </summary>
-    public class ThreadPostBaseViewModel : MobileAwfulViewModel
+    public class ThreadPostBaseViewModel : AwfulViewModel
     {
         protected ThreadReplyActions replyActions;
         protected ThreadPostCreationActions postActions;
         protected ThreadActions threadActions;
+        private IAwfulPopup popup;
         private TemplateHandler handler;
         private string subject = string.Empty;
         private string message = string.Empty;
@@ -31,11 +30,15 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadPostBaseViewModel"/> class.
         /// </summary>
+        /// <param name="popup">Awful Popup.</param>
+        /// <param name="navigation">Awful Navigation handler.</param>
+        /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful handler.</param>
         /// <param name="context">Awful Context.</param>
-        public ThreadPostBaseViewModel(TemplateHandler handler, AwfulContext context)
-            : base(context)
+        public ThreadPostBaseViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, AwfulContext context)
+            : base(navigation, error, context)
         {
+            this.popup = popup;
             this.handler = handler;
         }
 
@@ -74,30 +77,9 @@ namespace Awful.Mobile.ViewModels
         }
 
         /// <summary>
-        /// Gets the options command.
+        /// Gets or sets the options command.
         /// </summary>
-        public AwfulAsyncCommand OpenOptionsCommand
-        {
-            get
-            {
-                return new AwfulAsyncCommand(
-                    () =>
-                    {
-                        if (this.Popup != null)
-                        {
-                            if (this.Editor != null)
-                            {
-                                var view = new PostEditItemSelectionView(this.Editor);
-                                this.Popup.SetContent(view, true);
-                            }
-                        }
-
-                        return Task.CompletedTask;
-                    },
-                    null,
-                    this);
-            }
-        }
+        public AwfulAsyncCommand OpenOptionsCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the thread editor.
@@ -114,10 +96,10 @@ namespace Awful.Mobile.ViewModels
                 return new AwfulAsyncCommand(
                     async () =>
                 {
-                    await PopModalAsync().ConfigureAwait(false);
+                    await this.Navigation.PopModalAsync().ConfigureAwait(false);
                 },
                     null,
-                    this);
+                    this.Error);
             }
         }
 

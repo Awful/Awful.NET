@@ -10,16 +10,16 @@ using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.UI.Actions;
+using Awful.UI.Interfaces;
 using Awful.UI.ViewModels;
 using Awful.Webview;
-using Xamarin.Forms;
 
-namespace Awful.Mobile.ViewModels
+namespace Awful.UI.ViewModels
 {
     /// <summary>
     /// Lepers View Model.
     /// </summary>
-    public class LepersPageViewModel : MobileAwfulViewModel
+    public class LepersPageViewModel : AwfulViewModel
     {
 
         private BanActions banActions;
@@ -28,10 +28,12 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="LepersPageViewModel"/> class.
         /// </summary>
+        /// <param name="navigation">Awful Navigation handler.</param>
+        /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful Properties.</param>
         /// <param name="context">Awful Context.</param>
-        public LepersPageViewModel(TemplateHandler handler, AwfulContext context)
-            : base(context)
+        public LepersPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, AwfulContext context)
+            : base(navigation, error, context)
         {
             this.handler = handler;
         }
@@ -39,7 +41,7 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets or sets the internal webview.
         /// </summary>
-        public WebView WebView { get; set; }
+        public IAwfulWebview WebView { get; set; }
 
         /// <inheritdoc/>
         public override async Task OnLoad()
@@ -56,9 +58,7 @@ namespace Awful.Mobile.ViewModels
             this.IsBusy = true;
             var defaults = await this.GenerateDefaultOptionsAsync().ConfigureAwait(false);
             var banPage = await this.banActions.GetBanPageAsync().ConfigureAwait(false);
-            var source = new HtmlWebViewSource();
-            source.Html = this.banActions.RenderBanView(banPage, defaults);
-            Device.BeginInvokeOnMainThread(() => this.WebView.Source = source);
+            this.WebView.SetSource(this.banActions.RenderBanView(banPage, defaults));
             this.IsBusy = false;
         }
     }

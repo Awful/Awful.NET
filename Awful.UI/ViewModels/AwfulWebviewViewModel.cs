@@ -3,25 +3,11 @@
 // </copyright>
 
 using System;
-using System.Globalization;
-using System.Threading.Tasks;
-using Autofac;
-using Awful.Core.Tools;
-using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
-using Awful.Mobile.Controls;
-using Awful.Mobile.Pages;
-using Awful.UI.Actions;
-using Awful.UI.Entities;
 using Awful.UI.Interfaces;
-using Awful.UI.ViewModels;
-using Newtonsoft.Json;
-using Xamarin.Essentials;
-using Xamarin.Forms;
 
-
-namespace Awful.Mobile.ViewModels
+namespace Awful.UI.ViewModels
 {
     /// <summary>
     /// Awful Webview View Model.
@@ -32,9 +18,11 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="AwfulWebviewViewModel"/> class.
         /// </summary>
+        /// <param name="navigation">Awful Navigation handler.</param>
+        /// <param name="error">Awful Error handler.</param>
         /// <param name="context">Awful Context.</param>
-        public AwfulWebviewViewModel(AwfulContext context)
-            : base(context)
+        public AwfulWebviewViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, AwfulContext context)
+            : base(navigation, error, context)
         {
         }
 

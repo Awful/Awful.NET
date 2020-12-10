@@ -12,16 +12,17 @@ using Awful.Core.Tools;
 using Awful.Database.Context;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
+using Awful.UI.Interfaces;
 using Awful.UI.ViewModels;
 using Awful.Webview;
 using Xamarin.Forms;
 
-namespace Awful.Mobile.ViewModels
+namespace Awful.UI.ViewModels
 {
     /// <summary>
     /// SAclopedia Entry View Model.
     /// </summary>
-    public class SAclopediaEntryPageViewModel : MobileAwfulViewModel
+    public class SAclopediaEntryPageViewModel : AwfulViewModel
     {
         private SAclopediaAction saclopedia;
         private TemplateHandler handler;
@@ -30,10 +31,12 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="SAclopediaEntryPageViewModel"/> class.
         /// </summary>
+        /// <param name="navigation">Awful Navigation handler.</param>
+        /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful Template Handler.</param>
         /// <param name="context">Awful Context.</param>
-        public SAclopediaEntryPageViewModel(TemplateHandler handler, AwfulContext context)
-            : base(context)
+        public SAclopediaEntryPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, AwfulContext context)
+            : base(navigation, error, context)
         {
             this.handler = handler;
         }
@@ -41,7 +44,7 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets or sets the internal webview.
         /// </summary>
-        public WebView WebView { get; set; }
+        public IAwfulWebview WebView { get; set; }
 
         public void LoadEntry(SAclopediaEntryItem entry)
         {
@@ -70,9 +73,7 @@ namespace Awful.Mobile.ViewModels
             this.Title = entryListItem.Title;
             var defaults = await this.GenerateDefaultOptionsAsync().ConfigureAwait(false);
             var entry = await this.saclopedia.LoadSAclopediaEntryAsync(entryListItem).ConfigureAwait(false);
-            var source = new HtmlWebViewSource();
-            source.Html = this.saclopedia.GenerateSAclopediaEntryTemplate(entry, defaults);
-            Device.BeginInvokeOnMainThread(() => this.WebView.Source = source);
+            this.WebView.SetSource(this.saclopedia.GenerateSAclopediaEntryTemplate(entry, defaults));
             this.IsBusy = false;
         }
 

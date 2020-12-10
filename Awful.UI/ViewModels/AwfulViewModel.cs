@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
+using Awful.UI.Interfaces;
 using Awful.Webview.Entities.Themes;
 using Xamarin.Forms;
 
@@ -36,14 +37,18 @@ namespace Awful.UI.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="AwfulViewModel"/> class.
         /// </summary>
+        /// <param name="navigation">Awful Navigation handler.</param>
+        /// <param name="error">Awful Error handler.</param>
         /// <param name="context">Awful Database Context.</param>
-        public AwfulViewModel(AwfulContext context)
+        public AwfulViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, AwfulContext context)
         {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
 
+            this.Navigation = navigation;
+            this.Error = error;
             this.Context = context;
         }
 
@@ -99,6 +104,16 @@ namespace Awful.UI.ViewModels
         /// Gets or sets the awful Database Context.
         /// </summary>
         public AwfulContext Context { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Error Handler.
+        /// </summary>
+        protected IAwfulErrorHandler Error { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Navigation Handler.
+        /// </summary>
+        protected IAwfulNavigation Navigation { get; set; }
 
         /// <summary>
         /// Gets or sets the current user.

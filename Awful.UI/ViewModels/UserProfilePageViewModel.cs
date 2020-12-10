@@ -14,16 +14,13 @@ using Awful.Core.Entities.Threads;
 using Awful.Core.Tools;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
-using Awful.Database.Entities;
-using Awful.Mobile.Controls;
-using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
 using Awful.UI.Interfaces;
 using Awful.UI.ViewModels;
 using Awful.Webview;
 
-namespace Awful.Mobile.ViewModels
+namespace Awful.UI.ViewModels
 {
     /// <summary>
     /// User Profile Page View Model.
@@ -50,7 +47,7 @@ namespace Awful.Mobile.ViewModels
         /// </summary>
         public IAwfulWebview WebView { get; set; }
 
-        public void LoadProfile(long profileId, HybridWebView webview)
+        public void LoadProfile(long profileId, IAwfulWebview webview)
         {
             this.profileId = profileId;
             this.WebView = webview;

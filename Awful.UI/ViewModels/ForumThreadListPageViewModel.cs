@@ -9,16 +9,17 @@ using System.Threading.Tasks;
 using Awful.Core.Entities.Threads;
 using Awful.Database.Context;
 using Awful.Database.Entities;
-using Awful.Mobile.Pages;
 using Awful.UI.Actions;
+using Awful.UI.Interfaces;
 using Awful.UI.Tools;
+using Awful.UI.ViewModels;
 
-namespace Awful.Mobile.ViewModels
+namespace Awful.UI.ViewModels
 {
     /// <summary>
     /// Forum Thread List Page View Model.
     /// </summary>
-    public class ForumThreadListPageViewModel : MobileAwfulViewModel
+    public class ForumThreadListPageViewModel : AwfulViewModel
     {
         private ThreadListActions threadlistActions;
         private ThreadList threadList;
@@ -30,9 +31,11 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumThreadListPageViewModel"/> class.
         /// </summary>
+        /// <param name="navigation">Awful Navigation handler.</param>
+        /// <param name="error">Awful Error handler.</param>
         /// <param name="context">Awful Context.</param>
-        public ForumThreadListPageViewModel(AwfulContext context)
-            : base(context)
+        public ForumThreadListPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, AwfulContext context)
+            : base(navigation, error, context)
         {
         }
 
@@ -51,7 +54,7 @@ namespace Awful.Mobile.ViewModels
                     await this.RefreshForums().ConfigureAwait(false);
                 },
                     null,
-                    this);
+                    this.Error);
             }
         }
 
@@ -72,7 +75,7 @@ namespace Awful.Mobile.ViewModels
                     }
                 },
                     null,
-                    this);
+                    this.Error);
             }
         }
 
@@ -88,11 +91,11 @@ namespace Awful.Mobile.ViewModels
                 {
                     if (item != null)
                     {
-                        await PushDetailPageAsync(new ForumThreadPage(item)).ConfigureAwait(false);
+                        await this.NavigateToThreadPageAsync(item).ConfigureAwait(false);
                     }
                 },
                     null,
-                    this);
+                    this.Error);
             }
         }
 
@@ -108,11 +111,11 @@ namespace Awful.Mobile.ViewModels
                 {
                     if (this.forum != null)
                     {
-                        await PushModalAsync(new NewThreadPage(this.forum)).ConfigureAwait(false);
+                        await this.NavigateToNewThreadPageAsync(this.forum).ConfigureAwait(false);
                     }
                 },
                     () => !this.IsBusy && !this.OnProbation,
-                    this);
+                    this.Error);
             }
         }
 
@@ -186,6 +189,26 @@ namespace Awful.Mobile.ViewModels
             {
                 await this.RefreshCommand.ExecuteAsync().ConfigureAwait(false);
             }
+        }
+
+        /// <summary>
+        /// Navigate to New Thread page.
+        /// </summary>
+        /// <param name="forum">Awful Forum.</param>
+        /// <returns>Task.</returns>
+        protected virtual Task NavigateToNewThreadPageAsync(AwfulForum forum)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Navigate to Thread page.
+        /// </summary>
+        /// <param name="thread">Awful Thread.</param>
+        /// <returns>Task.</returns>
+        protected virtual Task NavigateToThreadPageAsync(AwfulThread thread)
+        {
+            throw new NotImplementedException();
         }
     }
 }

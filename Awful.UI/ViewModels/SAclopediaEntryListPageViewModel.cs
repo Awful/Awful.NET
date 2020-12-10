@@ -11,22 +11,22 @@ using Awful.Core.Entities.SAclopedia;
 using Awful.Core.Tools;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
-using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
+using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Awful.Webview;
 using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
 
-namespace Awful.Mobile.ViewModels
+namespace Awful.UI.ViewModels
 {
     /// <summary>
     /// SAclopedia Entry List View Model.
     /// On load, if signed in, load new SAclopedia items.
     /// </summary>
-    public class SAclopediaEntryListPageViewModel : MobileAwfulViewModel
+    public class SAclopediaEntryListPageViewModel : AwfulViewModel
     {
         private SAclopediaAction saclopedia;
         private TemplateHandler handler;
@@ -36,36 +36,20 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="SAclopediaEntryListPageViewModel"/> class.
         /// </summary>
+        /// <param name="navigation">Awful Navigation handler.</param>
+        /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful Template Handler.</param>
         /// <param name="context">Awful Context.</param>
-        public SAclopediaEntryListPageViewModel(TemplateHandler handler, AwfulContext context)
-            : base(context)
+        public SAclopediaEntryListPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, AwfulContext context)
+            : base(navigation, error, context)
         {
             this.handler = handler;
         }
 
         /// <summary>
-        /// Gets the Selection Entry.
+        /// Gets or sets the Selection Entry.
         /// </summary>
-        public AwfulAsyncCommand<SAclopediaEntryItem> SelectionCommand
-        {
-            get
-            {
-                return new AwfulAsyncCommand<SAclopediaEntryItem>(
-                    async (item) =>
-                {
-                    if (item != null)
-                    {
-                        Device.BeginInvokeOnMainThread(async () =>
-                        {
-                            await PushDetailPageAsync(new SAclopediaEntryPage(item)).ConfigureAwait(false);
-                        });
-                    }
-                },
-                    null,
-                    this);
-            }
-        }
+        public AwfulAsyncCommand<SAclopediaEntryItem> SelectionCommand { get; set; }
 
         /// <summary>
         /// Gets the refresh command.
@@ -74,7 +58,7 @@ namespace Awful.Mobile.ViewModels
         {
             get
             {
-                return this.refreshCommand ??= new AwfulAsyncCommand(async () => await this.RefreshEntryList(true).ConfigureAwait(false), null, this);
+                return this.refreshCommand ??= new AwfulAsyncCommand(async () => await this.RefreshEntryList(true).ConfigureAwait(false), null, this.Error);
             }
         }
 

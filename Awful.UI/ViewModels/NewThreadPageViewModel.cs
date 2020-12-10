@@ -7,12 +7,12 @@ using Awful.Core.Entities.PostIcons;
 using Awful.Core.Entities.Threads;
 using Awful.Database.Context;
 using Awful.Database.Entities;
-using Awful.Mobile.Views;
+using Awful.UI.Interfaces;
 using Awful.UI.Tools;
+using Awful.UI.ViewModels;
 using Awful.Webview;
-using Xamarin.Forms;
 
-namespace Awful.Mobile.ViewModels
+namespace Awful.UI.ViewModels
 {
     /// <summary>
     /// New Thread Page View Model.
@@ -27,10 +27,13 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="NewThreadPageViewModel"/> class.
         /// </summary>
+        /// <param name="popup">Awful Popup.</param>
+        /// <param name="navigation">Awful Navigation handler.</param>
+        /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful handler.</param>
         /// <param name="context">Awful Context.</param>
-        public NewThreadPageViewModel(TemplateHandler handler, AwfulContext context)
-            : base(handler, context)
+        public NewThreadPageViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, AwfulContext context)
+            : base(popup, navigation, error, handler, context)
         {
         }
 
@@ -51,75 +54,17 @@ namespace Awful.Mobile.ViewModels
         }
 
         /// <summary>
-        /// Gets the SelectPostIcon Command.
+        /// Gets or sets the SelectPostIcon Command.
         /// </summary>
         public AwfulAsyncCommand SelectPostIconCommand
         {
-            get
-            {
-                return new AwfulAsyncCommand(
-                    () =>
-                    {
-                        if (this.Popup != null)
-                        {
-                            this.Popup.SetContent(new ForumPostIconSelectionView(this.forum, this.PostIcon), true, this.OnCloseModal);
-                        }
-
-                        return Task.CompletedTask;
-                    },
-                    null,
-                    this);
-            }
+            get; set;
         }
 
         /// <summary>
-        /// Gets the post thread command.
+        /// Gets or sets the post thread command.
         /// </summary>
-        public AwfulAsyncCommand PostThreadCommand
-        {
-            get
-            {
-                return this.postThreadCommand ??= new AwfulAsyncCommand(
-                    async () =>
-                    {
-                        if (this.newThread != null)
-                        {
-                            var threadText = this.Message.Trim();
-                            if (string.IsNullOrEmpty(threadText))
-                            {
-                                return;
-                            }
-
-                            var threadTitle = this.Subject.Trim();
-                            if (string.IsNullOrEmpty(threadTitle))
-                            {
-                                return;
-                            }
-
-                            if (string.IsNullOrEmpty(this.PostIcon.ImageLocation))
-                            {
-                                return;
-                            }
-
-                            this.newThread.PostIcon = this.PostIcon;
-                            this.newThread.Subject = threadTitle;
-                            this.newThread.Content = threadText;
-
-                            // The Manager will throw if we couldn't post.
-                            // That will be captured by AwfulAsyncCommand.
-                            await this.threadActions.PostNewThreadAsync(this.newThread).ConfigureAwait(false);
-
-                            Device.BeginInvokeOnMainThread(async () =>
-                            {
-                                await PopModalAsync().ConfigureAwait(false);
-                                await RefreshForumPageAsync().ConfigureAwait(false);
-                            });
-                        }
-                    },
-                    () => this.CanPost,
-                    this);
-            }
-        }
+        public AwfulAsyncCommand PostThreadCommand { get; set; }
 
         private bool CanPost
         {

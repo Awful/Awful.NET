@@ -12,34 +12,39 @@ using Awful.Core.Entities.PostIcons;
 using Awful.Core.Entities.Smilies;
 using Awful.Database.Context;
 using Awful.Database.Entities;
-using Awful.Mobile.Controls;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
+using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Force.DeepCloner;
 using Xamarin.Forms;
 
-namespace Awful.Mobile.ViewModels
+namespace Awful.UI.ViewModels
 {
     /// <summary>
     /// Emote Item Selection View Model.
     /// </summary>
-    public class EmoteItemSelectionViewModel : MobileAwfulViewModel
+    public class EmoteItemSelectionViewModel : AwfulViewModel
     {
         private ThreadPostCreationActions threadPostCreationActions;
         private AwfulAsyncCommand<Smile> selectionCommand;
         private AwfulAsyncCommand<string> textChangedCommand;
         private ObservableCollection<SmileGroup> items = new ObservableCollection<SmileGroup>();
         private ObservableCollection<SmileGroup> originalItems = new ObservableCollection<SmileGroup>();
+        private IAwfulPopup popup;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmoteItemSelectionViewModel"/> class.
         /// </summary>
+        /// <param name="popup">Awful Popup.</param>
+        /// <param name="navigation">Awful Navigation handler.</param>
+        /// <param name="error">Awful Error handler.</param>
         /// <param name="context">Awful Context.</param>
-        public EmoteItemSelectionViewModel(AwfulContext context)
-            : base(context)
+        public EmoteItemSelectionViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, AwfulContext context)
+            : base(navigation, error, context)
         {
+            this.popup = popup;
         }
 
         /// <summary>
@@ -52,15 +57,15 @@ namespace Awful.Mobile.ViewModels
                 return this.selectionCommand ??= new AwfulAsyncCommand<Smile>(
                     (item) =>
                     {
-                        if (item != null && this.Popup != null)
+                        if (item != null && this.popup != null)
                         {
-                            this.Popup.SetIsVisible(false, item);
+                            this.popup.SetIsVisible(false, item);
                         }
 
                         return Task.CompletedTask;
                     },
                     null,
-                    this);
+                    this.Error);
             }
         }
 
@@ -92,12 +97,12 @@ namespace Awful.Mobile.ViewModels
                         return Task.CompletedTask;
                     },
                     null,
-                    this);
+                    this.Error);
             }
         }
 
         /// <summary>
-        /// Gets the SmileCategory Items.
+        /// Gets or sets the SmileCategory Items.
         /// </summary>
         public ObservableCollection<SmileGroup> Items
         {

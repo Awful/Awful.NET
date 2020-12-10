@@ -73,6 +73,18 @@ namespace Awful.Mobile.Controls
         }
 
         /// <inheritdoc/>
+        public async Task LogoutAsync(AwfulContext context, IPlatformProperties properties)
+        {
+            bool answer = await Application.Current.MainPage.DisplayAlert("Log Out", "Are you sure you want to log out?", "Yep", "Nope").ConfigureAwait(false);
+            if (answer)
+            {
+                System.IO.File.Delete(this.platformProperties.CookiePath);
+                context.ResetDatabase();
+                Device.BeginInvokeOnMainThread(() => App.Current.MainPage = new LoginPage());
+            }
+        }
+
+        /// <inheritdoc/>
         public Task PopModalAsync()
         {
             if (IsLargeDevice)

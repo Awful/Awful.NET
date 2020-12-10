@@ -10,19 +10,18 @@ using Awful.Core.Entities.Threads;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
-using Awful.Mobile.Controls;
-using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
 using Awful.UI.Interfaces;
 using Awful.UI.Tools;
+using Awful.UI.ViewModels;
 using Awful.Webview;
 using Awful.Webview.Entities.Themes;
 using Newtonsoft.Json;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace Awful.Mobile.ViewModels
+namespace Awful.UI.ViewModels
 {
     /// <summary>
     /// Forum Thread Page View Model.
@@ -36,19 +35,17 @@ namespace Awful.Mobile.ViewModels
         private AwfulAsyncCommand refreshCommand;
         private AwfulAsyncCommand replyToThreadCommand;
         private DefaultOptions defaults;
-        private IAwfulNavigation navigation;
-        private IAwfulErrorHandler error;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumThreadPageViewModel"/> class.
         /// </summary>
+        /// <param name="navigation">Awful Navigation handler.</param>
+        /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful Handler.</param>
         /// <param name="context">Awful Context.</param>
         public ForumThreadPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, AwfulContext context)
-            : base(context)
+            : base(navigation, error, context)
         {
-            this.navigation = navigation;
-            this.error = error;
             this.handler = handler;
         }
 
@@ -74,7 +71,7 @@ namespace Awful.Mobile.ViewModels
                     await this.RefreshThreadAsync().ConfigureAwait(false);
                 },
                     null,
-                    this.error);
+                    this.Error);
             }
         }
 
@@ -88,13 +85,10 @@ namespace Awful.Mobile.ViewModels
                 return this.replyToThreadCommand ??= new AwfulAsyncCommand(
                     async () =>
                 {
-                    if (this.ThreadPost != null)
-                    {
-                        await this.navigation.PushModalAsync(new ThreadReplyPage(this.Thread.ThreadId)).ConfigureAwait(false);
-                    }
+                    await this.NavigateToThreadReplyPageAsync().ConfigureAwait(false);
                 },
                     () => !this.IsBusy && !this.OnProbation,
-                    this.error);
+                    this.Error);
             }
         }
 
@@ -114,7 +108,7 @@ namespace Awful.Mobile.ViewModels
                     }
                 },
                     null,
-                    this.error);
+                    this.Error);
             }
         }
 
@@ -137,7 +131,7 @@ namespace Awful.Mobile.ViewModels
                     }
                 },
                     null,
-                    this.error);
+                    this.Error);
             }
         }
 
@@ -160,7 +154,7 @@ namespace Awful.Mobile.ViewModels
                     }
                 },
                     null,
-                    this.error);
+                    this.Error);
             }
         }
 
@@ -180,7 +174,7 @@ namespace Awful.Mobile.ViewModels
                     }
                 },
                     null,
-                    this.error);
+                    this.Error);
             }
         }
 
@@ -270,63 +264,29 @@ namespace Awful.Mobile.ViewModels
         }
 
         /// <summary>
+        /// Navigate to Thread Reply Page.
+        /// </summary>
+        /// <returns>Task.</returns>
+        protected virtual Task NavigateToThreadReplyPageAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Handles post data from Javascript.
         /// </summary>
         /// <param name="data">JSON string from post.</param>
-        public void HandleDataFromJavascript(string data)
+        protected virtual void HandleDataFromJavascript(string data)
         {
-            var json = JsonConvert.DeserializeObject<WebViewDataInterop>(data);
-            switch (json.Type)
-            {
-                case "showPostMenu":
-                    // TODO: Refactor into generic method.
-                    // TODO: Place into action? Command?
-                    Device.BeginInvokeOnMainThread(async () => {
-                        var result = await App.Current.MainPage.DisplayActionSheet("Post Options", "Cancel", null, "Share", "Mark Read", "Quote Post").ConfigureAwait(false);
-                        switch (result)
-                        {
-                            case "Share":
-                                await Share.RequestAsync(new ShareTextRequest
-                                {
-                                    Uri = string.Format(CultureInfo.InvariantCulture, EndPoints.ShowPost, json.Id),
-                                    Title = this.Title,
-                                }).ConfigureAwait(false);
-                                break;
-                            case "Mark Read":
-                                _ = Task.Run(async () => await this.MarkPostAsUnreadAsync(json.Id).ConfigureAwait(false)).ConfigureAwait(false);
-                                break;
-                            case "Quote Post":
-                                if (!this.OnProbation)
-                                {
-                                    await this.navigation.PushModalAsync(new ThreadReplyPage(this.Thread.ThreadId, json.Id, false)).ConfigureAwait(false);
-                                }
-
-                                break;
-                        }
-                    });
-                    break;
-                case "showUserMenu":
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
-                        var options = !this.CanPM ? new string[2] { "Profile", "Their Posts" } : new string[3] { "Profile", "PM", "Their Posts" };
-                        var result = await App.Current.MainPage.DisplayActionSheet("User Options", "Cancel", null, options).ConfigureAwait(false);
-                        switch (result)
-                        {
-                            case "Profile":
-                                await this.navigation.PushDetailPageAsync(new UserProfilePage(json.Id)).ConfigureAwait(false);
-                                break;
-                            case "PM":
-                                await this.navigation.PushModalAsync(new NewPrivateMessagePage(json.Text)).ConfigureAwait(false);
-                                break;
-                            case "Their Posts":
-                                break;
-                        }
-                    });
-                    break;
-            }
+            throw new NotImplementedException();
         }
 
-        private async Task MarkPostAsUnreadAsync(int postId)
+        /// <summary>
+        /// Mark posts as Unread.
+        /// </summary>
+        /// <param name="postId">Post Id.</param>
+        /// <returns>Task.</returns>
+        protected async Task MarkPostAsUnreadAsync(int postId)
         {
             var postIndex = this.ThreadPost.Posts.FirstOrDefault(n => n.PostId == postId);
             if (postIndex != null)

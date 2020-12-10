@@ -10,18 +10,19 @@ using System.Threading.Tasks;
 using Awful.Core.Entities.JSON;
 using Awful.Database.Context;
 using Awful.Database.Entities;
-using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
+using Awful.UI.Interfaces;
 using Awful.UI.Tools;
+using Awful.UI.ViewModels;
 using Force.DeepCloner;
 
-namespace Awful.Mobile.ViewModels
+namespace Awful.UI.ViewModels
 {
     /// <summary>
     /// Awful Forums List View Model.
     /// </summary>
-    public class ForumsListPageViewModel : MobileAwfulViewModel
+    public class ForumsListPageViewModel : AwfulViewModel
     {
         private IndexPageActions forumActions;
         private AwfulAsyncCommand refreshCommand;
@@ -31,9 +32,11 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumsListPageViewModel"/> class.
         /// </summary>
+        /// <param name="navigation">Awful Navigation handler.</param>
+        /// <param name="error">Awful Error handler.</param>
         /// <param name="context">Awful Context.</param>
-        public ForumsListPageViewModel(AwfulContext context)
-            : base(context)
+        public ForumsListPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, AwfulContext context)
+            : base(navigation, error, context)
         {
         }
 
@@ -52,7 +55,7 @@ namespace Awful.Mobile.ViewModels
                     this.IsRefreshing = false;
                 },
                     null,
-                    this);
+                    this.Error);
             }
         }
 
@@ -68,11 +71,11 @@ namespace Awful.Mobile.ViewModels
                 {
                     if (item != null)
                     {
-                        await PushPageAsync(new ForumThreadListPage(item)).ConfigureAwait(false);
+                        await this.NavigateToForumThreadListPageAsync(item).ConfigureAwait(false);
                     }
                 },
                     null,
-                    this);
+                    this.Error);
             }
         }
 
@@ -117,7 +120,7 @@ namespace Awful.Mobile.ViewModels
                     }
                 },
                     null,
-                    this);
+                    this.Error);
             }
         }
 
@@ -159,6 +162,15 @@ namespace Awful.Mobile.ViewModels
             {
                 await this.RefreshCommand.ExecuteAsync().ConfigureAwait(false);
             }
+        }
+
+        /// <summary>
+        /// Navigate to Forum Thread page.
+        /// </summary>
+        /// <returns>Task.</returns>
+        protected virtual Task NavigateToForumThreadListPageAsync(AwfulForum forum)
+        {
+            throw new NotImplementedException();
         }
 
         private void SortForumsIntoList(List<Forum> forums, string filter = "")

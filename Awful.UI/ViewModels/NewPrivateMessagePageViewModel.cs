@@ -5,16 +5,15 @@
 using System.Threading.Tasks;
 using Awful.Core.Entities.Messages;
 using Awful.Core.Entities.PostIcons;
-using Awful.Core.Entities.Threads;
 using Awful.Database.Context;
-using Awful.Database.Entities;
-using Awful.Mobile.Views;
 using Awful.UI.Actions;
+using Awful.UI.Interfaces;
 using Awful.UI.Tools;
+using Awful.UI.ViewModels;
 using Awful.Webview;
 using Xamarin.Forms;
 
-namespace Awful.Mobile.ViewModels
+namespace Awful.UI.ViewModels
 {
     /// <summary>
     /// New Private Message Page View Model.
@@ -30,10 +29,13 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="NewPrivateMessagePageViewModel"/> class.
         /// </summary>
+        /// <param name="popup">Awful Popup.</param>
+        /// <param name="navigation">Awful Navigation handler.</param>
+        /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful handler.</param>
         /// <param name="context">Awful Context.</param>
-        public NewPrivateMessagePageViewModel(TemplateHandler handler, AwfulContext context)
-            : base(handler, context)
+        public NewPrivateMessagePageViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, AwfulContext context)
+            : base(popup, navigation, error, handler, context)
         {
         }
 
@@ -71,26 +73,9 @@ namespace Awful.Mobile.ViewModels
         }
 
         /// <summary>
-        /// Gets the SelectPostIcon Command.
+        /// Gets or sets the SelectPostIcon Command.
         /// </summary>
-        public AwfulAsyncCommand SelectPostIconCommand
-        {
-            get
-            {
-                return new AwfulAsyncCommand(
-                    () =>
-                    {
-                        if (this.Popup != null)
-                        {
-                            this.Popup.SetContent(new ForumPostIconSelectionView(null, this.PostIcon), true, this.OnCloseModal);
-                        }
-
-                        return Task.CompletedTask;
-                    },
-                    null,
-                    this);
-            }
-        }
+        public AwfulAsyncCommand SelectPostIconCommand { get; set; }
 
         /// <summary>
         /// Gets the post pm command.
@@ -133,12 +118,12 @@ namespace Awful.Mobile.ViewModels
 
                             Device.BeginInvokeOnMainThread(async () =>
                             {
-                                await PopModalAsync().ConfigureAwait(false);
+                                await this.Navigation.PopModalAsync().ConfigureAwait(false);
                             });
                         }
                     },
                     () => this.CanPostPm,
-                    this);
+                    this.Error);
             }
         }
 

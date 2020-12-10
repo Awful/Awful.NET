@@ -13,22 +13,20 @@ using Awful.Core.Tools;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
-using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
+using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Awful.Webview;
 using Awful.Webview.Entities.Themes;
-using Xamarin.CommunityToolkit.UI.Views;
-using Xamarin.Forms;
 
-namespace Awful.Mobile.ViewModels
+namespace Awful.UI.ViewModels
 {
     /// <summary>
     /// Private Message Page View Model.
     /// </summary>
-    public class PrivateMessagePageViewModel : MobileAwfulViewModel
+    public class PrivateMessagePageViewModel : AwfulViewModel
     {
         private PrivateMessageActions pmActions;
         private AwfulAsyncCommand refreshCommand;
@@ -39,10 +37,12 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="PrivateMessagePageViewModel"/> class.
         /// </summary>
+        /// <param name="navigation">Awful Navigation handler.</param>
+        /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Template Handler.</param>
         /// <param name="context">Awful Context.</param>
-        public PrivateMessagePageViewModel(TemplateHandler handler, AwfulContext context)
-            : base(context)
+        public PrivateMessagePageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, AwfulContext context)
+            : base(navigation, error, context)
         {
             this.handler = handler;
         }
@@ -50,7 +50,7 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets or sets the internal webview.
         /// </summary>
-        public WebView WebView { get; set; }
+        public IAwfulWebview WebView { get; set; }
 
         /// <summary>
         /// Gets the refresh command.
@@ -70,7 +70,7 @@ namespace Awful.Mobile.ViewModels
                     }
                 },
                     null,
-                    this);
+                    this.Error);
             }
         }
 
@@ -100,9 +100,7 @@ namespace Awful.Mobile.ViewModels
 
             this.defaults = await this.GenerateDefaultOptionsAsync().ConfigureAwait(false);
             var post = await this.pmActions.GetPrivateMessageAsync(pmId).ConfigureAwait(false);
-            var source = new HtmlWebViewSource();
-            source.Html = this.pmActions.RenderPrivateMessageView(post, this.defaults);
-            Device.BeginInvokeOnMainThread(() => this.WebView.Source = source);
+            this.WebView.SetSource(this.pmActions.RenderPrivateMessageView(post, this.defaults));
             await Task.Delay(2000).ConfigureAwait(false);
 
             this.IsBusy = false;
