@@ -1943,7 +1943,4 @@
 		<EmbeddedResource Include="..\Awful.Tags.Local\4stars.png" Link="ThreadTags\4stars.png" />
 		<EmbeddedResource Include="..\Awful.Tags.Local\5stars.png" Link="ThreadTags\5stars.png" />
 	</ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
 </Project>

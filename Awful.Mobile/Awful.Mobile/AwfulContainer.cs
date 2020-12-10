@@ -9,6 +9,7 @@ using Autofac;
 using Awful.Database.Context;
 using Awful.Mobile.Controls;
 using Awful.Mobile.ViewModels;
+using Awful.UI.Interfaces;
 using Awful.UI.ViewModels;
 using Awful.Webview;
 
@@ -33,6 +34,8 @@ namespace Awful.UI
 
             builder.RegisterType<TemplateHandler>().SingleInstance();
             builder.RegisterType<AwfulContext>();
+            builder.RegisterType<AwfulMobileNavigation>().As<IAwfulNavigation>();
+            builder.RegisterType<AwfulMobileErrorHandler>().As<IAwfulErrorHandler>();
             builder.RegisterType<AwfulViewModel>();
             builder.RegisterType<MobileSettingsPageViewModel>();
             builder.RegisterType<LepersPageViewModel>();
