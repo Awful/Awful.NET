@@ -27,7 +27,7 @@ namespace Awful.Mobile.ViewModels
     /// Awful Webview View Model.
     /// Used as the base for pages with Webviews.
     /// </summary>
-    public class AwfulWebviewViewModel : MobileAwfulViewModel
+    public class AwfulWebviewViewModel : AwfulViewModel
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AwfulWebviewViewModel"/> class.

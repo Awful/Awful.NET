@@ -14,6 +14,7 @@ using Awful.Mobile.Controls;
 using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
+using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Awful.Webview;
 using Awful.Webview.Entities.Themes;
@@ -35,15 +36,19 @@ namespace Awful.Mobile.ViewModels
         private AwfulAsyncCommand refreshCommand;
         private AwfulAsyncCommand replyToThreadCommand;
         private DefaultOptions defaults;
+        private IAwfulNavigation navigation;
+        private IAwfulErrorHandler error;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumThreadPageViewModel"/> class.
         /// </summary>
         /// <param name="handler">Awful Handler.</param>
         /// <param name="context">Awful Context.</param>
-        public ForumThreadPageViewModel(TemplateHandler handler, AwfulContext context)
+        public ForumThreadPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, AwfulContext context)
             : base(context)
         {
+            this.navigation = navigation;
+            this.error = error;
             this.handler = handler;
         }
 
@@ -69,7 +74,7 @@ namespace Awful.Mobile.ViewModels
                     await this.RefreshThreadAsync().ConfigureAwait(false);
                 },
                     null,
-                    this);
+                    this.error);
             }
         }
 
@@ -85,11 +90,11 @@ namespace Awful.Mobile.ViewModels
                 {
                     if (this.ThreadPost != null)
                     {
-                        await PushModalAsync(new ThreadReplyPage(this.Thread.ThreadId)).ConfigureAwait(false);
+                        await this.navigation.PushModalAsync(new ThreadReplyPage(this.Thread.ThreadId)).ConfigureAwait(false);
                     }
                 },
                     () => !this.IsBusy && !this.OnProbation,
-                    this);
+                    this.error);
             }
         }
 
@@ -109,7 +114,7 @@ namespace Awful.Mobile.ViewModels
                     }
                 },
                     null,
-                    this);
+                    this.error);
             }
         }
 
@@ -132,7 +137,7 @@ namespace Awful.Mobile.ViewModels
                     }
                 },
                     null,
-                    this);
+                    this.error);
             }
         }
 
@@ -155,7 +160,7 @@ namespace Awful.Mobile.ViewModels
                     }
                 },
                     null,
-                    this);
+                    this.error);
             }
         }
 
@@ -175,7 +180,7 @@ namespace Awful.Mobile.ViewModels
                     }
                 },
                     null,
-                    this);
+                    this.error);
             }
         }
 
@@ -293,7 +298,7 @@ namespace Awful.Mobile.ViewModels
                             case "Quote Post":
                                 if (!this.OnProbation)
                                 {
-                                    await PushModalAsync(new ThreadReplyPage(this.Thread.ThreadId, json.Id, false)).ConfigureAwait(false);
+                                    await this.navigation.PushModalAsync(new ThreadReplyPage(this.Thread.ThreadId, json.Id, false)).ConfigureAwait(false);
                                 }
 
                                 break;
@@ -308,10 +313,10 @@ namespace Awful.Mobile.ViewModels
                         switch (result)
                         {
                             case "Profile":
-                                await PushDetailPageAsync(new UserProfilePage(json.Id)).ConfigureAwait(false);
+                                await this.navigation.PushDetailPageAsync(new UserProfilePage(json.Id)).ConfigureAwait(false);
                                 break;
                             case "PM":
-                                await PushModalAsync(new NewPrivateMessagePage(json.Text)).ConfigureAwait(false);
+                                await this.navigation.PushModalAsync(new NewPrivateMessagePage(json.Text)).ConfigureAwait(false);
                                 break;
                             case "Their Posts":
                                 break;
