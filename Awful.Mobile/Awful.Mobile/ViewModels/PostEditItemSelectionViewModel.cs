@@ -15,6 +15,7 @@ using Awful.Database.Entities;
 using Awful.Mobile.Controls;
 using Awful.Mobile.Views;
 using Awful.UI.Actions;
+using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Forms9Patch;
@@ -27,7 +28,7 @@ namespace Awful.Mobile.ViewModels
     /// </summary>
     public class PostEditItemSelectionViewModel : MobileAwfulViewModel
     {
-        private AwfulEditor editor;
+        private IAwfulEditor editor;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PostEditItemSelectionViewModel"/> class.
@@ -217,7 +218,7 @@ namespace Awful.Mobile.ViewModels
         /// Loads editor into VM.
         /// </summary>
         /// <param name="editor">SA Post Editor.</param>
-        public void LoadEditor(AwfulEditor editor)
+        public void LoadEditor(IAwfulEditor editor)
         {
             this.editor = editor;
         }
@@ -276,23 +277,7 @@ namespace Awful.Mobile.ViewModels
 
         private void SetTextInEditor(string text)
         {
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                if (this.editor != null)
-                {
-                    // If user has selected text, replace it.
-                    // Or else, add it to whereever they have the cursor.
-                    if (this.editor.IsTextSelected)
-                    {
-                        this.editor.Text = this.editor.Text.ReplaceAt(this.editor.SelectedTextStart, this.editor.SelectedTextLength, text);
-                    }
-                    else
-                    {
-                        this.editor.Text = this.editor.Text.Insert(this.editor.SelectedTextStart, text);
-                    }
-                }
-            });
-
+            this.editor.UpdateText(text);
             this.Popup.SetIsVisible(false);
         }
     }

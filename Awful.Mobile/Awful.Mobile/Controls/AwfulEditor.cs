@@ -3,6 +3,8 @@
 // </copyright>
 
 using System;
+using Awful.Core.Utilities;
+using Awful.UI.Interfaces;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.Controls
@@ -10,7 +12,7 @@ namespace Awful.Mobile.Controls
     /// <summary>
     /// Awful Editor.
     /// </summary>
-    public class AwfulEditor : Editor
+    public class AwfulEditor : Editor, IAwfulEditor
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AwfulEditor"/> class.
@@ -41,5 +43,27 @@ namespace Awful.Mobile.Controls
         /// Gets or sets the selected text length.
         /// </summary>
         public int SelectedTextLength { get; set; }
+
+        public void UpdateText(string content)
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                // If user has selected text, replace it.
+                // Or else, add it to whereever they have the cursor.
+                if (this.IsTextSelected)
+                {
+                    this.Text = this.Text.ReplaceAt(this.SelectedTextStart, this.SelectedTextLength, content);
+                }
+                else
+                {
+                    this.Text = this.Text.Insert(this.SelectedTextStart, content);
+                }
+            });
+        }
+
+        void IAwfulEditor.Focus()
+        {
+            this.Focus();
+        }
     }
 }

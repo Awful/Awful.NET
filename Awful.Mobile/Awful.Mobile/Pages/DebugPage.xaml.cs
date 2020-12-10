@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using Autofac;
 using Awful.Mobile.ViewModels;
+using Awful.UI.ViewModels;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.Pages
@@ -24,7 +25,7 @@ namespace Awful.Mobile.Pages
         {
             this.InitializeComponent();
             this.BindingContext = this.vm = App.Container.Resolve<DebugPageViewModel>();
-            this.vm.AwfulEditor = this.AwfulEditor;
+            //this.vm.AwfulEditor = this.AwfulEditor;
         }
     }
 }

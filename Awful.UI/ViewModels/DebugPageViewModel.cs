@@ -5,28 +5,31 @@
 using System;
 using System.Threading.Tasks;
 using Awful.Database.Context;
-using Awful.Mobile.Controls;
-using Awful.Mobile.Views;
+using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Xamarin.Forms;
 
-namespace Awful.Mobile.ViewModels
+namespace Awful.UI.ViewModels
 {
     /// <summary>
     /// Debug Page View Model.
     /// </summary>
-    public class DebugPageViewModel : MobileAwfulViewModel
+    public class DebugPageViewModel : AwfulViewModel
     {
+        private IAwfulErrorHandler error;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DebugPageViewModel"/> class.
         /// </summary>
+        /// <param name="error">Awful Error handler.</param>
         /// <param name="context">Awful Context.</param>
-        public DebugPageViewModel(AwfulContext context)
+        public DebugPageViewModel(IAwfulErrorHandler error, AwfulContext context)
             : base(context)
         {
+            this.error = error;
             this.OnProbation = true;
             this.OnProbationText = "TAKE A BREAK\nYou have been put on probation until Jun 25, 2025 13:50. You cannot post while\non probation. You might find out why you are on probation if you\ncheck the Leper's\nColony. If you read the fucking rules,\nmaybe this won't happen again!";
-            this.ThrowAsyncExceptionCommand = new AwfulAsyncCommand(this.ThrowAsyncDebugException, null, this);
+            this.ThrowAsyncExceptionCommand = new AwfulAsyncCommand(this.ThrowAsyncDebugException, null, this.error);
         }
 
         /// <summary>,
@@ -39,26 +42,26 @@ namespace Awful.Mobile.ViewModels
                 return new AwfulAsyncCommand(
                     async () =>
                 {
-                    if (this.Popup != null)
-                    {
-                        //var forum = await this.Context.Forums.FirstOrDefaultAsync(n => n.Id == 273);
-                        //var awfulForum = new AwfulForum(forum);
-                        //var postIcon = new PostIcon();
-                        //var view = new ForumPostIconSelectionView(awfulForum, postIcon);
+                    //if (this.Popup != null)
+                    //{
+                    //    //var forum = await this.Context.Forums.FirstOrDefaultAsync(n => n.Id == 273);
+                    //    //var awfulForum = new AwfulForum(forum);
+                    //    //var postIcon = new PostIcon();
+                    //    //var view = new ForumPostIconSelectionView(awfulForum, postIcon);
 
-                        if (this.AwfulEditor != null)
-                        {
-                            var view = new PostEditItemSelectionView(this.AwfulEditor);
-                            this.Popup.SetContent(view, true);
-                        }
-                    }
+                    //    if (this.AwfulEditor != null)
+                    //    {
+                    //        var view = new PostEditItemSelectionView(this.AwfulEditor);
+                    //        this.Popup.SetContent(view, true);
+                    //    }
+                    //}
                 },
                     null,
-                    this);
+                    this.error);
             }
         }
 
-        public AwfulEditor AwfulEditor { get; set; }
+        //public AwfulEditor AwfulEditor { get; set; }
 
         public override async Task OnLoad()
         {
@@ -73,14 +76,7 @@ namespace Awful.Mobile.ViewModels
         private async Task ThrowAsyncDebugException()
         {
             this.IsBusy = true;
-            //this.OnPropertyChanged("ThrowAsyncExceptionCommand");
             await Task.Delay(2000).ConfigureAwait(false);
-            throw new Exception("OH NO!");
-        }
-
-        private void ThrowDebugException()
-        {
-            this.IsBusy = true;
             throw new Exception("OH NO!");
         }
     }

@@ -8,6 +8,7 @@ using Awful.Database.Context;
 using Awful.Mobile.Controls;
 using Awful.Mobile.Views;
 using Awful.UI.Actions;
+using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Awful.Webview;
@@ -101,7 +102,7 @@ namespace Awful.Mobile.ViewModels
         /// <summary>
         /// Gets or sets the thread editor.
         /// </summary>
-        public AwfulEditor Editor { get; set; }
+        public IAwfulEditor Editor { get; set; }
 
         /// <summary>
         /// Gets the close modal command.
