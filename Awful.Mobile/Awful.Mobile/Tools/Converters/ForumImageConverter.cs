@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Awful.UI.Tools;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.Tools.Converters
@@ -25,19 +26,19 @@ namespace Awful.Mobile.Tools.Converters
         /// </summary>
         public ForumImageConverter()
         {
-            this.imageNames = typeof(ForumImageConverter).GetTypeInfo().Assembly.GetManifestResourceNames();
+            this.imageNames = typeof(AwfulAsyncCommand).GetTypeInfo().Assembly.GetManifestResourceNames();
         }
 
         /// <inheritdoc/>
         public object Convert(object value, Type targetType, object parameter, CultureInfo language)
         {
-            var name = $"Awful.Mobile.ThreadTags.{value}.png";
+            var name = $"Awful.UI.ThreadTags.{value}.png";
             if (this.imageNames.Contains(name))
             {
-                return ImageSource.FromResource(name, typeof(ForumImageConverter).GetTypeInfo().Assembly);
+                return ImageSource.FromResource(name, typeof(AwfulAsyncCommand).GetTypeInfo().Assembly);
             }
 
-            return ImageSource.FromResource($"Awful.Mobile.ThreadTags.missing.png", typeof(ForumImageConverter).GetTypeInfo().Assembly);
+            return ImageSource.FromResource($"Awful.UI.ThreadTags.missing.png", typeof(AwfulAsyncCommand).GetTypeInfo().Assembly);
         }
 
         /// <inheritdoc/>
