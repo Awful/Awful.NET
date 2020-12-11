@@ -34,23 +34,43 @@ namespace Awful.Mobile.ViewModels
         }
 
         /// <summary>
-        /// Navigate to New Thread page.
+        /// Gets the new thread command.
         /// </summary>
-        /// <param name="forum">Awful Forum.</param>
-        /// <returns>Task.</returns>
-        protected override async Task NavigateToNewThreadPageAsync(AwfulForum forum)
+        public AwfulAsyncCommand NewThreadCommand
         {
-            await this.Navigation.PushModalAsync(new NewThreadPage(forum)).ConfigureAwait(false);
+            get
+            {
+                return this.newThreadCommand ??= new AwfulAsyncCommand(
+                    async () =>
+                    {
+                        if (this.forum != null)
+                        {
+                            await this.NavigateToNewThreadPageAsync(this.forum).ConfigureAwait(false);
+                        }
+                    },
+                    () => !this.IsBusy && !this.OnProbation,
+                    this.Error);
+            }
         }
 
         /// <summary>
-        /// Navigate to New Thread page.
+        /// Gets the Selection Entry.
         /// </summary>
-        /// <param name="thread">Awful Thread.</param>
-        /// <returns>Task.</returns>
-        protected override async Task NavigateToThreadPageAsync(AwfulThread thread)
+        public AwfulAsyncCommand<AwfulThread> SelectionCommand
         {
-            await this.Navigation.PushDetailPageAsync(new ForumThreadPage(thread)).ConfigureAwait(false);
+            get
+            {
+                return new AwfulAsyncCommand<AwfulThread>(
+                    async (item) =>
+                    {
+                        if (item != null)
+                        {
+                            await this.Navigation.PushDetailPageAsync(new ForumThreadPage(item)).ConfigureAwait(false);
+                        }
+                    },
+                    null,
+                    this.Error);
+            }
         }
     }
 }

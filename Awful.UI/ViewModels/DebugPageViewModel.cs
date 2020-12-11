@@ -16,20 +16,18 @@ namespace Awful.UI.ViewModels
     /// </summary>
     public class DebugPageViewModel : AwfulViewModel
     {
-        private IAwfulErrorHandler error;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="DebugPageViewModel"/> class.
         /// </summary>
+        /// <param name="navigation">Awful Navigation handler.</param>
         /// <param name="error">Awful Error handler.</param>
         /// <param name="context">Awful Context.</param>
-        public DebugPageViewModel(IAwfulErrorHandler error, AwfulContext context)
-            : base(context)
+        public DebugPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, AwfulContext context)
+            : base(navigation, error, context)
         {
-            this.error = error;
             this.OnProbation = true;
             this.OnProbationText = "TAKE A BREAK\nYou have been put on probation until Jun 25, 2025 13:50. You cannot post while\non probation. You might find out why you are on probation if you\ncheck the Leper's\nColony. If you read the fucking rules,\nmaybe this won't happen again!";
-            this.ThrowAsyncExceptionCommand = new AwfulAsyncCommand(this.ThrowAsyncDebugException, null, this.error);
+            this.ThrowAsyncExceptionCommand = new AwfulAsyncCommand(this.ThrowAsyncDebugException, null, this.Error);
         }
 
         /// <summary>,
@@ -57,7 +55,7 @@ namespace Awful.UI.ViewModels
                     //}
                 },
                     null,
-                    this.error);
+                    this.Error);
             }
         }
 

@@ -8,12 +8,14 @@ using Autofac;
 using Awful.Mobile.ViewModels;
 using Awful.UI.ViewModels;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace Awful.Mobile.Pages
 {
     /// <summary>
     /// Debug Page. Used for testing out views.
     /// </summary>
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DebugPage : BasePage
     {
         private DebugPageViewModel vm;

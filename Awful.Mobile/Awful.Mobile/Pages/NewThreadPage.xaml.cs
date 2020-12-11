@@ -21,7 +21,7 @@ namespace Awful.Mobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewThreadPage : BasePage
     {
-        private NewThreadPageViewModel vm;
+        private MobileNewThreadPageViewModel vm;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NewThreadPage"/> class.
@@ -30,7 +30,7 @@ namespace Awful.Mobile.Pages
         public NewThreadPage(AwfulForum forum)
         {
             this.InitializeComponent();
-            this.BindingContext = this.vm = App.Container.Resolve<NewThreadPageViewModel>();
+            this.BindingContext = this.vm = App.Container.Resolve<MobileNewThreadPageViewModel>();
             this.vm.Editor = this.AwfulEditor;
             this.vm.LoadForum(forum);
         }

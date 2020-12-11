@@ -16,7 +16,7 @@ namespace Awful.Mobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ForumListPage : BasePage, IAwfulSearchPage
     {
-        private ForumsListPageViewModel vm;
+        private MobileForumsListPageViewModel vm;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumListPage"/> class.
@@ -24,7 +24,7 @@ namespace Awful.Mobile.Pages
         public ForumListPage()
         {
             this.InitializeComponent();
-            this.BindingContext = this.vm = App.Container.Resolve<ForumsListPageViewModel>();
+            this.BindingContext = this.vm = App.Container.Resolve<MobileForumsListPageViewModel>();
         }
 
         /// <inheritdoc/>

@@ -12,6 +12,7 @@ using Awful.Database.Context;
 using Awful.Mobile.Pages;
 using Awful.UI.Entities;
 using Awful.UI.Interfaces;
+using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Awful.Webview;
 using Newtonsoft.Json;
@@ -37,17 +38,27 @@ namespace Awful.Mobile.ViewModels
         {
         }
 
-        /// <inheritdoc/>
-        protected override async Task NavigateToThreadReplyPageAsync()
+        /// <summary>
+        /// Gets the reply to thread command.
+        /// </summary>
+        public AwfulAsyncCommand ReplyToThreadCommand
         {
-            if (this.ThreadPost != null)
+            get
             {
-                await this.Navigation.PushModalAsync(new ThreadReplyPage(this.Thread.ThreadId)).ConfigureAwait(false);
+                return this.replyToThreadCommand ??= new AwfulAsyncCommand(
+                    async () =>
+                    {
+                        if (this.ThreadPost != null)
+            {
+                            await this.Navigation.PushModalAsync(new ThreadReplyPage(this.Thread.ThreadId)).ConfigureAwait(false);
+                        }
+                    },
+                    () => !this.IsBusy && !this.OnProbation,
+                    this.Error);
             }
         }
 
-        /// <inheritdoc/>
-        protected override void HandleDataFromJavascript(string data)
+        public void HandleDataFromJavascript(string data)
         {
             var json = JsonConvert.DeserializeObject<WebViewDataInterop>(data);
             switch (json.Type)

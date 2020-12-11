@@ -4,12 +4,14 @@
 
 using Autofac;
 using Awful.Mobile.ViewModels;
+using Xamarin.Forms.Xaml;
 
 namespace Awful.Mobile.Pages
 {
     /// <summary>
     /// Bookmarks Page.
     /// </summary>
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BookmarksPage : BasePage
     {
         /// <summary>
@@ -18,7 +20,7 @@ namespace Awful.Mobile.Pages
         public BookmarksPage()
         {
             this.InitializeComponent();
-            this.BindingContext = App.Container.Resolve<BookmarksPageViewModel>();
+            this.BindingContext = App.Container.Resolve<MobileBookmarksPageViewModel>();
         }
 
         /// <inheritdoc/>

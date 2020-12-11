@@ -21,11 +21,11 @@ namespace Awful.UI.ViewModels
     /// </summary>
     public class ForumThreadListPageViewModel : AwfulViewModel
     {
+        protected AwfulForum forum;
+        protected AwfulAsyncCommand newThreadCommand;
         private ThreadListActions threadlistActions;
         private ThreadList threadList;
         private AwfulAsyncCommand refreshCommand;
-        private AwfulAsyncCommand newThreadCommand;
-        private AwfulForum forum;
         private int page = 1;
 
         /// <summary>
@@ -39,6 +39,9 @@ namespace Awful.UI.ViewModels
         {
         }
 
+        /// <summary>
+        /// Gets the list of threads.
+        /// </summary>
         public ObservableCollection<AwfulThread> Threads { get; set; } = new ObservableCollection<AwfulThread>();
 
         /// <summary>
@@ -75,46 +78,6 @@ namespace Awful.UI.ViewModels
                     }
                 },
                     null,
-                    this.Error);
-            }
-        }
-
-        /// <summary>
-        /// Gets the Selection Entry.
-        /// </summary>
-        public AwfulAsyncCommand<AwfulThread> SelectionCommand
-        {
-            get
-            {
-                return new AwfulAsyncCommand<AwfulThread>(
-                    async (item) =>
-                {
-                    if (item != null)
-                    {
-                        await this.NavigateToThreadPageAsync(item).ConfigureAwait(false);
-                    }
-                },
-                    null,
-                    this.Error);
-            }
-        }
-
-        /// <summary>
-        /// Gets the new thread command.
-        /// </summary>
-        public AwfulAsyncCommand NewThreadCommand
-        {
-            get
-            {
-                return this.newThreadCommand ??= new AwfulAsyncCommand(
-                    async () =>
-                {
-                    if (this.forum != null)
-                    {
-                        await this.NavigateToNewThreadPageAsync(this.forum).ConfigureAwait(false);
-                    }
-                },
-                    () => !this.IsBusy && !this.OnProbation,
                     this.Error);
             }
         }
@@ -178,7 +141,7 @@ namespace Awful.UI.ViewModels
         /// <inheritdoc/>
         public override void RaiseCanExecuteChanged()
         {
-            this.NewThreadCommand.RaiseCanExecuteChanged();
+            this.newThreadCommand?.RaiseCanExecuteChanged();
         }
 
         /// <inheritdoc/>

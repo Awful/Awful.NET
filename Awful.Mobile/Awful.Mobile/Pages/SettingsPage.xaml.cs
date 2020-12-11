@@ -8,12 +8,14 @@ using Autofac;
 using Awful.Mobile.ViewModels;
 using Awful.UI.ViewModels;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace Awful.Mobile.Pages
 {
     /// <summary>
     /// Settings Page.
     /// </summary>
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : BasePage
     {
         /// <summary>

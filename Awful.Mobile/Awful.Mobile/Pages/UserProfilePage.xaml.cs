@@ -14,15 +14,22 @@ using Xamarin.Forms.Xaml;
 
 namespace Awful.Mobile.Pages
 {
+    /// <summary>
+    /// User Profile Page.
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UserProfilePage : BasePage
     {
-        private UserProfilePageViewModel vm;
+        private MobileUserProfilePageViewModel vm;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserProfilePage"/> class.
+        /// </summary>
+        /// <param name="profileId">User Profile Id.</param>
         public UserProfilePage(long profileId)
         {
             this.InitializeComponent();
-            this.BindingContext = this.vm = App.Container.Resolve<UserProfilePageViewModel>();
+            this.BindingContext = this.vm = App.Container.Resolve<MobileUserProfilePageViewModel>();
             this.vm.LoadProfile(profileId, this.AwfulWebView);
         }
     }

@@ -19,9 +19,10 @@ namespace Awful.Mobile.Views
     /// Forum post Icon Selection View.
     /// Used to select and add a post icon to a new thread.
     /// </summary>
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ForumPostIconSelectionView : ContentView
     {
-        private ForumPostIconSelectionViewModel vm;
+        private MobileForumPostIconSelectionViewModel vm;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumPostIconSelectionView"/> class.
@@ -31,9 +32,9 @@ namespace Awful.Mobile.Views
         public ForumPostIconSelectionView(AwfulForum forum, PostIcon icon)
         {
             this.InitializeComponent();
-            this.BindingContext = this.vm = App.Container.Resolve<ForumPostIconSelectionViewModel>();
+            this.BindingContext = this.vm = App.Container.Resolve<MobileForumPostIconSelectionViewModel>();
             this.vm.LoadPostIcon(forum, icon);
-            this.vm.OnLoadCommand.ExecuteAsync().FireAndForgetSafeAsync(this.vm);
+            this.vm.OnLoadCommand.ExecuteAsync().FireAndForgetSafeAsync(this.vm.Error);
         }
     }
 }

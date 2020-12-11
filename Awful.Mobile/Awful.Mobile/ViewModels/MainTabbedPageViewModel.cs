@@ -55,6 +55,15 @@ namespace Awful.Mobile.ViewModels
             return base.OnLoad();
         }
 
+        /// <summary>
+        /// Setup Theme.
+        /// </summary>
+        /// <returns>Task.</returns>
+        public async Task SetupThemeAsync()
+        {
+            await this.Navigation.SetupThemeAsync().ConfigureAwait(false);
+        }
+
         private static Xamarin.Forms.NavigationPage CreateNavigationPage (Xamarin.Forms.Page page, string glyph, string title, string fontFamily)
         {
             Xamarin.Forms.NavigationPage navigationPage = new Xamarin.Forms.NavigationPage(page);

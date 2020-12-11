@@ -3,9 +3,12 @@
 // </copyright>
 
 using System.Collections.Generic;
+using Autofac;
 using Awful.Mobile.Controls;
 using Awful.Mobile.ViewModels;
+using Awful.UI.Interfaces;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace Awful.Mobile.Pages
 {
@@ -13,14 +16,18 @@ namespace Awful.Mobile.Pages
     /// Extra Page.
     /// Used to link out to other pages in the app.
     /// </summary>
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ExtraPage : BasePage
     {
+        IAwfulNavigation navigation;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ExtraPage"/> class.
         /// </summary>
         public ExtraPage()
         {
             this.InitializeComponent();
+            this.navigation = App.Container.Resolve<IAwfulNavigation>();
         }
 
         /// <inheritdoc/>
@@ -85,19 +92,19 @@ namespace Awful.Mobile.Pages
                         switch (item.Type)
                         {
                             case "SAclopediaCell":
-                                await MobileAwfulViewModel.PushPageAsync(new SAclopediaEntryListPage()).ConfigureAwait(false);
+                                await this.navigation.PushPageAsync(new SAclopediaEntryListPage()).ConfigureAwait(false);
                                 break;
                             case "LepersCell":
-                                await MobileAwfulViewModel.PushPageAsync(new LepersPage()).ConfigureAwait(false);
+                                await this.navigation.PushPageAsync(new LepersPage()).ConfigureAwait(false);
                                 break;
                             case "UserProfileCell":
-                                await MobileAwfulViewModel.PushDetailPageAsync(new UserProfilePage(0)).ConfigureAwait(false);
+                                await this.navigation.PushDetailPageAsync(new UserProfilePage(0)).ConfigureAwait(false);
                                 break;
                             case "AcknowledgmentsCell":
-                                await MobileAwfulViewModel.PushPageAsync(new AcknowledgmentsPage()).ConfigureAwait(false);
+                                await this.navigation.PushPageAsync(new AcknowledgmentsPage()).ConfigureAwait(false);
                                 break;
                             case "DebugCell":
-                                await MobileAwfulViewModel.PushPageAsync(new DebugPage()).ConfigureAwait(false);
+                                await this.navigation.PushPageAsync(new DebugPage()).ConfigureAwait(false);
                                 break;
                         }
                     });

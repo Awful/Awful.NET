@@ -28,12 +28,12 @@ namespace Awful.UI.ViewModels
     /// </summary>
     public class ForumThreadPageViewModel : AwfulWebviewViewModel
     {
+        protected AwfulAsyncCommand replyToThreadCommand;
         private TemplateHandler handler;
         private ThreadPostActions threadPostActions;
         private ThreadActions threadActions;
         private ThreadPost threadPost;
         private AwfulAsyncCommand refreshCommand;
-        private AwfulAsyncCommand replyToThreadCommand;
         private DefaultOptions defaults;
 
         /// <summary>
@@ -71,23 +71,6 @@ namespace Awful.UI.ViewModels
                     await this.RefreshThreadAsync().ConfigureAwait(false);
                 },
                     null,
-                    this.Error);
-            }
-        }
-
-        /// <summary>
-        /// Gets the reply to thread command.
-        /// </summary>
-        public AwfulAsyncCommand ReplyToThreadCommand
-        {
-            get
-            {
-                return this.replyToThreadCommand ??= new AwfulAsyncCommand(
-                    async () =>
-                {
-                    await this.NavigateToThreadReplyPageAsync().ConfigureAwait(false);
-                },
-                    () => !this.IsBusy && !this.OnProbation,
                     this.Error);
             }
         }
@@ -260,25 +243,7 @@ namespace Awful.UI.ViewModels
         /// <inheritdoc/>
         public override void RaiseCanExecuteChanged()
         {
-            this.ReplyToThreadCommand.RaiseCanExecuteChanged();
-        }
-
-        /// <summary>
-        /// Navigate to Thread Reply Page.
-        /// </summary>
-        /// <returns>Task.</returns>
-        protected virtual Task NavigateToThreadReplyPageAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Handles post data from Javascript.
-        /// </summary>
-        /// <param name="data">JSON string from post.</param>
-        protected virtual void HandleDataFromJavascript(string data)
-        {
-            throw new NotImplementedException();
+            this.replyToThreadCommand?.RaiseCanExecuteChanged();
         }
 
         /// <summary>

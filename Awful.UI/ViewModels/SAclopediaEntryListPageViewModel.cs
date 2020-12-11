@@ -47,11 +47,6 @@ namespace Awful.UI.ViewModels
         }
 
         /// <summary>
-        /// Gets or sets the Selection Entry.
-        /// </summary>
-        public AwfulAsyncCommand<SAclopediaEntryItem> SelectionCommand { get; set; }
-
-        /// <summary>
         /// Gets the refresh command.
         /// </summary>
         public AwfulAsyncCommand RefreshCommand

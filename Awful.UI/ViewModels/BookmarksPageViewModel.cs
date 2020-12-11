@@ -19,7 +19,7 @@ using Awful.UI.ViewModels;
 using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
 
-namespace Awful.Mobile.ViewModels
+namespace Awful.UI.ViewModels
 {
     /// <summary>
     /// Bookmarks View Model.
@@ -63,26 +63,6 @@ namespace Awful.Mobile.ViewModels
                     this.IsRefreshing = true;
                     await this.RefreshBookmarksAsync().ConfigureAwait(false);
                     this.IsRefreshing = false;
-                },
-                    null,
-                    this.Error);
-            }
-        }
-
-        /// <summary>
-        /// Gets the Selection Entry.
-        /// </summary>
-        public AwfulAsyncCommand<AwfulThread> SelectionCommand
-        {
-            get
-            {
-                return new AwfulAsyncCommand<AwfulThread>(
-                    async (item) =>
-                {
-                    if (item != null)
-                    {
-                        await this.NavigateToForumThreadPageAsync(item).ConfigureAwait(false);
-                    }
                 },
                     null,
                     this.Error);

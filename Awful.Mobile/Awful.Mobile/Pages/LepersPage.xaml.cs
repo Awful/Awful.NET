@@ -8,15 +8,17 @@ using Autofac;
 using Awful.Mobile.ViewModels;
 using Awful.UI.ViewModels;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace Awful.Mobile.Pages
 {
     /// <summary>
     /// Lepers Page.
     /// </summary>
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LepersPage : BasePage
     {
-        private LepersPageViewModel vm;
+        private MobileLepersPageViewModel vm;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LepersPage"/> class.
@@ -24,7 +26,7 @@ namespace Awful.Mobile.Pages
         public LepersPage()
         {
             this.InitializeComponent();
-            this.BindingContext = this.vm = App.Container.Resolve<LepersPageViewModel>();
+            this.BindingContext = this.vm = App.Container.Resolve<MobileLepersPageViewModel>();
             this.vm.WebView = this.AwfulWebView;
         }
     }

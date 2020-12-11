@@ -10,7 +10,6 @@ using Awful.Database.Context;
 using Awful.Mobile.Controls;
 using Awful.Mobile.ViewModels;
 using Awful.UI.Interfaces;
-using Awful.UI.ViewModels;
 using Awful.Webview;
 
 namespace Awful.UI
@@ -34,34 +33,32 @@ namespace Awful.UI
 
             builder.RegisterType<TemplateHandler>().SingleInstance();
             builder.RegisterType<AwfulContext>();
+            builder.RegisterType<MainTabbedPageViewModel>();
             builder.RegisterType<AwfulMobileNavigation>().As<IAwfulNavigation>();
             builder.RegisterType<AwfulMobileErrorHandler>().As<IAwfulErrorHandler>();
-            builder.RegisterType<AwfulViewModel>();
+            builder.RegisterType<MobileForumsListPageViewModel>();
+            builder.RegisterType<MobileForumThreadListPageViewModel>();
+            builder.RegisterType<MobileForumThreadPageViewModel>();
             builder.RegisterType<MobileSettingsPageViewModel>();
-            builder.RegisterType<LepersPageViewModel>();
-            builder.RegisterType<ForumsListPageViewModel>();
-            builder.RegisterType<BookmarksPageViewModel>();
-            builder.RegisterType<LoginPageViewModel>();
-            builder.RegisterType<MainTabbedPageViewModel>();
-            builder.RegisterType<SAclopediaEntryListPageViewModel>();
-            builder.RegisterType<SAclopediaEntryPageViewModel>();
-            builder.RegisterType<ThreadReplyPageViewModel>();
-            builder.RegisterType<ForumThreadListPageViewModel>();
-            builder.RegisterType<ForumThreadPageViewModel>();
-            builder.RegisterType<PrivateMessagesPageViewModel>();
-            builder.RegisterType<PrivateMessagePageViewModel>();
-            builder.RegisterType<UserProfilePageViewModel>();
-            builder.RegisterType<NewThreadPageViewModel>();
-            builder.RegisterType<MobileAwfulViewModel>();
-            builder.RegisterType<ForumPostIconSelectionViewModel>();
-            builder.RegisterType<PostEditItemSelectionViewModel>();
-            builder.RegisterType<AcknowledgmentsPageViewModel>();
-            builder.RegisterType<NewPrivateMessagePageViewModel>();
-            builder.RegisterType<EmoteItemSelectionViewModel>();
+            builder.RegisterType<MobileLepersPageViewModel>();
+            builder.RegisterType<MobileBookmarksPageViewModel>();
+            builder.RegisterType<Awful.UI.ViewModels.LoginPageViewModel>();
+            builder.RegisterType<MobileSAclopediaEntryListPageViewModel>();
+            builder.RegisterType<MobileSAclopediaEntryPageViewModel>();
+            builder.RegisterType<MobileThreadReplyPageViewModel>();
+            builder.RegisterType<MobilePrivateMessagesPageViewModel>();
+            builder.RegisterType<MobilePrivateMessagePageViewModel>();
+            builder.RegisterType<MobileUserProfilePageViewModel>();
+            builder.RegisterType<MobileNewThreadPageViewModel>();
+            builder.RegisterType<MobileForumPostIconSelectionViewModel>();
+            builder.RegisterType<MobilePostEditItemSelectionViewModel>();
+            builder.RegisterType<Awful.UI.ViewModels.AcknowledgmentsPageViewModel>();
+            builder.RegisterType<MobileNewPrivateMessagePageViewModel>();
+            builder.RegisterType<MobileEmoteItemSelectionViewModel>();
             builder.RegisterType<AwfulPopup>().As<IAwfulPopup>().SingleInstance();
             builder.RegisterType<AwfulEditor>().As<IAwfulEditor>();
 #if DEBUG
-            builder.RegisterType<DebugPageViewModel>();
+            builder.RegisterType<Awful.UI.ViewModels.DebugPageViewModel>();
 #endif
             return builder.Build();
         }

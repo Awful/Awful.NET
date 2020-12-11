@@ -11,6 +11,7 @@ using Awful.Database.Context;
 using Awful.Mobile.Pages;
 using Awful.Mobile.ViewModels;
 using Awful.UI.Actions;
+using Awful.UI.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -40,7 +41,26 @@ namespace Awful.Mobile
             Container = Awful.UI.AwfulContainer.BuildContainer(builder);
 
             var platformConfig = App.Container.Resolve<IPlatformProperties>();
-            MobileAwfulViewModel.StartApp(platformConfig);
+            StartApp(platformConfig);
+        }
+
+        public static void StartApp(IPlatformProperties platformProperties)
+        {
+            if (platformProperties == null)
+            {
+                throw new ArgumentNullException(nameof(platformProperties));
+            }
+
+            var user = System.IO.File.Exists(platformProperties.CookiePath);
+            if (!user)
+            {
+                App.Current.MainPage = new LoginPage();
+            }
+            else
+            {
+                var navigation = App.Container.Resolve<IAwfulNavigation>();
+                navigation.SetMainAppPage();
+            }
         }
 
         /// <summary>

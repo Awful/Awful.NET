@@ -16,7 +16,7 @@ using Awful.UI.ViewModels;
 using Awful.Webview.Entities.Themes;
 using Microsoft.EntityFrameworkCore;
 
-namespace Awful.Mobile.ViewModels
+namespace Awful.UI.ViewModels
 {
     /// <summary>
     /// Mobile Settings Page View Model.

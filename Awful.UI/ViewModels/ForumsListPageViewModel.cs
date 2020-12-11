@@ -60,26 +60,6 @@ namespace Awful.UI.ViewModels
         }
 
         /// <summary>
-        /// Gets the Selection Entry.
-        /// </summary>
-        public AwfulAsyncCommand<AwfulForum> SelectionCommand
-        {
-            get
-            {
-                return new AwfulAsyncCommand<AwfulForum>(
-                    async (item) =>
-                {
-                    if (item != null)
-                    {
-                        await this.NavigateToForumThreadListPageAsync(item).ConfigureAwait(false);
-                    }
-                },
-                    null,
-                    this.Error);
-            }
-        }
-
-        /// <summary>
         /// Gets the isFavorite command.
         /// </summary>
         public AwfulAsyncCommand<AwfulForum> IsFavoriteCommand
@@ -162,15 +142,6 @@ namespace Awful.UI.ViewModels
             {
                 await this.RefreshCommand.ExecuteAsync().ConfigureAwait(false);
             }
-        }
-
-        /// <summary>
-        /// Navigate to Forum Thread page.
-        /// </summary>
-        /// <returns>Task.</returns>
-        protected virtual Task NavigateToForumThreadListPageAsync(AwfulForum forum)
-        {
-            throw new NotImplementedException();
         }
 
         private void SortForumsIntoList(List<Forum> forums, string filter = "")

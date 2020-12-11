@@ -36,10 +36,24 @@ namespace Awful.Mobile.ViewModels
         {
         }
 
-        /// <inheritdoc/>
-        protected override async Task NavigateToForumThreadListPageAsync(AwfulForum forum)
+        /// <summary>
+        /// Gets the Selection Entry.
+        /// </summary>
+        public AwfulAsyncCommand<AwfulForum> SelectionCommand
         {
-            await this.Navigation.PushPageAsync(new ForumThreadListPage(forum)).ConfigureAwait(false);
+            get
+            {
+                return new AwfulAsyncCommand<AwfulForum>(
+                    async (item) =>
+                    {
+                        if (item != null)
+                        {
+                            await this.Navigation.PushPageAsync(new ForumThreadListPage(item)).ConfigureAwait(false);
+                        }
+                    },
+                    null,
+                    this.Error);
+            }
         }
     }
 }

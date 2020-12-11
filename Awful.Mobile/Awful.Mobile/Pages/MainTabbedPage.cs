@@ -33,9 +33,9 @@ namespace Awful.Mobile.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (this.BindingContext is MobileAwfulViewModel vm)
+            if (this.BindingContext is Awful.UI.ViewModels.AwfulViewModel vm)
             {
-                vm.OnLoadCommand.ExecuteAsync().FireAndForgetSafeAsync(vm);
+                vm.OnLoadCommand.ExecuteAsync().FireAndForgetSafeAsync(this.vm.Error);
             }
         }
     }

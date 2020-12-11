@@ -40,7 +40,7 @@ namespace Awful.UI.ViewModels
             IAwfulNavigation navigation,
             IPlatformProperties properties,
             AwfulContext context)
-            : base(context)
+            : base(navigation, error, context)
         {
             this.error = error;
             this.navigation = navigation;

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 using Awful.Mobile.ViewModels;
+using Awful.UI.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

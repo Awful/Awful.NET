@@ -19,7 +19,7 @@ namespace Awful.Mobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SAclopediaEntryListPage : BasePage, IAwfulSearchPage
     {
-        private SAclopediaEntryListPageViewModel vm;
+        private MobileSAclopediaEntryListPageViewModel vm;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SAclopediaEntryListPage"/> class.
@@ -27,7 +27,7 @@ namespace Awful.Mobile.Pages
         public SAclopediaEntryListPage()
         {
             this.InitializeComponent();
-            this.BindingContext = this.vm = App.Container.Resolve<SAclopediaEntryListPageViewModel>();
+            this.BindingContext = this.vm = App.Container.Resolve<MobileSAclopediaEntryListPageViewModel>();
         }
 
         /// <inheritdoc/>

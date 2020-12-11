@@ -10,6 +10,7 @@ using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.UI.Interfaces;
+using Awful.UI.Tools;
 using Awful.Webview.Entities.Themes;
 using Xamarin.Forms;
 
@@ -96,6 +97,14 @@ namespace Awful.UI.ViewModels
         }
 
         /// <summary>
+        /// Gets the OnLoad Command.
+        /// </summary>
+        public AwfulAsyncCommand OnLoadCommand
+        {
+            get { return new AwfulAsyncCommand(async () => { await this.SetupVM().ConfigureAwait(false); }, null, this.Error); }
+        }
+
+        /// <summary>
         /// Gets or sets the Awful Client.
         /// </summary>
         public AwfulClient Client { get; set; }
@@ -108,7 +117,7 @@ namespace Awful.UI.ViewModels
         /// <summary>
         /// Gets or sets the Error Handler.
         /// </summary>
-        protected IAwfulErrorHandler Error { get; set; }
+        public IAwfulErrorHandler Error { get; set; }
 
         /// <summary>
         /// Gets or sets the Navigation Handler.

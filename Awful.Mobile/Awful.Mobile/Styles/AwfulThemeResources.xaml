@@ -180,13 +180,13 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ThreadDataTemplate">
-        <Grid Padding="6"
-              xct:TouchEffect.HoveredScale="1.2"
+                      <!--xct:TouchEffect.HoveredScale="1.2"
               xct:TouchEffect.NativeAnimation="True"
               xct:TouchEffect.LongPressCommandParameter="{Binding .}"
               xct:TouchEffect.LongPressCommand="{Binding
             Source={RelativeSource AncestorType={x:Type vm:MobileAwfulViewModel}}, 
-                                              Path=LongPressThreadCommand}">
+                                              Path=LongPressThreadCommand}"-->
+        <Grid Padding="6">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="1"/>

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Awful.Mobile.Pages;
 using Awful.Mobile.ViewModels;
+using Awful.UI.ViewModels;
 using Xamarin.Forms;
 
 namespace Awful.Mobile
@@ -21,16 +22,12 @@ namespace Awful.Mobile
     /// </summary>
     public partial class MainPage : FlyoutPage
     {
-        private MobileAwfulViewModel vm;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="MainPage"/> class.
         /// </summary>
         public MainPage()
         {
             this.InitializeComponent();
-            this.vm = App.Container.Resolve<MobileAwfulViewModel>();
-            this.vm.SetupThemeAsync().ConfigureAwait(false);
         }
     }
 }
