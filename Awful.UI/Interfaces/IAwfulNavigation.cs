@@ -105,6 +105,6 @@ namespace Awful.UI.Interfaces
         /// <param name="context">Awful Context.</param>
         /// <param name="properties">Awful Properties.</param>
         /// <returns>Task.</returns>
-        Task LogoutAsync(AwfulContext context, IPlatformProperties properties);
+        Task LogoutAsync(IAwfulContext context, IPlatformProperties properties);
     }
 }

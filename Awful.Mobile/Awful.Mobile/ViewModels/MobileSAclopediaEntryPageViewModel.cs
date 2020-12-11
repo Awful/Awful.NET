@@ -22,7 +22,7 @@ namespace Awful.Mobile.ViewModels
         /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful Properties.</param>
         /// <param name="context">Awful Context.</param>
-        public MobileSAclopediaEntryPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, AwfulContext context) : base(navigation, error, handler, context)
+        public MobileSAclopediaEntryPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, IAwfulContext context) : base(navigation, error, handler, context)
         {
         }
     }

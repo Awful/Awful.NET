@@ -23,7 +23,7 @@ namespace Awful.Mobile.ViewModels
         /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful Properties.</param>
         /// <param name="context">Awful Context.</param>
-        public MobileNewPrivateMessagePageViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, AwfulContext context)
+        public MobileNewPrivateMessagePageViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, IAwfulContext context)
             : base(popup, navigation, error, handler, context)
         {
         }

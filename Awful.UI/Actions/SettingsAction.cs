@@ -24,13 +24,13 @@ namespace Awful.UI.Actions
     /// </summary>
     public class SettingsAction
     {
-        private AwfulContext context;
+        private IAwfulContext context;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsAction"/> class.
         /// </summary>
         /// <param name="context">AwfulContext.</param>
-        public SettingsAction(AwfulContext context)
+        public SettingsAction(IAwfulContext context)
         {
             this.context = context;
         }

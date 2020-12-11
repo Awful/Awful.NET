@@ -30,7 +30,7 @@ namespace Awful.UI.ViewModels
         /// <param name="navigation">Awful Navigation handler.</param>
         /// <param name="error">Awful Error handler.</param>
         /// <param name="context">Awful Context.</param>
-        public ForumPostIconSelectionViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, AwfulContext context)
+        public ForumPostIconSelectionViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, IAwfulContext context)
             : base(navigation, error, context)
         {
             this.popup = popup;

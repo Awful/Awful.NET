@@ -28,7 +28,7 @@ namespace Awful.UI.Actions
     /// </summary>
     public class IndexPageActions
     {
-        private AwfulContext context;
+        private IAwfulContext context;
         private IndexPageManager manager;
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Awful.UI.Actions
         /// </summary>
         /// <param name="client">AwfulClient.</param>
         /// <param name="context">AwfulContext.</param>
-        public IndexPageActions(AwfulClient client, AwfulContext context)
+        public IndexPageActions(AwfulClient client, IAwfulContext context)
         {
             this.manager = new IndexPageManager(client);
             this.context = context;
@@ -54,7 +54,7 @@ namespace Awful.UI.Actions
                 throw new ArgumentNullException(nameof(forum));
             }
 
-            var realForum = await this.context.Forums.FirstOrDefaultAsync(n => n.Id == forum.Id).ConfigureAwait(false);
+            var realForum = await this.context.GetForumAsync(forum.Id).ConfigureAwait(false);
             if (realForum == null)
             {
                 return forum;

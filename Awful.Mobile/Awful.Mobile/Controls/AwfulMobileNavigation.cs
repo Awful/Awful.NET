@@ -35,7 +35,7 @@ namespace Awful.Mobile.Controls
         /// Initializes a new instance of the <see cref="AwfulMobileNavigation"/> class.
         /// </summary>
         /// <param name="context">Awful Context.</param>
-        public AwfulMobileNavigation(AwfulContext context)
+        public AwfulMobileNavigation(IAwfulContext context)
         {
             this.SettingsAction = new SettingsAction(context);
             this.platformProperties = App.Container.Resolve<IPlatformProperties>();
@@ -73,7 +73,7 @@ namespace Awful.Mobile.Controls
         }
 
         /// <inheritdoc/>
-        public async Task LogoutAsync(AwfulContext context, IPlatformProperties properties)
+        public async Task LogoutAsync(IAwfulContext context, IPlatformProperties properties)
         {
             bool answer = await Application.Current.MainPage.DisplayAlert("Log Out", "Are you sure you want to log out?", "Yep", "Nope").ConfigureAwait(false);
             if (answer)

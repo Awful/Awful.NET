@@ -41,7 +41,7 @@ namespace Awful.UI.ViewModels
         /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Template Handler.</param>
         /// <param name="context">Awful Context.</param>
-        public PrivateMessagePageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, AwfulContext context)
+        public PrivateMessagePageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, IAwfulContext context)
             : base(navigation, error, context)
         {
             this.handler = handler;

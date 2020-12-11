@@ -25,7 +25,7 @@ namespace Awful.UI.Actions
     /// </summary>
     public class SigninAction
     {
-        private AwfulContext context;
+        private IAwfulContext context;
         private IPlatformProperties platformProperties;
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Awful.UI.Actions
         /// </summary>
         /// <param name="platformProperties">Platform Properties.</param>
         /// <param name="context">Awful Database Context.</param>
-        public SigninAction(IPlatformProperties platformProperties, AwfulContext context)
+        public SigninAction(IPlatformProperties platformProperties, IAwfulContext context)
         {
             if (platformProperties == null)
             {

@@ -35,7 +35,7 @@ namespace Awful.UI.ViewModels
         /// Initializes a new instance of the <see cref="UserProfilePageViewModel"/> class.
         /// </summary>
         /// <param name="context">Awful Context.</param>
-        public UserProfilePageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, AwfulContext context)
+        public UserProfilePageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, IAwfulContext context)
             : base(navigation, error, context)
         {
             this.handler = handler;

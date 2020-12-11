@@ -22,7 +22,7 @@ namespace Awful.Mobile.ViewModels
         /// <param name="error">Awful Error handler.</param>
         /// <param name="platformProperties">Awful Properties.</param>
         /// <param name="context">Awful Context.</param>
-        public MobileSettingsPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, IPlatformProperties platformProperties, AwfulContext context) : base(navigation, error, platformProperties, context)
+        public MobileSettingsPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, IPlatformProperties platformProperties, IAwfulContext context) : base(navigation, error, platformProperties, context)
         {
         }
     }

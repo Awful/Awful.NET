@@ -35,7 +35,7 @@ namespace Awful.UI.ViewModels
         /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful handler.</param>
         /// <param name="context">Awful Context.</param>
-        public ThreadPostBaseViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, AwfulContext context)
+        public ThreadPostBaseViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, IAwfulContext context)
             : base(navigation, error, context)
         {
             this.popup = popup;

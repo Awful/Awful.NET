@@ -35,7 +35,7 @@ namespace Awful.UI.ViewModels
         /// <param name="navigation">Awful Navigation handler.</param>
         /// <param name="error">Awful Error handler.</param>
         /// <param name="context">Awful Context.</param>
-        public SettingsPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, IPlatformProperties platformProperties, AwfulContext context)
+        public SettingsPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, IPlatformProperties platformProperties, IAwfulContext context)
             : base(navigation, error, context)
         {
             this.platformProperties = platformProperties;
@@ -120,7 +120,7 @@ namespace Awful.UI.ViewModels
         public override async Task OnLoad()
         {
             await base.OnLoad().ConfigureAwait(false);
-            this.settings = await this.Context.SettingOptionsItems.FirstOrDefaultAsync().ConfigureAwait(false) ?? new SettingOptions() { DeviceColorTheme = this.platformProperties.GetTheme() };
+            this.settings = await this.Context.GetDefaultSettingsAsync().ConfigureAwait(false);
             this.DeviceColorTheme = this.settings.DeviceColorTheme;
         }
 

@@ -23,7 +23,7 @@ namespace Awful.UI.Actions
     /// </summary>
     public class SAclopediaAction
     {
-        private AwfulContext context;
+        private IAwfulContext context;
         private SAclopediaManager manager;
         private TemplateHandler templates;
 
@@ -33,7 +33,7 @@ namespace Awful.UI.Actions
         /// <param name="client">AwfulClient.</param>
         /// <param name="context">AwfulContext.</param>
         /// <param name="templates">Templates.</param>
-        public SAclopediaAction(AwfulClient client, AwfulContext context, TemplateHandler templates)
+        public SAclopediaAction(AwfulClient client, IAwfulContext context, TemplateHandler templates)
         {
             this.manager = new SAclopediaManager(client);
             this.context = context;
@@ -80,7 +80,7 @@ namespace Awful.UI.Actions
         /// <returns>List of SAclopediaEntryItems.</returns>
         public async Task<List<SAclopediaEntryItem>> LoadSAclopediaEntryItemsAsync(bool forceRefresh = false, CancellationToken token = default)
         {
-            var list = await this.context.SAclopediaEntryItems.ToListAsync().ConfigureAwait(false);
+            var list = await this.context.GetAllSAclopediaEntryAsync().ConfigureAwait(false);
             if (forceRefresh || !list.Any())
             {
                 await this.context.RemoveAllSAclopediaEntryAsync().ConfigureAwait(false);

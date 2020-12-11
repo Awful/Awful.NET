@@ -32,7 +32,7 @@ namespace Awful.UI.ViewModels
         /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful Properties.</param>
         /// <param name="context">Awful Context.</param>
-        public LepersPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, AwfulContext context)
+        public LepersPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, IAwfulContext context)
             : base(navigation, error, context)
         {
             this.handler = handler;

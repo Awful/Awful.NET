@@ -24,7 +24,7 @@ namespace Awful.UI.Actions
     /// </summary>
     public class BookmarkAction
     {
-        private AwfulContext context;
+        private IAwfulContext context;
         private BookmarkManager manager;
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Awful.UI.Actions
         /// </summary>
         /// <param name="client">AwfulClient.</param>
         /// <param name="context">AwfulContext.</param>
-        public BookmarkAction(AwfulClient client, AwfulContext context)
+        public BookmarkAction(AwfulClient client, IAwfulContext context)
         {
             this.manager = new BookmarkManager(client);
             this.context = context;
@@ -44,7 +44,7 @@ namespace Awful.UI.Actions
         /// <returns>List of Thread Bookmarks.</returns>
         public async Task<List<AwfulThread>> GetAllBookmarksCachedAsync()
         {
-            var bookmarks = await this.context.BookmarkThreads.ToListAsync().ConfigureAwait(false);
+            var bookmarks = await this.context.GetAllBookmarkThreadsAsync().ConfigureAwait(false);
             return bookmarks.OrderBy(n => n.SortOrder).ToList();
         }
 
@@ -55,7 +55,7 @@ namespace Awful.UI.Actions
         /// <param name="forceRefresh">Force Refresh.</param>
         public async Task<List<AwfulThread>> GetAllBookmarksAsync(bool forceRefresh = false)
         {
-            var bookmarks = await this.context.BookmarkThreads.ToListAsync().ConfigureAwait(false);
+            var bookmarks = await this.context.GetAllBookmarkThreadsAsync().ConfigureAwait(false);
             if (!bookmarks.Any() || forceRefresh)
             {
                 var threads = await this.manager.GetAllBookmarksAsync().ConfigureAwait(false);

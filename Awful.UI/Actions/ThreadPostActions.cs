@@ -26,7 +26,7 @@ namespace Awful.UI.Actions
     /// </summary>
     public class ThreadPostActions
     {
-        private AwfulContext context;
+        private IAwfulContext context;
         private ThreadPostManager manager;
         private TemplateHandler templates;
 
@@ -36,7 +36,7 @@ namespace Awful.UI.Actions
         /// <param name="client">AwfulClient.</param>
         /// <param name="context">AwfulContext.</param>
         /// <param name="templates">Templates.</param>
-        public ThreadPostActions(AwfulClient client, AwfulContext context, TemplateHandler templates)
+        public ThreadPostActions(AwfulClient client, IAwfulContext context, TemplateHandler templates)
         {
             this.manager = new ThreadPostManager(client);
             this.context = context;

@@ -41,7 +41,7 @@ namespace Awful.UI.ViewModels
         /// <param name="navigation">Awful Navigation handler.</param>
         /// <param name="error">Awful Error handler.</param>
         /// <param name="context">Awful Database Context.</param>
-        public AwfulViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, AwfulContext context)
+        public AwfulViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, IAwfulContext context)
         {
             if (context == null)
             {
@@ -112,7 +112,7 @@ namespace Awful.UI.ViewModels
         /// <summary>
         /// Gets or sets the awful Database Context.
         /// </summary>
-        public AwfulContext Context { get; set; }
+        public IAwfulContext Context { get; set; }
 
         /// <summary>
         /// Gets or sets the Error Handler.

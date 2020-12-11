@@ -41,7 +41,7 @@ namespace Awful.UI.ViewModels
         /// <param name="navigation">Awful Navigation handler.</param>
         /// <param name="error">Awful Error handler.</param>
         /// <param name="context">Awful Context.</param>
-        public EmoteItemSelectionViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, AwfulContext context)
+        public EmoteItemSelectionViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, IAwfulContext context)
             : base(navigation, error, context)
         {
             this.popup = popup;

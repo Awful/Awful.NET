@@ -28,7 +28,7 @@ namespace Awful.UI.Actions
     /// </summary>
     public class PrivateMessageActions
     {
-        private AwfulContext context;
+        private IAwfulContext context;
         private PrivateMessageManager manager;
         private TemplateHandler templates;
 
@@ -38,7 +38,7 @@ namespace Awful.UI.Actions
         /// <param name="client">AwfulClient.</param>
         /// <param name="context">AwfulContext.</param>
         /// <param name="templates">Templates.</param>
-        public PrivateMessageActions(AwfulClient client, AwfulContext context, TemplateHandler templates)
+        public PrivateMessageActions(AwfulClient client, IAwfulContext context, TemplateHandler templates)
         {
             this.manager = new PrivateMessageManager(client);
             this.context = context;
@@ -53,7 +53,7 @@ namespace Awful.UI.Actions
         /// <param name="token">Cancelation Token.</param>
         public async Task<List<AwfulPM>> GetAllPrivateMessagesAsync(bool forceRefresh = false, CancellationToken token = default)
         {
-            var pms = await this.context.PrivateMessages.ToListAsync().ConfigureAwait(false);
+            var pms = await this.context.GetAllPrivateMessages().ConfigureAwait(false);
             if (!pms.Any() || forceRefresh)
             {
                 var threads = await this.manager.GetAllPrivateMessageListAsync(token).ConfigureAwait(false);

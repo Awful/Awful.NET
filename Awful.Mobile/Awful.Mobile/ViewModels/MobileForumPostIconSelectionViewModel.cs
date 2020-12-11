@@ -22,7 +22,7 @@ namespace Awful.Mobile.ViewModels
         /// <param name="navigation">Awful Navigation handler.</param>
         /// <param name="error">Awful Error handler.</param>
         /// <param name="context">Awful Context.</param>
-        public MobileForumPostIconSelectionViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, AwfulContext context) : base(popup, navigation, error, context)
+        public MobileForumPostIconSelectionViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, IAwfulContext context) : base(popup, navigation, error, context)
         {
         }
     }

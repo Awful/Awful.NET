@@ -40,7 +40,7 @@ namespace Awful.UI.ViewModels
         /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful Template Handler.</param>
         /// <param name="context">Awful Context.</param>
-        public SAclopediaEntryListPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, AwfulContext context)
+        public SAclopediaEntryListPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, IAwfulContext context)
             : base(navigation, error, context)
         {
             this.handler = handler;

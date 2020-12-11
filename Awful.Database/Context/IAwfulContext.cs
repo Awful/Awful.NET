@@ -36,6 +36,12 @@ namespace Awful.Database.Context
         public Task<int> RemoveAllSAclopediaEntryAsync();
 
         /// <summary>
+        /// Get all SAclopedia Entries.
+        /// </summary>
+        /// <returns>List of SAclopedia Entries.</returns>
+        public Task<List<SAclopediaEntryItem>> GetAllSAclopediaEntryAsync();
+
+        /// <summary>
         /// Add or update settings.
         /// </summary>
         /// <param name="settings">The settings.</param>
@@ -102,6 +108,13 @@ namespace Awful.Database.Context
         public Task<Forum> UpdateForumAsync(Forum forum);
 
         /// <summary>
+        /// Get forum.
+        /// </summary>
+        /// <param name="forumId">Forum Id.</param>
+        /// <returns>Forum.</returns>
+        public Task<Forum> GetForumAsync(int forumId);
+
+        /// <summary>
         /// Add All PMs.
         /// </summary>
         /// <param name="threads">SA PMs.</param>
@@ -114,6 +127,12 @@ namespace Awful.Database.Context
         /// <param name="thread">DB PM.</param>
         /// <returns>List of PMs.</returns>
         public Task<List<AwfulPM>> RemovePrivateMessage(AwfulPM thread);
+
+        /// <summary>
+        /// Get All PMs.
+        /// </summary>
+        /// <returns>SA Database PMs.</returns>
+        public Task<List<AwfulPM>> GetAllPrivateMessages();
 
         /// <summary>
         /// Add All Bookmarks.
@@ -130,10 +149,21 @@ namespace Awful.Database.Context
         public Task<List<AwfulThread>> RemoveBookmarkThread(AwfulThread thread);
 
         /// <summary>
+        /// Get All Bookmarks.
+        /// </summary>
+        /// <returns>SA Database Threads.</returns>
+        public Task<List<AwfulThread>> GetAllBookmarkThreadsAsync();
+
+        /// <summary>
         /// Enable or disable bookmark notifications for a given thread.
         /// </summary>
         /// <param name="thread">The AwfulThread.</param>
         /// <returns>The AwfulThread with the updated value.</returns>
         public Task<AwfulThread> EnableDisableBookmarkNotificationsEnable(AwfulThread thread);
+
+        /// <summary>
+        /// Dispose.
+        /// </summary>
+        public void Dispose();
     }
 }

@@ -1,4 +1,4 @@
-﻿// <copyright file="AwfulContext.cs" company="Drastic Actions">
+﻿// <copyright file="AwfulSqliteContext.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
@@ -25,13 +25,13 @@ namespace Awful.Database.Context
     /// <summary>
     /// Awful Database Context.
     /// </summary>
-    public class AwfulContext : DbContext, IAwfulContext
+    public class AwfulSqliteContext : DbContext, IAwfulContext
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AwfulContext"/> class.
+        /// Initializes a new instance of the <see cref="AwfulSqliteContext"/> class.
         /// </summary>
         /// <param name="platformProperties">Path to the platform properties.</param>
-        public AwfulContext(IPlatformProperties platformProperties)
+        public AwfulSqliteContext(IPlatformProperties platformProperties)
         {
             this.PlatformProperties = platformProperties;
             this.Database.EnsureCreated();
@@ -101,6 +101,12 @@ namespace Awful.Database.Context
             var saclopedias = await this.SAclopediaEntryItems.ToListAsync().ConfigureAwait(false);
             this.SAclopediaEntryItems.RemoveRange(saclopedias);
             return await this.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        /// <inheritdoc/>
+        public async Task<List<SAclopediaEntryItem>> GetAllSAclopediaEntryAsync()
+        {
+            return await this.SAclopediaEntryItems.ToListAsync().ConfigureAwait(false);
         }
 
         #endregion
@@ -299,6 +305,12 @@ namespace Awful.Database.Context
             return forum;
         }
 
+        /// <inheritdoc/>
+        public async Task<Forum> GetForumAsync(int forumId)
+        {
+            return await this.Forums.FirstOrDefaultAsync(n => n.Id == forumId).ConfigureAwait(false);
+        }
+
         #endregion
 
         #region PrivateMessage
@@ -341,6 +353,12 @@ namespace Awful.Database.Context
             return await this.PrivateMessages.ToListAsync().ConfigureAwait(false);
         }
 
+        /// <inheritdoc/>
+        public async Task<List<AwfulPM>> GetAllPrivateMessages()
+        {
+            return await this.PrivateMessages.OrderBy(n => n.SortOrder).ToListAsync().ConfigureAwait(false);
+        }
+
         #endregion
 
         #region Bookmarks
@@ -368,6 +386,12 @@ namespace Awful.Database.Context
             }
 
             await this.SaveChangesAsync().ConfigureAwait(false);
+            return await this.BookmarkThreads.OrderBy(n => n.SortOrder).ToListAsync().ConfigureAwait(false);
+        }
+
+        /// <inheritdoc/>
+        public async Task<List<AwfulThread>> GetAllBookmarkThreadsAsync()
+        {
             return await this.BookmarkThreads.OrderBy(n => n.SortOrder).ToListAsync().ConfigureAwait(false);
         }
 

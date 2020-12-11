@@ -36,7 +36,7 @@ namespace Awful.UI.ViewModels
         /// <param name="navigation">Awful Navigation handler.</param>
         /// <param name="error">Awful Error handler.</param>
         /// <param name="context">Awful Context.</param>
-        public BookmarksPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, AwfulContext context)
+        public BookmarksPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, IAwfulContext context)
             : base(navigation, error, context)
         {
         }

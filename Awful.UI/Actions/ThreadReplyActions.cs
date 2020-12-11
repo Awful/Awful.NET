@@ -29,7 +29,7 @@ namespace Awful.UI.Actions
     /// </summary>
     public class ThreadReplyActions
     {
-        private AwfulContext context;
+        private IAwfulContext context;
         private ThreadReplyManager manager;
         private TemplateHandler templates;
 
@@ -39,7 +39,7 @@ namespace Awful.UI.Actions
         /// <param name="client">AwfulClient.</param>
         /// <param name="context">AwfulContext.</param>
         /// <param name="handler">Awful Handler.</param>
-        public ThreadReplyActions(AwfulClient client, AwfulContext context, TemplateHandler handler)
+        public ThreadReplyActions(AwfulClient client, IAwfulContext context, TemplateHandler handler)
         {
             this.manager = new ThreadReplyManager(client);
             this.context = context;

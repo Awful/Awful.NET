@@ -28,7 +28,7 @@ namespace Awful.UI.Actions
     /// </summary>
     public class ThreadActions
     {
-        private AwfulContext context;
+        private IAwfulContext context;
         private ThreadManager manager;
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Awful.UI.Actions
         /// </summary>
         /// <param name="client">AwfulClient.</param>
         /// <param name="context">AwfulContext.</param>
-        public ThreadActions(AwfulClient client, AwfulContext context)
+        public ThreadActions(AwfulClient client, IAwfulContext context)
         {
             this.manager = new ThreadManager(client);
             this.context = context;

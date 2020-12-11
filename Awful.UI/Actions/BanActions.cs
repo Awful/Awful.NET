@@ -25,7 +25,7 @@ namespace Awful.UI.Actions
     /// </summary>
     public class BanActions
     {
-        private AwfulContext context;
+        private IAwfulContext context;
         private BanManager manager;
         private TemplateHandler templates;
 
@@ -35,7 +35,7 @@ namespace Awful.UI.Actions
         /// <param name="client">AwfulClient.</param>
         /// <param name="context">AwfulContext.</param>
         /// <param name="templates">Templates.</param>
-        public BanActions(AwfulClient client, AwfulContext context, TemplateHandler templates)
+        public BanActions(AwfulClient client, IAwfulContext context, TemplateHandler templates)
         {
             this.manager = new BanManager(client);
             this.context = context;

@@ -27,7 +27,7 @@ namespace Awful.UI.Actions
     /// </summary>
     public class UserActions
     {
-        private AwfulContext context;
+        private IAwfulContext context;
         private UserManager manager;
         private TemplateHandler templates;
 
@@ -37,7 +37,7 @@ namespace Awful.UI.Actions
         /// <param name="client">AwfulClient.</param>
         /// <param name="context">AwfulContext.</param>
         /// <param name="templates">Templates.</param>
-        public UserActions(AwfulClient client, AwfulContext context, TemplateHandler templates)
+        public UserActions(AwfulClient client, IAwfulContext context, TemplateHandler templates)
         {
             this.manager = new UserManager(client);
             this.context = context;

@@ -39,7 +39,7 @@ namespace Awful.Test.UI
         public async Task SigninActionTest()
         {
             var properties = new TestPlatformProperties("signin");
-            using var context = new AwfulContext(properties);
+            using var context = new AwfulSqliteContext(properties);
             var signinAction = new SigninAction(properties, context);
             signinAction.OnSignin += this.SigninAction_OnSignin;
             var userauth = await signinAction.SigninAsync(Environment.GetEnvironmentVariable("AWFUL_USER"), Environment.GetEnvironmentVariable("AWFUL_PASSWORD")).ConfigureAwait(false);
@@ -57,7 +57,7 @@ namespace Awful.Test.UI
         public async Task SAclopediaActionTest()
         {
             var properties = new TestPlatformProperties("saclopedia");
-            using var context = new AwfulContext(properties);
+            using var context = new AwfulSqliteContext(properties);
             using var webClient = await Setup.SetupWebClient(AwfulUser.Standard).ConfigureAwait(false);
             var saclopediaAction = new SAclopediaAction(webClient, context, this.templates);
             var entries = await saclopediaAction.LoadSAclopediaEntryItemsAsync().ConfigureAwait(false);
@@ -90,7 +90,7 @@ namespace Awful.Test.UI
         public async Task BookmarkActionTest()
         {
             var properties = new TestPlatformProperties("bookmarks");
-            using var context = new AwfulContext(properties);
+            using var context = new AwfulSqliteContext(properties);
             using var webClient = await Setup.SetupWebClient(AwfulUser.Standard).ConfigureAwait(false);
             var bookmarkAction = new BookmarkAction(webClient, context);
             var bookmarks = await bookmarkAction.GetAllBookmarksAsync().ConfigureAwait(false);
@@ -116,7 +116,7 @@ namespace Awful.Test.UI
         public async Task SettingsActionTest()
         {
             var properties = new TestPlatformProperties("settings");
-            using var context = new AwfulContext(properties);
+            using var context = new AwfulSqliteContext(properties);
             var settingAction = new SettingsAction(context);
 
             var settings = await settingAction.LoadSettingOptionsAsync().ConfigureAwait(false);
@@ -136,7 +136,7 @@ namespace Awful.Test.UI
             var properties = new TestPlatformProperties("ban");
             using var webClient = await Setup.SetupWebClient(AwfulUser.Platinum).ConfigureAwait(false);
             using var probationClient = await Setup.SetupWebClient(AwfulUser.Probation).ConfigureAwait(false);
-            using var context = new AwfulContext(properties);
+            using var context = new AwfulSqliteContext(properties);
             var banActions = new BanActions(webClient, context, this.templates);
             var proBanActions = new BanActions(probationClient, context, this.templates);
             var entry = await banActions.GetBanPageAsync().ConfigureAwait(false);
@@ -162,7 +162,7 @@ namespace Awful.Test.UI
         {
             var properties = new TestPlatformProperties("user");
             using var webClient = await Setup.SetupWebClient(AwfulUser.Standard).ConfigureAwait(false);
-            using var context = new AwfulContext(properties);
+            using var context = new AwfulSqliteContext(properties);
             var userActions = new UserActions(webClient, context, this.templates);
 
             var user = await userActions.GetLoggedInUserAsync().ConfigureAwait(false);
@@ -183,7 +183,7 @@ namespace Awful.Test.UI
         {
             var properties = new TestPlatformProperties("threadpost");
             using var webClient = await Setup.SetupWebClient(AwfulUser.Platinum).ConfigureAwait(false);
-            using var context = new AwfulContext(properties);
+            using var context = new AwfulSqliteContext(properties);
             var tpActions = new ThreadPostActions(webClient, context, this.templates);
             var thread = await tpActions.GetThreadPostsAsync(3606621).ConfigureAwait(false);
             Assert.NotNull(thread);
