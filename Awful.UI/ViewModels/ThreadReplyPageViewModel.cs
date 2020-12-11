@@ -22,11 +22,10 @@ namespace Awful.UI.ViewModels
     /// </summary>
     public class ThreadReplyPageViewModel : ThreadPostBaseViewModel
     {
-        private ThreadReply reply;
+        protected ThreadReply reply;
         private int threadId = 0;
         private int id = 0;
         private bool isEdit;
-        private AwfulAsyncCommand postReplyCommand;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadReplyPageViewModel"/> class.
@@ -41,9 +40,12 @@ namespace Awful.UI.ViewModels
         }
 
         /// <summary>
-        /// Gets or sets the post Reply.
+        /// Gets a value indicating whether the user can post.
         /// </summary>
-        public AwfulAsyncCommand PostThreadCommand { get; set; }
+        public bool CanPost
+        {
+            get { return !string.IsNullOrEmpty(this.Message); }
+        }
 
         /// <summary>
         /// Load thread into view.
@@ -58,10 +60,26 @@ namespace Awful.UI.ViewModels
             this.isEdit = isEdit;
         }
 
-        /// <inheritdoc/>
-        public override void RaiseCanExecuteChanged()
+        /// <summary>
+        /// Send Post.
+        /// </summary>
+        /// <returns>Result.</returns>
+        public async Task<Result> SendPostAsync()
         {
-            this.postReplyCommand?.RaiseCanExecuteChanged();
+            if (string.IsNullOrEmpty(this.Message.Trim()))
+            {
+                return null;
+            }
+
+            this.reply.MapMessage(this.Message.Trim());
+            if (this.isEdit)
+            {
+                return await this.replyActions.SendUpdatePostAsync(this.reply).ConfigureAwait(false);
+            }
+            else
+            {
+                return await this.replyActions.SendPostAsync(this.reply).ConfigureAwait(false);
+            }
         }
 
         /// <inheritdoc/>
