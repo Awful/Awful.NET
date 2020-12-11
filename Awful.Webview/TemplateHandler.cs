@@ -19,7 +19,7 @@ namespace Awful.Webview
     /// <summary>
     /// Handles creating SA HTML files for webviews.
     /// </summary>
-    public class TemplateHandler
+    public class TemplateHandler : ITemplateHandler
     {
         private readonly string acknowledgmentsHtml;
         private readonly string threadHtml;
