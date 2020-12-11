@@ -22,7 +22,8 @@ namespace Awful.Mobile.ViewModels
         /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful Properties.</param>
         /// <param name="context">Awful Context.</param>
-        public MobileThreadReplyPageViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, ITemplateHandler handler, IAwfulContext context) : base(popup, navigation, error, handler, context)
+        public MobileThreadReplyPageViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, ITemplateHandler handler, IAwfulContext context) 
+            : base(navigation, error, handler, context)
         {
         }
     }

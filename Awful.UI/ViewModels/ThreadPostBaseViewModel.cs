@@ -22,7 +22,6 @@ namespace Awful.UI.ViewModels
         protected ThreadReplyActions replyActions;
         protected ThreadPostCreationActions postActions;
         protected ThreadActions threadActions;
-        private IAwfulPopup popup;
         private ITemplateHandler handler;
         private string subject = string.Empty;
         private string message = string.Empty;
@@ -35,10 +34,9 @@ namespace Awful.UI.ViewModels
         /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful handler.</param>
         /// <param name="context">Awful Context.</param>
-        public ThreadPostBaseViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, ITemplateHandler handler, IAwfulContext context)
+        public ThreadPostBaseViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, ITemplateHandler handler, IAwfulContext context)
             : base(navigation, error, context)
         {
-            this.popup = popup;
             this.handler = handler;
         }
 
@@ -75,11 +73,6 @@ namespace Awful.UI.ViewModels
                 this.RaiseCanExecuteChanged();
             }
         }
-
-        /// <summary>
-        /// Gets or sets the options command.
-        /// </summary>
-        public AwfulAsyncCommand OpenOptionsCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the thread editor.

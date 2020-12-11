@@ -3,8 +3,10 @@
 // </copyright>
 
 using System.Threading.Tasks;
+using Awful.Core.Entities;
 using Awful.Core.Entities.Messages;
 using Awful.Core.Entities.PostIcons;
+using Awful.Core.Entities.Web;
 using Awful.Database.Context;
 using Awful.UI.Actions;
 using Awful.UI.Interfaces;
@@ -20,10 +22,9 @@ namespace Awful.UI.ViewModels
     /// </summary>
     public class NewPrivateMessagePageViewModel : ThreadPostBaseViewModel
     {
+        protected NewPrivateMessage newPrivateMessage = new NewPrivateMessage();
         private PrivateMessageActions pmActions;
-        private NewPrivateMessage newPrivateMessage = new NewPrivateMessage();
         private PostIcon postIcon = new PostIcon();
-        private AwfulAsyncCommand postPMCommand;
         private string to = string.Empty;
 
         /// <summary>
@@ -34,8 +35,8 @@ namespace Awful.UI.ViewModels
         /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful handler.</param>
         /// <param name="context">Awful Context.</param>
-        public NewPrivateMessagePageViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, ITemplateHandler handler, IAwfulContext context)
-            : base(popup, navigation, error, handler, context)
+        public NewPrivateMessagePageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, ITemplateHandler handler, IAwfulContext context)
+            : base(navigation, error, handler, context)
         {
         }
 
@@ -73,76 +74,11 @@ namespace Awful.UI.ViewModels
         }
 
         /// <summary>
-        /// Gets or sets the SelectPostIcon Command.
+        /// Gets a value indicating whether the user can post a pm.
         /// </summary>
-        public AwfulAsyncCommand SelectPostIconCommand { get; set; }
-
-        /// <summary>
-        /// Gets the post pm command.
-        /// </summary>
-        public AwfulAsyncCommand PostThreadCommand
-        {
-            get
-            {
-                return this.postPMCommand ??= new AwfulAsyncCommand(
-                    async () =>
-                    {
-                        if (this.newPrivateMessage != null)
-                        {
-                            var pmText = this.Message.Trim();
-                            if (string.IsNullOrEmpty(pmText))
-                            {
-                                return;
-                            }
-
-                            var pmTitle = this.Subject.Trim();
-                            if (string.IsNullOrEmpty(pmTitle))
-                            {
-                                return;
-                            }
-
-                            var to = this.To.Trim();
-                            if (string.IsNullOrEmpty(to))
-                            {
-                                return;
-                            }
-
-                            this.newPrivateMessage.Icon = this.PostIcon;
-                            this.newPrivateMessage.Title = pmTitle;
-                            this.newPrivateMessage.Body = pmText;
-                            this.newPrivateMessage.Receiver = to;
-
-                            // The Manager will throw if we couldn't post.
-                            // That will be captured by AwfulAsyncCommand.
-                            await this.pmActions.SendPrivateMessageAsync(this.newPrivateMessage).ConfigureAwait(false);
-
-                            Device.BeginInvokeOnMainThread(async () =>
-                            {
-                                await this.Navigation.PopModalAsync().ConfigureAwait(false);
-                            });
-                        }
-                    },
-                    () => this.CanPostPm,
-                    this.Error);
-            }
-        }
-
-        private bool CanPostPm
+        public bool CanPostPm
         {
             get { return !string.IsNullOrEmpty(this.Subject) && !string.IsNullOrEmpty(this.To) && !string.IsNullOrEmpty(this.Message); }
-        }
-
-        /// <inheritdoc/>
-        public override void OnCloseModal()
-        {
-            this.OnPropertyChanged(nameof(this.PostIcon));
-            this.PostThreadCommand.RaiseCanExecuteChanged();
-        }
-
-        /// <inheritdoc/>
-        public override void RaiseCanExecuteChanged()
-        {
-            this.PostThreadCommand.RaiseCanExecuteChanged();
         }
 
         /// <inheritdoc/>
@@ -150,6 +86,40 @@ namespace Awful.UI.ViewModels
         {
             await base.OnLoad().ConfigureAwait(false);
             this.pmActions = new PrivateMessageActions(this.Client, this.Context, null);
+        }
+
+        /// <summary>
+        /// Sends the private message.
+        /// </summary>
+        /// <returns>Result.</returns>
+        public async Task<SAItem> SendPrivateMessageAsync()
+        {
+            var pmText = this.Message.Trim();
+            if (string.IsNullOrEmpty(pmText))
+            {
+                return null;
+            }
+
+            var pmTitle = this.Subject.Trim();
+            if (string.IsNullOrEmpty(pmTitle))
+            {
+                return null;
+            }
+
+            var to = this.To.Trim();
+            if (string.IsNullOrEmpty(to))
+            {
+                return null;
+            }
+
+            this.newPrivateMessage.Icon = this.PostIcon;
+            this.newPrivateMessage.Title = pmTitle;
+            this.newPrivateMessage.Body = pmText;
+            this.newPrivateMessage.Receiver = to;
+
+            // The Manager will throw if we couldn't post.
+            // That will be captured by AwfulAsyncCommand.
+            return await this.pmActions.SendPrivateMessageAsync(this.newPrivateMessage).ConfigureAwait(false);
         }
     }
 }
