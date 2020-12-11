@@ -29,7 +29,7 @@ namespace Awful.UI.ViewModels
     public class ForumThreadPageViewModel : AwfulWebviewViewModel
     {
         protected AwfulAsyncCommand replyToThreadCommand;
-        private TemplateHandler handler;
+        private ITemplateHandler handler;
         private ThreadPostActions threadPostActions;
         private ThreadActions threadActions;
         private ThreadPost threadPost;
@@ -43,7 +43,7 @@ namespace Awful.UI.ViewModels
         /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful Handler.</param>
         /// <param name="context">Awful Context.</param>
-        public ForumThreadPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, IAwfulContext context)
+        public ForumThreadPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, ITemplateHandler handler, IAwfulContext context)
             : base(navigation, error, context)
         {
             this.handler = handler;

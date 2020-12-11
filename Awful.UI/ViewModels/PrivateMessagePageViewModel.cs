@@ -32,7 +32,7 @@ namespace Awful.UI.ViewModels
         private AwfulAsyncCommand refreshCommand;
         private AwfulPM pm;
         private DefaultOptions defaults;
-        private TemplateHandler handler;
+        private ITemplateHandler handler;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PrivateMessagePageViewModel"/> class.
@@ -41,7 +41,7 @@ namespace Awful.UI.ViewModels
         /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Template Handler.</param>
         /// <param name="context">Awful Context.</param>
-        public PrivateMessagePageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, IAwfulContext context)
+        public PrivateMessagePageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, ITemplateHandler handler, IAwfulContext context)
             : base(navigation, error, context)
         {
             this.handler = handler;

@@ -22,7 +22,7 @@ namespace Awful.UI.ViewModels
     {
         private PrivateMessageActions pmActions;
         private AwfulAsyncCommand refreshCommand;
-        private TemplateHandler handler;
+        private ITemplateHandler handler;
         private AwfulAsyncCommand newPMCommand;
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Awful.UI.ViewModels
         /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful Handler.</param>
         /// <param name="context">Awful Context.</param>
-        public PrivateMessagesPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, IAwfulContext context)
+        public PrivateMessagesPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, ITemplateHandler handler, IAwfulContext context)
             : base(navigation, error, context)
         {
             this.handler = handler;

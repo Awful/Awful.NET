@@ -31,7 +31,7 @@ namespace Awful.ConsoleApp
                     case MainMenu.LocalParsing:
                         break;
                     case MainMenu.TemplateHandler:
-                        TemplateHandler handler = new TemplateHandler();
+                        ITemplateHandler handler = new MobileTemplateHandler();
                         var templateMenu = Prompt.Select<TemplateHandlerOption>("Render Template");
                         var deviceColor = Prompt.Select<DeviceColorTheme>("Device Color Theme");
                         var defaultOptions = new DefaultOptions() { DeviceColorTheme = deviceColor };

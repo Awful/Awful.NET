@@ -25,7 +25,7 @@ namespace Awful.UI.ViewModels
     public class SAclopediaEntryPageViewModel : AwfulViewModel
     {
         private SAclopediaAction saclopedia;
-        private TemplateHandler handler;
+        private ITemplateHandler handler;
         private SAclopediaEntryItem entry;
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Awful.UI.ViewModels
         /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful Template Handler.</param>
         /// <param name="context">Awful Context.</param>
-        public SAclopediaEntryPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, IAwfulContext context)
+        public SAclopediaEntryPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, ITemplateHandler handler, IAwfulContext context)
             : base(navigation, error, context)
         {
             this.handler = handler;

@@ -29,7 +29,7 @@ namespace Awful.UI.ViewModels
     public class SAclopediaEntryListPageViewModel : AwfulViewModel
     {
         private SAclopediaAction saclopedia;
-        private TemplateHandler handler;
+        private ITemplateHandler handler;
         private AwfulAsyncCommand refreshCommand;
         private List<SAclopediaEntryItem> originalItems = new List<SAclopediaEntryItem>();
 
@@ -40,7 +40,7 @@ namespace Awful.UI.ViewModels
         /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful Template Handler.</param>
         /// <param name="context">Awful Context.</param>
-        public SAclopediaEntryListPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, TemplateHandler handler, IAwfulContext context)
+        public SAclopediaEntryListPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, ITemplateHandler handler, IAwfulContext context)
             : base(navigation, error, context)
         {
             this.handler = handler;

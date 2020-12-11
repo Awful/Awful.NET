@@ -28,7 +28,7 @@ namespace Awful.UI.Actions
     {
         private IAwfulContext context;
         private ThreadPostManager manager;
-        private TemplateHandler templates;
+        private ITemplateHandler templates;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadPostActions"/> class.
@@ -36,7 +36,7 @@ namespace Awful.UI.Actions
         /// <param name="client">AwfulClient.</param>
         /// <param name="context">AwfulContext.</param>
         /// <param name="templates">Templates.</param>
-        public ThreadPostActions(AwfulClient client, IAwfulContext context, TemplateHandler templates)
+        public ThreadPostActions(AwfulClient client, IAwfulContext context, ITemplateHandler templates)
         {
             this.manager = new ThreadPostManager(client);
             this.context = context;

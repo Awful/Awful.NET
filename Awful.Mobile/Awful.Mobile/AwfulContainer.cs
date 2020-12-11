@@ -31,8 +31,9 @@ namespace Awful.UI
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.RegisterType<TemplateHandler>().SingleInstance();
+            builder.RegisterType<MobileTemplateHandler>().SingleInstance();
             builder.RegisterType<AwfulSqliteContext>().As<IAwfulContext>();
+            builder.RegisterType<MobileTemplateHandler>().As<ITemplateHandler>();
             builder.RegisterType<MainTabbedPageViewModel>();
             builder.RegisterType<AwfulMobileNavigation>().As<IAwfulNavigation>();
             builder.RegisterType<AwfulMobileErrorHandler>().As<IAwfulErrorHandler>();

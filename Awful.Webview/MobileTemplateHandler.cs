@@ -1,4 +1,4 @@
-﻿// <copyright file="TemplateHandler.cs" company="Drastic Actions">
+﻿// <copyright file="MobileTemplateHandler.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
@@ -19,7 +19,7 @@ namespace Awful.Webview
     /// <summary>
     /// Handles creating SA HTML files for webviews.
     /// </summary>
-    public class TemplateHandler : ITemplateHandler
+    public class MobileTemplateHandler : ITemplateHandler
     {
         private readonly string acknowledgmentsHtml;
         private readonly string threadHtml;
@@ -40,23 +40,23 @@ namespace Awful.Webview
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateHandler"/> class.
         /// </summary>
-        public TemplateHandler()
+        public MobileTemplateHandler()
         {
-            this.acknowledgmentsHtml = TemplateHandler.GetResourceFileContentAsString("Templates.Acknowledgments.html.hbs");
-            this.threadHtml = TemplateHandler.GetResourceFileContentAsString("Templates.Thread.html.hbs");
-            this.saclopediaHtml = TemplateHandler.GetResourceFileContentAsString("Templates.SAclopedia.html.hbs");
-            this.profileHtml = TemplateHandler.GetResourceFileContentAsString("Templates.Profile.html.hbs");
-            this.banHtml = TemplateHandler.GetResourceFileContentAsString("Templates.Ban.html.hbs");
-            this.systemUiCss = TemplateHandler.GetResourceFileContentAsString("CSS.system-font.css");
-            this.profileCss = TemplateHandler.GetResourceFileContentAsString("CSS.profile.css");
-            this.postCss = TemplateHandler.GetResourceFileContentAsString("CSS.posts-view.css");
-            this.postDarkCss = TemplateHandler.GetResourceFileContentAsString("CSS.posts-view-oled-dark.css");
-            this.postYosposCss = TemplateHandler.GetResourceFileContentAsString("CSS.posts-view-yospos.css");
-            this.postFyadCss = TemplateHandler.GetResourceFileContentAsString("CSS.posts-view-fyad.css");
-            this.postByobCss = TemplateHandler.GetResourceFileContentAsString("CSS.posts-view-byob.css");
-            this.forumCss = TemplateHandler.GetResourceFileContentAsString("CSS.app.css");
-            this.forumJs = TemplateHandler.GetResourceFileContentAsString("JS.forum.js");
-            this.forumRenderJs = TemplateHandler.GetResourceFileContentAsString("JS.RenderView.js");
+            this.acknowledgmentsHtml = MobileTemplateHandler.GetResourceFileContentAsString("Templates.Acknowledgments.html.hbs");
+            this.threadHtml = MobileTemplateHandler.GetResourceFileContentAsString("Templates.Thread.html.hbs");
+            this.saclopediaHtml = MobileTemplateHandler.GetResourceFileContentAsString("Templates.SAclopedia.html.hbs");
+            this.profileHtml = MobileTemplateHandler.GetResourceFileContentAsString("Templates.Profile.html.hbs");
+            this.banHtml = MobileTemplateHandler.GetResourceFileContentAsString("Templates.Ban.html.hbs");
+            this.systemUiCss = MobileTemplateHandler.GetResourceFileContentAsString("CSS.system-font.css");
+            this.profileCss = MobileTemplateHandler.GetResourceFileContentAsString("CSS.profile.css");
+            this.postCss = MobileTemplateHandler.GetResourceFileContentAsString("CSS.posts-view.css");
+            this.postDarkCss = MobileTemplateHandler.GetResourceFileContentAsString("CSS.posts-view-oled-dark.css");
+            this.postYosposCss = MobileTemplateHandler.GetResourceFileContentAsString("CSS.posts-view-yospos.css");
+            this.postFyadCss = MobileTemplateHandler.GetResourceFileContentAsString("CSS.posts-view-fyad.css");
+            this.postByobCss = MobileTemplateHandler.GetResourceFileContentAsString("CSS.posts-view-byob.css");
+            this.forumCss = MobileTemplateHandler.GetResourceFileContentAsString("CSS.app.css");
+            this.forumJs = MobileTemplateHandler.GetResourceFileContentAsString("JS.forum.js");
+            this.forumRenderJs = MobileTemplateHandler.GetResourceFileContentAsString("JS.RenderView.js");
         }
 
         /// <summary>

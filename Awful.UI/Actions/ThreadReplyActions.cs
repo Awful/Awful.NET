@@ -31,7 +31,7 @@ namespace Awful.UI.Actions
     {
         private IAwfulContext context;
         private ThreadReplyManager manager;
-        private TemplateHandler templates;
+        private ITemplateHandler templates;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadReplyActions"/> class.
@@ -39,7 +39,7 @@ namespace Awful.UI.Actions
         /// <param name="client">AwfulClient.</param>
         /// <param name="context">AwfulContext.</param>
         /// <param name="handler">Awful Handler.</param>
-        public ThreadReplyActions(AwfulClient client, IAwfulContext context, TemplateHandler handler)
+        public ThreadReplyActions(AwfulClient client, IAwfulContext context, ITemplateHandler handler)
         {
             this.manager = new ThreadReplyManager(client);
             this.context = context;

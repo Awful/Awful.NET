@@ -21,14 +21,14 @@ namespace Awful.Test.UI
     /// </summary>
     public class ActionsTest
     {
-        private TemplateHandler templates;
+        private ITemplateHandler templates;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ActionsTest"/> class.
         /// </summary>
         public ActionsTest()
         {
-            this.templates = new TemplateHandler();
+            this.templates = new MobileTemplateHandler();
         }
 
         /// <summary>

@@ -25,7 +25,7 @@ namespace Awful.UI.Actions
     {
         private IAwfulContext context;
         private SAclopediaManager manager;
-        private TemplateHandler templates;
+        private ITemplateHandler templates;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SAclopediaAction"/> class.
@@ -33,7 +33,7 @@ namespace Awful.UI.Actions
         /// <param name="client">AwfulClient.</param>
         /// <param name="context">AwfulContext.</param>
         /// <param name="templates">Templates.</param>
-        public SAclopediaAction(AwfulClient client, IAwfulContext context, TemplateHandler templates)
+        public SAclopediaAction(AwfulClient client, IAwfulContext context, ITemplateHandler templates)
         {
             this.manager = new SAclopediaManager(client);
             this.context = context;
