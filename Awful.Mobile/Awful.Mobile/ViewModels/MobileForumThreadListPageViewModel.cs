@@ -45,7 +45,7 @@ namespace Awful.Mobile.ViewModels
                     {
                         if (this.forum != null)
                         {
-                            await this.NavigateToNewThreadPageAsync(this.forum).ConfigureAwait(false);
+                            await this.Navigation.PushModalAsync(new NewThreadPage(this.forum)).ConfigureAwait(false);
                         }
                     },
                     () => !this.IsBusy && !this.OnProbation,

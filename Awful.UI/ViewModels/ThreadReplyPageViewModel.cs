@@ -61,7 +61,7 @@ namespace Awful.UI.ViewModels
         /// <inheritdoc/>
         public override void RaiseCanExecuteChanged()
         {
-            this.PostThreadCommand.RaiseCanExecuteChanged();
+            this.postReplyCommand?.RaiseCanExecuteChanged();
         }
 
         /// <inheritdoc/>

@@ -153,25 +153,5 @@ namespace Awful.UI.ViewModels
                 await this.RefreshCommand.ExecuteAsync().ConfigureAwait(false);
             }
         }
-
-        /// <summary>
-        /// Navigate to New Thread page.
-        /// </summary>
-        /// <param name="forum">Awful Forum.</param>
-        /// <returns>Task.</returns>
-        protected virtual Task NavigateToNewThreadPageAsync(AwfulForum forum)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Navigate to Thread page.
-        /// </summary>
-        /// <param name="thread">Awful Thread.</param>
-        /// <returns>Task.</returns>
-        protected virtual Task NavigateToThreadPageAsync(AwfulThread thread)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

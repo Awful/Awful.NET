@@ -84,13 +84,13 @@ namespace Awful.UI.ViewModels
         public override void OnCloseModal()
         {
             this.OnPropertyChanged(nameof(this.PostIcon));
-            this.PostThreadCommand.RaiseCanExecuteChanged();
+            this.PostThreadCommand?.RaiseCanExecuteChanged();
         }
 
         /// <inheritdoc/>
         public override void RaiseCanExecuteChanged()
         {
-            this.PostThreadCommand.RaiseCanExecuteChanged();
+            this.postThreadCommand?.RaiseCanExecuteChanged();
         }
 
         /// <inheritdoc/>

@@ -103,7 +103,7 @@ namespace Awful.UI.ViewModels
         /// <inheritdoc/>
         public override void RaiseCanExecuteChanged()
         {
-            this.NewPMCommand.RaiseCanExecuteChanged();
+            this.newPMCommand?.RaiseCanExecuteChanged();
         }
 
         /// <inheritdoc/>
