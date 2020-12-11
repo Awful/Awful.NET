@@ -28,9 +28,8 @@ namespace Awful.UI.ViewModels
     /// </summary>
     public class PrivateMessagePageViewModel : AwfulViewModel
     {
+        protected AwfulPM pm;
         private PrivateMessageActions pmActions;
-        private AwfulAsyncCommand refreshCommand;
-        private AwfulPM pm;
         private DefaultOptions defaults;
         private ITemplateHandler handler;
 
@@ -51,28 +50,6 @@ namespace Awful.UI.ViewModels
         /// Gets or sets the internal webview.
         /// </summary>
         public IAwfulWebview WebView { get; set; }
-
-        /// <summary>
-        /// Gets the refresh command.
-        /// </summary>
-        public AwfulAsyncCommand RefreshCommand
-        {
-            get
-            {
-                return this.refreshCommand ??= new AwfulAsyncCommand(
-                    async () =>
-                {
-                    if (this.pm != null)
-                    {
-                        this.IsRefreshing = true;
-                        await this.LoadTemplate(this.pm.PrivateMessageId).ConfigureAwait(false);
-                        this.IsRefreshing = false;
-                    }
-                },
-                    null,
-                    this.Error);
-            }
-        }
 
         /// <summary>
         /// Load PM.

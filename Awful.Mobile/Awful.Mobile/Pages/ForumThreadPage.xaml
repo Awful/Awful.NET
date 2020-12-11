@@ -7,7 +7,7 @@
     Title="{Binding Title}"
     x:Class="Awful.Mobile.Pages.ForumThreadPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Reply" Command="{Binding ReplyToThreadCommand}" IsEnabled="{Binding IsSignedIn}"
+        <ToolbarItem Text="Reply" Command="{Binding ReplyToThreadCommand}"
         Order="Primary"
                  Priority="0">
             <ToolbarItem.IconImageSource>

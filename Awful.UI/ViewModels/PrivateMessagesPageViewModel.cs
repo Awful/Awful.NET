@@ -23,7 +23,6 @@ namespace Awful.UI.ViewModels
         private PrivateMessageActions pmActions;
         private AwfulAsyncCommand refreshCommand;
         private ITemplateHandler handler;
-        private AwfulAsyncCommand newPMCommand;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PrivateMessagesPageViewModel"/> class.
@@ -61,16 +60,6 @@ namespace Awful.UI.ViewModels
         }
 
         /// <summary>
-        /// Gets or sets the Selection Entry.
-        /// </summary>
-        public AwfulAsyncCommand<AwfulPM> SelectionCommand { get; set; }
-
-        /// <summary>
-        /// Gets or sets the new pm command.
-        /// </summary>
-        public AwfulAsyncCommand NewPMCommand { get; set; }
-
-        /// <summary>
         /// Refresh all PMs.
         /// </summary>
         /// <param name="forceRefresh">Force refresh PMs.</param>
@@ -98,12 +87,6 @@ namespace Awful.UI.ViewModels
             }
 
             this.IsBusy = false;
-        }
-
-        /// <inheritdoc/>
-        public override void RaiseCanExecuteChanged()
-        {
-            this.newPMCommand?.RaiseCanExecuteChanged();
         }
 
         /// <inheritdoc/>
