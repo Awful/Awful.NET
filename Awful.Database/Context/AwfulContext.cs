@@ -25,7 +25,7 @@ namespace Awful.Database.Context
     /// <summary>
     /// Awful Database Context.
     /// </summary>
-    public class AwfulContext : DbContext
+    public class AwfulContext : DbContext, IAwfulContext
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AwfulContext"/> class.
@@ -69,6 +69,9 @@ namespace Awful.Database.Context
 
         private IPlatformProperties PlatformProperties { get; set; }
 
+        /// <summary>
+        /// Resets the local database.
+        /// </summary>
         public void ResetDatabase()
         {
             this.GetDependencies().StateManager.ResetState();
@@ -245,7 +248,7 @@ namespace Awful.Database.Context
 
         #endregion
 
-        #region
+        #region Forum Categories
 
         /// <summary>
         /// Get Forum Categories.
@@ -262,6 +265,11 @@ namespace Awful.Database.Context
             return categories;
         }
 
+        /// <summary>
+        /// Add or update Forum Categories.
+        /// </summary>
+        /// <param name="list">List of Forums.</param>
+        /// <returns>Updated list of forums.</returns>
         public async Task<List<Forum>> AddOrUpdateForumCategories(List<Forum> list)
         {
             var oldFavorites = await this.Forums.Where(n => n.IsFavorited).Select(n => n.Id).ToListAsync().ConfigureAwait(false);
@@ -279,6 +287,11 @@ namespace Awful.Database.Context
             return await this.GetForumCategoriesAsync().ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Update forum on page.
+        /// </summary>
+        /// <param name="forum">Forum.</param>
+        /// <returns>Updated Forum.</returns>
         public async Task<Forum> UpdateForumAsync(Forum forum)
         {
             var result = this.Forums.Update(forum);
