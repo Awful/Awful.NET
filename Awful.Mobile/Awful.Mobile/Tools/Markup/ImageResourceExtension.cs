@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using Awful.UI.Tools;
 using System;
 using System.Reflection;
 using Xamarin.Forms;
@@ -30,7 +31,7 @@ namespace Awful.Mobile.Tools.Markup
             }
 
             // Do your translation lookup here, using whatever method you require
-            var imageSource = ImageSource.FromResource(this.Source, typeof(ImageResourceExtension).GetTypeInfo().Assembly);
+            var imageSource = ImageSource.FromResource(this.Source, typeof(AwfulAsyncCommand).GetTypeInfo().Assembly);
 
             return imageSource;
         }

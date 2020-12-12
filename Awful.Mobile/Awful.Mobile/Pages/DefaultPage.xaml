@@ -13,7 +13,7 @@
             </Grid.RowDefinitions>
             <Image Grid.Row="0"
                    Margin="15"
-                   Source="{local:ImageResource Awful.Mobile.ThreadTags.Mazui.png}"/>
+                   Source="{local:ImageResource Awful.UI.ThreadTags.Mazui.png}"/>
             <Label Grid.Row="1" FontAttributes="Bold" FontSize="40" HorizontalOptions="Center" Text="Awful.NET" />
         </Grid>
     </ContentPage.Content>

@@ -65,7 +65,7 @@
                                 Command="{Binding LoginCommand}" />
                         <Image HeightRequest="200" Grid.Row="3"
                          Margin="15"
-                            Source="{local:ImageResource Awful.Mobile.ThreadTags.Mazui.png}"/>
+                            Source="{local:ImageResource Awful.UI.ThreadTags.Mazui.png}"/>
                     </StackLayout>
                 </Grid>
             </Grid>
