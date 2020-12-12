@@ -10,6 +10,7 @@ using Awful.Core.Tools;
 using Awful.Webview.Entities.Themes;
 using Foundation;
 using UIKit;
+using Xamarin.Forms;
 
 namespace Awful.Mobile.iOS
 {
@@ -31,26 +32,30 @@ namespace Awful.Mobile.iOS
         /// <inheritdoc/>
         public DeviceColorTheme GetTheme()
         {
-            if (UIDevice.CurrentDevice.CheckSystemVersion(12, 0))
+            var result = Device.InvokeOnMainThreadAsync<DeviceColorTheme>(() =>
             {
-                var currentUIViewController = GetVisibleViewController();
-
-                var userInterfaceStyle = currentUIViewController.TraitCollection.UserInterfaceStyle;
-
-                switch (userInterfaceStyle)
+                if (UIDevice.CurrentDevice.CheckSystemVersion(12, 0))
                 {
-                    case UIUserInterfaceStyle.Light:
-                        return DeviceColorTheme.Light;
-                    case UIUserInterfaceStyle.Dark:
-                        return DeviceColorTheme.Dark;
-                    default:
-                        throw new NotSupportedException($"UIUserInterfaceStyle {userInterfaceStyle} not supported");
+                    var currentUIViewController = GetVisibleViewController();
+
+                    var userInterfaceStyle = currentUIViewController.TraitCollection.UserInterfaceStyle;
+
+                    switch (userInterfaceStyle)
+                    {
+                        case UIUserInterfaceStyle.Light:
+                            return DeviceColorTheme.Light;
+                        case UIUserInterfaceStyle.Dark:
+                            return DeviceColorTheme.Dark;
+                        default:
+                            throw new NotSupportedException($"UIUserInterfaceStyle {userInterfaceStyle} not supported");
+                    }
                 }
-            }
-            else
-            {
-                return DeviceColorTheme.Light;
-            }
+                else
+                {
+                    return DeviceColorTheme.Light;
+                }
+            });
+            return result.Result;
         }
 
         private static UIViewController GetVisibleViewController()
