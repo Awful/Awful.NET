@@ -87,10 +87,13 @@ namespace Awful.Mobile.ViewModels
 
             pages.Add(CreateNavigationPage(new SettingsPage(), "", "Settings", "FontAwesomeSolid"));
             pages.Add(CreateNavigationPage(new ExtraPage(), "", "More", "FontAwesomeSolid"));
-            foreach (var page in pages)
+            Device.BeginInvokeOnMainThread(() =>
             {
-                this.page.Children.Add(page);
-            }
+                foreach (var page in pages)
+                {
+                    this.page.Children.Add(page);
+                }
+            });
         }
     }
 }

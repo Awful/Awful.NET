@@ -75,7 +75,7 @@ namespace Awful.UI.ViewModels
         /// <param name="reload">Force Reload.</param>
         /// <param name="forceDelay">For Reload Delay, for allowing the forum list to update.</param>
         /// <returns>Task.</returns>
-        public async Task LoadBookmarksAsync(bool reload = false, int forceDelay = 0)
+        public async Task LoadBookmarksAsync(bool reload = false)
         {
             if (this.IsBusy)
             {
@@ -83,9 +83,8 @@ namespace Awful.UI.ViewModels
             }
 
             this.IsBusy = true;
-            await Task.Delay(forceDelay).ConfigureAwait(false);
             var threads = await this.bookmarks.GetAllBookmarksAsync(reload).ConfigureAwait(false);
-            this.Threads = new ObservableCollection<AwfulThread>();
+            this.Threads.Clear();
             foreach (var thread in threads)
             {
                 this.Threads.Add(thread);
@@ -112,19 +111,9 @@ namespace Awful.UI.ViewModels
         /// </summary>
         /// <param name="forceDelay">For Reload Delay, for allowing the forum list to update.</param>
         /// <returns>Task.</returns>
-        public async Task RefreshBookmarksAsync(int forceDelay = 0)
+        public async Task RefreshBookmarksAsync()
         {
-            await this.LoadBookmarksAsync(true, forceDelay).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Navigate to Forum Thread Page.
-        /// </summary>
-        /// <param name="thread">AwfulThread.</param>
-        /// <returns>Task.</returns>
-        protected virtual Task NavigateToForumThreadPageAsync(AwfulThread thread)
-        {
-            throw new NotImplementedException();
+            await this.LoadBookmarksAsync(true).ConfigureAwait(false);
         }
     }
 }
