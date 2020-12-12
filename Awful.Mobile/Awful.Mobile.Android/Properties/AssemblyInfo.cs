@@ -19,7 +19,7 @@ using Android.App;
 // Version information for an assembly consists of the following four values:
 //
 //      Major Version
-//      Minor Version 
+//      Minor Version
 //      Build Number
 //      Revision
 [assembly: AssemblyVersion("1.0.0.0")]
@@ -28,3 +28,6 @@ using Android.App;
 // Add some common permissions, these can be removed if not needed
 [assembly: UsesPermission(Android.Manifest.Permission.Internet)]
 [assembly: UsesPermission(Android.Manifest.Permission.WriteExternalStorage)]
+
+// Needed for Picking photo/video
+[assembly: UsesPermission(Android.Manifest.Permission.ReadExternalStorage)]

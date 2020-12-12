@@ -146,7 +146,7 @@ namespace Awful.UI.ViewModels
 
         private void SortForumsIntoList(List<Forum> forums, string filter = "")
         {
-            this.Items.Clear();
+            this.Items = new ObservableCollection<ForumGroup>();
             forums = forums.Where(y => !y.HasThreads && y.ParentForumId == null).OrderBy(y => y.SortOrder).ToList();
             List<ForumGroup> items;
             if (string.IsNullOrEmpty(filter))

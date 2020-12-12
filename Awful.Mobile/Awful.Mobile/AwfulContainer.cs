@@ -32,7 +32,7 @@ namespace Awful.UI
             }
 
             builder.RegisterType<MobileTemplateHandler>().SingleInstance();
-            builder.RegisterType<AwfulSqliteContext>().As<IAwfulContext>();
+            builder.RegisterType<AwfulLiteDBContext>().As<IAwfulContext>().SingleInstance();
             builder.RegisterType<MobileTemplateHandler>().As<ITemplateHandler>();
             builder.RegisterType<MainTabbedPageViewModel>();
             builder.RegisterType<AwfulMobileNavigation>().As<IAwfulNavigation>();

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Awful.Database.Context;
 using Awful.UI.Interfaces;
 using Awful.UI.Tools;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Awful.UI.ViewModels
@@ -28,6 +29,23 @@ namespace Awful.UI.ViewModels
             this.OnProbation = true;
             this.OnProbationText = "TAKE A BREAK\nYou have been put on probation until Jun 25, 2025 13:50. You cannot post while\non probation. You might find out why you are on probation if you\ncheck the Leper's\nColony. If you read the fucking rules,\nmaybe this won't happen again!";
             this.ThrowAsyncExceptionCommand = new AwfulAsyncCommand(this.ThrowAsyncDebugException, null, this.Error);
+        }
+
+        /// <summary>,
+        /// Gets the throw exception command.
+        /// </summary>
+        public AwfulAsyncCommand AddPhotoCommand
+        {
+            get
+            {
+                return new AwfulAsyncCommand(
+                    async () =>
+                    {
+                        await this.AddPhoto().ConfigureAwait(false);
+                    },
+                    null,
+                    this.Error);
+            }
         }
 
         /// <summary>,
@@ -57,6 +75,18 @@ namespace Awful.UI.ViewModels
                     null,
                     this.Error);
             }
+        }
+
+        private async Task AddPhoto()
+        {
+            await Xamarin.Essentials.MainThread.InvokeOnMainThreadAsync(async () =>
+            {
+                var photo = await MediaPicker.PickPhotoAsync().ConfigureAwait(false);
+                if (photo == null)
+                {
+                    return;
+                }
+            }).ConfigureAwait(false);
         }
 
         //public AwfulEditor AwfulEditor { get; set; }

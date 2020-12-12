@@ -12,6 +12,7 @@ using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Awful.Webview;
+using Xamarin.Essentials;
 
 namespace Awful.Mobile.ViewModels
 {
@@ -52,6 +53,7 @@ namespace Awful.Mobile.ViewModels
                                     this.popup.SetContentWithParameter(emotePage, false, this.OnCloseModal);
                                     break;
                                 case EditPostItemType.InsertImgur:
+                                    await this.AddPhoto().ConfigureAwait(false);
                                     break;
                                 case EditPostItemType.InsertVideo:
                                     await this.AddTag(item, "video").ConfigureAwait(false);
@@ -217,6 +219,10 @@ namespace Awful.Mobile.ViewModels
         public void LoadEditor(IAwfulEditor editor)
         {
             this.editor = editor;
+        }
+
+        private async Task AddPhoto()
+        {
         }
 
         private async Task AddUrl()

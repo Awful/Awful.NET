@@ -63,7 +63,7 @@ namespace Awful.Mobile.Controls
 
         void IAwfulEditor.Focus()
         {
-            this.Focus();
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() => this.Focus());
         }
     }
 }

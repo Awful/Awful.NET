@@ -26,6 +26,11 @@
                     Text="Make Popup Visible"
                     Command="{Binding MakePopupVisible}"
                     />
+                <Button HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Text="Add Photo"
+                    Command="{Binding AddPhotoCommand}"
+                    />
                 <controls:AwfulEditor x:Name="AwfulEditor" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
             </StackLayout>
             <!--<StackL

@@ -34,5 +34,9 @@
 	<string>Awful.NET</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Awful.NET needs access to the photo gallery for picking photos.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Awful.NET needs access to photos gallery for picking photos.</string>
 </dict>
 </plist>
