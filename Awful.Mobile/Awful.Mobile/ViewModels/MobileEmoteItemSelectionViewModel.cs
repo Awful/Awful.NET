@@ -3,8 +3,11 @@
 // </copyright>
 
 using System;
+using System.Threading.Tasks;
+using Awful.Core.Entities.Smilies;
 using Awful.Database.Context;
 using Awful.UI.Interfaces;
+using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Awful.Webview;
 
@@ -15,6 +18,9 @@ namespace Awful.Mobile.ViewModels
     /// </summary>
     public class MobileEmoteItemSelectionViewModel : EmoteItemSelectionViewModel
     {
+        private IAwfulPopup popup;
+        private AwfulAsyncCommand<Smile> selectionCommand;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MobileEmoteItemSelectionViewModel"/> class.
         /// </summary>
@@ -23,8 +29,31 @@ namespace Awful.Mobile.ViewModels
         /// <param name="error">Awful Error handler.</param>
         /// <param name="context">Awful Context.</param>
         public MobileEmoteItemSelectionViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, IAwfulContext context)
-            : base(popup, navigation, error, context)
+            : base(navigation, error, context)
         {
+            this.popup = popup;
+        }
+
+        /// <summary>
+        /// Gets the selection command.
+        /// </summary>
+        public AwfulAsyncCommand<Smile> SelectionCommand
+        {
+            get
+            {
+                return this.selectionCommand ??= new AwfulAsyncCommand<Smile>(
+                    (item) =>
+                    {
+                        if (item != null && this.popup != null)
+                        {
+                            this.popup.SetIsVisible(false, item);
+                        }
+
+                        return Task.CompletedTask;
+                    },
+                    null,
+                    this.Error);
+            }
         }
     }
 }
