@@ -93,7 +93,7 @@ namespace Awful.UI.Actions
                 }
 
                 var test = list.Distinct().ToList();
-                await this.context.AddAllSAclopediaEntry(list.Distinct().ToList()).ConfigureAwait(false);
+                await this.context.AddAllSAclopediaEntryAsync(list.Distinct().ToList()).ConfigureAwait(false);
             }
 
             return list.OrderBy(n => n.Title).ToList();

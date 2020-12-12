@@ -53,11 +53,11 @@ namespace Awful.UI.Actions
         /// <param name="token">Cancelation Token.</param>
         public async Task<List<AwfulPM>> GetAllPrivateMessagesAsync(bool forceRefresh = false, CancellationToken token = default)
         {
-            var pms = await this.context.GetAllPrivateMessages().ConfigureAwait(false);
+            var pms = await this.context.GetAllPrivateMessagesAsync().ConfigureAwait(false);
             if (!pms.Any() || forceRefresh)
             {
                 var threads = await this.manager.GetAllPrivateMessageListAsync(token).ConfigureAwait(false);
-                pms = await this.context.AddAllPrivateMessages(threads.PrivateMessages).ConfigureAwait(false);
+                pms = await this.context.AddAllPrivateMessagesAsync(threads.PrivateMessages).ConfigureAwait(false);
             }
 
             return pms.OrderBy(n => n.SortOrder).ToList();

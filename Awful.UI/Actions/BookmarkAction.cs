@@ -59,7 +59,7 @@ namespace Awful.UI.Actions
             if (!bookmarks.Any() || forceRefresh)
             {
                 var threads = await this.manager.GetAllBookmarksAsync().ConfigureAwait(false);
-                bookmarks = await this.context.AddAllBookmarkThreads(threads.Threads).ConfigureAwait(false);
+                bookmarks = await this.context.AddAllBookmarkThreadsAsync(threads.Threads).ConfigureAwait(false);
             }
 
             return bookmarks.OrderBy(n => n.SortOrder).ToList();
@@ -72,7 +72,7 @@ namespace Awful.UI.Actions
         /// <returns>The AwfulThread with the updated value.</returns>
         public async Task<AwfulThread> EnableDisableBookmarkNotificationAsync(AwfulThread thread)
         {
-            return await this.context.EnableDisableBookmarkNotificationsEnable(thread).ConfigureAwait(false);
+            return await this.context.EnableDisableBookmarkNotificationsEnableAsync(thread).ConfigureAwait(false);
         }
 
         /// <summary>

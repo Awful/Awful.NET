@@ -86,7 +86,7 @@ namespace Awful.Database.Context
         /// </summary>
         /// <param name="entries">Entries to be added.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
-        public async Task<int> AddAllSAclopediaEntry(List<SAclopediaEntryItem> entries)
+        public async Task<int> AddAllSAclopediaEntryAsync(List<SAclopediaEntryItem> entries)
         {
             await this.SAclopediaEntryItems.AddRangeAsync(entries).ConfigureAwait(false);
             return await this.SaveChangesAsync().ConfigureAwait(false);
@@ -276,7 +276,7 @@ namespace Awful.Database.Context
         /// </summary>
         /// <param name="list">List of Forums.</param>
         /// <returns>Updated list of forums.</returns>
-        public async Task<List<Forum>> AddOrUpdateForumCategories(List<Forum> list)
+        public async Task<List<Forum>> AddOrUpdateForumCategoriesAsync(List<Forum> list)
         {
             var oldFavorites = await this.Forums.Where(n => n.IsFavorited).Select(n => n.Id).ToListAsync().ConfigureAwait(false);
             var filteredList = list.Where(n => n.Id != 0);
@@ -320,7 +320,7 @@ namespace Awful.Database.Context
         /// </summary>
         /// <param name="threads">SA Threads.</param>
         /// <returns>SA Database PMs.</returns>
-        public async Task<List<AwfulPM>> AddAllPrivateMessages(List<PrivateMessage> threads)
+        public async Task<List<AwfulPM>> AddAllPrivateMessagesAsync(List<PrivateMessage> threads)
         {
             if (threads == null)
             {
@@ -346,7 +346,7 @@ namespace Awful.Database.Context
         /// </summary>
         /// <param name="thread">DB PM.</param>
         /// <returns>List of PMs.</returns>
-        public async Task<List<AwfulPM>> RemovePrivateMessage(AwfulPM thread)
+        public async Task<List<AwfulPM>> RemovePrivateMessageAsync(AwfulPM thread)
         {
             this.PrivateMessages.Remove(thread);
             await this.SaveChangesAsync().ConfigureAwait(false);
@@ -354,7 +354,7 @@ namespace Awful.Database.Context
         }
 
         /// <inheritdoc/>
-        public async Task<List<AwfulPM>> GetAllPrivateMessages()
+        public async Task<List<AwfulPM>> GetAllPrivateMessagesAsync()
         {
             return await this.PrivateMessages.OrderBy(n => n.SortOrder).ToListAsync().ConfigureAwait(false);
         }
@@ -368,7 +368,7 @@ namespace Awful.Database.Context
         /// </summary>
         /// <param name="threads">SA Threads.</param>
         /// <returns>SA Database Threads.</returns>
-        public async Task<List<AwfulThread>> AddAllBookmarkThreads(List<Thread> threads)
+        public async Task<List<AwfulThread>> AddAllBookmarkThreadsAsync(List<Thread> threads)
         {
             if (threads == null)
             {
@@ -400,7 +400,7 @@ namespace Awful.Database.Context
         /// </summary>
         /// <param name="thread">DB Thread.</param>
         /// <returns>List of Threads.</returns>
-        public async Task<List<AwfulThread>> RemoveBookmarkThread(AwfulThread thread)
+        public async Task<List<AwfulThread>> RemoveBookmarkThreadAsync(AwfulThread thread)
         {
             this.BookmarkThreads.Remove(thread);
             await this.SaveChangesAsync().ConfigureAwait(false);
@@ -412,7 +412,7 @@ namespace Awful.Database.Context
         /// </summary>
         /// <param name="thread">The AwfulThread.</param>
         /// <returns>The AwfulThread with the updated value.</returns>
-        public async Task<AwfulThread> EnableDisableBookmarkNotificationsEnable(AwfulThread thread)
+        public async Task<AwfulThread> EnableDisableBookmarkNotificationsEnableAsync(AwfulThread thread)
         {
             if (thread == null)
             {

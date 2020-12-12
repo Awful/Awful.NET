@@ -79,7 +79,7 @@ namespace Awful.UI.Actions
             {
                 var indexPageSorted = await this.manager.GetSortedIndexPageAsync(token).ConfigureAwait(false);
                 awfulCatList = indexPageSorted.ForumCategories;
-                await this.context.AddOrUpdateForumCategories(awfulCatList).ConfigureAwait(false);
+                await this.context.AddOrUpdateForumCategoriesAsync(awfulCatList).ConfigureAwait(false);
             }
 
             return awfulCatList;

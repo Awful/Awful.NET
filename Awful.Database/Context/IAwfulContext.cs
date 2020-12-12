@@ -27,7 +27,7 @@ namespace Awful.Database.Context
         /// </summary>
         /// <param name="entries">Entries to be added.</param>
         /// <returns>Number of rows changed.</returns>
-        public Task<int> AddAllSAclopediaEntry(List<SAclopediaEntryItem> entries);
+        public Task<int> AddAllSAclopediaEntryAsync(List<SAclopediaEntryItem> entries);
 
         /// <summary>
         /// Remove All SAclopedia Entry.
@@ -98,7 +98,7 @@ namespace Awful.Database.Context
         /// </summary>
         /// <param name="list">List of Forums.</param>
         /// <returns>Updated list of forums.</returns>
-        public Task<List<Forum>> AddOrUpdateForumCategories(List<Forum> list);
+        public Task<List<Forum>> AddOrUpdateForumCategoriesAsync(List<Forum> list);
 
         /// <summary>
         /// Update forum on page.
@@ -119,34 +119,34 @@ namespace Awful.Database.Context
         /// </summary>
         /// <param name="threads">SA PMs.</param>
         /// <returns>SA Database PMs.</returns>
-        public Task<List<AwfulPM>> AddAllPrivateMessages(List<PrivateMessage> threads);
+        public Task<List<AwfulPM>> AddAllPrivateMessagesAsync(List<PrivateMessage> threads);
 
         /// <summary>
         /// Remove Private Message.
         /// </summary>
         /// <param name="thread">DB PM.</param>
         /// <returns>List of PMs.</returns>
-        public Task<List<AwfulPM>> RemovePrivateMessage(AwfulPM thread);
+        public Task<List<AwfulPM>> RemovePrivateMessageAsync(AwfulPM thread);
 
         /// <summary>
         /// Get All PMs.
         /// </summary>
         /// <returns>SA Database PMs.</returns>
-        public Task<List<AwfulPM>> GetAllPrivateMessages();
+        public Task<List<AwfulPM>> GetAllPrivateMessagesAsync();
 
         /// <summary>
         /// Add All Bookmarks.
         /// </summary>
         /// <param name="threads">SA Threads.</param>
         /// <returns>SA Database Threads.</returns>
-        public Task<List<AwfulThread>> AddAllBookmarkThreads(List<Thread> threads);
+        public Task<List<AwfulThread>> AddAllBookmarkThreadsAsync(List<Thread> threads);
 
         /// <summary>
         /// Remove Bookmark Thread.
         /// </summary>
         /// <param name="thread">DB Thread.</param>
         /// <returns>List of Threads.</returns>
-        public Task<List<AwfulThread>> RemoveBookmarkThread(AwfulThread thread);
+        public Task<List<AwfulThread>> RemoveBookmarkThreadAsync(AwfulThread thread);
 
         /// <summary>
         /// Get All Bookmarks.
@@ -159,7 +159,7 @@ namespace Awful.Database.Context
         /// </summary>
         /// <param name="thread">The AwfulThread.</param>
         /// <returns>The AwfulThread with the updated value.</returns>
-        public Task<AwfulThread> EnableDisableBookmarkNotificationsEnable(AwfulThread thread);
+        public Task<AwfulThread> EnableDisableBookmarkNotificationsEnableAsync(AwfulThread thread);
 
         /// <summary>
         /// Dispose.
