@@ -46,7 +46,7 @@ namespace Awful.Database.Context
             }
 
             this.properties = properties;
-            this.db = new LiteDatabase(properties.DatabasePath);
+            this.db = new LiteDatabase(properties.DatabasePath + ".litedb");
         }
 
         /// <inheritdoc/>
@@ -62,17 +62,17 @@ namespace Awful.Database.Context
             {
                 var collection = this.db.GetCollection<AwfulThread>(BookmarkDB);
                 collection.DeleteAll();
-                var threads = new List<AwfulThread>();
+                var newThreads = new List<AwfulThread>();
                 for (int i = 0; i < threads.Count; i++)
                 {
                     Thread thread = (Thread)threads[i];
                     var awfulThread = new AwfulThread(thread);
                     awfulThread.SortOrder = i;
-                    threads.Add(awfulThread);
+                    newThreads.Add(awfulThread);
                 }
 
-                collection.InsertBulk(threads);
-                tcs.SetResult(threads.OrderBy(n => n.SortOrder).ToList());
+                collection.InsertBulk(newThreads);
+                tcs.SetResult(newThreads.OrderBy(n => n.SortOrder).ToList());
             });
             return tcs.Task;
         }
