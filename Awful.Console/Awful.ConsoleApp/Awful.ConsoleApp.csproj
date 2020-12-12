@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="..\Awful.Test.LocalHtml\editPost.html" Link="HTML\editPost.html" />
-    <EmbeddedResource Include="..\Awful.Test.LocalHtml\successPost.html" Link="HTML\successPost.html" />
+    <EmbeddedResource Include="..\..\Awful.Test.LocalHtml\editPost.html" Link="HTML\editPost.html" />
+    <EmbeddedResource Include="..\..\Awful.Test.LocalHtml\successPost.html" Link="HTML\successPost.html" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Awful.Core\Awful.Core.csproj" />
-    <ProjectReference Include="..\Awful.Webview\Awful.Webview.csproj" />
+    <ProjectReference Include="..\..\Awful.Core\Awful.Core.csproj" />
+    <ProjectReference Include="..\..\Awful.Webview\Awful.Webview.csproj" />
   </ItemGroup>
 
   <ItemGroup>

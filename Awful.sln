@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{5D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awful.Test", "Awful.Test\Awful.Test.csproj", "{DDE4447B-5450-475E-9942-28F5901EAA2D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awful.ConsoleApp", "Awful.ConsoleApp\Awful.ConsoleApp.csproj", "{A6E74E2F-A24D-48FE-98AD-D6B0098A578F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awful.ConsoleApp", "Awful.Console\Awful.ConsoleApp\Awful.ConsoleApp.csproj", "{A6E74E2F-A24D-48FE-98AD-D6B0098A578F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{37DA352D-B5FC-4A10-B9C4-7AB1F0A0FF56}"
 EndProject
@@ -42,7 +42,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Awful.Mobile.Android", "Awf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Awful.Mobile.iOS", "Awful.Mobile\Awful.Mobile.iOS\Awful.Mobile.iOS.csproj", "{2ED461F1-47F2-4933-896E-BF9D79B41FBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Awful.ConsoleGUIApp", "Console\Awful.ConsoleGUIApp\Awful.ConsoleGUIApp.csproj", "{D7D643B6-6A21-4D43-9D3E-E1FC2CE15DE3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Awful.ConsoleGUIApp", "Awful.Console\Awful.ConsoleGUIApp\Awful.ConsoleGUIApp.csproj", "{D7D643B6-6A21-4D43-9D3E-E1FC2CE15DE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

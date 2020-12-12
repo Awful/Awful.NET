@@ -73,7 +73,6 @@ namespace Awful.UI.ViewModels
         /// Load Bookmarks.
         /// </summary>
         /// <param name="reload">Force Reload.</param>
-        /// <param name="forceDelay">For Reload Delay, for allowing the forum list to update.</param>
         /// <returns>Task.</returns>
         public async Task LoadBookmarksAsync(bool reload = false)
         {
