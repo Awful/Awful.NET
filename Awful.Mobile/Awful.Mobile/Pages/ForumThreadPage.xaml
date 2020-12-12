@@ -3,7 +3,9 @@
     xmlns:pages="clr-namespace:Awful.Mobile.Pages"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:fontawesome="clr-namespace:FontAwesome" xmlns:controls="clr-namespace:Awful.Mobile.Controls" xmlns:views="clr-namespace:Awful.Mobile.Views"
+    xmlns:fontawesome="clr-namespace:FontAwesome"
+    xmlns:controls="clr-namespace:Awful.Mobile.Controls"
+    xmlns:views="clr-namespace:Awful.Mobile.Views"
     Title="{Binding Title}"
     x:Class="Awful.Mobile.Pages.ForumThreadPage">
     <ContentPage.ToolbarItems>

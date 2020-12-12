@@ -15,12 +15,12 @@ namespace Awful.Core.Entities.Bans
         /// <summary>
         /// Gets or sets the current page.
         /// </summary>
-        public int CurrentPage { get; set; }
+        public int CurrentPage { get; set; } = 1;
 
         /// <summary>
         /// Gets or sets the total pages.
         /// </summary>
-        public int TotalPages { get; set; }
+        public int TotalPages { get; set; } = 1;
 
         /// <summary>
         /// Gets or sets the banned users.

@@ -55,6 +55,11 @@ namespace Awful.Parser.Handlers
                 var requestedBy = tds[4].QuerySelector("a");
                 var approvedBy = tds[5].QuerySelector("a");
 
+                if (type == null)
+                {
+                    continue;
+                }
+
                 banItem.Type = type.TextContent;
                 banItem.PostId = Convert.ToInt32(type.GetAttribute("href").Split('=').Last(), CultureInfo.InvariantCulture);
 

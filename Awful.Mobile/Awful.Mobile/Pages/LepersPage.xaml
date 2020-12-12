@@ -4,23 +4,70 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:Awful.Mobile.Controls"
+    xmlns:fontawesome="clr-namespace:FontAwesome"
     Title="Leper's Colony"
     x:Class="Awful.Mobile.Pages.LepersPage">
     <ContentPage.Content>
         <Grid>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="20"/>
-                        </Grid.RowDefinitions>
-                        <controls:HybridWebView Grid.Row="0" x:Name="AwfulWebView"/>
-                    </Grid>
-                    <StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                            <ActivityIndicator IsRunning="True"/>
-                            <Label Text="{Binding LoadingText}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
-                        </StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <controls:HybridWebView Grid.Row="0" x:Name="AwfulWebView"/>
+                <StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <ActivityIndicator IsRunning="True"/>
+                        <Label Text="{Binding LoadingText}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
                     </StackLayout>
+                </StackLayout>
+                <Grid Grid.Row="1">
+                    <Grid HorizontalOptions="CenterAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0"
+                            WidthRequest="40"
+                            HorizontalOptions="StartAndExpand"
+                            Command="{Binding FirstPageCommand}"
+                            TextColor="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.FastBackward}" 
+                            FontFamily="FontAwesomeSolid"
+                            BackgroundColor="Transparent"  />
+                        <Button Grid.Column="1"
+                            WidthRequest="40"
+                            IsEnabled="{Binding ThreadPost, Converter={StaticResource FirstPageConverter}}"
+                            Command="{Binding PreviousPageCommand}"
+                            TextColor="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.ArrowLeft}" 
+                            FontFamily="FontAwesomeSolid"
+                            BackgroundColor="Transparent"  />
+                        <Label Grid.Column="2" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"  Text="{Binding BanPage.CurrentPage}" />
+                        <Button Grid.Column="3"
+                            WidthRequest="40"
+                            Command="{Binding NextPageCommand}"
+                            TextColor="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.ArrowRight}" 
+                            FontFamily="FontAwesomeSolid"
+                            BackgroundColor="Transparent"  />
+                        <Button Grid.Column="4"
+                            WidthRequest="40"
+                            Command="{Binding LastPageCommand}"
+                            TextColor="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
+                                    Light={StaticResource BackgroundColorDark}}"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.FastForward}" 
+                            FontFamily="FontAwesomeSolid"
+                            BackgroundColor="Transparent"  />
+                    </Grid>
                 </Grid>
+            </Grid>
+        </Grid>
     </ContentPage.Content>
 </pages:BasePage>
