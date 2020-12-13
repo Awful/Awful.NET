@@ -1,12 +1,16 @@
-﻿using System;
+﻿// <copyright file="App.xaml.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Autofac;
+using Awful.Core.Tools;
+using Awful.UI.Interfaces;
+using Awful.Win.Pages;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -14,25 +18,35 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Activation;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
 
 namespace Awful.Win
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    sealed partial class App : Application
+    public sealed partial class App : Application
     {
         /// <summary>
+        /// Autofac Container.
+        /// </summary>
+#pragma warning disable CA2211 // Non-constant fields should not be visible
+        public static IContainer Container;
+#pragma warning restore CA2211 // Non-constant fields should not be visible
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="App"/> class.
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += OnSuspending;
+            Container = AwfulContainer.BuildContainer();
+            this.Suspending += this.OnSuspending;
         }
 
         /// <summary>
@@ -51,7 +65,7 @@ namespace Awful.Win
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
 
-                rootFrame.NavigationFailed += OnNavigationFailed;
+                rootFrame.NavigationFailed += this.OnNavigationFailed;
 
                 if (e.UWPLaunchActivatedEventArgs.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
@@ -69,8 +83,9 @@ namespace Awful.Win
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    this.StartApp(rootFrame);
                 }
+
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
@@ -81,7 +96,7 @@ namespace Awful.Win
         /// </summary>
         /// <param name="sender">The Frame which failed navigation</param>
         /// <param name="e">Details about the navigation failure</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
@@ -98,6 +113,21 @@ namespace Awful.Win
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        private void StartApp(Frame rootFrame)
+        {
+            var platformProperties = App.Container.Resolve<IPlatformProperties>();
+            var user = System.IO.File.Exists(platformProperties.CookiePath);
+            if (!user)
+            {
+                rootFrame.Navigate(typeof(LoginPage));
+            }
+            else
+            {
+                var navigation = App.Container.Resolve<IAwfulNavigation>();
+                navigation.SetMainAppPage();
+            }
         }
     }
 }

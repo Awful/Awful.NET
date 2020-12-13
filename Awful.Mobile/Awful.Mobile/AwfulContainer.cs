@@ -31,12 +31,11 @@ namespace Awful.UI
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.RegisterType<MobileTemplateHandler>().SingleInstance();
+            builder.RegisterType<MobileTemplateHandler>().As<ITemplateHandler>().SingleInstance();
             builder.RegisterType<AwfulLiteDBContext>().As<IAwfulContext>().SingleInstance();
-            builder.RegisterType<MobileTemplateHandler>().As<ITemplateHandler>();
+            builder.RegisterType<AwfulMobileNavigation>().As<IAwfulNavigation>().SingleInstance();
+            builder.RegisterType<AwfulMobileErrorHandler>().As<IAwfulErrorHandler>().SingleInstance();
             builder.RegisterType<MainTabbedPageViewModel>();
-            builder.RegisterType<AwfulMobileNavigation>().As<IAwfulNavigation>();
-            builder.RegisterType<AwfulMobileErrorHandler>().As<IAwfulErrorHandler>();
             builder.RegisterType<MobileForumsListPageViewModel>();
             builder.RegisterType<MobileForumThreadListPageViewModel>();
             builder.RegisterType<MobileForumThreadPageViewModel>();
