@@ -17,10 +17,5 @@ namespace Awful.Webview.Entities.Themes
         /// Gets or sets the device color theme.
         /// </summary>
         public DeviceColorTheme DeviceColorTheme { get; set; }
-
-        /// <summary>
-        /// Gets or sets the device theme.
-        /// </summary>
-        public DeviceTheme DeviceTheme { get; set; }
     }
 }

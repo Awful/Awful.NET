@@ -19,7 +19,6 @@ using Awful.Webview;
 using Awful.Webview.Entities.Themes;
 using Newtonsoft.Json;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 
 namespace Awful.UI.ViewModels
 {

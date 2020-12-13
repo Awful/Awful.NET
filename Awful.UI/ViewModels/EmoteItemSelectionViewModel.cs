@@ -18,7 +18,6 @@ using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Force.DeepCloner;
-using Xamarin.Forms;
 
 namespace Awful.UI.ViewModels
 {

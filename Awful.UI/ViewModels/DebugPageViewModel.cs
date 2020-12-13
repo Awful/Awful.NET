@@ -8,7 +8,6 @@ using Awful.Database.Context;
 using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 
 namespace Awful.UI.ViewModels
 {

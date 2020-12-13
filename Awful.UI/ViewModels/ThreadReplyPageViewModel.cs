@@ -13,7 +13,6 @@ using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Awful.Webview;
-using Xamarin.Forms;
 
 namespace Awful.UI.ViewModels
 {
@@ -93,7 +92,7 @@ namespace Awful.UI.ViewModels
                 if (this.id > 0 && this.isEdit)
                 {
                     this.reply = await this.replyActions.CreateEditThreadReplyAsync(this.id).ConfigureAwait(false);
-                    Device.BeginInvokeOnMainThread(() => this.Editor.Text = this.reply.Message);
+                    Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() => this.Editor.Text = this.reply.Message);
                 }
                 else if (this.threadId > 0)
                 {
@@ -108,7 +107,7 @@ namespace Awful.UI.ViewModels
                 if (this.id > 0 && !this.isEdit)
                 {
                     var quote = await this.replyActions.GetQuoteStringAsync(this.id).ConfigureAwait(false);
-                    Device.BeginInvokeOnMainThread(() => this.Editor.Text += quote);
+                    Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() => this.Editor.Text += quote);
                 }
 
                 this.IsBusy = false;

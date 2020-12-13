@@ -19,6 +19,7 @@ using Awful.UI.Actions;
 using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Awful.UI.ViewModels;
+using Awful.Webview.Entities.Themes;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -245,12 +246,31 @@ namespace Awful.Mobile.Controls
             var options = await this.SettingsAction.LoadSettingOptionsAsync().ConfigureAwait(false);
             if (options != null)
             {
-                this.SettingsAction.SetAppTheme(options.DeviceColorTheme);
+                this.SetTheme(options.DeviceColorTheme);
             }
             else
             {
-                this.SettingsAction.SetAppTheme(this.platformProperties.GetTheme());
+                this.SetTheme(this.platformProperties.GetTheme());
             }
+        }
+
+        /// <summary>
+        /// Setup Theme.
+        /// </summary>
+        /// <param name="theme">Theme.</param>
+        public void SetTheme(DeviceColorTheme theme)
+        {
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() => {
+                switch (theme)
+                {
+                    case DeviceColorTheme.Light:
+                        Application.Current.UserAppTheme = OSAppTheme.Light;
+                        break;
+                    case DeviceColorTheme.Dark:
+                        Application.Current.UserAppTheme = OSAppTheme.Dark;
+                        break;
+                }
+            });
         }
     }
 }

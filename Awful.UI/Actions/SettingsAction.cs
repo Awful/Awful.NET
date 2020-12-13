@@ -15,7 +15,6 @@ using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Webview;
 using Awful.Webview.Entities.Themes;
-using Xamarin.Forms;
 
 namespace Awful.UI.Actions
 {
@@ -53,21 +52,6 @@ namespace Awful.UI.Actions
         {
             await this.context.AddOrUpdateSettingsAsync(settingOptions).ConfigureAwait(false);
             return settingOptions;
-        }
-
-        public void SetAppTheme(DeviceColorTheme theme)
-        {
-            Device.BeginInvokeOnMainThread(() => {
-                switch (theme)
-                {
-                    case DeviceColorTheme.Light:
-                        Application.Current.UserAppTheme = OSAppTheme.Light;
-                        break;
-                    case DeviceColorTheme.Dark:
-                        Application.Current.UserAppTheme = OSAppTheme.Dark;
-                        break;
-                }
-            });
         }
     }
 }

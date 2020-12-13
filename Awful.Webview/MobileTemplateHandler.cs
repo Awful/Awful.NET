@@ -204,12 +204,6 @@ namespace Awful.Webview
 
             entity.JS = new List<string>() { this.forumJs, this.forumRenderJs };
             entity.DeviceColorTheme = options.DeviceColorTheme == DeviceColorTheme.Dark ? "theme-dark" : "theme";
-            entity.Theme = options.DeviceTheme switch
-            {
-                DeviceTheme.Android => "md",
-                DeviceTheme.iOS => "ios",
-                _ => "aurora",
-            };
         }
     }
 }

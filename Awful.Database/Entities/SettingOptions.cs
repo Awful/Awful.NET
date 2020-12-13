@@ -32,11 +32,6 @@ namespace Awful.Database.Entities
         public DeviceColorTheme DeviceColorTheme { get; set; }
 
         /// <summary>
-        /// Gets or sets the device theme.
-        /// </summary>
-        public DeviceTheme DeviceTheme { get; set; }
-
-        /// <summary>
         /// Gets or sets a value indicating whether to enable background tasks.
         /// </summary>
         public bool EnableBackgroundTasks { get; set; }

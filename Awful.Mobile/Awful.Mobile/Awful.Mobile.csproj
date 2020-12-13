@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <Import Project="../../UI.props" />
+  <Import Project="../../Xamarin.props" />
   <Import Project="../../Database.props" />
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

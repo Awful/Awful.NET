@@ -12,7 +12,6 @@ using Awful.Database.Entities;
 using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Awful.Webview.Entities.Themes;
-using Xamarin.Forms;
 
 namespace Awful.UI.ViewModels
 {
@@ -181,19 +180,7 @@ namespace Awful.UI.ViewModels
         public async Task<DefaultOptions> GenerateDefaultOptionsAsync()
         {
             var defaults = await this.Context.GetDefaultSettingsAsync().ConfigureAwait(false);
-            var defaultOptions = new DefaultOptions() { DeviceColorTheme = defaults.DeviceColorTheme, DeviceTheme = defaults.DeviceTheme };
-            if (defaultOptions.DeviceTheme == DeviceTheme.Default)
-            {
-                switch (Device.RuntimePlatform)
-                {
-                    case Device.iOS:
-                        defaultOptions.DeviceTheme = DeviceTheme.iOS;
-                        break;
-                    case Device.Android:
-                        defaultOptions.DeviceTheme = DeviceTheme.Android;
-                        break;
-                }
-            }
+            var defaultOptions = new DefaultOptions() { DeviceColorTheme = defaults.DeviceColorTheme };
 
             return defaultOptions;
         }

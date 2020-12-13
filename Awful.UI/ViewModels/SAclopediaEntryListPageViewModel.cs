@@ -17,8 +17,6 @@ using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Awful.Webview;
-using Xamarin.CommunityToolkit.UI.Views;
-using Xamarin.Forms;
 
 namespace Awful.UI.ViewModels
 {
