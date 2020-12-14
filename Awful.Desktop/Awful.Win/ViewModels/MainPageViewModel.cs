@@ -23,6 +23,8 @@ namespace Awful.Win.ViewModels
     /// </summary>
     public class MainPageViewModel : AwfulViewModel
     {
+        private NavigationView navView;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MainPageViewModel"/> class.
         /// </summary>

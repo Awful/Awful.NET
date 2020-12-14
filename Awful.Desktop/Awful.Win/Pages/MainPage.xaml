@@ -5,22 +5,23 @@
     xmlns:local="using:Awful.Win.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:muxc="using:Microsoft.UI.Xaml.Controls" 
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:controls="using:Awful.Win.Controls"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
+    mc:Ignorable="d">
+
     <Page.Resources>
         <DataTemplate x:Key="NavigationViewMenuItem" x:DataType="controls:AwfulMenuCategory">
             <muxc:NavigationViewItem Tag="{x:Bind Name}" Content="{x:Bind Name}"/>
         </DataTemplate>
     </Page.Resources>
+
     <muxc:NavigationView x:Name="mainPageNavView"
                          MenuItemsSource="{x:Bind ViewModel.Categories, Mode=OneWay}" 
                          MenuItemTemplate="{StaticResource NavigationViewMenuItem}" 
                          ItemInvoked="MainPageNavView_ItemInvoked"
                          BackRequested="MainPageNavView_BackRequested"
+                         Loaded="MainPageNavView_Loaded"
                          >
-        <Frame x:Name="contentFrame" Navigated="ContentFrame_Navigated" />
+        <Frame x:Name="contentFrame"  Navigated="ContentFrame_Navigated" />
     </muxc:NavigationView>
 </local:BasePage>
