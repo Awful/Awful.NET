@@ -92,7 +92,14 @@ namespace Awful.Win.Controls
         /// <inheritdoc/>
         public Task PushPageAsync(object page)
         {
-            throw new NotImplementedException();
+            return MainThread.InvokeOnMainThreadAsync(() =>
+            {
+                var mainPage = GetMainPage();
+                if (mainPage != null)
+                {
+                    mainPage.ContentFrame.Navigate((Type)page);
+                }
+            });
         }
 
         /// <inheritdoc/>
@@ -137,6 +144,17 @@ namespace Awful.Win.Controls
         public Task SetupThemeAsync()
         {
             throw new NotImplementedException();
+        }
+
+        private static MainPage GetMainPage()
+        {
+            var rootFrame = Window.Current?.Content as Frame;
+            if (rootFrame != null)
+            {
+                return rootFrame.Content as MainPage;
+            }
+
+            return null;
         }
     }
 }

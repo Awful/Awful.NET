@@ -13,6 +13,7 @@ using Awful.Database.Context;
 using Awful.UI.Interfaces;
 using Awful.Webview;
 using Awful.Win.Controls;
+using Awful.Win.ViewModels;
 
 namespace Awful.Win
 {
@@ -35,6 +36,7 @@ namespace Awful.Win
             builder.RegisterType<AwfulErrorHandler>().As<IAwfulErrorHandler>().SingleInstance();
             builder.RegisterType<AwfulWindowsNavigation>().As<IAwfulNavigation>().SingleInstance();
             builder.RegisterType<Awful.UI.ViewModels.LoginPageViewModel>();
+            builder.RegisterType<MainPageViewModel>();
             return builder.Build();
         }
     }

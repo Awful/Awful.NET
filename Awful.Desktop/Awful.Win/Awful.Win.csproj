@@ -93,6 +93,7 @@
     </Compile>
     <Compile Include="AwfulContainer.cs" />
     <Compile Include="Controls\AwfulErrorHandler.cs" />
+    <Compile Include="Controls\AwfulMenuCategory.cs" />
     <Compile Include="Controls\AwfulWindowsNavigation.cs" />
     <Compile Include="Controls\AwfulWindowsPlatform.cs" />
     <Compile Include="Pages\BasePage.xaml.cs">
@@ -107,7 +108,11 @@
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\MainPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -142,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
