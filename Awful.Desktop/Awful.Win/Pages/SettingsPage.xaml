@@ -8,7 +8,11 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-
-    </Grid>
+    <Pivot>
+        <PivotItem Header="Theme">
+            <StackPanel Margin="5">
+                <ToggleSwitch Header="Theme Color" OffContent="Light Mode" OnContent="Dark Mode" IsOn="{x:Bind ViewModel.IsDark, Mode=TwoWay}" />
+            </StackPanel>
+        </PivotItem>
+    </Pivot>
 </local:BasePage>

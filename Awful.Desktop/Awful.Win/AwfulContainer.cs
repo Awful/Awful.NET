@@ -37,6 +37,7 @@ namespace Awful.Win
             builder.RegisterType<AwfulWindowsNavigation>().As<IAwfulNavigation>().SingleInstance();
             builder.RegisterType<Awful.UI.ViewModels.LoginPageViewModel>();
             builder.RegisterType<MainPageViewModel>();
+            builder.RegisterType<WindowsSettingsPageViewModel>();
             return builder.Build();
         }
     }

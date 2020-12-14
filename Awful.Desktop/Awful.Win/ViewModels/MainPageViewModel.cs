@@ -83,5 +83,14 @@ namespace Awful.Win.ViewModels
                     this.Error);
             }
         }
+
+        /// <summary>
+        /// Setup Theme.
+        /// </summary>
+        /// <returns>Task.</returns>
+        public async Task SetupThemeAsync()
+        {
+            await this.Navigation.SetupThemeAsync().ConfigureAwait(false);
+        }
     }
 }

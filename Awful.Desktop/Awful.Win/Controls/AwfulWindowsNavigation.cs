@@ -137,13 +137,36 @@ namespace Awful.Win.Controls
         /// <inheritdoc/>
         public void SetTheme(DeviceColorTheme theme)
         {
-            throw new NotImplementedException();
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                var rootFrame = Window.Current?.Content as Frame;
+                if (rootFrame != null)
+                {
+                    switch (theme)
+                    {
+                        case DeviceColorTheme.Dark:
+                            rootFrame.RequestedTheme = ElementTheme.Dark;
+                            break;
+                        case DeviceColorTheme.Light:
+                            rootFrame.RequestedTheme = ElementTheme.Light;
+                            break;
+                    }
+                }
+            });
         }
 
         /// <inheritdoc/>
-        public Task SetupThemeAsync()
+        public async Task SetupThemeAsync()
         {
-            throw new NotImplementedException();
+            var options = await this.SettingsAction.LoadSettingOptionsAsync().ConfigureAwait(false);
+            if (options != null)
+            {
+                this.SetTheme(options.DeviceColorTheme);
+            }
+            else
+            {
+                this.SetTheme(this.platformProperties.GetTheme());
+            }
         }
 
         private static MainPage GetMainPage()

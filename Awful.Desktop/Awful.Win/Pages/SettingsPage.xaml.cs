@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Autofac;
+using Awful.UI.ViewModels;
+using Awful.Win.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -30,6 +33,12 @@ namespace Awful.Win.Pages
         public SettingsPage()
         {
             this.InitializeComponent();
+            this.DataContext = App.Container.Resolve<WindowsSettingsPageViewModel>();
         }
+
+        /// <summary>
+        /// Gets the View Model.
+        /// </summary>
+        public WindowsSettingsPageViewModel ViewModel => this.DataContext as WindowsSettingsPageViewModel;
     }
 }

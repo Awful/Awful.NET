@@ -37,6 +37,7 @@ namespace Awful.Win.Pages
         {
             this.InitializeComponent();
             this.DataContext = App.Container.Resolve<MainPageViewModel>();
+            this.ViewModel.SetupThemeAsync().ConfigureAwait(false);
         }
 
         /// <summary>
