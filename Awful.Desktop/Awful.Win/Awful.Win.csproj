@@ -92,8 +92,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AwfulContainer.cs" />
+    <Compile Include="Controls\AwfulEditor.cs" />
     <Compile Include="Controls\AwfulErrorHandler.cs" />
     <Compile Include="Controls\AwfulMenuCategory.cs" />
+    <Compile Include="Controls\AwfulWebView.cs" />
     <Compile Include="Controls\AwfulWindowsNavigation.cs" />
     <Compile Include="Controls\AwfulWindowsPlatform.cs" />
     <Compile Include="Pages\BasePage.xaml.cs">
