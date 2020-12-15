@@ -54,6 +54,7 @@ namespace Awful.Mobile.Controls
                 errorMessage = $"An {exception.GetType().FullName} was thrown: {exception.Message} @ {exception.StackTrace}";
             }
 
+            System.Diagnostics.Debug.WriteLine(errorMessage);
             this.navigation.DisplayAlertAsync("Error", errorMessage);
         }
     }
