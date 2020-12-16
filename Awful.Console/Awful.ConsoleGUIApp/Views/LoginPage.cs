@@ -51,6 +51,7 @@ namespace Awful.ConsoleGUIApp.Views
                 X = Pos.Center(),
                 Y = Pos.Top(passText) + 2,
             };
+
             button.Clicked += () => MessageBox.Query(20, 7, "Hi", "Neat?", "Yes", "No");
             this.Win.Add(awfulLabel, login, password, loginText, passText, button);
         }

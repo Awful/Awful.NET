@@ -4,7 +4,8 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
+  <Import Project="../../UI.props" />
+  <Import Project="../../Database.props" />
   <ItemGroup>
     <EmbeddedResource Include="..\..\Awful.Test.LocalHtml\editPost.html" Link="HTML\editPost.html" />
     <EmbeddedResource Include="..\..\Awful.Test.LocalHtml\successPost.html" Link="HTML\successPost.html" />

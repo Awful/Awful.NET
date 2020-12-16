@@ -29,6 +29,7 @@ namespace Awful.Win.Controls
             this.navigation = navigation;
         }
 
+        /// <inheritdoc/>
         public void HandleError(Exception exception)
         {
             if (exception == null)
