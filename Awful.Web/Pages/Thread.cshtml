@@ -1,0 +1,59 @@
+﻿@page
+@model Awful.Web.Pages.ThreadModel
+@{
+    ViewData["Title"] = Model.ThreadPost.Name;
+    int i = 0;
+    string tableRow = "";
+}
+<table border="0" width="100%" cellpadding="2">
+    <tbody>
+        <tr>
+            <td width="100%">
+                <font face="verdana, arial, helvetica" size="-1"><b><a asp-page="./Index">The Awful Forums</a> &gt; <a asp-page="./Forum" asp-route-id="@Model.ThreadPost.ForumId">@Model.ThreadPost.ForumName</a> &gt; @Model.ThreadPost.Name</b></font><b>
+                </b>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<table width="100%" border="0" cellspacing="1" cellpadding="4">
+    <tbody>
+        <tr bgcolor="#006699">
+            <td valign="middle" width="20%">
+                <font face="verdana, arial,helvetica" size="-1" color="#FFFFFF"><b>Author</b></font>
+            </td>
+
+            <td valign="middle">
+                &nbsp;
+            </td>
+        </tr>
+        @foreach (var post in Model.ThreadPost.Posts)
+        {
+            // There has to be a better way to handle this...
+            // Yes, I know CSS exists, but this is meant to be run on old browsers and emulate 2001 SA.
+            // it was switched in PHP...
+
+            @if (i++ % 2 == 0)
+            {
+                tableRow = "#DADADA";
+            }
+            else
+            {
+                tableRow = "#F4F4F4";
+            }
+            <tr bgcolor="@tableRow">
+                <td width="18%" valign="top">
+                    @if (!string.IsNullOrEmpty(post.User.AvatarLink))
+                    {
+                        <img src="/proxy?file=@post.User.AvatarLink" />
+                    }
+                    <font face="verdana, arial, helvetica" size="-1"><b>@post.User.Username</b></font><br>
+                </td>
+                 <td valign="top">
+                 <font face="verdana, arial, helvetica" size="-1">
+                    @Html.Raw(post.PostHtml)
+                 </font>
+            </td>
+            </tr>
+        }
+    </tbody>
+</table>

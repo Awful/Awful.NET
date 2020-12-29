@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Text;
 using AngleSharp.Html.Dom;
 using Awful.Core.Entities.Threads;
+using Awful.Core.Utilities;
 
 namespace Awful.Core.Handlers
 {
@@ -51,6 +52,35 @@ namespace Awful.Core.Handlers
             {
                 threadList.CurrentPage = 1;
                 threadList.TotalPages = 1;
+            }
+
+            var testDiv = document.QuerySelector(".mainbodytextlarge");
+            if (testDiv != null)
+            {
+                var parentForumLinks = testDiv.QuerySelectorAll("a");
+                if (parentForumLinks.Length >= 1)
+                {
+                    var parentForumLink = parentForumLinks[1];
+                    threadList.ParentForumName = parentForumLink.TextContent;
+                    var link = parentForumLink.GetAttribute("href");
+                    var queryString = HtmlHelpers.ParseQueryString(link);
+                    if (queryString.ContainsKey("forumid"))
+                    {
+                        threadList.ParentForumId = Convert.ToInt32(queryString["forumid"], CultureInfo.InvariantCulture);
+                    }
+                }
+            }
+
+            var forumLink = document.QuerySelector(".bclast");
+            if (forumLink != null)
+            {
+                threadList.ForumName = forumLink.TextContent;
+                var link = forumLink.GetAttribute("href");
+                var queryString = HtmlHelpers.ParseQueryString(link);
+                if (queryString.ContainsKey("forumid"))
+                {
+                    threadList.ForumId = Convert.ToInt32(queryString["forumid"], CultureInfo.InvariantCulture);
+                }
             }
 
             return threadList;

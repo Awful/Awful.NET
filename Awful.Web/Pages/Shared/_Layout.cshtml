@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Awful.Web</title>
+</head>
+<body>
+    @*bgcolor="white" text="#000000" link="#006699" vlink="#000000" alink="#0099CC"*@
+    <table border="0" width="100%">
+        <tbody>
+            <tr>
+                <td valign="top" align="left"><a href="/"><img src="~/img/sa-forums.gif" border="0"></a></td>
+
+                @*<td valign="middle" align="center" nowrap="">
+                    <div align="right">
+                        <font face="Arial, Helvetica, sans-serif" size="-2">
+                            <a href="member.php?action=editprofile">Edit Profile</a><br>
+                            <a href="member.php?action=signup">Register Account</a><br>
+                            <a href="memberlist.php">Search Members</a><br>
+                            <a href="index.php?action=faq" target="_blank">FAQ</a><br>
+                            <a href="search.php">Search Forums</a><br>
+                            <a href="index.php">Go Home</a>
+                        </font>
+                    </div>
+                </td>*@
+            </tr>
+        </tbody>
+    </table>
+    @RenderBody()
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

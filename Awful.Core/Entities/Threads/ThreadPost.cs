@@ -23,5 +23,8 @@ namespace Awful.Core.Entities.Threads
         public int ThreadId { get; internal set; }
         public int ForumId { get; internal set; }
         public List<Post> Posts { get; internal set; } = new List<Post>();
+        public string ParentForumName { get; internal set; }
+        public int ParentForumId { get; internal set; }
+        public string ForumName { get; internal set; }
     }
 }

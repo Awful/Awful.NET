@@ -5,11 +5,14 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using AngleSharp.Html.Dom;
 using Awful.Core.Entities.Threads;
 using Awful.Core.Exceptions;
+using Awful.Core.Utilities;
 
 namespace Awful.Core.Handlers
 {
@@ -30,9 +33,9 @@ namespace Awful.Core.Handlers
 
             CheckPaywall(doc);
             ParseArchive(doc, thread);
+            ParseThreadPage(doc, thread);
             ParseThreadInfo(doc, thread, responseEndpoint);
             ParseThreadPageNumbers(doc, thread);
-            ParseThreadPage(doc, thread);
             ParseThreadPosts(doc, thread);
             return thread;
         }
@@ -93,7 +96,31 @@ namespace Awful.Core.Handlers
         private static void ParseThreadInfo(IHtmlDocument doc, ThreadPost thread, string responseUri = "")
         {
             thread.LoggedInUserName = doc.QuerySelector("#loggedinusername").TextContent;
-            thread.IsLoggedIn = thread.LoggedInUserName != "Unregistered Faggot";
+            thread.IsLoggedIn = thread.LoggedInUserName != "Unregistered User";
+
+            var testDiv = doc.QuerySelector(".mainbodytextlarge");
+            if (testDiv != null)
+            {
+                var parentForumLinks = testDiv.QuerySelectorAll("a");
+                if (parentForumLinks.Length >= 1)
+                {
+                    var parentForumLink = parentForumLinks[1];
+                    thread.ParentForumName = parentForumLink.TextContent;
+                    var link = parentForumLink.GetAttribute("href");
+                    var queryString = HtmlHelpers.ParseQueryString(link);
+                    if (queryString.ContainsKey("forumid"))
+                    {
+                        thread.ParentForumId = Convert.ToInt32(queryString["forumid"], CultureInfo.InvariantCulture);
+                    }
+                }
+
+                var forumLink = testDiv.QuerySelector($"a[href*='forumid={thread.ForumId}']");
+                if (forumLink != null)
+                {
+                    thread.ForumName = forumLink.TextContent;
+                }
+            }
+
             if (string.IsNullOrEmpty(responseUri))
             {
                 return;

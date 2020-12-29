@@ -41,6 +41,26 @@ namespace Awful.Core.Entities.Threads
         public int TotalPages { get; set; }
 
         /// <summary>
+        /// Gets or sets the parent forum name.
+        /// </summary>
+        public string ParentForumName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the parent forum id.
+        /// </summary>
+        public int ParentForumId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the forum name.
+        /// </summary>
+        public string ForumName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the forum id.
+        /// </summary>
+        public int ForumId { get; set; }
+
+        /// <summary>
         /// Gets the threads.
         /// </summary>
         public List<Thread> Threads { get; internal set; } = new List<Thread>();
