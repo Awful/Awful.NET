@@ -4,13 +4,39 @@
     ViewData["Title"] = Model.ThreadPost.Name;
     int i = 0;
     string tableRow = "";
+    int nextPage = Model.ThreadPost.CurrentPage + 1;
 }
 <table border="0" width="100%" cellpadding="2">
     <tbody>
         <tr>
-            <td width="100%">
+            <td width="95%">
                 <font face="verdana, arial, helvetica" size="-1"><b><a asp-page="./Index">The Awful Forums</a> &gt; <a asp-page="./Forum" asp-route-id="@Model.ThreadPost.ForumId">@Model.ThreadPost.ForumName</a> &gt; @Model.ThreadPost.Name</b></font><b>
                 </b>
+            </td>
+            <td width="46"></td>
+            @*<td align="right" valign="bottom"><img src="http://fi.somethingawful.com/images/4stars.gif" title="Thread Rating"></td>*@
+            <td align="right" nowrap="">
+                <font face="verdana, arial, helvetica" size="-2">
+                    <div>
+                        (@Model.ThreadPost.TotalPages): <b>
+                            @Model.ThreadPost.CurrentPage
+                            @*<a href="#">
+                                2
+                            </a>
+                            <a href="#">3</a>
+                            <a href="#">4</a>
+                            <a href="#">5</a>*@
+                            @if (!Model.ThreadPost.LastPage)
+                            {
+                                <a asp-page="./Thread" asp-route-pageNumber="@nextPage" asp-route-id="@Model.ThreadPost.ThreadId"  title="next page">»</a>
+                            }
+                                ...
+                            <a asp-page="./Thread" asp-route-newestPost="True" asp-route-id="@Model.ThreadPost.ThreadId" title="last page">
+                                Last »
+                            </a>
+                        </b>
+                    </div>
+                </font>
             </td>
         </tr>
     </tbody>
@@ -18,14 +44,43 @@
 <table width="100%" border="0" cellspacing="1" cellpadding="4">
     <tbody>
         <tr bgcolor="#006699">
-            <td valign="middle" width="20%">
-                <font face="verdana, arial,helvetica" size="-1" color="#FFFFFF"><b>Author</b></font>
+            <td valign="middle" width="175" nowrap="">
+                <font face="verdana, arial,helvetica" size="-1" color="#FFFFFF" class="thtcolor"><b>Author</b></font>
             </td>
+            <td valign="middle" width="100%">
 
-            <td valign="middle">
-                &nbsp;
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td width="100%" valign="middle">
+
+                                <font face="verdana, arial,helvetica" size="-1" color="#FFFFFF" class="thtcolor"><b>Message &nbsp;&nbsp; </b></font>
+
+                            </td>
+                            <td valign="middle">
+
+                                <a href="#"><img src="/img/forum-post.gif" border="0" alt="Post New Thread"></a>
+
+                            </td>
+                            <td valign="middle">
+                                <font face="verdana, arial, helvetica" size="-1">&nbsp;&nbsp;&nbsp;</font>
+
+                            </td>
+                            <td valign="middle">
+
+                                <a href="#"><img src="/img/forum-reply.gif" border="0" alt="Post A Reply"></a>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
             </td>
         </tr>
+    </tbody>
+</table>
+<table width="100%" border="0" cellspacing="1" cellpadding="4">
+    <tbody>
         @foreach (var post in Model.ThreadPost.Posts)
         {
             // There has to be a better way to handle this...
@@ -40,19 +95,48 @@
             {
                 tableRow = "#F4F4F4";
             }
-            <tr bgcolor="@tableRow">
-                <td width="18%" valign="top">
+            <tr>
+                <td bgcolor="@tableRow" width="175" valign="top">
                     @if (!string.IsNullOrEmpty(post.User.AvatarLink))
                     {
-                        <img src="/proxy?file=@post.User.AvatarLink" />
+                        <img width="100" src="/proxy?file=@post.User.AvatarLink" />
+                        <br />
                     }
                     <font face="verdana, arial, helvetica" size="-1"><b>@post.User.Username</b></font><br>
+                    <font face="Arial, Helvetica, sans-serif" size="-2">@post.User.AvatarTitle<br>
+                        Registered: @post.User.DateJoined.ToString("MM-yy")<br>
+                    </font>
                 </td>
-                 <td valign="top">
-                 <font face="verdana, arial, helvetica" size="-1">
-                    @Html.Raw(post.PostHtml)
-                 </font>
-            </td>
+                <td bgcolor="@tableRow"  width="100%" valign="top">
+                    <font face="verdana, arial, helvetica" size="-1">
+                        @Html.Raw(post.PostHtml)
+                    </font>
+                </td>
+            </tr>
+            <tr bgcolor="@tableRow">
+                <td width="175" valign="middle" height="16" nowrap="">
+                    <img src="/img/posticon.gif" border="0"> <font face="verdana, arial,helvetica" size="-1">@post.PostDate</font>
+                </td>
+                <td width="100%" valign="middle" height="16">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td align="left" valign="middle">
+                                    <a href="#" target="_blank">
+                                        <img src="/img/profile.gif" border="0" alt="Profile">
+                                    </a> &nbsp;&nbsp;
+                                    @*<a href="editpost.php?action=editpost&amp;postid=384708"><img src="/web/20010518164004im_/http://forums.somethingawful.com/images/edit.gif" border="0" alt="Edit/Delete Message"></a>*@ 
+                                    @*&nbsp;&nbsp;*@ <a href="#">
+                                    <img src="/img/quote.gif" border="0" alt="Reply w/Quote"></a> 
+                                    &nbsp;&nbsp; <!-- $ icq --> <!-- $ aim --> <!-- $ yahoo -->
+                                </td>
+                                @*<td align="right" valign="middle" nowrap="">
+                                    <font face="Arial, Helvetica, sans-serif" size="-2">IP: 64.209.134.135</font>
+                                </td>*@
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
             </tr>
         }
     </tbody>
