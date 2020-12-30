@@ -64,7 +64,7 @@
                 </td>
 
                 <td bgcolor="#DADADA" nowrap="">
-                    <font face="verdana,arial,helvetica" size="1">19:55 <font color="#666666">06-06</font> <a asp-page="./Thread" asp-route-newestPost="True" asp-route-id="@thread.ThreadId">@thread.KilledBy</a></font>
+                    <font face="verdana,arial,helvetica" size="1">@thread.KilledOn.ToString("HH:mm") <font color="#666666">@thread.KilledOn.ToString("dd-MM-yy")</font> <a asp-page="./Thread" asp-route-newestPost="True" asp-route-id="@thread.ThreadId">@thread.KilledBy</a></font>
                 </td>
             </tr>
         }
