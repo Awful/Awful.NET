@@ -4,6 +4,10 @@
 
 using System;
 using Autofac;
+using Awful.Core.Tools;
+using Awful.Database;
+using Awful.Database.Entities;
+using Awful.UI.Interfaces;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -30,11 +34,47 @@ namespace Awful.Mobile
         /// <param name="builder">Container Builder.</param>
         public App(ContainerBuilder builder)
         {
+            Device.SetFlags(new string[] { "MediaElement_Experimental", "Shell_UWP_Experimental", "AppTheme_Experimental", "CollectionView_Experimental", "Shapes_Experimental" });
             this.InitializeComponent();
 
-            AwfulContainerBuilder.BuildContainer(builder);
-            Container = builder.Build();
-            this.MainPage = new MainPage();
+            Container = AwfulContainerBuilder.BuildContainer(builder);
+            var database = Container.Resolve<IDatabase>();
+            var platform = Container.Resolve<IPlatformProperties>();
+            var navigation = Container.Resolve<IAwfulNavigationHandler>();
+            var settings = database.GetAppSettings();
+
+            // If we're using the default system settings.
+            if (settings.UseSystemThemeSettings)
+            {
+                if (platform.IsDarkTheme)
+                {
+                    ResourcesHelper.SetDarkMode();
+                }
+                else
+                {
+                    ResourcesHelper.SetLightMode();
+                }
+            }
+            else
+            {
+                if (settings.CustomTheme != AppCustomTheme.None)
+                {
+                    ResourcesHelper.SetCustomTheme(settings.CustomTheme);
+                }
+                else
+                {
+                    if (settings.UseDarkMode)
+                    {
+                        ResourcesHelper.SetDarkMode();
+                    }
+                    else
+                    {
+                        ResourcesHelper.SetLightMode();
+                    }
+                }
+            }
+
+            navigation.SetMainAppPage();
 #if DEBUG
             Xamarin.Forms.Xaml.Diagnostics.VisualDiagnostics.VisualTreeChanged += this.VisualDiagnostics_VisualTreeChanged;
 #endif

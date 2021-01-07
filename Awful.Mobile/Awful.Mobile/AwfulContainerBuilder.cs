@@ -6,7 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Autofac;
+using Awful.Database;
 using Awful.Database.Context;
+using Awful.Mobile.Tools;
+using Awful.Mobile.ViewModels;
 using Awful.UI.Interfaces;
 using Awful.Webview;
 
@@ -28,6 +31,12 @@ namespace Awful.Mobile
             {
                 throw new ArgumentNullException(nameof(builder));
             }
+
+            builder.RegisterType<AwfulDatabase>().As<IDatabase>().SingleInstance();
+            builder.RegisterType<AwfulNavigationHandler>().As<IAwfulNavigationHandler>().SingleInstance();
+            builder.RegisterType<AwfulErrorHandler>().As<IAwfulErrorHandler>().SingleInstance();
+
+            builder.RegisterType<SettingsViewModel>();
 
             return builder.Build();
         }

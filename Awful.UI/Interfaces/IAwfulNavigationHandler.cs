@@ -1,4 +1,4 @@
-﻿// <copyright file="IAwfulNavigation.cs" company="Drastic Actions">
+﻿// <copyright file="IAwfulNavigationHandler.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
@@ -14,7 +14,7 @@ namespace Awful.UI.Interfaces
     /// <summary>
     /// Awful Navigation.
     /// </summary>
-    public interface IAwfulNavigation
+    public interface IAwfulNavigationHandler
     {
         /// <summary>
         /// Display Alert to User.

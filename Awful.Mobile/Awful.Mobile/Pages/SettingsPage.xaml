@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Awful.Mobile.Pages.SettingsPage">
+    <ContentPage.Content>
+        <TableView>
+            <TableSection Title="Theme">
+                <SwitchCell Text="Use System Theme Settings:" On="{Binding UseSystemThemeSettings, Mode=TwoWay}" />
+                <SwitchCell Text="Use Dark Theme:" On="{Binding UseDarkMode, Mode=TwoWay}" />
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" Padding="13, 0">
+                        <Label Text="Custom Theme:" VerticalOptions="Center"></Label>
+                        <Picker ItemsSource="{Binding CustomThemeNames}"
+                                WidthRequest="{OnPlatform Android=50, Default=100}"
+                                IsEnabled="{Binding CanOverrideThemeSettings}"
+                                SelectedIndex="{Binding CustomTheme, Converter={StaticResource IntEnumConverter}}"
+                                HorizontalOptions="End"
+                                VerticalOptions="Center">
+                        </Picker>
+                    </StackLayout>
+                </ViewCell>
+            </TableSection>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>

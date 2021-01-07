@@ -1945,6 +1945,5 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Actions\" />
-	  <Folder Include="ViewModels\" />
 	</ItemGroup>
 </Project>
