@@ -1,29 +1,31 @@
-﻿using System;
+﻿// <copyright file="AppDelegate.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
 using UIKit;
 
+#pragma warning disable SA1300 // Element should begin with upper-case letter
 namespace Awful.Mobile.iOS
+#pragma warning restore SA1300 // Element should begin with upper-case letter
 {
-    // The UIApplicationDelegate for the application. This class is responsible for launching the 
-    // User Interface of the application, as well as listening (and optionally responding) to 
-    // application events from iOS.
+    /// <summary>
+    /// The UIApplicationDelegate for the application. This class is responsible for launching the
+    /// User Interface of the application, as well as listening (and optionally responding) to
+    /// application events from iOS.
+    /// </summary>
     [Register("AppDelegate")]
     public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
-        //
-        // This method is invoked when the application has loaded and is ready to run. In this 
-        // method you should instantiate the window, load the UI into it and then make the window
-        // visible.
-        //
-        // You have 17 seconds to return from this method, or iOS will terminate your application.
-        //
+        /// <inheritdoc/>
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+            this.LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
         }

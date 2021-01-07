@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="MainPage.xaml.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,13 +19,19 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Awful.Mobile.UWP
 {
+    /// <summary>
+    /// Main Page.
+    /// </summary>
     public sealed partial class MainPage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainPage"/> class.
+        /// </summary>
         public MainPage()
         {
             this.InitializeComponent();
 
-            LoadApplication(new Awful.Mobile.App());
+            this.LoadApplication(new Awful.Mobile.App());
         }
     }
 }
