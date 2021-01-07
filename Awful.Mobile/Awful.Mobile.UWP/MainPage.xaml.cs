@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Autofac;
+using Awful.Core.Tools;
+using Drastic.Forms.UWP;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -31,7 +34,9 @@ namespace Awful.Mobile.UWP
         {
             this.InitializeComponent();
 
-            this.LoadApplication(new Awful.Mobile.App());
+            var container = new ContainerBuilder();
+            container.RegisterType<WindowsPlatformProperties>().As<IPlatformProperties>();
+            this.LoadApplication(new Awful.Mobile.App(container));
         }
     }
 }

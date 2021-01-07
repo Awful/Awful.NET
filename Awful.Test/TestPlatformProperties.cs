@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Awful.Core.Tools;
-using Awful.Webview.Entities.Themes;
 
 namespace Awful.Test
 {
@@ -38,9 +37,6 @@ namespace Awful.Test
         public string DatabasePath => $"{prefix}.awful.sqlite";
 
         /// <inheritdoc/>
-        public DeviceColorTheme GetTheme()
-        {
-            return DeviceColorTheme.Dark;
-        }
+        public bool IsDarkTheme => true;
     }
 }

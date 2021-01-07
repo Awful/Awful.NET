@@ -279,11 +279,11 @@ namespace Awful.Database.Context
                 var settings = collection.FindAll().FirstOrDefault();
                 if (settings == null)
                 {
-                    var options = new SettingOptions
-                    {
-                        DeviceColorTheme = this.properties.GetTheme(),
-                    };
-                    tcs.SetResult(options);
+                    //var options = new SettingOptions
+                    //{
+                    //    DeviceColorTheme = this.properties.GetTheme(),
+                    //};
+                    //tcs.SetResult(options);
                 }
                 else
                 {

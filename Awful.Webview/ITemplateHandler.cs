@@ -11,7 +11,6 @@ using Awful.Core.Entities.Bans;
 using Awful.Core.Entities.JSON;
 using Awful.Core.Entities.SAclopedia;
 using Awful.Webview.Entities;
-using Awful.Webview.Entities.Themes;
 
 namespace Awful.Webview
 {
@@ -24,39 +23,39 @@ namespace Awful.Webview
         /// Renders SAclopedia View.
         /// </summary>
         /// <param name="entry">SAclopedia Entry.</param>
-        /// <param name="options">Default Theme Options.</param>
+        /// <param name="isDarkMode">Default Theme Options.</param>
         /// <returns>HTML Template String.</returns>
-        public string RenderSAclopediaView(SAclopediaEntry entry, DefaultOptions options);
+        public string RenderSAclopediaView(SAclopediaEntry entry, bool isDarkMode);
 
         /// <summary>
         /// Renders BanEntity View.
         /// </summary>
         /// <param name="entry">BanEntity Entry.</param>
-        /// <param name="options">Default Theme Options.</param>
+        /// <param name="isDarkMode">Default Theme Options.</param>
         /// <returns>HTML Template String.</returns>
-        public string RenderBanView(BanPage entry, DefaultOptions options);
+        public string RenderBanView(BanPage entry, bool isDarkMode);
 
         /// <summary>
         /// Renders User Profile View.
         /// </summary>
         /// <param name="entry">User Entry.</param>
-        /// <param name="options">Default Theme Options.</param>
+        /// <param name="isDarkMode">Default Theme Options.</param>
         /// <returns>HTML Template String.</returns>
-        public string RenderProfileView(Awful.Core.Entities.JSON.User entry, DefaultOptions options);
+        public string RenderProfileView(Awful.Core.Entities.JSON.User entry, bool isDarkMode);
 
         /// <summary>
         /// Renders Thread View.
         /// </summary>
         /// <param name="entry">User Entry.</param>
-        /// <param name="options">Default Theme Options.</param>
+        /// <param name="isDarkMode">Default Theme Options.</param>
         /// <returns>HTML Template String.</returns>
-        public string RenderThreadPostView(Awful.Core.Entities.Threads.ThreadPost entry, DefaultOptions options);
+        public string RenderThreadPostView(Awful.Core.Entities.Threads.ThreadPost entry, bool isDarkMode);
 
         /// <summary>
         /// Renders Acknowledgements View.
         /// </summary>
-        /// <param name="options">Default Theme Options.</param>
+        /// <param name="isDarkMode">Default Theme Options.</param>
         /// <returns>HTML Template String.</returns>
-        public string RenderAcknowledgementstView(DefaultOptions options);
+        public string RenderAcknowledgementstView(bool isDarkMode);
     }
 }

@@ -66,6 +66,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="iOSPlatformProperties.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
@@ -127,6 +128,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\..\Awful.Core\Awful.Core.csproj">
+      <Project>{9EAC913E-0139-4A7A-9F95-CAFDEA30E1EF}</Project>
+      <Name>Awful.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Awful.Mobile\Awful.Mobile.csproj">
       <Project>{8DDA901E-D337-46B9-A9B3-F782013B53F4}</Project>
       <Name>Awful.Mobile</Name>

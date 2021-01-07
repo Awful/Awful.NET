@@ -3,6 +3,8 @@
 // </copyright>
 
 using System;
+using Autofac;
+using Awful.Core.Tools;
 using Xamarin.Forms;
 
 namespace Awful.Mobile
@@ -18,8 +20,9 @@ namespace Awful.Mobile
         protected override void OnCreate()
         {
             base.OnCreate();
-
-            this.LoadApplication(new App());
+            var container = new ContainerBuilder();
+            container.RegisterType<TizenPlatformProperties>().As<IPlatformProperties>();
+            this.LoadApplication(new App(container));
         }
 
         private static void Main(string[] args)

@@ -100,6 +100,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WindowsPlatformProperties.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -147,9 +148,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.10"/>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.10" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Awful.Core\Awful.Core.csproj">
+      <Project>{9EAC913E-0139-4A7A-9F95-CAFDEA30E1EF}</Project>
+      <Name>Awful.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Awful.Mobile\Awful.Mobile.csproj">
       <Project>{8DDA901E-D337-46B9-A9B3-F782013B53F4}</Project>
       <Name>Awful.Mobile</Name>

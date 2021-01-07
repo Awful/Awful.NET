@@ -11,7 +11,6 @@ using Awful.Core.Entities.Bans;
 using Awful.Core.Entities.JSON;
 using Awful.Core.Entities.SAclopedia;
 using Awful.Webview.Entities;
-using Awful.Webview.Entities.Themes;
 using HandlebarsDotNet;
 
 namespace Awful.Webview
@@ -63,18 +62,13 @@ namespace Awful.Webview
         /// Renders SAclopedia View.
         /// </summary>
         /// <param name="entry">SAclopedia Entry.</param>
-        /// <param name="options">Default Theme Options.</param>
+        /// <param name="isDarkMode">Default Theme Options.</param>
         /// <returns>HTML Template String.</returns>
-        public string RenderSAclopediaView(SAclopediaEntry entry, DefaultOptions options)
+        public string RenderSAclopediaView(SAclopediaEntry entry, bool isDarkMode)
         {
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
-
             var template = Handlebars.Compile(this.saclopediaHtml);
             var entity = new SAclopedia() { Entry = entry };
-            this.SetDefaults(entity, options);
+            this.SetDefaults(entity, isDarkMode);
             return template(entity);
         }
 
@@ -82,18 +76,13 @@ namespace Awful.Webview
         /// Renders BanEntity View.
         /// </summary>
         /// <param name="entry">BanEntity Entry.</param>
-        /// <param name="options">Default Theme Options.</param>
+        /// <param name="isDarkMode">Default Theme Options.</param>
         /// <returns>HTML Template String.</returns>
-        public string RenderBanView(BanPage entry, DefaultOptions options)
+        public string RenderBanView(BanPage entry, bool isDarkMode)
         {
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
-
             var template = Handlebars.Compile(this.banHtml);
             var entity = new BanEntity() { Entry = entry };
-            this.SetDefaults(entity, options);
+            this.SetDefaults(entity, isDarkMode);
             return template(entity);
         }
 
@@ -101,19 +90,14 @@ namespace Awful.Webview
         /// Renders User Profile View.
         /// </summary>
         /// <param name="entry">User Entry.</param>
-        /// <param name="options">Default Theme Options.</param>
+        /// <param name="isDarkMode">Default Theme Options.</param>
         /// <returns>HTML Template String.</returns>
-        public string RenderProfileView(Awful.Core.Entities.JSON.User entry, DefaultOptions options)
+        public string RenderProfileView(Awful.Core.Entities.JSON.User entry, bool isDarkMode)
         {
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
-
             var template = Handlebars.Compile(this.profileHtml);
             var entity = new ProfileEntity() { Entry = entry };
             entity.CSS = new List<string>() { this.systemUiCss, this.profileCss };
-            entity.IsDark = options.DeviceColorTheme == DeviceColorTheme.Dark;
+            entity.IsDark = isDarkMode;
             return template(entity);
         }
 
@@ -121,41 +105,31 @@ namespace Awful.Webview
         /// Renders Thread View.
         /// </summary>
         /// <param name="entry">User Entry.</param>
-        /// <param name="options">Default Theme Options.</param>
+        /// <param name="isDarkMode">Default Theme Options.</param>
         /// <returns>HTML Template String.</returns>
-        public string RenderThreadPostView(Awful.Core.Entities.Threads.ThreadPost entry, DefaultOptions options)
+        public string RenderThreadPostView(Awful.Core.Entities.Threads.ThreadPost entry, bool isDarkMode)
         {
             if (entry == null)
             {
                 throw new ArgumentNullException(nameof(entry));
             }
 
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
-
             var template = Handlebars.Compile(this.threadHtml);
             var entity = new ThreadPostEntity() { Entry = entry };
-            this.SetDefaults(entity, options, entry.ForumId);
+            this.SetDefaults(entity, isDarkMode, entry.ForumId);
             return template(entity);
         }
 
         /// <summary>
         /// Renders Acknowledgements View.
         /// </summary>
-        /// <param name="options">Default Theme Options.</param>
+        /// <param name="isDarkMode">Default Theme Options.</param>
         /// <returns>HTML Template String.</returns>
-        public string RenderAcknowledgementstView(DefaultOptions options)
+        public string RenderAcknowledgementstView(bool isDarkMode)
         {
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
-
             var template = Handlebars.Compile(this.acknowledgmentsHtml);
             var entity = new TemplateEntity();
-            this.SetDefaults(entity, options);
+            this.SetDefaults(entity, isDarkMode);
             return template(entity);
         }
 
@@ -174,7 +148,7 @@ namespace Awful.Webview
             return resource;
         }
 
-        private void SetDefaults(TemplateEntity entity, DefaultOptions options, int forumId = 0)
+        private void SetDefaults(TemplateEntity entity, bool isDarkMode, int forumId = 0)
         {
             entity.CSS = new List<string>() { this.systemUiCss, this.forumCss };
 
@@ -190,7 +164,7 @@ namespace Awful.Webview
                     entity.CSS.Add(this.postByobCss);
                     break;
                 default:
-                    if (options.DeviceColorTheme == DeviceColorTheme.Dark)
+                    if (isDarkMode)
                     {
                         entity.CSS.Add(this.postDarkCss);
                     }
@@ -203,7 +177,7 @@ namespace Awful.Webview
             }
 
             entity.JS = new List<string>() { this.forumJs, this.forumRenderJs };
-            entity.DeviceColorTheme = options.DeviceColorTheme == DeviceColorTheme.Dark ? "theme-dark" : "theme";
+            entity.DeviceColorTheme = isDarkMode ? "theme-dark" : "theme";
         }
     }
 }

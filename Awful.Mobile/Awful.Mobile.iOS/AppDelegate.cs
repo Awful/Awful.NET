@@ -5,7 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Autofac;
+using Awful.Core.Tools;
+using Drastic.Forms.iOS;
 using Foundation;
 using UIKit;
 
@@ -25,7 +27,9 @@ namespace Awful.Mobile.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            this.LoadApplication(new App());
+            var container = new ContainerBuilder();
+            container.RegisterType<iOSPlatformProperties>().As<IPlatformProperties>();
+            this.LoadApplication(new App(container));
 
             return base.FinishedLaunching(app, options);
         }
