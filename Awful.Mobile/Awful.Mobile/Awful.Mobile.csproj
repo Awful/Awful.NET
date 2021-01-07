@@ -14,6 +14,16 @@
   <Import Project="../../Xamarin.props" />
   <Import Project="../../Database.props" />
   <ItemGroup>
+    <None Remove="Fonts\fa-brands-400.ttf" />
+    <None Remove="Fonts\fa-regular-400.ttf" />
+    <None Remove="Fonts\fa-solid-900.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Fonts\fa-brands-400.ttf" />
+    <EmbeddedResource Include="Fonts\fa-regular-400.ttf" />
+    <EmbeddedResource Include="Fonts\fa-solid-900.ttf" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\Awful.Core\Awful.Core.csproj" />
     <ProjectReference Include="..\..\Awful.Database\Awful.Database.csproj" />
     <ProjectReference Include="..\..\Awful.UI\Awful.UI.csproj" />

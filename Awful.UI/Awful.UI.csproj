@@ -1946,4 +1946,17 @@
 	<ItemGroup>
 	  <Folder Include="Actions\" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Resources\AwfulResources.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>AwfulResources.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Update="Resources\AwfulResources.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	    <LastGenOutput>AwfulResources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
 </Project>

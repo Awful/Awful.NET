@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 using Awful.Mobile.ViewModels;
+using Awful.UI.Resources;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -27,6 +28,7 @@ namespace Awful.Mobile.Pages
         {
             this.InitializeComponent();
             this.BindingContext = App.Container.Resolve<SettingsViewModel>();
+            this.Title = AwfulResources.SettingsTitle;
         }
     }
 }
