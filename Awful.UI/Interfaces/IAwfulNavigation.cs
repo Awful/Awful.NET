@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Awful.Core.Tools;
 using Awful.Database.Context;
-using Awful.Webview.Entities.Themes;
 
 namespace Awful.UI.Interfaces
 {
@@ -83,18 +82,6 @@ namespace Awful.UI.Interfaces
         /// And the detail page on the same screen.
         /// </summary>
         void SetMainAppPage();
-
-        /// <summary>
-        /// Setup the theme of the app on load.
-        /// </summary>
-        /// <returns>A <see cref="Task"/>.</returns>
-        Task SetupThemeAsync();
-
-        /// <summary>
-        /// Set the theme of the app.
-        /// </summary>
-        /// <param name="theme">Theme.</param>
-        void SetTheme(DeviceColorTheme theme);
 
         /// <summary>
         /// Display Prompt to User.

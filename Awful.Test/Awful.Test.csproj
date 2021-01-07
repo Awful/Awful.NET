@@ -19,4 +19,8 @@
       <ProjectReference Include="..\Awful.Webview\Awful.Webview.csproj" />
     </ItemGroup>
     
+    <ItemGroup>
+      <Folder Include="UI\" />
+    </ItemGroup>
+    
 </Project>

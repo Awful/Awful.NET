@@ -11,7 +11,6 @@ using Awful.Core.Entities;
 using Awful.Core.Managers;
 using Awful.Core.Utilities;
 using Awful.Webview;
-using Awful.Webview.Entities.Themes;
 using Sharprompt;
 using Sharprompt.Validations;
 
@@ -33,8 +32,7 @@ namespace Awful.ConsoleApp
                     case MainMenu.TemplateHandler:
                         ITemplateHandler handler = new MobileTemplateHandler();
                         var templateMenu = Prompt.Select<TemplateHandlerOption>("Render Template");
-                        var deviceColor = Prompt.Select<DeviceColorTheme>("Device Color Theme");
-                        var defaultOptions = new DefaultOptions() { DeviceColorTheme = deviceColor };
+                        bool isDarkMode = true;
                         string result = string.Empty;
                         switch (templateMenu)
                         {
@@ -44,28 +42,28 @@ namespace Awful.ConsoleApp
                                 var answer = Prompt.Confirm("Go To Last Page?");
                                 ThreadPostManager manager = new ThreadPostManager(awfulClient);
                                 var entry = await manager.GetThreadPostsAsync(threadId, page, answer).ConfigureAwait(false);
-                                result = handler.RenderThreadPostView(entry, defaultOptions);
+                                result = handler.RenderThreadPostView(entry, isDarkMode);
                                 break;
                             case TemplateHandlerOption.Ban:
                                 BanManager banManager = new BanManager(awfulClient);
                                 var banPage = Prompt.Input<int>("Enter Page", 1);
                                 var banEntry = await banManager.GetBanPageAsync(banPage).ConfigureAwait(false);
-                                result = handler.RenderBanView(banEntry, defaultOptions);
+                                result = handler.RenderBanView(banEntry, isDarkMode);
                                 break;
                             case TemplateHandlerOption.UserProfile:
                                 UserManager userManager = new UserManager(awfulClient);
                                 var profileId = Prompt.Input<int>("Enter Profile Id", 0);
                                 var profileEntry = await userManager.GetUserFromProfilePageAsync(profileId).ConfigureAwait(false);
-                                result = handler.RenderProfileView(profileEntry, defaultOptions);
+                                result = handler.RenderProfileView(profileEntry, isDarkMode);
                                 break;
                             case TemplateHandlerOption.SAclopedia:
                                 var saId = Prompt.Input<int>("Enter SAclopedia Id", 2300);
                                 SAclopediaManager saManager = new SAclopediaManager(awfulClient);
                                 var saEntry = await saManager.GetEntryAsync(saId).ConfigureAwait(false);
-                                result = handler.RenderSAclopediaView(saEntry, defaultOptions);
+                                result = handler.RenderSAclopediaView(saEntry, isDarkMode);
                                 break;
                             case TemplateHandlerOption.Acknowledgements:
-                                result = handler.RenderAcknowledgementstView(defaultOptions);
+                                result = handler.RenderAcknowledgementstView(isDarkMode);
                                 break;
                         }
 

@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Awful.Core.Entities.SAclopedia;
-using Awful.Webview.Entities.Themes;
 
 namespace Awful.Webview.Entities
 {
