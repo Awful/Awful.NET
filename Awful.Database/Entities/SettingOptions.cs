@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using Awful.Webview.Entities.Themes;
 
@@ -18,7 +17,6 @@ namespace Awful.Database.Entities
         /// <summary>
         /// Gets or sets the ID.
         /// </summary>
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         /// <summary>

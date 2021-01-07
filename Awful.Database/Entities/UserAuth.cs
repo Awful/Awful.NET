@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Text;
 
@@ -18,7 +17,6 @@ namespace Awful.Database.Entities
         /// <summary>
         /// Gets or sets the User Auth Id.
         /// </summary>
-        [Key]
         public int UserAuthId { get; set; }
 
         /// <summary>

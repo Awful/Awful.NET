@@ -1,0 +1,32 @@
+﻿<Project Sdk="Tizen.NET.Sdk/1.1.5">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>tizen80</TargetFramework>
+      <AssemblyName>Awful.Mobile.Tizen</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>None</DebugType>
+  </PropertyGroup>
+
+    <PropertyGroup>
+        <ProjectTypeGuids>{B484D2DE-331C-4CA2-B931-2B4BDAD9945F}</ProjectTypeGuids>
+    </PropertyGroup>
+
+    <ItemGroup>
+    <Folder Include="lib\" />
+    <Folder Include="res\" />
+  </ItemGroup>
+
+
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Awful.Mobile\Awful.Mobile.csproj" />
+  </ItemGroup>
+  
+
+</Project>

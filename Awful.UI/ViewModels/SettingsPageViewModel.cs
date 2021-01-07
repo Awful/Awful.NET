@@ -14,7 +14,6 @@ using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Awful.Webview.Entities.Themes;
-using Microsoft.EntityFrameworkCore;
 
 namespace Awful.UI.ViewModels
 {

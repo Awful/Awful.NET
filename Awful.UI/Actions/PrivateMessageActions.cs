@@ -19,7 +19,6 @@ using Awful.Database.Context;
 using Awful.Database.Entities;
 using Awful.Webview;
 using Awful.Webview.Entities.Themes;
-using Microsoft.EntityFrameworkCore;
 
 namespace Awful.UI.Actions
 {
