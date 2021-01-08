@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Awful.Core.Entities.JSON;
 using Awful.Core.Tools;
 using Awful.Database.Entities;
 using LiteDB;
@@ -18,6 +19,7 @@ namespace Awful.Database
     public class AwfulDatabase : IDatabase, IDisposable
     {
         private const string UserDB = nameof(UserDB);
+        private const string ForumsDB = nameof(ForumsDB);
         private const string OptionsDB = nameof(OptionsDB);
         private readonly IPlatformProperties properties;
         private readonly LiteDatabase db;
@@ -74,6 +76,20 @@ namespace Awful.Database
         {
             var collection = this.db.GetCollection<SettingOptions>(OptionsDB);
             return collection.Upsert(appSettings);
+        }
+
+        /// <inheritdoc/>
+        public List<Forum> GetForums()
+        {
+            var collection = this.db.GetCollection<Forum>(ForumsDB);
+            return collection.Include(y => y.ParentForum).Include(y => y.SubForums).FindAll().ToList();
+        }
+
+        /// <inheritdoc/>
+        public bool SaveForums(List<Forum> forums)
+        {
+            var collection = this.db.GetCollection<Forum>(ForumsDB);
+            return collection.Upsert(forums.Where(n => !n.HasThreads)) > 0;
         }
 
         /// <inheritdoc/>

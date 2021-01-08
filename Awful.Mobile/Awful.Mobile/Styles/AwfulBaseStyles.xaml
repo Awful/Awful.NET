@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:json="clr-namespace:Awful.Core.Entities.JSON;assembly=Awful.Core"
+             xmlns:fontAwesome="clr-namespace:FontAwesome;assembly=Awful.Mobile"
              x:Class="Awful.Mobile.Styles.AwfulBaseStyles">
     <Color x:Key="OLED_BackgroundColorDark">#000000</Color>
     <Color x:Key="BackgroundColorDark">#202020</Color>
@@ -21,6 +23,12 @@
     <Color x:Key="HeaderBarBackgroundColorDark">#272727</Color>
     <Color x:Key="HeaderBarTextColorLight">#FFFFFF</Color>
     <Color x:Key="HeaderBarTextColorDark">#FFFFFF</Color>
+    
+    <Color x:Key="ForumHeaderTextColorDark">#838383</Color>
+    <Color x:Key="ForumHeaderTextColorLight">#848484</Color>
+    
+    <Color x:Key="ForumBackgroundDark">#1C1C1C</Color>
+    <Color x:Key="ForumBackgroundLight">#E4E4E4</Color>
 
     <Style ApplyToDerivedTypes="True" TargetType="ContentPage">
         <Setter Property="BackgroundColor" Value="{DynamicResource DynamicBackgroundColor}" />

@@ -36,6 +36,16 @@ namespace Awful.Mobile
         public const string DynamicHeaderBackgroundColor = nameof(DynamicHeaderBackgroundColor);
 
         /// <summary>
+        /// Forum Header Text Color.
+        /// </summary>
+        public const string ForumHeaderTextColor = nameof(ForumHeaderTextColor);
+
+        /// <summary>
+        /// Forum Background Color.
+        /// </summary>
+        public const string ForumBackground = nameof(ForumBackground);
+
+        /// <summary>
         /// Set a dynamic resource.
         /// </summary>
         /// <param name="targetResourceName">Target Resource.</param>
@@ -67,6 +77,9 @@ namespace Awful.Mobile
         public static void SetDarkMode()
         {
             Application.Current.UserAppTheme = OSAppTheme.Dark;
+            SetDynamicResource(ForumBackground, "ForumHeaderTextColorLight");
+            SetDynamicResource(ForumHeaderTextColor, "ForumBackgroundDark");
+
             SetDynamicResource(DynamicBackgroundColor, "BackgroundColorDark");
             SetDynamicResource(DynamicTextColor, "TextColorLight");
 
@@ -80,7 +93,10 @@ namespace Awful.Mobile
         public static void SetLightMode()
         {
             Application.Current.UserAppTheme = OSAppTheme.Light;
-            SetDynamicResource(DynamicBackgroundColor, "BackgroundColorLight");
+            SetDynamicResource(ForumBackground, "ForumHeaderTextColorDark");
+            SetDynamicResource(ForumHeaderTextColor, "ForumBackgroundLight");
+
+            SetDynamicResource(ForumHeaderTextColor, "BackgroundColorLight");
             SetDynamicResource(DynamicTextColor, "TextColorDark");
 
             SetDynamicResource(DynamicHeaderBackgroundColor, "HeaderBarBackgroundColorLight");

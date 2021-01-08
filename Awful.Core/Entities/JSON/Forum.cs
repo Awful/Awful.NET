@@ -4,9 +4,10 @@
 
 using System;
 using System.Collections.Generic;
-
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 
 namespace Awful.Core.Entities.JSON
@@ -14,8 +15,11 @@ namespace Awful.Core.Entities.JSON
     /// <summary>
     /// Something Awful Forum Object.
     /// </summary>
-    public class Forum
+    public class Forum : INotifyPropertyChanged
     {
+        /// <inheritdoc/>
+        public event PropertyChangedEventHandler PropertyChanged;
+
         /// <summary>
         /// Gets or sets the id of a forum.
         /// </summary>
@@ -80,6 +84,11 @@ namespace Awful.Core.Entities.JSON
         {
             get
             {
+                if (this.SubForums == null)
+                {
+                    return false;
+                }
+
                 var forums = this.SubForums.Where(n => n.Id != 0);
                 return forums.Any();
             }
@@ -105,5 +114,16 @@ namespace Awful.Core.Entities.JSON
         /// </summary>
         [JsonProperty("moderators")]
         public List<Moderator> Moderators { get; set; } = new List<Moderator>();
+
+        /// <summary>
+        /// On Property Changed.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        public void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            var changed = this.PropertyChanged;
+
+            changed?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

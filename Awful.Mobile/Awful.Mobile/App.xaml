@@ -7,6 +7,6 @@
         <ResourceDictionary Source="Styles/AwfulBaseStyles.xaml"/>
         <converters:IntEnumConverter x:Key="IntEnumConverter"/>
         <converters:BookmarkStarImageConverter x:Key="BookmarkStarImageConverter"/>
-
+        <converters:SubForumsImageConverter x:Key="SubForumsImageConverter"/>
     </Application.Resources>
 </Application>

@@ -14,6 +14,7 @@ using Awful.Database.Entities;
 using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Awful.UI.ViewModels;
+using Force.DeepCloner;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -55,6 +56,35 @@ namespace Awful.Mobile.ViewModels
                 return this.favoriteForumCommand ??= new AwfulAsyncCommand<Forum>(
                     (item) =>
                     {
+                        item.IsFavorited = !item.IsFavorited;
+                        item.OnPropertyChanged(nameof(item.IsFavorited));
+                        var category = this.Forums.FirstOrDefault(n => !n.HasThreads && n.Id == 1);
+                        if (category == null)
+                        {
+                            category = new Forum() { Id = 1, Title = "Bookmarks", ShowSubforums = true };
+                            this.Forums.Insert(0, category);
+                        }
+
+                        if (!item.IsFavorited)
+                        {
+                            category.SubForums.Remove(item);
+                            this.Forums.Remove(item);
+                        }
+                        else
+                        {
+                            var bookmarkItem = item.DeepClone();
+                            bookmarkItem.SubForums = new List<Forum>();
+                            bookmarkItem.IsFavorited = item.IsFavorited;
+                            category.SubForums.Add(bookmarkItem);
+                            this.Forums.Insert(1, bookmarkItem);
+                        }
+
+                        if (!category.SubForums.Any())
+                        {
+                            this.Forums.Remove(category);
+                        }
+
+                        this.Database.SaveForums(this.Forums.ToList());
                         return Task.CompletedTask;
                     },
                     null,
@@ -72,46 +102,28 @@ namespace Awful.Mobile.ViewModels
                 return this.showForumsCommand ??= new AwfulAsyncCommand<Forum>(
                     (item) =>
                     {
-                        var index = this.Forums.IndexOf(item);
                         item.ShowSubforums = !item.ShowSubforums;
+                        item.OnPropertyChanged(nameof(item.ShowSubforums));
                         MainThread.InvokeOnMainThreadAsync(() =>
                         {
-                            if (item.ShowSubforums)
-                            {
-                                foreach (var forum in item.SubForums.Where(forum => forum.Id != 0))
-                                {
-                                    index = index + 1;
-                                    this.Forums.Insert(index, forum);
-                                }
-
-                                //this.Forums.InsertRange(index + 1, item.SubForums);
-                            }
-                            else
-                            {
-                                this.RemoveSubforumsFromList(item);
-                            }
-
-                            this.OnPropertyChanged(nameof(this.Forums));
-                            return Task.CompletedTask;
+                            this.SubForumsView(item);
                         });
+                        this.Database.SaveForums(this.Forums.ToList());
                         return Task.CompletedTask;
-                },
+                    },
                     null,
                     this.Error);
             }
         }
 
+        /// <summary>
+        /// Gets the list of forums.
+        /// </summary>
         public ObservableCollection<Forum> Forums
         {
-            get
-            {
-                return this.forums;
-            }
+            get => this.forums;
 
-            set
-            {
-                this.SetProperty(ref this.forums, value);
-            }
+            set => this.SetProperty(ref this.forums, value);
         }
 
         /// <inheritdoc/>
@@ -121,17 +133,56 @@ namespace Awful.Mobile.ViewModels
             {
                 await this.TestGetForumsList().ConfigureAwait(false);
             }
-
-            this.OnPropertyChanged(nameof(this.Forums));
         }
 
         private async Task TestGetForumsList()
         {
-            var result = await this.manager.GetIndexPageAsync().ConfigureAwait(false);
-            foreach (var forum in result.Forums)
+            var cachedForums = this.Database.GetForums();
+            if (!cachedForums.Any())
             {
-                this.Forums.Add(forum);
+                var result = await this.manager.GetIndexPageAsync().ConfigureAwait(false);
+                foreach (var forum in result.Forums)
+                {
+                    forum.ShowSubforums = true;
+                    this.Forums.Add(forum);
+                    this.SubForumsView(forum);
+                }
+
+                this.Database.SaveForums(this.Forums.ToList());
             }
+            else
+            {
+                foreach (var forum in cachedForums.Where(n => !n.HasThreads))
+                {
+                    this.Forums.Add(forum);
+                    this.SubForumsView(forum);
+                }
+            }
+
+            this.OnPropertyChanged(nameof(this.Forums));
+        }
+
+        private int SubForumsView(Forum item)
+        {
+            var index = this.Forums.IndexOf(item);
+            if (item.ShowSubforums)
+            {
+                foreach (var forum in item.SubForums.Where(forum => forum.Id != 0))
+                {
+                    index += 1;
+                    this.Forums.Insert(index, forum);
+                    if (forum.ShowSubforums)
+                    {
+                        index = this.SubForumsView(forum);
+                    }
+                }
+            }
+            else
+            {
+                this.RemoveSubforumsFromList(item);
+            }
+
+            return index;
         }
 
         private void RemoveSubforumsFromList(Forum forum)
@@ -141,10 +192,16 @@ namespace Awful.Mobile.ViewModels
                 return;
             }
 
-            foreach (var subforum in forum.SubForums)
+            foreach (var subForum in forum.SubForums)
             {
-                this.Forums.Remove(subforum);
-                this.RemoveSubforumsFromList(subforum);
+                var index = this.Forums.ToList().LastIndexOf(subForum);
+                if (index <= -1)
+                {
+                    continue;
+                }
+
+                this.Forums.RemoveAt(index);
+                this.RemoveSubforumsFromList(subForum);
             }
         }
     }

@@ -6,13 +6,20 @@
            xmlns:pages="clr-namespace:Awful.Mobile.Pages;assembly=Awful.Mobile"
            xmlns:fontAwesome="clr-namespace:FontAwesome;assembly=Awful.Mobile"
            xmlns:json="clr-namespace:Awful.Core.Entities.JSON;assembly=Awful.Core"
+           xmlns:templates="clr-namespace:Awful.Mobile.Tools.Templates;assembly=Awful.Mobile"
            Title="{x:Static resources:AwfulResources.ForumsListTitle}"
            x:Name="ForumListPage"
            x:Class="Awful.Mobile.Pages.ForumsListPage">
-    <ContentPage.Content>
-        <CollectionView ItemsSource="{Binding Forums, Mode=TwoWay}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="json:Forum">
+    <ContentPage.Resources>
+        <DataTemplate x:DataType="json:Forum" x:Key="ForumCategoryTemplate">
+            <Label
+                TextColor="{DynamicResource ForumHeaderTextColor}"
+                BackgroundColor="{DynamicResource ForumBackground}"
+                Padding="10"
+                Text="{Binding Title}" />
+        </DataTemplate>
+    
+     <DataTemplate x:Key="ForumTemplate" x:DataType="json:Forum">
                    <StackLayout Orientation="Horizontal" Padding="10">
                        <Image WidthRequest="22"
                               IsVisible="{Binding HasThreads}"
@@ -20,7 +27,7 @@
                               Grid.Column="0">
                            <Image.GestureRecognizers>
                                <TapGestureRecognizer
-                                   Command="{Binding Path=BindingContext.IsFavoriteCommand,
+                                   Command="{Binding Path=BindingContext.FavoriteForumCommand,
                                             Source={x:Reference ForumListPage}}"
                                    CommandParameter="{Binding .}"
                                />
@@ -35,15 +42,9 @@
                                VerticalOptions="CenterAndExpand"
                                Text="{Binding Title}" />
                         <Image WidthRequest="22"
+                               Source="{Binding ShowSubforums, Converter={StaticResource SubForumsImageConverter}}"
                                IsVisible="{Binding HasSubForums}"
                                Grid.Column="0">
-                            <Image.Source>
-                                <FontImageSource
-                                    FontFamily="FontAwesomeSolid"
-                                    Glyph="{x:Static fontAwesome:FontAwesomeIcons.ArrowDown}"
-                                    Size="20"
-                                />
-                            </Image.Source>
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer
                                     Command="{Binding Path=BindingContext.ShowForumsCommand,
@@ -52,9 +53,16 @@
                                 />
                             </Image.GestureRecognizers>
                         </Image>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
+                   </StackLayout>
+        </DataTemplate>
+        <templates:ForumListDataTemplateSelector x:Key="ForumListDataTemplateSelector"
+                                                 CategoryTemplate="{StaticResource ForumCategoryTemplate}"
+                                                 ForumTemplate="{StaticResource ForumTemplate}" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <CollectionView 
+            ItemTemplate="{StaticResource ForumListDataTemplateSelector}" 
+            ItemsSource="{Binding Forums, Mode=TwoWay}">
         </CollectionView>
     </ContentPage.Content>
 </pages:AwfulPage>

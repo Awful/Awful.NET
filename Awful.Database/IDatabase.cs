@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Awful.Core.Entities.JSON;
 using Awful.Database.Entities;
 
 namespace Awful.Database
@@ -32,6 +33,19 @@ namespace Awful.Database
         /// <param name="appSettings">App Settings.</param>
         /// <returns>Bool if saved.</returns>
         bool SaveAppSettings(SettingOptions appSettings);
+
+        /// <summary>
+        /// Gets forums list.
+        /// </summary>
+        /// <returns>List of Forums.</returns>
+        List<Forum> GetForums();
+
+        /// <summary>
+        /// Save Forums List.
+        /// </summary>
+        /// <param name="forums">Forums.</param>
+        /// <returns>Bool if saved.</returns>
+        bool SaveForums(List<Forum> forums);
 
         /// <summary>
         /// Gets the current logged in user.
