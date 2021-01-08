@@ -36,6 +36,7 @@ namespace Awful.Mobile
             builder.RegisterType<AwfulNavigationHandler>().As<IAwfulNavigationHandler>().SingleInstance();
             builder.RegisterType<AwfulErrorHandler>().As<IAwfulErrorHandler>().SingleInstance();
 
+            builder.RegisterType<ForumsListViewModel>();
             builder.RegisterType<SettingsViewModel>();
 
             return builder.Build();

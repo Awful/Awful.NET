@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Awful.Mobile.Pages.SettingsPage">
+             xmlns:viewModels="clr-namespace:Awful.Mobile.ViewModels;assembly=Awful.Mobile"
+             xmlns:resources="clr-namespace:Awful.UI.Resources;assembly=Awful.UI"
+             Title="{x:Static resources:AwfulResources.SettingsTitle}"
+             x:Class="Awful.Mobile.Pages.SettingsPage" 
+             x:DataType="viewModels:SettingsViewModel">
     <ContentPage.Content>
         <TableView Intent="Settings">
             <TableSection>
@@ -9,6 +13,14 @@
                 <SwitchCell Text="Use Dark Theme:" On="{Binding UseDarkMode, Mode=TwoWay}" />
                 <ViewCell>
                     <StackLayout Orientation="Horizontal">
+                        <StackLayout.Padding>
+                            <OnPlatform x:TypeArguments="Thickness">
+                               <OnPlatform.Platforms>
+                                   <On Platform="iOS" Value="20,0,20,0"></On>
+                                   <On Platform="Default" Value="0,0,0,0"></On>
+                               </OnPlatform.Platforms>
+                            </OnPlatform>
+                        </StackLayout.Padding>
                         <Label Text="Custom Theme:" VerticalOptions="Center"></Label>
                         <Picker ItemsSource="{Binding CustomThemeNames}"
                                 WidthRequest="100"

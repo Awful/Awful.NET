@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Awful.Core.Entities.JSON
@@ -73,9 +74,26 @@ namespace Awful.Core.Entities.JSON
         public virtual List<Forum> SubForums { get; set; } = new List<Forum>();
 
         /// <summary>
+        /// Gets a value indicating whether this forum has any valid sub-forums.
+        /// </summary>
+        public bool HasSubForums
+        {
+            get
+            {
+                var forums = this.SubForums.Where(n => n.Id != 0);
+                return forums.Any();
+            }
+        }
+
+        /// <summary>
         /// Gets or sets a value indicating whether the forum is a favorite.
         /// </summary>
         public bool IsFavorited { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to show the forums SubForums.
+        /// </summary>
+        public bool ShowSubforums { get; set; }
 
         /// <summary>
         /// Gets or sets the Parent Forum.

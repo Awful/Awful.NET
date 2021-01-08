@@ -19,9 +19,9 @@ namespace Awful.Mobile.ViewModels
     /// </summary>
     public class SettingsViewModel : BaseViewModel
     {
-        private SettingOptions appSettings;
-        private IPlatformProperties properties;
-        private IDatabase database;
+        private readonly SettingOptions appSettings;
+        private readonly IPlatformProperties properties;
+        private readonly IDatabase database;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsViewModel"/> class.
@@ -30,21 +30,15 @@ namespace Awful.Mobile.ViewModels
         /// <param name="database">Database.</param>
         /// <param name="error">Error Handler.</param>
         /// <param name="navigation">Navigation Handler.</param>
-        public SettingsViewModel(IPlatformProperties properties, IDatabase database, IAwfulErrorHandler error, IAwfulNavigationHandler navigation)
+        public SettingsViewModel(
+            IPlatformProperties properties,
+            IDatabase database,
+            IAwfulErrorHandler error,
+            IAwfulNavigationHandler navigation)
             : base(database, error, navigation)
         {
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
-
-            if (database == null)
-            {
-                throw new ArgumentNullException(nameof(database));
-            }
-
-            this.database = database;
-            this.properties = properties;
+            this.database = database ?? throw new ArgumentNullException(nameof(database));
+            this.properties = properties ?? throw new ArgumentNullException(nameof(properties));
             this.appSettings = database.GetAppSettings();
             this.Title = "Settings";
         }
@@ -85,10 +79,7 @@ namespace Awful.Mobile.ViewModels
         /// </summary>
         public bool UseSystemThemeSettings
         {
-            get
-            {
-                return this.appSettings.UseSystemThemeSettings;
-            }
+            get => this.appSettings.UseSystemThemeSettings;
 
             set
             {
@@ -112,10 +103,7 @@ namespace Awful.Mobile.ViewModels
         /// </summary>
         public bool UseDarkMode
         {
-            get
-            {
-                return this.appSettings.UseDarkMode;
-            }
+            get => this.appSettings.UseDarkMode;
 
             set
             {

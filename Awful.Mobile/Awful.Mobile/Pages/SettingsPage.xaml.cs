@@ -28,7 +28,6 @@ namespace Awful.Mobile.Pages
         {
             this.InitializeComponent();
             this.BindingContext = App.Container.Resolve<SettingsViewModel>();
-            this.Title = AwfulResources.SettingsTitle;
         }
     }
 }

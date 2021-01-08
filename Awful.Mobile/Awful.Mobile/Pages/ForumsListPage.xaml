@@ -1,12 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Awful.Mobile.Pages.ForumsListPage">
+<pages:AwfulPage xmlns="http://xamarin.com/schemas/2014/forms"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:viewModels="clr-namespace:Awful.Mobile.ViewModels;assembly=Awful.Mobile"
+           xmlns:resources="clr-namespace:Awful.UI.Resources;assembly=Awful.UI"
+           xmlns:pages="clr-namespace:Awful.Mobile.Pages;assembly=Awful.Mobile"
+           xmlns:fontAwesome="clr-namespace:FontAwesome;assembly=Awful.Mobile"
+           xmlns:json="clr-namespace:Awful.Core.Entities.JSON;assembly=Awful.Core"
+           Title="{x:Static resources:AwfulResources.ForumsListTitle}"
+           x:Name="ForumListPage"
+           x:Class="Awful.Mobile.Pages.ForumsListPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <CollectionView ItemsSource="{Binding Forums, Mode=TwoWay}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="json:Forum">
+                   <StackLayout Orientation="Horizontal" Padding="10">
+                       <Image WidthRequest="22"
+                              IsVisible="{Binding HasThreads}"
+                              Source="{Binding IsFavorited, Converter={StaticResource BookmarkStarImageConverter}}"
+                              Grid.Column="0">
+                           <Image.GestureRecognizers>
+                               <TapGestureRecognizer
+                                   Command="{Binding Path=BindingContext.IsFavoriteCommand,
+                                            Source={x:Reference ForumListPage}}"
+                                   CommandParameter="{Binding .}"
+                               />
+                           </Image.GestureRecognizers>
+                       </Image>
+                        <Label Padding="15,0,0,0"
+                               HorizontalOptions="FillAndExpand"
+                               Grid.Column="1"
+                               FontSize="{OnPlatform Android=15, iOS=19, Default=19}"
+                               LineBreakMode="TailTruncation"
+                               MaxLines="1"
+                               VerticalOptions="CenterAndExpand"
+                               Text="{Binding Title}" />
+                        <Image WidthRequest="22"
+                               IsVisible="{Binding HasSubForums}"
+                               Grid.Column="0">
+                            <Image.Source>
+                                <FontImageSource
+                                    FontFamily="FontAwesomeSolid"
+                                    Glyph="{x:Static fontAwesome:FontAwesomeIcons.ArrowDown}"
+                                    Size="20"
+                                />
+                            </Image.Source>
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Path=BindingContext.ShowForumsCommand,
+                                            Source={x:Reference ForumListPage}}"
+                                    CommandParameter="{Binding .}"
+                                />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </ContentPage.Content>
-</ContentPage>
+</pages:AwfulPage>

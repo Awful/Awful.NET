@@ -17,7 +17,8 @@ namespace Awful.Mobile.Tools
     {
         public Task DisplayAlertAsync(string title, string message)
         {
-            throw new NotImplementedException();
+            MainThread.BeginInvokeOnMainThread(async () => await App.Current.MainPage.DisplayAlert(title, message, "Close").ConfigureAwait(false));
+            return Task.CompletedTask;
         }
 
         public Task<string> DisplayPromptAsync(string title, string message, string placeholder = "Text", string initialValue = "")
