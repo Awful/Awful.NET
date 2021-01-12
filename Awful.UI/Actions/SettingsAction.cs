@@ -40,7 +40,7 @@ namespace Awful.UI.Actions
         /// <returns>Default Settings.</returns>
         public async Task<SettingOptions> LoadSettingOptionsAsync()
         {
-            return await this.context.GetDefaultSettingsAsync().ConfigureAwait(false);
+            return this.context.GetAppSettings();
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Awful.UI.Actions
         /// <returns>Setting Options.</returns>
         public async Task<SettingOptions> SaveSettingOptionsAsync(SettingOptions settingOptions)
         {
-            await this.context.AddOrUpdateSettingsAsync(settingOptions).ConfigureAwait(false);
+            this.context.SaveAppSettings(settingOptions);
             return settingOptions;
         }
     }

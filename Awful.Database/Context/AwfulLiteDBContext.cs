@@ -136,28 +136,25 @@ namespace Awful.Database.Context
         }
 
         /// <inheritdoc/>
-        public Task<int> AddOrUpdateSettingsAsync(SettingOptions settings)
+        public SettingOptions GetAppSettings()
         {
-            if (settings == null)
+            var collection = this.db.GetCollection<SettingOptions>(OptionsDB);
+            var appSettings = collection.FindAll().ToList();
+            var appSetting = appSettings.FirstOrDefault();
+            if (appSetting != null)
             {
-                throw new ArgumentNullException(nameof(settings));
+                return appSetting;
             }
 
-            var tcs = new TaskCompletionSource<int>();
-            Task.Run(() =>
-            {
-                var collection = this.db.GetCollection<SettingOptions>(OptionsDB);
-                var result = collection.Upsert(settings);
-                if (result)
-                {
-                    tcs.SetResult(1);
-                }
-                else
-                {
-                    tcs.SetResult(0);
-                }
-            });
-            return tcs.Task;
+            appSetting = new SettingOptions() { UseDarkMode = this.properties.IsDarkTheme };
+            return appSetting;
+        }
+
+        /// <inheritdoc/>
+        public bool SaveAppSettings(SettingOptions appSettings)
+        {
+            var collection = this.db.GetCollection<SettingOptions>(OptionsDB);
+            return collection.Upsert(appSettings);
         }
 
         /// <inheritdoc/>
@@ -265,29 +262,6 @@ namespace Awful.Database.Context
             {
                 var collection = this.db.GetCollection<SAclopediaEntryItem>(SAclopediaDB);
                 tcs.SetResult(collection.FindAll().ToList());
-            }).ConfigureAwait(false);
-            return tcs.Task;
-        }
-
-        /// <inheritdoc/>
-        public Task<SettingOptions> GetDefaultSettingsAsync()
-        {
-            var tcs = new TaskCompletionSource<SettingOptions>();
-            Task.Run(() =>
-            {
-                var collection = this.db.GetCollection<SettingOptions>(OptionsDB);
-                var settings = collection.FindAll().FirstOrDefault();
-                if (settings == null)
-                {
-                    var options = new SettingOptions
-                    {
-                    };
-                    tcs.SetResult(options);
-                }
-                else
-                {
-                    tcs.SetResult(settings);
-                }
             }).ConfigureAwait(false);
             return tcs.Task;
         }

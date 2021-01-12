@@ -42,17 +42,17 @@ namespace Awful.Database.Context
         public Task<List<SAclopediaEntryItem>> GetAllSAclopediaEntryAsync();
 
         /// <summary>
-        /// Add or update settings.
+        /// Gets app settings.
         /// </summary>
-        /// <param name="settings">The settings.</param>
-        /// <returns>Number of rows changed.</returns>
-        public Task<int> AddOrUpdateSettingsAsync(SettingOptions settings);
+        /// <returns>App Settings.</returns>
+        SettingOptions GetAppSettings();
 
         /// <summary>
-        /// Get Default Setting Options.
+        /// Save App Settings.
         /// </summary>
-        /// <returns>SettingOptions.</returns>
-        public Task<SettingOptions> GetDefaultSettingsAsync();
+        /// <param name="appSettings">App Settings.</param>
+        /// <returns>Bool if saved.</returns>
+        bool SaveAppSettings(SettingOptions appSettings);
 
         /// <summary>
         /// Test if users exist.

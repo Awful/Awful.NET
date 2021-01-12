@@ -67,7 +67,7 @@ namespace Awful.UI.ViewModels
             {
                 this.settings.CustomTheme = value;
                 this.OnPropertyChanged(nameof(this.CustomTheme));
-                this.Context.AddOrUpdateSettingsAsync(this.settings);
+                this.Context.SaveAppSettings(this.settings);
                 this.SetTheme();
             }
         }
@@ -91,7 +91,7 @@ namespace Awful.UI.ViewModels
 
                 this.OnPropertyChanged(nameof(this.UseSystemThemeSettings));
                 this.OnPropertyChanged(nameof(this.CanOverrideThemeSettings));
-                this.Context.AddOrUpdateSettingsAsync(this.settings);
+                this.Context.SaveAppSettings(this.settings);
                 this.SetTheme();
             }
         }
@@ -108,7 +108,7 @@ namespace Awful.UI.ViewModels
             {
                 this.settings.UseDarkMode = value;
                 this.OnPropertyChanged(nameof(this.UseDarkMode));
-                this.Context.AddOrUpdateSettingsAsync(this.settings);
+                this.Context.SaveAppSettings(this.settings);
                 this.SetTheme();
             }
         }
@@ -157,7 +157,7 @@ namespace Awful.UI.ViewModels
         public override async Task OnLoad()
         {
             await base.OnLoad().ConfigureAwait(false);
-            this.settings = await this.Context.GetDefaultSettingsAsync().ConfigureAwait(false);
+            this.settings = this.Context.GetAppSettings();
         }
 
         public virtual void SetTheme()

@@ -17,6 +17,7 @@ namespace Awful.Mobile.ViewModels
     public class MobileSettingsPageViewModel : SettingsPageViewModel
     {
         IPlatformProperties properties;
+        IAwfulNavigation navigation;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MobileSettingsPageViewModel"/> class.
@@ -28,26 +29,13 @@ namespace Awful.Mobile.ViewModels
         public MobileSettingsPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, IPlatformProperties platformProperties, IAwfulContext context) : base(navigation, error, platformProperties, context)
         {
             this.properties = platformProperties;
+            this.navigation = navigation;
         }
 
         /// <inheritdoc/>
         public override void SetTheme()
         {
-            var darkMode = this.UseSystemThemeSettings ? this.properties.IsDarkTheme : this.UseDarkMode;
-            if (!this.UseSystemThemeSettings && this.settings.CustomTheme != AppCustomTheme.None)
-            {
-                ResourcesHelper.SetCustomTheme(this.settings.CustomTheme);
-                return;
-            }
-
-            if (darkMode)
-            {
-                ResourcesHelper.SetDarkMode();
-            }
-            else
-            {
-                ResourcesHelper.SetLightMode();
-            }
+            this.navigation.SetTheme(this.settings);
         }
     }
 }

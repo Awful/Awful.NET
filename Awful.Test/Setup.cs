@@ -24,9 +24,9 @@ namespace Awful.Test
         /// </summary>
         /// <param name="properties">Test Properties.</param>
         /// <returns>AwfulContext.</returns>
-        public static AwfulSqliteContext SetupContext(TestPlatformProperties properties)
+        public static AwfulLiteDBContext SetupContext(TestPlatformProperties properties)
         {
-            return new AwfulSqliteContext(properties);
+            return new AwfulLiteDBContext(properties);
         }
 
         /// <summary>

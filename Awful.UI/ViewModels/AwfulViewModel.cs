@@ -179,8 +179,8 @@ namespace Awful.UI.ViewModels
         /// <returns><see cref="DefaultOptions"/>.</returns>
         public async Task<DefaultOptions> GenerateDefaultOptionsAsync()
         {
-            var defaults = await this.Context.GetDefaultSettingsAsync().ConfigureAwait(false);
-            var defaultOptions = new DefaultOptions() { };
+            var defaults = this.Context.GetAppSettings();
+            var defaultOptions = new DefaultOptions() { IsDarkMode = defaults.UseDarkMode };
 
             return defaultOptions;
         }
