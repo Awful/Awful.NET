@@ -8,29 +8,25 @@
     xmlns:vm="clr-namespace:Awful.Mobile.ViewModels;assembly=Awful.Mobile"
     xmlns:local="clr-namespace:Awful.Mobile.Tools.Markup;assembly=Awful.Mobile"
     x:Class="Awful.Mobile.Styles.AwfulThemeResources">
-    <Color x:Key="BackgroundColorDark">#111111</Color>
+    <Color x:Key="OLED_BackgroundColorDark">#000000</Color>
+    <Color x:Key="BackgroundColorDark">#202020</Color>
     <Color x:Key="BackgroundColorLight">#ffffff</Color>
-    <Color x:Key="TextColorDark">#ffffff</Color>
-    <Color x:Key="TextColorLight">#000000</Color>
 
+    <Color x:Key="TextColorDark">#000000</Color>
+    <Color x:Key="TextColorLight">#ffffff</Color>
+
+    <Color x:Key="ButtonBackgroundColor">#1483B1</Color>
+    <Color x:Key="ButtonTextColor">#FFFFFF</Color>
+
+    <Color x:Key="TabBarUnselectedColor">#999999</Color>
     <Color x:Key="TabBarSelectedColor">#1483B1</Color>
 
-    <Color x:Key="ShellHeaderBarBackgroundColorLight">#F6F6F6</Color>
+    <Color x:Key="SwitchOnColor">#1483B1</Color>
+
     <Color x:Key="HeaderBarBackgroundColorLight">#1483B1</Color>
     <Color x:Key="HeaderBarBackgroundColorDark">#272727</Color>
     <Color x:Key="HeaderBarTextColorLight">#FFFFFF</Color>
     <Color x:Key="HeaderBarTextColorDark">#FFFFFF</Color>
-
-    <Color x:Key="ButtonBackgroundColorLight">#1483B1</Color>
-    <Color x:Key="ButtonBackgroundColorDark">#1483B1</Color>
-    <Color x:Key="ButtonBackgroundDisabledColorLight">#331483B1</Color>
-    <Color x:Key="ButtonBackgroundDisabledColorDark">#331483B1</Color>
-    <Color x:Key="ButtonTextColorLight">#FFFFFF</Color>
-    <Color x:Key="ButtonTextColorDark">#FFFFFF</Color>
-
-
-    <Color x:Key="AccentColorLight">#96d1ff</Color>
-    <Color x:Key="AccentColorDark">#111111</Color>
 
     <Color x:Key="ForumHeaderTextColorDark">#838383</Color>
     <Color x:Key="ForumHeaderTextColorLight">#848484</Color>
@@ -38,112 +34,48 @@
     <Color x:Key="ForumBackgroundDark">#1C1C1C</Color>
     <Color x:Key="ForumBackgroundLight">#E4E4E4</Color>
 
-    <Color x:Key="PrimaryBackgroundDark">#1483B1</Color>
-    <Color x:Key="PrimaryBackgroundLight">#1483B1</Color>
-    <Color x:Key="PrimaryTextDark">#ffffff</Color>
-    <Color x:Key="PrimaryTextLight">#ffffff</Color>
+    <Style ApplyToDerivedTypes="True" TargetType="ContentPage">
+        <Setter Property="BackgroundColor" Value="{DynamicResource DynamicBackgroundColor}" />
+    </Style>
 
     <Style ApplyToDerivedTypes="True" TargetType="Label">
-        <Setter Property="TextColor" 
-                        Value="{AppThemeBinding Dark={StaticResource TextColorDark}, 
-                                    Light={StaticResource TextColorLight}}" />
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextColor}" />
+    </Style>
+
+    <Style ApplyToDerivedTypes="True" TargetType="Picker">
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextColor}" />
+    </Style>
+
+    <Style ApplyToDerivedTypes="True" TargetType="Switch">
+        <Setter Property="OnColor" Value="{DynamicResource SwitchOnColor}" />
     </Style>
 
     <Style TargetType="NavigationPage" ApplyToDerivedTypes="True">
         <Setter Property="NavigationPage.BarBackgroundColor"
-                        Value="{AppThemeBinding Dark={StaticResource HeaderBarBackgroundColorLight}, 
-                                    Light={StaticResource HeaderBarBackgroundColorLight}}" />
-        <Setter Property="NavigationPage.BarTextColor" Value="White"/>
+                        Value="{DynamicResource DynamicHeaderBackgroundColor}" />
+        <Setter Property="NavigationPage.BarTextColor" Value="{DynamicResource DynamicHeaderBarTextColor}"/>
+    </Style>
+
+    <Style TargetType="Editor">
+        <Setter Property="TextColor"
+                        Value="{DynamicResource DynamicTextColor}" />
+        <Setter Property="BackgroundColor"
+                        Value="{DynamicResource DynamicBackgroundColor}" />
     </Style>
 
     <Style TargetType="TabbedPage" ApplyToDerivedTypes="True">
+        <Setter Property="BackgroundColor" Value="{DynamicResource DynamicBackgroundColor}" />
         <Setter Property="BarBackgroundColor"
-                 Value="{AppThemeBinding Dark={StaticResource HeaderBarBackgroundColorDark}, 
-                 Light={StaticResource ShellHeaderBarBackgroundColorLight}}"/>
+                 Value="{DynamicResource DynamicBackgroundColor}"/>
         <Setter Property="BarTextColor"
-                 Value="{AppThemeBinding Dark={StaticResource TextColorDark}, 
-                 Light={StaticResource TextColorLight}}"/>
-        <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Dark={OnPlatform Android={StaticResource BackgroundColorLight}, iOS=Default, Default=Default},
-                    Light={OnPlatform Android={StaticResource BackgroundColorDark}, iOS=Default, Default=Default}}" />
-        <Setter Property="SelectedTabColor" Value="{StaticResource TabBarSelectedColor}" />
-     </Style>
-
-    <Style x:Key="PageStyle" TargetType="ContentPage" ApplyToDerivedTypes="True">
-        <Setter Property="BackgroundColor"
-                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
-                                    Light={StaticResource BackgroundColorLight}}" />
+                 Value="{DynamicResource DynamicTextColor}"/>
+        <Setter Property="UnselectedTabColor" Value="{DynamicResource TabBarUnselectedColor}" />
+        <Setter Property="SelectedTabColor" Value="{DynamicResource DynamicTextColor}" />
     </Style>
 
-    <Style ApplyToDerivedTypes="True" TargetType="ListView">
-        <Setter Property="BackgroundColor"
-                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
-                                    Light={StaticResource BackgroundColorLight}}" />
-    </Style>
-
-    <Style TargetType="CollectionView">
-        <Setter Property="BackgroundColor"
-                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
-                                    Light={StaticResource BackgroundColorLight}}" />
-    </Style>
-    <Style TargetType="Picker">
-        <Setter Property="BackgroundColor"
-                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
-                                    Light={StaticResource BackgroundColorLight}}" />
-        <Setter Property="TitleColor"
-                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
-                                    Light={StaticResource BackgroundColorDark}}" />
-        <Setter Property="TextColor"
-                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
-                                    Light={StaticResource BackgroundColorDark}}" />
-    </Style>
-    <Style TargetType="Entry">
-        <Setter Property="TextColor"
-                        Value="{AppThemeBinding Dark={OnPlatform Android={StaticResource BackgroundColorLight}, iOS=Default, Default=Default},
-                    Light={OnPlatform Android={StaticResource BackgroundColorDark}, iOS=Default, Default=Default}}" />
-        <Setter Property="PlaceholderColor"
-                        Value="{AppThemeBinding Dark={OnPlatform Android={StaticResource BackgroundColorLight}, iOS=Default, Default=Default},
-                    Light={OnPlatform Android={StaticResource BackgroundColorDark}, iOS=Default, Default=Default}}" />
-    </Style>
-     <Style TargetType="Editor">
-        <Setter Property="TextColor"
-                        Value="{AppThemeBinding Dark={StaticResource TextColorDark}, 
-                                    Light={StaticResource TextColorLight}}" />
-        <Setter Property="BackgroundColor"
-                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
-                                    Light={StaticResource BackgroundColorLight}}" />
-    </Style>
-    <Style TargetType="Grid">
-        <Setter Property="BackgroundColor"
-                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
-                                    Light={StaticResource BackgroundColorLight}}" />
-    </Style>
-    <Style TargetType="StackLayout">
-        <Setter Property="BackgroundColor"
-                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
-                                    Light={StaticResource BackgroundColorLight}}" />
-    </Style>
-    <Style TargetType="ActivityIndicator">
-        <Setter Property="Color"
-                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
-                                    Light={StaticResource BackgroundColorDark}}"
-                        />
-        <Setter Property="Scale" Value="{OnPlatform Android=1, iOS=2, Default=0}"
-                        />
-        <Setter Property="Margin" Value="{OnPlatform Android=0, iOS=15, Default=0}"
-                        />
-    </Style>
-    <Style TargetType="RefreshView">
-        <Setter Property="BackgroundColor"
-                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
-                                    Light={StaticResource BackgroundColorLight}}" />
-        <Setter Property="RefreshColor"
-                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
-                                    Light={StaticResource BackgroundColorDark}}" />
-    </Style>
-    <Style TargetType="TableView">
-        <Setter Property="BackgroundColor"
-                        Value="{AppThemeBinding Dark={StaticResource BackgroundColorDark}, 
-                                    Light={StaticResource BackgroundColorLight}}" />
+    <Style ApplyToDerivedTypes="True" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{DynamicResource ButtonBackgroundColor}" />
+        <Setter Property="TextColor" Value="{DynamicResource ButtonTextColor}" />
     </Style>
 
     <DataTemplate x:Key="PrivateMessageTemplate">

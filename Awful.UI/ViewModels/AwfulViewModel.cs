@@ -180,7 +180,7 @@ namespace Awful.UI.ViewModels
         public async Task<DefaultOptions> GenerateDefaultOptionsAsync()
         {
             var defaults = await this.Context.GetDefaultSettingsAsync().ConfigureAwait(false);
-            var defaultOptions = new DefaultOptions() { DeviceColorTheme = defaults.DeviceColorTheme };
+            var defaultOptions = new DefaultOptions() { };
 
             return defaultOptions;
         }

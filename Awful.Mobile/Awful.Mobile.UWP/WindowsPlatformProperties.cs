@@ -19,6 +19,22 @@ namespace Awful.Mobile.UWP
     /// </summary>
     public class WindowsPlatformProperties : IPlatformProperties
     {
+        /// <inheritdoc/>
+        public bool IsDarkTheme
+        {
+            get
+            {
+                var uiSettings = new Windows.UI.ViewManagement.UISettings();
+                var color = uiSettings.GetColorValue(Windows.UI.ViewManagement.UIColorType.Background).ToString(System.Globalization.CultureInfo.InvariantCulture);
+                return color switch
+                {
+                    "#FF000000" => true,
+                    "#FFFFFFFF" => false,
+                    _ => false,
+                };
+            }
+        }
+
         /// <summary>
         /// Gets the cookie path.
         /// </summary>
@@ -28,21 +44,5 @@ namespace Awful.Mobile.UWP
         /// Gets the Database Path.
         /// </summary>
         public string DatabasePath => System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "awful.db");
-
-        /// <inheritdoc/>
-        public DeviceColorTheme GetTheme()
-        {
-            var uiSettings = new Windows.UI.ViewManagement.UISettings();
-            var color = uiSettings.GetColorValue(Windows.UI.ViewManagement.UIColorType.Background).ToString(CultureInfo.InvariantCulture);
-            switch (color)
-            {
-                case "#FF000000":
-                    return DeviceColorTheme.Dark;
-                case "#FFFFFFFF":
-                    return DeviceColorTheme.Light;
-                default:
-                    return DeviceColorTheme.Light;
-            }
-        }
     }
 }

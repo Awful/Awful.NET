@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Awful.Core.Tools;
 using Awful.Database.Context;
+using Awful.Database.Entities;
 using Awful.Webview.Entities.Themes;
 
 namespace Awful.UI.Interfaces
@@ -93,8 +94,8 @@ namespace Awful.UI.Interfaces
         /// <summary>
         /// Set the theme of the app.
         /// </summary>
-        /// <param name="theme">Theme.</param>
-        void SetTheme(DeviceColorTheme theme);
+        /// <param name="options">Options.</param>
+        void SetTheme(SettingOptions options);
 
         /// <summary>
         /// Display Prompt to User.

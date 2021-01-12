@@ -24,26 +24,29 @@ namespace Awful.Mobile.Droid
     public class AndroidPlatformProperties : Core.Tools.IPlatformProperties
     {
         /// <inheritdoc/>
-        public DeviceColorTheme GetTheme()
+        public bool IsDarkTheme
         {
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.Froyo)
+            get
             {
-                var uiModeFlags = Xamarin.Essentials.Platform.CurrentActivity.Resources.Configuration.UiMode & UiMode.NightMask;
-
-                switch (uiModeFlags)
+                if (Build.VERSION.SdkInt >= BuildVersionCodes.Froyo)
                 {
-                    case UiMode.NightYes:
-                        return DeviceColorTheme.Dark;
+                    var uiModeFlags = Xamarin.Essentials.Platform.CurrentActivity.Resources.Configuration.UiMode & UiMode.NightMask;
 
-                    case UiMode.NightNo:
-                        return DeviceColorTheme.Light;
-                    default:
-                        return DeviceColorTheme.Light;
+                    switch (uiModeFlags)
+                    {
+                        case UiMode.NightYes:
+                            return true;
+
+                        case UiMode.NightNo:
+                            return false;
+                        default:
+                            return false;
+                    }
                 }
-            }
-            else
-            {
-                return DeviceColorTheme.Light;
+                else
+                {
+                    return false;
+                }
             }
         }
 

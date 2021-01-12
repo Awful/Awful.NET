@@ -113,7 +113,7 @@ namespace Awful.Webview
             var template = Handlebars.Compile(this.profileHtml);
             var entity = new ProfileEntity() { Entry = entry };
             entity.CSS = new List<string>() { this.systemUiCss, this.profileCss };
-            entity.IsDark = options.DeviceColorTheme == DeviceColorTheme.Dark;
+            entity.IsDark = options.IsDarkMode;
             return template(entity);
         }
 
@@ -190,7 +190,7 @@ namespace Awful.Webview
                     entity.CSS.Add(this.postByobCss);
                     break;
                 default:
-                    if (options.DeviceColorTheme == DeviceColorTheme.Dark)
+                    if (options.IsDarkMode)
                     {
                         entity.CSS.Add(this.postDarkCss);
                     }
@@ -203,7 +203,7 @@ namespace Awful.Webview
             }
 
             entity.JS = new List<string>() { this.forumJs, this.forumRenderJs };
-            entity.DeviceColorTheme = options.DeviceColorTheme == DeviceColorTheme.Dark ? "theme-dark" : "theme";
+            entity.DeviceColorTheme = options.IsDarkMode ? "theme-dark" : "theme";
         }
     }
 }

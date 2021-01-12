@@ -15,10 +15,9 @@ namespace Awful.Core.Tools
     public interface IPlatformProperties
     {
         /// <summary>
-        /// Gets the device theme.
+        /// Gets a value indicating whether the current platform is running a system level dark theme.
         /// </summary>
-        /// <returns><see cref="DeviceColorTheme"/>.</returns>
-        DeviceColorTheme GetTheme();
+        bool IsDarkTheme { get; }
 
         /// <summary>
         /// Gets the path to where cookies are stored.

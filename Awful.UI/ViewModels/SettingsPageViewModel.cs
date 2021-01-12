@@ -24,8 +24,7 @@ namespace Awful.UI.ViewModels
     public class SettingsPageViewModel : AwfulViewModel
     {
         private SettingsAction settingActions;
-        private SettingOptions settings;
-        private DeviceColorTheme deviceColorTheme;
+        protected SettingOptions settings;
         private IPlatformProperties platformProperties;
 
         /// <summary>
@@ -46,40 +45,78 @@ namespace Awful.UI.ViewModels
         /// <summary>
         /// Gets the theme names.
         /// </summary>
-        public List<string> ThemeNames
+        public List<string> CustomThemeNames
         {
             get
             {
-                return Enum.GetNames(typeof(DeviceColorTheme)).Select(b => b).ToList();
+                return Enum.GetNames(typeof(AppCustomTheme)).Select(b => b).ToList();
             }
         }
 
         /// <summary>
         /// Gets or sets the device color theme.
         /// </summary>
-        public DeviceColorTheme DeviceColorTheme
+        public AppCustomTheme CustomTheme
         {
             get
             {
-                return this.deviceColorTheme;
+                return this.settings.CustomTheme;
             }
 
             set
             {
-                this.deviceColorTheme = value;
-                if (value != this.settings.DeviceColorTheme)
-                {
-                    this.settings.DeviceColorTheme = value;
-                    Task.Run(async () =>
-                    {
-                        this.Navigation.SetTheme(value);
-                        await this.SaveSettingsAsync().ConfigureAwait(false);
-                    });
-                }
-
-                this.OnPropertyChanged(nameof(this.DeviceColorTheme));
+                this.settings.CustomTheme = value;
+                this.OnPropertyChanged(nameof(this.CustomTheme));
+                this.Context.AddOrUpdateSettingsAsync(this.settings);
+                this.SetTheme();
             }
         }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to use the system settings for themes,
+        /// or let the user override them.
+        /// </summary>
+        public bool UseSystemThemeSettings
+        {
+            get => this.settings.UseSystemThemeSettings;
+
+            set
+            {
+                this.settings.UseSystemThemeSettings = value;
+                if (value)
+                {
+                    this.UseDarkMode = this.platformProperties.IsDarkTheme;
+                    this.CustomTheme = AppCustomTheme.None;
+                }
+
+                this.OnPropertyChanged(nameof(this.UseSystemThemeSettings));
+                this.OnPropertyChanged(nameof(this.CanOverrideThemeSettings));
+                this.Context.AddOrUpdateSettingsAsync(this.settings);
+                this.SetTheme();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to use the system settings for themes,
+        /// or let the user override them.
+        /// </summary>
+        public bool UseDarkMode
+        {
+            get => this.settings.UseDarkMode;
+
+            set
+            {
+                this.settings.UseDarkMode = value;
+                this.OnPropertyChanged(nameof(this.UseDarkMode));
+                this.Context.AddOrUpdateSettingsAsync(this.settings);
+                this.SetTheme();
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the user can override theme settings.
+        /// </summary>
+        public bool CanOverrideThemeSettings => !this.UseSystemThemeSettings;
 
         /// <summary>
         /// Gets or sets a value indicating whether to enable background tasks.
@@ -121,7 +158,10 @@ namespace Awful.UI.ViewModels
         {
             await base.OnLoad().ConfigureAwait(false);
             this.settings = await this.Context.GetDefaultSettingsAsync().ConfigureAwait(false);
-            this.DeviceColorTheme = this.settings.DeviceColorTheme;
+        }
+
+        public virtual void SetTheme()
+        {
         }
 
         private async Task SaveSettingsAsync()

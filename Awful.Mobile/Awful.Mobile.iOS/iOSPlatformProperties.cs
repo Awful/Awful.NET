@@ -19,6 +19,43 @@ namespace Awful.Mobile.iOS
     /// </summary>
     public class iOSPlatformProperties : IPlatformProperties
     {
+        /// <inheritdoc/>
+        public bool IsDarkTheme
+        {
+            get
+            {
+                var result = Xamarin.Essentials.MainThread.InvokeOnMainThreadAsync<bool>(() =>
+                {
+                    if (UIDevice.CurrentDevice.CheckSystemVersion(12, 0))
+                    {
+                        var currentUIViewController = GetVisibleViewController();
+
+                        if (currentUIViewController == null)
+                        {
+                            return false;
+                        }
+
+                        var userInterfaceStyle = currentUIViewController.TraitCollection.UserInterfaceStyle;
+
+                        switch (userInterfaceStyle)
+                        {
+                            case UIUserInterfaceStyle.Light:
+                                return false;
+                            case UIUserInterfaceStyle.Dark:
+                                return true;
+                            default:
+                                throw new NotSupportedException($"UIUserInterfaceStyle {userInterfaceStyle} not supported");
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                });
+                return result.Result;
+            }
+        }
+
         /// <summary>
         /// Gets the cookie path.
         /// </summary>
@@ -28,35 +65,6 @@ namespace Awful.Mobile.iOS
         /// Gets the Database Path.
         /// </summary>
         public string DatabasePath => System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "awful.db");
-
-        /// <inheritdoc/>
-        public DeviceColorTheme GetTheme()
-        {
-            var result = Device.InvokeOnMainThreadAsync<DeviceColorTheme>(() =>
-            {
-                if (UIDevice.CurrentDevice.CheckSystemVersion(12, 0))
-                {
-                    var currentUIViewController = GetVisibleViewController();
-
-                    var userInterfaceStyle = currentUIViewController.TraitCollection.UserInterfaceStyle;
-
-                    switch (userInterfaceStyle)
-                    {
-                        case UIUserInterfaceStyle.Light:
-                            return DeviceColorTheme.Light;
-                        case UIUserInterfaceStyle.Dark:
-                            return DeviceColorTheme.Dark;
-                        default:
-                            throw new NotSupportedException($"UIUserInterfaceStyle {userInterfaceStyle} not supported");
-                    }
-                }
-                else
-                {
-                    return DeviceColorTheme.Light;
-                }
-            });
-            return result.Result;
-        }
 
         private static UIViewController GetVisibleViewController()
         {

@@ -148,7 +148,7 @@ namespace Awful.Database.Context
             if (settingOptions == null)
             {
                 var options = new SettingOptions();
-                options.DeviceColorTheme = this.PlatformProperties.GetTheme();
+                //options.DeviceColorTheme = this.PlatformProperties.GetTheme();
                 return options;
             }
 

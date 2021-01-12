@@ -5,6 +5,7 @@
 using System;
 using Awful.Core.Tools;
 using Awful.Database.Context;
+using Awful.Database.Entities;
 using Awful.UI.Interfaces;
 using Awful.UI.ViewModels;
 
@@ -15,6 +16,8 @@ namespace Awful.Mobile.ViewModels
     /// </summary>
     public class MobileSettingsPageViewModel : SettingsPageViewModel
     {
+        IPlatformProperties properties;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MobileSettingsPageViewModel"/> class.
         /// </summary>
@@ -24,6 +27,27 @@ namespace Awful.Mobile.ViewModels
         /// <param name="context">Awful Context.</param>
         public MobileSettingsPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, IPlatformProperties platformProperties, IAwfulContext context) : base(navigation, error, platformProperties, context)
         {
+            this.properties = platformProperties;
+        }
+
+        /// <inheritdoc/>
+        public override void SetTheme()
+        {
+            var darkMode = this.UseSystemThemeSettings ? this.properties.IsDarkTheme : this.UseDarkMode;
+            if (!this.UseSystemThemeSettings && this.settings.CustomTheme != AppCustomTheme.None)
+            {
+                ResourcesHelper.SetCustomTheme(this.settings.CustomTheme);
+                return;
+            }
+
+            if (darkMode)
+            {
+                ResourcesHelper.SetDarkMode();
+            }
+            else
+            {
+                ResourcesHelper.SetLightMode();
+            }
         }
     }
 }

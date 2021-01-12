@@ -34,7 +34,24 @@ namespace Awful.Mobile.UWP
             this.InitializeComponent();
             var builder = new ContainerBuilder();
             builder.RegisterType<WindowsPlatformProperties>().As<IPlatformProperties>();
-            this.LoadApplication(new Awful.Mobile.App(builder));
+            var app = new Awful.Mobile.App(builder);
+            app.RequestedThemeChanged += this.App_RequestedThemeChanged;
+            this.LoadApplication(app);
+        }
+
+        private void App_RequestedThemeChanged(object sender, Xamarin.Forms.AppThemeChangedEventArgs e)
+        {
+            this.SetTheme(e.RequestedTheme);
+        }
+
+        private void SetTheme(Xamarin.Forms.OSAppTheme theme)
+        {
+            switch (theme)
+            {
+                case Xamarin.Forms.OSAppTheme.Dark: this.RequestedTheme = ElementTheme.Dark; break;
+                case Xamarin.Forms.OSAppTheme.Light: this.RequestedTheme = ElementTheme.Light; break;
+                case Xamarin.Forms.OSAppTheme.Unspecified: this.RequestedTheme = ElementTheme.Default; break;
+            }
         }
     }
 }

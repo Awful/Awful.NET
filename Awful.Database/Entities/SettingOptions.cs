@@ -27,9 +27,21 @@ namespace Awful.Database.Entities
         public DateTime LastBookmarkRefreshTime { get; set; }
 
         /// <summary>
-        /// Gets or sets the device color theme.
+        /// Gets or sets a value indicating whether to use the system theme settings.
         /// </summary>
-        public DeviceColorTheme DeviceColorTheme { get; set; }
+        public bool UseSystemThemeSettings { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to use Dark Mode.
+        /// Ignored if <see cref="UseSystemThemeSettings"/> is set to true.
+        /// </summary>
+        public bool UseDarkMode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the apps custom theme.
+        /// Defaults to None.
+        /// </summary>
+        public AppCustomTheme CustomTheme { get; set; } = AppCustomTheme.None;
 
         /// <summary>
         /// Gets or sets a value indicating whether to enable background tasks.
@@ -50,5 +62,21 @@ namespace Awful.Database.Entities
         /// Gets or sets how long to refresh the bookmarks in the background.
         /// </summary>
         public int BookmarkInBackgroundRefreshTimeInMinutes { get; set; }
+    }
+
+    /// <summary>
+    /// App Custom Themes.
+    /// </summary>
+    public enum AppCustomTheme
+    {
+        /// <summary>
+        /// No Theme.
+        /// </summary>
+        None,
+
+        /// <summary>
+        /// OLED Theme.
+        /// </summary>
+        OLED,
     }
 }

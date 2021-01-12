@@ -244,31 +244,30 @@ namespace Awful.Mobile.Controls
         public async Task SetupThemeAsync()
         {
             var options = await this.SettingsAction.LoadSettingOptionsAsync().ConfigureAwait(false);
-            if (options != null)
-            {
-                this.SetTheme(options.DeviceColorTheme);
-            }
-            else
-            {
-                this.SetTheme(this.platformProperties.GetTheme());
-            }
+            this.SetTheme(options);
         }
 
         /// <summary>
         /// Setup Theme.
         /// </summary>
-        /// <param name="theme">Theme.</param>
-        public void SetTheme(DeviceColorTheme theme)
+        /// <param name="options">Options.</param>
+        public void SetTheme(SettingOptions options)
         {
             Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() => {
-                switch (theme)
+                var darkMode = options.UseSystemThemeSettings ? this.platformProperties.IsDarkTheme : options.UseDarkMode;
+                if (!options.UseSystemThemeSettings && options.CustomTheme != AppCustomTheme.None)
                 {
-                    case DeviceColorTheme.Light:
-                        Application.Current.UserAppTheme = OSAppTheme.Light;
-                        break;
-                    case DeviceColorTheme.Dark:
-                        Application.Current.UserAppTheme = OSAppTheme.Dark;
-                        break;
+                    ResourcesHelper.SetCustomTheme(options.CustomTheme);
+                    return;
+                }
+
+                if (darkMode)
+                {
+                    ResourcesHelper.SetDarkMode();
+                }
+                else
+                {
+                    ResourcesHelper.SetLightMode();
                 }
             });
         }

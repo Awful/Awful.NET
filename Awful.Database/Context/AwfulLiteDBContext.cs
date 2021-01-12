@@ -281,7 +281,6 @@ namespace Awful.Database.Context
                 {
                     var options = new SettingOptions
                     {
-                        DeviceColorTheme = this.properties.GetTheme(),
                     };
                     tcs.SetResult(options);
                 }
