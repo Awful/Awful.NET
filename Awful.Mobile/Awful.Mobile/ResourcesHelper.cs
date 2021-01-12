@@ -93,6 +93,9 @@ namespace Awful.Mobile
         public static void SetLightMode()
         {
             Application.Current.UserAppTheme = OSAppTheme.Light;
+            SetDynamicResource(DynamicBackgroundColor, "BackgroundColorLight");
+            SetDynamicResource(DynamicTextColor, "TextColorDark");
+
             SetDynamicResource(ForumBackground, "ForumHeaderTextColorDark");
             SetDynamicResource(ForumHeaderTextColor, "ForumBackgroundLight");
 

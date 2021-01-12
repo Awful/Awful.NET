@@ -41,10 +41,13 @@ namespace Awful.Mobile
             Container = Awful.UI.AwfulContainer.BuildContainer(builder);
 
             var platformConfig = App.Container.Resolve<IPlatformProperties>();
-            StartApp(platformConfig);
+            var database = App.Container.Resolve<IAwfulContext>();
+            var navigation = App.Container.Resolve<IAwfulNavigation>();
+            navigation.SetTheme(database.GetAppSettings());
+            StartApp(platformConfig, navigation);
         }
 
-        public static void StartApp(IPlatformProperties platformProperties)
+        public static void StartApp(IPlatformProperties platformProperties, IAwfulNavigation navigation)
         {
             if (platformProperties == null)
             {
@@ -58,7 +61,6 @@ namespace Awful.Mobile
             }
             else
             {
-                var navigation = App.Container.Resolve<IAwfulNavigation>();
                 navigation.SetMainAppPage();
             }
         }

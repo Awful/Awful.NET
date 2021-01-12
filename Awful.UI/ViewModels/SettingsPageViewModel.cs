@@ -38,7 +38,7 @@ namespace Awful.UI.ViewModels
             : base(navigation, error, context)
         {
             this.platformProperties = platformProperties;
-            this.settings = new SettingOptions();
+            this.settings = this.Context.GetAppSettings();
             this.settingActions = new SettingsAction(context);
         }
 
@@ -132,7 +132,7 @@ namespace Awful.UI.ViewModels
             {
                 this.settings.EnableBackgroundTasks = value;
                 this.OnPropertyChanged(nameof(this.EnableBackgroundTasks));
-                Task.Run(async () => await this.SaveSettingsAsync().ConfigureAwait(false));
+                this.Context.SaveAppSettings(this.settings);
             }
         }
 
@@ -157,7 +157,6 @@ namespace Awful.UI.ViewModels
         public override async Task OnLoad()
         {
             await base.OnLoad().ConfigureAwait(false);
-            this.settings = this.Context.GetAppSettings();
         }
 
         public virtual void SetTheme()

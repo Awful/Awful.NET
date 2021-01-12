@@ -5,7 +5,7 @@
 using Autofac;
 using Awful.Mobile.ViewModels;
 using Awful.UI.Tools;
-
+using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
@@ -24,19 +24,42 @@ namespace Awful.Mobile.Pages
         public MainTabbedPage()
         {
             this.On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
-            this.BindingContext = this.vm = App.Container.Resolve<MainTabbedPageViewModel>();
-            this.vm.SetupThemeAsync().ConfigureAwait(false);
-            this.vm.LoadTabbedPage(this);
+            this.RenderPages();
+            //this.BindingContext = this.vm = App.Container.Resolve<MainTabbedPageViewModel>();
+            //this.vm.SetupThemeAsync().ConfigureAwait(false);
+            //this.vm.LoadTabbedPage(this);
         }
 
-        /// <inheritdoc/>
-        protected override void OnAppearing()
+        private static Xamarin.Forms.NavigationPage CreateNavigationPage(Xamarin.Forms.Page page, string glyph, string title, string fontFamily)
         {
-            base.OnAppearing();
-            if (this.BindingContext is Awful.UI.ViewModels.AwfulViewModel vm)
+            Xamarin.Forms.NavigationPage navigationPage = new Xamarin.Forms.NavigationPage(page);
+            // navigationPage.On<iOS>().SetPrefersLargeTitles(true);
+            navigationPage.IconImageSource = new FontImageSource()
             {
-                vm.OnLoadCommand.ExecuteAsync().FireAndForgetSafeAsync(this.vm.Error);
-            }
+                FontFamily = fontFamily,
+                Glyph = glyph,
+                Size = 24,
+            };
+            navigationPage.Title = title;
+            return navigationPage;
+        }
+
+        private void RenderPages()
+        {
+            List<Xamarin.Forms.NavigationPage> pages = new List<Xamarin.Forms.NavigationPage>();
+            pages.Add(CreateNavigationPage(new ForumListPage(), "", "Forums", "FontAwesomeSolid"));
+            pages.Add(CreateNavigationPage(new BookmarksPage(), "", "Bookmarks", "FontAwesomeRegular"));
+            pages.Add(CreateNavigationPage(new PrivateMessagesPage(), "", "Messages", "FontAwesomeRegular"));
+
+            pages.Add(CreateNavigationPage(new SettingsPage(), "", "Settings", "FontAwesomeSolid"));
+            pages.Add(CreateNavigationPage(new ExtraPage(), "", "More", "FontAwesomeSolid"));
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                foreach (var page in pages)
+                {
+                    this.Children.Add(page);
+                }
+            });
         }
     }
 }
