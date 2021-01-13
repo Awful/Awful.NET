@@ -1,6 +1,6 @@
 <Project>
     <ItemGroup>
-        <PackageReference Include="Autofac" Version="5.2.0"/>
-        <PackageReference Include="Xamarin.Essentials" Version="1.6.0-rc1" />
+        <PackageReference Include="Autofac" Version="6.1.0"/>
+        <PackageReference Include="Xamarin.Essentials" Version="1.6.1-preview1" />
     </ItemGroup>
 </Project>

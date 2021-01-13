@@ -1,7 +1,7 @@
 <Project>
     <ItemGroup>
         <PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />
-        <PackageReference Include="Xamarin.CommunityToolkit" Version="1.0.0-pre6" />
+        <PackageReference Include="Xamarin.CommunityToolkit" Version="1.0.0" />
         <PackageReference Include="Forms9Patch" Version="2.4.8" />
     </ItemGroup>
 </Project>

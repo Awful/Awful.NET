@@ -12,7 +12,6 @@ using Awful.Mobile.Pages;
 using Awful.Mobile.ViewModels;
 using Awful.UI.Actions;
 using Awful.UI.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

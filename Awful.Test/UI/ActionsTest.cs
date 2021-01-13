@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Awful.Database.Context;
 using Awful.UI.Actions;
 using Awful.Webview;
-using Microsoft.EntityFrameworkCore;
 using Xunit;
 
 namespace Awful.Test.UI
