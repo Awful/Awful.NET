@@ -71,6 +71,10 @@ namespace Awful.Mobile.iOS
             UIViewController viewController = null;
 
             var window = UIApplication.SharedApplication.KeyWindow;
+            if (window == null)
+            {
+                return null;
+            }
 
             if (window.WindowLevel == UIWindowLevel.Normal)
             {
