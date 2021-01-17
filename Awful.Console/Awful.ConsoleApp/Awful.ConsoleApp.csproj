@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Awful.Core\Awful.Core.csproj" />
+    <ProjectReference Include="..\..\Awful.UI.Core\Awful.UI.Core.csproj" />
     <ProjectReference Include="..\..\Awful.Webview\Awful.Webview.csproj" />
   </ItemGroup>
 

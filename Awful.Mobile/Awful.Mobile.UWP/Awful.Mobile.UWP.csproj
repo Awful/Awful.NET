@@ -155,6 +155,10 @@
       <Project>{9eac913e-0139-4a7a-9f95-cafdea30e1ef}</Project>
       <Name>Awful.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Awful.UI.Core\Awful.UI.Core.csproj">
+      <Project>{74bb77ec-9fce-4a70-a7d7-a3d66cda0c18}</Project>
+      <Name>Awful.UI.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Awful.UI\Awful.UI.csproj">
       <Project>{4a2edb48-2471-4ec6-ac14-0b75dafb5da6}</Project>
       <Name>Awful.UI</Name>

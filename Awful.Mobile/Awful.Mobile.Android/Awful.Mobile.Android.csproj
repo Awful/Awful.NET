@@ -83,6 +83,10 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Awful.UI.Core\Awful.UI.Core.csproj">
+      <Project>{74bb77ec-9fce-4a70-a7d7-a3d66cda0c18}</Project>
+      <Name>Awful.UI.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Awful.Mobile\Awful.Mobile.csproj">
       <Project>{D50E5AED-AEF5-4CBA-ACA1-267D06B95CD4}</Project>
       <Name>Awful.Mobile</Name>
