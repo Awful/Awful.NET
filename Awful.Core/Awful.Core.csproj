@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company>Awful.NET</Company>
+    <Authors>Awful.NET Contributors</Authors>
+    <Product>Awful.NET</Product>
+    <Description>Awful.Core is the core component of Awful.NET, the Something Awful Parser written in .NET.</Description>
+    <PackageId>Awful.Core</PackageId>
+    <PackageProjectUrl>https://github.com/Awful/Awful.NET/</PackageProjectUrl>
+    <PackageTags>something awful, awful</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
     
   <Import Project="../Web.props" />
@@ -19,6 +28,13 @@
             <Generator>PublicResXFileCodeGenerator</Generator>
             <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
         </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="..\LICENSE">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
     </ItemGroup>
     
 </Project>
