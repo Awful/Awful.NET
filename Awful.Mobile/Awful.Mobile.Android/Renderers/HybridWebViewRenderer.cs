@@ -12,14 +12,22 @@ using Xamarin.Forms.Platform.Android;
 
 namespace Awful.Mobile.Droid.Renderers
 {
+    /// <summary>
+    /// Hybrid WebView Renderer.
+    /// </summary>
     public class HybridWebViewRenderer : WebViewRenderer
     {
         private const string JavascriptFunction = "function invokeCSharpAction(data){jsBridge.invokeAction(data);}";
-        Context _context;
+        private readonly Context context;
 
-        public HybridWebViewRenderer(Context context) : base(context)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HybridWebViewRenderer"/> class.
+        /// </summary>
+        /// <param name="context">Context.</param>
+        public HybridWebViewRenderer(Context context)
+            : base(context)
         {
-            _context = context;
+            this.context = context;
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<WebView> e)
@@ -29,16 +37,16 @@ namespace Awful.Mobile.Droid.Renderers
             // Setting the background as transparent
             this.Control.SetBackgroundColor(Android.Graphics.Color.Transparent);
 
-            if (e.OldElement != null)
+            if (e != null && e.OldElement != null)
             {
-                Control.RemoveJavascriptInterface("jsBridge");
-                ((HybridWebView)Element).Cleanup();
+                this.Control.RemoveJavascriptInterface("jsBridge");
+                ((HybridWebView)this.Element).Cleanup();
             }
 
-            if (e.NewElement != null)
+            if (e != null && e.NewElement != null)
             {
-                Control.SetWebViewClient(new JavascriptWebViewClient($"javascript: {JavascriptFunction}"));
-                Control.AddJavascriptInterface(new JsBridge(this), "jsBridge");
+                this.Control.SetWebViewClient(new JavascriptWebViewClient($"javascript: {JavascriptFunction}"));
+                this.Control.AddJavascriptInterface(new JsBridge(this), "jsBridge");
             }
         }
     }

@@ -26,7 +26,9 @@ namespace Awful.Mobile
         /// Autofac Container.
         /// </summary>
 #pragma warning disable CA2211 // Non-constant fields should not be visible
+#pragma warning disable SA1401 // Fields should be private
         public static IContainer Container;
+#pragma warning restore SA1401 // Fields should be private
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 
         /// <summary>
@@ -46,11 +48,21 @@ namespace Awful.Mobile
             StartApp(platformConfig, navigation);
         }
 
+        /// <summary>
+        /// Starts App.
+        /// </summary>
+        /// <param name="platformProperties">Platform Properties.</param>
+        /// <param name="navigation">Navigation Handler.</param>
         public static void StartApp(IPlatformProperties platformProperties, IAwfulNavigation navigation)
         {
             if (platformProperties == null)
             {
                 throw new ArgumentNullException(nameof(platformProperties));
+            }
+
+            if (navigation == null)
+            {
+                throw new ArgumentNullException(nameof(navigation));
             }
 
             var user = System.IO.File.Exists(platformProperties.CookiePath);
@@ -83,14 +95,17 @@ namespace Awful.Mobile
            return App.Current.Resources[name];
         }
 
+        /// <inheritdoc/>
         protected override void OnStart()
         {
         }
 
+        /// <inheritdoc/>
         protected override void OnSleep()
         {
         }
 
+        /// <inheritdoc/>
         protected override void OnResume()
         {
         }

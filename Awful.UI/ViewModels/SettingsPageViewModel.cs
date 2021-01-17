@@ -23,7 +23,6 @@ namespace Awful.UI.ViewModels
     public class SettingsPageViewModel : AwfulViewModel
     {
         private SettingsAction settingActions;
-        protected SettingOptions settings;
         private IPlatformProperties platformProperties;
 
         /// <summary>
@@ -37,14 +36,16 @@ namespace Awful.UI.ViewModels
             : base(navigation, error, context)
         {
             this.platformProperties = platformProperties;
-            this.settings = this.Context.GetAppSettings();
+            this.Settings = this.Context.GetAppSettings();
             this.settingActions = new SettingsAction(context);
         }
 
         /// <summary>
         /// Gets the theme names.
         /// </summary>
+#pragma warning disable CA1822 // Mark members as static
         public List<string> CustomThemeNames
+#pragma warning restore CA1822 // Mark members as static
         {
             get
             {
@@ -59,14 +60,14 @@ namespace Awful.UI.ViewModels
         {
             get
             {
-                return this.settings.CustomTheme;
+                return this.Settings.CustomTheme;
             }
 
             set
             {
-                this.settings.CustomTheme = value;
+                this.Settings.CustomTheme = value;
                 this.OnPropertyChanged(nameof(this.CustomTheme));
-                this.Context.SaveAppSettings(this.settings);
+                this.Context.SaveAppSettings(this.Settings);
                 this.SetTheme();
             }
         }
@@ -77,11 +78,11 @@ namespace Awful.UI.ViewModels
         /// </summary>
         public bool UseSystemThemeSettings
         {
-            get => this.settings.UseSystemThemeSettings;
+            get => this.Settings.UseSystemThemeSettings;
 
             set
             {
-                this.settings.UseSystemThemeSettings = value;
+                this.Settings.UseSystemThemeSettings = value;
                 if (value)
                 {
                     this.UseDarkMode = this.platformProperties.IsDarkTheme;
@@ -90,7 +91,7 @@ namespace Awful.UI.ViewModels
 
                 this.OnPropertyChanged(nameof(this.UseSystemThemeSettings));
                 this.OnPropertyChanged(nameof(this.CanOverrideThemeSettings));
-                this.Context.SaveAppSettings(this.settings);
+                this.Context.SaveAppSettings(this.Settings);
                 this.SetTheme();
             }
         }
@@ -101,13 +102,13 @@ namespace Awful.UI.ViewModels
         /// </summary>
         public bool UseDarkMode
         {
-            get => this.settings.UseDarkMode;
+            get => this.Settings.UseDarkMode;
 
             set
             {
-                this.settings.UseDarkMode = value;
+                this.Settings.UseDarkMode = value;
                 this.OnPropertyChanged(nameof(this.UseDarkMode));
-                this.Context.SaveAppSettings(this.settings);
+                this.Context.SaveAppSettings(this.Settings);
                 this.SetTheme();
             }
         }
@@ -124,14 +125,14 @@ namespace Awful.UI.ViewModels
         {
             get
             {
-                return this.settings.EnableBackgroundTasks;
+                return this.Settings.EnableBackgroundTasks;
             }
 
             set
             {
-                this.settings.EnableBackgroundTasks = value;
+                this.Settings.EnableBackgroundTasks = value;
                 this.OnPropertyChanged(nameof(this.EnableBackgroundTasks));
-                this.Context.SaveAppSettings(this.settings);
+                this.Context.SaveAppSettings(this.Settings);
             }
         }
 
@@ -152,19 +153,22 @@ namespace Awful.UI.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets the setting options.
+        /// </summary>
+        protected SettingOptions Settings { get; private set; }
+
         /// <inheritdoc/>
         public override async Task OnLoad()
         {
             await base.OnLoad().ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Sets the theme for the running app.
+        /// </summary>
         public virtual void SetTheme()
         {
-        }
-
-        private async Task SaveSettingsAsync()
-        {
-            await this.settingActions.SaveSettingOptionsAsync(this.settings).ConfigureAwait(false);
         }
     }
 }

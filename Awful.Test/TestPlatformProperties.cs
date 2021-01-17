@@ -32,10 +32,10 @@ namespace Awful.Test
         }
 
         /// <inheritdoc/>
-        public string CookiePath => $"{prefix}.test.cookie";
+        public string CookiePath => $"{this.prefix}.test.cookie";
 
         /// <inheritdoc/>
-        public string DatabasePath => $"{prefix}.awful.sqlite";
+        public string DatabasePath => $"{this.prefix}.awful.sqlite";
 
         /// <inheritdoc/>
         public bool IsDarkTheme => true;

@@ -17,7 +17,7 @@ namespace Awful.Mobile.Pages
     /// SAclopedia Entry List.
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SAclopediaEntryListPage : BasePage, IAwfulSearchPage
+    public partial class SAclopediaEntryListPage : BasePage
     {
         private MobileSAclopediaEntryListPageViewModel vm;
 
@@ -29,11 +29,5 @@ namespace Awful.Mobile.Pages
             this.InitializeComponent();
             this.BindingContext = this.vm = App.Container.Resolve<MobileSAclopediaEntryListPageViewModel>();
         }
-
-        /// <inheritdoc/>
-        public event EventHandler<string> SearchBarTextChanged;
-
-        /// <inheritdoc/>
-        public void OnSearchBarTextChanged(in string text) => this.vm.FilterList(text);
     }
 }

@@ -14,7 +14,7 @@ namespace Awful.Mobile.Pages
     /// Forum List Page View.
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ForumListPage : BasePage, IAwfulSearchPage
+    public partial class ForumListPage : BasePage
     {
         private MobileForumsListPageViewModel vm;
 
@@ -26,12 +26,6 @@ namespace Awful.Mobile.Pages
             this.InitializeComponent();
             this.BindingContext = this.vm = App.Container.Resolve<MobileForumsListPageViewModel>();
         }
-
-        /// <inheritdoc/>
-        public event EventHandler<string> SearchBarTextChanged;
-
-        /// <inheritdoc/>
-        public void OnSearchBarTextChanged(in string text) => this.vm.FilterForums(text);
 
         /// <inheritdoc/>
         protected override void OnAppearing()

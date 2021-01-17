@@ -9,20 +9,31 @@ using Java.Interop;
 
 namespace Awful.Mobile.Droid.Renderers
 {
+    /// <summary>
+    /// Javascript Bridge.
+    /// </summary>
     public class JsBridge : Java.Lang.Object
     {
-        readonly WeakReference<HybridWebViewRenderer> HybridWebViewMainRenderer;
+        private readonly WeakReference<HybridWebViewRenderer> hybridWebViewMainRenderer;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JsBridge"/> class.
+        /// </summary>
+        /// <param name="hybridRenderer">Hybrid Webview Renderer.</param>
         public JsBridge(HybridWebViewRenderer hybridRenderer)
         {
-            HybridWebViewMainRenderer = new WeakReference<HybridWebViewRenderer>(hybridRenderer);
+            this.hybridWebViewMainRenderer = new WeakReference<HybridWebViewRenderer>(hybridRenderer);
         }
 
+        /// <summary>
+        /// Invoke Action.
+        /// </summary>
+        /// <param name="data">Data to Invoke.</param>
         [JavascriptInterface]
         [Export("invokeAction")]
         public void InvokeAction(string data)
         {
-            if (HybridWebViewMainRenderer != null && HybridWebViewMainRenderer.TryGetTarget(out var hybridRenderer))
+            if (this.hybridWebViewMainRenderer != null && this.hybridWebViewMainRenderer.TryGetTarget(out var hybridRenderer))
             {
                 ((HybridWebView)hybridRenderer.Element).InvokeAction(data);
             }

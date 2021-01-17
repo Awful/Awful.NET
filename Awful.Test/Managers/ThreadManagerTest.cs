@@ -67,11 +67,12 @@ namespace Awful.Test.Managers
             Assert.NotNull(preview);
             Assert.NotEmpty(preview.PostHtml);
 
-            // We don't want to post a ton of new threads in the live forums. 
+            // We don't want to post a ton of new threads in the live forums.
             // Thread Preview should be enough to show it works.
-            //var thread = await manager.CreateNewThreadAsync(result).ConfigureAwait(false);
-            //Assert.NotNull(thread);
-            //Assert.NotEmpty(thread.ResultHtml);
+
+            // var thread = await manager.CreateNewThreadAsync(result).ConfigureAwait(false);
+            // Assert.NotNull(thread);
+            // Assert.NotEmpty(thread.ResultHtml);
         }
     }
 }

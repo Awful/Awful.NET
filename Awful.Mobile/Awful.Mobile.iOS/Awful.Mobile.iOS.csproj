@@ -78,7 +78,6 @@
     <Compile Include="iOSPlatformProperties.cs" />
     <Compile Include="Renderers\HybridWebViewRenderer.cs" />
     <Compile Include="Renderers\AwfulEditorRenderer.cs" />
-    <Compile Include="Renderers\AwfulSearchPageRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

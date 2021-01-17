@@ -16,8 +16,8 @@ namespace Awful.Mobile.ViewModels
     /// </summary>
     public class MobileSettingsPageViewModel : SettingsPageViewModel
     {
-        IPlatformProperties properties;
-        IAwfulNavigation navigation;
+        private readonly IPlatformProperties properties;
+        private readonly IAwfulNavigation navigation;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MobileSettingsPageViewModel"/> class.
@@ -26,7 +26,8 @@ namespace Awful.Mobile.ViewModels
         /// <param name="error">Awful Error handler.</param>
         /// <param name="platformProperties">Awful Properties.</param>
         /// <param name="context">Awful Context.</param>
-        public MobileSettingsPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, IPlatformProperties platformProperties, IAwfulContext context) : base(navigation, error, platformProperties, context)
+        public MobileSettingsPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, IPlatformProperties platformProperties, IAwfulContext context)
+            : base(navigation, error, platformProperties, context)
         {
             this.properties = platformProperties;
             this.navigation = navigation;
@@ -35,7 +36,7 @@ namespace Awful.Mobile.ViewModels
         /// <inheritdoc/>
         public override void SetTheme()
         {
-            this.navigation.SetTheme(this.settings);
+            this.navigation.SetTheme(this.Settings);
         }
     }
 }

@@ -66,6 +66,9 @@ namespace Awful.Core.Entities.Bans
         /// <summary>
         /// Gets a value indicating whether the user is permabanned.
         /// </summary>
-        public bool IsPermaBanned { get { return this.Type.ToUpperInvariant() == "PERMABAN"; } }
+        public bool IsPermaBanned
+        {
+            get { return this.Type.ToUpperInvariant() == "PERMABAN"; }
+        }
     }
 }

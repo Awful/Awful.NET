@@ -17,9 +17,12 @@ using Sharprompt.Validations;
 
 namespace Awful.ConsoleApp
 {
-    class Program
+    /// <summary>
+    /// Program.
+    /// </summary>
+    internal class Program
     {
-        static async Task Main(string[] args)
+        private static async Task Main()
         {
             try
             {
