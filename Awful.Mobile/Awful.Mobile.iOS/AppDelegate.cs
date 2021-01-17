@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 using Awful.Core.Tools;
+using FFImageLoading.Forms.Platform;
 using Foundation;
 using UIKit;
 
@@ -29,8 +30,9 @@ namespace Awful.Mobile.iOS
         /// <inheritdoc/>
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            SQLitePCL.Batteries.Init();
             global::Xamarin.Forms.Forms.Init();
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+            CachedImageRenderer.InitImageSourceHandler();
             Forms9Patch.iOS.Settings.Initialize(this);
             var builder = new ContainerBuilder();
             builder.RegisterType<iOSPlatformProperties>().As<IPlatformProperties>();

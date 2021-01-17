@@ -62,6 +62,7 @@ namespace Awful.Mobile.UWP
 
                 rootFrame.NavigationFailed += this.OnNavigationFailed;
                 Xamarin.Forms.Forms.Init(e);
+                FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
 
                 if (e != null && e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

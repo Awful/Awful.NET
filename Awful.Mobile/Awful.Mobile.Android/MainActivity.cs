@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Autofac;
 using Awful.Core.Tools;
+using FFImageLoading.Forms.Platform;
 
 namespace Awful.Mobile.Droid
 {
@@ -33,6 +34,8 @@ namespace Awful.Mobile.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            CachedImageRenderer.Init(true);
+            CachedImageRenderer.InitImageViewHandler();
             Forms9Patch.Droid.Settings.Initialize(this);
             var builder = new ContainerBuilder();
             builder.RegisterType<AndroidPlatformProperties>().As<IPlatformProperties>();
