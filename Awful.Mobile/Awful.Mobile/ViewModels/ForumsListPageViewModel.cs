@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Awful.Core.Entities.JSON;
 using Awful.Database.Context;
 using Awful.Database.Entities;
+using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
 using Awful.UI.Interfaces;
@@ -26,7 +27,7 @@ namespace Awful.UI.ViewModels
     {
         private IndexPageActions forumActions;
         private AwfulAsyncCommand refreshCommand;
-        private AwfulAsyncCommand<AwfulForum> isFavoriteCommand;
+        private AwfulAsyncCommand<string> searchCommand;
         private List<Forum> originalList = new List<Forum>();
 
         /// <summary>
@@ -60,45 +61,34 @@ namespace Awful.UI.ViewModels
         }
 
         /// <summary>
-        /// Gets the isFavorite command.
+        /// Gets the refresh command.
         /// </summary>
-        public AwfulAsyncCommand<AwfulForum> IsFavoriteCommand
+        public AwfulAsyncCommand<string> SearchCommand
         {
             get
             {
-                return this.isFavoriteCommand ??= new AwfulAsyncCommand<AwfulForum>(
-                    async (forum) =>
-                {
-                    await this.forumActions.SetIsFavoriteForumAsync(forum).ConfigureAwait(false);
-                    forum.OnPropertyChanged("IsFavorited");
+                return this.searchCommand ??= new AwfulAsyncCommand<string>(
+                    async (x) => this.FilterForums(x),
+                    null,
+                    this.Error);
+            }
+        }
 
-                    if (this.Items.Any() && this.Items.First().Title == "Search")
+        /// <summary>
+        /// Gets the Selection Entry.
+        /// </summary>
+        public AwfulAsyncCommand<AwfulForum> SelectionCommand
+        {
+            get
+            {
+                return new AwfulAsyncCommand<AwfulForum>(
+                    async (item) =>
                     {
-                        return;
-                    }
-
-                    var favoritedForumGroup = this.Items.FirstOrDefault(n => n.Id == 0);
-
-                    if (favoritedForumGroup == null)
-                    {
-                        favoritedForumGroup = CreateFavoriteForumGroup();
-                        this.Items.Insert(0, favoritedForumGroup);
-                    }
-
-                    if (forum.IsFavorited)
-                    {
-                        favoritedForumGroup.Add(forum);
-                    }
-                    else
-                    {
-                        favoritedForumGroup.Remove(forum);
-                    }
-
-                    if (!favoritedForumGroup.Any())
-                    {
-                        this.Items.Remove(favoritedForumGroup);
-                    }
-                },
+                        if (item != null)
+                        {
+                            await this.Navigation.PushPageAsync(new ForumThreadListPage(item)).ConfigureAwait(false);
+                        }
+                    },
                     null,
                     this.Error);
             }
@@ -163,25 +153,7 @@ namespace Awful.UI.ViewModels
                 this.Items.Add(item);
             }
 
-            var favoritedForums = items.SelectMany(y => y).Where(y => y.IsFavorited);
-            if (favoritedForums.Any())
-            {
-                var favoritedForumGroup = CreateFavoriteForumGroup();
-
-                foreach (var item in favoritedForums)
-                {
-                    favoritedForumGroup.Add(item);
-                }
-
-                this.Items.Insert(0, favoritedForumGroup);
-            }
-
             this.OnPropertyChanged(nameof(this.Items));
-        }
-
-        private static ForumGroup CreateFavoriteForumGroup()
-        {
-            return new ForumGroup(new Forum() { Id = 0, Title = "Favorites" }, new List<Forum>());
         }
 
         private IEnumerable<Forum> Flatten(Forum forum)

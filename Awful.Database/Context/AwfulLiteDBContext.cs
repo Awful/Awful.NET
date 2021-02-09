@@ -291,7 +291,9 @@ namespace Awful.Database.Context
             Task.Run(() =>
             {
                 var collection = this.db.GetCollection<Forum>(ForumsDB);
-                var forum = collection.FindOne(x => x.Id == forumId);
+                var list = collection.FindAll().ToList();
+                var forums = list.SelectMany(n => this.Flatten(n));
+                var forum = forums.FirstOrDefault(x => x.Id == forumId);
                 tcs.SetResult(forum);
             });
             return tcs.Task;
@@ -402,7 +404,8 @@ namespace Awful.Database.Context
             Task.Run(() =>
             {
                 var collection = this.db.GetCollection<Forum>(ForumsDB);
-                tcs.SetResult(collection.FindOne(n => n.Id == forum.Id));
+                var test = collection.Update(forum);
+                tcs.SetResult(forum);
             });
             return tcs.Task;
         }

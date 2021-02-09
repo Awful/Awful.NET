@@ -8,50 +8,42 @@
     x:Class="Awful.Mobile.Pages.ForumListPage">
  <ContentPage.Content>
        <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
-            <CollectionView SelectionMode="Single" 
+            <StackLayout>
+                <SearchBar x:Name="searchBar"  
+                           Placeholder="Search Forums..." 
+                           SearchCommand="{Binding SearchCommand}"
+                           SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" />
+                <CollectionView SelectionMode="Single" 
                         x:Name="ForumCollection"
-                        ItemSizingStrategy="MeasureFirstItem"
                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ForumCollection}}" 
                         SelectionChangedCommand="{Binding SelectionCommand}"
                          ItemsSource="{Binding Items}"
                 IsGrouped="True">
-                <CollectionView.GroupHeaderTemplate>
-                    <DataTemplate>
-                           <Label
+                    <CollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <Label
                                TextColor="{AppThemeBinding Dark={StaticResource ForumHeaderTextColorDark}, 
                            Light={StaticResource ForumHeaderTextColorLight}}"
                                BackgroundColor="{AppThemeBinding Dark={StaticResource ForumBackgroundDark}, 
                            Light={StaticResource ForumBackgroundLight}}"
                                   Padding="10"
                                   Text="{Binding Title}" />
-                    </DataTemplate>
-                </CollectionView.GroupHeaderTemplate>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout Orientation="Horizontal" Padding="10">
-                             <Image WidthRequest="22"
-                                 Source="{Binding IsFavorited, Converter={StaticResource BookmarkStarImageConverter}}"
-                                 Grid.Column="0">
-                                  <Image.GestureRecognizers>
-                                        <TapGestureRecognizer
-                                            Command="{Binding Path=BindingContext.IsFavoriteCommand,
-                                            Source={x:Reference ForumsListPage}}"
-                                            CommandParameter="{Binding .}"
-                                            />
-                                        </Image.GestureRecognizers>
-                                 </Image>
-                            <Label Padding="15,0,0,0"
+                        </DataTemplate>
+                    </CollectionView.GroupHeaderTemplate>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal" Padding="10">
+                                <Label Padding="0,0,0,0"
                                 HorizontalOptions="FillAndExpand"
                                 Grid.Column="1"
                                    FontSize="{OnPlatform Android=15, iOS=19, Default=19}"
-                                   LineBreakMode="TailTruncation"
-                                   MaxLines="1"
                                 VerticalOptions="CenterAndExpand"
                        Text="{Binding Title}" />
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
        </RefreshView>
     </ContentPage.Content>
 </pages:BasePage>

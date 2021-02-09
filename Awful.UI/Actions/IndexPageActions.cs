@@ -42,30 +42,6 @@ namespace Awful.UI.Actions
         }
 
         /// <summary>
-        /// Save existing forum.
-        /// </summary>
-        /// <param name="forum">Forum to update.</param>
-        /// <returns>Forum.</returns>
-        public async Task<AwfulForum> SetIsFavoriteForumAsync(AwfulForum forum)
-        {
-            if (forum == null)
-            {
-                throw new ArgumentNullException(nameof(forum));
-            }
-
-            var realForum = await this.context.GetForumAsync(forum.Id).ConfigureAwait(false);
-            if (realForum == null)
-            {
-                return forum;
-            }
-
-            forum.IsFavorited = !forum.IsFavorited;
-            realForum.IsFavorited = !realForum.IsFavorited;
-            await this.context.UpdateForumAsync(realForum).ConfigureAwait(false);
-            return forum;
-        }
-
-        /// <summary>
         /// Get the forums category list.
         /// </summary>
         /// <param name="forceReload">Force Reloading.</param>
