@@ -9,9 +9,9 @@
     <ContentPage.Content>
         <Grid xct:StateLayout.CurrentState="{Binding CurrentState}" xct:StateLayout.AnimateStateChanges="true">
             <xct:StateLayout.StateViews>
-                <xct:StateView StateKey="Loading" BackgroundColor="White" VerticalOptions="FillAndExpand">
+                <xct:StateView StateKey="Loading" VerticalOptions="FillAndExpand">
                     <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-                        <ActivityIndicator Color="#1abc9c" IsRunning="{Binding CurrentState, Converter={StaticResource StateToBooleanConverter}, ConverterParameter={x:Static xct:LayoutState.Loading}}" />
+                        <ActivityIndicator Color="#1abc9c" IsRunning="True" />
                         <Label Text="Loading..." HorizontalOptions="Center" />
                     </StackLayout>
                 </xct:StateView>
