@@ -1,4 +1,4 @@
-﻿// <copyright file="MobilePostEditItemSelectionViewModel.cs" company="Drastic Actions">
+﻿// <copyright file="PostEditItemSelectionViewModel.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
@@ -19,16 +19,16 @@ namespace Awful.Mobile.ViewModels
     /// <summary>
     /// Mobile Post Edit Item Selection View Model.
     /// </summary>
-    public class MobilePostEditItemSelectionViewModel : AwfulViewModel
+    public class PostEditItemSelectionViewModel : AwfulViewModel
     {
         private IAwfulEditor editor;
         private IAwfulPopup popup;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MobilePostEditItemSelectionViewModel"/> class.
+        /// Initializes a new instance of the <see cref="PostEditItemSelectionViewModel"/> class.
         /// </summary>
         /// <param name="popup">Awful Popup.</param>
-        public MobilePostEditItemSelectionViewModel(IAwfulPopup popup)
+        public PostEditItemSelectionViewModel(IAwfulPopup popup)
             : base()
         {
             this.popup = popup;

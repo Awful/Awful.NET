@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Awful.Database.Entities;
 using Awful.Mobile.ViewModels;
+using Awful.UI.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,7 +22,7 @@ namespace Awful.Mobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewThreadPage : BasePage
     {
-        private MobileNewThreadPageViewModel vm;
+        private NewThreadPageViewModel vm;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NewThreadPage"/> class.
@@ -30,7 +31,7 @@ namespace Awful.Mobile.Pages
         public NewThreadPage(AwfulForum forum)
         {
             this.InitializeComponent();
-            this.BindingContext = this.vm = App.Container.Resolve<MobileNewThreadPageViewModel>();
+            this.BindingContext = this.vm = App.Container.Resolve<NewThreadPageViewModel>();
             this.vm.Editor = this.AwfulEditor;
             this.vm.LoadForum(forum);
         }

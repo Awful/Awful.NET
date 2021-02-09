@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 using Awful.Mobile.ViewModels;
+using Awful.UI.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,7 +21,7 @@ namespace Awful.Mobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewPrivateMessagePage : BasePage
     {
-        private MobileNewPrivateMessagePageViewModel vm;
+        private NewPrivateMessagePageViewModel vm;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NewPrivateMessagePage"/> class.
@@ -29,7 +30,7 @@ namespace Awful.Mobile.Pages
         public NewPrivateMessagePage(string username = "")
         {
             this.InitializeComponent();
-            this.BindingContext = this.vm = App.Container.Resolve<MobileNewPrivateMessagePageViewModel>();
+            this.BindingContext = this.vm = App.Container.Resolve<NewPrivateMessagePageViewModel>();
             this.vm.To = username;
             this.vm.Editor = this.AwfulEditor;
         }

@@ -22,7 +22,7 @@ namespace Awful.Mobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PostEditItemSelectionView : ContentView
     {
-        private MobilePostEditItemSelectionViewModel vm;
+        private PostEditItemSelectionViewModel vm;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PostEditItemSelectionView"/> class.
@@ -31,7 +31,7 @@ namespace Awful.Mobile.Views
         public PostEditItemSelectionView(IAwfulEditor editor)
         {
             this.InitializeComponent();
-            this.BindingContext = this.vm = App.Container.Resolve<MobilePostEditItemSelectionViewModel>();
+            this.BindingContext = this.vm = App.Container.Resolve<PostEditItemSelectionViewModel>();
             this.vm.LoadEditor(editor);
         }
     }

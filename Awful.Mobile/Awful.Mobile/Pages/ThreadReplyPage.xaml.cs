@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Autofac;
 using Awful.Database.Entities;
 using Awful.Mobile.ViewModels;
+using Awful.UI.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,7 +20,7 @@ namespace Awful.Mobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ThreadReplyPage : BasePage
     {
-        private MobileThreadReplyPageViewModel vm;
+        private ThreadReplyPageViewModel vm;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadReplyPage"/> class.
@@ -30,7 +31,7 @@ namespace Awful.Mobile.Pages
         public ThreadReplyPage(int threadId, int id = 0, bool isEdit = false)
         {
             this.InitializeComponent();
-            this.BindingContext = this.vm = App.Container.Resolve<MobileThreadReplyPageViewModel>();
+            this.BindingContext = this.vm = App.Container.Resolve<ThreadReplyPageViewModel>();
             this.vm.Editor = this.AwfulEditor;
             this.vm.LoadThread(threadId, id, isEdit);
         }

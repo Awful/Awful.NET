@@ -18,7 +18,7 @@ namespace Awful.Mobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LepersPage : BasePage
     {
-        private MobileLepersPageViewModel vm;
+        private LepersPageViewModel vm;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LepersPage"/> class.
@@ -26,7 +26,7 @@ namespace Awful.Mobile.Pages
         public LepersPage()
         {
             this.InitializeComponent();
-            this.BindingContext = this.vm = App.Container.Resolve<MobileLepersPageViewModel>();
+            this.BindingContext = this.vm = App.Container.Resolve<LepersPageViewModel>();
             this.vm.WebView = this.AwfulWebView;
         }
     }

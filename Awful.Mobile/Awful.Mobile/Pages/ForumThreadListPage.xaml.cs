@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Autofac;
 using Awful.Database.Entities;
 using Awful.Mobile.ViewModels;
+using Awful.UI.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,7 +19,7 @@ namespace Awful.Mobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ForumThreadListPage : BasePage
     {
-        private MobileForumThreadListPageViewModel vm;
+        private ForumThreadListPageViewModel vm;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumThreadListPage"/> class.
@@ -27,7 +28,7 @@ namespace Awful.Mobile.Pages
         public ForumThreadListPage(AwfulForum forum)
         {
             this.InitializeComponent();
-            this.BindingContext = this.vm = App.Container.Resolve<MobileForumThreadListPageViewModel>();
+            this.BindingContext = this.vm = App.Container.Resolve<ForumThreadListPageViewModel>();
             this.vm.LoadForum(forum);
         }
 

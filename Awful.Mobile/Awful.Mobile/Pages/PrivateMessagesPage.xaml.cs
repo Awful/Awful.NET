@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using Autofac;
 using Awful.Mobile.ViewModels;
+using Awful.UI.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,7 +24,7 @@ namespace Awful.Mobile.Pages
         public PrivateMessagesPage()
         {
             this.InitializeComponent();
-            this.BindingContext = App.Container.Resolve<MobilePrivateMessagesPageViewModel>();
+            this.BindingContext = App.Container.Resolve<PrivateMessagesPageViewModel>();
         }
 
         /// <inheritdoc/>

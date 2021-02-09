@@ -10,6 +10,7 @@ using Awful.Mobile.Controls;
 using Awful.Mobile.ViewModels;
 using Awful.UI.Actions;
 using Awful.UI.Tools;
+using Awful.UI.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,7 +23,7 @@ namespace Awful.Mobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ForumPostIconSelectionView : ContentView
     {
-        private MobileForumPostIconSelectionViewModel vm;
+        private ForumPostIconSelectionViewModel vm;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumPostIconSelectionView"/> class.
@@ -32,7 +33,7 @@ namespace Awful.Mobile.Views
         public ForumPostIconSelectionView(AwfulForum forum, PostIcon icon)
         {
             this.InitializeComponent();
-            this.BindingContext = this.vm = App.Container.Resolve<MobileForumPostIconSelectionViewModel>();
+            this.BindingContext = this.vm = App.Container.Resolve<ForumPostIconSelectionViewModel>();
             this.vm.LoadPostIcon(forum, icon);
             this.vm.OnLoadCommand.ExecuteAsync().FireAndForgetSafeAsync(this.vm.Error);
         }

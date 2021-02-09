@@ -6,6 +6,7 @@ using System;
 using Autofac;
 using Awful.Mobile.Controls;
 using Awful.Mobile.ViewModels;
+using Awful.UI.ViewModels;
 using Xamarin.Forms.Xaml;
 
 namespace Awful.Mobile.Pages
@@ -16,7 +17,7 @@ namespace Awful.Mobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ForumListPage : BasePage
     {
-        private MobileForumsListPageViewModel vm;
+        private ForumsListPageViewModel vm;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumListPage"/> class.
@@ -24,7 +25,7 @@ namespace Awful.Mobile.Pages
         public ForumListPage()
         {
             this.InitializeComponent();
-            this.BindingContext = this.vm = App.Container.Resolve<MobileForumsListPageViewModel>();
+            this.BindingContext = this.vm = App.Container.Resolve<ForumsListPageViewModel>();
         }
 
         /// <inheritdoc/>

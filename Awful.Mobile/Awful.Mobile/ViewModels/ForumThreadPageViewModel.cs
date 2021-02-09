@@ -10,6 +10,8 @@ using Awful.Core.Entities.Threads;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
+using Awful.Mobile;
+using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
 using Awful.UI.Interfaces;
@@ -46,6 +48,26 @@ namespace Awful.UI.ViewModels
             : base(navigation, error, context)
         {
             this.handler = handler;
+        }
+
+        /// <summary>
+        /// Gets the reply to thread command.
+        /// </summary>
+        public AwfulAsyncCommand ReplyToThreadCommand
+        {
+            get
+            {
+                return this.replyToThreadCommand ??= new AwfulAsyncCommand(
+                    async () =>
+                    {
+                        if (this.ThreadPost != null)
+                        {
+                            await this.Navigation.PushModalAsync(new ThreadReplyPage(this.Thread.ThreadId)).ConfigureAwait(false);
+                        }
+                    },
+                    () => !this.IsBusy && !this.OnProbation,
+                    this.Error);
+            }
         }
 
         /// <summary>
@@ -157,6 +179,63 @@ namespace Awful.UI.ViewModels
                 },
                     null,
                     this.Error);
+            }
+        }
+
+        /// <summary>
+        /// Handles Data From javascript.
+        /// </summary>
+        /// <param name="data">json string.</param>
+        public void HandleDataFromJavascript(string data)
+        {
+            var json = JsonConvert.DeserializeObject<WebViewDataInterop>(data);
+            switch (json.Type)
+            {
+                case "showPostMenu":
+                    // TODO: Refactor into generic method.
+                    // TODO: Place into action? Command?
+                    MainThread.BeginInvokeOnMainThread(async () =>
+                    {
+                        var result = await App.Current.MainPage.DisplayActionSheet("Post Options", "Cancel", null, "Share", "Mark Read", "Quote Post").ConfigureAwait(false);
+                        switch (result)
+                        {
+                            case "Share":
+                                await Share.RequestAsync(new ShareTextRequest
+                                {
+                                    Uri = string.Format(CultureInfo.InvariantCulture, EndPoints.ShowPost, json.Id),
+                                    Title = this.Title,
+                                }).ConfigureAwait(false);
+                                break;
+                            case "Mark Read":
+                                _ = Task.Run(async () => await this.MarkPostAsUnreadAsync(json.Id).ConfigureAwait(false)).ConfigureAwait(false);
+                                break;
+                            case "Quote Post":
+                                if (!this.OnProbation)
+                                {
+                                    await this.Navigation.PushModalAsync(new ThreadReplyPage(this.Thread.ThreadId, json.Id, false)).ConfigureAwait(false);
+                                }
+                                break;
+                        }
+                    });
+                    break;
+                case "showUserMenu":
+                    MainThread.BeginInvokeOnMainThread(async () =>
+                    {
+                        var options = !this.CanPM ? new string[2] { "Profile", "Their Posts" } : new string[3] { "Profile", "PM", "Their Posts" };
+                        var result = await App.Current.MainPage.DisplayActionSheet("User Options", "Cancel", null, options).ConfigureAwait(false);
+                        switch (result)
+                        {
+                            case "Profile":
+                                await this.Navigation.PushDetailPageAsync(new UserProfilePage(json.Id)).ConfigureAwait(false);
+                                break;
+                            case "PM":
+                                await this.Navigation.PushModalAsync(new NewPrivateMessagePage(json.Text)).ConfigureAwait(false);
+                                break;
+                            case "Their Posts":
+                                break;
+                        }
+                    });
+                    break;
             }
         }
 

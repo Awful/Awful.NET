@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Autofac;
 using Awful.Database.Entities;
 using Awful.Mobile.ViewModels;
+using Awful.UI.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,7 +19,7 @@ namespace Awful.Mobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PrivateMessagePage : BasePage
     {
-        private MobilePrivateMessagePageViewModel vm;
+        private PrivateMessagePageViewModel vm;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PrivateMessagePage"/> class.
@@ -27,7 +28,7 @@ namespace Awful.Mobile.Pages
         public PrivateMessagePage(AwfulPM pm)
         {
             this.InitializeComponent();
-            this.BindingContext = this.vm = App.Container.Resolve<MobilePrivateMessagePageViewModel>();
+            this.BindingContext = this.vm = App.Container.Resolve<PrivateMessagePageViewModel>();
             this.vm.WebView = this.AwfulWebView;
             this.vm.LoadPM(pm);
         }

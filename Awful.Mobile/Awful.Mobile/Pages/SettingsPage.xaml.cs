@@ -24,7 +24,7 @@ namespace Awful.Mobile.Pages
         public SettingsPage()
         {
             this.InitializeComponent();
-            this.BindingContext = App.Container.Resolve<MobileSettingsPageViewModel>();
+            this.BindingContext = App.Container.Resolve<SettingsPageViewModel>();
         }
     }
 }

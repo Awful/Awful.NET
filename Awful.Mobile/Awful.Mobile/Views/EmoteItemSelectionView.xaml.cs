@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Autofac;
 using Awful.Mobile.ViewModels;
 using Awful.UI.Tools;
+using Awful.UI.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,7 +19,7 @@ namespace Awful.Mobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EmoteItemSelectionView : ContentView
     {
-        private MobileEmoteItemSelectionViewModel vm;
+        private EmoteItemSelectionViewModel vm;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmoteItemSelectionView"/> class.
@@ -26,7 +27,7 @@ namespace Awful.Mobile.Views
         public EmoteItemSelectionView()
         {
             this.InitializeComponent();
-            this.BindingContext = this.vm = App.Container.Resolve<MobileEmoteItemSelectionViewModel>();
+            this.BindingContext = this.vm = App.Container.Resolve<EmoteItemSelectionViewModel>();
             this.vm.OnLoadCommand.ExecuteAsync().FireAndForgetSafeAsync(this.vm.Error);
         }
     }
