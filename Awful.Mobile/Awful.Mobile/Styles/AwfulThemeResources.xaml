@@ -91,24 +91,4 @@
         <Setter Property="SelectedTabColor" Value="{DynamicResource DynamicTextColor}" />
     </Style>
 
-    <Style ApplyToDerivedTypes="True" TargetType="Button">
-        <Setter Property="VisualStateManager.VisualStateGroups">
-            <VisualStateGroupList>
-                <VisualStateGroup x:Name="CommonStates">
-                    <VisualState x:Name="Normal">
-                        <VisualState.Setters>
-                            <Setter Property="BackgroundColor" Value="{DynamicResource ButtonBackgroundColor}" />
-                            <Setter Property="TextColor" Value="{DynamicResource ButtonTextColor}" />
-                        </VisualState.Setters>
-                    </VisualState>
-                    <VisualState x:Name="Disabled">
-                        <VisualState.Setters>
-                            <Setter Property="BackgroundColor" Value="{DynamicResource ButtonBackgroundColor}" />
-                            <Setter Property="TextColor" Value="{DynamicResource ButtonTextColor}" />
-                        </VisualState.Setters>
-                    </VisualState>
-                </VisualStateGroup>
-            </VisualStateGroupList>
-        </Setter>
-    </Style>
 </ResourceDictionary>

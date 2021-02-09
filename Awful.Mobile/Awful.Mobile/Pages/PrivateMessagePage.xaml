@@ -12,8 +12,8 @@
                  Priority="0">
             <ToolbarItem.IconImageSource>
                 <FontImageSource
-                    Color="{AppThemeBinding Dark={OnPlatform Android={StaticResource TextColorDark}, iOS=Default, Default=Default},
-                    Light={OnPlatform Android={StaticResource TextColorDark}, iOS=Default, Default=Default}}"
+                    Color="{AppThemeBinding Dark={OnPlatform Android={StaticResource TextColorLight}, iOS=Default, Default=Default},
+                    Light={OnPlatform Android={StaticResource TextColorLight}, iOS=Default, Default=Default}}"
                     FontFamily="FontAwesomeSolid"
                     Glyph=""
                     Size="20"

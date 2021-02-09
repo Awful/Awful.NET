@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Awful.Core.Entities.Threads;
 using Awful.Database.Context;
 using Awful.Database.Entities;
+using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Interfaces;
 using Awful.UI.Tools;
@@ -56,6 +57,46 @@ namespace Awful.UI.ViewModels
                 {
                     await this.RefreshForums().ConfigureAwait(false);
                 },
+                    null,
+                    this.Error);
+            }
+        }
+
+        /// <summary>
+        /// Gets the new thread command.
+        /// </summary>
+        public AwfulAsyncCommand NewThreadCommand
+        {
+            get
+            {
+                return this.newThreadCommand ??= new AwfulAsyncCommand(
+                    async () =>
+                    {
+                        if (this.forum != null)
+                        {
+                            await this.Navigation.PushModalAsync(new NewThreadPage(this.forum)).ConfigureAwait(false);
+                        }
+                    },
+                    () => !this.IsBusy && !this.OnProbation,
+                    this.Error);
+            }
+        }
+
+        /// <summary>
+        /// Gets the Selection Entry.
+        /// </summary>
+        public AwfulAsyncCommand<AwfulThread> SelectionCommand
+        {
+            get
+            {
+                return new AwfulAsyncCommand<AwfulThread>(
+                    async (item) =>
+                    {
+                        if (item != null)
+                        {
+                            await this.Navigation.PushDetailPageAsync(new ForumThreadPage(item)).ConfigureAwait(false);
+                        }
+                    },
                     null,
                     this.Error);
             }

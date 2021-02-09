@@ -24,6 +24,7 @@ namespace Awful.UI.ViewModels
     {
         private SettingsAction settingActions;
         private IPlatformProperties platformProperties;
+        private readonly IAwfulNavigation navigation;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsPageViewModel"/> class.
@@ -35,6 +36,7 @@ namespace Awful.UI.ViewModels
         public SettingsPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, IPlatformProperties platformProperties, IAwfulContext context)
             : base(navigation, error, context)
         {
+            this.navigation = navigation;
             this.platformProperties = platformProperties;
             this.Settings = this.Context.GetAppSettings();
             this.settingActions = new SettingsAction(context);
@@ -169,6 +171,7 @@ namespace Awful.UI.ViewModels
         /// </summary>
         public virtual void SetTheme()
         {
+            this.navigation.SetTheme(this.Settings);
         }
     }
 }
