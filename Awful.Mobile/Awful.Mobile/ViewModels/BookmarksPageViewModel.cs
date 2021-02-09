@@ -12,6 +12,7 @@ using Awful.Core.Tools;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
 using Awful.Database.Entities;
+using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Interfaces;
 using Awful.UI.Tools;
@@ -62,6 +63,26 @@ namespace Awful.UI.ViewModels
                     await this.RefreshBookmarksAsync().ConfigureAwait(false);
                     this.IsRefreshing = false;
                 },
+                    null,
+                    this.Error);
+            }
+        }
+
+        /// <summary>
+        /// Gets the Selection Entry.
+        /// </summary>
+        public AwfulAsyncCommand<AwfulThread> SelectionCommand
+        {
+            get
+            {
+                return new AwfulAsyncCommand<AwfulThread>(
+                    async (item) =>
+                    {
+                        if (item != null)
+                        {
+                            await this.Navigation.PushDetailPageAsync(new ForumThreadPage(item)).ConfigureAwait(false);
+                        }
+                    },
                     null,
                     this.Error);
             }
