@@ -2,11 +2,20 @@
 <pages:BasePage
     xmlns:pages="clr-namespace:Awful.Mobile.Pages"
     xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xmlns:local="clr-namespace:Awful.Mobile.Tools.Markup;assembly=Awful.Mobile"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Awful.Mobile.Pages.LoginPage">
     <ContentPage.Content>
-        <Grid>
+        <Grid xct:StateLayout.CurrentState="{Binding CurrentState}" xct:StateLayout.AnimateStateChanges="true">
+            <xct:StateLayout.StateViews>
+                <xct:StateView StateKey="Loading" BackgroundColor="White" VerticalOptions="FillAndExpand">
+                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                        <ActivityIndicator Color="#1abc9c" IsRunning="{Binding CurrentState, Converter={StaticResource StateToBooleanConverter}, ConverterParameter={x:Static xct:LayoutState.Loading}}" />
+                        <Label Text="Loading..." HorizontalOptions="Center" />
+                    </StackLayout>
+                </xct:StateView>
+            </xct:StateLayout.StateViews>
             <Grid Margin="15">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Essentials;
 
 namespace Awful.UI.ViewModels
@@ -15,7 +16,7 @@ namespace Awful.UI.ViewModels
     /// </summary>
     public class BaseViewModel : INotifyPropertyChanged
     {
-        private bool isBusy = false;
+        private LayoutState currentState = LayoutState.None;
         private bool isRefreshing = false;
         private string title = string.Empty;
         private string loadingText = "Loading...";
@@ -30,12 +31,28 @@ namespace Awful.UI.ViewModels
         {
             get
             {
-                return this.isBusy;
+                return this.currentState == LayoutState.Loading;
             }
 
             set
             {
-                this.SetProperty(ref this.isBusy, value);
+                this.CurrentState = value ? LayoutState.Loading : LayoutState.None;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the current layout state.
+        /// </summary>
+        public LayoutState CurrentState
+        {
+            get
+            {
+                return this.currentState;
+            }
+
+            set
+            {
+                this.SetProperty(ref this.currentState, value);
                 this.RaiseCanExecuteChanged();
             }
         }
