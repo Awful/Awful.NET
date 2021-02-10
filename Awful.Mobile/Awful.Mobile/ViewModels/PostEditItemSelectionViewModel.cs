@@ -28,8 +28,8 @@ namespace Awful.Mobile.ViewModels
         /// Initializes a new instance of the <see cref="PostEditItemSelectionViewModel"/> class.
         /// </summary>
         /// <param name="popup">Awful Popup.</param>
-        public PostEditItemSelectionViewModel(IAwfulPopup popup)
-            : base()
+        public PostEditItemSelectionViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, IAwfulContext context)
+            : base(navigation, error, context)
         {
             this.popup = popup;
         }

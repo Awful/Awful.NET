@@ -59,6 +59,11 @@ namespace Awful.Mobile.Droid.Renderers
         {
             if (this.Element is AwfulEditor editor && this.Control != null)
             {
+                editor.SelectedTextStart = 0;
+                editor.SelectedTextEnd = 0;
+                editor.SelectedTextLength = 0;
+                editor.SelectedText = string.Empty;
+
                 int start = this.Control.SelectionStart;
                 int end = this.Control.SelectionEnd;
                 int selectionLength = end - start;

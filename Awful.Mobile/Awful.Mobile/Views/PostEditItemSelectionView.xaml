@@ -17,8 +17,7 @@
                             <Image Margin="5" WidthRequest="35" HeightRequest="35">
                                 <Image.Source>
                                     <FontImageSource
-                            Color="{AppThemeBinding Dark={StaticResource TextColorDark}, 
-                                    Light={StaticResource TextColorLight}}"
+                            Color="{DynamicResource DynamicTextColor}"
                             FontFamily="FontAwesomeSolid"
                             Glyph="{Binding Glyph}"
                             Size="24"

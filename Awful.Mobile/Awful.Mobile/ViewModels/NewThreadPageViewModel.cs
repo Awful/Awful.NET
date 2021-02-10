@@ -8,10 +8,12 @@ using Awful.Core.Entities.Threads;
 using Awful.Core.Entities.Web;
 using Awful.Database.Context;
 using Awful.Database.Entities;
+using Awful.Mobile.Views;
 using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Awful.Webview;
+using Xamarin.CommunityToolkit.UI.Views;
 
 namespace Awful.UI.ViewModels
 {
@@ -21,6 +23,7 @@ namespace Awful.UI.ViewModels
     public class NewThreadPageViewModel : ThreadPostBaseViewModel
     {
         protected NewThread newThread;
+        private IAwfulPopup popup;
         private AwfulForum forum;
         private PostIcon postIcon = new PostIcon();
 
@@ -32,9 +35,10 @@ namespace Awful.UI.ViewModels
         /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful handler.</param>
         /// <param name="context">Awful Context.</param>
-        public NewThreadPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, ITemplateHandler handler, IAwfulContext context)
+        public NewThreadPageViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, ITemplateHandler handler, IAwfulContext context)
             : base(navigation, error, handler, context)
         {
+            this.popup = popup;
         }
 
         /// <summary>
@@ -50,6 +54,32 @@ namespace Awful.UI.ViewModels
             set
             {
                 this.SetProperty(ref this.postIcon, value);
+            }
+        }
+
+        /// <summary>
+        /// Gets the options command.
+        /// </summary>
+        public AwfulAsyncCommand OpenOptionsCommand
+        {
+            get
+            {
+                return new AwfulAsyncCommand(
+                    () =>
+                    {
+                        if (this.popup != null)
+                        {
+                            if (this.Editor != null)
+                            {
+                                var view = new PostEditItemSelectionView(this.Editor);
+                                this.popup.SetContent(view, true);
+                            }
+                        }
+
+                        return Task.CompletedTask;
+                    },
+                    null,
+                    this.Error);
             }
         }
 

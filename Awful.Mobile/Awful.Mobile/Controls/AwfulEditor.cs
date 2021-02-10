@@ -3,8 +3,11 @@
 // </copyright>
 
 using System;
+using Autofac;
 using Awful.Core.Utilities;
 using Awful.UI.Interfaces;
+using Awful.UI.Tools;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.Controls
@@ -14,12 +17,15 @@ namespace Awful.Mobile.Controls
     /// </summary>
     public class AwfulEditor : Editor, IAwfulEditor
     {
+        IAwfulErrorHandler error;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AwfulEditor"/> class.
         /// </summary>
         public AwfulEditor()
         {
             this.Text = string.Empty;
+            this.error = App.Container.Resolve<IAwfulErrorHandler>();
         }
 
         public bool IsTextSelected => !string.IsNullOrEmpty(this.SelectedText);
@@ -46,7 +52,7 @@ namespace Awful.Mobile.Controls
 
         public void UpdateText(string content)
         {
-            Device.BeginInvokeOnMainThread(() =>
+            MainThread.InvokeOnMainThreadAsync(() =>
             {
                 // If user has selected text, replace it.
                 // Or else, add it to whereever they have the cursor.
@@ -58,7 +64,7 @@ namespace Awful.Mobile.Controls
                 {
                     this.Text = this.Text.Insert(this.SelectedTextStart, content);
                 }
-            });
+            }).FireAndForgetSafeAsync(this.error);
         }
 
         void IAwfulEditor.Focus()

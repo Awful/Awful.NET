@@ -26,10 +26,12 @@ namespace Awful.UI.ViewModels
     /// </summary>
     public class EmoteItemSelectionViewModel : AwfulViewModel
     {
+        private IAwfulPopup popup;
         private ThreadPostCreationActions threadPostCreationActions;
         private AwfulAsyncCommand<string> textChangedCommand;
         private ObservableCollection<SmileGroup> items = new ObservableCollection<SmileGroup>();
         private ObservableCollection<SmileGroup> originalItems = new ObservableCollection<SmileGroup>();
+        private AwfulAsyncCommand<Smile> selectionCommand;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmoteItemSelectionViewModel"/> class.
@@ -38,9 +40,32 @@ namespace Awful.UI.ViewModels
         /// <param name="navigation">Awful Navigation handler.</param>
         /// <param name="error">Awful Error handler.</param>
         /// <param name="context">Awful Context.</param>
-        public EmoteItemSelectionViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, IAwfulContext context)
+        public EmoteItemSelectionViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, IAwfulContext context)
             : base(navigation, error, context)
         {
+            this.popup = popup;
+        }
+
+        /// <summary>
+        /// Gets the selection command.
+        /// </summary>
+        public AwfulAsyncCommand<Smile> SelectionCommand
+        {
+            get
+            {
+                return this.selectionCommand ??= new AwfulAsyncCommand<Smile>(
+                    (item) =>
+                    {
+                        if (item != null && this.popup != null)
+                        {
+                            this.popup.SetIsVisible(false, item);
+                        }
+
+                        return Task.CompletedTask;
+                    },
+                    null,
+                    this.Error);
+            }
         }
 
         /// <summary>
