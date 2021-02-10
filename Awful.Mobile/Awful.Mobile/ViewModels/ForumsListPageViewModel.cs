@@ -120,8 +120,10 @@ namespace Awful.UI.ViewModels
         /// <returns>Task.</returns>
         public async Task LoadForumsAsync(bool forceReload)
         {
+            this.IsBusy = true;
             this.originalList = await this.forumActions.GetForumListAsync(forceReload).ConfigureAwait(false);
             this.SortForumsIntoList(this.originalList.DeepClone());
+            this.IsBusy = false;
         }
 
         /// <inheritdoc/>

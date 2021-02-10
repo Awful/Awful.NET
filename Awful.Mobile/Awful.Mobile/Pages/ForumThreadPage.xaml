@@ -6,6 +6,7 @@
     xmlns:fontawesome="clr-namespace:FontAwesome"
     xmlns:controls="clr-namespace:Awful.Mobile.Controls"
     xmlns:views="clr-namespace:Awful.Mobile.Views"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="{Binding Title}"
     x:Class="Awful.Mobile.Pages.ForumThreadPage">
     <ContentPage.ToolbarItems>
@@ -35,17 +36,21 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
-                <RefreshView Grid.Row="0"
+                <Grid xct:StateLayout.CurrentState="{Binding CurrentState}" xct:StateLayout.AnimateStateChanges="true" Grid.Row="0">
+                    <xct:StateLayout.StateViews>
+                        <xct:StateView StateKey="Loading" VerticalOptions="FillAndExpand">
+                            <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                                <ActivityIndicator Color="{DynamicResource ActivityLoaderColor}" IsRunning="True" />
+                                <Label Text="{Binding LoadingText}" HorizontalOptions="Center" />
+                            </StackLayout>
+                        </xct:StateView>
+                    </xct:StateLayout.StateViews>
+                    <RefreshView Grid.Row="0"
                     Command="{Binding RefreshCommand}"
                     IsRefreshing="{Binding IsRefreshing}">
-                    <controls:HybridWebView x:Name="AwfulWebView"/>
-                </RefreshView>
-                <StackLayout Grid.Row="0" IsVisible="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                        <ActivityIndicator IsRunning="True"/>
-                        <Label Text="{Binding LoadingText}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
-                    </StackLayout>
-                </StackLayout>
+                        <controls:HybridWebView x:Name="AwfulWebView"/>
+                    </RefreshView>
+                </Grid>
                 <StackLayout Orientation="Horizontal"
                     Grid.Row="1">
                     <Button Grid.Column="0"

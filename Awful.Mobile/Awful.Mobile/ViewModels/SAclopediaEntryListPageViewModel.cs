@@ -11,6 +11,7 @@ using Awful.Core.Entities.SAclopedia;
 using Awful.Core.Tools;
 using Awful.Core.Utilities;
 using Awful.Database.Context;
+using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Entities;
 using Awful.UI.Interfaces;
@@ -42,6 +43,26 @@ namespace Awful.UI.ViewModels
             : base(navigation, error, context)
         {
             this.handler = handler;
+        }
+
+        /// <summary>
+        /// Gets the Selection Entry.
+        /// </summary>
+        public AwfulAsyncCommand<SAclopediaEntryItem> SelectionCommand
+        {
+            get
+            {
+                return new AwfulAsyncCommand<SAclopediaEntryItem>(
+                    async (item) =>
+                    {
+                        if (item != null)
+                        {
+                            await this.Navigation.PushDetailPageAsync(new SAclopediaEntryPage(item)).ConfigureAwait(false);
+                        }
+                    },
+                    null,
+                    this.Error);
+            }
         }
 
         /// <summary>

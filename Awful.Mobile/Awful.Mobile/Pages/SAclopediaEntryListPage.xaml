@@ -3,20 +3,29 @@
     xmlns:pages="clr-namespace:Awful.Mobile.Pages"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="SAclopedia"
     x:Class="Awful.Mobile.Pages.SAclopediaEntryListPage">
     <ContentPage.Content>
-          <Grid>
-                <CollectionView SelectionMode="Single" 
+        <Grid xct:StateLayout.CurrentState="{Binding CurrentState}" xct:StateLayout.AnimateStateChanges="true">
+            <xct:StateLayout.StateViews>
+                <xct:StateView StateKey="Loading" VerticalOptions="FillAndExpand">
+                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                        <ActivityIndicator Color="{DynamicResource ActivityLoaderColor}" IsRunning="True" />
+                        <Label Text="{Binding LoadingText}" HorizontalOptions="Center" />
+                    </StackLayout>
+                </xct:StateView>
+            </xct:StateLayout.StateViews>
+            <CollectionView SelectionMode="Single" 
                         x:Name="SAclopediaCollection"
                         ItemSizingStrategy="MeasureFirstItem"
                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference SAclopediaCollection}}" 
                         SelectionChangedCommand="{Binding SelectionCommand}"
                         ItemsSource="{Binding Items}"
                 IsGrouped="True">
-                    <CollectionView.GroupHeaderTemplate>
+                <CollectionView.GroupHeaderTemplate>
                     <DataTemplate>
-                           <Label
+                        <Label
                                TextColor="{AppThemeBinding Dark={StaticResource ForumHeaderTextColorDark}, 
                            Light={StaticResource ForumHeaderTextColorLight}}"
                                BackgroundColor="{AppThemeBinding Dark={StaticResource ForumBackgroundDark}, 
@@ -24,24 +33,18 @@
                                   Padding="10"
                                   Text="{Binding Name}" />
                     </DataTemplate>
-                    </CollectionView.GroupHeaderTemplate>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Padding="10">
+                </CollectionView.GroupHeaderTemplate>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
                             <Label  FontSize="{OnPlatform Android=15, iOS=19, Default=19}"
                                     MaxLines="1" 
                                     LineBreakMode="TailTruncation" 
                                     Text="{Binding Title}" />
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-               <StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                            <ActivityIndicator IsRunning="True"/>
-                            <Label Text="{Binding LoadingText}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
-                        </StackLayout>
-               </StackLayout>
-          </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
     </ContentPage.Content>
 </pages:BasePage>

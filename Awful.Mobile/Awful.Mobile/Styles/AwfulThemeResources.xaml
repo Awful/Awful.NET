@@ -34,6 +34,8 @@
     <Color x:Key="ForumBackgroundDark">#1C1C1C</Color>
     <Color x:Key="ForumBackgroundLight">#E4E4E4</Color>
 
+    <Color x:Key="ActivityLoaderColor">#1abc9c</Color>
+    
     <Style ApplyToDerivedTypes="True" TargetType="ContentPage">
         <Setter Property="BackgroundColor" Value="{DynamicResource DynamicBackgroundColor}" />
     </Style>
