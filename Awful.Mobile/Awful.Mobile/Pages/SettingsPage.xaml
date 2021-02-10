@@ -9,8 +9,8 @@
         <TableSection Title="User Options">
             <ViewCell>
                 <ViewCell.View>
-                    <Grid>
-                        <Button Margin="5"
+                    <Grid Padding="2">
+                        <Button
                            BackgroundColor="Red"
                            Text="Log Out"
                            Command="{Binding LoginPageCommand}" />
@@ -20,43 +20,19 @@
         </TableSection>
         <TableSection Title="Themes">
             <ViewCell>
-                <StackLayout Orientation="Horizontal">
-                    <StackLayout.Padding>
-                        <OnPlatform x:TypeArguments="Thickness">
-                            <OnPlatform.Platforms>
-                                <On Platform="iOS" Value="20,0,20,0"></On>
-                                <On Platform="Default" Value="0,0,0,0"></On>
-                            </OnPlatform.Platforms>
-                        </OnPlatform>
-                    </StackLayout.Padding>
+                <StackLayout Padding="13, 0" Orientation="Horizontal">
                     <Label Text="Use System Theme Settings:" VerticalOptions="Center"></Label>
                     <Switch IsToggled="{Binding UseSystemThemeSettings, Mode=TwoWay}" />
                 </StackLayout>
             </ViewCell>
             <ViewCell>
-                <StackLayout Orientation="Horizontal">
-                    <StackLayout.Padding>
-                        <OnPlatform x:TypeArguments="Thickness">
-                            <OnPlatform.Platforms>
-                                <On Platform="iOS" Value="20,0,20,0"></On>
-                                <On Platform="Default" Value="0,0,0,0"></On>
-                            </OnPlatform.Platforms>
-                        </OnPlatform>
-                    </StackLayout.Padding>
+                <StackLayout Padding="13, 0" Orientation="Horizontal">
                     <Label Text="Use Dark Mode:" VerticalOptions="Center"></Label>
                     <Switch IsEnabled="{Binding CanOverrideThemeSettings}" IsToggled="{Binding UseDarkMode, Mode=TwoWay}" />
                 </StackLayout>
             </ViewCell>
             <ViewCell>
-                <StackLayout Orientation="Horizontal">
-                    <StackLayout.Padding>
-                        <OnPlatform x:TypeArguments="Thickness">
-                            <OnPlatform.Platforms>
-                                <On Platform="iOS" Value="20,0,20,0"></On>
-                                <On Platform="Default" Value="0,0,0,0"></On>
-                            </OnPlatform.Platforms>
-                        </OnPlatform>
-                    </StackLayout.Padding>
+                <StackLayout Padding="13, 0" Orientation="Horizontal">
                     <Label Text="Custom Theme:" VerticalOptions="Center"></Label>
                     <Picker ItemsSource="{Binding CustomThemeNames}"
                                 WidthRequest="100"
