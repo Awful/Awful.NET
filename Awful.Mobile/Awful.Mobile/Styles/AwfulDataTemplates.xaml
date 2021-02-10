@@ -60,47 +60,29 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Grid VerticalOptions="Start" Grid.Column="0">
+                    <Grid VerticalOptions="Start" WidthRequest="55" Grid.Column="0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Image Grid.Row="0"
                                Margin="5"
+                               HeightRequest="45"
                                Source="{Binding ImageIconLocation, Converter={StaticResource ForumImageConverter}}"/>
                         <Image
                         Grid.Row="1"
-                        WidthRequest="55"
-                        HeightRequest="20"
+                        WidthRequest="10"
+                        HeightRequest="10"
                         IsVisible="{Binding RatingImage, Converter={StaticResource StringToVisibilityConverter}}"
                         Source="{Binding RatingImage, Converter={StaticResource RatingImageConverter}}" />
                         <Image
                         Grid.Row="2"
-                        WidthRequest="55"
-                        HeightRequest="20"
+                        WidthRequest="35"
+                        HeightRequest="13"
                         IsVisible="{Binding StoreImageIconEndpoint, Converter={StaticResource StringToVisibilityConverter}}"
                         Source="{Binding StoreImageIconEndpoint}" />
                     </Grid>
-                    <!--<StackLayout VerticalOptions="Start" Grid.Column="0">
-                        <Grid HeightRequest="55" WidthRequest="55">
-                            <Image Grid.Column="0"
-                               Margin="5"
-                               Source="{Binding ImageIconLocation, Converter={StaticResource ForumImageConverter}}"/>
-                        </Grid>
-                        <Image
-                        Grid.Column="0"
-                        WidthRequest="55"
-                        HeightRequest="20"
-                        IsVisible="{Binding RatingImage, Converter={StaticResource StringToVisibilityConverter}}"
-                        Source="{Binding RatingImage, Converter={StaticResource RatingImageConverter}}" />
-                        <Image
-                        Grid.Column="0"
-                        WidthRequest="55"
-                        HeightRequest="20"
-                        IsVisible="{Binding StoreImageIconEndpoint, Converter={StaticResource StringToVisibilityConverter}}"
-                        Source="{Binding StoreImageIconEndpoint}" />
-                    </StackLayout>-->
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>

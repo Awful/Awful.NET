@@ -27,6 +27,10 @@ namespace Awful.UI.ViewModels
         private ThreadListActions threadlistActions;
         private ThreadList threadList;
         private AwfulAsyncCommand refreshCommand;
+        private AwfulAsyncCommand firstPageCommand;
+        private AwfulAsyncCommand lastPageCommand;
+        private AwfulAsyncCommand nextPageCommand;
+        private AwfulAsyncCommand previousPageCommand;
         private int page = 1;
 
         /// <summary>
@@ -44,6 +48,23 @@ namespace Awful.UI.ViewModels
         /// Gets the list of threads.
         /// </summary>
         public ObservableCollection<AwfulThread> Threads { get; set; } = new ObservableCollection<AwfulThread>();
+
+        /// <summary>
+        /// Gets or sets the page.
+        /// </summary>
+        public int Page
+        {
+            get { return this.page; }
+            set { this.SetProperty(ref this.page, value); }
+        }
+
+        /// <summary>
+        /// Gets the total page.
+        /// </summary>
+        public int TotalPages
+        {
+            get { return this.threadList != null ? this.threadList.TotalPages : 1; }
+        }
 
         /// <summary>
         /// Gets the refresh command.
@@ -103,19 +124,82 @@ namespace Awful.UI.ViewModels
         }
 
         /// <summary>
+        /// Gets the previous page command.
+        /// </summary>
+        public AwfulAsyncCommand FirstPageCommand
+        {
+            get
+            {
+                return this.firstPageCommand ??= new AwfulAsyncCommand(
+                    async () =>
+                    {
+                        if (!this.IsBusy && this.threadList != null && this.Page <= this.threadList.TotalPages)
+                        {
+                            this.Page = 1;
+                            await this.LoadThreadListAsync(this.forum.Id, this.Page).ConfigureAwait(false);
+                        }
+                    },
+                    null,
+                    this.Error);
+            }
+        }
+
+        /// <summary>
+        /// Gets the previous page command.
+        /// </summary>
+        public AwfulAsyncCommand LastPageCommand
+        {
+            get
+            {
+                return this.lastPageCommand ??= new AwfulAsyncCommand(
+                    async () =>
+                    {
+                        if (!this.IsBusy && this.threadList != null && this.Page <= this.threadList.TotalPages)
+                        {
+                            this.Page = this.threadList.TotalPages;
+                            await this.LoadThreadListAsync(this.forum.Id, this.Page).ConfigureAwait(false);
+                        }
+                    },
+                    null,
+                    this.Error);
+            }
+        }
+
+        /// <summary>
+        /// Gets the previous page command.
+        /// </summary>
+        public AwfulAsyncCommand PreviousPageCommand
+        {
+            get
+            {
+                return this.previousPageCommand ??= new AwfulAsyncCommand(
+                    async () =>
+                    {
+                        if (!this.IsBusy && this.threadList != null && this.Page <= this.threadList.TotalPages)
+                        {
+                            this.Page--;
+                            await this.LoadThreadListAsync(this.forum.Id, this.Page).ConfigureAwait(false);
+                        }
+                    },
+                    null,
+                    this.Error);
+            }
+        }
+
+        /// <summary>
         /// Gets the next page command.
         /// </summary>
         public AwfulAsyncCommand NextPageCommand
         {
             get
             {
-                return new AwfulAsyncCommand(
+                return this.nextPageCommand ??= new AwfulAsyncCommand(
                     async () =>
                 {
-                    if (!this.IsBusy && this.threadList != null && this.page <= this.threadList.TotalPages)
+                    if (!this.IsBusy && this.threadList != null && this.Page <= this.threadList.TotalPages)
                     {
-                        this.page++;
-                        await this.LoadThreadListAsync(this.forum.Id, this.page).ConfigureAwait(false);
+                        this.Page++;
+                        await this.LoadThreadListAsync(this.forum.Id, this.Page).ConfigureAwait(false);
                     }
                 },
                     null,
@@ -147,10 +231,7 @@ namespace Awful.UI.ViewModels
                 throw new ArgumentOutOfRangeException(nameof(forumId));
             }
 
-            if (page == 1)
-            {
-                this.Threads.Clear();
-            }
+            this.Threads.Clear();
 
             this.IsBusy = true;
             this.threadList = await this.threadlistActions.GetForumThreadListAsync(forumId, page).ConfigureAwait(false);
