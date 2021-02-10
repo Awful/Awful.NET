@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Text;
 using Awful.Core.Entities.Threads;
+using Awful.UI.Tools;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.Tools.Converters
@@ -24,11 +25,11 @@ namespace Awful.Mobile.Tools.Converters
             {
                 if (!string.IsNullOrEmpty(ratingImage))
                 {
-                    return ImageSource.FromResource($"Awful.Mobile.ThreadTags.{ratingImage}.png", typeof(RatingImageConverter).GetTypeInfo().Assembly);
+                    return ImageSource.FromResource($"Awful.UI.ThreadTags.{ratingImage}.png", typeof(AwfulAsyncCommand).GetTypeInfo().Assembly);
                 }
             }
 
-            return ImageSource.FromResource($"Awful.Mobile.ThreadTags.0stars.png", typeof(RatingImageConverter).GetTypeInfo().Assembly);
+            return ImageSource.FromResource($"Awful.UI.ThreadTags.0stars.png", typeof(AwfulAsyncCommand).GetTypeInfo().Assembly);
         }
 
         /// <inheritdoc/>

@@ -32,6 +32,7 @@
                  IsRefreshing="{Binding IsRefreshing}">
                 <CollectionView x:Name="ThreadListCollection"
                         SelectionMode="Single"
+                        ItemSizingStrategy="MeasureAllItems"
                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ThreadListCollection}}" 
                         SelectionChangedCommand="{Binding SelectionCommand}"
                         RemainingItemsThreshold="1"
