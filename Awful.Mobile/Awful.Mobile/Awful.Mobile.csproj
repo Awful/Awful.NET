@@ -43,6 +43,9 @@
     <Compile Remove="Styles\PrivateMessagesPage.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Xamarin.Forms.DualScreen" Version="5.0.0.1931" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Pages\AcknowledgmentsPage.xaml.cs">
       <DependentUpon>AcknowledgmentsPage.xaml</DependentUpon>
     </Compile>

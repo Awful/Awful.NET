@@ -172,6 +172,11 @@
   <ItemGroup>
     <AndroidResource Include="Resources\values\sizes.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms.DualScreen">
+      <Version>5.0.0.1931</Version>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
