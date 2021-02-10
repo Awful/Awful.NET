@@ -68,6 +68,12 @@
         <Setter Property="OnColor" Value="{DynamicResource SwitchOnColor}" />
     </Style>
 
+    <Style ApplyToDerivedTypes="True" TargetType="SearchBar">
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextColor}" />
+        <Setter Property="CancelButtonColor" Value="{DynamicResource DynamicTextColor}" />
+        <Setter Property="PlaceholderColor" Value="{DynamicResource DynamicTextColor}" />
+    </Style>
+
     <Style TargetType="NavigationPage" ApplyToDerivedTypes="True">
         <Setter Property="NavigationPage.BarBackgroundColor"
                         Value="{DynamicResource DynamicHeaderBackgroundColor}" />
