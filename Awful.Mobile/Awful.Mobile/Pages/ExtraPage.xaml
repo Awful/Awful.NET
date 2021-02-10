@@ -17,7 +17,7 @@
                         <Image Margin="5" WidthRequest="35" HeightRequest="35">
                          <Image.Source>
                                 <FontImageSource
-                            Color="{StaticResource TabBarSelectedColor}"
+                            Color="{StaticResource DynamicTextColor}"
                             FontFamily="FontAwesomeSolid"
                             Glyph="{Binding Glyph}"
                             Size="24"
