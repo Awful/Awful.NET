@@ -48,4 +48,14 @@ function showPosts() {
     }
 }
 
+function scrollToBottom() {
+    var scrollingElement = (document.scrollingElement || document.body);
+    scrollingElement.scrollTop = scrollingElement.scrollHeight;
+}
+
+function scrollToTop() {
+    var scrollingElement = (document.scrollingElement || document.body);
+    scrollingElement.scrollTop = 0;
+}
+
 hidePosts();

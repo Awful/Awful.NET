@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Awful.UI.Interfaces;
 using Xamarin.Forms;
 
@@ -56,6 +57,12 @@ namespace Awful.Mobile.Controls
             var source = new HtmlWebViewSource();
             source.Html = html;
             Device.BeginInvokeOnMainThread(() => this.Source = source);
+        }
+
+        /// <inheritdoc/>
+        Task IAwfulWebview.EvaluateJavaScriptAsync(string data)
+        {
+            return this.EvaluateJavaScriptAsync(data);
         }
     }
 }

@@ -36,6 +36,8 @@ namespace Awful.UI.ViewModels
         private ThreadPost threadPost;
         private AwfulAsyncCommand refreshCommand;
         private DefaultOptions defaults;
+        private AwfulAsyncCommand scrollToBottomCommand;
+        private AwfulAsyncCommand scrollToTopCommand;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ForumThreadPageViewModel"/> class.
@@ -66,6 +68,40 @@ namespace Awful.UI.ViewModels
                         }
                     },
                     () => !this.IsBusy && !this.OnProbation,
+                    this.Error);
+            }
+        }
+
+        /// <summary>
+        /// Gets the scroll to top command.
+        /// </summary>
+        public AwfulAsyncCommand ScrollToTopCommand
+        {
+            get
+            {
+                return this.scrollToTopCommand ??= new AwfulAsyncCommand(
+                    async () =>
+                    {
+                        await this.WebView.EvaluateJavaScriptAsync("scrollToTop()");
+                    },
+                    () => !this.IsBusy,
+                    this.Error);
+            }
+        }
+
+        /// <summary>
+        /// Gets the scroll to top command.
+        /// </summary>
+        public AwfulAsyncCommand ScrollToBottomCommand
+        {
+            get
+            {
+                return this.scrollToBottomCommand ??= new AwfulAsyncCommand(
+                    async () =>
+                    {
+                        await this.WebView.EvaluateJavaScriptAsync("scrollToBottom()");
+                    },
+                    () => !this.IsBusy,
                     this.Error);
             }
         }

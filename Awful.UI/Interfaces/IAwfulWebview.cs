@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Awful.UI.Interfaces
 {
@@ -29,6 +30,12 @@ namespace Awful.UI.Interfaces
         /// </summary>
         /// <param name="data">Data used to invoke.</param>
         public void InvokeAction(string data);
+
+        /// <summary>
+        /// Invoke Action.
+        /// </summary>
+        /// <param name="data">Data used to invoke.</param>
+        public Task EvaluateJavaScriptAsync(string data);
 
         /// <summary>
         /// Sets the source of the webview.

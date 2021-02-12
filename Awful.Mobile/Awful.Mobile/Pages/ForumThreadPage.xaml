@@ -7,7 +7,6 @@
     xmlns:controls="clr-namespace:Awful.Mobile.Controls"
     xmlns:views="clr-namespace:Awful.Mobile.Views"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-    Title="{Binding Title}"
     x:Class="Awful.Mobile.Pages.ForumThreadPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Reply" Command="{Binding ReplyToThreadCommand}"
@@ -24,6 +23,13 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
+    <NavigationPage.TitleView>
+        <Label Text="{Binding Title}">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ScrollToTopCommand}" />
+            </Label.GestureRecognizers>
+        </Label>
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -53,6 +59,9 @@
                 </Grid>
                 <StackLayout Orientation="Horizontal"
                     Grid.Row="1">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ScrollToBottomCommand}" />
+                    </StackLayout.GestureRecognizers>
                     <Button Grid.Column="0"
                              Margin="5,0,0,0"
                              TextColor="{AppThemeBinding Dark={StaticResource BackgroundColorLight}, 
