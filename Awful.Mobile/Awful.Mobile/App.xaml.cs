@@ -40,7 +40,11 @@ namespace Awful.Mobile
         {
             Device.SetFlags(new string[] { "Shell_UWP_Experimental", "AppTheme_Experimental", "CollectionView_Experimental", "Shapes_Experimental" });
             this.InitializeComponent();
-            Container = Awful.UI.AwfulContainer.BuildContainer(builder);
+            if (Container == null)
+            {
+                Container = Awful.UI.AwfulContainer.BuildContainer(builder);
+            }
+
             var platformConfig = App.Container.Resolve<IPlatformProperties>();
             var database = App.Container.Resolve<IAwfulContext>();
             var navigation = App.Container.Resolve<IAwfulNavigation>();
