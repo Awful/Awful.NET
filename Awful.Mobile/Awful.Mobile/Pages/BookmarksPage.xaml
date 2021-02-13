@@ -22,6 +22,12 @@
                         <Label Grid.Row="1" FontAttributes="Bold" HorizontalOptions="Center" Text="No Bookmarked Threads!" />
                     </Grid>
                 </xct:StateView>
+                <xct:StateView StateKey="Loading" VerticalOptions="FillAndExpand">
+                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                        <ActivityIndicator Color="{DynamicResource ActivityLoaderColor}" IsRunning="True" />
+                        <Label Text="{Binding LoadingText}" HorizontalOptions="Center" />
+                    </StackLayout>
+                </xct:StateView>
             </xct:StateLayout.StateViews>
             <RefreshView Command="{Binding RefreshCommand}"
                  IsRefreshing="{Binding IsRefreshing}">

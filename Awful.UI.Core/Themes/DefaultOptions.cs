@@ -14,8 +14,18 @@ namespace Awful.Webview.Entities.Themes
     public class DefaultOptions
     {
         /// <summary>
-        /// Gets or sets the device color theme.
+        /// Gets or sets a value indicating whether we're using dark mode.
         /// </summary>
         public bool IsDarkMode { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether we're using Oled mode.
+        /// </summary>
+        public bool IsOledMode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the default forum theme id.
+        /// </summary>
+        public int ForumThemeId { get; set; }
     }
 }

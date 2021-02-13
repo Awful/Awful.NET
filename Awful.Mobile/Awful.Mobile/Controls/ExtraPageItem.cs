@@ -30,5 +30,10 @@ namespace Awful.Mobile.Controls
         /// Gets or sets the title of the page.
         /// </summary>
         public string Title { get; set; }
+
+        /// <summary>
+        /// Gets or sets the description for the option.
+        /// </summary>
+        public string Description { get; set; }
     }
 }

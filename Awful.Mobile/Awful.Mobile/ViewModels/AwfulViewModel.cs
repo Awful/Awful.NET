@@ -180,7 +180,7 @@ namespace Awful.UI.ViewModels
         public async Task<DefaultOptions> GenerateDefaultOptionsAsync()
         {
             var defaults = this.Context.GetAppSettings();
-            var defaultOptions = new DefaultOptions() { IsDarkMode = defaults.UseDarkMode };
+            var defaultOptions = new DefaultOptions() { IsDarkMode = defaults.UseDarkMode, IsOledMode = defaults.CustomTheme == AppCustomTheme.OLED };
 
             return defaultOptions;
         }

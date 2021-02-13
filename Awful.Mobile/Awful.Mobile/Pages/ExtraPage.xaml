@@ -14,7 +14,7 @@
                         <RowDefinition Height="1" />
                     </Grid.RowDefinitions>
                     <StackLayout Orientation="Horizontal">
-                        <Image Margin="5" WidthRequest="35" HeightRequest="35">
+                        <Image VerticalOptions="Center" Margin="5" WidthRequest="35" HeightRequest="35">
                          <Image.Source>
                                 <FontImageSource
                             Color="{StaticResource DynamicTextColor}"
@@ -24,7 +24,10 @@
                             />
                          </Image.Source>
                         </Image>
-                        <Label VerticalOptions="Center" Text="{Binding Title}" />
+                        <StackLayout VerticalOptions="Center">
+                            <Label FontAttributes="Bold" FontSize="Large" Text="{Binding Title}" />
+                            <Label FontSize="Subtitle" Text="{Binding Description}" />
+                        </StackLayout>
                     </StackLayout>
                  <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
                 </Grid>

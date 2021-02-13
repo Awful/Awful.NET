@@ -7,6 +7,7 @@ using Autofac;
 using Awful.Mobile.Controls;
 using Awful.Mobile.ViewModels;
 using Awful.UI.Interfaces;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -41,24 +42,28 @@ namespace Awful.Mobile.Pages
                     Type = "SAclopediaCell",
                     Glyph = "",
                     Title = "SAclopedia",
+                    Description = "The Something Awful Encyclopedia.",
                 },
                 new ExtraPageItem()
                 {
                     Type = "LepersCell",
                     Glyph = "",
                     Title = "Leper's Colony",
+                    Description = "List of banned users and the reason they were banned.",
                 },
                 new ExtraPageItem()
                 {
                     Type = "UserProfileCell",
                     Glyph = "",
                     Title = "User Profile",
+                    Description = "Go straight to the currently logged in users profile.",
                 },
                 new ExtraPageItem()
                 {
                     Type = "AcknowledgmentsCell",
                     Glyph = "",
                     Title = "Acknowledgments",
+                    Description = "All of the cool libraries and people who helped make this app possible.",
                 },
             };
 
@@ -68,6 +73,7 @@ namespace Awful.Mobile.Pages
                 Type = "DebugCell",
                 Glyph = "",
                 Title = "Debug",
+                Description = "Scratch page with a bunch of debug stuff. If you can see this and it ain't a debug build, something got screwed up!",
             });
 #endif
 
@@ -87,7 +93,7 @@ namespace Awful.Mobile.Pages
                 var selection = e.CurrentSelection[0];
                 if (selection is ExtraPageItem item)
                 {
-                    Device.BeginInvokeOnMainThread(async () =>
+                    MainThread.BeginInvokeOnMainThread(async () =>
                     {
                         switch (item.Type)
                         {

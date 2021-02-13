@@ -29,6 +29,7 @@ namespace Awful.Webview
         private readonly string profileCss;
         private readonly string postCss;
         private readonly string postDarkCss;
+        private readonly string postOledDarkCss;
         private readonly string postYosposCss;
         private readonly string postFyadCss;
         private readonly string postByobCss;
@@ -50,7 +51,8 @@ namespace Awful.Webview
             this.systemUiCss = MobileTemplateHandler.GetResourceFileContentAsString("CSS.system-font.css");
             this.profileCss = MobileTemplateHandler.GetResourceFileContentAsString("CSS.profile.css");
             this.postCss = MobileTemplateHandler.GetResourceFileContentAsString("CSS.posts-view.css");
-            this.postDarkCss = MobileTemplateHandler.GetResourceFileContentAsString("CSS.posts-view-oled-dark.css");
+            this.postDarkCss = MobileTemplateHandler.GetResourceFileContentAsString("CSS.posts-view-dark.css");
+            this.postOledDarkCss = MobileTemplateHandler.GetResourceFileContentAsString("CSS.posts-view-oled-dark.css");
             this.postYosposCss = MobileTemplateHandler.GetResourceFileContentAsString("CSS.posts-view-yospos.css");
             this.postFyadCss = MobileTemplateHandler.GetResourceFileContentAsString("CSS.posts-view-fyad.css");
             this.postByobCss = MobileTemplateHandler.GetResourceFileContentAsString("CSS.posts-view-byob.css");
@@ -190,13 +192,20 @@ namespace Awful.Webview
                     entity.CSS.Add(this.postByobCss);
                     break;
                 default:
-                    if (options.IsDarkMode)
+                    if (options.IsOledMode)
                     {
-                        entity.CSS.Add(this.postDarkCss);
+                        entity.CSS.Add(this.postOledDarkCss);
                     }
                     else
                     {
-                        entity.CSS.Add(this.postCss);
+                        if (options.IsDarkMode)
+                        {
+                            entity.CSS.Add(this.postDarkCss);
+                        }
+                        else
+                        {
+                            entity.CSS.Add(this.postCss);
+                        }
                     }
 
                     break;

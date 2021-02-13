@@ -3,17 +3,20 @@
                  xmlns="http://xamarin.com/schemas/2014/forms"
                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
                  xmlns:controls="clr-namespace:Awful.Mobile.Controls"
+                 xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
                  Title="{Binding Title}"
                  x:Class="Awful.Mobile.Pages.UserProfilePage">
     <ContentPage.Content>
-        <Grid>
+        <Grid xct:StateLayout.CurrentState="{Binding CurrentState}" xct:StateLayout.AnimateStateChanges="true">
+            <xct:StateLayout.StateViews>
+                <xct:StateView StateKey="Loading" VerticalOptions="FillAndExpand">
+                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                        <ActivityIndicator Color="{DynamicResource ActivityLoaderColor}" IsRunning="True" />
+                        <Label Text="{Binding LoadingText}" HorizontalOptions="Center" />
+                    </StackLayout>
+                </xct:StateView>
+            </xct:StateLayout.StateViews>
             <controls:HybridWebView x:Name="AwfulWebView"/>
-            <StackLayout Grid.Row="0" IsVisible="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                    <ActivityIndicator IsRunning="True"/>
-                    <Label Text="{Binding LoadingText}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
-                </StackLayout>
-            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </pages:BasePage>

@@ -6,6 +6,7 @@
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
     xmlns:vm="clr-namespace:Awful.Mobile.ViewModels;assembly=Awful.Mobile"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:local="clr-namespace:Awful.Mobile.Tools.Markup;assembly=Awful.Mobile"
     x:Class="Awful.Mobile.Styles.AwfulThemeResources">
     <Color x:Key="OLED_BackgroundColorDark">#000000</Color>
