@@ -253,23 +253,26 @@ namespace Awful.Mobile.Controls
         /// <param name="options">Options.</param>
         public void SetTheme(SettingOptions options)
         {
-            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() => {
-                var darkMode = options.UseSystemThemeSettings ? this.platformProperties.IsDarkTheme : options.UseDarkMode;
-                if (!options.UseSystemThemeSettings && options.CustomTheme != AppCustomTheme.None)
-                {
-                    ResourcesHelper.SetCustomTheme(options.CustomTheme);
-                    return;
-                }
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(
+                () => {
+                    var darkMode = options.UseSystemThemeSettings ? this.platformProperties.IsDarkTheme : options.UseDarkMode;
+                    if (!options.UseSystemThemeSettings && options.CustomTheme != AppCustomTheme.None)
+                    {
+                        ResourcesHelper.SetCustomTheme(options.CustomTheme);
+                    }
+                    else
 
-                if (darkMode)
-                {
-                    ResourcesHelper.SetDarkMode();
-                }
-                else
-                {
-                    ResourcesHelper.SetLightMode();
-                }
-            });
+                        if (darkMode)
+                    {
+                        ResourcesHelper.SetDarkMode();
+                    }
+                    else
+                    {
+                        ResourcesHelper.SetLightMode();
+                    }
+
+                    ResourcesHelper.SetStatusBarColor(Application.Current.Resources["DynamicHeaderBackgroundColor"]);
+                });
         }
     }
 }

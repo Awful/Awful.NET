@@ -5,6 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Autofac;
+using Awful.Core.Tools;
 using Awful.Database.Entities;
 using Xamarin.Forms;
 
@@ -124,6 +126,12 @@ namespace Awful.Mobile
                 default:
                     break;
             }
+        }
+
+        public static void SetStatusBarColor(object color)
+        {
+            var platform = App.Container.Resolve<IPlatformProperties>();
+            platform.SetStatusBarColor((Xamarin.Forms.Color)color);
         }
     }
 }

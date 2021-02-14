@@ -10,6 +10,7 @@ using Awful.Core.Tools;
 using Awful.Webview.Entities.Themes;
 using Foundation;
 using UIKit;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Awful.Mobile.iOS
@@ -97,6 +98,18 @@ namespace Awful.Mobile.iOS
             }
 
             return viewController;
+        }
+
+        /// <inheritdoc/>
+        public void SetStatusBarColor(System.Drawing.Color color)
+        {
+            UIView statusBar = UIApplication.SharedApplication.ValueForKey(
+            new NSString("statusBar")) as UIView;
+            if (statusBar != null && statusBar.RespondsToSelector(
+            new ObjCRuntime.Selector("setBackgroundColor:")))
+            {
+                statusBar.BackgroundColor = color.ToPlatformColor();
+            }
         }
     }
 }

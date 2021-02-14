@@ -44,5 +44,10 @@ namespace Awful.Mobile.UWP
         /// Gets the Database Path.
         /// </summary>
         public string DatabasePath => System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "awful.db");
+
+        /// <inheritdoc/>
+        public void SetStatusBarColor(System.Drawing.Color color)
+        {
+        }
     }
 }

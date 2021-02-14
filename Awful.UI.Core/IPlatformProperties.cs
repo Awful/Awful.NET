@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 using Awful.Webview.Entities.Themes;
 
@@ -28,5 +29,11 @@ namespace Awful.Core.Tools
         /// Gets the path to where the database is stored.
         /// </summary>
         string DatabasePath { get; }
+
+        /// <summary>
+        /// Sets the status bar color.
+        /// </summary>
+        /// <param name="color">Color to set the status bar to.</param>
+        void SetStatusBarColor(Color color);
     }
 }

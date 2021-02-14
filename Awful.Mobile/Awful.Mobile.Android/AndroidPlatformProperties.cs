@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using Android.App;
@@ -15,6 +16,8 @@ using Android.Views;
 using Android.Widget;
 using Awful.Core.Tools;
 using Awful.Webview.Entities.Themes;
+using Xamarin.Forms.Platform.Android;
+using Xamarin.Essentials;
 
 namespace Awful.Mobile.Droid
 {
@@ -59,5 +62,11 @@ namespace Awful.Mobile.Droid
         /// Gets the Database Path.
         /// </summary>
         public string DatabasePath => System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "awful.db");
+
+        /// <inheritdoc/>
+        public void SetStatusBarColor(Color color)
+        {
+            Xamarin.Essentials.Platform.CurrentActivity.Window.SetStatusBarColor(color.ToPlatformColor());
+        }
     }
 }
