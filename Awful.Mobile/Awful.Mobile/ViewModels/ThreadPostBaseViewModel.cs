@@ -88,6 +88,10 @@ namespace Awful.UI.ViewModels
                 return new AwfulAsyncCommand(
                     async () =>
                 {
+                    if (this.Editor != null)
+                    {
+                        this.Editor.Unfocus();
+                    }
                     await this.Navigation.PopModalAsync().ConfigureAwait(false);
                 },
                     null,

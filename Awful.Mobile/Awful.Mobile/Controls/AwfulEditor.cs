@@ -71,5 +71,13 @@ namespace Awful.Mobile.Controls
         {
             Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() => this.Focus());
         }
+
+        void IAwfulEditor.Unfocus()
+        {
+            Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() => {
+                this.Unfocus();
+                Forms9Patch.KeyboardService.Hide();
+            });
+        }
     }
 }

@@ -49,5 +49,10 @@ namespace Awful.UI.Interfaces
         /// Focus the editor.
         /// </summary>
         public void Focus();
+
+        /// <summary>
+        /// Unfocus the editor.
+        /// </summary>
+        public void Unfocus();
     }
 }
