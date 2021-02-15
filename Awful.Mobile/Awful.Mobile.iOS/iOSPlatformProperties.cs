@@ -103,13 +103,14 @@ namespace Awful.Mobile.iOS
         /// <inheritdoc/>
         public void SetStatusBarColor(System.Drawing.Color color)
         {
-            UIView statusBar = UIApplication.SharedApplication.ValueForKey(
-            new NSString("statusBar")) as UIView;
-            if (statusBar != null && statusBar.RespondsToSelector(
-            new ObjCRuntime.Selector("setBackgroundColor:")))
+            if (UIApplication.SharedApplication.KeyWindow == null)
             {
-                statusBar.BackgroundColor = color.ToPlatformColor();
+                return;
             }
+
+            UIView statusBar = new UIView(UIApplication.SharedApplication.KeyWindow.WindowScene.StatusBarManager.StatusBarFrame);
+            statusBar.BackgroundColor = color.ToPlatformColor();
+            UIApplication.SharedApplication.KeyWindow.AddSubview(statusBar);
         }
     }
 }
