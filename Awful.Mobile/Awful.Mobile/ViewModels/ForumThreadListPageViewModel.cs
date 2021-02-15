@@ -55,7 +55,7 @@ namespace Awful.UI.ViewModels
         public int Page
         {
             get { return this.page; }
-            set { this.SetProperty(ref this.page, value); }
+            set { this.SetProperty(ref this.page, value); this.RaiseCanExecuteChanged(); }
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace Awful.UI.ViewModels
                             await this.LoadThreadListAsync(this.forum.Id, this.Page).ConfigureAwait(false);
                         }
                     },
-                    null,
+                    () => this.Page > 1,
                     this.Error);
             }
         }
@@ -202,7 +202,7 @@ namespace Awful.UI.ViewModels
                         await this.LoadThreadListAsync(this.forum.Id, this.Page).ConfigureAwait(false);
                     }
                 },
-                    null,
+                    () => this.Page < this.TotalPages,
                     this.Error);
             }
         }
@@ -264,6 +264,8 @@ namespace Awful.UI.ViewModels
         public override void RaiseCanExecuteChanged()
         {
             this.newThreadCommand?.RaiseCanExecuteChanged();
+            this.NextPageCommand.RaiseCanExecuteChanged();
+            this.PreviousPageCommand.RaiseCanExecuteChanged();
         }
 
         /// <inheritdoc/>

@@ -3,6 +3,7 @@
 // </copyright>
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace Awful.UI.ViewModels
     public class BookmarksPageViewModel : AwfulViewModel
     {
         private BookmarkAction bookmarks;
-        private ObservableCollection<AwfulThread> threads = new ObservableCollection<AwfulThread>();
+        private List<AwfulThread> threads = new List<AwfulThread>();
         private AwfulAsyncCommand refreshCommand;
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace Awful.UI.ViewModels
         /// <summary>
         /// Gets or sets Forum Threads.
         /// </summary>
-        public ObservableCollection<AwfulThread> Threads
+        public List<AwfulThread> Threads
         {
             get { return this.threads; }
             set { this.SetProperty(ref this.threads, value); }
@@ -101,12 +102,7 @@ namespace Awful.UI.ViewModels
             }
 
             this.IsBusy = true;
-            var threads = await this.bookmarks.GetAllBookmarksAsync(reload).ConfigureAwait(false);
-            this.Threads.Clear();
-            foreach (var thread in threads)
-            {
-                this.Threads.Add(thread);
-            }
+            this.Threads = await this.bookmarks.GetAllBookmarksAsync(reload).ConfigureAwait(false);
 
             this.IsBusy = false;
         }

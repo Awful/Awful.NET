@@ -11,7 +11,7 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />
-                        <RowDefinition Height="1" />
+                        <RowDefinition Height="2" />
                     </Grid.RowDefinitions>
                     <StackLayout Orientation="Horizontal">
                         <Image VerticalOptions="Center" Margin="5" WidthRequest="35" HeightRequest="35">
@@ -26,10 +26,10 @@
                         </Image>
                         <StackLayout VerticalOptions="Center">
                             <Label FontAttributes="Bold" FontSize="Large" Text="{Binding Title}" />
-                            <Label FontSize="Subtitle" Text="{Binding Description}" />
+                            <Label FontSize="Medium" Text="{Binding Description}" />
                         </StackLayout>
                     </StackLayout>
-                 <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
+                 <Rectangle Grid.Row="1" HeightRequest="1" BackgroundColor="Gray"/>
                 </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>

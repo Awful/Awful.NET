@@ -110,7 +110,10 @@ namespace Awful.UI.ViewModels
             if (this.IsSignedIn)
             {
                 this.saclopedia = new SAclopediaAction(this.Client, this.Context, this.handler);
-                await this.RefreshEntryList(false).ConfigureAwait(false);
+                if (!this.Items.Any())
+                {
+                    await this.RefreshEntryList(false).ConfigureAwait(false);
+                }
             }
         }
 
