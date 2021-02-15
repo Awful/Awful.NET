@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Awful.Database.Context;
 using Awful.Database.Entities;
+using Awful.Mobile.Pages;
 using Awful.UI.Actions;
 using Awful.UI.Interfaces;
 using Awful.UI.Tools;
@@ -23,6 +24,8 @@ namespace Awful.UI.ViewModels
         private PrivateMessageActions pmActions;
         private AwfulAsyncCommand refreshCommand;
         private ITemplateHandler handler;
+        private AwfulAsyncCommand newPMCommand;
+        private AwfulAsyncCommand<AwfulPM> selectionCommand;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PrivateMessagesPageViewModel"/> class.
@@ -57,6 +60,49 @@ namespace Awful.UI.ViewModels
                     () => this.CanPM,
                     this.Error);
             }
+        }
+
+        /// <summary>
+        /// Gets the Selection Entry.
+        /// </summary>
+        public AwfulAsyncCommand<AwfulPM> SelectionCommand
+        {
+            get
+            {
+                return this.selectionCommand ??= new AwfulAsyncCommand<AwfulPM>(
+                    async (item) =>
+                    {
+                        if (item != null)
+                        {
+                            await this.Navigation.PushDetailPageAsync(new PrivateMessagePage(item)).ConfigureAwait(false);
+                        }
+                    },
+                    (item) => this.CanPM,
+                    this.Error);
+            }
+        }
+
+        /// <summary>
+        /// Gets the new pm command.
+        /// </summary>
+        public AwfulAsyncCommand NewPMCommand
+        {
+            get
+            {
+                return this.newPMCommand ??= new AwfulAsyncCommand(
+                    async () =>
+                    {
+                        await this.Navigation.PushModalAsync(new NewPrivateMessagePage()).ConfigureAwait(false);
+                    },
+                    () => !this.IsBusy && this.CanPM,
+                    this.Error);
+            }
+        }
+
+        /// <inheritdoc/>
+        public override void RaiseCanExecuteChanged()
+        {
+            this.NewPMCommand.RaiseCanExecuteChanged();
         }
 
         /// <summary>

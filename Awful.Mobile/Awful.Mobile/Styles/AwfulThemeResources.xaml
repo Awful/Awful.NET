@@ -83,11 +83,20 @@
         <Setter Property="NavigationPage.BarTextColor" Value="{DynamicResource DynamicHeaderBarTextColor}"/>
     </Style>
 
-    <Style TargetType="Editor">
+    <Style ApplyToDerivedTypes="True" TargetType="Editor">
         <Setter Property="TextColor"
+                        Value="{DynamicResource DynamicTextColor}" />
+        <Setter Property="PlaceholderColor"
                         Value="{DynamicResource DynamicTextColor}" />
         <Setter Property="BackgroundColor"
                         Value="{DynamicResource DynamicBackgroundColor}" />
+    </Style>
+
+    <Style ApplyToDerivedTypes="True" TargetType="Entry">
+        <Setter Property="TextColor"
+                        Value="{DynamicResource DynamicTextColor}" />
+        <Setter Property="PlaceholderColor"
+                        Value="{DynamicResource DynamicTextColor}" />
     </Style>
 
     <Style TargetType="TabbedPage" ApplyToDerivedTypes="True">

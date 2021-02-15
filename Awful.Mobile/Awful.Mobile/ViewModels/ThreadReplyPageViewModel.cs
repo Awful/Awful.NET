@@ -8,11 +8,13 @@ using Awful.Core.Entities.Replies;
 using Awful.Core.Entities.Web;
 using Awful.Database.Context;
 using Awful.Database.Entities;
+using Awful.Mobile.Views;
 using Awful.UI.Actions;
 using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Awful.Webview;
+using Xamarin.Essentials;
 
 namespace Awful.UI.ViewModels
 {
@@ -25,17 +27,21 @@ namespace Awful.UI.ViewModels
         private int threadId = 0;
         private int id = 0;
         private bool isEdit;
+        private AwfulAsyncCommand postReplyCommand;
+        private IAwfulPopup popup;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadReplyPageViewModel"/> class.
         /// </summary>
+        /// <param name="popup">Awful Popup.</param>
         /// <param name="navigation">Awful Navigation handler.</param>
         /// <param name="error">Awful Error handler.</param>
         /// <param name="handler">Awful handler.</param>
         /// <param name="context">Awful Context.</param>
-        public ThreadReplyPageViewModel(IAwfulNavigation navigation, IAwfulErrorHandler error, ITemplateHandler handler, IAwfulContext context)
+        public ThreadReplyPageViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, ITemplateHandler handler, IAwfulContext context)
             : base(navigation, error, handler, context)
         {
+            this.popup = popup;
         }
 
         /// <summary>
@@ -44,6 +50,72 @@ namespace Awful.UI.ViewModels
         public bool CanPost
         {
             get { return !string.IsNullOrEmpty(this.Message); }
+        }
+
+        /// <inheritdoc/>
+        public override void RaiseCanExecuteChanged()
+        {
+            this.PostThreadCommand?.RaiseCanExecuteChanged();
+        }
+
+        /// <summary>
+        /// Gets the options command.
+        /// </summary>
+        public AwfulAsyncCommand OpenOptionsCommand
+        {
+            get
+            {
+                return new AwfulAsyncCommand(
+                    () =>
+                    {
+                        if (this.popup != null)
+                        {
+                            if (this.Editor != null)
+                            {
+                                var view = new PostEditItemSelectionView(this.Editor);
+                                this.popup.SetContent(view, true);
+                            }
+                        }
+
+                        return Task.CompletedTask;
+                    },
+                    null,
+                    this.Error);
+            }
+        }
+
+        /// <summary>
+        /// Gets the post thread command.
+        /// </summary>
+        public AwfulAsyncCommand PostThreadCommand
+        {
+            get
+            {
+                return this.postReplyCommand ??= new AwfulAsyncCommand(
+                    async () =>
+                    {
+                        if (this.reply != null)
+                        {
+                            var result = await this.SendPostAsync().ConfigureAwait(false);
+
+                            if (result == null)
+                            {
+                                return;
+                            }
+
+                            if (result.IsSuccess)
+                            {
+                                MainThread.BeginInvokeOnMainThread(async () =>
+                                {
+                                    await this.Navigation.PopModalAsync().ConfigureAwait(false);
+                                    await this.Navigation.RefreshPostPageAsync().ConfigureAwait(false);
+                                });
+                            }
+                        }
+                    },
+                    () => this.CanPost,
+                    this.Error);
+            }
         }
 
         /// <summary>

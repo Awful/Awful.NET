@@ -14,6 +14,7 @@ using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Awful.Webview;
 using Xamarin.CommunityToolkit.UI.Views;
+using Xamarin.Essentials;
 
 namespace Awful.UI.ViewModels
 {
@@ -26,6 +27,7 @@ namespace Awful.UI.ViewModels
         private IAwfulPopup popup;
         private AwfulForum forum;
         private PostIcon postIcon = new PostIcon();
+        private AwfulAsyncCommand postThreadCommand;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NewThreadPageViewModel"/> class.
@@ -84,6 +86,66 @@ namespace Awful.UI.ViewModels
         }
 
         /// <summary>
+        /// Gets the SelectPostIcon Command.
+        /// </summary>
+        public AwfulAsyncCommand SelectPostIconCommand
+        {
+            get
+            {
+                return new AwfulAsyncCommand(
+                    () =>
+                    {
+                        if (this.popup != null)
+                        {
+                            this.popup.SetContent(new ForumPostIconSelectionView(null, this.PostIcon), true, this.OnCloseModal);
+                        }
+
+                        return Task.CompletedTask;
+                    },
+                    null,
+                    this.Error);
+            }
+        }
+
+        /// <summary>
+        /// Gets the post thread command.
+        /// </summary>
+        public AwfulAsyncCommand PostThreadCommand
+        {
+            get
+            {
+                return this.postThreadCommand ??= new AwfulAsyncCommand(
+                    async () =>
+                    {
+                        if (this.newThread != null)
+                        {
+
+                            var result = await this.PostNewThreadAsync().ConfigureAwait(false);
+
+                            // If we get a null result, we couldn't post at all. Ignore.
+                            // TODO: It shouldn't ever return null anyway because of the Command Check.
+                            // We probably don't need this check.
+                            if (result == null)
+                            {
+                                return;
+                            }
+
+                            if (result.IsSuccess)
+                            {
+                                MainThread.BeginInvokeOnMainThread(async () =>
+                                {
+                                    await this.Navigation.PopModalAsync().ConfigureAwait(false);
+                                    await this.Navigation.RefreshForumPageAsync().ConfigureAwait(false);
+                                });
+                            }
+                        }
+                    },
+                    () => this.CanPost,
+                    this.Error);
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether the user can post.
         /// </summary>
         public bool CanPost
@@ -112,6 +174,19 @@ namespace Awful.UI.ViewModels
             {
                 this.OnPropertyChanged(nameof(this.PostIcon));
             }
+        }
+
+        /// <inheritdoc/>
+        public override void OnCloseModal()
+        {
+            this.OnPropertyChanged(nameof(this.PostIcon));
+            this.PostThreadCommand.RaiseCanExecuteChanged();
+        }
+
+        /// <inheritdoc/>
+        public override void RaiseCanExecuteChanged()
+        {
+            this.PostThreadCommand.RaiseCanExecuteChanged();
         }
 
         /// <summary>

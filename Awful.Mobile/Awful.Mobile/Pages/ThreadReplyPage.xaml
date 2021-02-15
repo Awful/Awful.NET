@@ -3,21 +3,30 @@
     xmlns:pages="clr-namespace:Awful.Mobile.Pages"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:controls="clr-namespace:Awful.Mobile.Controls"
     xmlns:views="clr-namespace:Awful.Mobile.Views"
-    ios:Page.ModalPresentationStyle="FormSheet"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     x:Class="Awful.Mobile.Pages.ThreadReplyPage">
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="1" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <views:ForumHeaderView Grid.Row="0" />
-            <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
-            <controls:AwfulEditor Text="{Binding Message}" Grid.Row="2" Margin="15" x:Name="AwfulEditor"/>
+        <Grid xct:StateLayout.CurrentState="{Binding CurrentState}" xct:StateLayout.AnimateStateChanges="true">
+            <xct:StateLayout.StateViews>
+                <xct:StateView StateKey="Loading" VerticalOptions="FillAndExpand">
+                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                        <ActivityIndicator Color="{DynamicResource ActivityLoaderColor}" IsRunning="True" />
+                        <Label Text="{Binding LoadingText}" HorizontalOptions="Center" />
+                    </StackLayout>
+                </xct:StateView>
+            </xct:StateLayout.StateViews>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <views:ForumHeaderView Grid.Row="0" />
+                <Rectangle Grid.Row="1" BackgroundColor="Gray"/>
+                <controls:AwfulEditor Text="{Binding Message}" Grid.Row="2" Margin="15" x:Name="AwfulEditor"/>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </pages:BasePage>
