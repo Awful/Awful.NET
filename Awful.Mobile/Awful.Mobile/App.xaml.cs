@@ -48,7 +48,6 @@ namespace Awful.Mobile
             var platformConfig = App.Container.Resolve<IPlatformProperties>();
             var database = App.Container.Resolve<IAwfulContext>();
             var navigation = App.Container.Resolve<IAwfulNavigation>();
-            navigation.SetTheme(database.GetAppSettings());
             StartApp(platformConfig, navigation);
         }
 

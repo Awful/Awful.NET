@@ -12,6 +12,7 @@
                     <Grid Padding="2">
                         <Button
                            BackgroundColor="Red"
+                           TextColor="White"
                            Text="Log Out"
                            Command="{Binding LoginPageCommand}" />
                     </Grid>

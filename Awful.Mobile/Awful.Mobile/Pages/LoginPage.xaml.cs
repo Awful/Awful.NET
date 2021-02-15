@@ -5,7 +5,9 @@
 using System;
 using System.Collections.Generic;
 using Autofac;
+using Awful.Database.Context;
 using Awful.Mobile.ViewModels;
+using Awful.UI.Interfaces;
 using Awful.UI.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -25,6 +27,15 @@ namespace Awful.Mobile.Pages
         {
             this.InitializeComponent();
             this.BindingContext = App.Container.Resolve<LoginPageViewModel>();
+        }
+
+        /// <inheritdoc/>
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            var navigation = App.Container.Resolve<IAwfulNavigation>();
+            var database = App.Container.Resolve<IAwfulContext>();
+            navigation.SetTheme(database.GetAppSettings());
         }
     }
 }

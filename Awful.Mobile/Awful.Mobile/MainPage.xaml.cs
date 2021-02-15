@@ -9,8 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
+using Awful.Database.Context;
 using Awful.Mobile.Pages;
 using Awful.Mobile.ViewModels;
+using Awful.UI.Interfaces;
 using Awful.UI.ViewModels;
 using Xamarin.Forms;
 
@@ -28,6 +30,15 @@ namespace Awful.Mobile
         public MainPage()
         {
             this.InitializeComponent();
+        }
+
+        /// <inheritdoc/>
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            var navigation = App.Container.Resolve<IAwfulNavigation>();
+            var database = App.Container.Resolve<IAwfulContext>();
+            navigation.SetTheme(database.GetAppSettings());
         }
     }
 }
