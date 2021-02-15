@@ -8,10 +8,13 @@ using System.Text;
 using Autofac;
 using Awful.Database.Context;
 using Awful.Mobile.Controls;
+using Awful.Mobile.Helpers;
 using Awful.Mobile.ViewModels;
 using Awful.UI.Interfaces;
 using Awful.UI.ViewModels;
 using Awful.Webview;
+using Imgur.API.Authentication;
+using Imgur.API.Endpoints;
 
 namespace Awful.UI
 {
@@ -30,6 +33,11 @@ namespace Awful.UI
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (!string.IsNullOrEmpty(Secrets.ImgurApiClientKey))
+            {
+                builder.RegisterInstance(new ImageEndpoint(new ApiClient(Secrets.ImgurApiClientKey), new System.Net.Http.HttpClient())).SingleInstance();
             }
 
             builder.RegisterType<MobileTemplateHandler>().As<ITemplateHandler>().SingleInstance();

@@ -42,6 +42,19 @@ Mac
 - To run the Android build, select `Awful.Mobile.Droid` in the project selection dropdown, and deploy. It should build and deploy to your device or simulator.
 - To run the iOS app, you need XCode installed. If you don't, you will be prompted to install it. Select `Awful.Mobile.iOS` and deploy.
 
+---
+
+In order to use the Imgur Upload functions, you must setup `secrets.json` in the [Awful.Mobile](Awful.Mobile/Awful.Mobile) Class Library. This contains the Imgur API keys.
+
+```
+{
+  "ImgurApiClientKey": "(CLIENT KEY)",
+  "ImgurApiClientSecret": "(CLIENT SECRET)"
+}
+
+```
+
+
 ## Awful.Mobile
 
 Awful.Mobile is the mobile application. We are using Xamarin.Forms and currently targeting iOS and Android. Using Forms, we can make a shared UI that can span multiple platforms with the vast majority of the same code.

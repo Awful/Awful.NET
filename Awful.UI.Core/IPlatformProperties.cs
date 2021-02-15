@@ -5,7 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Awful.Webview.Entities.Themes;
 
 namespace Awful.Core.Tools
@@ -35,5 +37,11 @@ namespace Awful.Core.Tools
         /// </summary>
         /// <param name="color">Color to set the status bar to.</param>
         void SetStatusBarColor(Color color);
+
+        /// <summary>
+        /// Gets an image.
+        /// </summary>
+        /// <returns>Image Stream.</returns>
+        public Task<Stream> PickImageAsync();
     }
 }

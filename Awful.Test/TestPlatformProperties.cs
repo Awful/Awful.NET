@@ -4,8 +4,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Awful.Core.Tools;
 using Awful.Webview.Entities.Themes;
 
@@ -39,5 +41,15 @@ namespace Awful.Test
 
         /// <inheritdoc/>
         public bool IsDarkTheme => true;
+
+        public Task<Stream> PickImageAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetStatusBarColor(Color color)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

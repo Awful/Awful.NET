@@ -6,12 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Awful.Core.Entities.Smilies;
+using Awful.Core.Tools;
 using Awful.Database.Context;
 using Awful.Mobile.Views;
 using Awful.UI.Interfaces;
 using Awful.UI.Tools;
 using Awful.UI.ViewModels;
 using Awful.Webview;
+using Imgur.API.Endpoints;
 using Xamarin.Essentials;
 
 namespace Awful.Mobile.ViewModels
@@ -23,15 +25,19 @@ namespace Awful.Mobile.ViewModels
     {
         private IAwfulEditor editor;
         private IAwfulPopup popup;
+        private IPlatformProperties platform;
+        private ImageEndpoint client;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PostEditItemSelectionViewModel"/> class.
         /// </summary>
         /// <param name="popup">Awful Popup.</param>
-        public PostEditItemSelectionViewModel(IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, IAwfulContext context)
+        public PostEditItemSelectionViewModel(ImageEndpoint client, IPlatformProperties platform, IAwfulPopup popup, IAwfulNavigation navigation, IAwfulErrorHandler error, IAwfulContext context)
             : base(navigation, error, context)
         {
             this.popup = popup;
+            this.platform = platform;
+            this.client = client;
         }
 
         /// <summary>
@@ -223,6 +229,17 @@ namespace Awful.Mobile.ViewModels
 
         private async Task AddPhoto()
         {
+            this.IsBusy = true;
+            var photo = await this.platform.PickImageAsync().ConfigureAwait(false);
+            if (photo != null)
+            {
+                var imageUpload = await this.client.UploadImageAsync(photo).ConfigureAwait(false);
+                if (imageUpload != null)
+                {
+                    this.SetTextInEditor($"[timg]{imageUpload.Link}[/timg]");
+                }
+            }
+            this.IsBusy = false;
         }
 
         private async Task AddUrl()

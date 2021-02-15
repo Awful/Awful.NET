@@ -4,8 +4,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Awful.Core.Tools;
 using Awful.Webview.Entities.Themes;
 using Foundation;
@@ -20,6 +22,9 @@ namespace Awful.Mobile.iOS
     /// </summary>
     public class iOSPlatformProperties : IPlatformProperties
     {
+        TaskCompletionSource<Stream> taskCompletionSource;
+        UIImagePickerController imagePicker;
+
         /// <inheritdoc/>
         public bool IsDarkTheme
         {
@@ -111,6 +116,76 @@ namespace Awful.Mobile.iOS
             UIView statusBar = new UIView(UIApplication.SharedApplication.KeyWindow.WindowScene.StatusBarManager.StatusBarFrame);
             statusBar.BackgroundColor = color.ToPlatformColor();
             UIApplication.SharedApplication.KeyWindow.AddSubview(statusBar);
+        }
+
+        /// <inheritdoc/>
+        public System.Threading.Tasks.Task<Stream> PickImageAsync()
+        {
+            // Create and define UIImagePickerController
+            this.imagePicker = new UIImagePickerController
+            {
+                SourceType = UIImagePickerControllerSourceType.PhotoLibrary,
+                MediaTypes = UIImagePickerController.AvailableMediaTypes(UIImagePickerControllerSourceType.PhotoLibrary),
+            };
+
+            // Set event handlers
+            this.imagePicker.FinishedPickingMedia += this.OnImagePickerFinishedPickingMedia;
+            this.imagePicker.Canceled += this.OnImagePickerCancelled;
+
+            // Present UIImagePickerController;
+            UIWindow window = UIApplication.SharedApplication.KeyWindow;
+            var viewController = window.RootViewController;
+            viewController.PresentViewController(imagePicker, true, null);
+
+            // Return Task object
+            this.taskCompletionSource = new TaskCompletionSource<Stream>();
+            return this.taskCompletionSource.Task;
+        }
+
+        private void OnImagePickerFinishedPickingMedia(object sender, UIImagePickerMediaPickedEventArgs args)
+        {
+            UIImage image = args.EditedImage ?? args.OriginalImage;
+
+            if (image != null)
+            {
+                // Convert UIImage to .NET Stream object
+                NSData data;
+                if (args.ReferenceUrl.PathExtension.Equals("PNG") || args.ReferenceUrl.PathExtension.Equals("png"))
+                {
+                    data = image.AsPNG();
+                }
+                else
+                {
+                    data = image.AsJPEG(1);
+                }
+
+                Stream stream = data.AsStream();
+
+                this.UnregisterEventHandlers();
+
+                // Set the Stream as the completion of the Task
+                this.taskCompletionSource.SetResult(stream);
+            }
+            else
+            {
+                this.UnregisterEventHandlers();
+                this.taskCompletionSource.SetResult(null);
+            }
+
+            this.imagePicker.DismissModalViewController(true);
+        }
+
+        private void OnImagePickerCancelled(object sender, EventArgs args)
+        {
+            this.UnregisterEventHandlers();
+            this.taskCompletionSource.SetResult(null);
+            this.imagePicker.DismissModalViewController(true);
+        }
+
+        private void UnregisterEventHandlers()
+        {
+            this.imagePicker.FinishedPickingMedia -= this.OnImagePickerFinishedPickingMedia;
+            this.imagePicker.Canceled -= this.OnImagePickerCancelled;
         }
     }
 }

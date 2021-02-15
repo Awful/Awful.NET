@@ -9,6 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awful.Core", "Awful.Core\Aw
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{5DE4F485-0C6D-4ED0-A8F1-41833E4EB122}"
 	ProjectSection(SolutionItems) = preProject
+		buildtools.json = buildtools.json
 		Database.props = Database.props
 		Directory.Build.props = Directory.Build.props
 		stylecop.json = stylecop.json
@@ -44,7 +45,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Awful.Mobile.iOS", "Awful.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Awful.Mobile.UWP", "Awful.Mobile\Awful.Mobile.UWP\Awful.Mobile.UWP.csproj", "{471EFD81-31C9-4FD7-8AB1-10FBF87D7029}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Awful.UI.Core", "Awful.UI.Core\Awful.UI.Core.csproj", "{74BB77EC-9FCE-4A70-A7D7-A3D66CDA0C18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awful.UI.Core", "Awful.UI.Core\Awful.UI.Core.csproj", "{74BB77EC-9FCE-4A70-A7D7-A3D66CDA0C18}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

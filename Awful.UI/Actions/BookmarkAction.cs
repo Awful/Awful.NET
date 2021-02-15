@@ -91,7 +91,7 @@ namespace Awful.UI.Actions
         /// </summary>
         /// <param name="thread">Thread.</param>
         /// <returns>Result.</returns>
-        public async Task<List<AwfulThread>> AddBookmarkAsync(Core.Entities.Threads.Thread thread)
+        public async Task<List<AwfulThread>> AddBookmarkAsync(Awful.Core.Entities.Threads.Thread thread)
         {
             if (thread == null)
             {
@@ -117,7 +117,7 @@ namespace Awful.UI.Actions
         /// </summary>
         /// <param name="thread">Thread.</param>
         /// <returns>Result.</returns>
-        public async Task<List<AwfulThread>> RemoveBookmarkAsync(Core.Entities.Threads.Thread thread)
+        public async Task<List<AwfulThread>> RemoveBookmarkAsync(Awful.Core.Entities.Threads.Thread thread)
         {
             if (thread == null)
             {

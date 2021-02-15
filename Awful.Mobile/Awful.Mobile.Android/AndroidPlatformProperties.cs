@@ -5,8 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
@@ -16,8 +18,8 @@ using Android.Views;
 using Android.Widget;
 using Awful.Core.Tools;
 using Awful.Webview.Entities.Themes;
-using Xamarin.Forms.Platform.Android;
 using Xamarin.Essentials;
+using Xamarin.Forms.Platform.Android;
 
 namespace Awful.Mobile.Droid
 {
@@ -67,6 +69,26 @@ namespace Awful.Mobile.Droid
         public void SetStatusBarColor(Color color)
         {
             Xamarin.Essentials.Platform.CurrentActivity.Window.SetStatusBarColor(color.ToPlatformColor());
+        }
+
+        /// <inheritdoc/>
+        public Task<Stream> PickImageAsync()
+        {
+            // Define the Intent for getting images
+            Intent intent = new Intent();
+            intent.SetType("image/*");
+            intent.SetAction(Intent.ActionGetContent);
+
+            // Start the picture-picker activity (resumes in MainActivity.cs)
+            MainActivity.Instance.StartActivityForResult(
+                Intent.CreateChooser(intent, "Select Picture"),
+                MainActivity.PickImageId);
+
+            // Save the TaskCompletionSource object as a MainActivity property
+            MainActivity.Instance.PickImageTaskCompletionSource = new TaskCompletionSource<Stream>();
+
+            // Return Task object
+            return MainActivity.Instance.PickImageTaskCompletionSource.Task;
         }
     }
 }

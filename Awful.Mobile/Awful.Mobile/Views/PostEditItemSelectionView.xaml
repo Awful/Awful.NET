@@ -2,9 +2,18 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              HeightRequest="500"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Class="Awful.Mobile.Views.PostEditItemSelectionView">
   <ContentView.Content>
-        <Grid>
+        <Grid xct:StateLayout.CurrentState="{Binding CurrentState}" xct:StateLayout.AnimateStateChanges="true">
+            <xct:StateLayout.StateViews>
+                <xct:StateView StateKey="Loading" VerticalOptions="FillAndExpand">
+                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                        <ActivityIndicator Color="{DynamicResource ActivityLoaderColor}" IsRunning="True" />
+                        <Label Text="{Binding LoadingText}" HorizontalOptions="Center" />
+                    </StackLayout>
+                </xct:StateView>
+            </xct:StateLayout.StateViews>
             <CollectionView x:Name="AwfulCollection"
                             ItemsLayout="VerticalGrid, 3"
                             SelectionMode="Single"

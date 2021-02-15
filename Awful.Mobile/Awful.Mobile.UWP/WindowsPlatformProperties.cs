@@ -5,12 +5,14 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Awful.Core.Tools;
 using Awful.Webview.Entities.Themes;
 using Windows.UI;
+using Xamarin.Essentials;
 
 namespace Awful.Mobile.UWP
 {
@@ -48,6 +50,36 @@ namespace Awful.Mobile.UWP
         /// <inheritdoc/>
         public void SetStatusBarColor(System.Drawing.Color color)
         {
+        }
+
+        /// <inheritdoc/>
+        public Task<Stream> PickImageAsync()
+        {
+            var tcs = new TaskCompletionSource<Stream>();
+            MainThread.BeginInvokeOnMainThread(async () => {
+                var picker = new Windows.Storage.Pickers.FileOpenPicker
+                {
+                    ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail,
+                    SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary,
+                };
+
+                foreach (var ext in Awful.UI.Core.ImageUploadFileExtensions.ImageExtensions)
+                {
+                    picker.FileTypeFilter.Add(ext);
+                }
+
+                Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
+                if (file == null)
+                {
+                    tcs.SetResult(null);
+                    return;
+                }
+
+                var token = Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.Add(file);
+                var fileStream = await file.OpenStreamForReadAsync().ConfigureAwait(false);
+                tcs.SetResult(fileStream);
+            });
+            return tcs.Task;
         }
     }
 }
