@@ -7,6 +7,8 @@
     x:Name="NewThreadPageView"
     xmlns:fontawesome="clr-namespace:FontAwesome"
     xmlns:controls="clr-namespace:Awful.Mobile.Controls"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:Page.UseSafeArea="true"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xmlns:views="clr-namespace:Awful.Mobile.Views"
     x:Class="Awful.Mobile.Pages.NewThreadPage">

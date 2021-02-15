@@ -7,6 +7,8 @@
              xmlns:controls="clr-namespace:Awful.Mobile.Controls"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:views="clr-namespace:Awful.Mobile.Views"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
              x:Name="NewPmPageView"
              x:Class="Awful.Mobile.Pages.NewPrivateMessagePage">
     <ContentPage.Content>
