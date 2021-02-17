@@ -20,9 +20,15 @@
             <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
                 <StackLayout>
                     <SearchBar x:Name="searchBar"  
-                           Placeholder="Search Forums..." 
-                           SearchCommand="{Binding SearchCommand}"
-                           SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" />
+                           Placeholder="Search Forums..." >
+                        <SearchBar.Behaviors>
+                            <xct:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding SearchCommand}"
+                                CommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                            />
+                            </SearchBar.Behaviors>
+                        </SearchBar>
                     <CollectionView SelectionMode="Single" 
                         x:Name="ForumCollection"
                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ForumCollection}}" 

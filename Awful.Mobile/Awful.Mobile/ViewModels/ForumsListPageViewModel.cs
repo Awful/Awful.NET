@@ -27,7 +27,7 @@ namespace Awful.UI.ViewModels
     {
         private IndexPageActions forumActions;
         private AwfulAsyncCommand refreshCommand;
-        private AwfulAsyncCommand<string> searchCommand;
+        private AwfulAsyncCommand<object> searchCommand;
         private List<Forum> originalList = new List<Forum>();
 
         /// <summary>
@@ -61,14 +61,23 @@ namespace Awful.UI.ViewModels
         }
 
         /// <summary>
-        /// Gets the refresh command.
+        /// Gets the Search command.
         /// </summary>
-        public AwfulAsyncCommand<string> SearchCommand
+        public AwfulAsyncCommand<object> SearchCommand
         {
             get
             {
-                return this.searchCommand ??= new AwfulAsyncCommand<string>(
-                    async (x) => this.FilterForums(x),
+                return this.searchCommand ??= new AwfulAsyncCommand<object>(
+                    async (x) => {
+                        if (x is string search)
+                        {
+                            this.FilterForums(search);
+                        }
+                        else
+                        {
+                            this.FilterForums(string.Empty);
+                        }
+                    },
                     null,
                     this.Error);
             }

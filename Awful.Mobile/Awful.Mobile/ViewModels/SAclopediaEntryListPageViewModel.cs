@@ -31,6 +31,7 @@ namespace Awful.UI.ViewModels
         private ITemplateHandler handler;
         private AwfulAsyncCommand refreshCommand;
         private List<SAclopediaEntryItem> originalItems = new List<SAclopediaEntryItem>();
+        private AwfulAsyncCommand<object> searchCommand;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SAclopediaEntryListPageViewModel"/> class.
@@ -80,6 +81,29 @@ namespace Awful.UI.ViewModels
         /// Gets the SAclopedia Items.
         /// </summary>
         public List<SAclopediaGroup> Items { get; private set; } = new List<SAclopediaGroup>();
+
+        /// <summary>
+        /// Gets the Search command.
+        /// </summary>
+        public AwfulAsyncCommand<object> SearchCommand
+        {
+            get
+            {
+                return this.searchCommand ??= new AwfulAsyncCommand<object>(
+                    async (x) => {
+                        if (x is string search)
+                        {
+                            this.FilterList(search);
+                        }
+                        else
+                        {
+                            this.FilterList(string.Empty);
+                        }
+                    },
+                    null,
+                    this.Error);
+            }
+        }
 
         /// <summary>
         /// Filter SAclopediaList, with text.

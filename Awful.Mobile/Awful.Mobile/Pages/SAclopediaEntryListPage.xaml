@@ -16,7 +16,18 @@
                     </StackLayout>
                 </xct:StateView>
             </xct:StateLayout.StateViews>
-            <CollectionView SelectionMode="Single" 
+            <StackLayout>
+                <SearchBar x:Name="searchBar"  
+                           Placeholder="Search SAclopedia..." >
+                            <SearchBar.Behaviors>
+                            <xct:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding SearchCommand}"
+                                CommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                            />
+                            </SearchBar.Behaviors>
+                    </SearchBar>
+                <CollectionView SelectionMode="Single" 
                         x:Name="SAclopediaCollection"
                         ItemSizingStrategy="MeasureFirstItem"
                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference SAclopediaCollection}}" 
@@ -45,6 +56,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </pages:BasePage>

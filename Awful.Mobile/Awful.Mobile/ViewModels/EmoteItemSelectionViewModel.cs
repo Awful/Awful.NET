@@ -28,9 +28,9 @@ namespace Awful.UI.ViewModels
     {
         private IAwfulPopup popup;
         private ThreadPostCreationActions threadPostCreationActions;
-        private AwfulAsyncCommand<string> textChangedCommand;
-        private ObservableCollection<SmileGroup> items = new ObservableCollection<SmileGroup>();
-        private ObservableCollection<SmileGroup> originalItems = new ObservableCollection<SmileGroup>();
+        private AwfulAsyncCommand<object> textChangedCommand;
+        private List<SmileGroup> items = new List<SmileGroup>();
+        private List<SmileGroup> originalItems = new List<SmileGroup>();
         private AwfulAsyncCommand<Smile> selectionCommand;
 
         /// <summary>
@@ -71,26 +71,20 @@ namespace Awful.UI.ViewModels
         /// <summary>
         /// Gets the selection command.
         /// </summary>
-        public AwfulAsyncCommand<string> TextChangedCommand
+        public AwfulAsyncCommand<object> TextChangedCommand
         {
             get
             {
-                return this.textChangedCommand ??= new AwfulAsyncCommand<string>(
+                return this.textChangedCommand ??= new AwfulAsyncCommand<object>(
                     (item) =>
                     {
-                        var textItem = item.Trim();
-                        if (string.IsNullOrEmpty(textItem))
+                        if (item is string search)
                         {
-                            this.Items = this.originalItems.DeepClone();
-                            return Task.CompletedTask;
+                            this.FilterList(search);
                         }
-
-                        var items = this.originalItems.Where(n => n.Any(p => p.Title.Contains(textItem)));
-                        this.Items.Clear();
-                        foreach (var group in items)
+                        else
                         {
-                            var filteredList = group.Where(y => y.Title.Contains(textItem));
-                            this.Items.Add(new SmileGroup(group.Title, filteredList.ToList()));
+                            this.FilterList(string.Empty);
                         }
 
                         return Task.CompletedTask;
@@ -103,7 +97,7 @@ namespace Awful.UI.ViewModels
         /// <summary>
         /// Gets or sets the SmileCategory Items.
         /// </summary>
-        public ObservableCollection<SmileGroup> Items
+        public List<SmileGroup> Items
         {
             get
             {
@@ -115,6 +109,28 @@ namespace Awful.UI.ViewModels
                 this.SetProperty(ref this.items, value);
                 this.RaiseCanExecuteChanged();
             }
+        }
+
+        /// <summary>
+        /// Filter Emotes, with text.
+        /// </summary>
+        /// <param name="text">Text to filter by.</param>
+        public void FilterList(string text)
+        {
+            if (!this.originalItems.Any())
+            {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(text))
+            {
+                this.Items = this.originalItems.DeepClone();
+                this.OnPropertyChanged(nameof(this.Items));
+                return;
+            }
+
+            this.Items = this.originalItems.Select(n => new SmileGroup(n.Title, n.Where(n => n.Title.Contains(text)).ToList())).ToList();
+            this.OnPropertyChanged(nameof(this.Items));
         }
 
         /// <inheritdoc/>

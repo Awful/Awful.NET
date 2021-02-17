@@ -75,6 +75,7 @@
         <Setter Property="TextColor" Value="{DynamicResource DynamicTextColor}" />
         <Setter Property="CancelButtonColor" Value="{DynamicResource DynamicTextColor}" />
         <Setter Property="PlaceholderColor" Value="{DynamicResource DynamicTextColor}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource DynamicBackgroundColor}" />
     </Style>
 
     <Style TargetType="NavigationPage" ApplyToDerivedTypes="True">
