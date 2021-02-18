@@ -96,14 +96,8 @@ namespace Awful.UI.ViewModels
         /// <returns>Task.</returns>
         public async Task LoadBookmarksAsync(bool reload = false)
         {
-            if (this.IsBusy)
-            {
-                return;
-            }
-
             this.IsBusy = true;
             this.Threads = await this.bookmarks.GetAllBookmarksAsync(reload).ConfigureAwait(false);
-
             this.IsBusy = false;
         }
 

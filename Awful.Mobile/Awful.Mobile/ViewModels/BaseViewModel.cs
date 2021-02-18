@@ -16,7 +16,7 @@ namespace Awful.UI.ViewModels
     /// </summary>
     public class BaseViewModel : INotifyPropertyChanged
     {
-        private LayoutState currentState = LayoutState.None;
+        private LayoutState currentState = LayoutState.Loading;
         private bool isRefreshing = false;
         private string title = string.Empty;
         private string loadingText = "Loading...";

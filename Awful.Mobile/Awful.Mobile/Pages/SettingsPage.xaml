@@ -23,13 +23,13 @@
             <ViewCell>
                 <StackLayout Padding="13, 0" Orientation="Horizontal">
                     <Label Text="Use System Theme Settings:" VerticalOptions="Center"></Label>
-                    <Switch IsToggled="{Binding UseSystemThemeSettings, Mode=TwoWay}" />
+                    <Switch HorizontalOptions="EndAndExpand" VerticalOptions="Center" IsToggled="{Binding UseSystemThemeSettings, Mode=TwoWay}" />
                 </StackLayout>
             </ViewCell>
             <ViewCell>
                 <StackLayout Padding="13, 0" Orientation="Horizontal">
                     <Label Text="Use Dark Mode:" VerticalOptions="Center"></Label>
-                    <Switch IsEnabled="{Binding CanOverrideThemeSettings}" IsToggled="{Binding UseDarkMode, Mode=TwoWay}" />
+                    <Switch HorizontalOptions="EndAndExpand" VerticalOptions="Center" IsEnabled="{Binding CanOverrideThemeSettings}" IsToggled="{Binding UseDarkMode, Mode=TwoWay}" />
                 </StackLayout>
             </ViewCell>
             <ViewCell>
@@ -37,6 +37,7 @@
                     <Label Text="Custom Theme:" VerticalOptions="Center"></Label>
                     <Picker ItemsSource="{Binding CustomThemeNames}"
                                 WidthRequest="100"
+                                HorizontalTextAlignment="End"
                                 IsEnabled="{Binding CanOverrideThemeSettings}"
                                 SelectedIndex="{Binding CustomTheme, Converter={StaticResource IntEnumConverter}}"
                                 HorizontalOptions="EndAndExpand"
