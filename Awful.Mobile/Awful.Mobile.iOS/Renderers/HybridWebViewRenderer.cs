@@ -72,13 +72,13 @@ namespace Awful.Mobile.iOS.Renderers
             this.Opaque = false;
             this.BackgroundColor = Color.Transparent.ToUIColor();
 
-            if (e.OldElement != null)
-            {
-                this.userController.RemoveAllUserScripts();
-                this.userController.RemoveScriptMessageHandler("invokeAction");
-                HybridWebView hybridWebViewMain = e.OldElement as HybridWebView;
-                hybridWebViewMain?.Cleanup();
-            }
+            //if (e.OldElement != null)
+            //{
+            //    this.userController.RemoveAllUserScripts();
+            //    this.userController.RemoveScriptMessageHandler("invokeAction");
+            //    HybridWebView hybridWebViewMain = e.OldElement as HybridWebView;
+            //    hybridWebViewMain?.Cleanup();
+            //}
         }
 
     }

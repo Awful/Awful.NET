@@ -24,8 +24,10 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <NavigationPage.TitleView>
-        <Label TextColor="{AppThemeBinding Dark={OnPlatform Android={StaticResource TextColorLight}, iOS=Default, Default=Default},
-                    Light={OnPlatform Android={StaticResource TextColorLight}, iOS=Default, Default=Default}}" Text="{Binding Title}">
+        <Label VerticalOptions="CenterAndExpand"
+            TextColor="{AppThemeBinding Dark={OnPlatform Android={StaticResource TextColorLight}, iOS=Default, Default=Default},
+                    Light={OnPlatform Android={StaticResource TextColorLight}, iOS=Default, Default=Default}}"
+            Text="{Binding Title}">
             <Label.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding ScrollToTopCommand}" />
             </Label.GestureRecognizers>
