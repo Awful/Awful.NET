@@ -45,6 +45,7 @@ namespace Awful.UI.ViewModels
             this.error = error;
             this.navigation = navigation;
             this.signin = new SigninAction(properties, context);
+            this.CurrentState = Xamarin.CommunityToolkit.UI.Views.LayoutState.None;
         }
 
         /// <summary>

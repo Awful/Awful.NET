@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:Awful.Mobile.Controls"
     xmlns:fontawesome="clr-namespace:FontAwesome"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="Leper's Colony"
     x:Class="Awful.Mobile.Pages.LepersPage">
     <ContentPage.Content>
@@ -14,13 +15,17 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <controls:HybridWebView Grid.Row="0" x:Name="AwfulWebView"/>
-                <StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                        <ActivityIndicator IsRunning="True"/>
-                        <Label Text="{Binding LoadingText}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"  />
-                    </StackLayout>
-                </StackLayout>
+                <Grid xct:StateLayout.CurrentState="{Binding CurrentState}" xct:StateLayout.AnimateStateChanges="true" Grid.Row="0">
+                    <xct:StateLayout.StateViews>
+                        <xct:StateView StateKey="Loading" VerticalOptions="FillAndExpand">
+                            <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                                <ActivityIndicator Color="{DynamicResource ActivityLoaderColor}" IsRunning="True" />
+                                <Label Text="{Binding LoadingText}" HorizontalOptions="Center" />
+                            </StackLayout>
+                        </xct:StateView>
+                    </xct:StateLayout.StateViews>
+                    <controls:HybridWebView x:Name="AwfulWebView"/>
+                </Grid>
                 <Grid Grid.Row="1">
                     <Grid HorizontalOptions="CenterAndExpand">
                         <Grid.ColumnDefinitions>

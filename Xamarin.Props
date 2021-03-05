@@ -1,6 +1,6 @@
 <Project>
     <ItemGroup>
-        <PackageReference Include="Xamarin.Forms" Version="5.0.0.1931" />
+        <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
         <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.759" />
         <PackageReference Include="Xamarin.CommunityToolkit" Version="1.0.2" />
         <PackageReference Include="Forms9Patch" Version="2.4.9" />
