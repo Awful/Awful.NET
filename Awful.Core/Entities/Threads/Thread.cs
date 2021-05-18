@@ -99,6 +99,16 @@ namespace Awful.Core.Entities.Threads
         public DateTime KilledOn { get; set; }
 
         /// <summary>
+        /// Gets the date the thread was killed.
+        /// </summary>
+        public string KilledOnHours => this.KilledOn.ToString("HH:mm");
+
+        /// <summary>
+        /// Gets the date the thread was killed.
+        /// </summary>
+        public string KilledOnDay => this.KilledOn.ToString("dd-MM-yy");
+
+        /// <summary>
         /// Gets or sets a value indicating whether the thread is archived.
         /// </summary>
         public bool IsArchived { get; set; }
