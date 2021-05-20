@@ -84,9 +84,9 @@ namespace Awful.Core.Utilities
         public HttpClient Client { get; }
 
         /// <summary>
-        /// Gets the CookieContainer for the WebClient.
+        /// Gets or sets the CookieContainer for the WebClient.
         /// </summary>
-        public CookieContainer CookieContainer { get; }
+        public CookieContainer CookieContainer { get; set; }
 
         /// <summary>
         /// GETs data from SA.
