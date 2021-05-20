@@ -76,7 +76,7 @@ namespace Awful.Core.Utilities
         /// <summary>
         /// Gets a value indicating whether the user is authenticated, based on if they have cookies in the container.
         /// </summary>
-        public bool IsAuthenticated => this.CookieContainer != null && this.CookieContainer.Count > 0;
+        public bool IsAuthenticated => this.CookieContainer != null && this.CookieContainer.Count > 2;
 
         /// <summary>
         /// Gets the (Actual) HttpClient used to make requests.
