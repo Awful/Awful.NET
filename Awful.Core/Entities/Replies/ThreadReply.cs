@@ -25,7 +25,7 @@ namespace Awful.Core.Entities.Replies
 
         public string FormCookie { get; private set; }
 
-        public string Quote { get; private set; }
+        public string Quote { get; set; }
 
         public string ThreadId { get; private set; }
 
