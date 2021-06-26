@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -11,6 +12,7 @@ namespace Awful.Core.Handlers
     /// <summary>
     /// Helpers for managing cookies, used by Something Awful for authentication.
     /// </summary>
+    [Obsolete("CookieManager uses BinaryFormatter, which won't work correctly for the newer .NET versions.", true)]
     public static class CookieManager
     {
         /// <summary>
