@@ -107,7 +107,7 @@ namespace Awful.Core.Managers.JSON
             }
         }
 
-        private void UpdateForumMetadata(Forum forum, Forum parentForum = null, int? categoryId = null)
+        private void UpdateForumMetadata(Forum forum, Forum? parentForum = null, int? categoryId = null)
         {
             if (parentForum != null)
             {

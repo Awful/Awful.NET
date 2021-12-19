@@ -36,7 +36,7 @@ namespace Awful.Core.Utilities
         /// Initializes a new instance of the <see cref="AwfulClient"/> class.
         /// </summary>
         /// <param name="authenticationCookie">The users authentication cookie.</param>
-        public AwfulClient(CookieContainer authenticationCookie = null)
+        public AwfulClient(CookieContainer? authenticationCookie = null)
         {
             this.parser = new HtmlParser();
             if (authenticationCookie != null)

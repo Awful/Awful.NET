@@ -11,6 +11,7 @@
     <PackageProjectUrl>https://github.com/Awful/Awful.NET/</PackageProjectUrl>
     <PackageTags>something awful, awful</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
     
   <Import Project="../Web.props" />

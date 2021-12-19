@@ -16,7 +16,7 @@ namespace Awful.Core.Entities.Bans
         /// <summary>
         /// Gets or sets the type of ban.
         /// </summary>
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         /// <summary>
         /// Gets or sets the id of the post.
@@ -31,7 +31,7 @@ namespace Awful.Core.Entities.Bans
         /// <summary>
         /// Gets or sets the user who is banned.
         /// </summary>
-        public string HorribleJerk { get; set; }
+        public string? HorribleJerk { get; set; }
 
         /// <summary>
         /// Gets or sets the id of the user who is banned.
@@ -41,12 +41,12 @@ namespace Awful.Core.Entities.Bans
         /// <summary>
         /// Gets or sets the reason for the ban.
         /// </summary>
-        public string PunishmentReason { get; set; }
+        public string? PunishmentReason { get; set; }
 
         /// <summary>
         /// Gets or sets the user who requested the ban.
         /// </summary>
-        public string RequestedBy { get; set; }
+        public string? RequestedBy { get; set; }
 
         /// <summary>
         /// Gets or sets the id of the user who requested the ban.
@@ -56,7 +56,7 @@ namespace Awful.Core.Entities.Bans
         /// <summary>
         /// Gets or sets the user who approved the ban.
         /// </summary>
-        public string ApprovedBy { get; set; }
+        public string? ApprovedBy { get; set; }
 
         /// <summary>
         /// Gets or sets the id of the user who approved the ban.
@@ -68,7 +68,7 @@ namespace Awful.Core.Entities.Bans
         /// </summary>
         public bool IsPermaBanned
         {
-            get { return this.Type.ToUpperInvariant() == "PERMABAN"; }
+            get { return this.Type?.ToUpperInvariant() == "PERMABAN"; }
         }
     }
 }
