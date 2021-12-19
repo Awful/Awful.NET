@@ -27,7 +27,7 @@ namespace Awful.Core.Entities
         /// Initializes a new instance of the <see cref="SAItem"/> class.
         /// </summary>
         /// <param name="result">SA Web Result.</param>
-        public SAItem(Result result)
+        public SAItem(Result? result)
         {
             this.Result = result;
         }
@@ -35,7 +35,7 @@ namespace Awful.Core.Entities
         /// <summary>
         /// Gets or sets the raw web result.
         /// </summary>
-        public Result Result { get; set; }
+        public Result? Result { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether the result is set.

@@ -8,6 +8,7 @@ using System.Linq;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using Awful.Core.Entities.Posts;
+using Awful.Core.Exceptions;
 
 namespace Awful.Core.Handlers
 {
@@ -33,6 +34,11 @@ namespace Awful.Core.Handlers
             user.Id = userId;
 
             var authorTd = doc.QuerySelector(@"[class*=""userinfo""]");
+            if (authorTd == null)
+            {
+                throw new AwfulParserException($"{nameof(User)}: ParseUserFromProfilePage: authorTd");
+            }
+
             ParseUserInfoElement(user, authorTd);
 
             // If we're trying to get the current user,
@@ -60,6 +66,10 @@ namespace Awful.Core.Handlers
             var user = new User();
 
             var authorTd = doc.QuerySelector(@"[class*=""userid""]");
+            if (authorTd == null)
+            {
+                throw new AwfulParserException($"{nameof(User)}: ParseUserFromPost: authorTd");
+            }
 
             var userId = authorTd.ClassList.First(n => n.Contains("userid-")).Trim().Replace("userid-", string.Empty);
             user.Id = Convert.ToInt64(userId, CultureInfo.InvariantCulture);
@@ -84,7 +94,7 @@ namespace Awful.Core.Handlers
             var input = doc.QuerySelector(@"input[name=""userid""]");
             if (input != null)
             {
-                var inputNum = input.GetAttribute("value");
+                var inputNum = input.TryGetAttribute("value");
                 if (!string.IsNullOrEmpty(inputNum))
                 {
                     user.Id = Convert.ToInt64(inputNum, CultureInfo.InvariantCulture);
@@ -95,9 +105,14 @@ namespace Awful.Core.Handlers
         private static void ParseUserInfoElement(User user, IElement authorTd)
         {
             var authorTitle = authorTd.QuerySelector(".author");
+            if (authorTitle?.ClassName == null)
+            {
+                throw new AwfulParserException($"{nameof(User)}: ParseUserInfoElement: authorTitle");
+            }
+
             user.Username = authorTitle.TextContent;
             user.Roles = authorTitle.ClassName;
-            user.Title = authorTitle.GetAttribute("title");
+            user.Title = authorTitle.TryGetAttribute("title");
             var userTitleHtml = authorTd.QuerySelector(".title");
 
             var registered = authorTd.QuerySelector(".registered");
@@ -118,7 +133,7 @@ namespace Awful.Core.Handlers
             var userImgs = userTitleHtml.QuerySelectorAll(@"img");
             if (userImgs != null && userImgs.Any())
             {
-                user.AvatarLink = userImgs.First().GetAttribute("src");
+                user.AvatarLink = userImgs.First().TryGetAttribute("src");
             }
 
             if (user.AvatarLink == null)
@@ -126,14 +141,14 @@ namespace Awful.Core.Handlers
                 var userImgAv = userTitleHtml.QuerySelector(@"img[src*=""titles""]");
                 if (userImgAv != null)
                 {
-                    user.AvatarLink = userImgAv.GetAttribute("src");
+                    user.AvatarLink = userImgAv.TryGetAttribute("src");
                 }
             }
 
             var gangTagImg = userTitleHtml.QuerySelector(@"img[src*=""gangtags""]");
             if (gangTagImg != null)
             {
-                user.AvatarGangTagLink = gangTagImg.GetAttribute("src");
+                user.AvatarGangTagLink = gangTagImg.TryGetAttribute("src");
             }
         }
     }

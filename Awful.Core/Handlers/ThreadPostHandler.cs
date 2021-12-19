@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using AngleSharp.Html.Dom;
+using Awful.Core;
 using Awful.Core.Entities.Threads;
 using Awful.Core.Exceptions;
 using Awful.Core.Utilities;
@@ -66,8 +67,8 @@ namespace Awful.Core.Handlers
         {
             thread.Name = doc.Title.Replace(" - The Something Awful Forums", string.Empty);
             var threadBody = doc.QuerySelector("body");
-            thread.ThreadId = Convert.ToInt32(threadBody.GetAttribute("data-thread"), CultureInfo.InvariantCulture);
-            thread.ForumId = Convert.ToInt32(threadBody.GetAttribute("data-forum"), CultureInfo.InvariantCulture);
+            thread.ThreadId = Convert.ToInt32(threadBody.TryGetAttribute("data-thread"), CultureInfo.InvariantCulture);
+            thread.ForumId = Convert.ToInt32(threadBody.TryGetAttribute("data-forum"), CultureInfo.InvariantCulture);
         }
 
         private static void ParseThreadPosts(IHtmlDocument doc, ThreadPost thread)
@@ -106,7 +107,7 @@ namespace Awful.Core.Handlers
                 {
                     var parentForumLink = parentForumLinks[1];
                     thread.ParentForumName = parentForumLink.TextContent;
-                    var link = parentForumLink.GetAttribute("href");
+                    var link = parentForumLink.TryGetAttribute("href");
                     var queryString = HtmlHelpers.ParseQueryString(link);
                     if (queryString.ContainsKey("forumid"))
                     {

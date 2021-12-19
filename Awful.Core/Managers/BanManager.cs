@@ -22,14 +22,17 @@ namespace Awful.Core.Managers
     public class BanManager
     {
         private readonly AwfulClient webManager;
+        private readonly ILogger logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BanManager"/> class.
         /// </summary>
         /// <param name="webManager">The SA WebClient.</param>
-        public BanManager(AwfulClient webManager)
+        /// <param name="logger"><see cref="ILogger"/>.</param>
+        public BanManager(AwfulClient webManager, ILogger logger)
         {
             this.webManager = webManager;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -53,6 +56,11 @@ namespace Awful.Core.Managers
             var result = await this.webManager.GetDataAsync(string.Format(CultureInfo.InvariantCulture, EndPoints.RapSheet, page), false, token).ConfigureAwait(false);
             try
             {
+                if (result?.Document == null)
+                {
+                    throw new Exceptions.AwfulParserException("Failed to find document while parsing Ban Page.", new Awful.Core.Entities.SAItem(result));
+                }
+
                 var banPage = BanHandler.ParseBanPage(result.Document);
                 banPage.Result = result;
                 return banPage;
@@ -78,6 +86,11 @@ namespace Awful.Core.Managers
             var result = await this.webManager.GetDataAsync(EndPoints.BaseUrl, false, token).ConfigureAwait(false);
             try
             {
+                if (result?.Document == null)
+                {
+                    throw new Exceptions.AwfulParserException("Failed to find document while parsing Probation Page.", new Awful.Core.Entities.SAItem(result));
+                }
+
                 var prob = BanHandler.ParseForProbation(result.Document);
                 this.webManager.Probation = prob;
                 prob.Result = result;

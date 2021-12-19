@@ -29,7 +29,7 @@ namespace Awful.Core.Handlers
                 throw new ArgumentNullException(nameof(document));
             }
 
-            return document.QuerySelector(".letternav").QuerySelectorAll("a").Select(n => new SAclopediaCategory() { Letter = n.TextContent.Trim(), Id = Convert.ToInt32(n.GetAttribute("href").Split('=').Last(), CultureInfo.InvariantCulture) }).ToList();
+            return document.QuerySelector(".letternav").QuerySelectorAll("a").Select(n => new SAclopediaCategory() { Letter = n.TextContent.Trim(), Id = Convert.ToInt32(n.TryGetAttribute("href").Split('=').Last(), CultureInfo.InvariantCulture) }).ToList();
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Awful.Core.Handlers
                 throw new ArgumentNullException(nameof(document));
             }
 
-            return document.QuerySelector("#topiclist").QuerySelectorAll("a").Select(n => new SAclopediaEntryItem() { Title = n.TextContent.Trim(), Id = Convert.ToInt32(n.GetAttribute("href").Split('=').Last(), CultureInfo.InvariantCulture) }).ToList();
+            return document.QuerySelector("#topiclist").QuerySelectorAll("a").Select(n => new SAclopediaEntryItem() { Title = n.TextContent.Trim(), Id = Convert.ToInt32(n.TryGetAttribute("href").Split('=').Last(), CultureInfo.InvariantCulture) }).ToList();
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Awful.Core.Handlers
                 if (userThing != null)
                 {
                     entry.Username = userThing.QuerySelector("a").TextContent;
-                    entry.UserId = Convert.ToInt32(userThing.QuerySelector("a").GetAttribute("href").Split('=').Last(), CultureInfo.InvariantCulture);
+                    entry.UserId = Convert.ToInt32(userThing.QuerySelector("a").TryGetAttribute("href").Split('=').Last(), CultureInfo.InvariantCulture);
                     var htmlTest = userThing.InnerHtml;
                     var lastBracket = htmlTest.LastIndexOf('>');
                     if (lastBracket > 0)

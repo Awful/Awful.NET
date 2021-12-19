@@ -4,10 +4,9 @@
 
 using System;
 using System.Collections.Generic;
-
 using System.Globalization;
-using System.Text.RegularExpressions;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 
 namespace Awful.Core.Entities.JSON
 {
@@ -26,48 +25,50 @@ namespace Awful.Core.Entities.JSON
         /// Gets or sets the username.
         /// </summary>
         [JsonPropertyName("username")]
-        public string Username { get; set; }
+        public string? Username { get; set; }
 
         /// <summary>
         /// Gets or sets the homepage.
         /// </summary>
         [JsonPropertyName("homepage")]
-        public string Homepage { get; set; }
+        public string? Homepage { get; set; }
 
         /// <summary>
         /// Gets or sets the ICQ name.
         /// </summary>
         [JsonPropertyName("icq")]
-        public string Icq { get; set; }
+        public string? Icq { get; set; }
 
         /// <summary>
         /// Gets or sets the AIM id.
         /// </summary>
         [JsonPropertyName("aim")]
-        public string Aim { get; set; }
+        public string? Aim { get; set; }
 
         /// <summary>
         /// Gets or sets the Yahoo id.
         /// </summary>
         [JsonPropertyName("yahoo")]
-        public string Yahoo { get; set; }
+        public string? Yahoo { get; set; }
 
         /// <summary>
         /// Gets or sets the users gender.
         /// </summary>
         [JsonPropertyName("gender")]
-        public string Gender { get; set; }
+        public string? Gender { get; set; }
 
         /// <summary>
         /// Gets or sets the users title.
         /// </summary>
         [JsonPropertyName("usertitle")]
-        public string Usertitle { get; set; }
+        public string? Usertitle { get; set; }
 
         /// <summary>
         /// Gets the Avatar.
         /// </summary>
-        public string Avatar { get
+        public string Avatar
+        {
+            get
             {
                 var captures = Regex.Match(this.Usertitle, @"(http|ftp|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?");
                 var avatarLink = captures.Captures.Count > 0 ? captures.Captures[0].Value : string.Empty;
@@ -141,7 +142,7 @@ namespace Awful.Core.Entities.JSON
         /// Gets or sets the role of a user.
         /// </summary>
         [JsonPropertyName("role")]
-        public string Role { get; set; }
+        public string? Role { get; set; }
 
         /// <summary>
         /// Gets or sets the biography of a user.
@@ -159,18 +160,18 @@ namespace Awful.Core.Entities.JSON
         /// Gets or sets the interests of a user.
         /// </summary>
         [JsonPropertyName("interests")]
-        public string Interests { get; set; }
+        public string? Interests { get; set; }
 
         /// <summary>
         /// Gets or sets the occupation of a user.
         /// </summary>
         [JsonPropertyName("occupation")]
-        public string Occupation { get; set; }
+        public string? Occupation { get; set; }
 
         /// <summary>
         /// Gets or sets the users picture.
         /// </summary>
         [JsonPropertyName("picture")]
-        public string Picture { get; set; }
+        public string? Picture { get; set; }
     }
 }

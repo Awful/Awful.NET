@@ -21,16 +21,16 @@ namespace Awful.Core.Entities.PostIcons
         /// <summary>
         /// Gets or sets the image icon endpoint.
         /// </summary>
-        public string ImageEndpoint { get; set; }
+        public string? ImageEndpoint { get; set; }
 
         /// <summary>
         /// Gets or sets the title of the post icon.
         /// </summary>
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
-        /// Gets the image location of the icon.
+        /// Gets or sets the image location of the icon.
         /// </summary>
-        public string ImageLocation { get; set; }
+        public string? ImageLocation { get; set; }
     }
 }

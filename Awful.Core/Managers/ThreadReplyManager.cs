@@ -90,10 +90,10 @@ namespace Awful.Core.Managers
                 var forumReplyEntity = new ThreadReply();
                 string quote = System.Net.WebUtility.HtmlDecode(result.Document.QuerySelector("textarea").TextContent);
                 forumReplyEntity.MapThreadInformation(
-                    inputs["formkey"].GetAttribute("value"),
-                    inputs["form_cookie"].GetAttribute("value"),
+                    inputs["formkey"].TryGetAttribute("value"),
+                    inputs["form_cookie"].TryGetAttribute("value"),
                     quote,
-                    inputs["threadid"].GetAttribute("value"));
+                    inputs["threadid"].TryGetAttribute("value"));
                 forumReplyEntity.ForumPosts.AddRange(posts);
                 forumReplyEntity.Result = result;
                 return forumReplyEntity;

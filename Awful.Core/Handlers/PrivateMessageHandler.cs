@@ -69,7 +69,7 @@ namespace Awful.Core.Handlers
             }
 
             var img = element.QuerySelector("img");
-            pm.StatusImageIconEndpoint = img.GetAttribute("src");
+            pm.StatusImageIconEndpoint = img.TryGetAttribute("src");
             pm.StatusImageIconLocation = Path.GetFileNameWithoutExtension(pm.ImageIconEndpoint);
         }
 
@@ -86,7 +86,7 @@ namespace Awful.Core.Handlers
                 return;
             }
 
-            pm.ImageIconEndpoint = img.GetAttribute("src");
+            pm.ImageIconEndpoint = img.TryGetAttribute("src");
             pm.ImageIconLocation = Path.GetFileNameWithoutExtension(pm.ImageIconEndpoint);
             pm.Icon = new PostIcon() { ImageEndpoint = pm.ImageIconEndpoint };
         }
@@ -99,7 +99,7 @@ namespace Awful.Core.Handlers
             }
 
             var threadList = element.QuerySelector("a");
-            pm.MessageEndpoint = threadList.GetAttribute("href");
+            pm.MessageEndpoint = threadList.TryGetAttribute("href");
             pm.PrivateMessageId = Convert.ToInt32(pm.MessageEndpoint.Split('=').Last(), CultureInfo.InvariantCulture);
             pm.Title = threadList.TextContent;
         }

@@ -100,8 +100,8 @@ namespace Awful.Core.Handlers
 
             return new NewThread
             {
-                FormKey = document.QuerySelector(@"input[name=""formkey""]").GetAttribute("value"),
-                FormCookie = document.QuerySelector(@"input[name=""form_cookie""]").GetAttribute("value"),
+                FormKey = document.QuerySelector(@"input[name=""formkey""]").TryGetAttribute("value"),
+                FormCookie = document.QuerySelector(@"input[name=""form_cookie""]").TryGetAttribute("value"),
             };
         }
 
@@ -147,7 +147,7 @@ namespace Awful.Core.Handlers
             }
 
             var img = element.QuerySelector("img");
-            thread.ImageIconEndpoint = img.GetAttribute("src");
+            thread.ImageIconEndpoint = img.TryGetAttribute("src");
             thread.ImageIconLocation = Path.GetFileNameWithoutExtension(thread.ImageIconEndpoint);
         }
 
@@ -159,7 +159,7 @@ namespace Awful.Core.Handlers
             }
 
             var img = element.QuerySelector("img");
-            thread.StoreImageIconEndpoint = img.GetAttribute("src");
+            thread.StoreImageIconEndpoint = img.TryGetAttribute("src");
             thread.StoreImageIconLocation = Path.GetFileNameWithoutExtension(thread.StoreImageIconEndpoint);
         }
 
@@ -188,7 +188,7 @@ namespace Awful.Core.Handlers
 
             var authorLink = element.QuerySelector("a");
             thread.Author = authorLink.TextContent;
-            thread.AuthorId = Convert.ToInt64(authorLink.GetAttribute("href").Split('=').Last(), CultureInfo.InvariantCulture);
+            thread.AuthorId = Convert.ToInt64(authorLink.TryGetAttribute("href").Split('=').Last(), CultureInfo.InvariantCulture);
         }
 
         private static void ParseReplies(IElement element, Thread thread)
@@ -220,9 +220,9 @@ namespace Awful.Core.Handlers
             }
 
             var img = element.QuerySelector("img");
-            thread.RatingImageEndpoint = img.GetAttribute("src");
+            thread.RatingImageEndpoint = img.TryGetAttribute("src");
             thread.RatingImage = Path.GetFileNameWithoutExtension(thread.RatingImageEndpoint);
-            var firstSplit = img.GetAttribute("title").Split('-');
+            var firstSplit = img.TryGetAttribute("title").Split('-');
             thread.TotalRatingVotes = Convert.ToInt32(Regex.Match(firstSplit[0], @"\d+").Value, CultureInfo.InvariantCulture);
             thread.Rating = Convert.ToDecimal(Regex.Match(firstSplit[1], @"[\d]{1,4}([.,][\d]{1,2})?").Value, CultureInfo.InvariantCulture);
         }
@@ -237,7 +237,7 @@ namespace Awful.Core.Handlers
             var date = element.QuerySelector(".date");
             var author = element.QuerySelector(".author");
             thread.KilledOn = DateTime.Parse(date.TextContent, CultureInfo.InvariantCulture);
-            thread.KilledById = Convert.ToInt64(author.GetAttribute("href").Split('=').Last(), CultureInfo.InvariantCulture);
+            thread.KilledById = Convert.ToInt64(author.TryGetAttribute("href").Split('=').Last(), CultureInfo.InvariantCulture);
             thread.KilledBy = author.TextContent;
         }
     }

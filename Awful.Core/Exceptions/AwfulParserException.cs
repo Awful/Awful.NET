@@ -23,6 +23,17 @@ namespace Awful.Core.Exceptions
         /// Initializes a new instance of the <see cref="AwfulParserException"/> class.
         /// </summary>
         /// <param name="message">Inner Message.</param>
+        /// <param name="item"><see cref="SAItem"/> object.</param>
+        public AwfulParserException(string message, SAItem item)
+            : base(message)
+        {
+            this.Data.Add(AwfulParserKey, item);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AwfulParserException"/> class.
+        /// </summary>
+        /// <param name="message">Inner Message.</param>
         /// <param name="innerException">Inner Exception.</param>
         /// <param name="item"><see cref="SAItem"/> object.</param>
         public AwfulParserException(string message, Exception innerException, SAItem item)

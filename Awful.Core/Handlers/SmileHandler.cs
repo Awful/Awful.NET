@@ -38,7 +38,7 @@ namespace Awful.Core.Handlers
                 var smiles = smileGroup.QuerySelectorAll(".smilie");
                 foreach (var smile in smiles)
                 {
-                    var image = smile.QuerySelector("img").GetAttribute("src");
+                    var image = smile.QuerySelector("img").TryGetAttribute("src");
                     smileCategory.SmileList.Add(new Smile()
                     {
                         Category = smileCategory.Name,

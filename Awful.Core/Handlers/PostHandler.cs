@@ -46,7 +46,7 @@ namespace Awful.Core.Handlers
             long.TryParse(id, out idVal);
             post.PostId = idVal;
 
-            var index = doc.GetAttribute("data-idx");
+            var index = doc.TryGetAttribute("data-idx");
             long indexVal = 0;
             long.TryParse(index, out indexVal);
             post.PostIndex = indexVal;
@@ -82,9 +82,9 @@ namespace Awful.Core.Handlers
                             div.ClassList.Add("gif-wrap");
                             var newImgur = parent.CreateElement("img");
                             newImgur.ClassList.Add("posterized");
-                            newImgur.SetAttribute("data-original-url", imgurGif.GetAttribute("src"));
-                            newImgur.SetAttribute("data-poster-url", imgurGif.GetAttribute("src").Replace(".gif", "h.jpg"));
-                            newImgur.SetAttribute("src", imgurGif.GetAttribute("src").Replace(".gif", "h.jpg"));
+                            newImgur.SetAttribute("data-original-url", imgurGif.TryGetAttribute("src"));
+                            newImgur.SetAttribute("data-poster-url", imgurGif.TryGetAttribute("src").Replace(".gif", "h.jpg"));
+                            newImgur.SetAttribute("src", imgurGif.TryGetAttribute("src").Replace(".gif", "h.jpg"));
                             div.AppendChild(newImgur);
                             imgurGif.Replace(div);
                         }
@@ -93,7 +93,7 @@ namespace Awful.Core.Handlers
                     var tweets = threadBody.QuerySelectorAll(@"a[href*=""twitter.com""]");
                     foreach (var tweet in tweets)
                     {
-                        var href = tweet.GetAttribute("href");
+                        var href = tweet.TryGetAttribute("href");
                         var captures = Regex.Match(href, @"^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(?:es)?\/(\d+)(?:\/.*)?$");
                         if (captures.Success && captures.Groups.Count >= 3)
                         {
@@ -153,7 +153,7 @@ namespace Awful.Core.Handlers
             var threadDivTableHolder = doc.QuerySelector("#thread");
             foreach (var threadTable in threadDivTableHolder.QuerySelectorAll("table"))
             {
-                if (string.IsNullOrEmpty(threadTable.GetAttribute("data-idx")))
+                if (string.IsNullOrEmpty(threadTable.TryGetAttribute("data-idx")))
                 {
                     continue;
                 }

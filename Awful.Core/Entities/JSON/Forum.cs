@@ -40,19 +40,19 @@ namespace Awful.Core.Entities.JSON
         /// Gets or sets the title.
         /// </summary>
         [JsonPropertyName("title")]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
         /// Gets or sets the short version of the title.
         /// </summary>
         [JsonPropertyName("title_short")]
-        public string TitleShort { get; set; }
+        public string? TitleShort { get; set; }
 
         /// <summary>
         /// Gets or sets the description of a forum.
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the forum has threads.
@@ -64,7 +64,7 @@ namespace Awful.Core.Entities.JSON
         /// Gets or sets the icon for a forum.
         /// </summary>
         [JsonPropertyName("icon")]
-        public string Icon { get; set; }
+        public string? Icon { get; set; }
 
         /// <summary>
         /// Gets or sets the list of subforums.
@@ -80,7 +80,7 @@ namespace Awful.Core.Entities.JSON
         /// <summary>
         /// Gets or sets the Parent Forum.
         /// </summary>
-        public virtual Forum ParentForum { get; set; }
+        public virtual Forum? ParentForum { get; set; }
 
         /// <summary>
         /// Gets or sets the list of moderators for a given forum.

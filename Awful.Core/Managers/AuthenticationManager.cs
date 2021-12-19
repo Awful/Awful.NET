@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Awful.Core;
@@ -14,8 +16,6 @@ using Awful.Core.Entities.JSON;
 using Awful.Core.Entities.Web;
 using Awful.Core.Handlers;
 using Awful.Core.Utilities;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Awful.Core.Managers
 {
@@ -56,7 +56,7 @@ namespace Awful.Core.Managers
             try
             {
                 var authResult = new AuthResult(this.webManager.CookieContainer, true);
-                if (string.IsNullOrEmpty(webResult.AbsoluteEndpoint))
+                if (webResult?.AbsoluteEndpoint == null)
                 {
                     return authResult;
                 }
@@ -114,6 +114,11 @@ namespace Awful.Core.Managers
             try
             {
                 var user = JsonSerializer.Deserialize<User>(result.ResultText);
+                if (user == null)
+                {
+                    throw new Awful.Core.Exceptions.AwfulParserException("FetchUserAsync Failed Parse", new Awful.Core.Entities.SAItem(result));
+                }
+
                 authResult.CurrentUser = user;
                 authResult.Result = result;
                 return authResult;

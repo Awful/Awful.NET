@@ -33,10 +33,10 @@ namespace Awful.Core.Handlers
             var postIconsHtml = document.QuerySelectorAll(".posticon");
             foreach (var postIconHtml in postIconsHtml)
             {
-                var inputId = Convert.ToInt32(postIconHtml.QuerySelector("input").GetAttribute("value"), CultureInfo.InvariantCulture);
+                var inputId = Convert.ToInt32(postIconHtml.QuerySelector("input").TryGetAttribute("value"), CultureInfo.InvariantCulture);
                 var image = postIconHtml.QuerySelector("img");
-                var srcAlt = image.GetAttribute("alt");
-                var imageLocation = image.GetAttribute("src");
+                var srcAlt = image.TryGetAttribute("alt");
+                var imageLocation = image.TryGetAttribute("src");
                 postIconList.Add(new PostIcon()
                 {
                     Id = inputId,

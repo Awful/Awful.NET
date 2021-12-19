@@ -86,6 +86,11 @@ namespace Awful.Core.Managers
             }
 
             var result = await this.webManager.GetDataAsync(url, false, token).ConfigureAwait(false);
+            if (result?.Document == null)
+            {
+                throw new Exceptions.AwfulParserException("Failed to find document while getting bookmark thread list page.", new Awful.Core.Entities.SAItem(result));
+            }
+
             try
             {
                 var threads = ThreadHandler.ParseForumThreadList(result.Document);

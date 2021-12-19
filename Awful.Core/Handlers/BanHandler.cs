@@ -7,7 +7,9 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using AngleSharp.Html.Dom;
+using Awful.Core;
 using Awful.Core.Entities.Bans;
+using Awful.Core.Exceptions;
 
 namespace Awful.Parser.Handlers
 {
@@ -32,12 +34,17 @@ namespace Awful.Parser.Handlers
             var banList = document.QuerySelector(@"table[class=""standard full""]");
             if (banList == null)
             {
-                return banPage;
+                throw new AwfulParserException($"{nameof(BanPage)}: ParseBanPage: banList");
             }
 
             GetPageInfo(document, banPage);
 
             var banListBody = banList.QuerySelector("tbody");
+            if (banListBody == null)
+            {
+                throw new AwfulParserException($"{nameof(BanPage)}: ParseBanPage: banListBody");
+            }
+
             var banListRows = banListBody.QuerySelectorAll("tr");
             foreach (var banListRow in banListRows)
             {
@@ -60,21 +67,26 @@ namespace Awful.Parser.Handlers
                     continue;
                 }
 
+                if (horribleJerk == null || requestedBy == null || approvedBy == null)
+                {
+                    throw new AwfulParserException($"{nameof(BanPage)}: ParseBanPage: banListRow");
+                }
+
                 banItem.Type = type.TextContent;
-                banItem.PostId = Convert.ToInt32(type.GetAttribute("href").Split('=').Last(), CultureInfo.InvariantCulture);
+                banItem.PostId = Convert.ToInt32(type.TryGetAttribute("href").Split('=').Last(), CultureInfo.InvariantCulture);
 
                 banItem.Date = DateTime.Parse(date.TextContent, CultureInfo.InvariantCulture);
 
                 banItem.HorribleJerk = horribleJerk.TextContent;
-                banItem.HorribleJerkId = Convert.ToInt32(horribleJerk.GetAttribute("href").Split('=').Last(), CultureInfo.InvariantCulture);
+                banItem.HorribleJerkId = Convert.ToInt32(horribleJerk.TryGetAttribute("href").Split('=').Last(), CultureInfo.InvariantCulture);
 
                 banItem.PunishmentReason = reason.InnerHtml;
 
                 banItem.RequestedBy = requestedBy.TextContent;
-                banItem.RequestedById = Convert.ToInt32(requestedBy.GetAttribute("href").Split('=').Last(), CultureInfo.InvariantCulture);
+                banItem.RequestedById = Convert.ToInt32(requestedBy.TryGetAttribute("href").Split('=').Last(), CultureInfo.InvariantCulture);
 
                 banItem.ApprovedBy = approvedBy.TextContent;
-                banItem.ApprovedById = Convert.ToInt32(approvedBy.GetAttribute("href").Split('=').Last(), CultureInfo.InvariantCulture);
+                banItem.ApprovedById = Convert.ToInt32(approvedBy.TryGetAttribute("href").Split('=').Last(), CultureInfo.InvariantCulture);
                 banPage.Bans.Add(banItem);
             }
 
@@ -122,8 +134,13 @@ namespace Awful.Parser.Handlers
             }
 
             var banPageDoc = doc.QuerySelector(".pages");
-            var select = banPageDoc.QuerySelector("select");
-            var selectedPageItem = select.QuerySelector("option:checked");
+            var select = banPageDoc?.QuerySelector("select");
+            var selectedPageItem = select?.QuerySelector("option:checked");
+            if (select == null || selectedPageItem == null)
+            {
+                throw new AwfulParserException($"GetPageInfo: select, selectedPageItem");
+            }
+
             banPage.CurrentPage = Convert.ToInt32(selectedPageItem.TextContent, CultureInfo.InvariantCulture);
             banPage.TotalPages = select.ChildElementCount;
         }
