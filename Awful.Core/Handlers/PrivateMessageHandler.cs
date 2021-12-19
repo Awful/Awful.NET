@@ -41,6 +41,11 @@ namespace Awful.Core.Handlers
             }
 
             var pmListBody = doc.QuerySelector("tbody");
+            if (pmListBody == null)
+            {
+                throw new Exceptions.AwfulParserException("Failed to find pmListBody while parsing Private Message Page.");
+            }
+
             var pmListRows = pmListBody.QuerySelectorAll("tr");
             foreach (var pmRow in pmListRows)
             {
@@ -61,7 +66,7 @@ namespace Awful.Core.Handlers
             return pm;
         }
 
-        private static void ParseStatus(IElement element, PrivateMessage pm)
+        private static void ParseStatus(IElement? element, PrivateMessage pm)
         {
             if (element == null)
             {
@@ -73,7 +78,7 @@ namespace Awful.Core.Handlers
             pm.StatusImageIconLocation = Path.GetFileNameWithoutExtension(pm.ImageIconEndpoint);
         }
 
-        private static void ParseIcon(IElement element, PrivateMessage pm)
+        private static void ParseIcon(IElement? element, PrivateMessage pm)
         {
             if (element == null)
             {
@@ -91,7 +96,7 @@ namespace Awful.Core.Handlers
             pm.Icon = new PostIcon() { ImageEndpoint = pm.ImageIconEndpoint };
         }
 
-        private static void ParseTitle(IElement element, PrivateMessage pm)
+        private static void ParseTitle(IElement? element, PrivateMessage pm)
         {
             if (element == null)
             {
@@ -99,12 +104,17 @@ namespace Awful.Core.Handlers
             }
 
             var threadList = element.QuerySelector("a");
+            if (threadList == null)
+            {
+                return;
+            }
+
             pm.MessageEndpoint = threadList.TryGetAttribute("href");
             pm.PrivateMessageId = Convert.ToInt32(pm.MessageEndpoint.Split('=').Last(), CultureInfo.InvariantCulture);
             pm.Title = threadList.TextContent;
         }
 
-        private static void ParseSender(IElement element, PrivateMessage pm)
+        private static void ParseSender(IElement? element, PrivateMessage pm)
         {
             if (element == null)
             {
@@ -114,7 +124,7 @@ namespace Awful.Core.Handlers
             pm.Sender = element.TextContent;
         }
 
-        private static void ParseDate(IElement element, PrivateMessage pm)
+        private static void ParseDate(IElement? element, PrivateMessage pm)
         {
             if (element == null)
             {

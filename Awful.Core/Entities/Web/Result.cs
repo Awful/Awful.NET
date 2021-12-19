@@ -31,7 +31,7 @@ namespace Awful.Core.Entities.Web
         /// <summary>
         /// Gets the raw HTTP Response Message.
         /// </summary>
-        public HttpResponseMessage Message { get; }
+        public HttpResponseMessage? Message { get; }
 
         /// <summary>
         /// Gets the result of the request.

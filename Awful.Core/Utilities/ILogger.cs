@@ -111,7 +111,7 @@ namespace Awful.Core
         /// <returns>LogMessage.</returns>
         public LogMessage WithMessage(string message)
         {
-            var result = (LogMessage)MemberwiseClone();
+            var result = (LogMessage)this.MemberwiseClone();
             result.Message = message;
             return result;
         }

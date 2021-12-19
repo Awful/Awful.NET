@@ -126,7 +126,7 @@ namespace Awful.Core.Utilities
         /// <returns>A Result.</returns>
         public async Task<Result> PostDataAsync(string endpoint, FormUrlEncodedContent data, bool shouldBeJson = false, CancellationToken token = default)
         {
-            HttpResponseMessage result = null;
+            HttpResponseMessage? result = null;
             string html = string.Empty;
             try
             {
@@ -161,7 +161,7 @@ namespace Awful.Core.Utilities
         /// <returns>A Result.</returns>
         public async Task<Result> PostFormDataAsync(string endpoint, MultipartFormDataContent form, bool shouldBeJson = false, CancellationToken token = default)
         {
-            HttpResponseMessage result = null;
+            HttpResponseMessage? result = null;
             string html = string.Empty;
             try
             {
@@ -258,7 +258,7 @@ namespace Awful.Core.Utilities
                 result.OnProbationText = probationNode.TextContent.Trim();
             }
 
-            if (!document.Body.ClassList.Contains("standarderror"))
+            if (document.Body != null && !document.Body.ClassList.Contains("standarderror"))
             {
                 result.Document = document;
                 return;

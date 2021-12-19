@@ -21,6 +21,6 @@ namespace Awful.Core.Entities.SAclopedia
         /// <summary>
         /// Gets or sets the title of the entry item.
         /// </summary>
-        public string Title { get; set; }
+        public string? Title { get; set; }
     }
 }

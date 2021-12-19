@@ -18,7 +18,6 @@ namespace Awful.Core.Entities.Threads
         /// </summary>
         public ThreadList()
         {
-
         }
 
         /// <summary>
@@ -43,7 +42,7 @@ namespace Awful.Core.Entities.Threads
         /// <summary>
         /// Gets or sets the parent forum name.
         /// </summary>
-        public string ParentForumName { get; set; }
+        public string? ParentForumName { get; set; }
 
         /// <summary>
         /// Gets or sets the parent forum id.
@@ -53,7 +52,7 @@ namespace Awful.Core.Entities.Threads
         /// <summary>
         /// Gets or sets the forum name.
         /// </summary>
-        public string ForumName { get; set; }
+        public string? ForumName { get; set; }
 
         /// <summary>
         /// Gets or sets the forum id.

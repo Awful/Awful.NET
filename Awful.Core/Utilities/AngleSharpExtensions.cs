@@ -5,6 +5,7 @@
 using System;
 using AngleSharp;
 using AngleSharp.Dom;
+using Awful.Core.Exceptions;
 
 namespace Awful.Core
 {
@@ -29,6 +30,34 @@ namespace Awful.Core
 
             var testOutput = element.GetAttribute(attribute);
             return testOutput ?? defaultOutput;
+        }
+
+        /// <summary>
+        /// Get element via Query Selector.
+        /// </summary>
+        /// <param name="node">Node.</param>
+        /// <param name="selector">Selector.</param>
+        /// <returns>IElement.</returns>
+        /// <exception cref="AwfulParserException">Failed to find element.</exception>
+        public static IElement GetElementViaQuerySelector(this IParentNode node, string selector) => node.GetElementViaQuerySelector(selector, true);
+
+        /// <summary>
+        /// Get element via Query Selector.
+        /// </summary>
+        /// <param name="node">Node.</param>
+        /// <param name="selector">Selector.</param>
+        /// <param name="throwIfNull">Throw if null.</param>
+        /// <returns>IElement.</returns>
+        /// <exception cref="AwfulParserException">Failed to find element.</exception>
+        public static IElement? GetElementViaQuerySelector(this IParentNode node, string selector, bool throwIfNull)
+        {
+            var element = node.QuerySelector(selector);
+            if (element == null && throwIfNull)
+            {
+                throw new AwfulParserException($"Failed to find {selector} within {node.ToString()}");
+            }
+
+            return element;
         }
     }
 }

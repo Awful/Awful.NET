@@ -21,12 +21,12 @@ namespace Awful.Core.Entities.SAclopedia
         /// <summary>
         /// Gets or sets the username.
         /// </summary>
-        public string Username { get; set; }
+        public string? Username { get; set; }
 
         /// <summary>
         /// Gets or sets the inner contents of the post.
         /// </summary>
-        public string PostHtml { get; set; }
+        public string? PostHtml { get; set; }
 
         /// <summary>
         /// Gets or sets the date the post was posted.

@@ -16,21 +16,21 @@ namespace Awful.Core.Entities.Smilies
         /// <summary>
         /// Gets or sets the title.
         /// </summary>
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
         /// Gets or sets the category.
         /// </summary>
-        public string Category { get; set; }
+        public string? Category { get; set; }
 
         /// <summary>
         /// Gets or sets the image endpoint.
         /// </summary>
-        public string ImageEndpoint { get; set; }
+        public string? ImageEndpoint { get; set; }
 
         /// <summary>
         /// Gets or sets the image location.
         /// </summary>
-        public string ImageLocation { get; set; }
+        public string? ImageLocation { get; set; }
     }
 }
