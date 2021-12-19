@@ -46,6 +46,11 @@ namespace Awful.Core.Managers
             }
 
             var result = await this.webManager.GetDataAsync(EndPoints.SAclopediaBase, false, token).ConfigureAwait(false);
+            if (result?.Document == null)
+            {
+                throw new Exceptions.AwfulParserException("Failed to find document while parsing SAClopedia Page.", new Awful.Core.Entities.SAItem(result));
+            }
+
             try
             {
                 var categories = SAclopediaHandler.ParseCategoryList(result.Document);
@@ -74,6 +79,11 @@ namespace Awful.Core.Managers
             }
 
             var result = await this.webManager.GetDataAsync(EndPoints.SAclopediaBase + $"?act={act}&l={id}", false, token).ConfigureAwait(false);
+            if (result?.Document == null)
+            {
+                throw new Exceptions.AwfulParserException("Failed to find document while parsing SAClopedia Entry Page.", new Awful.Core.Entities.SAItem(result));
+            }
+
             try
             {
                 var entries = SAclopediaHandler.ParseEntryItemList(result.Document);
@@ -101,6 +111,11 @@ namespace Awful.Core.Managers
             }
 
             var result = await this.webManager.GetDataAsync(EndPoints.SAclopediaBase + $"?act={act}&topicid={id}", false, token).ConfigureAwait(false);
+            if (result?.Document == null)
+            {
+                throw new Exceptions.AwfulParserException("Failed to find document while parsing SAClopedia Entry Page.", new Awful.Core.Entities.SAItem(result));
+            }
+
             try
             {
                 var entry = SAclopediaHandler.ParseEntry(result.Document, id);

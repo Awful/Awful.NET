@@ -2,11 +2,11 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using AngleSharp.Html.Dom;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using AngleSharp.Html.Dom;
 
 namespace Awful.Core.Entities.Web
 {
@@ -21,7 +21,7 @@ namespace Awful.Core.Entities.Web
         /// <param name="message">The request.</param>
         /// <param name="text">The text of the request.</param>
         /// <param name="endpoint">The endpoint that was hit.</param>
-        public Result(HttpResponseMessage message, string text = "", string endpoint = "")
+        public Result(HttpResponseMessage? message, string text = "", string endpoint = "")
         {
             this.Message = message;
             this.ResultText = text;

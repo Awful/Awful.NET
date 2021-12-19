@@ -48,6 +48,11 @@ namespace Awful.Core.Managers
             try
             {
                 var user = JsonSerializer.Deserialize<User>(result.ResultText);
+                if (user == null)
+                {
+                    throw new Awful.Core.Exceptions.AwfulParserException("Failed to parse user in GetUserFromProfilePageAsync", new Awful.Core.Entities.SAItem(result));
+                }
+
                 user.Result = result;
                 return user;
             }

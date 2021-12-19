@@ -65,6 +65,11 @@ namespace Awful.Core.Managers
 
             string url = isPrivateMessage ? EndPoints.NewPrivateMessageBase : string.Format(CultureInfo.InvariantCulture, EndPoints.NewThread, forumId);
             var result = await this.webManager.GetDataAsync(url, false, token).ConfigureAwait(false);
+            if (result?.Document == null)
+            {
+                throw new Exceptions.AwfulParserException("Failed to find document while parsing Post Icon Page.", new Awful.Core.Entities.SAItem(result));
+            }
+
             try
             {
                 var icons = PostIconHandler.ParsePostIconList(result.Document);

@@ -53,6 +53,11 @@ namespace Awful.Core.Managers
 
             var url = EndPoints.PrivateMessages;
             var result = await this.webManager.GetDataAsync(url, false, token).ConfigureAwait(false);
+            if (result?.Document == null)
+            {
+                throw new Exceptions.AwfulParserException("Failed to find document while parsing Private Message Page.", new Awful.Core.Entities.SAItem(result));
+            }
+
             try
             {
                 var list = PrivateMessageHandler.ParseList(result.Document);
@@ -80,6 +85,11 @@ namespace Awful.Core.Managers
 
             var message = new PrivateMessage() { PrivateMessageId = id };
             var result = await this.webManager.GetDataAsync(EndPoints.PrivateMessages + $"?action=show&privatemessageid={message.PrivateMessageId}", false, token).ConfigureAwait(false);
+            if (result?.Document?.Body == null)
+            {
+                throw new Exceptions.AwfulParserException("Failed to find document while parsing Private Message Page.", new Awful.Core.Entities.SAItem(result));
+            }
+
             try
             {
                 message.Result = result;

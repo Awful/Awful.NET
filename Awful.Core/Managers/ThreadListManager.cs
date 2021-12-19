@@ -44,13 +44,13 @@ namespace Awful.Core.Managers
         {
             var pageUrl = string.Format(CultureInfo.InvariantCulture, EndPoints.ForumPage, forumId, EndPoints.DefaultNumberPerPage) + string.Format(CultureInfo.InvariantCulture, EndPoints.PageNumber, page);
             var result = await this.webManager.GetDataAsync(pageUrl, false, token).ConfigureAwait(false);
+            if (result?.Document == null)
+            {
+                throw new Exceptions.AwfulParserException("Failed to find document while getting forum thread list page.", new Awful.Core.Entities.SAItem(result));
+            }
+
             try
             {
-                if (result?.Document == null)
-                {
-                    throw new Exceptions.AwfulParserException("Failed to find document while getting forum thread list page.", new Awful.Core.Entities.SAItem(result));
-                }
-
                 var threadList = new ThreadList();
                 ForumHandler.GetForumPageInfo(result.Document, threadList, this.logger);
                 threadList.Threads.AddRange(ThreadHandler.ParseForumThreadList(result.Document));

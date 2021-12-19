@@ -40,6 +40,11 @@ namespace Awful.Core.Managers
         public async Task<SmileCategoryList> GetSmileListAsync(CancellationToken token = default)
         {
             var result = await this.webManager.GetDataAsync(EndPoints.SmileUrl, false, token).ConfigureAwait(false);
+            if (result?.Document == null)
+            {
+                throw new Exceptions.AwfulParserException("Failed to find document while parsing SmileList Page.", new Awful.Core.Entities.SAItem(result));
+            }
+
             try
             {
                 var smiles = SmileHandler.ParseSmileList(result.Document);

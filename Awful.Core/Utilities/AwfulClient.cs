@@ -8,14 +8,14 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using AngleSharp.Html.Parser;
 using Awful.Core.Entities.Bans;
 using Awful.Core.Entities.Web;
 using Awful.Core.Exceptions;
-using System.Text.Json.Serialization;
-using System.Text.Json;
 
 namespace Awful.Core.Utilities
 {
@@ -97,7 +97,7 @@ namespace Awful.Core.Utilities
         /// <returns>A Result.</returns>
         public async Task<Result> GetDataAsync(string endpoint, bool shouldBeJson = false, CancellationToken token = default)
         {
-            HttpResponseMessage result = null;
+            HttpResponseMessage? result = null;
             string html = string.Empty;
             try
             {

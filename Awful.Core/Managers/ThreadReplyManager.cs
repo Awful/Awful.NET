@@ -51,12 +51,24 @@ namespace Awful.Core.Managers
 
             string url = string.Format(CultureInfo.InvariantCulture, EndPoints.EditBase, postId);
             var result = await this.webManager.GetDataAsync(url, false, token).ConfigureAwait(false);
+            if (result?.Document == null)
+            {
+                throw new Exceptions.AwfulParserException("Failed to find document while getting forum reply cookies page.", new Awful.Core.Entities.SAItem(result));
+            }
+
             try
             {
                 var inputs = result.Document.QuerySelectorAll("input");
                 var forumReplyEntity = new ThreadReply();
-                var bookmarks = inputs["bookmark"].HasAttribute("checked") ? "yes" : "no";
-                string quote = System.Net.WebUtility.HtmlDecode(result.Document.QuerySelector("textarea").TextContent);
+                var bookmarkInput = inputs["bookmark"];
+                var bookmarks = bookmarkInput != null && bookmarkInput.HasAttribute("checked") ? "yes" : "no";
+                var quoteArea = result.Document.QuerySelector("textarea");
+                string quote = string.Empty;
+                if (quoteArea != null)
+                {
+                    quote = System.Net.WebUtility.HtmlDecode(quoteArea.TextContent);
+                }
+
                 forumReplyEntity.MapEditPostInformation(
                     quote,
                     postId,
@@ -86,17 +98,36 @@ namespace Awful.Core.Managers
             string url;
             url = threadId > 0 ? string.Format(CultureInfo.InvariantCulture, EndPoints.ReplyBase, threadId) : string.Format(CultureInfo.InvariantCulture, EndPoints.QuoteBase, postId);
             var result = await this.webManager.GetDataAsync(url, false, token).ConfigureAwait(false);
+            if (result?.Document == null)
+            {
+                throw new Exceptions.AwfulParserException("Failed to find document while getting forum reply cookies page.", new Awful.Core.Entities.SAItem(result));
+            }
+
             try
             {
                 var inputs = result.Document.QuerySelectorAll("input");
                 var posts = PostHandler.ParsePreviousPosts(result.Document);
+                var formkey = inputs["formkey"];
+                var formCookie = inputs["form_cookie"];
+                var threadid = inputs["threadid"];
+                if (formkey == null || formCookie == null || threadid == null)
+                {
+                    throw new Exceptions.AwfulParserException("Failed to find form infor while getting forum reply cookies page.", new Awful.Core.Entities.SAItem(result));
+                }
+
                 var forumReplyEntity = new ThreadReply();
-                string quote = System.Net.WebUtility.HtmlDecode(result.Document.QuerySelector("textarea").TextContent);
+                var quoteArea = result.Document.QuerySelector("textarea");
+                string quote = string.Empty;
+                if (quoteArea != null)
+                {
+                    quote = System.Net.WebUtility.HtmlDecode(quoteArea.TextContent);
+                }
+
                 forumReplyEntity.MapThreadInformation(
-                    inputs["formkey"].TryGetAttribute("value"),
-                    inputs["form_cookie"].TryGetAttribute("value"),
+                    formkey.TryGetAttribute("value"),
+                    formCookie.TryGetAttribute("value"),
                     quote,
-                    inputs["threadid"].TryGetAttribute("value"));
+                    threadid.TryGetAttribute("value"));
                 forumReplyEntity.ForumPosts.AddRange(posts);
                 forumReplyEntity.Result = result;
                 return forumReplyEntity;
@@ -208,7 +239,13 @@ namespace Awful.Core.Managers
             var result = await this.webManager.PostFormDataAsync(EndPoints.NewReply, form, false).ConfigureAwait(false);
             try
             {
-                return new Post { PostHtml = result.Document.QuerySelector(".postbody").InnerHtml, Result = result };
+                var postbody = result.Document?.QuerySelector(".postbody");
+                if (postbody == null)
+                {
+                    throw new Exceptions.AwfulParserException("Failed to find post body while getting forum preview page.", new Awful.Core.Entities.SAItem(result));
+                }
+
+                return new Post { PostHtml = postbody.InnerHtml, Result = result };
             }
             catch (Exception ex)
             {
@@ -239,9 +276,20 @@ namespace Awful.Core.Managers
                 { new StringContent("Preview Post"), "preview" },
             };
             var result = await this.webManager.PostFormDataAsync(EndPoints.EditPost, form, false, token).ConfigureAwait(false);
+            if (result?.Document == null)
+            {
+                throw new Exceptions.AwfulParserException("Failed to find document while getting forum preview page.", new Awful.Core.Entities.SAItem(result));
+            }
+
             try
             {
-                return new Post { PostHtml = result.Document.QuerySelector(".postbody").InnerHtml, Result = result };
+                var postbody = result.Document.QuerySelector(".postbody");
+                if (postbody == null)
+                {
+                    throw new Exceptions.AwfulParserException("Failed to find post body while getting forum preview page.", new Awful.Core.Entities.SAItem(result));
+                }
+
+                return new Post { PostHtml = postbody.InnerHtml, Result = result };
             }
             catch (Exception ex)
             {
@@ -264,10 +312,20 @@ namespace Awful.Core.Managers
 
             string url = string.Format(CultureInfo.InvariantCulture, EndPoints.QuoteBase, postId);
             var result = await this.webManager.GetDataAsync(url, false, token).ConfigureAwait(false);
+            if (result?.Document == null)
+            {
+                throw new Exceptions.AwfulParserException("Failed to find document while getting quote string page.", new Awful.Core.Entities.SAItem(result));
+            }
+
             try
             {
-                return System.Net.WebUtility.HtmlDecode(System.Net.WebUtility.HtmlDecode(result.Document.QuerySelector("textarea").TextContent));
+                var quoteString = result.Document.QuerySelector("textarea");
+                if (quoteString == null)
+                {
+                    throw new Exceptions.AwfulParserException("Failed to find quote string body while getting quote string page.", new Awful.Core.Entities.SAItem(result));
+                }
 
+                return System.Net.WebUtility.HtmlDecode(System.Net.WebUtility.HtmlDecode(quoteString.TextContent));
             }
             catch (Exception ex)
             {

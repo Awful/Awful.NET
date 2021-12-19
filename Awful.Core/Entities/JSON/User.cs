@@ -70,6 +70,11 @@ namespace Awful.Core.Entities.JSON
         {
             get
             {
+                if (this.Usertitle == null)
+                {
+                    return string.Empty;
+                }
+
                 var captures = Regex.Match(this.Usertitle, @"(http|ftp|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?");
                 var avatarLink = captures.Captures.Count > 0 ? captures.Captures[0].Value : string.Empty;
                 return avatarLink;

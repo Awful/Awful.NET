@@ -8,28 +8,27 @@ using AngleSharp.Dom;
 
 namespace Awful.Core
 {
-	/// <summary>
+    /// <summary>
     /// Angle Sharp Extensions.
     /// </summary>
-	public static class AngleSharpExtensions
-	{
-		/// <summary>
+    public static class AngleSharpExtensions
+    {
+        /// <summary>
         /// Try Get Attribute.
         /// </summary>
         /// <param name="element"><see cref="IElement"/>.</param>
         /// <param name="attribute">Attribute.</param>
         /// <param name="defaultOutput">Default Output.</param>
-        /// <returns></returns>
-		public static string TryGetAttribute(this IElement element, string attribute, string defaultOutput = "")
-		{
-			if (element == null)
+        /// <returns>string.</returns>
+        public static string TryGetAttribute(this IElement element, string attribute, string defaultOutput = "")
+        {
+            if (element == null)
             {
-				return defaultOutput;
+                return defaultOutput;
             }
 
-			var testOutput = element.GetAttribute(attribute);
-			return testOutput ?? defaultOutput;
+            var testOutput = element.GetAttribute(attribute);
+            return testOutput ?? defaultOutput;
         }
-	}
+    }
 }
-

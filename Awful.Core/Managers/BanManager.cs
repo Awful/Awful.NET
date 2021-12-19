@@ -54,13 +54,13 @@ namespace Awful.Core.Managers
             }
 
             var result = await this.webManager.GetDataAsync(string.Format(CultureInfo.InvariantCulture, EndPoints.RapSheet, page), false, token).ConfigureAwait(false);
+            if (result?.Document == null)
+            {
+                throw new Exceptions.AwfulParserException("Failed to find document while parsing Ban Page.", new Awful.Core.Entities.SAItem(result));
+            }
+
             try
             {
-                if (result?.Document == null)
-                {
-                    throw new Exceptions.AwfulParserException("Failed to find document while parsing Ban Page.", new Awful.Core.Entities.SAItem(result));
-                }
-
                 var banPage = BanHandler.ParseBanPage(result.Document);
                 banPage.Result = result;
                 return banPage;
@@ -84,13 +84,13 @@ namespace Awful.Core.Managers
             }
 
             var result = await this.webManager.GetDataAsync(EndPoints.BaseUrl, false, token).ConfigureAwait(false);
+            if (result?.Document == null)
+            {
+                throw new Exceptions.AwfulParserException("Failed to find document while parsing Probation Page.", new Awful.Core.Entities.SAItem(result));
+            }
+
             try
             {
-                if (result?.Document == null)
-                {
-                    throw new Exceptions.AwfulParserException("Failed to find document while parsing Probation Page.", new Awful.Core.Entities.SAItem(result));
-                }
-
                 var prob = BanHandler.ParseForProbation(result.Document);
                 this.webManager.Probation = prob;
                 prob.Result = result;

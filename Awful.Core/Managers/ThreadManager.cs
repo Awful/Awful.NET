@@ -78,6 +78,11 @@ namespace Awful.Core.Managers
         {
             string url = string.Format(CultureInfo.InvariantCulture, EndPoints.NewThread, forumId);
             var result = await this.webManager.GetDataAsync(url, false, token).ConfigureAwait(false);
+            if (result?.Document == null)
+            {
+                throw new Exceptions.AwfulParserException("Failed to find document while getting forum thread cookies page.", new Awful.Core.Entities.SAItem(result));
+            }
+
             try
             {
                 var thread = ThreadHandler.ParseNewThread(result.Document);
@@ -170,6 +175,11 @@ namespace Awful.Core.Managers
             };
 
             var result = await this.webManager.PostFormDataAsync(EndPoints.NewThreadBase, form, false, token).ConfigureAwait(false);
+            if (result?.Document == null)
+            {
+                throw new Exceptions.AwfulParserException("Failed to find document while getting forum thread preview page.", new Awful.Core.Entities.SAItem(result));
+            }
+
             try
             {
                 var post = PostHandler.ParsePostPreview(result.Document);

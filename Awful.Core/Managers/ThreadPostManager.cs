@@ -60,6 +60,11 @@ namespace Awful.Core.Managers
             }
 
             var result = await this.webManager.GetDataAsync(baseUri, false, token).ConfigureAwait(false);
+            if (result?.Document == null)
+            {
+                throw new Exceptions.AwfulParserException("Failed to find document while getting forum thread post page.", new Awful.Core.Entities.SAItem(result));
+            }
+
             try
             {
                 var item = ThreadPostHandler.ParseThread(result.Document);
