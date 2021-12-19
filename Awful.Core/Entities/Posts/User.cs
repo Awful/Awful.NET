@@ -16,12 +16,12 @@ namespace Awful.Core.Entities.Posts
         /// <summary>
         /// Gets or sets the username.
         /// </summary>
-        public string Username { get; set; }
+        public string? Username { get; set; }
 
         /// <summary>
         /// Gets or sets the avatar link.
         /// </summary>
-        public string AvatarLink { get; set; }
+        public string? AvatarLink { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether the avatar is visible or not.
@@ -34,17 +34,17 @@ namespace Awful.Core.Entities.Posts
         /// <summary>
         /// Gets or sets the avatar title.
         /// </summary>
-        public string AvatarTitle { get; set; }
+        public string? AvatarTitle { get; set; }
 
         /// <summary>
         /// Gets or sets the avatar html.
         /// </summary>
-        public string AvatarHtml { get; set; }
+        public string? AvatarHtml { get; set; }
 
         /// <summary>
         /// Gets or sets the Avatar Gang tag link.
         /// </summary>
-        public string AvatarGangTagLink { get; set; }
+        public string? AvatarGangTagLink { get; set; }
 
         /// <summary>
         /// Gets or sets the date joined.
@@ -54,7 +54,7 @@ namespace Awful.Core.Entities.Posts
         /// <summary>
         /// Gets or sets the users roles.
         /// </summary>
-        public string Roles { get; set; }
+        public string? Roles { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether the user has roles.
@@ -64,7 +64,7 @@ namespace Awful.Core.Entities.Posts
         /// <summary>
         /// Gets or sets the users title.
         /// </summary>
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
         /// Gets or sets the user id.
