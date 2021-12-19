@@ -15,6 +15,21 @@ namespace Awful.Core.Entities.Messages
     public class NewPrivateMessage
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="NewPrivateMessage"/> class.
+        /// </summary>
+        /// <param name="icon"><see cref="PostIcon"/>.</param>
+        /// <param name="title">Title.</param>
+        /// <param name="reciever">Reciever Username.</param>
+        /// <param name="body">Body of text.</param>
+        public NewPrivateMessage(PostIcon icon, string title, string reciever, string body)
+        {
+            this.Icon = icon;
+            this.Title = title;
+            this.Receiver = reciever;
+            this.Body = body;
+        }
+
+        /// <summary>
         /// Gets or sets the icon.
         /// </summary>
         public PostIcon Icon { get; set; }

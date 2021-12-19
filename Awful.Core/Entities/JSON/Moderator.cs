@@ -25,6 +25,6 @@ namespace Awful.Core.Entities.JSON
         /// Gets or sets the username of a moderator.
         /// </summary>
         [JsonPropertyName("username")]
-        public string Username { get; set; }
+        public string? Username { get; set; }
     }
 }

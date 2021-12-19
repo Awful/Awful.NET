@@ -37,15 +37,15 @@ namespace Awful.Test.Managers
         {
             using var webClient = await Setup.SetupWebClient(AwfulUser.Platinum).ConfigureAwait(false);
             PrivateMessageManager manager = new PrivateMessageManager(webClient, this.logger);
-            var pm = new NewPrivateMessage();
             PostIconManager iconManager = new PostIconManager(webClient, this.logger);
             var iconResult = await iconManager.GetPrivateMessagePostIconsAsync().ConfigureAwait(false);
             Assert.NotNull(iconResult);
             var date = DateTime.UtcNow;
-            pm.Body = $"Awful.NET Unit Test PM Create: {date}";
-            pm.Title = $"Awful.NET Unit Test PM Create: {date}";
-            pm.Receiver = Environment.GetEnvironmentVariable("AWFUL_PLATINUM_USER");
-            pm.Icon = iconResult.Icons.First();
+            var body = $"Awful.NET Unit Test PM Create: {date}";
+            var title = $"Awful.NET Unit Test PM Create: {date}";
+            var receiver = Environment.GetEnvironmentVariable("AWFUL_PLATINUM_USER");
+            var icon = iconResult.Icons.First();
+            var pm = new NewPrivateMessage(icon, title, receiver, body);
             var result = await manager.SendPrivateMessageAsync(pm).ConfigureAwait(false);
             Assert.NotNull(result);
             Assert.NotEmpty(result.Result.ResultText);

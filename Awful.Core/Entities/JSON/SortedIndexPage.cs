@@ -19,24 +19,24 @@ namespace Awful.Core.Entities.JSON
         /// Gets or sets the stats of a given forum.
         /// </summary>
         [JsonPropertyName("stats")]
-        public Stats Stats { get; set; }
+        public Stats? Stats { get; set; }
 
         /// <summary>
         /// Gets or sets the user asking for the forum info.
         /// </summary>
         [JsonPropertyName("user")]
-        public User User { get; set; }
+        public User? User { get; set; }
 
         /// <summary>
         /// Gets or sets the list of forums, listed by category.
         /// </summary>
         [JsonPropertyName("forums")]
-        public List<Forum> ForumCategories { get; set; }
+        public List<Forum>? ForumCategories { get; set; }
 
         /// <summary>
         /// Gets or sets the list of forums, flattened.
         /// </summary>
         [JsonPropertyName("forums")]
-        public List<Forum> Forums { get; set;  }
+        public List<Forum>? Forums { get; set;  }
     }
 }
