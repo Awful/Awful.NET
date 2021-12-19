@@ -14,8 +14,8 @@ using AngleSharp.Html.Parser;
 using Awful.Core.Entities.Bans;
 using Awful.Core.Entities.Web;
 using Awful.Core.Exceptions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace Awful.Core.Utilities
 {
@@ -233,7 +233,7 @@ namespace Awful.Core.Utilities
             {
                 try
                 {
-                    result.Json = JsonConvert.DeserializeObject(text);
+                    result.Json = JsonSerializer.Serialize(text);
                 }
                 catch
                 {

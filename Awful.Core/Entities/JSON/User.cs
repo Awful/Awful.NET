@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 using System.Globalization;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Awful.Core.Entities.JSON
 {
@@ -19,49 +19,49 @@ namespace Awful.Core.Entities.JSON
         /// <summary>
         /// Gets or sets the user id.
         /// </summary>
-        [JsonProperty("userid")]
+        [JsonPropertyName("userid")]
         public long Userid { get; set; }
 
         /// <summary>
         /// Gets or sets the username.
         /// </summary>
-        [JsonProperty("username")]
+        [JsonPropertyName("username")]
         public string Username { get; set; }
 
         /// <summary>
         /// Gets or sets the homepage.
         /// </summary>
-        [JsonProperty("homepage")]
+        [JsonPropertyName("homepage")]
         public string Homepage { get; set; }
 
         /// <summary>
         /// Gets or sets the ICQ name.
         /// </summary>
-        [JsonProperty("icq")]
+        [JsonPropertyName("icq")]
         public string Icq { get; set; }
 
         /// <summary>
         /// Gets or sets the AIM id.
         /// </summary>
-        [JsonProperty("aim")]
+        [JsonPropertyName("aim")]
         public string Aim { get; set; }
 
         /// <summary>
         /// Gets or sets the Yahoo id.
         /// </summary>
-        [JsonProperty("yahoo")]
+        [JsonPropertyName("yahoo")]
         public string Yahoo { get; set; }
 
         /// <summary>
         /// Gets or sets the users gender.
         /// </summary>
-        [JsonProperty("gender")]
+        [JsonPropertyName("gender")]
         public string Gender { get; set; }
 
         /// <summary>
         /// Gets or sets the users title.
         /// </summary>
-        [JsonProperty("usertitle")]
+        [JsonPropertyName("usertitle")]
         public string Usertitle { get; set; }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Awful.Core.Entities.JSON
         /// <summary>
         /// Gets or sets the join date (long).
         /// </summary>
-        [JsonProperty("joindate")]
+        [JsonPropertyName("joindate")]
         public long Joindate { get; set; }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Awful.Core.Entities.JSON
         /// <summary>
         /// Gets or sets the last post from the user (long).
         /// </summary>
-        [JsonProperty("lastpost")]
+        [JsonPropertyName("lastpost")]
         public long Lastpost { get; set; }
 
         /// <summary>
@@ -122,55 +122,55 @@ namespace Awful.Core.Entities.JSON
         /// <summary>
         /// Gets or sets the number of posts a user has made.
         /// </summary>
-        [JsonProperty("posts")]
+        [JsonPropertyName("posts")]
         public long Posts { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the user can recieve PMs.
         /// </summary>
-        [JsonProperty("receivepm")]
+        [JsonPropertyName("receivepm")]
         public bool Receivepm { get; set; }
 
         /// <summary>
         /// Gets or sets the number of posts the user makes per day.
         /// </summary>
-        [JsonProperty("postsperday")]
+        [JsonPropertyName("postsperday")]
         public double Postsperday { get; set; }
 
         /// <summary>
         /// Gets or sets the role of a user.
         /// </summary>
-        [JsonProperty("role")]
+        [JsonPropertyName("role")]
         public string Role { get; set; }
 
         /// <summary>
         /// Gets or sets the biography of a user.
         /// </summary>
-        [JsonProperty("biography")]
+        [JsonPropertyName("biography")]
         public string Biography { get; set; } = "None";
 
         /// <summary>
         /// Gets or sets the location of a user.
         /// </summary>
-        [JsonProperty("location")]
+        [JsonPropertyName("location")]
         public string Location { get; set; } = "Unknown";
 
         /// <summary>
         /// Gets or sets the interests of a user.
         /// </summary>
-        [JsonProperty("interests")]
+        [JsonPropertyName("interests")]
         public string Interests { get; set; }
 
         /// <summary>
         /// Gets or sets the occupation of a user.
         /// </summary>
-        [JsonProperty("occupation")]
+        [JsonPropertyName("occupation")]
         public string Occupation { get; set; }
 
         /// <summary>
         /// Gets or sets the users picture.
         /// </summary>
-        [JsonProperty("picture")]
+        [JsonPropertyName("picture")]
         public string Picture { get; set; }
     }
 }

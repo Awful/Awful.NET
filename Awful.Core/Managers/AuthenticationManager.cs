@@ -14,7 +14,8 @@ using Awful.Core.Entities.JSON;
 using Awful.Core.Entities.Web;
 using Awful.Core.Handlers;
 using Awful.Core.Utilities;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Awful.Core.Managers
 {
@@ -112,7 +113,7 @@ namespace Awful.Core.Managers
             var result = await this.webManager.GetDataAsync(url, true, token).ConfigureAwait(false);
             try
             {
-                var user = JsonConvert.DeserializeObject<User>(result.ResultText);
+                var user = JsonSerializer.Deserialize<User>(result.ResultText);
                 authResult.CurrentUser = user;
                 authResult.Result = result;
                 return authResult;

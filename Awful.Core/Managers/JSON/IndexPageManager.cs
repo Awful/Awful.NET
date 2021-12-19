@@ -10,7 +10,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Awful.Core.Entities.JSON;
 using Awful.Core.Utilities;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Awful.Core.Managers.JSON
 {
@@ -40,7 +41,7 @@ namespace Awful.Core.Managers.JSON
             var result = await this.webManager.GetDataAsync(EndPoints.IndexPageUrl, true, token).ConfigureAwait(false);
             try
             {
-                var item = JsonConvert.DeserializeObject<IndexPage>(result.ResultText);
+                var item = JsonSerializer.Deserialize<IndexPage>(result.ResultText);
                 item.Result = result;
                 return item;
             }
@@ -61,7 +62,7 @@ namespace Awful.Core.Managers.JSON
 
             try
             {
-                var data = JsonConvert.DeserializeObject<IndexPage>(result.ResultText);
+                var data = JsonSerializer.Deserialize<IndexPage>(result.ResultText);
                 data.Result = result;
                 foreach (var forum in data.Forums)
                 {

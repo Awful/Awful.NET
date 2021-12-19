@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 
 using System.Globalization;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Awful.Core.Entities.JSON
 {
@@ -18,19 +18,19 @@ namespace Awful.Core.Entities.JSON
         /// <summary>
         /// Gets or sets the stats of a given forum.
         /// </summary>
-        [JsonProperty("stats")]
+        [JsonPropertyName("stats")]
         public Stats Stats { get; set; }
 
         /// <summary>
         /// Gets or sets the user asking for the forum info.
         /// </summary>
-        [JsonProperty("user")]
+        [JsonPropertyName("user")]
         public User User { get; set; }
 
         /// <summary>
         /// Gets or sets the list of forums.
         /// </summary>
-        [JsonProperty("forums")]
+        [JsonPropertyName("forums")]
         public List<Forum> Forums { get; set;  }
     }
 }

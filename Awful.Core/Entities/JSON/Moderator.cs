@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 
 using System.Globalization;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Awful.Core.Entities.JSON
 {
@@ -18,13 +18,13 @@ namespace Awful.Core.Entities.JSON
         /// <summary>
         /// Gets or sets the user id of a moderator.
         /// </summary>
-        [JsonProperty("userid")]
+        [JsonPropertyName("userid")]
         public long Userid { get; set; }
 
         /// <summary>
         /// Gets or sets the username of a moderator.
         /// </summary>
-        [JsonProperty("username")]
+        [JsonPropertyName("username")]
         public string Username { get; set; }
     }
 }

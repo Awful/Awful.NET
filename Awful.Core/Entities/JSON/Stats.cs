@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 
 using System.Globalization;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Awful.Core.Entities.JSON
 {
@@ -18,55 +18,55 @@ namespace Awful.Core.Entities.JSON
         /// <summary>
         /// Gets or sets the number of archived posts.
         /// </summary>
-        [JsonProperty("archived_posts")]
+        [JsonPropertyName("archived_posts")]
         public long ArchivedPosts { get; set; }
 
         /// <summary>
         /// Gets or sets the number of archived threads.
         /// </summary>
-        [JsonProperty("archived_threads")]
+        [JsonPropertyName("archived_threads")]
         public long ArchivedThreads { get; set; }
 
         /// <summary>
         /// Gets or sets the number of banned users.
         /// </summary>
-        [JsonProperty("banned_users")]
+        [JsonPropertyName("banned_users")]
         public long BannedUsers { get; set; }
 
         /// <summary>
         /// Gets or sets the total number of banned users.
         /// </summary>
-        [JsonProperty("banned_users_total")]
+        [JsonPropertyName("banned_users_total")]
         public long BannedUsersTotal { get; set; }
 
         /// <summary>
         /// Gets or sets the number of total online registered users.
         /// </summary>
-        [JsonProperty("online_registered")]
+        [JsonPropertyName("online_registered")]
         public long OnlineRegistered { get; set; }
 
         /// <summary>
         /// Gets or sets the total number of online users.
         /// </summary>
-        [JsonProperty("online_total")]
+        [JsonPropertyName("online_total")]
         public long OnlineTotal { get; set; }
 
         /// <summary>
         /// Gets or sets the numbers of unique posts.
         /// </summary>
-        [JsonProperty("unique_posts")]
+        [JsonPropertyName("unique_posts")]
         public long UniquePosts { get; set; }
 
         /// <summary>
         /// Gets or sets the number of unique threads.
         /// </summary>
-        [JsonProperty("unique_threads")]
+        [JsonPropertyName("unique_threads")]
         public long UniqueThreads { get; set; }
 
         /// <summary>
         /// Gets or sets the numbers of users.
         /// </summary>
-        [JsonProperty("usercount")]
+        [JsonPropertyName("usercount")]
         public long Usercount { get; set; }
     }
 }

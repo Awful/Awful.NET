@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 
 using System.Globalization;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Awful.Core.Entities.JSON
 {
@@ -18,7 +18,7 @@ namespace Awful.Core.Entities.JSON
         /// <summary>
         /// Gets or sets the id of a forum.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
         /// <summary>
@@ -39,37 +39,37 @@ namespace Awful.Core.Entities.JSON
         /// <summary>
         /// Gets or sets the title.
         /// </summary>
-        [JsonProperty("title")]
+        [JsonPropertyName("title")]
         public string Title { get; set; }
 
         /// <summary>
         /// Gets or sets the short version of the title.
         /// </summary>
-        [JsonProperty("title_short")]
+        [JsonPropertyName("title_short")]
         public string TitleShort { get; set; }
 
         /// <summary>
         /// Gets or sets the description of a forum.
         /// </summary>
-        [JsonProperty("description")]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the forum has threads.
         /// </summary>
-        [JsonProperty("has_threads")]
+        [JsonPropertyName("has_threads")]
         public bool HasThreads { get; set; }
 
         /// <summary>
         /// Gets or sets the icon for a forum.
         /// </summary>
-        [JsonProperty("icon")]
+        [JsonPropertyName("icon")]
         public string Icon { get; set; }
 
         /// <summary>
         /// Gets or sets the list of subforums.
         /// </summary>
-        [JsonProperty("sub_forums")]
+        [JsonPropertyName("sub_forums")]
         public virtual List<Forum> SubForums { get; set; } = new List<Forum>();
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace Awful.Core.Entities.JSON
         /// <summary>
         /// Gets or sets the list of moderators for a given forum.
         /// </summary>
-        [JsonProperty("moderators")]
+        [JsonPropertyName("moderators")]
         public List<Moderator> Moderators { get; set; } = new List<Moderator>();
     }
 }
