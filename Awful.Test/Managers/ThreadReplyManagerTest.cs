@@ -19,6 +19,16 @@ namespace Awful.Test.Managers
     /// </summary>
     public class ThreadReplyManagerTest
     {
+        private readonly Core.ILogger logger;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ThreadReplyManagerTest"/> class.
+        /// </summary>
+        public ThreadReplyManagerTest()
+        {
+            this.logger = new Core.DebuggerLogger();
+        }
+
         /// <summary>
         /// Test ReplyToPost.
         /// </summary>
@@ -27,7 +37,7 @@ namespace Awful.Test.Managers
         public async Task ReplyToPostTest()
         {
             using var webClient = await Setup.SetupWebClient(AwfulUser.Platinum).ConfigureAwait(false);
-            var manager = new ThreadReplyManager(webClient);
+            var manager = new ThreadReplyManager(webClient, this.logger);
             var threadReply = await manager.GetReplyCookiesAsync(3947346).ConfigureAwait(false);
             Assert.NotNull(threadReply);
             Assert.NotEmpty(threadReply.FormCookie);
@@ -47,7 +57,7 @@ namespace Awful.Test.Managers
         public async Task EditPostTest()
         {
             using var webClient = await Setup.SetupWebClient(AwfulUser.Platinum).ConfigureAwait(false);
-            var manager = new ThreadReplyManager(webClient);
+            var manager = new ThreadReplyManager(webClient, this.logger);
             var threadReply = await manager.GetReplyCookiesForEditAsync(509785640).ConfigureAwait(false);
             Assert.NotNull(threadReply);
             Assert.NotEmpty(threadReply.Message);

@@ -6,13 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Awful.Core.Entities.JSON;
 using Awful.Core.Handlers;
 using Awful.Core.Utilities;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Awful.Core.Managers
 {
@@ -22,14 +22,17 @@ namespace Awful.Core.Managers
     public class UserManager
     {
         private readonly AwfulClient webManager;
+        private readonly ILogger logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserManager"/> class.
         /// </summary>
         /// <param name="webManager">The SA WebClient.</param>
-        public UserManager(AwfulClient webManager)
+        /// <param name="logger"><see cref="ILogger"/>.</param>
+        public UserManager(AwfulClient webManager, ILogger logger)
         {
             this.webManager = webManager;
+            this.logger = logger;
         }
 
         /// <summary>

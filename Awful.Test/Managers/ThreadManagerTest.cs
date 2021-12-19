@@ -17,6 +17,16 @@ namespace Awful.Test.Managers
     /// </summary>
     public class ThreadManagerTest
     {
+        private readonly Core.ILogger logger;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ThreadManagerTest"/> class.
+        /// </summary>
+        public ThreadManagerTest()
+        {
+            this.logger = new Core.DebuggerLogger();
+        }
+
         /// <summary>
         /// Test MarkThreadUnreadAsync.
         /// </summary>
@@ -25,7 +35,7 @@ namespace Awful.Test.Managers
         public async Task MarkThreadUnreadAsyncTest()
         {
             using var webClient = await Setup.SetupWebClient(AwfulUser.Standard).ConfigureAwait(false);
-            ThreadManager manager = new ThreadManager(webClient);
+            ThreadManager manager = new ThreadManager(webClient, this.logger);
             var result = await manager.MarkThreadUnreadAsync(3910844).ConfigureAwait(false);
             Assert.NotNull(result);
             Assert.NotEmpty(result.ResultText);
@@ -39,7 +49,7 @@ namespace Awful.Test.Managers
         public async Task MarkPostAsLastReadAsAsyncTest()
         {
             using var webClient = await Setup.SetupWebClient(AwfulUser.Standard).ConfigureAwait(false);
-            ThreadManager manager = new ThreadManager(webClient);
+            ThreadManager manager = new ThreadManager(webClient, this.logger);
             var result = await manager.MarkPostAsLastReadAsAsync(3910844, 1).ConfigureAwait(false);
             Assert.NotNull(result);
             Assert.NotEmpty(result.ResultText);
@@ -53,8 +63,8 @@ namespace Awful.Test.Managers
         public async Task CreateNewThreadAsyncTest()
         {
             using var webClient = await Setup.SetupWebClient(AwfulUser.Platinum).ConfigureAwait(false);
-            ThreadManager manager = new ThreadManager(webClient);
-            PostIconManager iconManager = new PostIconManager(webClient);
+            ThreadManager manager = new ThreadManager(webClient, this.logger);
+            PostIconManager iconManager = new PostIconManager(webClient, this.logger);
             var iconResult = await iconManager.GetForumPostIconsAsync(261).ConfigureAwait(false);
             Assert.NotNull(iconResult);
             var icon = iconResult.Icons.First(n => n.Title == "Windows");

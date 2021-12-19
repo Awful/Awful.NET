@@ -16,6 +16,16 @@ namespace Awful.Test.Managers
     /// </summary>
     public class PostIconManagerTest
     {
+        private readonly Core.ILogger logger;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PostIconManagerTest"/> class.
+        /// </summary>
+        public PostIconManagerTest()
+        {
+            this.logger = new Core.DebuggerLogger();
+        }
+
         /// <summary>
         /// Test GetForumPostIconsAsyncTest.
         /// </summary>
@@ -24,7 +34,7 @@ namespace Awful.Test.Managers
         public async Task GetForumPostIconsAsyncTest()
         {
             using var webClient = await Setup.SetupWebClient(AwfulUser.Platinum).ConfigureAwait(false);
-            PostIconManager manager = new PostIconManager(webClient);
+            PostIconManager manager = new PostIconManager(webClient, this.logger);
             var result = await manager.GetForumPostIconsAsync(273).ConfigureAwait(false);
             Assert.NotNull(result);
             Assert.True(result.Icons.Any());
@@ -38,7 +48,7 @@ namespace Awful.Test.Managers
         public async Task GetPrivateMessagePostIconsAsyncTest()
         {
             using var webClient = await Setup.SetupWebClient(AwfulUser.Platinum).ConfigureAwait(false);
-            PostIconManager manager = new PostIconManager(webClient);
+            PostIconManager manager = new PostIconManager(webClient, this.logger);
             var result = await manager.GetPrivateMessagePostIconsAsync().ConfigureAwait(false);
             Assert.NotNull(result);
             Assert.True(result.Icons.Any());

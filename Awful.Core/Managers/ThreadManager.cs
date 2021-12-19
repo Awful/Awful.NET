@@ -24,14 +24,17 @@ namespace Awful.Core.Managers
     public class ThreadManager
     {
         private readonly AwfulClient webManager;
+        private readonly ILogger logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadManager"/> class.
         /// </summary>
         /// <param name="webManager">The SA WebClient.</param>
-        public ThreadManager(AwfulClient webManager)
+        /// <param name="logger"><see cref="ILogger"/>.</param>
+        public ThreadManager(AwfulClient webManager, ILogger logger)
         {
             this.webManager = webManager;
+            this.logger = logger;
         }
 
         /// <summary>

@@ -17,6 +17,16 @@ namespace Awful.Test.Managers
     /// </summary>
     public class SAclopediaManagerTest
     {
+        private readonly Core.ILogger logger;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SAclopediaManagerTest"/> class.
+        /// </summary>
+        public SAclopediaManagerTest()
+        {
+            this.logger = new Core.DebuggerLogger();
+        }
+
         /// <summary>
         /// Parse SAclopedia Entries.
         /// </summary>
@@ -25,7 +35,7 @@ namespace Awful.Test.Managers
         public async Task SAclopediaTest()
         {
             using var webClient = await Setup.SetupWebClient(AwfulUser.Standard).ConfigureAwait(false);
-            SAclopediaManager manager = new SAclopediaManager(webClient);
+            SAclopediaManager manager = new SAclopediaManager(webClient, this.logger);
             var categoryList = await manager.GetCategoryListAsync().ConfigureAwait(false);
             Assert.True(categoryList.SAclopediaCategories.Any());
             var entryList = await manager.GetEntryItemListAsync(categoryList.SAclopediaCategories.First().Id).ConfigureAwait(false);

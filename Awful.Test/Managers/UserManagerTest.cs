@@ -15,6 +15,16 @@ namespace Awful.Test.Managers
     /// </summary>
     public class UserManagerTest
     {
+        private readonly Core.ILogger logger;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserManagerTest"/> class.
+        /// </summary>
+        public UserManagerTest()
+        {
+            this.logger = new Core.DebuggerLogger();
+        }
+
         /// <summary>
         /// Test GetUserFromProfilePageAsync.
         /// </summary>
@@ -23,7 +33,7 @@ namespace Awful.Test.Managers
         public async Task GetUserFromProfilePageAsyncTest()
         {
             using var webClient = await Setup.SetupWebClient(AwfulUser.Standard).ConfigureAwait(false);
-            UserManager manager = new UserManager(webClient);
+            UserManager manager = new UserManager(webClient, this.logger);
 
             // 0 = default user.
             var user = await manager.GetUserFromProfilePageAsync(0).ConfigureAwait(false);

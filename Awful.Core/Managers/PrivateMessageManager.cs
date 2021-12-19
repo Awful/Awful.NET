@@ -26,14 +26,17 @@ namespace Awful.Core.Managers
     public class PrivateMessageManager
     {
         private readonly AwfulClient webManager;
+        private readonly ILogger logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PrivateMessageManager"/> class.
         /// </summary>
         /// <param name="webManager">Awful Client.</param>
-        public PrivateMessageManager(AwfulClient webManager)
+        /// <param name="logger"><see cref="ILogger"/>.</param>
+        public PrivateMessageManager(AwfulClient webManager, ILogger logger)
         {
             this.webManager = webManager;
+            this.logger = logger;
         }
 
         /// <summary>

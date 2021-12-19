@@ -25,14 +25,17 @@ namespace Awful.Core.Managers
     public class BookmarkManager
     {
         private readonly AwfulClient webManager;
+        private readonly ILogger logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BookmarkManager"/> class.
         /// </summary>
         /// <param name="webManager">The SA WebClient.</param>
-        public BookmarkManager(AwfulClient webManager)
+        /// <param name="logger"><see cref="ILogger"/>.</param>
+        public BookmarkManager(AwfulClient webManager, ILogger logger)
         {
             this.webManager = webManager;
+            this.logger = logger;
         }
 
         /// <summary>

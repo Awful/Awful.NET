@@ -6,12 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Awful.Core.Entities.JSON;
 using Awful.Core.Utilities;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Awful.Core.Managers.JSON
 {
@@ -21,14 +21,17 @@ namespace Awful.Core.Managers.JSON
     public class IndexPageManager
     {
         private readonly AwfulClient webManager;
+        private readonly ILogger logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IndexPageManager"/> class.
         /// </summary>
         /// <param name="webManager"><see cref="AwfulClient"/>.</param>
-        public IndexPageManager(AwfulClient webManager)
+        /// <param name="logger"><see cref="ILogger"/>.</param>
+        public IndexPageManager(AwfulClient webManager, ILogger logger)
         {
             this.webManager = webManager;
+            this.logger = logger;
         }
 
         /// <summary>

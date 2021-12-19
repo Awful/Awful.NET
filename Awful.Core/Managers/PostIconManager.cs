@@ -22,14 +22,17 @@ namespace Awful.Core.Managers
     public class PostIconManager
     {
         private readonly AwfulClient webManager;
+        private readonly ILogger logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PostIconManager"/> class.
         /// </summary>
         /// <param name="webManager">The SA WebClient.</param>
-        public PostIconManager(AwfulClient webManager)
+        /// <param name="logger"><see cref="ILogger"/>.</param>
+        public PostIconManager(AwfulClient webManager, ILogger logger)
         {
             this.webManager = webManager;
+            this.logger = logger;
         }
 
         /// <summary>

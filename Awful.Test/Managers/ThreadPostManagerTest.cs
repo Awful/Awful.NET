@@ -17,6 +17,16 @@ namespace Awful.Test.Managers
     /// </summary>
     public class ThreadPostManagerTest
     {
+        private readonly Core.ILogger logger;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ThreadPostManagerTest"/> class.
+        /// </summary>
+        public ThreadPostManagerTest()
+        {
+            this.logger = new Core.DebuggerLogger();
+        }
+
         /// <summary>
         /// Test GetThreadPostsAsync.
         /// </summary>
@@ -25,7 +35,7 @@ namespace Awful.Test.Managers
         public async Task GetThreadPostsAsyncTest()
         {
             using var webClient = await Setup.SetupWebClient(AwfulUser.Standard).ConfigureAwait(false);
-            ThreadPostManager manager = new ThreadPostManager(webClient);
+            ThreadPostManager manager = new ThreadPostManager(webClient, this.logger);
             var result = await manager.GetThreadPostsAsync(3836680, 1).ConfigureAwait(false);
             Assert.NotNull(result);
             Assert.True(result.CurrentPage == 1);

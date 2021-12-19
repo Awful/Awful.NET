@@ -25,14 +25,17 @@ namespace Awful.Core.Managers
     public class AuthenticationManager
     {
         private AwfulClient webManager;
+        private ILogger logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AuthenticationManager"/> class.
         /// </summary>
         /// <param name="web">The SA WebClient.</param>
-        public AuthenticationManager(AwfulClient web)
+        /// <param name="logger"><see cref="ILogger"/>.</param>
+        public AuthenticationManager(AwfulClient web, ILogger logger)
         {
             this.webManager = web;
+            this.logger = logger;
         }
 
         /// <summary>

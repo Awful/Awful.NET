@@ -20,14 +20,17 @@ namespace Awful.Core.Managers
     public class SAclopediaManager
     {
         private readonly AwfulClient webManager;
+        private readonly ILogger logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SAclopediaManager"/> class.
         /// </summary>
         /// <param name="webManager">The SA WebClient.</param>
-        public SAclopediaManager(AwfulClient webManager)
+        /// <param name="logger"><see cref="ILogger"/>.</param>
+        public SAclopediaManager(AwfulClient webManager, ILogger logger)
         {
             this.webManager = webManager;
+            this.logger = logger;
         }
 
         /// <summary>

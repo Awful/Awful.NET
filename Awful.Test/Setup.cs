@@ -63,7 +63,7 @@ namespace Awful.Test
                     return webClient;
                 }
 
-                var authManager = new AuthenticationManager(webClient);
+                var authManager = new AuthenticationManager(webClient, new Core.DebuggerLogger());
                 var result = await authManager.AuthenticateAsync(username, password).ConfigureAwait(false);
                 if (!result.IsSuccess)
                 {

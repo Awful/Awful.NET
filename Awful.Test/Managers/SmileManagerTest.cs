@@ -14,6 +14,16 @@ namespace Awful.Test.Managers
     /// </summary>
     public class SmileManagerTest
     {
+        private readonly Core.ILogger logger;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SmileManagerTest"/> class.
+        /// </summary>
+        public SmileManagerTest()
+        {
+            this.logger = new Core.DebuggerLogger();
+        }
+
         /// <summary>
         /// Test GetSmileListAsync.
         /// </summary>
@@ -22,7 +32,7 @@ namespace Awful.Test.Managers
         public async Task GetSmileListAsyncTest()
         {
             using var webClient = await Setup.SetupWebClient(AwfulUser.Platinum).ConfigureAwait(false);
-            SmileManager manager = new SmileManager(webClient);
+            SmileManager manager = new SmileManager(webClient, this.logger);
             var result = await manager.GetSmileListAsync().ConfigureAwait(false);
             Assert.NotNull(result);
             Assert.True(result.SmileCategories.Any());

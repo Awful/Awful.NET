@@ -19,14 +19,17 @@ namespace Awful.Core.Managers
     public class SmileManager
     {
         private readonly AwfulClient webManager;
+        private readonly ILogger logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SmileManager"/> class.
         /// </summary>
         /// <param name="webManager">The SA WebClient.</param>
-        public SmileManager(AwfulClient webManager)
+        /// <param name="logger"><see cref="ILogger"/>.</param>
+        public SmileManager(AwfulClient webManager, ILogger logger)
         {
             this.webManager = webManager;
+            this.logger = logger;
         }
 
         /// <summary>

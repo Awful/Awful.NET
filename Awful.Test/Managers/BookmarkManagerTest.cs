@@ -17,6 +17,16 @@ namespace Awful.Test.Managers
     /// </summary>
     public class BookmarkManagerTest
     {
+        private readonly Core.ILogger logger;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BookmarkManagerTest"/> class.
+        /// </summary>
+        public BookmarkManagerTest()
+        {
+            this.logger = new Core.DebuggerLogger();
+        }
+
         /// <summary>
         /// Test GetAllBookmarksAsync.
         /// </summary>
@@ -25,7 +35,7 @@ namespace Awful.Test.Managers
         public async Task GetAllBookmarksAsyncTest()
         {
             using var webClient = await Setup.SetupWebClient(AwfulUser.Standard).ConfigureAwait(false);
-            BookmarkManager manager = new BookmarkManager(webClient);
+            BookmarkManager manager = new BookmarkManager(webClient, this.logger);
             var result = await manager.GetAllBookmarksAsync().ConfigureAwait(false);
             Assert.NotNull(result);
             Assert.True(result.Threads.Any());
@@ -39,7 +49,7 @@ namespace Awful.Test.Managers
         public async Task GetBookmarkListAsyncTest()
         {
             using var webClient = await Setup.SetupWebClient(AwfulUser.Standard).ConfigureAwait(false);
-            BookmarkManager manager = new BookmarkManager(webClient);
+            BookmarkManager manager = new BookmarkManager(webClient, this.logger);
             var result = await manager.GetBookmarkListAsync(1).ConfigureAwait(false);
             Assert.NotNull(result);
             Assert.True(result.Threads.Any());

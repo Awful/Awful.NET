@@ -18,6 +18,16 @@ namespace Awful.Test.Managers
     /// </summary>
     public class PrivateMessageManagerTest
     {
+        private readonly Core.ILogger logger;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PrivateMessageManagerTest"/> class.
+        /// </summary>
+        public PrivateMessageManagerTest()
+        {
+            this.logger = new Core.DebuggerLogger();
+        }
+
         /// <summary>
         /// Test CreateNewThreadAsync.
         /// </summary>
@@ -26,9 +36,9 @@ namespace Awful.Test.Managers
         public async Task CreateNewThreadAsyncTest()
         {
             using var webClient = await Setup.SetupWebClient(AwfulUser.Platinum).ConfigureAwait(false);
-            PrivateMessageManager manager = new PrivateMessageManager(webClient);
+            PrivateMessageManager manager = new PrivateMessageManager(webClient, this.logger);
             var pm = new NewPrivateMessage();
-            PostIconManager iconManager = new PostIconManager(webClient);
+            PostIconManager iconManager = new PostIconManager(webClient, this.logger);
             var iconResult = await iconManager.GetPrivateMessagePostIconsAsync().ConfigureAwait(false);
             Assert.NotNull(iconResult);
             var date = DateTime.UtcNow;

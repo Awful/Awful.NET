@@ -16,6 +16,16 @@ namespace Awful.Test.Managers
     /// </summary>
     public class IndexPageManagerTest
     {
+        private readonly Core.ILogger logger;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IndexPageManagerTest"/> class.
+        /// </summary>
+        public IndexPageManagerTest()
+        {
+            this.logger = new Core.DebuggerLogger();
+        }
+
         /// <summary>
         /// Test GetSortedIndexPageAsync with an unauthenticated user.
         /// </summary>
@@ -24,7 +34,7 @@ namespace Awful.Test.Managers
         public async Task GetSortedIndexPageAsyncUnauthedTest()
         {
             using var webClient = await Setup.SetupWebClient(AwfulUser.Unauthenticated).ConfigureAwait(false);
-            IndexPageManager indexManager = new IndexPageManager(webClient);
+            IndexPageManager indexManager = new IndexPageManager(webClient, this.logger);
             var result = await indexManager.GetSortedIndexPageAsync().ConfigureAwait(false);
             Assert.NotNull(result);
             Assert.True(result.User.Userid == 0);
@@ -40,7 +50,7 @@ namespace Awful.Test.Managers
         public async Task GetSortedIndexPageAsyncAuthedTest()
         {
             using var webClient = await Setup.SetupWebClient(AwfulUser.Standard).ConfigureAwait(false);
-            IndexPageManager indexManager = new IndexPageManager(webClient);
+            IndexPageManager indexManager = new IndexPageManager(webClient, this.logger);
             var result = await indexManager.GetSortedIndexPageAsync().ConfigureAwait(false);
             Assert.NotNull(result);
             Assert.True(result.User.Userid != 0);

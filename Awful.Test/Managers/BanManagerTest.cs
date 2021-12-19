@@ -19,6 +19,9 @@ namespace Awful.Test.Managers
     {
         private readonly ILogger logger;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BanManagerTest"/> class.
+        /// </summary>
         public BanManagerTest()
         {
             this.logger = new DebuggerLogger();
