@@ -1,4 +1,4 @@
-﻿// <copyright file="CookieManager.cs" company="Drastic Actions">
+﻿// <copyright file="BinaryFormatterCookieManager.cs" company="Drastic Actions">
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
@@ -13,14 +13,14 @@ namespace Awful.Core.Handlers
     /// Helpers for managing cookies, used by Something Awful for authentication.
     /// </summary>
     [Obsolete("CookieManager uses BinaryFormatter, which won't work correctly for the newer .NET versions.", true)]
-    public static class CookieManager
+    public class BinaryFormatterCookieManager : ICookieManager
     {
         /// <summary>
         /// Loads a cookie.
         /// </summary>
         /// <param name="path">Path to the cookie file.</param>
         /// <returns>A CookieContainer.</returns>
-        public static CookieContainer LoadCookie(string path)
+        public CookieContainer LoadCookie(string path)
         {
             using FileStream stream = File.OpenRead(path);
             var formatter = new BinaryFormatter();
@@ -32,7 +32,7 @@ namespace Awful.Core.Handlers
         /// </summary>
         /// <param name="cookieContainer">The cookie container to be saved.</param>
         /// <param name="path">The path where the cookie should be saved.</param>
-        public static void SaveCookie(CookieContainer cookieContainer, string path)
+        public void SaveCookie(CookieContainer cookieContainer, string path)
         {
             using FileStream stream = File.Create(path);
             var formatter = new BinaryFormatter();
@@ -43,7 +43,7 @@ namespace Awful.Core.Handlers
         /// Deleted a cookie.
         /// </summary>
         /// <param name="path">Path of the cookie.</param>
-        public static void RemoveCookie(string path)
+        public void RemoveCookie(string path)
         {
             System.IO.File.Delete(path);
         }
