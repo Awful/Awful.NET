@@ -1,41 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Company>Awful.NET</Company>
-    <Authors>Awful.NET Contributors</Authors>
-    <Product>Awful.NET</Product>
-    <Description>Awful.Core is the core component of Awful.NET, the Something Awful Parser written in .NET.</Description>
-    <PackageId>Awful.Core</PackageId>
-    <PackageProjectUrl>https://github.com/Awful/Awful.NET/</PackageProjectUrl>
-    <PackageTags>something awful, awful</PackageTags>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-    
   <Import Project="../Web.props" />
+  <PropertyGroup>
+    <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <WarningsAsErrors>nullable</WarningsAsErrors>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <Compile Update="Resources\ExceptionMessages.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>ExceptionMessages.resx</DependentUpon>
-        </Compile>
-    </ItemGroup>
-
-    <ItemGroup>
-        <EmbeddedResource Update="Resources\ExceptionMessages.resx">
-            <Generator>PublicResXFileCodeGenerator</Generator>
-            <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Include="..\LICENSE">
-        <Pack>True</Pack>
-        <PackagePath></PackagePath>
-      </None>
-    </ItemGroup>
-    
+  <ItemGroup>
+		<AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />
+	</ItemGroup>
 </Project>
