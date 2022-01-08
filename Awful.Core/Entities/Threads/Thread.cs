@@ -83,7 +83,7 @@ namespace Awful.Core.Entities.Threads
             this.RatingImageEndpoint = ratingImageEndpoint ?? string.Empty;
             this.RatingImage = Path.GetFileNameWithoutExtension(this.RatingImageEndpoint) ?? string.Empty;
             this.ImageIconEndpoint = imageIconEndpoint ?? string.Empty;
-            this.ImageIconLocation = Path.GetFileNameWithoutExtension(this.ImageIconLocation) ?? string.Empty;
+            this.ImageIconLocation = Path.GetFileNameWithoutExtension(this.ImageIconEndpoint) ?? string.Empty;
             this.StoreImageIconEndpoint = storeImageIconEndpoint ?? string.Empty;
             this.StoreImageIconLocation = Path.GetFileNameWithoutExtension(this.StoreImageIconEndpoint) ?? string.Empty;
         }

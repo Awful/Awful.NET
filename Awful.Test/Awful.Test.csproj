@@ -17,4 +17,26 @@
   <ItemGroup>
 		<AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />
 	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Awful.Core\Awful.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SampleHtml\bookmark_single_page.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SampleHtml\bookmark_multi_page.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SampleHtml\byob_thread.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SampleHtml\fyad_thread.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SampleHtml\gbs_thread_list.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

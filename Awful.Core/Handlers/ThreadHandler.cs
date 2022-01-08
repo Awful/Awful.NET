@@ -89,10 +89,11 @@ namespace Awful.Core.Handlers
                 var totalRatingVotes = ParseTotalRatingVotes(ratingItem);
                 var rating = ParseRating(ratingItem);
                 var lastSeenItem = row.QuerySelector(".lastseen");
+                var lastPostItem = row.QuerySelector(".lastpost");
                 var isAnnouncement = ParseIsAnnouncement(titleItem);
-                var killedByDate = ParseKilledByDate(lastSeenItem);
-                var killedBy = ParseKilledBy(lastSeenItem);
-                var killedById = ParseKilledById(lastSeenItem);
+                var killedByDate = ParseKilledByDate(lastPostItem);
+                var killedBy = ParseKilledBy(lastPostItem);
+                var killedById = ParseKilledById(lastPostItem);
                 var thread = new Entities.Threads.Thread(
                     id,
                     title,
