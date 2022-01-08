@@ -2,6 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using Awful.Core.Entities.Forums;
+
 namespace Awful.Core.Entities.Threads
 {
     /// <summary>
@@ -9,45 +11,28 @@ namespace Awful.Core.Entities.Threads
     /// </summary>
     public class ThreadList : SAItem
     {
-        public ThreadList(int id, int forumId, string forumName, int currentPage, int totalPages, IEnumerable<Thread> threads, int parentForumId = 0, string? parentForumName = null)
+        public ThreadList(int id, int currentPage, int totalPages, Forum forum, IEnumerable<Thread> threads)
         {
             this.CurrentPage = currentPage;
             this.TotalPages = totalPages;
-            this.ParentForumName = parentForumName ?? string.Empty;
-            this.ForumId = forumId;
-            this.ForumName = forumName;
+            this.Forum = forum;
             this.Threads = threads.ToList().AsReadOnly();
         }
 
         /// <summary>
-        /// Gets or sets the current page.
+        /// Gets the current page.
         /// </summary>
-        public int CurrentPage { get; set; }
+        public int CurrentPage { get; }
 
         /// <summary>
-        /// Gets or sets the total pages.
+        /// Gets the total pages.
         /// </summary>
-        public int TotalPages { get; set; }
+        public int TotalPages { get; }
 
         /// <summary>
-        /// Gets or sets the parent forum name.
+        /// Gets the forum.
         /// </summary>
-        public string ParentForumName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the parent forum id.
-        /// </summary>
-        public int ParentForumId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the forum name.
-        /// </summary>
-        public string ForumName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the forum id.
-        /// </summary>
-        public int ForumId { get; set; }
+        public Forum Forum { get; }
 
         /// <summary>
         /// Gets the threads.

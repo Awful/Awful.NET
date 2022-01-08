@@ -14,10 +14,8 @@ namespace Awful.Core.Entities.Threads
         /// </summary>
         /// <param name="id">Id.</param>
         /// <param name="name">Name.</param>
-        /// <param name="location">Location.</param>
         /// <param name="author">Author.</param>
         /// <param name="authorId">authorId.</param>
-        /// <param name="totalPages">totalPages.</param>
         /// <param name="starColor">starColor.</param>
         /// <param name="canMarkAsUnread">canMarkAsUnread.</param>
         /// <param name="isLocked">isLocked.</param>
@@ -26,7 +24,6 @@ namespace Awful.Core.Entities.Threads
         /// <param name="isAnnouncement">isAnnouncement.</param>
         /// <param name="isArchive">isArchive.</param>
         /// <param name="hasSeen">hasSeen.</param>
-        /// <param name="hasBeenViewed">hasBeenViewed.</param>
         /// <param name="killedOn">killedOn.</param>
         /// <param name="killedBy">killedBy.</param>
         /// <param name="killedById">killedById.</param>
@@ -41,10 +38,8 @@ namespace Awful.Core.Entities.Threads
         public Thread(
             int id,
             string name,
-            string location,
             string author,
             long authorId,
-            int totalPages,
             string? starColor = null,
             bool canMarkAsUnread = false,
             bool isLocked = false,
@@ -53,7 +48,6 @@ namespace Awful.Core.Entities.Threads
             bool isAnnouncement = false,
             bool isArchive = false,
             bool hasSeen = false,
-            bool hasBeenViewed = false,
             DateTime? killedOn = null,
             string? killedBy = null,
             long killedById = 0,
@@ -66,10 +60,8 @@ namespace Awful.Core.Entities.Threads
             string? imageIconEndpoint = null,
             string? storeImageIconEndpoint = null)
         {
-            this.HasBeenViewed = hasBeenViewed;
             this.IsLocked = isLocked;
             this.CanMarkAsUnread = canMarkAsUnread;
-            this.TotalPages = totalPages;
             this.RepliesSinceLastOpened = repliesSinceLastOpen;
             this.IsBookmark = isBookmark;
             this.HasSeen = hasSeen;
@@ -83,7 +75,6 @@ namespace Awful.Core.Entities.Threads
             this.KilledBy = killedBy ?? string.Empty;
             this.KilledById = killedById;
             this.Name = name;
-            this.Location = location;
             this.TotalRatingVotes = totalRatingVotes;
             this.ReplyCount = replyCount;
             this.ViewCount = viewCount;
@@ -106,11 +97,6 @@ namespace Awful.Core.Entities.Threads
         /// Gets the name of the thread.
         /// </summary>
         public string Name { get; }
-
-        /// <summary>
-        /// Gets the location of the thread.
-        /// </summary>
-        public string Location { get; }
 
         /// <summary>
         /// Gets the image icon endpoint.
@@ -218,11 +204,6 @@ namespace Awful.Core.Entities.Threads
         public bool IsAnnouncement { get; }
 
         /// <summary>
-        /// Gets a value indicating whether the thread has been viewed.
-        /// </summary>
-        public bool HasBeenViewed { get; }
-
-        /// <summary>
         /// Gets a value indicating whether the thread can be marked as unread.
         /// </summary>
         public bool CanMarkAsUnread { get; }
@@ -231,11 +212,6 @@ namespace Awful.Core.Entities.Threads
         /// Gets the number of replies since last opened.
         /// </summary>
         public int RepliesSinceLastOpened { get; }
-
-        /// <summary>
-        /// Gets the total number of pages.
-        /// </summary>
-        public int TotalPages { get; }
 
         /// <summary>
         /// Gets a value indicating whether the thread has been seen.

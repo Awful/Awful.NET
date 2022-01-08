@@ -15,13 +15,12 @@ namespace Awful.Core.Entities.PostIcons
         /// <param name="id">Id.</param>
         /// <param name="imageEndpoint">Image Endpoint.</param>
         /// <param name="title">Title.</param>
-        /// <param name="imageLocation">Image Location.</param>
-        public PostIcon(int id, string imageEndpoint, string title, string imageLocation)
+        public PostIcon(int id, string imageEndpoint, string title)
         {
             this.Id = id;
             this.ImageEndpoint = imageEndpoint;
             this.Title = title;
-            this.ImageLocation = imageLocation;
+            this.ImageLocation = Path.GetFileNameWithoutExtension(this.ImageEndpoint);
         }
 
         /// <summary>

@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using Awful.Core.Entities.Forums;
 using Awful.Core.Entities.Posts;
 
 namespace Awful.Core.Entities.Threads
@@ -11,20 +12,17 @@ namespace Awful.Core.Entities.Threads
     /// </summary>
     public class ThreadPost : SAItem
     {
-        public ThreadPost(int id, string name, int forumId, string forumName, IEnumerable<Post> posts, int parentForumId = 0, string? parentForumName = null, int currentPage = 0, int totalPages = 0, int scrollToPost = 0, string? scrollToPostString = null, string? loggedInUserName = null, bool isLoggedIn = false, bool isArchived = false)
+        public ThreadPost(int id, string name, Forum forum, IEnumerable<Post> posts, int currentPage = 0, int totalPages = 0, int scrollToPost = 0, string? scrollToPostString = null, string? loggedInUserName = null, bool isLoggedIn = false, bool isArchived = false)
         {
             this.ThreadId = id;
             this.Name = name;
-            this.ForumId = forumId;
-            this.ForumName = forumName;
             this.IsArchived = isArchived;
             this.CurrentPage = currentPage;
             this.TotalPages = totalPages;
             this.LoggedInUserName = loggedInUserName ?? string.Empty;
             this.IsLoggedIn = isLoggedIn;
             this.ScrollToPost = scrollToPost;
-            this.ParentForumId = parentForumId;
-            this.ParentForumName = parentForumName ?? string.Empty;
+            this.Forum = forum;
             this.ScrollToPostString = scrollToPostString ?? string.Empty;
             this.Posts = posts.ToList().AsReadOnly();
         }
@@ -66,6 +64,8 @@ namespace Awful.Core.Entities.Threads
 
         /// <summary>
         /// Gets the total pages.
+        /// This is based on the forum page, which represents whatever options
+        /// are set by the user on SA. This may be different for different users.
         /// </summary>
         public int TotalPages { get; internal set; }
 
@@ -80,28 +80,13 @@ namespace Awful.Core.Entities.Threads
         public string? Name { get; internal set; }
 
         /// <summary>
-        /// Gets the forum id.
-        /// </summary>
-        public int ForumId { get; internal set; }
-
-        /// <summary>
         /// Gets the list of threads.
         /// </summary>
         public IReadOnlyList<Post> Posts { get; }
 
         /// <summary>
-        /// Gets the parent forum name.
+        /// Gets the forum.
         /// </summary>
-        public string? ParentForumName { get; internal set; }
-
-        /// <summary>
-        /// Gets the parent forum id.
-        /// </summary>
-        public int ParentForumId { get; internal set; }
-
-        /// <summary>
-        /// Gets the forum name.
-        /// </summary>
-        public string? ForumName { get; internal set; }
+        public Forum Forum { get; internal set; }
     }
 }
