@@ -2,14 +2,13 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using System.Net;
-using System.Text.Json;
 using AngleSharp.Html.Parser;
 using Awful.Core.Entities.Bans;
 using Awful.Core.Entities.Web;
 using Awful.Core.Exceptions;
 using Awful.Core.Utilities;
-using Awful.Logger;
+using System.Net;
+using System.Text.Json;
 
 namespace Awful.Core
 {
@@ -25,16 +24,14 @@ namespace Awful.Core
         private readonly HttpClientHandler httpClientHandler;
         private bool isDisposed;
         private HtmlParser parser;
-        private ILogger logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AwfulClient"/> class.
         /// </summary>
         /// <param name="logger">Logger.</param>
         /// <param name="authenticationCookie">The users authentication cookie.</param>
-        public AwfulClient(ILogger logger, CookieContainer? authenticationCookie = null)
+        public AwfulClient(CookieContainer? authenticationCookie = null)
         {
-            this.logger = logger;
             this.parser = new HtmlParser();
             if (authenticationCookie != null)
             {
@@ -240,7 +237,6 @@ namespace Awful.Core
                 }
                 catch (Exception ex)
                 {
-                    this.logger.Log(ex);
                 }
             }
 
