@@ -5,6 +5,7 @@
 using AngleSharp.Html.Parser;
 using Awful.Core.Entities.Bans;
 using Awful.Core.Entities.Web;
+using Awful.Core.Events;
 using Awful.Core.Exceptions;
 using Awful.Core.Utilities;
 using System.Net;
@@ -62,10 +63,12 @@ namespace Awful.Core
             this.Client.DefaultRequestHeaders.Add("User-Agent", UserAgent);
         }
 
+        public event EventHandler<ProbationChangedEventArgs>? OnProbationChanged;
+
         /// <summary>
         /// Gets or sets if the user is on probation.
         /// </summary>
-        public ProbationItem? Probation { get; set; }
+        public ProbationItem? Probation { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether the user is authenticated, based on if they have cookies in the container.
@@ -81,6 +84,16 @@ namespace Awful.Core
         /// Gets or sets the CookieContainer for the WebClient.
         /// </summary>
         public CookieContainer CookieContainer { get; set; }
+
+        /// <summary>
+        /// Set the probation on a given client session.
+        /// </summary>
+        /// <param name="prob">Probation</param>
+        public void SetProbation(ProbationItem? prob)
+        {
+            this.Probation = prob;
+            this.OnProbationChanged?.Invoke(this, new ProbationChangedEventArgs(prob));
+        }
 
         /// <summary>
         /// GETs data from SA.

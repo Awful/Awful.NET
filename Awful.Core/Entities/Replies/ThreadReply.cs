@@ -8,7 +8,7 @@ namespace Awful.Core.Entities.Replies
 {
     public class ThreadReply : SAItem
     {
-        public ThreadReply(int threadId, string message, string formKey, string formCookie, string bookmark = "", string quote = "", string previousPostsRaw = "", long editPostId = 0, IEnumerable<Post>? posts = null, bool parseUrl = false)
+        public ThreadReply(string message, string? formKey = null, string? formCookie = null, string bookmark = "", string quote = "", string previousPostsRaw = "", int threadId = 0, long editPostId = 0, IEnumerable<Post>? posts = null, bool parseUrl = false)
         {
             this.ThreadId = threadId;
             this.Message = message;
@@ -26,9 +26,9 @@ namespace Awful.Core.Entities.Replies
 
         public bool ParseUrl { get; private set; }
 
-        public string FormKey { get; private set; }
+        public string? FormKey { get; private set; }
 
-        public string FormCookie { get; private set; }
+        public string? FormCookie { get; private set; }
 
         public string Quote { get; set; }
 

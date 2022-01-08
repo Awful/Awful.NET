@@ -2,11 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
-using Awful.Core.Entities.Users;
 
 namespace Awful.Core.Entities.Web
 {
@@ -22,9 +18,9 @@ namespace Awful.Core.Entities.Web
         /// <param name="user">User.</param>
         /// <param name="isSuccess">If the request was successful.</param>
         /// <param name="error">The error.</param>
-        public AuthResult(CookieContainer container, JSON.User? user = null, bool isSuccess = false, string error = "")
+        public AuthResult(CookieContainer container, JSON.User? user = null, string error = "")
         {
-            this.IsSuccess = isSuccess;
+            this.IsSuccess = string.IsNullOrEmpty(error);
             this.AuthenticationCookieContainer = container;
             this.Error = error;
             this.CurrentUser = user;

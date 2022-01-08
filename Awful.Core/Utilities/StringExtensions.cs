@@ -2,6 +2,9 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Globalization;
+using System.Net;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Awful.Core.Utilities
@@ -46,6 +49,44 @@ namespace Awful.Core.Utilities
             }
 
             return nvc;
+        }
+
+        /// <summary>
+        /// Special HTML Encode method to account for weird stuff Something Awful does to strings.
+        /// </summary>
+        /// <param name="text">String to be HTML encoded.</param>
+        /// <returns>HTML Encoded string.</returns>
+        public static string HtmlEncode(this string text)
+        {
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+
+            // In order to get Unicode characters fully working, we need to first encode the entire post.
+            // THEN we decode the bits we can safely pass in, like single/double quotes.
+            // If we don't, the post format will be screwed up.
+            char[] chars = WebUtility.HtmlEncode(text).ToCharArray();
+            var result = new StringBuilder(text.Length + (int)(text.Length * 0.1));
+
+            foreach (char c in chars)
+            {
+                int value = Convert.ToInt32(c);
+                if (value > 127)
+                {
+                    result.AppendFormat(CultureInfo.InvariantCulture, "&#{0};", value);
+                }
+                else
+                {
+                    result.Append(c);
+                }
+            }
+
+            result.Replace("&quot;", "\"");
+            result.Replace("&#39;", @"'");
+            result.Replace("&lt;", @"<");
+            result.Replace("&gt;", @">");
+            return result.ToString();
         }
     }
 }

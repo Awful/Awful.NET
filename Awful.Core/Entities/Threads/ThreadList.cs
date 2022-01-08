@@ -11,7 +11,7 @@ namespace Awful.Core.Entities.Threads
     /// </summary>
     public class ThreadList : SAItem
     {
-        public ThreadList(int id, int currentPage, int totalPages, Forum forum, IEnumerable<Thread> threads)
+        public ThreadList(int currentPage, int totalPages, Forum forum, IEnumerable<Thread> threads)
         {
             this.CurrentPage = currentPage;
             this.TotalPages = totalPages;

@@ -2,16 +2,14 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Net;
-using System.Text;
-using System.Text.RegularExpressions;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using Awful.Core.Entities.Posts;
 using Awful.Core.Exceptions;
+using System.Globalization;
+using System.Net;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Awful.Core.Handlers
 {
@@ -147,7 +145,7 @@ namespace Awful.Core.Handlers
         /// </summary>
         /// <param name="doc">SA Post IHtmlDocument.</param>
         /// <returns>An SA Post.</returns>
-        public static string? ParsePostPreview(IHtmlDocument doc)
+        public static string ParsePostPreview(IHtmlDocument doc)
         {
             if (doc == null)
             {
@@ -155,7 +153,7 @@ namespace Awful.Core.Handlers
             }
 
             var threadBody = doc.QuerySelector(".postbody");
-            return threadBody?.OuterHtml;
+            return threadBody?.OuterHtml ?? string.Empty;
         }
 
         /// <summary>

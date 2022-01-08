@@ -16,6 +16,29 @@ namespace Awful.Core.Handlers
     public static class ThreadHandler
     {
         /// <summary>
+        /// Parses the content of a new thread page to get the form key and cookies.
+        /// </summary>
+        /// <param name="document">The IHtmlDocument of the New Thread page.</param>
+        /// <returns>formKey, formCookie.</returns>
+        public static (string formKey, string formCookie) ParseThreadCookies(IHtmlDocument document)
+        {
+            if (document == null)
+            {
+                throw new ArgumentNullException(nameof(document));
+            }
+
+            var formKey = document.QuerySelector(@"input[name=""formkey""]")?.TryGetAttribute("value");
+            var formCookie = document.QuerySelector(@"input[name=""form_cookie""]")?.TryGetAttribute("value");
+
+            if (formKey is null || formCookie is null)
+            {
+                throw new AwfulParserException("ParseThreadCookies: Failed to parse thread");
+            }
+
+            return (formKey, formCookie);
+        }
+
+        /// <summary>
         /// Parses the IHtmlDocument for a forum thread list.
         /// </summary>
         /// <param name="doc">IHtmlDocument containing the Forum List.</param>
