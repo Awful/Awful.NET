@@ -35,6 +35,7 @@ namespace Awful.Core.Entities.Threads
         /// <param name="ratingImageEndpoint">ratingImageEndpoint.</param>
         /// <param name="imageIconEndpoint">imageIconEndpoint.</param>
         /// <param name="storeImageIconEndpoint">storeImageIconEndpoint.</param>
+        /// <param name="postsPerPage">Posts per page. Defaults to 40.</param>
         public Thread(
             int id,
             string name,
@@ -58,8 +59,14 @@ namespace Awful.Core.Entities.Threads
             int totalRatingVotes = 0,
             string? ratingImageEndpoint = null,
             string? imageIconEndpoint = null,
-            string? storeImageIconEndpoint = null)
+            string? storeImageIconEndpoint = null,
+            int postsPerPage = 40)
         {
+            if (postsPerPage <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(postsPerPage));
+            }
+
             this.IsLocked = isLocked;
             this.CanMarkAsUnread = canMarkAsUnread;
             this.RepliesSinceLastOpened = repliesSinceLastOpen;
@@ -86,6 +93,7 @@ namespace Awful.Core.Entities.Threads
             this.ImageIconLocation = Path.GetFileNameWithoutExtension(this.ImageIconEndpoint) ?? string.Empty;
             this.StoreImageIconEndpoint = storeImageIconEndpoint ?? string.Empty;
             this.StoreImageIconLocation = Path.GetFileNameWithoutExtension(this.StoreImageIconEndpoint) ?? string.Empty;
+            this.TotalPages = this.ReplyCount / postsPerPage;
         }
 
         /// <summary>
@@ -227,5 +235,10 @@ namespace Awful.Core.Entities.Threads
         /// Gets the star color.
         /// </summary>
         public string StarColor { get; }
+
+        /// <summary>
+        /// Gets the total pages.
+        /// </summary>
+        public int TotalPages { get; }
     }
 }
