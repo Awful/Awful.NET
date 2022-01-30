@@ -6,8 +6,17 @@ using System;
 
 namespace Awful.Test
 {
+    /// <summary>
+    /// Test Helpers.
+    /// </summary>
     public static class TestHelpers
     {
+        /// <summary>
+        /// Gets the sample HTML file from storage.
+        /// </summary>
+        /// <param name="filename">The sample filename.</param>
+        /// <returns>HTML sample.</returns>
+        /// <exception cref="NullReferenceException">Thrown if sample doesn't exist.</exception>
         public static string GetSampleHtmlFile(string filename)
         {
             var baseLocation = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
