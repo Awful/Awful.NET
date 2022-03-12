@@ -12,6 +12,15 @@ namespace Awful.Core.Entities.Threads
     /// </summary>
     public class ThreadPost : SAItem
     {
+        public ThreadPost()
+        {
+        }
+
+        public ThreadPost(Post post)
+        {
+            this.Posts = new List<Post>() { post };
+        }
+
         public ThreadPost(int id, string name, Forum forum, IEnumerable<Post> posts, int currentPage = 0, int totalPages = 0, int scrollToPost = 0, string? scrollToPostString = null, string? loggedInUserName = null, bool isLoggedIn = false, bool isArchived = false)
         {
             this.ThreadId = id;
@@ -40,7 +49,7 @@ namespace Awful.Core.Entities.Threads
         /// <summary>
         /// Gets the logged in username.
         /// </summary>
-        public string LoggedInUserName { get; internal set; }
+        public string? LoggedInUserName { get; internal set; }
 
         /// <summary>
         /// Gets a value indicating whether the user in logged in.
@@ -55,7 +64,7 @@ namespace Awful.Core.Entities.Threads
         /// <summary>
         /// Gets the post to scroll string.
         /// </summary>
-        public string ScrollToPostString { get; internal set; }
+        public string? ScrollToPostString { get; internal set; }
 
         /// <summary>
         /// Gets the current page.
@@ -82,11 +91,11 @@ namespace Awful.Core.Entities.Threads
         /// <summary>
         /// Gets the list of threads.
         /// </summary>
-        public IReadOnlyList<Post> Posts { get; }
+        public IReadOnlyList<Post> Posts { get; } = new List<Post>(); 
 
         /// <summary>
         /// Gets the forum.
         /// </summary>
-        public Forum Forum { get; internal set; }
+        public Forum? Forum { get; internal set; }
     }
 }
