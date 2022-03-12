@@ -12,6 +12,13 @@ namespace Awful.Core.Entities.Threads
         /// <summary>
         /// Initializes a new instance of the <see cref="Thread"/> class.
         /// </summary>
+        public Thread()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Thread"/> class.
+        /// </summary>
         /// <param name="id">Id.</param>
         /// <param name="name">Name.</param>
         /// <param name="author">Author.</param>
@@ -104,32 +111,32 @@ namespace Awful.Core.Entities.Threads
         /// <summary>
         /// Gets the name of the thread.
         /// </summary>
-        public string Name { get; }
+        public string? Name { get; }
 
         /// <summary>
         /// Gets the image icon endpoint.
         /// </summary>
-        public string ImageIconEndpoint { get; }
+        public string? ImageIconEndpoint { get; }
 
         /// <summary>
         /// Gets the image icon location.
         /// </summary>
-        public string ImageIconLocation { get; }
+        public string? ImageIconLocation { get; }
 
         /// <summary>
         /// Gets the store image icon endpoint.
         /// </summary>
-        public string StoreImageIconEndpoint { get; }
+        public string? StoreImageIconEndpoint { get; }
 
         /// <summary>
         /// Gets the store image icon location.
         /// </summary>
-        public string StoreImageIconLocation { get; }
+        public string? StoreImageIconLocation { get; }
 
         /// <summary>
         /// Gets the author of the thread.
         /// </summary>
-        public string Author { get; }
+        public string? Author { get; }
 
         /// <summary>
         /// Gets the author id.
@@ -159,17 +166,17 @@ namespace Awful.Core.Entities.Threads
         /// <summary>
         /// Gets the rating image.
         /// </summary>
-        public string RatingImage { get; }
+        public string? RatingImage { get; }
 
         /// <summary>
         /// Gets the rating image endpoint.
         /// </summary>
-        public string RatingImageEndpoint { get; }
+        public string? RatingImageEndpoint { get; }
 
         /// <summary>
         /// Gets the user name who killed the thread.
         /// </summary>
-        public string KilledBy { get; }
+        public string? KilledBy { get; }
 
         /// <summary>
         /// Gets the user id who killed the thread.
@@ -184,12 +191,12 @@ namespace Awful.Core.Entities.Threads
         /// <summary>
         /// Gets the date the thread was killed.
         /// </summary>
-        public string KilledOnHours => this.KilledOn.ToString("HH:mm");
+        public string? KilledOnHours => this.KilledOn.ToString("HH:mm");
 
         /// <summary>
         /// Gets the date the thread was killed.
         /// </summary>
-        public string KilledOnDay => this.KilledOn.ToString("dd-MM-yy");
+        public string? KilledOnDay => this.KilledOn.ToString("dd-MM-yy");
 
         /// <summary>
         /// Gets a value indicating whether the thread is archived.
@@ -234,7 +241,7 @@ namespace Awful.Core.Entities.Threads
         /// <summary>
         /// Gets the star color.
         /// </summary>
-        public string StarColor { get; }
+        public string? StarColor { get; }
 
         /// <summary>
         /// Gets the total pages.

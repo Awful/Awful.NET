@@ -12,6 +12,13 @@ namespace Awful.Core.Entities.Messages
         /// <summary>
         /// Initializes a new instance of the <see cref="PrivateMessage"/> class.
         /// </summary>
+        public PrivateMessage()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PrivateMessage"/> class.
+        /// </summary>
         /// <param name="id">Id.</param>
         /// <param name="statusImageIconEndpoint">Status Image Icon Endpoint.</param>
         /// <param name="title">Title.</param>
