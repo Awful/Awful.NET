@@ -11,6 +11,12 @@ namespace Awful.Core.Entities.Threads
     /// </summary>
     public class NewThread : SAItem
     {
+        public NewThread(string formKey, string formCookie)
+        {
+            this.FormKey = formKey;
+            this.FormCookie = formCookie;
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="NewThread"/> class.
         /// </summary>
@@ -38,19 +44,19 @@ namespace Awful.Core.Entities.Threads
         public int ForumId { get; }
 
         /// <summary>
-        /// Gets the post subject.
+        /// Gets or sets the post subject.
         /// </summary>
-        public string Subject { get; }
+        public string? Subject { get; set; }
 
         /// <summary>
-        /// Gets the post content.
+        /// Gets or sets the post content.
         /// </summary>
-        public string Content { get; }
+        public string? Content { get; set; }
 
         /// <summary>
-        /// Gets the post icon.
+        /// Gets or sets the post icon.
         /// </summary>
-        public PostIcon PostIcon { get; }
+        public PostIcon? PostIcon { get; set; }
 
         /// <summary>
         /// Gets the form key.
