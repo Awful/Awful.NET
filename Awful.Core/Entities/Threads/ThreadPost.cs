@@ -91,7 +91,7 @@ namespace Awful.Core.Entities.Threads
         /// <summary>
         /// Gets the list of threads.
         /// </summary>
-        public IReadOnlyList<Post> Posts { get; } = new List<Post>(); 
+        public IReadOnlyList<Post> Posts { get; } = new List<Post>();
 
         /// <summary>
         /// Gets the forum.
