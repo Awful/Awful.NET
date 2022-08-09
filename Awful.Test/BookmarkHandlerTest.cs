@@ -2,10 +2,10 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Linq;
 using AngleSharp.Html.Parser;
 using Awful.Core.Handlers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 
 namespace Awful.Test
 {

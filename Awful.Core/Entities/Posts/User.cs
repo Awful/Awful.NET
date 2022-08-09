@@ -78,7 +78,7 @@ namespace Awful.Core.Entities.Posts
         /// <summary>
         /// Gets the Avatar Gang tag link.
         /// </summary>
-        public string? AvatarGangTagLink { get;  }
+        public string? AvatarGangTagLink { get; }
 
         /// <summary>
         /// Gets the date joined.
@@ -98,11 +98,11 @@ namespace Awful.Core.Entities.Posts
         /// <summary>
         /// Gets the users title.
         /// </summary>
-        public string? Title { get;  }
+        public string? Title { get; }
 
         /// <summary>
         /// Gets the user id.
         /// </summary>
-        public long Id { get;  }
+        public long Id { get; }
     }
 }

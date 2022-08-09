@@ -33,6 +33,6 @@ namespace Awful.Core.Entities.JSON
         /// Gets or sets the list of forums, flattened.
         /// </summary>
         [JsonPropertyName("forums")]
-        public List<Forum>? Forums { get; set;  }
+        public List<Forum>? Forums { get; set; }
     }
 }

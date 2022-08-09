@@ -2,11 +2,11 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Globalization;
+using System.Text.RegularExpressions;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using Awful.Core.Exceptions;
-using System.Globalization;
-using System.Text.RegularExpressions;
 
 namespace Awful.Core.Handlers
 {
@@ -117,8 +117,7 @@ namespace Awful.Core.Handlers
                     totalRatingVotes,
                     ratingImage,
                     icon,
-                    storeIcon
-                    );
+                    storeIcon);
                 forumThreadList.Add(thread);
             }
 

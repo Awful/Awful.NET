@@ -2,9 +2,9 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Text.Json;
 using Awful.Core.Entities.JSON;
 using Awful.Core.Utilities;
-using System.Text.Json;
 
 namespace Awful.Core.Managers.JSON
 {

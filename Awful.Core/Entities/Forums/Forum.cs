@@ -1,4 +1,8 @@
-﻿namespace Awful.Core.Entities.Forums
+﻿// <copyright file="Forum.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
+
+namespace Awful.Core.Entities.Forums
 {
     public class Forum
     {

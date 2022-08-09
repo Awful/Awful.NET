@@ -2,11 +2,11 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Globalization;
 using AngleSharp.Html.Dom;
 using Awful.Core.Entities.Forums;
 using Awful.Core.Exceptions;
 using Awful.Core.Utilities;
-using System.Globalization;
 
 namespace Awful.Core.Handlers
 {

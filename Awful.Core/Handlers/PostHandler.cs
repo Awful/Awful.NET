@@ -2,14 +2,14 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using AngleSharp.Dom;
-using AngleSharp.Html.Dom;
-using Awful.Core.Entities.Posts;
-using Awful.Core.Exceptions;
 using System.Globalization;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using AngleSharp.Dom;
+using AngleSharp.Html.Dom;
+using Awful.Core.Entities.Posts;
+using Awful.Core.Exceptions;
 
 namespace Awful.Core.Handlers
 {

@@ -2,10 +2,10 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Globalization;
 using AngleSharp.Html.Dom;
 using Awful.Core.Entities.PostIcons;
 using Awful.Core.Exceptions;
-using System.Globalization;
 
 namespace Awful.Core.Handlers
 {

@@ -2,8 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using AngleSharp.Html.Dom;
 using System.Globalization;
+using AngleSharp.Html.Dom;
 
 namespace Awful.Core.Handlers
 {

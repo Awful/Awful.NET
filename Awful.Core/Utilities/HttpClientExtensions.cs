@@ -12,7 +12,7 @@ namespace Awful.Core.Utilities
         /// <summary>
         /// Read Html out of <see cref="HttpResponseMessage"/>.
         /// </summary>
-        /// <param name="message"><see cref="HttpResponseMessage"/></param>
+        /// <param name="message"><see cref="HttpResponseMessage"/>.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         public static async Task<string> ReadHtmlAsync(this HttpResponseMessage message)
         {

@@ -2,13 +2,13 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Globalization;
 using Awful.Core.Entities.Bans;
 using Awful.Core.Entities.Web;
 using Awful.Core.Exceptions;
 using Awful.Core.Handlers;
 using Awful.Core.Utilities;
 using Awful.Exceptions;
-using System.Globalization;
 
 namespace Awful.Core.Managers
 {

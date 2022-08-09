@@ -2,6 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Globalization;
 using Awful.Core.Entities;
 using Awful.Core.Entities.Forums;
 using Awful.Core.Entities.Threads;
@@ -9,7 +10,6 @@ using Awful.Core.Entities.Web;
 using Awful.Core.Handlers;
 using Awful.Core.Utilities;
 using Awful.Exceptions;
-using System.Globalization;
 
 namespace Awful.Core.Managers
 {

@@ -2,14 +2,14 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Net;
+using System.Text.Json;
 using AngleSharp.Html.Parser;
 using Awful.Core.Entities.Bans;
 using Awful.Core.Entities.Web;
 using Awful.Core.Events;
 using Awful.Core.Exceptions;
 using Awful.Core.Utilities;
-using System.Net;
-using System.Text.Json;
 
 namespace Awful.Core
 {
@@ -66,7 +66,7 @@ namespace Awful.Core
         public event EventHandler<ProbationChangedEventArgs>? OnProbationChanged;
 
         /// <summary>
-        /// Gets or sets if the user is on probation.
+        /// Gets if the user is on probation.
         /// </summary>
         public ProbationItem? Probation { get; private set; }
 
@@ -88,7 +88,7 @@ namespace Awful.Core
         /// <summary>
         /// Set the probation on a given client session.
         /// </summary>
-        /// <param name="prob">Probation</param>
+        /// <param name="prob">Probation.</param>
         public void SetProbation(ProbationItem? prob)
         {
             this.Probation = prob;
@@ -248,7 +248,7 @@ namespace Awful.Core
                 {
                     return new JsonResult(JsonSerializer.Serialize(text), message.IsSuccessStatusCode, text, endpoint);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                 }
             }
