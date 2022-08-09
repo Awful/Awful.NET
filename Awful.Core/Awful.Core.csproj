@@ -27,8 +27,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Themes\" />
+    <None Remove="AngleSharp" />
+    <None Remove="System.Text.Json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Themes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AngleSharp" Version="0.17.1" />
+    <PackageReference Include="System.Text.Json" Version="6.0.5" />
   </ItemGroup>
 </Project>
