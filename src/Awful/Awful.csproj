@@ -10,11 +10,12 @@
 		<PackageTags>something awful forums parser library YOSPOS</PackageTags>
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 		<IncludeSymbols>true</IncludeSymbols>
-		<PackageProjectUrl>https://github.com/drasticactions/Drastic.Tempest</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/drasticactions/Drastic.Tempest</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/awful/awful.net</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/awful/awful.net</RepositoryUrl>
 		<IncludeSymbols>true</IncludeSymbols>
 		<TargetFrameworks>netstandard2.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<Nullable>enable</Nullable>
 		<WarningsAsErrors>nullable</WarningsAsErrors>
