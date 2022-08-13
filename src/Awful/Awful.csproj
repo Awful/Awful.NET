@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
+		<PackageId>Awful</PackageId>
+		<Authors>Drastic Actions</Authors>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<Company>Drastic Actions</Company>
+		<Description>Access the Something Awful Forums from your .NET Project.</Description>
+		<Copyright>MIT</Copyright>
+		<PackageTags>something awful forums parser library YOSPOS</PackageTags>
+		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+		<IncludeSymbols>true</IncludeSymbols>
+		<PackageProjectUrl>https://github.com/drasticactions/Drastic.Tempest</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/drasticactions/Drastic.Tempest</RepositoryUrl>
+		<IncludeSymbols>true</IncludeSymbols>
 		<TargetFrameworks>netstandard2.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
