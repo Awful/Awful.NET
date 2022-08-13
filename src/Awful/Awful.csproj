@@ -26,4 +26,10 @@
 		<PackageReference Include="AngleSharp" Version="0.17.1" />
 		<PackageReference Include="System.Text.Json" Version="6.0.5" />
 	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="MinVer" Version="4.1.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 </Project>
