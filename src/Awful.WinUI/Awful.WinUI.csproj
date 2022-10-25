@@ -38,6 +38,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Awful.ThreadTags\Awful.ThreadTags.csproj" />
+	  <ProjectReference Include="..\Awful.UI\Awful.UI.csproj" />
 	  <ProjectReference Include="..\Awful\Awful.csproj" />
 	</ItemGroup>
 
