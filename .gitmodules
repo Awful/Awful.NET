@@ -1,0 +1,3 @@
+[submodule "external/thread-tags"]
+	path = external/thread-tags
+	url = https://github.com/Awful/thread-tags.git
